@@ -1900,6 +1900,45 @@ echo "$1 is a good boy and $2 is a innocent guy"
    - *Build*
      
 * TODO Ansible :
+** Introduction
+*** Before Ansible
+sys-admin use to take all time inupdating severs and creating new servers but there  no-time to moniotir servers to know which servers are corrupt/not-functioning servers.
+*Configuration Management tool*: organization tool which help manage ,configure and monitor all servers efficienctly
+Eg: At New year there was "Mega Sale" so there huge rise in traffic, so we need web servers to handille using(load balancer + servers(increase) + db) in *short period* of time. This is possible by *Configuration Management*
+*** Advantages of Configuration Management tool:
+- Scalability
+  -  before sys-admin manually launch and config servers but with configuration tool we can
+  -  automate laucch and configure servers
+- work-velocity:
+  - when developer pushes code and wanted new testing then  sys-admin take time to configure,during this time developer will be idels which affect the work flow with configuration tool we can maintain work-flow
+- Roll back :
+  - New Version of software are released beta version some time user/customer are not happy or some bug was present. We need to switch back to older version as quickly as possible this can happen with configuration management
+    - *Example: New York Stock*
+      - There was a bug in new-software  during lauch which cause loss in stock and they quickly move to old-software which is possible by configuration management tool.
+*** Alternative to Ansible (Different Configuration Management tool):
+- Ansible ,SaltStack : push based Configuration tool
+- Chef puppet : pull based Comfiguration Management tool
+*** WHY Ansible
+- Configuration Management tool & deployment & Orchestration tool
+- push based Conf Mange tool
+- automate
+- Features :
+  - Agentless
+  - Simple            
+  - Powerfull
+  - efficienct
+**** Case Study :NASA moving Private Servers to Cloud using ansible [[https://www.youtube.com/watch?v=dCQpaTTTv9][Edureka Youtube]]
+**** Architechture
+- Ansible
+  - Automate Engine
+  - Inventory
+  - Playbook
+    - module : lib 
+    - plugins : execute ansible-task as jobs,plugins can to action, call-back,
+    - api
+  - CMDB
+  - Hosts(servers) [connect through ssh or ...]
+    
 *** [20 march] SSH-Key connection between master and all slave 
 **** Prerequirement-I : Create a common user with root privillage and ssh-key base authentication
 
@@ -1977,29 +2016,152 @@ ansible --version
 #+END_SRC
 
 *** [21 march ] Inventory Enable and Example
+**** Config Ansible for Inventory
 #+BEGIN_SRC sh
 # Enable /etc/ansible/host by un-commenting <inventory> in ansible.cfg file
 #vi /etc/ansible/ansible.cfg
-#inventory = /etc/ansible/hosts
-
-
-
-
+    #inventory = /etc/ansible/hosts
+    #host_key_checking = False. # This is to disable SSH key host checking:
 # /etc/ansible/host           # contain all information slave host in yaml file
 
 #EXAmPLE : Ansible has inventory files where host info are stored and used.
 # inventory = /etc/ansible/host
 #vi /etc/ansible/hosts   # System given examples
-
+#############################################################################################
+#  Inventory file
 #[web]
 # 192.147.58.9
 #[app]
 # 192.147.59.7
 #[dbserevr]
 # 192.34.5.6
-# using host file we create cluster in order to run cmd on cluster we 
-
+# using host file we create cluster in order to run cmd on cluster we
 #+END_SRC
+**** Invertory Parameters
+***** Formate
+#+begin_src sh
+# #Inventory Parameters
+# ansible_host - 192.168.25.15
+# ansible_host - server1.company.com
+
+# ansible_connection - ssh/winrm/localhost
+# ansible_port -  22/5986
+# ansible_user - root/administrator/ansible
+# ansible_ssh_pass - Password
+
+#+end_src
+***** Example1 
+#+begin_src sh 
+###########################################################33
+web1 ansible_host - 192.147.58.1
+web2 ansible_host - 192.147.58.2
+web3 ansible_host - 192.147.58.3
+db1 web1 ansible_host - 192.147.59.1
+db2 ansible_host - 192.147.59.2
+db3 ansible_host - 192.147.59.3
+[web]
+webserver[1:3]
+
+[dbserevr]
+db[1:3]
+
+# parent : child
+[prodserver]
+webserver
+dbserevr
+#+end_src
+
+***** Example2
+#+begin_src sh
+cat inventory.txt
+# webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+ansible webserver1 -m ping -i inventory.txt 
+#+end_src
+
+#+BEGIN_SRC sh
+# Sample inventory files
+web ansible_host=server1.company.com
+db ansible_host=server2.company.com
+mail ansible_host=server3.company.com
+web2 ansible_host=server4.company.com
+web3 ansible_host=192.168.25.15 ansible_ssh_pass=password
+
+#
+web ansible_host=server1.company.com ansible_connection=ssh
+db ansible_host=server2.company.com ansible_ssh_pass=osboxes.org
+mail ansible_host=server3.company.com ansible_ssh_pass=osboxes.org
+web2 ansible_host=server4.company.com ansible_connection=ssh
+
+localhost1 ansible_connection=localhost
+#+END_SRC
+
+
+*** Example 3
+#+begin_src sh
+webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver2 ansible_host=192.168.25.17 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver3 ansible_host=192.168.25.18 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+sqlserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+nfsserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+[webservers]
+webserver1
+webserver2
+webserver3
+
+[dbservers]
+dbserver1
+dbserver2
+dbserver3
+
+[nfsservers]
+nfsserver1
+nfsserver2
+nfsserver3
+#+end_src
+
+In the above file, we can also label servers as - 
+#+begin_src sh
+[nfsservers]
+nfsserver[1:3]
+#+end_src
+
+And, it is also possible to aggregate multiple groups as children under a “parent” group. The “parent” is then called a metagroup.
+#+begin_src sh
+webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver2 ansible_host=192.168.25.17 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver3 ansible_host=192.168.25.18 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+sqlserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+nfsserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+[webservers]
+webserver1
+webserver2
+webserver3
+
+[dbservers]
+dbserver1
+dbserver2
+dbserver3
+
+[nfsservers]
+nfsserver[1:3]
+
+[production:children]
+webservers
+dbservers
+#+end_src
 *** [21 march ]Ad-hoc commands
 You could execute a quick one-liner cmd in ansible with-out writing playbook
 #+BEGIN_SRC sh
@@ -2271,6 +2433,23 @@ ansible-playbook create_file.yml
     ping:
 
 #+END_SRC
+*** Playbook
+Playbooks offer repeatable, reusable, simple configuration management. It can be used for configuration management, orchestrating steps of any manual process on multiple machines in synchronous or asynchronous order.
+**** Different YAML Tags
+Let us now go through the different tags in a playbook-
+- *name*: Logical name of the task which specifies what this playbook will be doing
+- *hosts*: This specifies the lists of hosts against which we want to run the task
+- *vars*: This allows you to define and use variables in your playbook
+- *tasks*: Tasks are a list of actions the playbook will perform
+- *handler*
+- loop:
+  - loop
+  - with_items
+  - with_files
+  - with_urls
+  - with_{mongodb,dict,evn,filetree,ini,inventoryhostnames,k8s,manifold,nestd,nios,openshift,password,pipe,rabbitmq,redis,sequence,skydive,subelements,template,together,varnames}
+  - become:
+
 *** [24 march] when should we use ad-hoc and playbook
 For ad-hoc to run commands which are used rarely
       For runing single instruction
@@ -2768,9 +2947,6 @@ ansible-glaxy install geerlingguy.msql
 ansible-galaxy init mysql # 
 # How to use mysql in my playbook 
 # move role to comman dir where ansible can find the location (/etc/ansible/roles)
-
-
-
 #+END_SRC
 
 *** Patter 
@@ -4340,6 +4516,85 @@ sonar-scanner:
 ** TODO git java prj which need to quality anallysis  
 https://www.youtube.com/watch?v=31igoWxauEQ
 
+** [old version] Install sonarqube with mysql and sonar-scanner
+*** Install sonar-server( sonarqube):
+#+BEGIN_SRC sh
+sudo adduser --system --no-create-home --group --disabled-login sonarqube
+sudo apt-get install unzip
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.5.zip
+sudo unzip sonarqube-7.5.zip
+sudo rm sonarqube-7.5.zip
+sudo chown -R sonarqube:sonarqube /opt/sonarqube
+
+
+#+END_SRC
+*** Database setup
+#+BEGIN_SRC sh
+mysql> CREATE USER sonarqube@'localhost' IDENTIFIED BY 'Dev@1234';
+GRANT ALL ON sonarqube.* to sonarqube@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+#+END_SRC
+
+*** Configure the sonar
+#+BEGIN_SRC sh
+sudo nano sonarqube-7.5/conf/sonar.properties
+
+# SonarQube wil use to access the database to the username and password you created for MySQL:
+
+#sonar.jdbc.username=sonarqube
+#sonar.jdbc.password=Dev@1234
+
+# SonarQube to use MySQL as the database driver:
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Tell SonarQube to use MySQL as the database driver:
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+#sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Nginx will handle the communication between the SonarQube clients and your server, so you will tell SonarQube to only listen to the local address.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+# sonar.web.javaAdditionalOpts=-server
+# sonar.web.host=127.0.0.1
+
+# you will use Systemd to configure SonarQube to run as a service so that it will start automatically upon a reboot.
+# sudo nano /etc/systemd/system/sonarqube.service
+
+
+
+#
+# start sonarqube service 
+#
+service sonarqube start
+service sonarqube status
+
+
+#+END_SRC
+
+*** install sonar scanner 
+#+BEGIN_SRC sh
+mkdir /opt/sonarscanner
+cd /opt/sonar/scanner
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+
+sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo rm sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo nano sonar-scanner-3.2.0.1227-linux/conf/sonar-scanner.properties
+vi /opt/sonarscanner/sonar-scanner-3.2.0.1277-linux
+# sonar.host.url=https://sonarqube.example.com
+sudo chmod +x sonar-scanner-3.2.0.1277-linux/bin/sonar-scanner
+
+sudo ln -s /opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
+
+#+END_SRC
+*** Integrate maven with sonar
+https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/
 * 26th maven Q-Ans session
 - how to ignore test cases
   - mvn install -DskipTests
@@ -4532,88 +4787,7 @@ if [all]
 credit.jar
 deposit.jar
 
-#+END_SRC
-* Sonar 
-** Install sonarqube
-*** create the sonarqube user:
-#+BEGIN_SRC sh
-sudo adduser --system --no-create-home --group --disabled-login sonarqube
-sudo apt-get install unzip
-
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.5.zip
-sudo unzip sonarqube-7.5.zip
-sudo rm sonarqube-7.5.zip
-sudo chown -R sonarqube:sonarqube /opt/sonarqube
-
-
-#+END_SRC
-
-*** Database setup
-#+BEGIN_SRC sh
-mysql> CREATE USER sonarqube@'localhost' IDENTIFIED BY 'Dev@1234';
-GRANT ALL ON sonarqube.* to sonarqube@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-#+END_SRC
-
-*** Configure the sonar
-#+BEGIN_SRC sh
-sudo nano sonarqube-7.5/conf/sonar.properties
-
-# SonarQube wil use to access the database to the username and password you created for MySQL:
-
-#sonar.jdbc.username=sonarqube
-#sonar.jdbc.password=Dev@1234
-
-# SonarQube to use MySQL as the database driver:
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
-# # # Tell SonarQube to use MySQL as the database driver:
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
-nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
-#sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
-# # # Nginx will handle the communication between the SonarQube clients and your server, so you will tell SonarQube to only listen to the local address.
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
-nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
-# sonar.web.javaAdditionalOpts=-server
-# sonar.web.host=127.0.0.1
-
-# you will use Systemd to configure SonarQube to run as a service so that it will start automatically upon a reboot.
-# sudo nano /etc/systemd/system/sonarqube.service
-
-
-
-#
-# start sonarqube service 
-#
-service sonarqube start
-service sonarqube status
-
-
-#+END_SRC
-
-*** install sonar scanner 
-#+BEGIN_SRC sh
-mkdir /opt/sonarscanner
-cd /opt/sonar/scanner
-
-sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
-
-sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-sudo rm sonar-scanner-cli-3.2.0.1227-linux.zip
-sudo nano sonar-scanner-3.2.0.1227-linux/conf/sonar-scanner.properties
-vi /opt/sonarscanner/sonar-scanner-3.2.0.1277-linux
-# sonar.host.url=https://sonarqube.example.com
-sudo chmod +x sonar-scanner-3.2.0.1277-linux/bin/sonar-scanner
-
-sudo ln -s /opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
-
-
-#+END_SRC
-** Integrate maven with sonar
-https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/
+#+END_SRC 
 
 
 * Next Topics to covered
