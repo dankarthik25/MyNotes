@@ -216,7 +216,7 @@ docker network disconnect 498f7bf 3928fe27
 #+end_src
 
 ** TODO Docker File
-** TODO Compose yml file 
+** TODO Compose yml file and Link
 ** TODO Docker Stack
 * Introduction
 ** what is docker :
@@ -314,7 +314,7 @@ Port Forwording, Data Volume & Bund mounts
 - Docker Compose in cluster
 - Create yml file and build and create cluster
 - cmd
-* Docker Network
+* TODO Docker Network
 - Overview
   - Intro
   - Container Network Model
@@ -331,6 +331,6 @@ Port Forwording, Data Volume & Bund mounts
         
 * Docker DNS
 - DNS RoundRobin Test
-* Links
+* External Links
 
 Edureka :https://www.youtube.com/watch?v=RSIstPUiEjY
