@@ -412,3 +412,15 @@ UUID=b75e5abd-3f5b-4448-9a96-c20c9d0f6aaf /               ext4    errors=remount
 LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" rw,auto,nobrowse 
 
 #+END_SRC
+
+
+* Unable to connect exteranl mike to linux-mint
+In obs i can't add external mike after doing setting i got my answer
+#+begin_src sh
+sudo nano /etc/modprobe.d/alsa-base.conf
+
+# snd-hda-intel is for boya mike obs setting
+options snd-hda-intel model=,dell-headset-multi
+#+end_src
+External mike is showing in system> setting > sound(serach sound) but in obs it is not showing but showing as defalut
+but when using ubs setting it is showing usb mike connection
