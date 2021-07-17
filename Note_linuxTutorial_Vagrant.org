@@ -1,5 +1,6 @@
-* Vagrant
-** Vagrant Virtualization (Creating virtual meachine Environment)
+* Vagrant Udemy Shell 
+** Introduction
+Vagrant Virtualization (Creating virtual meachine Environment)
 *** Introduction Why Virtualization 
 **** Why use the Virtualization (Linux installallation) in class ?
 - No suprises which lets you to stay  focused on scripting
@@ -232,5 +233,101 @@ passwd # set passwd for  dougstamper
 
 #+END_SRC
 
+* ------------------------------------
+* Vagrant
+** Install Vagrant
+#+begin_src sh
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  SUDO APT-GET UPDATE && SUDO APT-GET INSTALL VAGRANT
+#+END_SRC
 
-** Install Vagrant 
+** Vagrant-hub
+Online where vagrent os are stored and shared https://app.vagrantup.com/boxes/search
+** VAGRANT FILE
+*** Configurations of Vagrant Files
+#+begin_src sh
+#config.vm.box - Operating System
+#config.vm.provider - virtualbox #alternative also present
+#config.vm.network - How your host OS see you  box
+#config.vm.synced_folder - How you access files for your  computers
+#config.vm.provision - what we want setup like LAMP STACK.....ETC
+#+end_src
+*** Configuration with Example
+#+begin_src sh
+#config.vm.box - Operating System
+config.vm.box = "ubuntu/trusty64" # it will pull img form  https://app.vagrantup.com/boxes/search or Vagrant-hub
+config.vm.box = "jasonc/centos7"
+
+#config.vm.provider - virtualbox #alternative also present
+config.vm.provider "virtualbox" do |vb|
+
+# Network Settings
+#config.vm.network - How your host OS see you  box
+config.vm.network "private_network", ip "10.9.8.5"
+# config.vm.network "forwarded_port", guest: 80, host: 8080
+# config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+
+# Folder Settings
+config.vm.synced_folder ".", "/var/www/html",
+# "." current folder
+# "../data" in parentdir data folder
+########### For more secure use below file
+config.vm.synced_folder ".", "/var/www/html",:mount_options => ["dmode=777", "fmode=666"] 
+########### For using nfs in mac
+config.vm.synced_folder ".", "/var/www/html",:nfs =>{:mount_options => ["dmode=777", "fmode=666"] }
+
+
+#config.vm.synced_folder - How you access files for your  computers
+
+
+#config.vm.provision - what we  want setup like LAMP STACK.....ETC
+config.vm.provision "shell", path : "setup.sh"
+config.vm.provision "shell", inline : <<-SHELL
+  apt-get update   
+  apt-get install -y apache2
+SHELL
+config.vm.provision "shell", path : "boothstrap.sh" # instead of inline shell cmd we can run shell by giving path
+#+end_src
+
+
+** Run Vagrant FILE
+#+begin_src
+# Go to folder where you want to run Vagrant
+mkdir VagrantProject/
+cd VagrantProject/
+
+# Inicialize Vagrant
+vagrant init jasonc/centos7  # create vagrant file and .vagrant dir
+vagrant init debian/jessie64
+vagrant init ubuntu/trusty64
+
+# You can edit vagrantfile run vagrant file directly
+# vi vagrantfile
+
+# To run vagrant
+vagrant up   # up every VM's test1,test2
+
+
+###########################################################
+vagrant status # show 2 running virtualbox
+vagrant halt           # halt all virtual machines 
+
+# you will not lose any work you’ve performed on the virtual machine.  The virtual machine will still exist in VirtualBox, it will simply be stopped.
+
+vagrant up <vm-name> # start and
+vagrant halt <vm-name> # halt <vm-name>
+vagrant suspend <vm-name>  # to suspend          #difference btw halt and suspend
+vagrant resume <vm-name>   # to resume 
+vagrant destroy <vm-name>  # to remove virtual-meachine from virtual box
+vagrant relaod <vm-name>
+
+# you want to start over with a fresh copy of the virtual machine, run "vagrant destroy" all work inside virtual-meachine will be lost.
+
+vagrant ssh test1
+#+end_src
+
+** Different Vagrant VMs
+[[https://www.chrisjmendez.com/2017/01/08/installing-jenkins-using-virtualbox-and-vagrant/][Install Jenkins in VM using Vagrant]]
+
