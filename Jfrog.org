@@ -1,4 +1,4 @@
-What is artifactory ?
+* What is artifactory ?
 Place to store your packages (artifactory) and maintain repository
 
 scr > binary > package
@@ -53,3 +53,10 @@ https://releases.jfrog.io/artifactory/artifactory-pro/org/artifactory/pro/jfrog-
 # user : admin , jfrog-Password :password(change: Small)
 
 #+end_src
+
+
+* Sathish Anna
+https://github.com/ravdy/DevOps/tree/master/Artifactory
+https://www.youtube.com/watch?v=eB6CDSR8VCA
+https://www.youtube.com/watch?v=BVxhLIfunmI
+

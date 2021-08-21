@@ -1113,9 +1113,8 @@ curl localhost:9200
 
 #+END_SRC
 
-** Assignment Ans : Create a multi-server multi-node web app[69]
+** Assignment Ans : Create a multi-server multi-node web app[69-70]
 #+BEGIN_SRC sh
-
 docker node ls
 docker ps -a
 docker services ls
@@ -1164,12 +1163,211 @@ docker service create --name db --network backend --mount type=volume, source=db
 docker servie create --name result --network backend -p 5001:80
 
  #+END_SRC
-** Stacks : Production Grade Compose
+* Stacks : Production Grade Compose[71]
+** Intro
 - In 1.13 Docker adds a new layer of abstraction to swarm called stack
-- Stacks accept Compose files as their  declarative definition for services, networks, and volumes
-- We use docker stack deploy  rather then docker service create
-- Stacks manages all those obj for us, including overlay netwok per stack. Add stack name to start of their  name
-- New deplo : key in Compose file. Can't do build:
+- Stacks accept Compose files
+  - which consist of declarative definition for services, networks, and volumes
+  - its swarm job to create them
+  - include =secrete=     
+- We use =docker stack deploy=  rather then docker service create
+- Stacks manages all those obj for us,
+   -including overlay netwok per stack, volume and inter-connection, services
+- New =deploy= : key in Compose file. Can't do build:
+  - who many replicas are needed
+  - what we can't in stack is we =can't build= as docker-compose.
+- Compose is created to =build multi service= while ignoring =deploy= and
+- Swarm is created to =deploy= while ignoring =build=
+- docker-compose cli not need in docker swarm
+  NOTE: Compose is not the production tool but for developer and sys-admin tool. Swarm is production,deployment tool.
+
+** Difference btw compose and stack file
+In stack we will not see build option
+In stack as new function called =deploy= which tells about
+- deploy:
+  - replicas
+  - update_config {parallelism, delay}
+  - restart_policy {condition[on-failure], delay,max_attempts,window}
+  - placement: {constraints [node.role]==manager}
+  - mode
+  - labels [APP=VOTING]
+  #+begin_src 
+docker stack deploy -c <compose-file-path> <stack-name> # c:compose
+
+Usage:  docker stack [OPTIONS] COMMAND
+Options:
+      --orchestrator string   Orchestrator to use (swarm|kubernetes|all)
+#Commands:
+#  deploy      Deploy a new stack or update an existing stack
+#  ls          List stacks
+#  ps          List the tasks in the stack
+#  rm          Remove one or more stacks
+#  services    List the services in the stack
+
+docker stack deploy -c voting_app.yml vote_app
+docker stack ls
+docker stack ps voteapp
+docker stack services voteapp
+
+# Update of stack:
+  #Q)  if new-update in voting app is done then How to update stack
+     #A) git compose-file(.yml) and delpoy again without stop or removing stack
+vim voting_app.yml
+docker  stack deploy -c voting_app.yml voteapp
+  #+end_src
+* Secrets[72] 
+** Intro
+- Secrets Storage [1.13.1 version]
+  - Easiest('.' build inside swarm) "secure('.' it's encripted and only avaiable when it is needed  )" solution for storing "secure"  in swarm
+  - What is secret ?  # which doesn't show in front page or encripted
+    - Stores username and passwords
+    - TLS certificates and keys
+    - SSH Keys
+    - Any data you would prefer not be "on front page of news"
+  - Supports generic strings or binary content up to 500kb in size
+  - Doesn't require apps to be rewritten
+
+ - In Docker Swarm RaftDb is encripted on disk to store secret
+ - Only stored on disk on Manager Nodes [Only manager can unlock/decripted secret-key]
+ - Who secret are passed arround container/services?
+   - secret are 1st stored in swarm, then assigned to services        
+   - only containers in assinged service can see them
+ - Who they are stored and where they are stored in container/services?
+   - they look like files in hard-drive  container but are actually in-memory RAM-FS (File System)
+     path =/run/secrets/<secret_name/secret_alias>=      
+ - Can we use secrets in compose ?
+   -Ans : Yes but they are not secure as they store in file-based secrets.
+** Secret cmd 
+#+begin_src 
+$ docker secret
+# Commands:
+#   create      Create a secret from a file or STDIN as content
+#   inspect     Display detailed information on one or more secrets
+#   ls          List secrets
+#   rm          Remove one or more secrets
+#+end_src
+** Secret with [services/Swarm][73]  
+#+begin_src sh
+# create file psql_user, psql_password which contain id and password 
+cat psql_user.txt psql_password.txt
+#dan_psql
+#myDd_passwrd
+docker secret create psd_user psql_user.txt
+# Storing password as file in hardrive of host '.' when using remote api each node will store password as file which can be readed if hacked any node
+
+
+
+# Using terminal to stdin for enter secrets
+echo "dan_psql" | dokcer secret create psql_user -
+echo "myDd_passwrd" | dokcer secret create psql_password -
+# Disadvantages : 
+# If we see history of bash in root user/host we can get secrets
+
+
+docker secrete ls
+docker secrete inspect psql_user # Don't show user_id
+
+# Pass secrets to db
+docker service create --name psql --secret psql_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secret/psql postgres
+
+# to see password 
+docker exec -it psql /bin/bash
+# $cat /run/secret/psql_user(or)password # show user name and password
+
+# To remove secret
+docker service update --secret-rm  # then it will re-deploy container
+#+end_src
+
+** Secret with Stack [74]
+Stack compose  consist of services,volumes,networks + deploy but it also contain =secret= feature
+There are two way to give =secret= in stack  
+- as filbe
+  #+begin_src sh
+version :"3.1"
+
+services:
+  psql:
+    image: postgres
+    secrets:
+     - psql_user
+     - psql_password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/psql_password
+      POSTGRES_USER_FILE: /run/secretes/psql_user
+secrets:
+   psql_user:
+     file: ./psql_user.txt
+   psql_user:
+     file: ./psql_password.txt
+# docker stack deploy -c stack-compose.yml mydb
+# docker stack rm mydb #NOTE: also clean secrets
+
+  #+end_src
+- create secret (cli or api ) and pass them in stack compose file.  
+where we can give secret file or externally
+
+#+begin_src sh
+version :"3.1"
+services:
+  psql:
+    image: postgres
+    secrets:
+     - psql_user
+     - psql_password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/psql_password
+      POSTGRES_USER_FILE: /run/secretes/psql_user
+secrets:
+   psql_user:
+     file: ./psql_user.txt
+   psql_user:
+     file: ./psql_password.txt
+# docker stack deploy -c stack-compose.yml mydb
+
+#+end_src
+
+** Assignment: Stack with Secret[75-76]
+Create a stack for Drupal  using psql with secrets
+
+- Steps :
+  - Compose yml file with drupal without build of drupal and psql
+  - use secrete external but not from files like cli
+#+begin_src 
+version: '3.1'
+
+services:
+  drupal:
+    image: drupal:8.2
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+ 
+  postgres:
+    image: postgres:12.1
+    environment:
+      - POSTGRES_PASSWORD=/run/secrets/psql-pw
+    secrets:
+      - psql-pw 
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+volumes:
+  drupal-data:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+secrets:
+  psql-pw:
+    external:true
+
+# echo "adfdsfoe1@" | docker secrete create psql-pw -
+# docker stack deploy -c stack-compose.yml drupal
+# NOTE : Need to remove history for remove password
+#+end_src
 
 * TODO Swarm App LifeCycle
 * TODO Container Registries: Image Storage and Distribution

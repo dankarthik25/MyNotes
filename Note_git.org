@@ -14,36 +14,36 @@ SVN is still used because of its performance with large files won't be satisfied
 - Creating a version control of local repository
   - We need to Create a version contol file (=.git=) it create by =git init=
     
-#+BEGIN_SRC sh
-     git init                                  # Inicialize or Create a version control 
-     git status                                # View the Stagging Area
-     git add <file>                            # Add files to stagging Area
-     git add -A
-     git rim --cached <file>                   # Remove files in Stagging Area
-     touch .gitignore                          #  list all files  that are need to ignore                    # Ignore files in Stagging Area
-     git commit -m "fist commit"               # Save-Commit  to Local Repo
-     git remote add orgin https://github.com/....                      # Connect Local Repo to Remote Repo
-     git push origin master                    # Upload Local Repo to Remote Repo
-     git pull                                  # Update Local Repo
-     git clone https://github.com/..git        # clone to current dir   # Clone
-     git diff  <commit id> <commit id>         # diff : View changes in fiels
+#+BEGIN_SRC
+git init                                  # Inicialize or Create a version control 
+git status                                # View the Stagging Area
+git add <file>                            # Add files to stagging Area
+git add -A
+git rim --cached <file>                   # Remove files in Stagging Area
+touch .gitignore                          #  list all files  that are need to ignore                    # Ignore files in Stagging Area
+git commit -m "fist commit"               # Save-Commit  to Local Repo
+git remote add orgin https://github.com/....                      # Connect Local Repo to Remote Repo
+git push origin master                    # Upload Local Repo to Remote Repo
+git pull                                  # Update Local Repo
+git clone https://github.com/..git        # clone to current dir   # Clone
+git diff  <commit id> <commit id>         # diff : View changes in fiels
 
-     ## Creat Branch ,push, delete:
-     git branch <branch-name>       # create a new branch
-     git chechout -b <branchname>    # to create and moveing to the   
-     git branch                      # list of branch
-     git branch --list               # list of branch
-     git checkout UncleDaveEmacs     # Switch one branch to other
-     git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
-     git branch -D UncleDaveEmacs  # delete a branch
-     git push orign <branch-name>     # push branch to remote repo
-     git branch -D devop     # git delete a branch in local repository
-     git push origin --delete <branch name>     # delete branch at remote repositort
-     git push origin --delete UncleDaveEmacs # delete a branch in remote repository
+## Creat Branch ,push, delete:
+git branch <branch-name>       # create a new branch
+git chechout -b <branchname>    # to create and moveing to the   
+git branch                      # list of branch
+git branch --list               # list of branch
+git checkout UncleDaveEmacs     # Switch one branch to other
+git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
+git branch -D UncleDaveEmacs  # delete a branch
+git push orign <branch-name>     # push branch to remote repo
+git branch -D devop     # git delete a branch in local repository
+git push origin --delete <branch name>     # delete branch at remote repositort
+git push origin --delete UncleDaveEmacs # delete a branch in remote repository
 
-     # Merge
-     git chekout master # to go to destination (master)
-     git merge <branch-name>     # merge brach to master git
+# Merge
+git chekout master # to go to destination (master)
+git merge <branch-name>     # merge brach to master git
 #+END_SRC
 ** Installation and Configuration Cmd
 #+BEGIN_SRC  sh
@@ -522,3 +522,7 @@ git ahead   free
 Webstore
 VS Code + git panel + inbuild termial
 
+
+* Interview Git
+What is git?
+[[https://www.edureka.co/blog/interview-questions/git-interview-questions/][Edureka interview questions]]

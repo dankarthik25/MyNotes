@@ -176,6 +176,7 @@ Tools Used:
   - t2.medius (2, 4gb)
   - t2.large()
   - t2.Xlarge () <Compancys>
+  - m5.large  
 - Configur Instance
   - No.of Instance : ___________
 - Add Storgae
@@ -234,13 +235,37 @@ SVN is still used because of its performance with large files won't be satisfied
 - Creating a version control of local repository
   - We need to Create a version contol file (=.git=) it create by =git init=
     
-#+BEGIN_SRC sh
+#+BEGIN_SRC
+git --version
+git config --global user.name "Dankarthik25"
+git config --global user.email "dankarthik25@gmail.com"
+git config --list
+
+git remote -v # info of remote repository
+
+###################################
 git init                                  # Inicialize or Create a version control 
 git status                                # View the Stagging Area
 git add <file>                            # Add files to stagging Area
-git add -A
+git add -A                                # add all 
+git add -
+git reset    # unstage all change in stagging area
+git add -A my_dir/             # add all the files and dir inside my_dir
+git add --no-all my_dir
+git add -u       # used to add all the modefied files but it will not add any new files
+git add . # current dir
+# but git add . and git add -A
+git add * # not recommended 
+git add --update # same as -u   
 git rim --cached <file>                   # Remove files in Stagging Area
+
 touch .gitignore                          #  list all files  that are need to ignore                    # Ignore files in Stagging Area
+cat .gitignore
+# .DS_Store
+# .project
+# *.pyc
+
+
 git commit -m "fist commit"               # Save-Commit  to Local Repo
 git remote add orgin https://github.com/....                      # Connect Local Repo to Remote Repo
 git push origin master                    # Upload Local Repo to Remote Repo
@@ -248,12 +273,24 @@ git pull                                  # Update Local Repo
 git clone https://github.com/..git        # clone to current dir   # Clone
 git diff  <commit id> <commit id>         # diff : View changes in fiels
 
+# Commit
+git status
+git log
+git log --oneline
+
+# how to edit previous commit in git
+git commit --amend -m "Completed Subtract Function"
+git commit --amend  # NEW WINDOW 
+
 ## Creat Branch ,push, delete:
 git branch <branch-name>       # create a new branch
-git chechout -b <branchname>    # to create and moveing to the   
+git chechout -b <branchname>    # to create and moveing to the
+
 git branch                      # list of branch
 git branch --list               # list of branch
+
 git checkout UncleDaveEmacs     # Switch one branch to other
+
 git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
 git branch -D UncleDaveEmacs  # delete a branch
 git push orign <branch-name>     # push branch to remote repo
@@ -264,29 +301,90 @@ git push origin --delete UncleDaveEmacs # delete a branch in remote repository
 # Merge
 git chekout master # to go to destination (master)
 git merge <branch-name>     # merge brach to master git
+
+# rebase
+git rebase master
+# who to undo the rebase
+
+# CherryPick
+git cherrypick <commit-id>
+
+# git reset 
+git reset --hard 77592f3  # remove files for workdir,stagging,local
+git clean -df #
+git reset --soft 77592f3  # local repo to stagging 
+git reset --mixed 77592f3 #  local repo to work - dir
+
+# How to undo hard reset
+git reflog
+#ee46246 HEAD@{0}: reset :moving to 2e7520782
+#1b818d3 HEAD@{0}: checkout: moving form subtract-feature to master 
+#672915a HEAD@{1}: commit: Note_linux_os:How to config linux for obs external mike
+#ed066f3 HEAD@{2}: reset: moving to HEAD~
+#460650a HEAD@{3}: commit: Note_linux_os:How to config linux for obs external mike
+#ed066f3 HEAD@{4}: commit: Docker_Overview:small changes
+#c5e4e3e HEAD@{5}: commit: JFrog:cre Seperate file,need to practice but free trial(30 days)
+# 
+git checkout 1b818d3
+git log # presently we are IN DETACH HEAD STATE and sys will clean after some time
+# To save some changes and creatre a new branch
+git branch backup
+# To undo the reset
+#TODO :
+
+
+git checkout 
+# 
+git revert 1c08f78
+git push origin master
+
+#
+# Coreshef : Git tutorial git stash
+#
+# Git Stash : Save repo tempo but n't commit in log
+git stash save "Worked on stash"
+git stash list
+# stash@{0}: On add : Worked on add function
+git checkout <other-branch>
+git checkout <1st branch>
+git stash apply                #  apply changes
+git stash -- .
+git stash pop                 # apply and drop the stash
+git stash drop              # drop or remove the change
+git stash clear             # clear
+
+# Explane when is git stash is helpfull
+
+
 #+END_SRC
 
+
 ** Installation and Configuration Cmd
-#+BEGIN_SRC  sh
-  git --version   # >> git version 2.3.2
+#+BEGIN_SRC 
+git --version   # >> git version 2.3.2
 
-  # Configuration 
-  git config --global user.name "Dankarthik25"
-  git config -global user.email "dankarthik25@gmail.com"
+# Configuration 
+git config --global user.name "Dankarthik25"
+git config -global user.email "dankarthik25@gmail.com"
 
-  # help
-  git help config
-  git config --help
+# help
+git help config
+git config --help
 
-  #
-  cat ~/.gitconfig
-  #[user]
-  #        email = dankarthik25@gmail.com
-  #        name = Dankarthik25
-  #[log]
-  #  date = relative
-  #[format]
-  #  pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+#
+cat ~/.gitconfig
+git config -l
+#[user]
+#        email = dankarthik25@gmail.com
+#        name = Dankarthik25
+#[log]
+#  date = relative
+#[format]
+#  pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+
+# To store TOKEN for next use
+# Generate TOKEN : GITHUB > Settings > Developer setting  > Personal acess Token > Generate TOKEN 
+git config --global credential.helper cache 
 #+END_SRC
 
 ** TODO Q)three main states in git 
@@ -536,40 +634,40 @@ Instead, it is better to use git revert, which undoes the changes made by a prev
 
 
 #+BEGIN_SRC sh
-  # delete file in local and remote repo
+# delete file in local and remote repo
 
-  # To remove file for remote to  
-  git revert <commitid> 
-  git commit - m "remove from remote"
+# To remove file for remote to  
+git revert <commitid> 
+git commit - m "remove from remote"
 
-  got log --oneline
+got log --oneline
 
-  #commit id : 1
-  #commit id : 2
-  #commit id : 3
-  #commit id : 4
-  #commit id : 5
-  git reset --soft 2 # keep the commit after 2 (3,4,5) 
-  #commit id : 3
-  #commit id : 4
-  #commit id : 5
+#commit id : 1
+#commit id : 2
+#commit id : 3
+#commit id : 4
+#commit id : 5
+git reset --soft 2 # keep the commit after 2 (3,4,5) 
+#commit id : 3
+#commit id : 4
+#commit id : 5
 
 
-  git reset --hard 77592f3  # 
-  git reset --soft 77592f3  # local repo to stagging 
-  git reset --mixed 77592f3 #  local repo to work - dir
+git reset --hard 77592f3  # 
+git reset --soft 77592f3  # local repo to stagging 
+git reset --mixed 77592f3 #  local repo to work - dir
 
-  git log --oneline
-  # beef857 Revert "created test3 file"
-  # 77592f3 created test3 file
-  # 1c08f78 created test2 file
-  # 78b777d created test1 file
-  # a7968c1 Created hh
-  # 4b30445 Created bb
-  # 2e435ca Created gg file to intall git
+git log --oneline
+# beef857 Revert "created test3 file"
+# 77592f3 created test3 file
+# 1c08f78 created test2 file
+# 78b777d created test1 file
+# a7968c1 Created hh
+# 4b30445 Created bb
+# 2e435ca Created gg file to intall git
 
-  git revert 1c08f78
-  git push origin master
+git revert 1c08f78
+git push origin master
 #+END_SRC
 ** merge
 #+BEGIN_SRC sh
@@ -658,6 +756,7 @@ git log --online
 
 #+END_SRC
 ** conflicts
+ Edureka https://www.youtube.com/watch?v=KMOmw19ZCGs&t=9872s
 When two branch <kar> <sanjay> make different change in a same file 
 #+BEGIN_SRC sh
 git checkout master
@@ -684,6 +783,60 @@ git merge future
 vi ww
 
 #+END_SRC
+
+There tools which use to resolve the conflicts
+win-merge
+kdiff3 # in git
+
+#+begin_src
+# Install kdiff3 merge tool in git 
+git config --global merge.tool kdiff3
+git merge future 
+#ERROR mESSAGE: CONFLICT (content): merge confilct in ww
+#             : fix conflicts and then commit the results
+git mergetool
+
+#+end_src
+** Stashing
+It is way to create a checkpoint for non-committed changes.
+It saves all the changes to a temporary location so the user can perform other task such as switching branches, reverting etc.
+These changes can then be  reapplied elsewhere.
+
+- Stash (Clear and Store) the changes in dirty working dirctory
+- Stash command only takes *UNCOMMIED* changes (either in working dir or staging area)
+- Stash command flow:
+  - Records current state of working dirctory and index
+  - Saves local uncommited changes separately and revert working dir to HEAD commit
+- After these you will get a clean branch
+- We can re-apply stash changes again using stash pop or stash apply
+#+begin_src sh
+git stash  # stash local changes
+git stash list # list modified stashed 
+git git show stast <> # To inspect or check details of particual stash:
+git stash apply   # apply changes  in wrk dir and keep stash if required for other branch
+git stash pop  # removed stash changes and add them in current wrk
+#+end_src
+#+begin_src sh
+# in master  branch 
+touch test.txt README.md
+git add README.md
+# switch to master branch
+git chekout feature 
+# ERROR : Your local changes to the following files would be overwritten by checkout: test.txt
+#Please Commit : your changes or stash them before you switch branches.
+git stash
+git checkout feature
+git status : # Only see unstages files (text.txt) file not staged files (README.md)
+git checkout master
+git show stash
+git status # NOTE: files in staged area(README.md) are moved to unstage area(test.txt)
+git stash
+# Saved working directory and index states WIP on master : 9037dfc update readme
+git status
+#On master branch
+git stash
+#+end_src
+** Squash
 
 ** Interview Qusestion
 - Q)If branch and merge, and pull and push  are done my devops then what is role of devops 
@@ -1089,8 +1242,6 @@ https://www.middlewareinventory.com/blog/sample-web-application-war-file-downloa
 #+BEGIN_SRC sh
 # download  or SampleWebApp.war file to tomcat/webapps dir # 
 # /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/webapps
-
-
 #+END_SRC
 
 ** Example 2
@@ -1100,7 +1251,6 @@ https://github.com/kliakos/sparkjava-war-example
 # get clone to local repository
 # cd /home/jayradhe/Workspace/Devops # local repository
 git clone https://github.com/kliakos/sparkjava-war-example.git
-
 #+END_SRC
 ** TODO Deploy war file to tomcat
 #+BEGIN_SRC sh
@@ -1118,7 +1268,7 @@ fi
   - Create Job to Produce Tomcat Deployable Artifacts
   - Install "Copy Artifact" & "Deploy to Containers" Plugins
   - Create Job to Deploy Artifacts to Tomcat server or(Staging Env).
-*** Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzx*** Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
 #+BEGIN_SRC sh
   cd /opt/tomcat/conf
   # update tomcat-users.xml file
@@ -1137,13 +1287,14 @@ fi
 
 #+END_SRC
 *** Create Job to Produce Tomcat Deployable Artifacts
-#+begin_quote
+#+begin_SRC
 Create a view :
 View Name : _TomcatDeploy_View_
 List View : select
 
-Inside "TomcatDeploy_View" Create a New JOB   :
-New item > Name _Package_Application_
+Inside "TomcatDeploy_View"
+Create a New JOB   :
+             New item > Name _Package_Application_
 Genral :        
     Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
     Discard Old Build: 5 days and 5 builds
@@ -1153,7 +1304,8 @@ Source Code management:
 Build Trigger :
     Poll SCm: * * * * *
 Build: _Invoke top-level maven target_
-    pom : _location of pox.xml_
+    goal: clean pacakge
+    pom : _location of pox.xml(java-tomcat-sample/pom.xml)_
 
 Post-build Action : _Archive the artifacts_
     Files to archive : _**/*.war_
@@ -1162,10 +1314,10 @@ Post-build Action : _Build Other Project_
     Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
     Trigger only if build is stable : Ok
 Save Job
-#+end_quote
+#+end_SRC
 
 *** Create Job to Deploy Artifacts to Tomcat server or(Staging Env)
-#+begin_quote
+#+begin_SRC
 Step 1:  Install "Copy Artifact" & "Deploy to Containers" Plugins
 Step 2:
 New item > Name : _Depoly Application Staging Env_
@@ -1187,8 +1339,8 @@ Post-build Action
              Username : tomcat
              Password : tomcat (For configuration we set)
     Tomcat Url : Same page url.
-#+end_quote    
-* Jenkins    
+#+end_SRC    
+* Jenkins
 ** [02nd march]-installation
 - Jenkins can be install in 3 ways
   - 1. using executal file (unzip and install)
@@ -1551,13 +1703,10 @@ Steps 1 :
 |User/group        |  Over all      |  Credentials                                      |
 +------------------+----------------+---------+--------+----------------+--------+------+
 |User/group        |Adminster| Read |  Create | Delete | mangae Domains | Update | View | 
-+------------------+---------+------+---------+--------+----------------+--------+------|
 |Authenticated User|         |      |         |        |                |        |      |
-+------------------+---------+------+---------+--------+----------------+--------+------|
 |admin             |         |      |         |        |                |        |      |
-+------------------+---------+------+---------+--------+----------------+--------+------|
 |sanjay            |  check  |check |         |        |                |        | check|
-+------------------+---------+------+---------+--------+----------------+--------+------|
+
 
 *** Project based
 - Step :
@@ -1572,11 +1721,9 @@ Steps 1 :
 |User/group        |Adminster| Read |  Create | Delete | mangae Domains | Update | View | 
 +------------------+---------+------+---------+--------+----------------+--------+------|
 |Authenticated User|         |      |         |        |                |        |      |
-+------------------+---------+------+---------+--------+----------------+--------+------|
 |admin             |         |      |         |        |                |        |      |
-+------------------+---------+------+---------+--------+----------------+--------+------|
 |sanjay            |  check  |check |         |        |                |        | check|
-+------------------+---------+------+---------+--------+----------------+--------+------|
+
 *** Role based Authentication
 - Step 1 : Enable Role based
 #+BEGIN_SRC sh
@@ -1790,9 +1937,7 @@ mvn -version
 - Step 4: Restore a backup
   - manage jenkins > Backup Manager or (ThinBackup) >
     - Resotre Hudson Configuration
-      - Choose backup_file for backup
-
-        
+      - Choose backup_file for backup        
 ** [12 march]Upstream and Downstream
 There are diffrent job and jobs should be executive in order respectively
 - world job
@@ -1898,8 +2043,111 @@ echo "$1 is a good boy and $2 is a innocent guy"
    - In UI :
      - myboolpara : enable/disable
    - *Build*
-     
-* TODO Ansible :
+** Learn Groovy script
+https://learnxinyminutes.com/docs/groovy/
+** TODO DSL Scripting and yaml file for jenkins pipline [Domain Specific Langaugae]
+Two Types of scripted pipeline
+Scripted Pipeline
+Declarative pipeline
+
+
+Prescently we are using yml file instead fo DSL scripting
+For Pipline syntax : https://www.jenkins.io/doc/book/pipeline/syntax/
+Visit Udemy-Jenkins
+https://www.jenkins.io/doc/book/pipeline/#scripted-pipeline-fundamentals : below code 
+#+begin_src 
+
+Jenkinsfile (Scripted Pipeline)
+
+node {  
+    stage('Build') { 
+        // 
+    }
+    stage('Test') { 
+        // 
+    }
+    stage('Deploy') { 
+        // 
+    }
+}
+#+end_src
+
+#+begin_src 
+
+Jenkinsfile (Declarative Pipeline)
+
+pipeline { 
+    agent any  # none, all
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'make' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'make check'
+                junit 'reports/**/*.xml' 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'make publish'
+            }
+        }
+    }
+}
+
+
+#+end_src
+*** Example 2. Stage-level Agent Section
+
+#+begin_src
+pipeline {
+    agent none 
+    stages {
+        stage('Example Build') {
+            agent { docker 'maven:3.8.1-adoptopenjdk-11' } 
+            steps {
+                echo 'Hello, Maven'
+                sh 'mvn --version'
+            }
+        }
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' } 
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
+        }
+    }
+}
+
+
+
+#+end_src
+*** Post
+#+begin_src 
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
+    }
+}
+#+end_src
+* Ansible :
 ** Introduction
 *** Before Ansible
 sys-admin use to take all time inupdating severs and creating new servers but there  no-time to moniotir servers to know which servers are corrupt/not-functioning servers.
@@ -2041,10 +2289,10 @@ ansible --version
 ***** Formate
 #+begin_src sh
 # #Inventory Parameters
-# ansible_host - 192.168.25.15
-# ansible_host - server1.company.com
+# ansible_host - 192.168.25.15 IP
+# ansible_host - server1.company.com DNS
 
-# ansible_connection - ssh/winrm/localhost
+# ansible_connection - ssh/winrm/localhost 
 # ansible_port -  22/5986
 # ansible_user - root/administrator/ansible
 # ansible_ssh_pass - Password
@@ -2056,13 +2304,14 @@ ansible --version
 web1 ansible_host - 192.147.58.1
 web2 ansible_host - 192.147.58.2
 web3 ansible_host - 192.147.58.3
-db1 web1 ansible_host - 192.147.59.1
+db1  ansible_host - 192.147.59.1
 db2 ansible_host - 192.147.59.2
 db3 ansible_host - 192.147.59.3
-[web]
-webserver[1:3]
 
-[dbserevr]
+[webservers]
+web[1:3]
+
+[dbservers]
 db[1:3]
 
 # parent : child
@@ -2095,7 +2344,9 @@ web2 ansible_host=server4.company.com ansible_connection=ssh
 localhost1 ansible_connection=localhost
 #+END_SRC
 
-
+*** TODO Security of Inventory File
+Digital Ocean
+https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data-on-ubuntu-16-04
 *** Example 3
 #+begin_src sh
 webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
@@ -2938,7 +3189,7 @@ This are task which are comman used by all dev, or with in organiziatoin.,,,etc
 *** Find Roles
 ansible-galaxy :web UI
 $ansible-galaxy search mysql
-*** Use Roles
+*** TODO Use Roles
 #+BEGIN_SRC sh
 ansible-glaxy install geerlingguy.msql
 #+END_SRC
@@ -3294,30 +3545,6 @@ service: name=httpd state=restarted
 #+END_SRC
 * [28 march] Docker
 ** Onframe and Cloud
-Private Data Center : 
-IRCTC OR BSNL private data centers
-Disatvangaes:
-Cons: If you want a server (assign diskpace, dependencecy, users creation, check network) minimum 3-4 days
-
-Simillary to lanch a server we may need 3-4 days
-
-
-If there is Suddenly increase  user ? How can we increase the user in short time ?
-Example: irctc 10-12 am tatkal ticket(AC and SC)
-Q) How increse servers dynamically based on online-users ?
-A) Containerizaztion
-
-In docker any software is called a image based on one image we can create many servers
-
-Onframe uses a Virtual machine,Vm-ware,Oracle virtual machine
-
-Pro:
-protable(Docker hub)
-scalable
-
-
-
-
 
 ** Installation Docker and cmds
 Install docker
@@ -3405,7 +3632,6 @@ docker run -itd --name tomcat-dev -p 8081:8080 nginx
 #+END_SRC
 ** Volume and Bind mount 
 local(host) linux and container dir are synchronized
-
 local and container are have shared space
 #+BEGIN_SRC sh
 cd /opt
@@ -3415,8 +3641,10 @@ touch sbi.war icic.jar
 # docker run -itd -v <local-path(host OS)> : <container-path> <image-name> # Bind mounts
 docker run -itd -v /opt/devops: /opt/sathish centos # Bind mounts
 docker run -itd --name sathish-jenkins -p 8083:8080 jenkins
-
+# bind mount jekyll project 
+# https://www.youtube.com/watch?v=ZHQ3IwIL590
 #+END_SRC
+
 * [1st April] Database mysql
 #+BEGIN_SRC sh
 docker run -itd --name sathish_mydb -e MYSQL_ROOT_PASSWORD=12345 mysql:5
@@ -3468,6 +3696,72 @@ CMD ["data"] # Over-ride the  last cmd and execute last cmd
 ENTRYPOINT
 #+END_SRC
 
+** Q) upgrade  database with in container 
+#+begin_src sh 
+docker run -d --name mypsql_old -v psql:/var/lib/postgressql/data postgres:9.6.1
+docker logs -f mypsql_old
+# try creating db inside mypsql_old and access same db in newly created container
+docker ps
+docker container stop mypsql_old
+docker run -d --name mypsql_new -v psql:/var/lib/postgressql/data postgres:9.6.2
+docker container logs -f mypsql_old
+LOG: database sys was shutdown
+#LOG: MultiXact member wraparound
+#LOG: database system is ready to accept connect
+#LOG: autovaccum launcher started  
+#+end_src
+
+Create a database and tables and update tables
+#+begin_src sh
+root@f77bfead1b87:/# psql -U postgres
+postgres=# CREATE DATABASE testdb;
+postgres=# \l # show databses
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ testdb    | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+(4 rows)
+
+postgres=# \c testdb; #You are now connected to database "testdb" as user "postgres".
+testdb=# CREATE TABLE COMPANY(
+testdb(#    ID INT PRIMARY KEY     NOT NULL,
+testdb(#    NAME           TEXT    NOT NULL,
+testdb(#    AGE            INT     NOT NULL,
+testdb(#    ADDRESS        CHAR(50),
+testdb(#    SALARY         REAL
+testdb(# );
+
+testdb=# CREATE TABLE DEPARTMENT(
+testdb(#    ID INT PRIMARY KEY      NOT NULL,
+testdb(#    DEPT           CHAR(50) NOT NULL,
+testdb(#    EMP_ID         INT      NOT NULL
+testdb(# );
+CREATE TABLE
+
+testdb=# \d # show the tables created
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | company    | table | postgres
+ public | department | table | postgres
+(2 rows)
+                                                        ^
+testdb=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 ), (5, 'David', 27, 'Texas', 85000.00);
+testdb=# SELECT * FROM COMPANY;
+ id | name  | age |                      address                       | salary 
+----+-------+-----+----------------------------------------------------+--------
+  4 | Mark  |  25 | Rich-Mond                                          |  65000
+  5 | David |  27 | Texas                                              |  85000
+(2 rows)
+
+testdb=#\q
+exit  # exit container 
+#+end_src
 ** Docker with Jenkins 
 #+BEGIN_SRC sh
 FROM centos:7
@@ -3477,11 +3771,11 @@ ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war /tmp
 
 #+BEGIN_SRC sh
 docker build -t sat-dev .
-
 #+END_SRC
 * [3rd April] Docker File
 Docker file is look like shell but it is not
-** Edit Docker File 
+For [more information read [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][docker offical link]]
+** TODO Edit Docker File [Health and info about each instruction] 
 #+BEGIN_SRC sh
   # Docker-formate not shell script
   # 1
@@ -3502,6 +3796,10 @@ Docker file is look like shell but it is not
       yum update ;
 
   RUN mkdir /opt/demo && touch /opt/devops && yum install git -y    yum update ;
+  RUN rm -rf /var/lib/apt/lists/* # Remove the cachy after installation
+# When you  RUN "update" command 
+# Then  a layer containing the lists, which will ALWAYS be pulled by anyone using your image, even though the next command removes those files (so they're not accessible). Ultimately those extra files are just a waste of space and time.
+# source : https://stackoverflow.com/questions/61990329/dockerfile-benefits-of-repeated-apt-cache-cleans
 
   RUN # INSTALL packages or unzip....etc
   #  &&    make all cmd into one layer
@@ -3539,20 +3837,26 @@ Docker file is look like shell but it is not
   RUN export PATH
 
   ENV NGINX_VERSIN 1.11.10-1~jessie
-
+  # NEW features in docker file 
+  USER ANSIBLE 
+  VOLUME /opt
   # 9) 
   EXPOSE 8080  # Enable port 
   # 10
 
   #CMD        
+
+  # NEW features in docker file 
+  USER ANSIBLE 
+  VOLUME /opt
+  
 #+END_SRC
-** Docker File
+** Example Docker File
 
 #+BEGIN_SRC sh
 # To delete used image 
 docker system prune -a # remove  unused images,container
 docker pull msql:5
-
 # -e : password
 docker run -itd --name sathish_mydb -e mYSQL_ROOT_PASSWORD=DEVOPS@12345 
 # Interview : How to pass password(mysql) in docker cli
@@ -3571,14 +3875,11 @@ Run a docker file
 #
 docker build -t docker_file_name  # -t: tag #-f : docker file path
 docker build -t sathish -f dockerfile-dev . # . : current dir
-
 #
 # start container 
 #
 docker run -itd sathish
-
 # inside the container
-
 #+END_SRC
 
 #+BEGIN_SRC sh
@@ -3798,8 +4099,6 @@ docker ps -a    #by default the command is bash
 
 ** Link
 Link  : two or more contianers link or communicate each other
-
-
 #+BEGIN_SRC sh
 # To delete used image 
 docker system prune -a # remove  unused images,container
@@ -3816,8 +4115,31 @@ docker run -itd -itd wordpress  --link mydb:mysql -p 83:80 wordpress
 ** Docker Compose : 
 Docker Compose is used for running multiple containers of same-image/ Same-organaisation.
 
+#+begin_src sh
+version: '3.1'  # if no version is specified then v1 is assumed. Recommend v2 minimum
 
+services:  # containers. same as docker run
+  <servicenam>e: # a friendly name. this is also DNS name inside network
+    image: # Optional if you use build:
+    build:
+        context : . # current directory
+        dockerfile: #Name of Dockerfile
+    command: # Optional, replace the default CMD specified by the image
+    environment: # Optional, same as -e in docker run
+    volumes: # Optional, same as -v in docker run
+    depends_on: # need to run other servers before running this servier
+  servicename2:
+
+volumes: # Optional, same as docker volume create
+
+networks: # Optional, same as docker network create
+
+
+
+#+end_src
+Example
 #+BEGIN_SRC sh
+
 # cat docker-compose.yml
 version: '3.3'
 
@@ -3840,8 +4162,122 @@ services:
 Build the project
 #+BEGIN_SRC sh
 docker-compose up -d
-docker ps
+docker-compose up
+docker-compose down # stop all container and remove volumes thee volumes
+docker-compose ps
+docker-compose top 
+#Commands:
+#  build              Build or rebuild services
+#  bundle             Generate a Docker bundle from the Compose file
+#  config             Validate and view the Compose file
+#  create             Create services
+#  down               Stop and remove containers, networks, images, and volumes
+#  events             Receive real time events from containers
+#  exec               Execute a command in a running container
+#  help               Get help on a command
+#  images             List images
+#  kill               Kill containers
+#  logs               View output from containers
+#  pause              Pause services
+#  port               Print the public port for a port binding
+#  ps                 List containers
+#  pull               Pull service images
+#  push               Push service images
+#  restart            Restart services
+#  rm                 Remove stopped containers
+#  run                Run a one-off command
+#  scale              Set number of containers for a service
+#  start              Start services
+#  stop               Stop services
+#  top                Display the running processes
+#  unpause            Unpause services
+#  up                 Create and start containers
+# version            Show the Docker-Compose version information
+
 #+END_SRC
+* Docker Network
+By default we have 3 networks
+- DRIVER
+ - bridge   # Going out side container
+ - host     # internal- connect containers
+ - null     #
+
+Sub net : it is a part of network
+
+Class A
+Class B
+Class C - /16
+Class D - /24
+
+EX:
+10.1.0.0/24    24=8*3                10.1.0.X  (X:0-251)
+10.1.0.0/16    16=8*2                10.1.X.X  (X:0-251) 4 : ARE RESERVERD
+
+ #+BEGIN_SRC sh
+# docker network:
+docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter # easter: name of network
+# subnet
+# gateway
+# list:
+docker network ls 
+
+remove:
+# docker network rm networkname
+
+# remove unused networks
+docker network prune 
+
+# see networkinfo or container info:
+# docker network inspect <network-name> 
+docker network inspect easter
+#container:
+#docker inspect <containerid>
+
+# example:
+docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  
+
+docker network ls
+docker network inspect devops
+
+docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7 # set: network: easter  and ip-address of container: ip:10.1.0.91
+docker ps
+docker exec -it e8a9ef45586c /bin/bash
+
+
+# own network                               # docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  
+# we can assigen our ip to container        # docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7 
+# 
+
+
+# 1. docker network create done
+# 2. docker network ls done 
+# 3. dpcker network rm  
+# 4. docker network prune - delete unused network
+# 5. docker network inspect continerid 
+#+END_SRC
+
+* Docker DNS RoundRobin
+Different containers same same DNS is know as Docker DNS Roundrobin
+Ex: google.com
+
+Roundrobin mesh con
+- Stateless load balancer:
+  layer at OSI 3(TCP), not layer 4(DNS)
+** Example with Multiple Node Connecting overlay Network 
+python(front-end) <====>redis(front-end) <=====>worker(.net) <====>psql(db,back-end)<======>Node.js
+#+begin_src 
+docker network create -d overlay backend
+docker network create -d overlay frontend
+
+docker service create --name vote -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name redis -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name worker -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:befo
+
+docker service create --name worker -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:befo
+docker service create --name psql -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name Nodejs -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:before
+#+end_src
+
 * [9th April] Docker Swarm
 Docker Swarm : To mainitain multiple containers in cluster
 - Advantage is
@@ -3921,8 +4357,6 @@ docker node ls
 # see in which node the container(service) is running
 docker service ps nginx
 
-
-
 # step8: scale up
 #docker service scale <servicename>=20
 docker service scale nginx=20
@@ -3965,13 +4399,6 @@ master drain or active:
 
 
 docker service create -p 81:80 --net own-net --name name service 
-
-
-
-
-
-
-
 
 #  1. create cluter - 
 docker swarm init  - 
@@ -4035,74 +4462,7 @@ load balance
 scale up
 scale down
 drain & active
-
-* [13th April] Network N Stack
-** Docker Network
-By default we have 3 networks
-- DRIVER
- - bridge   # Going out side container
- - host     # internal- connect containers
- - null     #
-
-Sub net : it is a part of network
-
-Class A
-Class B
-Class C - /16
-Class D - /24
-
-EX:
-10.1.0.0/24    24=8*3                10.1.0.X  (X:0-251)
-10.1.0.0/16    16=8*2                10.1.X.X  (X:0-251) 4 : ARE RESERVERD
-
- #+BEGIN_SRC sh
-# docker network:
-
-docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter # easter: name of network
-# subnet
-# gateway
-
-
-
-# list:
-docker network ls 
-
-remove:
-# docker network rm networkname
-
-# remove unused networks
-docker network prune 
-
-# see networkinfo or container info:
-# docker network inspect <network-name> 
-docker network inspect easter
-#container:
-#docker inspect <containerid>
-
-# example:
-docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  
-
-docker network ls
-docker network inspect devops
-
-docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7 # set: network: easter  and ip-address of container: ip:10.1.0.91
-docker ps
-docker exec -it e8a9ef45586c /bin/bash
-
-
-# own network                               # docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  
-# we can assigen our ip to container        # docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7 
-# 
-
-
-# 1. docker network create done
-# 2. docker network ls done 
-# 3. dpcker network rm  
-# 4. docker network prune - delete unused network
-# 5. docker network inspect continerid 
-#+END_SRC
-
-** Docker Stack 
+* Docker Stack 
 1. multiple containers
 2. scale up
 3. Formate : yml
@@ -4228,6 +4588,55 @@ services:
           - node.hostname == stackslave
 
 #+END_SRC
+
+#+begin_src sh
+docker stack deploy -c <file-name> <stack-name>
+
+Usage:  docker stack [OPTIONS] COMMAND
+Options:
+      --orchestrator string   Orchestrator to use (swarm|kubernetes|all)
+#Commands:
+#  deploy      Deploy a new stack or update an existing stack
+#  ls          List stacks
+#  ps          List the tasks in the stack
+#  rm          Remove one or more stacks
+#  services    List the services in the stack
+#+end_src
+
+* TODO Secrets
+Added in Docker 1.13
+Note we can see user_id and password by runing =cat /run/secrets/<secret-user_id/password>or<secret-alias>=
+
+#+begin_src 
+$ docker secret
+# Commands:
+#   create      Create a secret from a file or STDIN as content
+#   inspect     Display detailed information on one or more secrets
+#   ls          List secrets
+#   rm          Remove one or more secrets
+
+
+echo "dan_psql" | dokcer secret create psql_user -
+echo "myDd_passwrd" | dokcer secret create psql_password -
+
+# or create file psql_user, psql_password which contain id and password 
+cat psql_user.txt psql_password.txt
+#dan_psql
+#myDd_passwrd
+#      docker secret create psd_user psql_user.txt ps
+
+docker secrete ls
+docker secrete inspect psql_user # Don't show user_id
+
+# Pass secrets to db
+docker service create --name psql --secret psql_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secret/psql postgres
+
+# to see password 
+docker exec -it psql /bin/bash
+# $cat /run/secret/psql_user(or)password # show user name and password
+
+#+end_src
+* Create Stack with Secret
 * [24th April] Kubernetics
 Open source contaner managment and orchestration
 
@@ -4787,9 +5196,7 @@ if [all]
 credit.jar
 deposit.jar
 
-#+END_SRC 
-
-
+#+END_SRC
 * Next Topics to covered
 ** TODO Continuous Deployment
 ** TODO Phase 5: Continuous Monitoring 

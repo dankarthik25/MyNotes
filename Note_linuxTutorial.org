@@ -1,7 +1,7 @@
 
 Linux Tutorial
 * Linux Cmd 
-** Linux File System
+* Linux File System
 #+BEGIN_SRC 
 (/): Directory
 ├── bin           # binary like ls,cat........ 
@@ -41,430 +41,696 @@ Linux Tutorial
 └── vmlinuz
 
 #+END_SRC
-** Linux BASIC cmd
-#+BEGIN_SRC sh
-    #############################################################
-    #   Root User 
-    # ##########################################################
-    sudo su - # root user  # what is password for sudo su - ? 
-    # How to know root user and normal user 
-    # root user as       [root@ip-172-31-30-43 ~]#
-    # normal user as [ec2-user@ip-172-31-30-43 ~]$
+* Linux User CMD's
+#+begin_src 
+#############################################################
+#   Root User 
+# ##########################################################
+sudo su - # root user  # what is password for sudo su - ? 
+# How to know root user and normal user 
+# root user    [root@ip-172-31-30-43 ~]#
+# normal user  [ec2-user@ip-172-31-30-43 ~]$
 
-    # root user start with #(ash symbal) 
-    # normal user start with $(doller symbol)
+# root user start with #(ash symbal) 
+# normal user start with $(doller symbol)
 
-    sudo -i   # (alternative of root user)
-    whoami
-    # ##########################################################
-    # Change directory
-    # ##########################################################
-    cd ..        # parent directory
-    cd           # home directory
-    cd ~         # home directory
-    cd /         # root direcoty
-    cd /opt      # 
-    cd ~/.bashrc # in home dir .bashrc file
+sudo -i   # (alternative of root user)
+whoami
 
-    # direct path or home path
-    cd ~/Workspace/
-    cd /home/jayaradhe/Workspace/
+#+end_src
+* cp ,mv,rename,rm  for file and dir 
+#+begin_src
+## ##########################################################
+# File/Directory Creation, Delete,copy,move,rename manupulation cmd
+## ##########################################################
 
 
-    # ##########################################################
-    # print working directory
-    # ##########################################################
-    pwd 
-    #  [root@ip-172-31-19-8 python]# pwd
-    ## /etc/python
+touch test_file.txt              # create a file 
+mkdir test_files                 # create a directory
+cp test_file.txt copy_file.txt   # copy(or) duplicate a file
+mv test_file.tzt rename_file.txt # rename a file
+mv orig_file.txt SubDir1/        # move  to SubDir1 
+mv orig_file.txt SubDir1/rename_file.txt # move and remane 
+rm orig_file.txt   # Delete a file
+rm -R SubDir1      # Delete folder(dir) and inside files RECURSIVELY
+rm -rf subdir1
+#+end_src
+* Read and Write in terminal cat, vi,nano,gedit, head,tail,less
+#+begin_src
+## ##########################################################
+# Read and Write file in terminal
+## ##########################################################
+cat orig_file.txt  # print content of file in terminal
+vi orig_file.txt   # edit file
+nano orig_file.txt
+gedit orig_file.txt
+head -n1 /etc/passwd
+tail -n1 /etc/passwd
+less /etc/passwd
 
+#+end_src
+* cd pwd ls 
+#+BEGIN_SRC 
+# ##########################################################
+# Change directory
+# ##########################################################
+cd ..        # parent directory {..} and current dir{.}
+cd           # home directory
+cd ~         # home directory
+cd /         # root direcoty
+cd /opt      # 
+cd ~/.bashrc # in home dir .bashrc file
 
-
-    # ###########################################################
-    # list directory
-    # # ##########################################################
-    ls
-    ls -a                # all hidden files and dir
-    ls -l                # long list format 
-    ls dir/sub_dir_1/sub_dir_2
-    ls -latr             # reverse 
-    # How do you know the file in list is dir in (ls - l)
-    # in < ls-l > cmd as d --- --- --- then it is directory
-
-
-    ## ##########################################################
-    #   Directory 
-    ## ##########################################################
-    mkdir SubDir1      # Create a Dir
-    rm -R SubDir1      # Delete folder(dir) and inside files RECURSIVELY
-
-    mv /path Orginal_Dir1 /path moved_ParentDir/ # move directies
-    # mv /home/dan/MyNotes_personal_2 /home/dan/Pictures/
-
-
-
-    cp -r /path/subdir1 /path/copied_subdir1   # copy directory recursively
-    rm -rf subdir1
-
-    #
-    # help
-    # 
-    man ls
-
-    type echo # inbuilt or nor  with address
-
-
-
-    ## ##########################################################
-    # File/Directory Creation, Delete,copy,move,rename manupulation cmd
-    ## ##########################################################
-
-
-    touch test_file.txt              # create a file 
-    mkdir test_files                 # create a directory
-    cp test_file.txt copy_file.txt   # copy(or) duplicate a file
-    mv test_file.tzt rename_file.txt # rename a file
-    mv orig_file.txt SubDir1/        # move  to SubDir1 
-    mv orig_file.txt SubDir1/rename_file.txt # move and remane 
-    rm orig_file.txt   # Delete a file
-    rm -R SubDir1      # Delete folder(dir) and inside files RECURSIVELY
-    rm -rf subdir1
-
-
-    ## ##########################################################
-    # Read and Write file in terminal
-    ## ##########################################################
-    cat orig_file.txt  # print content of file in terminal
-    vi orig_file.txt   # edit file
-    nano orig_file.txt
-    gedit orig_file.txt
-    head -n1 /etc/passwd
-    tail -n1 /etc/passwd
-    less /etc/passwd
-
-
-    ## ##########################################################
-    # SEARCH and Replace "STRING/TEXT" in file 
-    ## ##########################################################
-
-    # grep : search string/text in a file
-    # grep "<text-need-2-search>" <filename>
-    grep "at" sat
-
-    #replace text
-
-    # sed -i 's/oldname/newname/g' <filename>
-    # s (substitue) oldname / newname/g(global) in <filename>
-    sed -i 's/todya/wednesday/g' sat
-    less sat #  displays file contents or command output one page at a time in your terminal. 
-             # less is most useful for viewing the content of large files 
-
-    ## ##########################################################
-    # Find files/directory 
-    # # ##########################################################
-
-    find <path> -type f -name <file-name> # For find file
-    find <path> -type d -name <dir-name> # For find dir
-
-    # Examples 
-    touch phani kar sanjay sathish
-    find /devops -type f -name kar # search "kar" file
-    find /devops -type f -name "*.txt"
-    mkdir india pakistan austriala asia china japan
-    find /devops -type d -name asia               # search asia
-
-    find . -type -d asia # '.' search in current dir(.)
+# direct path or home path
+cd ~/Workspace/
+cd /home/jayaradhe/Workspace/
+# relative path
+ls -l
+# drwxrwxr-x  2 jayradhey jayradhey 4096 Aug  4 10:11  WorkSpace_AWS
+# drwxrwxr-x 14 jayradhey jayradhey 4096 Jul 30 17:02  WorkSpace_Devops
+# drwxrwxr-x  2 jayradhey jayradhey 4096 Aug  4 12:39  WorkSpace_Python
+cd /home/jayradhey/MyNotes_dev
+cd ../WorkSpace_AWS # THIS is relative path with respect to current path
 
 
 
+# ##########################################################
+# print working directory
+# ##########################################################
+pwd 
+#  [root@ip-172-31-19-8 python]# pwd
+## /etc/python
 
-    ## ##########################################################
-    ##                   zip and un-zip         
-    ## ########################################################## 
-
-    tar -cvzf india.tar india            # c : craete v: verboz, z: zip   f:file
-    tar -xvzf india.tar                  # x: extrach 
 
 
-    ## ##########################################################
-    # File permissions:
-    ## ##########################################################
+# ###########################################################
+# list directory
+# # ##########################################################
+ls  # parent directory {..} and current dir{.}
+ls -a                # all hidden files and dir
+ls -l                # long list format 
+ls dir/sub_dir_1/sub_dir_2
+ls -latr             # reverse 
+# How do you know the file in list is dir in (ls - l)
+# in < ls-l > cmd as d --- --- --- then it is directory
 
-    # Change mode (permissions)
 
-    drwx-rwx-rwx
-    owner-group-user
-    d: driectory 
-    x(1) : user
-    w(2) : write
-    r(4) : read 
+## ##########################################################
+#   Directory 
+## ##########################################################
+mkdir SubDir1      # Create a Dir
+rm -R SubDir1      # Delete folder(dir) and inside files RECURSIVELY
 
-    0: --- 
-    1: --x
-    2: -w-
-    3: -wx
-    4: r--
-    5: r-x
-    6: rw-
-    7: rwx
-      ## ##########################################################
-         chmod 777 sat          # drwx rwx rwx   file
-         chmod -R 777 phani     # dir and inside files
-         chmod +x <file_name>  
-         chmod 755 sat         # drwx r-x r-x 
-         chmod 400 aws_key.pem # -r-- --- --- 
-         ## ##########################################################
-         -rwx  rwx   rwx        1 root  root  1156 Mar 24 08:36 hosts
-         -rw   -r--  r--        1 root  root     0 Mar 24 14:17 ansible.txt
-      # owner-group-user        owner  group
+mv /path Orginal_Dir1 /path moved_ParentDir/ # move directies
+# mv /home/dan/MyNotes_personal_2 /home/dan/Pictures/
 
-  # Who are owner group and users in change mode ?
-  # WHAT IS difference btw owner,group,user ?
-  # Who is owner,group,user 's ?     
 
-  ## ##########################################################
-  # change owner of file or dir : chown
-  ## ##########################################################
-  chown owner-user file 
-  chown <owner-user>:<owner-group>  <file/directory>
-  ################################################################
+
+cp -r /path/subdir1 /path/copied_subdir1   # copy directory recursively
+rm -rf subdir1
+
+#
+# help
+# 
+man ls
+
+type echo # inbuilt or nor  with address
+
+
+
+## ##########################################################
+# Find files/directory 
+# # ##########################################################
+
+find <path> -type f -name <file-name> # For find file
+find <path> -type d -name <dir-name> # For find dir
+
+# Examples for find all files in dir (include child dir)
+find .   # give all list of file in current dir and in all child dir 
+find /   # give all files in all level of tree
+
+# Examples for find all dir  in dir (include child dir)
+find . -type d
+find / -type d
+
+# Example find all files which are modified last 10 minints ago in currernt  dirctory ?
+# touch new_modified.txt
+find . -type f -mmin -10
+ 
+
+# Example find all files which are modified morethan 10 minints ago in currernt  dirctory ?
+find . -type -f -mmin +10
+
+#Find all files which are modified more than 1 minite ago and less than 5 minite ago
+find . -type f -mmin +1 -mmin -5
+
+#Find files modified less than 20 days ago
+find . -type f -mtime -20
+
+#Find files modified more than 20 days ago
+find . -type f -mtime +20
+
+# Find file more than 5Mb
+find . -type -size +5M  # G for Gb
+
+# Find files which are empty ?
+find . -empty
+
+# Search files based on permissions ?
+find . -perm 777 # files which has 777 permision 
+
+
+
+
+## Action on search files
+# Change user and group and permission to (775 for dir and 664 for files
+
+#Step 1: change user and group
+find Website_Demo -exec chom coreyschafer:www-data {} +
+ls  -la Website_Demo
+
+# Step 2 : change directory permission to 755
+find Website_DEMO -type d -exec chomd 775 {} +
+
+# Step 2 : change file permission to 755
+find Website_Demo -type f -exec chomod 664 {} +
+
+
+# delete all files with .jpg form current direcory
+find . -type f -name "*.jpg"  # list all jpg in current directory and child directory
+# NOTE : In order to get only in current dir but not child dirctory
+find . -type f -name "*.jpg" -maxdepth 1
+
+# To delete above files
+find. -type f -name  "*.jpg" -maxdepth 1 -exec rm {} +
+
+
+
+
+find . -perm
+find  
+
+#NOTE :
+# mmint , mtime  # modified minites and modified time
+# amint , atime  # access minites and acess time
+# cmint, ctime   # changed minites and changed time
+
+touch phani kar sanjay sathish
+find /devops -type f -name kar # search "kar" file
+find /devops -type f -name "*.txt"
+mkdir india pakistan austriala asia china japan
+find /devops -type d -name asia               # search asia
+
+find . -type -d asia # '.' search in current dir(.)
+
+
+
+
+## ##########################################################
+##                   zip and un-zip         
+## ########################################################## 
+
+tar -cvzf india.tar india            # c : craete v: verboz, z: zip   f:file
+tar -xvzf india.tar                  # x: extrach 
+
+
+## ##########################################################
+# File permissions:
+## ##########################################################
+
+# Change mode (permissions)
+
+drwx-rwx-rwx
+owner-group-user
+d: driectory 
+x(1) : user
+w(2) : write
+r(4) : read 
+
+0: --- 
+1: --x
+2: -w-
+3: -wx
+4: r--
+5: r-x
+6: rw-
+7: rwx
+## ##########################################################
+    chmod 777 sat          # drwx rwx rwx   file
+    chmod -R 777 phani     # dir and inside files
+    chmod +x <file_name>  
+    chmod 755 sat         # drwx r-x r-x 
+    chmod 400 aws_key.pem # -r-- --- --- 
+## ##########################################################
+    -rwx  rwx   rwx        1 root  root  1156 Mar 24 08:36 hosts
+    -rw   -r--  r--        1 root  root     0 Mar 24 14:17 ansible.txt
+  # owner-group-user        owner  group
+
+# Who are owner group and users in change mode ?
+# WHAT IS difference btw owner,group,user ?
+# Who is owner,group,user 's ?     
+
+## ##########################################################
+# change owner of file or dir : chown
+## ##########################################################
+chown owner-user file 
+chown <owner-user>:<owner-group>  <file/directory>
+################################################################
   [root@ansible-master ansible]# chown -R ansible:ansible ansible.txt 
 
   -rwxrwxrwx  1 root    root     1156 Mar 24 08:36 hosts
   -rw-r--r--  1 ansible ansible     0 Mar 24 14:17 ansible.tx
 
 
-  # ls -l demo.txt      #>> -rw-r--r-- 1 root root 0 Aug 31 05:48 demo.txt
+# ls -l demo.txt      #>> -rw-r--r-- 1 root root 0 Aug 31 05:48 demo.txt
+# chown vivek demo.txt 
+# ls -l demo.txt      # >> -rw-r--r-- 1 vivek root 0 Aug 31 05:48 demo.txt
 
-  # chown vivek demo.txt 
-  # ls -l demo.txt      # >> -rw-r--r-- 1 vivek root 0 Aug 31 05:48 demo.txt
-
-  # chown vivek:vivek demo.txt
-  # ls -l demo.txt      #>>   -rw-r--r-- 1 vivek vivek 0 Aug 31 05:48 demo.txt
-
-
-  chown ec2-user:ec2-user <file/dir>
-
-    # Eg:
-    cd ~
-    mkdir devops
-    ls -latr
-    chown -R ec2-user:ec2-user devops
-    ls -latr 
+# chown vivek:vivek demo.txt
+# ls -l demo.txt      #>>   -rw-r--r-- 1 vivek vivek 0 Aug 31 05:48 demo.txt
 
 
+chown ec2-user:ec2-user <file/dir>
 
-    ## ##########################################################
-    #    SSH
-    ## ##########################################################
-
-    # connect one linux to other linux
-    ssh <other-user-name>@ip
-    # passwd enter
-
-    # copy for other user to current user
-    scp <source-file-path> username@ip: <dest-path>
-    scp -i key.pem /path/to/myfile.txt ec2-user@IPAddressOfEC2:/ 
-
-    ## ##########################################################
-    #  Create Users
-    ## ##########################################################
-
-    user <new-user-name>   # create users
-    passwd <new-user-name> # set password
-    passwd <user-name>     # change password
-
-    #eg :
-    useradd phani
-    passwd phani
-    # Enter password
+# Eg:
+cd ~
+mkdir devops
+ls -latr
+chown -R ec2-user:ec2-user devops
+ls -latr 
 
 
-    cat  /etc/passwd       # to see password
+
+## ##########################################################
+#    SSH
+## ##########################################################
+
+# connect one linux to other linux
+ssh <other-user-name>@ip
+# passwd enter
+
+# copy for other user to current user
+scp <source-file-path> username@ip: <dest-path>
+scp -i key.pem /path/to/myfile.txt ec2-user@IPAddressOfEC2:/ 
+
+## ##########################################################
+#  Create Users
+## ##########################################################
+
+useradd <new-user-name>   # create users
+passwd <new-user-name> # set password
+passwd <user-name>     # change password
+
+#eg :
+useradd phani
+passwd phani
+# Enter password
+# switch user in linux
+su phani 
 
 
-    # histor
-    ls -latr | grep test.sh | rm -rf
-  # disk size or disk free
-    df - h # 
-
-    ## ##########################################################
-    # system moitor 
-    ## ########################################################## 
-    top # user id, user, cup, mem, swap, process name , process id # Ctrl-C
+cat  /etc/passwd       # to see password
 
 
-    # ## ##########################################################
-    # diskspace or disk free (used available, % used) 
-    # ## ##########################################################
-    df -h # Or
+# histor
+ls -latr | grep test.sh | rm -rf
 
-  #Filesystem      Size  Used Avail Use% Mounted on
-  #udev            3.8G     0  3.8G   0% /dev
-  #tmpfs           776M  1.6M  775M   1% /run
-  #/dev/sda1       916G  550G  320G  64% /
-  #tmpfs           3.8G  212M  3.6G   6% /dev/shm
-  #tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-  #tmpfs           3.8G     0  3.8G   0% /sys/fs/cgroup
-  #/dev/loop0      185M  185M     0 100% /snap/eclipse/40
-  #/dev/loop1       63M   63M     0 100% /snap/gtk-common-t
-
-    df -aPh # -a :all, P: Portable, h: human read able
-
-    ## ##########################################################
-    # directory size:  du -sh <dir_name> 
-    # disk  usage :
-    ## ##########################################################
-
-    du -sh asia  # -s : summarize , # -h : human readable
-    du -sh sat
-    du -sh * # size in current directory
-    du -sh *.jpg # size of all jpg formate
-  # du -h Gitabase
-  # 378M	Gitabase
-
-    ## ##########################################################
-    # RAm size
-    ## ##########################################################
-    free -m
-    free -mh #  free or available ram in Gb or Mb
+# disk size or disk free
+df - h # 
+## ##########################################################
+# system moitor 
+## ########################################################## 
+top # user id, user, cup, mem, swap, process name , process id # Ctrl-C
 
 
-  ## ##########################################################
-  # process running 
-  ## ##########################################################
-  ps -ef | grep <process-name>
-  ps -ef| grep tomcat
-  # UID        PID  PPID  C STIME TTY          TIME CMD
-  # jayradhe 23909  7504  0 13:38 pts/0    00:00:00 grep --color=auto tomcat
+# ## ##########################################################
+# diskspace or disk free (used available, % used) 
+# ## ##########################################################
+df -h # Or
 
-  # UID: USER iD
-  # PID : Process Id
-  # PPID: Parent Process Id
-  # $ kill -kill <PID>  # to kill process
-  # $ kill -term <PID>  # to kill process
+#Filesystem      Size  Used Avail Use% Mounted on
+#udev            3.8G     0  3.8G   0% /dev
+#tmpfs           776M  1.6M  775M   1% /run
+#/dev/sda1       916G  550G  320G  64% /
+#tmpfs           3.8G  212M  3.6G   6% /dev/shm
+#tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+#tmpfs           3.8G     0  3.8G   0% /sys/fs/cgroup
+#/dev/loop0      185M  185M     0 100% /snap/eclipse/40
+#/dev/loop1       63M   63M     0 100% /snap/gtk-common-t
 
-  # $ kill -l 
+df -aPh # -a :all, P: Portable, h: human read able
 
-  # 1) SIGHUP	        2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
-  # 6) SIGABRT	7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
-  #11) SIGSEGV  	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
-  #16) SIGSTKFLT	17) SIGCHLD	18) SIGCONT	19) SIGSTOP	20) SIGTSTP
-  #21) SIGTTIN  	22) SIGTTOU	23) SIGURG	24) SIGXCPU	25) SIGXFSZ
-  #26) SIGVTALRM	27) SIGPROF	28) SIGWINCH	29) SIGIO	30) SIGPWR
-  #31) SIGSYS  	34) SIGRTMIN	35) SIGRTMIN+1	36) SIGRTMIN+2	37) SIGRTMIN+3
-  #38) SIGRTMIN+4	39) SIGRTMIN+5	40) SIGRTMIN+6	41) SIGRTMIN+7	42) SIGRTMIN+8
-  #43) SIGRTMIN+9	44) SIGRTMIN+10	45) SIGRTMIN+11	46) SIGRTMIN+12	47) SIGRTMIN+13
-  #48) SIGRTMIN+14	49) SIGRTMIN+15	50) SIGRTMAX-14	51) SIGRTMAX-13	52) SIGRTMAX-12
-  #53) SIGRTMAX-11	54) SIGRTMAX-10	55) SIGRTMAX-9	56) SIGRTMAX-8	57) SIGRTMAX-7
-  #58) SIGRTMAX-6	59) SIGRTMAX-5	60) SIGRTMAX-4	61) SIGRTMAX-3	62) SIGRTMAX-2
-  #63) SIGRTMAX-1	64) SIGRTMAX	
+## ##########################################################
+# directory size:  du -sh <dir_name> 
+# disk  usage :
+## ##########################################################
 
-  kill -9 23909 
+du -sh asia  # -s : summarize , # -h : human readable
+du -sh sat
+du -sh * # size in current directory
+du -sh *.jpg # size of all jpg formate
+# du -h Gitabase
+# 378M	Gitabase
 
-  kill -9
+## ##########################################################
+# RAm size
+## ##########################################################
+free -m
+free -mh #  free or available ram in Gb or Mb
 
-    ## ##########################################################
-    #         Network Cmd
-    ## ##########################################################
 
-    ping google.com          # ping ip/dns/
-    nslookup google.com      # for querying the Domain Name System to obtain domain name or IP address mapping, or other DNS records.
-    telnet google.com 23     # check port 
-    ifconfig
-    netstat                  # (network statistics) displays network connections: Ip,port PID 
+## ##########################################################
+# process running 
+## ##########################################################
+ps -ef | grep <process-name>
+ps -ef| grep tomcat
+# UID        PID  PPID  C STIME TTY          TIME CMD
+# jayradhe 23909  7504  0 13:38 pts/0    00:00:00 grep --color=auto tomcat
+
+# UID: USER iD
+# PID : Process Id
+# PPID: Parent Process Id
+# $ kill -kill <PID>  # to kill process
+# $ kill -term <PID>  # to kill process
+
+# $ kill -l 
+
+# 1) SIGHUP	        2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
+# 6) SIGABRT	7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+kill -9 23909 
+kill -9
+
+## ##########################################################
+#         Network Cmd
+## ##########################################################
+
+ping google.com          # ping ip/dns/
+nslookup google.com      # for querying the Domain Name System to obtain domain name or IP address mapping, or other DNS records.
+telnet google.com 23     # check port 
+ifconfig
+netstat                  # (network statistics) displays network connections: Ip,port PID 
                              #  # Proto,  Recv-Q, Send-Q, Local Address(Port)           Foreign Address         State       PID/Program name
-    # GET ip
-  ping google.com
-  #PING google.com (172.217.163.46) 56(84) bytes of data.
-  # 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=1 ttl=55 time=16.5 ms
-  # 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=2 ttl=55 time=17.1 ms
-  # 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=3 ttl=55 time=20.2 ms
-  # 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=4 ttl=55 time=88.2 ms
+# GET ip
+ping google.com
+#PING google.com (172.217.163.46) 56(84) bytes of data.
+# 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=1 ttl=55 time=16.5 ms
+# 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=2 ttl=55 time=17.1 ms
+# 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=3 ttl=55 time=20.2 ms
+# 64 bytes from maa05s01-in-f14.1e100.net (172.217.163.46): icmp_seq=4 ttl=55 time=88.2 ms
 
-  nslookup google.com      # for querying the Domain Name System to obtain domain name or IP address mapping, or other DNS records.
+nslookup google.com      # for querying the Domain Name System to obtain domain name or IP address mapping, or other DNS records.
 
-  # Server:		127.0.0.53
-  # Address:	127.0.0.53#53
+# Server:		127.0.0.53
+# Address:	127.0.0.53#53
 
-  # Non-authoritative answer:
-  # Name:	google.com
-  # Address: 172.217.163.46
-  # Name:	google.com
-  # Address: 2404:6800:4007:80b::200e
-
-
-    # check ports is running
-  netstat -anp | grep <ports-no> # all  p: PID , n: doesnot resolve name
-  # Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-  # tcp        0      0 0.0.0.0:8888            0.0.0.0:*               LISTEN      -                   
-  # tcp        0      0 192.168.0.105:37756     52.40.23.85:443         ESTABLISHED 11770/firefox       
-  # tcp        0     32 192.168.0.105:52374     34.195.246.183:443      LAST_ACK    -
-  # Active UNIX domain sockets (servers and established)
-  # Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
-  # unix  2      [ ACC ]     STREAM     LISTENING     34772    2332/systemd         /run/user/1000/systemd/private
-  # unix  2      [ ACC ]     STREAM     LISTENING     31708    -                    /run/user/123/systemd/private
-  # unix  2      [ ACC ]     STREAM     LISTENING     34776    2332/systemd         /run/user/1000/snapd-session-agent.socket
-  # unix  2      [ ACC ]     STREAM     LISTENING     31712    -                    /run/user/123/gnupg/S.dirmngr
-  # unix  3      [ ]         STREAM     CONNECTED     3237440  11770/firefox        
-  # unix  3      [ ]         STREAM     CONNECTED     3233405  7229/firefox         
-  # unix  3      [ ]         STREAM     CONNECTED     2101124  3731/vlc             
-  # unix  3      [ ]         STREAM     CONNECTED     830211   2389/dbus-daemon     /run/user/1000/bus
-  # unix  3      [ ]         STREAM     CONNECTED     38761    2712/blueberry-obex  
-  # unix  3      [ ]         STREAM     CONNECTED     38294    -                    /var/run/dbus/system_bus_socket
-  # unix  3      [ ]         STREAM     CONNECTED     37112    -                    /var/run/dbus/system_bus_socket
-  # unix  3      [ ]         STREAM     CONNECTED     31184    -                    /var/run/dbus/system_bus_socket
-  # unix  3      [ ]         STREAM     CONNECTED     37567    2813/cinnamon-scree  
-  # unix  3      [ ]         STREAM     CONNECTED     24609    -                    
-  # unix  3      [ ]         STREAM     CONNECTED     2099806  3731/vlc             
-  # unix  3      [ ]         STREAM     CONNECTED     37262    2489/csd-color       
-  # unix  3      [ ]         STREAM     CONNECTED     23321    -                    /var/run/dbus/system_bus_socket
-  # unix  3      [ ]         STREAM     CONNECTED     2529413  11770/firefox        
-  # unix  3      [ ]         STREAM     CONNECTED     2022448  11770/firefox        
-  # unix  3      [ ]         STREAM     CONNECTED     833750   3244/gvfsd-trash     @/dbus-vfs-daemon/socket-6kJqXg56
-  # unix  3      [ ]         STREAM     CONNECTED     38987    -                    /var/run/dbus/system_bus_socket
-
-  uptime  # find out how long system is active.
-  #Display the time since the last boot
-
-  #  
-  #   Run levels https://www.liquidweb.com/kb/linux-runlevels-explained/
-  #
-  Run levels 
-  #Q) What is runlevels in linux
+# Non-authoritative answer:
+# Name:	google.com
+# Address: 172.217.163.46
+# Name:	google.com
+# Address: 2404:6800:4007:80b::200e
 
 
-  # 
-  #  awk: cut columwise:
-  #
-  # syntax : awk '{print $3}' filename
-  df -h |grep /dev/xvda1 
+# check ports is running
+netstat -anp | grep <ports-no> # all  p: PID , n: doesnot resolve name
+# Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+# tcp        0      0 0.0.0.0:8888            0.0.0.0:*               LISTEN      -                   
+# tcp        0      0 192.168.0.105:37756     52.40.23.85:443         ESTABLISHED 11770/firefox       
+# tcp        0     32 192.168.0.105:52374     34.195.246.183:443      LAST_ACK    -
+# Active UNIX domain sockets (servers and established)
+# Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
+# unix  2      [ ACC ]     STREAM     LISTENING     34772    2332/systemd         /run/user/1000/systemd/private
+# unix  2      [ ACC ]     STREAM     LISTENING     31708    -                    /run/user/123/systemd/private
+# unix  2      [ ACC ]     STREAM     LISTENING     34776    2332/systemd         /run/user/1000/snapd-session-agent.socket
+# unix  2      [ ACC ]     STREAM     LISTENING     31712    -                    /run/user/123/gnupg/S.dirmngr
+# unix  3      [ ]         STREAM     CONNECTED     3237440  11770/firefox        
+# unix  3      [ ]         STREAM     CONNECTED     3233405  7229/firefox         
 
-  # Example 
-  touch users
-  vi users
-  ## insert below text
-  # sno     course   name  fee
-  # 1      devops   phani 15
-  # 2      devops   kar  15
-  # 3      devops   san 15
-  awk '{print $3}' sat
+uptime  # find out how long system is active.
+#Display the time since the last boot
 
-  # Example : find size of /dev/xvda1
-  df -h |grep /dev/xvda1 | awk '{print $1, $4}'
-
-  #
-  #   Cut CHARACER Columwise : cut -c
-  #
-  cut -c 1 filename      # f
-  cut -c 1-5 filename    # filename
-  cut -c 1,6 filename    # fa
-  cut -c 1 sat 
+#  
+#   Run levels https://www.liquidweb.com/kb/linux-runlevels-explained/
+#
+Run levels 
+#Q) What is runlevels in linux
 
 
+# 
+#  awk: cut columwise:
+#
+# syntax : awk '{print $3}' filename
+df -h |grep /dev/xvda1 
+
+# Example 
+touch users
+vi users
+## insert below text
+# sno     course   name  fee
+# 1      devops   phani 15
+# 2      devops   kar  15
+# 3      devops   san 15
+awk '{print $3}' sat
+
+# Example : find size of /dev/xvda1
+df -h |grep /dev/xvda1 | awk '{print $1, $4}'
+
+#
+#   Cut CHARACER Columwise : cut -c
+#
+cut -c 1 filename      # f
+cut -c 1-5 filename    # filename
+cut -c 1,6 filename    # fa
+cut -c 1 sat 
 #+END_SRC
 
-** combination of two cmds
+* Regular expression 
+Regular Expression
+ - Flexible search pattern
+ - made up of:
+   - anchors        - specify
+   - character sets - what is searched
+   - modifiers      - specify  how many times the previous character set  is repeted
+|-----------+--------------------------------------------------------------------|
+| ANCHORS   |                                                                    |
+|-----------+--------------------------------------------------------------------|
+| .(period) | any char except '\n'                                               |
+| ^         | matches start of string                                            |
+| *         | matches up zero or more time the preceding character               |
+| $         | matches end of string                                              |
+| \         | Represent special  character                                       |
+| ()        | Group of regural Expression                                        |
+| ?         | match up exactly one character                                     |
+| {n}       | matches the preceding char appearing 'n' times exactly             |
+| {n,m}     | matches the preceding char appearing 'n' times but not more than m |
+| {n,}      | matches the preceding char appearing 'n' times or more             |
+|           |                                                                    |
+
+Extended Regular Expression
+| \+ | matches one or more occurrence of the previous character |
+| \? | matches zero or one occurrence of previous character     |
+| {} | Brace Expression                                        |
+
+* GREP : Global Regular Expression Print
+#+BEGIN_SRC sh
+cat sample |grep ^a  # strat with a 
+cat sample | grep t$   # end with t
+echo -e "apple\npant\npeople" |grep -E p\{2}   # apple 
+echo -e "bat\nant\neat\npant\ntaste" | grep "a\+t" # bat, eat
+
+echo -e "bat\nhat\nrat\nsat\neat\npeople" |grep '[b,h]at'
+#bat
+#hat
+# asdfbatadfadsd
+# adfahatadfad
+
+echo -e "0324-241-341" |grep '[0-9][0-9][0-9][0-9]'
+# 0324-241-341
+echo -e "0324-241-341" |grep -oP '[0-9]{3}'
+# 032
+# 241
+# 341
+
+grep -n ^'work' GNULicense.txt # line starting with work
+grep -n 'work'$ GNULicense.txt # line ending with work
+grep -n 'th..' GNULicense.txt 
+#the that this....etc
+#Exception want to search for []
+grep -n '\[\]' GNULicense.txt
+grep -n '\<work\>' GNULicense.txt # search for word "work" with no starting and ending extentions
+
+# global serach using regular expression
+# grep -i # ignore case
+# grep -
+#+END_SRC
+
+** Example for grep 
+#+begin_src 
+## ##########################################################
+# SEARCH and Replace "STRING/TEXT" in file 
+## ##########################################################
+
+## GREP : Global Regular Expression Print
+# grep : search string/text in a file
+# grep "<text-need-2-search>" <filename>
+grep "at" sat
+
+grep "Jane Williams" names.txt
+grep "John Williams" name.txt
+#John Williams
+#John Williamson
+grep -w "John Williams" name.txt # match the word
+grep -wi "John Williams" name.txt  # i : case insensitive
+#john williams
+#John Williams
+
+# Find the line.no where the search is found
+grep -win "John Williams" names.txt
+51: john williams
+431: John Williams
+
+#  To find extra info on grep like show 4 lines before the match
+grep -win -B 4 "John Williams" name.txt
+grep -win -A 4 "John Williams" name.txt 
+grep -win -C 2 "John Williams" name.txt
+
+
+# Find word "John Williams" in multiple files at once ?
+grep -win "John Williams" ./*    # ./ means current dir and * all files
+# Give error if current dir current has dir
+
+
+# Recursively search
+grep -winr "John Williams" .  
+# NOTE : If if there are many child dir in current dir then serach will take long time and you have to kill it.
+
+# Give we files list where match is found
+grep -wirl "John Williams" .
+
+# How many No.of matches in each files match
+grep -wirc "John Williams" .
+
+
+# pipe grep
+
+# How the commit we have done and find commit having message dotfile.
+history | grep "git commit" | grep "dotfile"
+
+# GET pHONE No like 872-133-2144
+grep "...-...-...." name.txt
+grep "\d{3}-\d{3}-\d{4}" name.txt # will not give results
+# because it should be perl compatable
+# linux will default has perl compatable
+
+grep -P "\d{3}-\d{3}-\d{4}" name.txt # work in linux not in mac,windows
+
+# Find file consistance of phone-number
+grep -wirlP "\d{3}-\d{3}-\d{4}" .
+#+end_src
+
+* CURL
+#+begin_src sh 
+curl http://localhost:5000
+# Use to test rest api
+
+curl http://localhost:5000/json-test
+
+curl -i  http://localhost:5000/json-test # i :Information
+
+curl http://localhost:5000/method
+
+curl -d "first=Corey&last=Schafer" http://localhost:5000/method
+
+#You have sent a POST Request
+#{'last':u'Schafer', 'first=Corey&last=Smith" http://localhost:5000/methods
+#You sent a PUT Request 
+#{'last':u'Smith', 'first':u'Corey'}
+
+curl -X PUT -D "first=Corey&last=Smith" http://localhost:5000/methods
+# You sent a PUT Request
+# {'last' :u'Smith', 'first': u'Corey'}
+
+curl -X DELETE  "first=Corey&last=Smith" http://localhost:5000/methods
+# You sent a DELETE
+
+# Routes require user-name and password
+
+curl http://localhost:5000/secret
+# Could not verify your access.
+curl -u <user>:<password> <http://>
+curl -u core:pass http://localhost:5000/secret
+# You were successfully authenticated!
+
+# download a route
+curl -o http://localhost:5000/downlaod  # --output or -o
+
+curl -o commits.json https://api.github/repos.CoreyMSchafer/Demo-Repo/commits
+#+end_src
+
+
+* TODO Rsync
+apt-get install rsync
+yum install rsync
+
+#+begin_src 
+cd Desktop/
+rsync Original/* Backup/
+rsync Original/* Backup/   # Re-run will not duplicate files 
+mkdir Original/More-Pics
+
+rsync Original/* Backup/  #ERROR : skips direcory
+
+# To SYNCHROIZE DIRECTORY  also
+rsync -r Original/ Backup/   # folder: Desktop/Original is syn with Backup/ 
+                             # cp  Orignal Dir with Backup Dir  
+
+rsync -r Original Backup/    # folder: Desktop/Original is syn with Backup/Orignal/ 
+                             # copy(syn)  Orignal Dir inside Backup Dir  
+
+
+# Check what files are going to syn
+
+# dirve run or check
+rsync -av --dry-run Orignal/ Backup/   
+# -a : archive -v : visualise 
+
+rsync -av --delete --dry-run Orignal/ Backup/
+# NOTE: --delete will delete the files in backup dir
+
+#This is used in syn www-data(or)http_dir with rsync file but can't used to as backup method because it will delete all files
+
+
+############ssh-rsync
+cd 
+ls Projects/my_site/
+# index.html main.css main.js
+rsync -zaP ~/Projects/my_site coreyms@192.168.56.100:~/public/ 
+# -z : compress , - a: archive , -P: show progress 
+
+# # Check 
+ssh coreyms@192.168.56.100
+cd public/
+tree my_site
+
+########### We can set crontab for rsync to backup  http(dir) to  my_backup(dir)
+
+mkdir my_backup
+touch my_backup/backup.sql
+rsync -zaP coreyms@192.168.56.100:~/public/my_site/my_backup ~/Projects/my_site/
+
+# NOTE : COMMONLY WE USE "CRON-JOB" WITH "RSYNC"
+#+end_src
+* sed 
+#+begin_src 
+#replace text
+
+# sed -i 's/oldname/newname/g' <filename>
+# s (substitue) oldname / newname/g(global) in <filename>
+sed -i 's/todya/wednesday/g' sat
+less sat #  displays file contents or command output one page at a time in your terminal. 
+             # less is most useful for viewing the content of large files
+#+end_src
+
+* combination of two cmds
 pip
 | : gives output of one cmd to next cmd
 redirect
@@ -488,7 +754,7 @@ redirect
 
 
 #+end_src
-** TODO Crontab
+* TODO Crontab
 For Crontab : Example visit https://crontab.guru/examples.html
 #+BEGIN_SRC sh
 
@@ -501,7 +767,8 @@ For Crontab : Example visit https://crontab.guru/examples.html
 # 2 * - hours(0-23)
 # 3 * - days(1-31)
 # 4 * - months(1-12)
-# 5 * - weeks(1-7)
+# 5 * - weeks(1-7) (0-6) : 7 : is Sunday or 0: Monday
+
 
 # https://www.geeksforgeeks.org/crontab-in-linux-with-examples/
 
@@ -536,7 +803,17 @@ For Crontab : Example visit https://crontab.guru/examples.html
 crontab -e # edit cron tabs
 crontab -l # list
 crontab -r # delete 
+crontab -u user2 -e  # edit cron tabs of user2
 
+# To view or edit sudo users crontab 
+sudo crontab -l
+#Enterpassword:
+sudo crontab -e 
+
+ 
+# view crontab of sudo user
+ 
+crontab
 #  *	        any value
 #  ,	        value list separator
 0,15,30,45 * * * * dh -h
@@ -557,19 +834,27 @@ Say I have a crontab which runs every 20 minutes and I have a hour range which c
 #  @reboot  	(non-standard)
 
 #+END_SRC
-** run 
+
+** Example
+#+begin_src 
+# Empty temp folder every Friday 5:00 am
+0 5 * * 5 rm -rf /temp/*
+
+# Backup images to Google Drive every night at midnight
+0 0 * * * rsync -a ~/Prictures/ ~/Google\ Drive/Pictures/
+
+
+
+#+end_src
+* RUN SHELL SCRIPTS 
 #+BEGIN_SRC sh
   # 
-  # run shell scripts 
-  
+  # run shell scripts
   ./name.sh
   sh -x name.sh # debugging mode or Trouble shoot
   sh name.sh
   source name.sh
-
 #+END_SRC
-
-
 * Linux Interview Question
 ** 36) What are environmental variables?
 
@@ -622,3 +907,51 @@ Linux Process states
   #Q) What is runlevels in linu
  https://www.liquidweb.com/kb/linux-runlevels-explained/
 
+
+
+* Customize TERMINAL 
+
+To have same customize in bash profile and bashrc 
+bash profile : It is customized for evey terminal 
+bashrc : It is customized for evey login 
+
+#+begin_src sh
+#cat .bash_profile
+if [-f ~/.bashrc]; then # if file exist 
+   source ~/.bashrc     # then run bashrc
+fi
+# OR you can run 
+[-n "$PS1"] && source ~/.bashrc;
+# So we can have single customization file both bash_profile and bashrc
+#+end_src
+
+
+#+begin_src sh
+[ -r "$file"] && [-f "$file"] && source  "$file";
+# -r FILE   #FILE exists and read permission is granted
+# -f FILE   #FILE exists and is a regular file
+
+# If file "EXISTS, REGULAR" and "READ" 
+
+ 
+#+end_src
+My bashrc file 
+#+begin_src 
+#cat ~./bashrc
+PS1='->'
+#PS1='-Customize->'
+#PS1="\u@\h \W->";
+export PS1;
+
+# Special Characters:
+#\h   hostname up to first 
+#\n   newline
+#\s   name of shell
+#\t   current time in 24-hour format
+#\u   username of current user
+#\w   current working directory
+#\W   basename of current working directory
+#+end_src
+
+
+# If you google search dotfile : these are customized setting of users in github

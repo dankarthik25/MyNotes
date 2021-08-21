@@ -257,3 +257,24 @@ https://www.youtube.com/watch?v=5PwTkb8fY5g
 # Jira online ppts devopsschool
 https://www.devopsschool.com/slides/jira/index.html
 
+
+
+* TODO Install Jenkins inside Docker
+Write Docker file and run Docker build and run Jenkins 
+https://patharetanmay1018.medium.com/automation-with-custom-jenkins-image-by-using-dockerfile-2f2e9aa3c1cd
+Try using tomcaat
+* TODO Install Tomcat inside Docker
+install tomcat and use jenkins to deploy artifacts to tomcat server
+* Sonarqube
+* Jfrog
+* AWS
+EC2
+ALB
+S3
+ECR
+ECS
+VPC
+* Terra frorm
+* Create Cluster using Micro servers in docker
+* ELC
+* Nagios

@@ -762,7 +762,7 @@ Infrastructure as code (IaC)  is ability to programmatically  manage and proviso
 Version Control provide the History and Audit Trail
 
 Easy Roll Back to prior version of Jobs and Builds
-* Jenkins DSL
+* Jenkins DSL Domain Specific Langaugae
 ** Job DSL Overview[34] 
 - Jenkins DSL : Programatic way of Implement the Jenkins Jobs
 - Jenkins Job DSL plugin is used to define Jobs in Programatic Form

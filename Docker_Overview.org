@@ -5,8 +5,8 @@ docker images           # list of images in your docker
 docker image ls         # list of images in your docker
 docker search centos    # check if image is present in local repo (host OS)
 docker pull centos      # download image to local repo
-docker rmi centos:7       # remove centos:7 from local repo
-
+docker rmi centos:7     # remove centos:7 from local repo
+docker system prune -a  # delete unused images,containers
 ##########
 # Push image to Docker hub
 ############
@@ -18,16 +18,24 @@ docker rmi centos:7       # remove centos:7 from local repo
 ################
 Container Status
 #################
-docker container top <c-id/name>
-docker container status <c-id/name>
-docker container status # performance status all containers
+docker container top <c-id/name>  # Consist {UID, PID, PPID, C, STIME, TTY, TIME, CMD }
+#UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+#root                27989               27969               0                   22:36               pts/0               00:00:00            bash
+
+docker container stats <c-id/name> #CONTAINER ID,NAME, CPU %, MEM USAGE / LIMIT, MEM %, NET I/O, BLOCK I/O, PIDS
+
+#CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O     PIDS
+#5eef4fc49b1b   myubuntu   0.00%     4.625MiB / 7.561GiB   0.06%     7.23kB / 0B   4.51MB / 0B   1
+
+docker container stats # performance status all containers
 docker container inspect mysql | grep "VOLUME"        # give volume dir 
-
-
+#docker inspect myubuntu |grep LogPath
+#docker inspect --format='{{.LogPath}}' myubuntu
 #######
 # container cmds
 ######
 docker ps                      # docker container ls                                #
+# CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 docker ps -a                   # docker container ls -a                             #
 docker stop <c-id/name>        # docker container stop <c-id/name>                  #
 docker kill <c-id/name>        # docker container kill <c-id/name>                  #
@@ -48,7 +56,6 @@ docker exec -it d2bf3ff05b9b /bin/bash   # Enter inside the container
 # PORT FORWORDING
 #########
 docker run -itd --name tomcat-dev -p 8081:8080 tomcat:9 # run localhost:8001
-
 ###############
 # Docker Volume: Data volume and bindmount
 ###########
@@ -121,12 +128,21 @@ docker rm d2bf3ff05b9b # to remove the container (destroy)
 #+end_src
 
 ** Compose cmds
-Use to build and run  mulit containers which are inter-linked to each other   
-#+begin_src
+Use to build and run  mulit containers which are inter-linked to each other
+It is not a product tool
+
+#+begin_src 
+docker run -itd --name mydb -e MYSQL_ROOT_PASSWORD=DEVOPS@12345 mysql:5.7
+docker run -itd wordpress  --link mydb:mysql -p 83:80 wordpress
+
 # cd <path> where docker-compose.yml is present
 docker compose build
-docker compose up 
+docker compose up
+docker compose down # NOTE: it stops all containers and remove volumes also 
 docker-compose up -d
+docker-compose ps
+docker-compose top
+
 #+end_src
 
 ** Swarm cmds
@@ -140,13 +156,18 @@ docker swarm init --advertise-addr 18.220.116.100  # generate TOKEN
 #####################################################################
 
 docker swarm leave # leave the swam cluster
+docker swarm leave --force
 # Note : for manger it ask for force leave
 #+end_src
  
 *** Services cmds
+Docker services :
+- if same image/container are need form cluster
+  - Eg: if web-server is conatainerized and we need to increase servers at port 8000 at outside then with service we can internally connect all containers but externally we can access at 8000 port  
+                  
 use to control any existing Docker services like (Container,Compose,Swarm,)
 
-#+begin_src sh
+#+begin_src 
 docker service ls                 # Inside node (list of container) are show 
 docker service ps                 # TODO
 docker service scale <c-id/name>
@@ -154,17 +175,97 @@ docker service stop <c-id/name>
 docker service logs <c-id/name>
 docker service rm <name>
 docker service create <c-name> <img-name>
+
+docker service create 	# Create a new service
+docker service inspect 	# Display detailed information on one or more services
+docker service logs 	# Fetch the logs of a service or task
+docker service ls 	# List services
+docker service ps 	# List the tasks of one or more services
+docker service rm 	# Remove one or more services
+docker service rollback 	# Revert changes to a service’s configuration
+docker service scale 	# Scale one or multiple replicated services
+docker service update 	# Update a service
 #+end_src
 
+#+begin_src 
+docker service create --name redis redis:3.0.6
+docker service create --replicas 5 -p 80:80 --name myredis redis:3.0.6
+docker service create --mode global --name redis2 redis:3.0.6
+docker service ls
+# ID            NAME    MODE        REPLICAS  IMAGE
+# dmu1ept4cxcf  redis   replicated  1/1       redis:3.0.6
+# a8q9dasaafud  redis2  global      1/1       redis:3.0.6
+
+docker service ps redis
+
+# ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS
+# 0qihejybwf1x   redis.1   redis:3.0.5  manager1  Running        Running 8 seconds
+# bk658fpbex0d   redis.2   redis:3.0.5  worker2   Running        Running 9 seconds
+# 5ls5s5fldaqg   redis.3   redis:3.0.5  worker1   Running        Running 9 seconds
+# 8ryt076polmc   redis.4   redis:3.0.5  worker1   Running        Running 9 seconds
+# 1x0v8yomsncd   redis.5   redis:3.0.5  manager1  Running        Running 8 seconds
+# 71v7je3el7rr   redis.6   redis:3.0.5  worker2   Running        Running 9 seconds
+# 4l3zm9b7tfr7   redis.7   redis:3.0.5  worker2   Running        Running 9 seconds
+# 9tfpyixiy2i7   redis.8   redis:3.0.5  worker1   Running        Running 9 seconds
+# 3w1wu13yupln   redis.9   redis:3.0.5  manager1  Running        Running 8 seconds
+# 8eaxrb2fqpbn   redis.10  redis:3.0.5  manager1  Running        Running 8 seconds
+
+
+docker service scale redis=7
+docker service update --replicas=50 redis
+docker service ls --filter name=redis
+
+# ID            NAME      MODE        REPLICAS  IMAGE
+# 3pr5mlvu3fh9  redis     replicated  15/50     redis:3.0.5
+
+#+end_src
 *** Node
-#+begin_src sh
-docker node ls # all node & manger
-docker node ps # all container running inside node not cluster
+#+begin_src
+docker node ls # List nodes in the swarm
+
+docker node ps # List tasks running on one or more nodes, defaults to current node
 docker rm <node-id> # remove node form cluster
 # to remove manger from cluster if above not work then use below
 docker swarm leave --force
+
+# 
+# docker node update --avalibility drain <hostaname>
+docker node update --avalibility drain worker1
+
+# docker node update --avalibility drain <hostaname>
+
+#
+# To activae a server(container):
+#
+
+# docker node update --avalibility active hostaname
+
 #+end_src
 
+#+begin_src sh 
+docker node ls # List nodes in the swarm
+# ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+# 1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready   Active
+# 38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active
+# e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
+
+docker node ps swarm-manager1
+# NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+# redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+# redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+# redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+# redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+# redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+
+docker node update --avalibility drain worker1
+docker service ps redis
+# NAME                                    IMAGE        NODE      DESIRED STATE  CURRENT STATE           ERROR
+# redis.1.7q92v0nr1hcgts2amcjyqg3pq       redis:3.0.6  manager1  Running        Running 4 minutes
+# redis.2.b4hovzed7id8irg1to42egue8       redis:3.0.6  worker2   Running        Running About a minute
+#  \_ redis.2.7h2l8h3q3wqy5f66hlv9ddmi6   redis:3.0.6  worker1   Shutdown       Shutdown 2 minutes ago
+# redis.3.9bg7cezvedmkgg6c8yzvbhwsd       redis:3.0.6  worker2   Running        Running 4 minutes
+
+#+end_src
 ** Networking
 #+begin_src sh
 docker network ls  # show network
@@ -177,17 +278,32 @@ docker network ls  # show network
 # driver : 4 types bridge,host,null,overlay,maclan
 
 
-docker network create --drive  [network-name]     #  create a network
+docker network create --driver  [driver-type] <network-name>     #  create a network
 docker network inspect [network-id/name]           # docker network inspect bridge
 docker network inspect bridge | grep 'Containers' # List of containers in bridge
 docker network connect  [container-id]            # attach a network to container
 docker network disconnect  [containter-id]         # detach a network from network
 docker network create --help
+docker service create --name mysql --network mydrupal -p 80:80 drupal
 # To see the containers attached to networks
 docker network inspect bridge
 #+end_src
 *** Example
-#+begin_src 
+#+begin_src
+docker network create --driver bridge alpine-net
+docker network ls
+
+# NETWORK ID          NAME                DRIVER              SCOPE
+# e9261a8c9a19        alpine-net          bridge              local
+# 17e324f45964        bridge              bridge              local
+# 6ed54d316334        host                host                local
+# 7092879f2cc8        none                null                local
+docker container attach alpine4
+
+docker network create -d overlay nginx-net
+#+end_src
+
+#+begin_src sh
 docker network create --driver overlay mydrupal
 docekr network ls
 docker service create --name psql --network mydrupal -e POSTGRESS_PASSWORD=mypass postgres
@@ -212,9 +328,7 @@ docker container ls
 docker network connect 498f7bf 3928fe27
 docker network inspect 
 docker network disconnect 498f7bf 3928fe27
-
 #+end_src
-
 ** TODO Docker File
 ** TODO Compose yml file and Link
 ** TODO Docker Stack
@@ -235,8 +349,8 @@ The host OS kernel run various apps separatly in containers where each container
 A app *cannot harm the host* OS or  *conflict with other apps* running in separate containers.
 *** *Disadvanges of Containers*:
 Containers still *do not offer same security* and *stability* that VMs can. Since they share the host’s kernel, they cannot be as isolated as a virtual machine. Consequently, containers are process-level isolated, and one container can affect others by compromising the stability of the kernel.
-* TODO Docker Installation
-* TODO what is docker-hub :
+* Docker Installation
+* what is docker-hub :
 Docker-Hub : Online public/private repo mainted by docker where docker-images are pull/pushed consisting of standard images(linux,ubuntu,winodws) or customsied image(using Docker file)
 
 ** Create image using Docker file
@@ -298,7 +412,7 @@ Create Custome image using Docker file and push to docker-hub
 * TODO Docker file
 Port Forwording, Data Volume & Bund mounts
 
-* TODO Docker cmds (TODO: merge dockerfile,compose,stack,network cmds)
+* Docker cmds (TODO: merge dockerfile,compose,stack,network cmds)
 * TODO Docker Compose :
 - Overview
 - Docker Link
@@ -306,15 +420,7 @@ Port Forwording, Data Volume & Bund mounts
 - build and run(up)
 - cmds
   
-* TODO Docker Swarm
-- overview
-- swarm cmd
-
-* TODO Docker Stack
-- Docker Compose in cluster
-- Create yml file and build and create cluster
-- cmd
-* TODO Docker Network
+* Docker Network
 - Overview
   - Intro
   - Container Network Model
@@ -329,8 +435,21 @@ Port Forwording, Data Volume & Bund mounts
  - CMD (Bridge,Host,Overlay)
    - How bridge network host is connected using overlay Newtork (docker cmd)          
         
-* Docker DNS
+* TODO Docker DNS
 - DNS RoundRobin Test
+* TODO Docker Swarm
+- overview
+- swarm cmd
+
+* TODO Docker Stack
+- Docker Compose in cluster
+- Create yml file and build and create cluster
+- cmd
+  https://www.youtube.com/watch?v=Yq-SQTESTJE
+  with git repo
+  
+* TODO Docker Secrets
+https://www.youtube.com/watch?v=OLSHSkSZLV8
 * External Links
 
 Edureka :https://www.youtube.com/watch?v=RSIstPUiEjY

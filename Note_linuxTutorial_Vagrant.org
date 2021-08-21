@@ -234,14 +234,14 @@ passwd # set passwd for  dougstamper
 #+END_SRC
 
 * ------------------------------------
-* Vagrant
-** Install Vagrant
+* Vagrant Install Vagrant
 #+begin_src sh
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
   sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
   SUDO APT-GET UPDATE && SUDO APT-GET INSTALL VAGRANT
 #+END_SRC
-
+short cuts
+https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
 ** Vagrant-hub
 Online where vagrent os are stored and shared https://app.vagrantup.com/boxes/search
 ** VAGRANT FILE
@@ -329,5 +329,9 @@ vagrant ssh test1
 #+end_src
 
 ** Different Vagrant VMs
+*** When to use halt and suspend
+Use vagrant halt when you want to power off your machine, use vagrant suspend when you want to hibernate your machine.
+https://vegibit.com/getting-started-with-vagrant/
+
 [[https://www.chrisjmendez.com/2017/01/08/installing-jenkins-using-virtualbox-and-vagrant/][Install Jenkins in VM using Vagrant]]
 

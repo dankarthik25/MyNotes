@@ -54,7 +54,7 @@ If install new package math3.0 then it will mess up old project using math 2.0
 What Virtural Environment does it will make a
 It will allow us to install all our dependencies in local folder(own hub) not effect gobal module (os)
 
-#+BEGIN_SRC python
+#+BEGIN_SRC
 # installing virtualen
 sudo pip install virtualev
 
@@ -62,21 +62,37 @@ sudo pip install virtualev
 virtualev projectName
 
 # activate the virtual environement
-cd projectName/source bin/activate
+cd projectName
+source /source/bin/activate
+
+# which python  we are running (where is the source file of python)
+which pip
 
 # installing package beautifuls
-pip install beautifulsoup
+pip list 
+pip install beautifulsoup pytz
+pip install numpy panda
 
 # unactivate 
 deactivate  
 
 #pip to install all of the packages in this file using the -r flag:
 pip install -r requirements.txt
+
+# virtual env for  with python version 2.6
+virtualenv  -p /usr/bin/python2.6 py26_env
+source/bin/activate
+which python
+
+
 #+END_SRC
+
+
 Consider you are using math 2.0  module in one project and 
 later on  new features are added in math 3.0 which need in new projects
 ** Conda virtual env
-#+BEGIN_SRC python
+#+BEGIN_SRC
+python
 conda env list
 conda create --name <virtual_env_name> <py modules>
 # To activate environment
@@ -84,6 +100,23 @@ source activate my_project_env
 source deactive my_project_env
 conda remove --name opencv-env --all
 conda env create -f enironment.yaml
+
+# EX:
+conda create --name my_app python 2.7 flask sqlalchemy
+activate my_app
+pip list
+which python
+activate   # source activate 
+decativate # source deactivate
+
+
+conda env list
+
+conda remove --name my_app
+
+# CONDA Virtual Enviroment set :  ENVIROMENT VARIBLE for different project
+
+
 #+END_SRC
  
 Udemy seting
@@ -112,6 +145,30 @@ python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/cour
 ###############################################################
 python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/14754858#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
 #+END_SRC
+** Jupyter
+
+#+begin_src
+! pip list # to run shell cmd also know as line magics
+
+%lsmagiic   # line magic
+
+%pwd
+
+%ls -la
+
+%matplotlib inline
+
+%%HTML
+You can be add youtube videos to your jupyter notebook
+
+
+%%SVG
+
+%%timeit
+time for execute block
+
+
+#+end_src
 * Operators in python:
 1) Arthimetic operator
   | +  | addition                       |
@@ -123,7 +180,7 @@ python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/cour
   | ** | power                          |
   |    |                                |
 
- #+BEGIN_SRC python
+ #+BEGIN_SRC
 ############################
 #   Arthimetic Operator
 ###########################
@@ -137,6 +194,36 @@ a/b   	# >>> 4.0 floating point
 a//b  	# >>> 4 int
 a%b   	# >>> 0
 a+b/3-4*12 	#>>> -35.0
+# Order of exprssion
+3 * 2 +1
+3 *(2 +1)
+
+# increment
+
+num =1
+num = num +1
+# Or
+num +=1
+num *=10
+
+print(abs(-3))
+print(round(3.75))   #  4
+print(round(3.75),1) # 3.8
+
+num_1 =3
+num_2 =2
+print(num_1 <= num_2)
+
+# Convert string to numbert
+
+num_1 =  '100'
+num_2 = '200'
+print(num_1 + num_2)  # 100200
+num_1 = int(num_1)
+num_2 = int(num_2)
+
+
+ 
  #+END_SRC
 2) Assignment  operator :
   | =  | assignment   |
@@ -281,147 +368,6 @@ print("He says \" It's is working \" ")     # >>> He says " It's is working
 print("""He says " It's is working" """)     # >>> He says " It's is working
 print('''He says " It's is working" ''')     # >>> He says " It's is working
 #+END_SRC
-*** R String
-R string : is a raw string: the escape sequence are negleted   
-#+BEGIN_SRC python
-print(r'\tTab')                          # >>> \tTab      
-#+END_SRC
-*** F String {py3.6}
-make string formate simple as possible
-#+BEGIN_SRC python
-greeting = 'Hello'
-name = 'karthik
-message = f'{greeting},  {name.upper()}.Welcome! '
-
-print(dir(name))
-print(help (str))
-#+END_SRC
-
-*** Replacement Field(Place Holders)
-**** String Formating Vs Replacement Field(Paleholders{})
-#+BEGIN_SRC python
-person = {'name': 'Jenn', 'age':23}
-
-sentence = 'My name is '+person['name'] + 'and I am '+str(person['age'])+ 'year old.'
-print(sentence)                               # above is NOT READABLE, EASY WRITABLE
-
-# # Using Placeholder
-sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
-print(sentence)
-#+END_SRC
-**** Passing(assing place holders) inorder, numbers refeance, list, dic members, class attribues
-#+BEGIN_SRC python
-  person = {'name': 'Jenn', 'age':23}
-
-  # passing inorder
-  sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
-  print(sentence)
-
-  # passing by numbers{0},{1}...etc
-  sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person, person)
-  print(sentence)
-
-  # passing in list members
-  l1 = ['Jenn',23]
-  sentence = 'My name is {0[0]} and I am {0[1]} year old.'.format(person)
-  print(l1)
-
-  # passing by dic only values
-  person = {'name': 'Jenn', 'age':23}
-  sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person)
-  print(sentence)
-
-
-  # place holders having keywords (basically used in dic)
-  sentence = 'My name is {name} and I am {age} year old.'.formate(name ='Jack', age = '30')
-  print(sentence)
-
-
-  # passing in dic key and values
-  person = {'name': 'Jenn', 'age':23}
-  sentence = 'My name is {name} and I am {age} year old.'.formate(**person)
-  print(sentence)
-
-  # passing class attributes
-
-  class Person():
-      def __init__(self, name, age):
-          self.name = name
-          self.age = age
-
-  p1 = Person('Jack','33')
-  sentence = 'My name is {0.name} and I am {0.age} year old.'.formate(p1)
-  print(sentence)
-
-#+END_SRC
-**** Numbers (Padding, Decimals(precession), Comma)
-#+BEGIN_SRC python
-  # # Padding
-
-  for i in range (1,11):
-      sentence = 'This value is {:03}'.format(i)
-      print(sentence)              # The value is 001
-
-
-  # # decimals(pression)
-
-  pi = 3.1415965
-
-  sendence = 'Pi is equal to {:.3f}'.formate(pi)
-  print(pi)                        # 3.142
-
-
-  # # comma seperator
-
-  sentence = '1 MB is equal to {:,.2f} bytes.'fomate(1000**2)
-  print(sentence)
-
-  # 1MB is equal to 1,000,000.00 bytes
-
-
-  # # Date fomate link https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
-  import date time
-  my_date = datetime.date(2016,9,24,12,45)
-
-  # March 01, 2016
-  sentence ='{:%B %d, %Y}'.fomat(my_date)
-  print(sentence)
-
-  sentence ='{0:%B %d, %Y} fell on a {0:%A} and was the {0:%j} day of the years.'.fomat(my_date)
-  print(sentence)
-
-
-#+END_SRC
-**** Example1
-#+BEGIN_SRC python
-  tag = 'h1'
-  text = 'This is a headerline'
-  sentence = '<{0}> <{1} </{0}'.format(tag,text)
-
-  print(sentence)             # >>> <h1>This is a headerline</h1>
-#+END_SRC
-
-**** Example 2
-#+BEGIN_SRC python
-age =24
-print("My age is {0} years".format(age)) 								# >>> My age is 24 years
- 
-print("I am {0} years, {1} mounts, {2} days old".format(28,4,19))		# >>> I am 28 years, 4 mounts, 19 days old
-
-print("""
- January     :{2} days
- February    :{0} days
- March       :{1} days
- April       :{1} days
- May         :{2} days
- June        :{1} days
- July        :{2} days
- August      :{2} days
- September   :{1} days
- October     :{2} days
- November    :{1} days
- December    :{2} days""".format(28, 30, 31))
-#+END_SRC
 *** Operations
     |-----------------+-----------------------|
     | Operations      |                       |
@@ -484,9 +430,150 @@ str = base64.b64(Str.encode('utf-8'))
 print("Ecoded String:",stre)                    # it is a binary formate
 str = base64.b64(Str).decode('utf-8')
 print("Decode String: ",strd)
+#+END_SRC
+** String Formating
+*** TODO Place Holder(f string or Replace files)
+*** Replacement Field(Place Holders)
+**** String
+Formating Vs Replacement Field(Paleholders{})
+#+BEGIN_SRC python
+person = {'name': 'Jenn', 'age':23}
+
+sentence = 'My name is '+person['name'] + 'and I am '+str(person['age'])+ 'year old.'
+print(sentence)                               # above is NOT READABLE, EASY WRITABLE
+
+# # Using Placeholder
+sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
+print(sentence)
+#+END_SRC
+**** Passing(assing place holders) inorder, numbers refeance, list, dic members, class attribues
+#+BEGIN_SRC python
+person = {'name': 'Jenn', 'age':23}
+
+# Dict passing inorder
+sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
+print(sentence)
+
+# Dict  passing by numbers{0},{1}...etc
+sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person, person)
+print(sentence)
+
+# passing by dic only values
+person = {'name': 'Jenn', 'age':23}
+sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person)
+print(sentence)
+
+
+# place holders having keywords (basically used in dic)
+sentence = 'My name is {name} and I am {age} year old.'.format(name ='Jack', age = '30')
+print(sentence)
+
+
+# passing in dic key and values
+person = {'name': 'Jenn', 'age':23}
+sentence = 'My name is {name} and I am {age} year old.'.format(**person)
+print(sentence)
+
+#List passing in list members
+l1 = ['Jenn',23]
+sentence = 'My name is {0[0]} and I am {0[1]} year old.'.format(person)
+print(l1)
+
+# passing class attributes
+
+class Person():
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person('Jack','33')
+sentence = 'My name is {0.name} and I am {0.age} year old.'.formate(p1)
+print(sentence)
+#+END_SRC
+**** Numbers (Padding, Decimals(precession), Comma)
+#+BEGIN_SRC python
+# # Padding
+
+for i in range (1,11):
+  sentence = 'This value is {:03}'.format(i)
+  print(sentence)              # The value is 001
+
+
+# # decimals(pression)
+
+pi = 3.1415965
+
+sendence = 'Pi is equal to {:.3f}'.formate(pi)
+print(pi)                        # 3.142
+
+
+# # comma seperator
+
+sentence = '1 MB is equal to {:,.2f} bytes.'fomate(1000**2)
+print(sentence)
+
+# 1MB is equal to 1,000,000.00 bytes
 
 #+END_SRC
-*** TODO Place Holder(f string or Replace files)
+**** Date String format
+#+begin_src python
+# # Date fomate link https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+import date time
+my_date = datetime.date(2016,9,24,12,45) 
+
+
+sentence ='{:%B %d, %Y}'.format(my_date)
+print(sentence)  # >> September 24, 2016
+
+sentence ='{0:%B %d, %Y} fell on a {0:%A} and was the {0:%j} day of the years.'.fomat(my_date)
+print(sentence) # >> September 24, 2016 fell on a Saturday and was the 268 day of the years
+#+end_src
+**** Example1
+#+BEGIN_SRC python
+tag = 'h1'
+text = 'This is a headerline'
+sentence = '<{0}> <{1} </{0}'.format(tag,text)
+
+print(sentence)             # >>> <h1>This is a headerline</h1>
+#+END_SRC
+
+**** Example 2
+#+BEGIN_SRC python
+age =24
+print("My age is {0} years".format(age)) 								# >>> My age is 24 years
+ 
+print("I am {0} years, {1} mounts, {2} days old".format(28,4,19))		# >>> I am 28 years, 4 mounts, 19 days old
+
+print("""
+ January     :{2} days
+ February    :{0} days
+ March       :{1} days
+ April       :{1} days
+ May         :{2} days
+ June        :{1} days
+ July        :{2} days
+ August      :{2} days
+ September   :{1} days
+ October     :{2} days
+ November    :{1} days
+ December    :{2} days""".format(28, 30, 31))
+#+END_SRC
+*** R String
+R string : is a raw string: the escape sequence are negleted   
+#+BEGIN_SRC python
+print(r'\tTab')                          # >>> \tTab      
+#+END_SRC
+*** F String {py3.6}
+make string formate simple as possible
+#+BEGIN_SRC python
+greeting = 'Hello'
+name = 'karthik
+message = f'{greeting},  {name.upper()}.Welcome! '
+
+print(dir(name))
+print(help (str))
+#+END_SRC
+
 *** Print
 convert convert the expressions you pass into a string and writes the result to standard output device(stdout in sys(sys.stdout and sys.stdin))
 **** String Formating
@@ -521,12 +608,12 @@ for i in range(1, 12):
 
 #+BEGIN_SRC python
 
-print("Pi value is appox %11f" %(22/7))       		# 11 = 03+1+1+06 	>>> Pi value is appox    3.142857
-print("Pi value is appox %10f" %(22/7))       		# 10 = 02+1+1+06 	>>> Pi value is appox   3.142857
+print("Pi value is appox %11f" %(22/7))       	# 11 = 03+1+1+06 	>>> Pi value is appox    3.142857
+print("Pi value is appox %10f" %(22/7))       	# 10 = 02+1+1+06 	>>> Pi value is appox   3.142857
 print("Pi value is appox %9f" %(22/7))       		# 09 = 01+1+1+06 	>>> Pi value is appox  3.142857
-print("Pi value is appox %8f" %(22/7))			# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
-print("Pi value is appox %7f" %(22/7))			# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
-print("Pi value is appox %6f" %(22/7))			# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("Pi value is appox %8f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("Pi value is appox %7f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("Pi value is appox %6f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
 print("		Conclusion :By Default Precission is 6digits")
 #+END_SRC
 ***** Righ Spacing Eg 1
@@ -752,78 +839,11 @@ Try  slicing url into : top level domain, url without http://
       |               |                           |                                        |
 **** list2str
 #+BEGIN_SRC python
-  course = ['History', 'Math', 'Physics', 'CompSci']
-  course_str = " - ".join(courses)        # >>>  'History - Math - Physics - CompSci'
-
-
-  my_list = course_str.split(" - ")       # >>>  ['History', 'Math', 'Physics', 'CompSci']
+course = ['History', 'Math', 'Physics', 'CompSci']
+course_str = " - ".join(courses)        # >>>  'History - Math - Physics - CompSci'
+my_list = course_str.split(" - ")       # >>>  ['History', 'Math', 'Physics', 'CompSci']
 #+END_SRC
 
-*** List Comprahsion
-#+BEGIN_SRC python
-  my_list = [1,2,3,4,5,6,7,8,9,10]
-
-  # using for loop
-
-  my_list =[]
-  for n in nums:
-      my_list.append(n*n)
-  print
-(my_list)
-#+END_SRC
-
-#+BEGIN_SRC python
-  # using list comprahession
-
-  my_list[n*n for n in nums]
-  print(my_list)
-
-  # using map + lambda
-
-  my_list = map(lambda n: n*n, nums)
-
-  print(my_list)
-#+END_SRC
-
-#+BEGIN_SRC python
-
-  # Using for  even list 
-  my_list =[]
-  for n in nums:
-      if n%2==0:
-          my_list.append(n)
-  print(my_list)
-
-#+END_SRC
-
-#+BEGIN_SRC python
-  # Using Compression
-
-  my_list[n*n for n in nums if n%2==0]
-  print(my_list)
-
-#+END_SRC
-
-#+BEGIN_SRC python
- # I want a (letter, num) pai for each letter in "abcd" and number in "0123"
-  my_list =[]
-  for letter in "abcd":
-      for num in range(4):
-          my_list.append((letter, num))
-  print my_list
-
-#+END_SRC
-
-#+BEGIN_SRC python
-  # Using list comprssion
-  my_list = [(letter, num) for letter in "abcd" for num in rang(4)]
-  print my_list
-  # for matwork, andriod, vir job, jav,   ,js
-#+END_SRC
-**** List Compression for dynamical create List of  integer 
-#+BEGIN_SRC python
-my_list = [ int(x) for x in input("Enter the integers seperated by spcae").split(" ")]
-#+END_SRC
 ** Tubles
 *** Defination
 #+BEGIN_SRC python
@@ -841,22 +861,22 @@ imelda
      tup2 = ('a','d',4.6)
      tup_str = ('a', 'b', 'c', 'd')
 
-      |---------------+-------------------------+----------------------------------------|
-      | Operations    |                         | Result                                 |
-      |---------------+-------------------------+----------------------------------------|
-      | Concatenation | tup1 +tup2              | ('1','b',2.5, 'a','d',4.6)             |
-      | Repetition    | tup1*3                  | ('1','b',2.5, '1','b',2.5,'1','b',2.5) |
-      | Slicing       | tup1[0:4:2]             | ('1',2.5)                              |
-      | Indexing      | tup1[0]                 | '1'                                    |
-      | Delete        | del tup1                |                                        |
-      | Membership in | 2.5 in list1            | True                                   |
-      |---------------+-------------------------+----------------------------------------|
-      | Method        |                         |                                        |
-      |---------------+-------------------------+----------------------------------------|
-      | tub2str       | ' - '.joint(tup_str)    | 'a - b - c - d'                        |
-      | len           | len(tup1)               | 3                                      |
-      | count         | ele(occures) in tup     |                                        |
-      |               |                         |                                        |
+      |---------------+----------------------+----------------------------------------|
+      | Operations    |                      | Result                                 |
+      |---------------+----------------------+----------------------------------------|
+      | Concatenation | tup1 +tup2           | ('1','b',2.5, 'a','d',4.6)             |
+      | Repetition    | tup1*3               | ('1','b',2.5, '1','b',2.5,'1','b',2.5) |
+      | Slicing       | tup1[0:4:2]          | ('1',2.5)                              |
+      | Indexing      | tup1[0]              | '1'                                    |
+      | Delete        | del tup1             |                                        |
+      | Membership in | 2.5 in list1         | True                                   |
+      |---------------+----------------------+----------------------------------------|
+      | Method        |                      |                                        |
+      |---------------+----------------------+----------------------------------------|
+      | tub2str       | ' - '.joint(tup_str) | 'a - b - c - d'                        |
+      | len           | len(tup1)            | 3                                      |
+      | count         | ele(occures) in tup  |                                        |
+      |               |                      |                                        |
 ** Dictonary 
 *** Defination
 #+BEGIN_SRC python
@@ -881,7 +901,6 @@ myDict = {1:"apple",2:"ball"}
       | update       | myDict.update({3:'c'}) | {1:'apple',2:'ball',3:"c"} |
       | pop          | myDict.pop(2)          | {1:'apple'}                |
       |              |                        |                            |
-
 ** Dictionary
 *** Defination
 #+BEGIN_SRC python
@@ -965,21 +984,20 @@ myset = {1,2,3,4}
 ***  Methods
 myS1 = {1,2,3}
 myS2 = {1,'B','C'}
-  |-----------------------------+---------------------------------+---------------|
-  | Methods                     |                                 |               |
-  |-----------------------------+---------------------------------+---------------|
-  | Union                       | (myS1 UNION myS2)               | {1,2,'B','C'} |
-  |                             | myS1.union(myS2)                | {1,2,'B','C'} |
-  | Intersection                | myS1 & myS2                     | {1,'C'}       |
-  |                             | myS1.intersection(myS2)         | {1,'C'}       |
-  | difference                  | myS1 - myS2                     | {2}           |
-  |                             | myS1.difference(myS2)           | {2}           |
-  | symmetric_difference        | myS1.symmetric_difference(myS2) |               |
-  | remove                      | myS1.remove(1)                  | {2,3}         |
-  | discard(no exception rised) | myS1.discarde(3)                |               |
-  | issubset                    |                                 |               |
-  | issuperset                  |                                 |               |
-  |                             |                                 |               |
+  |-----------------------------+---------------------------------+---------------+---+--------+----------------+-------|
+  | Methods                     |                                 |               |   |        |                |       |
+  |-----------------------------+---------------------------------+---------------+---+--------+----------------+-------|
+  | Union                       | (myS1 UNION myS2)               | {1,2,'B','C'} |   |        |                |       |
+  |                             | myS1.union(myS2)                | {1,2,'B','C'} |   |        |                |       |
+  | Intersection                | myS1 & myS2                     | {1,'C'}       |   |        |                |       |
+  |                             | myS1.intersection(myS2)         | {1,'C'}       |   |        |                |       |
+  | difference                  | myS1 - myS2                     | {2}           |   |        |                |       |
+  |                             | myS1.difference(myS2)           | {2}           |   |        |                |       |
+  | symmetric_difference        | myS1.symmetric_difference(myS2) |               |   | remove | myS1.remove(1) | {2,3} |
+  | discard(no exception rised) | myS1.discarde(3)                |               |   |        |                |       |
+  | issubset                    |                                 |               |   |        |                |       |
+  | issuperset                  |                                 |               |   |        |                |       |
+  |                             |                                 |               |   |        |                |       |
 ** Set
 [[SET Objects][https://docs.python.org/2/library/sets.html]]
 
@@ -1050,6 +1068,8 @@ print(sorted(even.symmetric_difference(squares)))
 print("symmetric squares minus even")
 print(squares.symmetric_difference(even))
 #+END_SRC
+
+
 *** Sort
 #+BEGIN_SRC python
 print(sorted(even))
@@ -1090,6 +1110,210 @@ print(even)
 # even.add(3)
 #+END_SRC
 
+** Compression 
+*** List Comprahsion
+#+BEGIN_SRC python
+my_list = [1,2,3,4,5,6,7,8,9,10]
+
+# using for loop
+
+my_list =[]
+for n in nums:
+  my_list.append(n*n)
+
+print(my_list)
+#+END_SRC
+
+lambda 
+#+BEGIN_SRC python
+# using list comprahession
+my_list = [n for n in nums]
+print(my_list)
+
+my_list[n*n for n in nums]
+print(my_list)
+
+# using map + lambda
+
+my_list = map(lambda n: n*n, nums)
+
+print(my_list)
+#+END_SRC
+
+#+BEGIN_SRC python
+# Using for  even list 
+my_list =[]
+for n in nums:
+  if n%2==0:
+     my_list.append(n)
+print(my_list)
+
+#+END_SRC
+
+#+BEGIN_SRC python
+# Using Compression
+
+my_list[n*n for n in nums if n%2==0]
+print(my_list)
+
+# Filter + lambda 
+my_list = filter(lambda  n: n%2 ==0, nums)
+print(my_list)
+#+END_SRC
+
+#+BEGIN_SRC python
+ # I want a (letter, num) pai for each letter in "abcd" and number in "0123"
+  my_list =[]
+  for letter in "abcd":
+      for num in range(4):
+          my_list.append((letter, num))
+  print my_list
+
+#+END_SRC
+
+#+BEGIN_SRC python
+  # Using list comprssion
+  my_list = [(letter, num) for letter in "abcd" for num in rang(4)]
+  print my_list
+  # for matwork, andriod, vir job, jav,   ,js
+#+END_SRC
+*** List Compression for dynamical create List of  integer 
+#+BEGIN_SRC python
+my_list = [ int(x) for x in input("Enter the integers seperated by spcae").split(" ")]
+#+END_SRC
+
+*** Dictitionary compression 
+#+begin_src 
+nums = [1,2,3,4,5,6,7,8,910]
+
+# Dictionary Comprehension
+names = ['Bruce', 'Clark', 'Peter', 'Logan', 'Wade']
+heros = ['Batman','Superman', 'Spiderman', 'Wolverine', 'Deadpool']
+print zip (name, heros)
+# [(Bruce, Batman), ('Clark','Superman'), ('Peter', 'Spiderman'), ('Logan', 'Wolverine'), ('Wade,'Deadpool')]
+
+# with out list comprehension
+my_dict = {}
+for name, hero in zip(name, heros):
+   my_dict [name] = hero
+print my_dict
+
+my_dict = {name : hero for name, hero in zip(name,heros) if name != 'peter'}
+print my_dict
+
+
+#
+#+end_src
+*** Set Comprehension 
+nums = [1,2,3,4,5,6,7,8,9,10]
+#+begin_src python
+# Set Comprehension 
+nums = [1,1,2,1,3,4,3,4,55,6,7,9,9]
+my_set = set()
+for n in nums:
+    my_set.add(n)
+print(my_set)
+
+my_set = {n for n in nums} 
+#+end_src
+*** Generator Expression 
+#+begin_src python
+nums = [1,2,3,4,5,6,7,8,9,10]
+
+def gen_func(nums):
+   for n in nums
+        yield n*n
+
+my_gen = my_gen_func(nums)
+
+for i in my_gen:
+   print i
+
+for i in my_gen:
+   print i
+
+# Generator using list Comprehension
+
+my_nums = (x*x for x in [1,2,3,4,5])
+
+for my_num in my_nums :
+    print(my_num)
+
+
+#+end_src
+
+** Sort 
+#+begin_src
+li = [9,1,8,2,5,4,6,3,7]
+s_li = sorted (li, reverse=True)
+
+print('Sorted Variable: \t', s_li)
+li.sort(reverse=True)
+print('Orignial Variable:\t',li)
+
+# Tuple 
+tup = (9,1,8,1,7,3,6,4,5)
+s_tup = sorted (tup)
+
+print ('Tuple\t' , s_tup)
+
+
+# Dictionary 
+di  = {'name' : 'Corey', 'job': 'programming', 'age': None , 'os': 'Mint'}
+s_di = sort(di)
+pritn('Dict\t', s_di)
+
+# sort number based on absolute value 
+li = [-6,-5,-4,1,2,3]
+print(li,key=abs)
+
+
+# Sort class
+class Employee():
+   def __init__(self, name, age, salary):
+           self.name = name
+           self.age = age
+           self.salary= salary
+   def __repr__(self):
+          return '({},{},${})'.formate(selft.name, self.age, self.salary)
+e1 = Employee('Carl',37, 70000)
+e2 = Employee('Sarah',29, 8000)
+e3 = Employee('John',43, 9000)
+
+employees = [e1,e2,e3]
+
+# s_employees = soreted(employee) # gives error
+
+def e_sort(emp):
+   return emp.name
+#   return emp.age
+#   return emp.salary
+
+s_employees = sorted(employees, key=e_sort)
+s_employees = sorted(employees, key=e_sort, reverse= True)
+
+
+# Usingg lambda there is no need of e_sort function
+
+s_employees = sorted(employees, key=lamdba e: e.name, reverse= True)
+s_employees = 
+print(s_employees)
+
+
+# Sorting using operator and attrgetter
+
+from operator import attrgetter
+
+e1 = Employee('Carl', 37, 70000)
+e2 = Employee('Sarah', 29, 8000)
+e3 =  Employee('John', 43,9000)
+
+employees = [e1,e2,e3]
+
+
+s_employees = soreted(employees, key= attrgetter('age'))
+print(s_employees)
+#+end_src
 ** Type Conversions
 *** tub2list
 #+BEGIN_SRC python
@@ -1153,8 +1377,6 @@ list(a)      # ['h', 'e','l','l','o']
 set(a)       # {'h', 'e','l','l','o'}
 tuple(a)     # ('h', 'e','l','l','o')
 #+END_SRC
-
-
 * Data Binding
 #+BEGIN_SRC python
 # List iniciallization
@@ -1259,6 +1481,11 @@ valid_ip = ["north", "south", "east", "west"]
 give_ip =""
 while give_ip is not valid_ip:
 	give_ip = input("Enter the Direction: ")
+      # execute statement
+
+
+
+
 #+END_SRC
 **** for
 ***** Eg
@@ -1272,7 +1499,25 @@ for i in str:
 	print("\n")
 	print(i,end=" ")
 
+nums = [1,2,3,4,5]
+
+for num in nums :
+   if num ==3:
+      print('Found!')
+      continue
+   print(num)
+
+# output : 1,2, Found!,4,5
+
+
+for letter in 'abc':
+    print(num, letter)
+
+for i in range(10):  # range(1,11)
+    print(i)
+
 #+END_SRC
+
 **** for loop by iterating by sequencec index
 #+BEGIN_SRC python
 str = "123456789"
@@ -1302,6 +1547,20 @@ for char in iter(str):
 *** Flow control :
 **** continue
 **** break
+* Loop
+#+begin_src python
+courses = ['History','Math', 'Physics', 'ComSci']
+
+for index, course in enumerate(course, start =1) :
+    print(index,course)
+
+student = {'name':'John', 'age' :25, 'courses': ['Math', 'CompSci']}
+ 
+for key, value in student.items():
+    print (key, value) 
+
+
+#+end_src
 * Keyboard Input:
 python3 has build-in function =input()= to read input data from standard input(sys.stdin)
 
@@ -1403,7 +1662,7 @@ These arg are called variable-length-arguments and are not named in the function
                   return variable
 #+END_SRC
 
-Note : asterisk (*) is placed before var name that hold value of all non-keyword variable arg. This tuple remains empty if no additional arg are speciied during the function called
+Note : asterisk (\*) is placed before var name that hold value of all non-keyword variable arg. This tuple remains empty if no additional arg are speciied during the function called
 ***** Example
 #+BEGIN_SRC python
   def printinfo( arg1,*vartuple):
@@ -1464,7 +1723,6 @@ lamda
 filter
 * Namespace & Scope
 *** Scope
-
 LEGB : Local, Enclose, Global, Built-in 
 18 video of chore schafer
 - Local   :defined with in a function
@@ -1496,7 +1754,7 @@ py check in local then enclosed, global and last built-in
       global z
 
       y ="local y"
-     
+      
       print(x)    # x is global 
       print(y)    # y is local
       print(z)    # z is global
@@ -1608,11 +1866,11 @@ File object are two categories :
 **** open/close file :
 ***** Syntax
 #+BEGIN_SRC python
-  # To OPEN a file
-    file_obj = open(file_name, [access_mode],[buffering])
+# To OPEN a file
+file_obj = open(file_name, [access_mode],[buffering])
 
-  # To CLOSE a file
-  file_obj.close()
+# To CLOSE a file
+file_obj.close()
 #+END_SRC
 
 ****** buffering mode:
@@ -1748,7 +2006,7 @@ print(os.__file__)             # /usr/lib/python2.7/os.pyc
 | os.makedir(path)            | create dir and it sub dir (mkdir can't)                   |
 | os.mkdir(path[, mode])      | create a directory                                        |
 | os.rmdir(path)              | remove dir path                                           |
-| os.removedirs               | remove dir ectory and it sub directory                    |
+| os.removedirs(path)         | remove dir ectory and it sub directory                    |
 | os.remdir(path)             | re directory                                              |
 | os.rename (src,dst)         | rename file or dir src to dst                             |
 | os.chroot(path)             | change root dir to current working path                   |
@@ -1883,213 +2141,80 @@ os.open(file, flage[, mode])
 | os.O_APPEND   | append on each write             | 'a'  |
 | os.O_CREAT    | create file if it does not exist |      |
 
-*** File acess modes 
-| read only       | 'r'  |
-| read and write  | 'r+  |
-| write only      | 'w'  |
-| write and read  | 'w+' |
-| append only     | 'a'  |
-| append and read | 'a+' |
-|                 |      |
-
-#+BEGIN_SRC python
-f = open('newfile.txt', 'w')
-f.write('Hello\n')
-f.writelines(['Hello','World\n'])
-
-#+END_SRC
-*** Ex of Contant manager
-#+BEGIN_SRC python
-  with open ('text.txt','r') as f:
-      f_contents = f.read()              # read entire file
-      print(f_contents)
-
-      # Disadvantages:
-             # if file size is more then memory is more > slower
-      # Advantages :
-             # To read a small size file
-
-  # what if  we need to read large  we n't  wanted to load in memory 
-
-      f_contents = f.readlines()        # list of lines ['line1 \n', 'line2 \n'..........etc]
-      print(f_contents)
-
-      f_id_line = f.readline()
-      print(f_f_id_line, end='')                #  >>> line1 
-
-      f_id_line = f.readline()
-      print(f_f_id_line, end='')                #  >>> line2
-
-      # Using for loop to read line
-
-      for line in f:
-          print(line, end='')
-      # effiecient for read line
-
-      # More control read 10 char
-      size_to_read = 10
-      f_content = f.read(size_to_read)
-      print(f_content, end ='*')     # read 10 char for index seperate by *
-
-      while len(f_contents ) >0:
-          print(f_contents, end='*')
-          print("\n index or current possion:\n "f.tell())      # current possion
-          f_content = f.read(size_to_read)
-
-
-
-      f.seek(0)
-      f_content = f.read(size_to_read)
-      print(f_content, end ='*')     # read 10 char for index seperate by *
-
-      f_content = f.read(size_to_read)
-      f.seek(0)
-      f_content = f.read(size_to_read)
-      print(f_content, end ='*')     # read 10 char for index seperate by *
-#+END_SRC
-
-*** Ex Write mode
-#+BEGIN_SRC python
-  with open('test2.txt', 'w') as f:
-  #    f.write("Test")
-
-  with open('test3.txt', 'w') as f:
-      f.write('Test First line')   # str 'Test' is write in file
-      f.seek(0)
-      f.write('Second line')
-  # Disadvange:
-      # If text3.txt is already existed then it will start write at the EOF
-
-      # If use to movke to begin of flie : f.seek(0)
-
-
-  # # Copy a file
-
-  with open('test.txt', 'r') as rf:
-      with open('test_copy.txt', 'w') as wf:
-          for line in rf:
-              wf.write(line)
-
-
-  # # Copy a Image
-
-  with open('test.txt', 'r') as rf:
-      # ERROR UnicodeDecoder: utf-8 can't decode bytes at Addre in position 0
-
-  # For Image we use binary mode
-  with open('test.jpg', 'rb') as rf:
-      with open('test_copy.jpg', 'wb') as wf:
-          for line in rf:
-              wf.write(line)
-
-  # More control : in chunk_size
-  with open('bronx.jpg','rb') as rf:
-      with open('bronx_copy,jpg', 'wb') as wf:
-          chunk_size = 1024
-          rf_chunk = rf.read(chunk_size)
-          while len(rf_chunk):
-              wf.write(rf_chunk)
-              rf_chunk = rf.read(chunk_size)
-#+END_SRC
-
-*** Ex Rename mulitple files
-#+BEGIN_SRC python
-  # Consister a dir as unorder videos which are to sorted by index in name
-
-  # dir(path)
-  """
-  >>>
-  Earth - Our Solor System - #4
-  Jupiter - Our Solar System -#6
-  Mars
-  Neptune
-  Pluto
-  Saturn
-  The Sun
-  Urans
-  Venus
-  """
-
-  import os
-
-  path ='/home/dan/Downloads'
-
-  os.chdir(path)
-
-  for file in os.listdir():
-      f_name,f_ext = os.path.split(file)
-      # print(file_name,f_ext)
-
-      f_title, f_course, f_num = f_name.split('-')
-      # print(f_title, f_course, f_num) = f_name.split('-')
-
-      f_title = f_title.strip()
-      f_course = f_course.strip()
-      f_num = f_num.strip.()[1:].zfill(2) # zero padding by 2 and remove #
-      
-
-      #  print('{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext))
-      new_name = '{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext)
-      os.rename(f, new_name)
-#+END_SRC
 *** Ex of Dir managements
-#+BEGIN_SRC python
-  import os
-
-  print(dir(os))        # show all attribues and method in module
-
-
-  # Get current working Dir [os.getcwd()]   [pwd in linux]
-  print(os.getcwd())              # /home/dan
-
-  # Change Dir
-  os.chdir('/home/dan/Desktop')   # /home/dan/Desktop
-  print(os.getcwd())
-
-  # List of file and folders in current dir
-  print(os.listdir())
+#+BEGIN_SRC
+import os
+form datetime import datetime
+print(dir(os))        # show all attribues and method in module
 
 
-  # Make a dir
-  os.mkdir('Os-Demo-1')
+# Get current working Dir [os.getcwd()]   [pwd in linux]
+print(os.getcwd())              # /home/dan
 
-  # os.mkdir('Os-Demo-1/Sub-DEMO') # ERROR: CANNOT CREATE DIR INSIDE
-  os.makedirs('Os-Demo-1/Sub-DEMO')    # advange os makedirs is it can create dir inside dirs
+# Change Dir
+os.chdir('/home/dan/Desktop')   # /home/dan/Desktop
+print(os.getcwd())
 
-  # Delete a dir(folders)
-
-  os.rmdir('Os-Demo-1')
-  os.remodedirs('Os-Demo-1')
-
-  # Rename a dir
-
-  os.rename('old.txt', 'new.txt')
+# List of file and folders in current dir
+print(os.listdir())
 
 
+# Make a dir
+os.mkdir('Os-Demo-1')
 
+# os.mkdir('Os-Demo-1/Sub-DEMO') # ERROR: CANNOT CREATE DIR INSIDE
+os.makedirs('Os-Demo-1/Sub-DEMO')    # advange os makedirs is it can create dir inside dirs
+
+# Delete a dir(folders)
+os.rmdir('Os-Demo-1')
+os.remodedirs('Os-Demo-1')
+
+# Rename a dir
+os.rename('old.txt', 'new.txt')
+
+
+# Status of demo
+
+print(os.stat('demo.txt'))
+
+# >>> os.stat_result(st_mode=16877, st_ino=8524201, st_dev=2049, st_nlink=2, st_uid=1000, st_gid=1000, st_size=4096, st_atime=1543198458, st_mtime=1543082778, st_ctime=1543082778)
+
+# Size of file
+print('Size of file: demo.txt is :' + os.status('demo.txt').st_size)
+# >> 4096
+
+# Last Modified Time 
+print(os.stat('demo.txt').st_mtime)
+#>>> 1543082778 (this is in timestamp formate )
+
+# Modified time stamps
+mod_time = os.stat('demo.txt').st_mtime
+print(datetime.fromtimestap(mod_time))
+# >>> 2018-11-24 23:36:18.194036
+
+# See entire directory (child director)
 #+END_SRC
-*** Os walk
+*** Os walk [tree of all file/sub-dir]
 #+BEGIN_SRC python
-  import os
+import os
 
-  path = '/home/dan/Desktop'
+path = '/home/dan/Desktop'
 
-  for dirpath in os.walk(path):
+for dirpath in os.walk(path):
   # dirpath  = ('seach_path', [list of dir in search_path],[list of files in search_path])
-      drp = dirpath[0]
-      dirnames = dirpath[1]
-      filenames = dirpath[2]
-
-      print('path :',drp[len(path):])
-      print('dir:'+ '\n  ' +  '\n  '.join(dirnames))
-      print('files:'+ '\n   ' + '\n '.join(filenames))
-      print()
+  drp = dirpath[0]
+  dirnames = dirpath[1]
+  filenames = dirpath[2]
+  print('path :',drp[len(path):])
+  print('dir:'+ '\n  ' +  '\n  '.join(dirnames))
+  print('files:'+ '\n   ' + '\n '.join(filenames))
+  print()
 
 #+END_SRC
-*** Os path
+*** Os path [JOIN AND SPLIT PATH]
 #+BEGIN_SRC python
  # Joining , Spiliting,
-print(os.environ.get('HOME'))
+print(os.environ.get('HOME')) #>> /User/jayradhe
 
 file_path = os.path.join(os.environ.get('HOME'), 'text.txt')
 
@@ -2145,55 +2270,55 @@ so we use other package like pytz, dateulti.tz
 
 *** Date
 #+BEGIN_SRC python
-  # navie datetime, aware datetime
+# navie datetime, aware datetime
+import datetime
+d = datetime.date(2016,7,24)  # YYYY,MM,DD
+print(d)      # >>>2016-07-24
 
-  d = datetime.date(2016,7,24)  # YYYY,MM,DD
-  print(d)      # >>>2016-07-24
+tday = datetime.date.today()
+print(tday)     # 2018-11-28
 
-  tday = datetime.date.today()
-  print(tday)     # 2018-11-28
-
-  import datetime
-
-
-  tday = datetime.date.today()
-  print(tday.year)                # 2018
-  print(tday.month)               # 11
-  print(tday.day)                 # 26
-  print(tday)                     # 2018-11-20
-
-  print(tday.weekday())           # 0
-  print(tday.isoweekday())        # 1
-
-  # weekday MONDAY :0, SUNDAY :6
-  # iso weekday MONDAY:1 SUNDAY:7
-
-  ###############
-  #  tdelta
-  #################
+import datetime
 
 
-  tdelta = datetime.timedelta(days=7)
-  print(tday +tdelta)                 # 2018-12-03
-  print(tday - tdelta)                # 2018-11-19
-  bday = datetime.date(2018,8,25)
-  till_day = bday-tday
-  print(till_day)                     # -93 days, 0:00:00
-  print(till_day.total_seconds())     # -8035200.0
+tday = datetime.date.today()
+print(tday.year)                # 2018
+print(tday.month)               # 11
+print(tday.day)                 # 26
+print(tday)                     # 2018-11-20
+
+print(tday.weekday())           # 0 # weekday MONDAY :0, SUNDAY :6
+print(tday.isoweekday())        # 1 # iso weekday MONDAY:1 SUNDAY:7
 
 
+
+
+###############
+#  tdelta
+#################
+
+
+tdelta = datetime.timedelta(days=7)
+print(tday +tdelta)                 # 2018-12-03
+print(tday - tdelta)                # 2018-11-19
+bday = datetime.date(2018,8,25)
+till_day = bday-tday
+print(till_day)                     # -93 days, 0:00:00
+print(till_day.total_seconds())     # -8035200.0
 #+END_SRC
 
 *** Time
 #+BEGIN_SRC python
-  t = datetime.time(9, 30, 45, 100000)  #  hh,mm,ss,micro ss
-  print(t)                  #  09:30:45.100000
-  print(t.hour)               # 9
-  print(t.min)                # 00:00:00
-  print(t.minute)             # 30
+import datetime
 
-  print(t.min)                # 00:00:00
-  print(t.minute)             # 30
+t = datetime.time(9, 30, 45, 100000)  #  hh,mm,ss,micro ss
+print(t)                  #  09:30:45.100000
+print(t.hour)               # 9
+print(t.min)                # 00:00:00
+print(t.minute)             # 30
+
+print(t.min)                # 00:00:00
+print(t.minute)             # 30
 
 #+END_SRC
 
@@ -2209,45 +2334,46 @@ print(dt_utcnow)            # 2018-11-26 15:51:51.149416
 
 #+END_SRC
 
-*** pytz for Timezone :default +00:00
+** pytz module for Timezone :default +00:00
 #+BEGIN_SRC python
-  import pytz
-  print ('Timezone')
-  dt_today = datetime.datetime.today()
+import pytz
+import datetime
+import pytz
 
-  #
-  yy = dt_today.year
-  mm = dt_today.month
-  dd = dt_today.day
-  hh = dt_today.hour
-  mn = dt_today.minute
-  sec = dt_today.second
-  msec = dt_today.microsecond
-  # WRONG :
-  dt = datetime.datetime(yy,mm,dd,hh,mn,sec,msec,tzinfo=pytz.UTC)
-  # # we are in timezone india(koltala) we can't assign timzone to default
-  print('datetime.today:\t',dt)               # 2018-11-27 12:30:45+00:00
+print("\n".join(pytz.all_timezones))
+dt_today = datetime.datetime.today()
 
-
-  dt_now = datetime.datetime.now(tz=pytz.UTC)
-  print('datetime.now:\t',dt_now)           # 2018-11-26 20:32:32.911316+00:00
-
-  dt_utcnow = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
-  print('utcnow:\t \t',dt_utcnow)        # 2018-11-26 20:33:24.122555+00:00
+#
+yy = dt_today.year
+mm = dt_today.month
+dd = dt_today.day
+hh = dt_today.hour
+mn = dt_today.minute
+sec = dt_today.second
+msec = dt_today.microsecond
+# WRONG :
+dt = datetime.datetime(yy,mm,dd,hh,mn,sec,msec,tzinfo=pytz.UTC)
+# # we are in timezone india(koltala) we can't assign timzone to default
+print('datetime.today:\t',dt)               # 2018-11-27 12:30:45+00:00
 
 
+dt_now = datetime.datetime.now(tz=pytz.UTC)
+print('datetime.now:\t',dt_now)           # 2018-11-26 20:32:32.911316+00:00
 
-  dt_dtz = datetime.datetime.now(tz=pytz.UTC)
-  print ("time zone defalut :\t", dt_dtz)
-  dt_UsMountain_tz = dt_dtz.astimezone(pytz.timezone('US/Mountain'))
-  print("time zone US/Moun : \t", dt_UsMountain_tz)                                 # 2018-11-26 13:36:10.214904-07:00
+dt_utcnow = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
+print('utcnow:\t \t',dt_utcnow)        # 2018-11-26 20:33:24.122555+00:00
+
+dt_dtz = datetime.datetime.now(tz=pytz.UTC)
+print ("time zone defalut :\t", dt_dtz)
+dt_UsMountain_tz = dt_dtz.astimezone(pytz.timezone('US/Mountain'))
+print("time zone US/Moun : \t", dt_UsMountain_tz)                                 # 2018-11-26 13:36:10.214904-07:00
 #+END_SRC
 
 *** List of Timezone
 #+BEGIN_SRC python
-  ## List of all timezones
-  for tz in pytz.all_timezones:
-      print(tz)
+## List of all timezones
+for tz in pytz.all_timezones:
+  print(tz)
 #+END_SRC
 
 *** Naive dt to timezone
@@ -2260,8 +2386,27 @@ UsMountain_tz = pytz.timezone('US/Mountain')
 # print(UsMountain_tz)                                    # US/Mountain
 dt_UsMountain_tz = UsMountain_tz.localize(dt_naive)
 print("time zone US/Moun : \t",dt_UsMountain_tz)                                # 2018-11-27 02:10:19.941388-07:00
-
 #+END_SRC
+*** String 2 Datetime or Datetime 2 String
+#+begin_src python
+import datetime
+import pytz
+
+dt_mtn = datetime.datetime.now(tz=pytz.time('US/Mountain'))
+print(dt_mtn.isoformat()))
+print(dt_mtn.strftime('%B %d, %Y'))  # August 15, 2021
+
+
+
+# CONVERT STRING TO DATETIME 
+dt_str  = 'August 15, 2021'
+
+dt= datetime.datetime.strptime(dt_str,'%B %d, %Y')
+print(dt)
+
+# strftime - Datetime to String 
+# strptime - String to Datetime
+#+end_src
 *** Ex Datetime and 
 #+BEGIN_SRC python
   import os
@@ -2292,80 +2437,158 @@ print("time zone US/Moun : \t",dt_UsMountain_tz)                                
   # See entire directory (child director)
 #+END_SRC
 
-** Random module
-*** Introdution
-Shoulded to be used for crypthography use sectrets module instead
+** File Module or File Object 
+*** File acess modes 
+| read only       | 'r'  |
+| read and write  | 'r+  |
+| write only      | 'w'  |
+| write and read  | 'w+' |
+| append only     | 'a'  |
+| append and read | 'a+' |
+|                 |      |
 
-Cread a random value btw (0 1)
 #+BEGIN_SRC python
-  import random
-
-  value = random.random()         # 0.2426467353658334
-  value = random.uniform(1, 10)   # 6.223664645274
-  dice = random.randint(1, 6)    # 1,2,6,2,3,5,4
-  coin = random.randint(0, 1)
-
-  print(value)
-
-  greeting = ['Hello', 'Hi', 'Hey', 'Howdy', 'Hola']
-
-  value = random.choice(greetins)
-  print( value + " Corey")
-
-  # Multiple choiess
-
-  colors = ['Red', 'Black','Green']
-
-  results = random.choices(colors, k=10) # how many time we pick a value
-  print(results)
-  # >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
-
-  results = random.choices(colors,, weight = [18, 18, 2] k=10) # total w = 38, red is 18/38 chance, black is 18/38, green = 2/38
-  print(results)
-  # >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
-
-
-  # Random generate a list of num of size 63 and range from [1 63]
-
-  deck = list(range(1, 53))
-  print(desk)
-  # >>> [1, 2, 3, 4, ..........53 ]
-
-  random.shuffle(deck)
-  print(deck)
-  # >>> [41 ,39, 29, 38,47, 50,6,20.....]
-
-
-  # To select unique card or no
-
-  random.sample(deck)
-  print(deck, k =5)
-  # >>> [41 ,39, 29, 38,47]
+f = open('test.txt','r')
+print(f.name)
+print(f.mode)
+f.close 
 
 
 
-  # Grenerate fake  fist_names,last_name, street_name, fake_cites, states
+f = open('newfile.txt', 'w')
+f.write('Hello\n')
+f.writelines(['Hello','World\n'])
 
-  f_n = ['John', 'Jane', 'Corey', 'Travis']
-  l_n = ['Smith', 'Doe', 'Jenkins', 'Robinson']
-  s_n = ['Main', 'High', 'Pearl', 'Maple' ]
-  f_c = ['Metropolics', 'Eerie','King', 'Landing']
+f.close
+#+END_SRC
+*** Contant manager
+#+BEGIN_SRC python
+with open ('text.txt','r') as f:
+   f_contents = f.read()              # read entire file
+   print(f_contents)
+# Disadvantages:    # if file size is more then memory is more > slower
+# Advantages :      # To read a small size file
+# what if  we need to read large  we n't  wanted to load in memory 
+   f_contents = f.readlines()   # list of lines ['line1 \n', 'line2 \n'..........etc]
+   print(f_contents)
 
-  for num in range(100):
-      first = random.choice(f_n)
-      last = random.choice(l_n)
+   f_id_line = f.readline()
+   print(f_f_id_line, end='')                #  >>> line1 
 
-      phone = f'{random.randint(100,999)}-555-{random.randint(1000,9999)}'
-      # 548-555-6572
+   f_id_line = f.readline()
+   print(f_f_id_line, end='')                #  >>> line2
+# ####################
+# Using for loop to read line
+# ####################
+   for line in f:
+     print(line, end='')
+      # effiecient for read line
+# #############
+# More control read 10 char
+# ###################
+size_to_read = 10
+f_content = f.read(size_to_read)
+print(f_content, end ='*')     # read 10 char for index seperate by *
 
-      s_num = random.randint(100,999)
-      street = random.choice(fake_cities)
-      city = random.choice(states)
-      zip_code = random.randint(10000,99999)
-      address = f'{street_name}{street} St., {city}{state}{zip_code}'
+while len(f_contents ) >0:
+  print(f_contents, end='*')
+  print("\n index or current possion:\n "f.tell())      # current possion
+  f_content = f.read(size_to_read)
+#   print(f_tell()) # 
+  f.seek(0)   # to change the position to starting of file 
+  f_content = f.read(size_to_read)
+  print(f_content, end ='*')     # read 10 char for index seperate by *
+  f_content = f.read(size_to_read)
+  f.seek(0)
+  f_content = f.read(size_to_read)
+  print(f_content, end ='*')     # read 10 char for index seperate by *
+#+END_SRC
 
-      email = first.lower() + last.lower() + '@gmail.com'
-      print(f'{first}{last} \n {phone} \n {address} \n {email} \n')
+*** Ex Write mode
+#+BEGIN_SRC python
+with open('test2.txt', 'w') as f:
+     pass
+#    f.write("Test")
+
+with open('test3.txt', 'w') as f:
+    f.write('Test First line')   # str 'Test' is write in file
+    f.seek(0)
+    f.write('Second line')
+# Disadvange:
+    # If text3.txt is already existed then it will start write at the EOF
+
+    # If use to movke to begin of flie : f.seek(0)
+
+
+# # Copy a file
+
+with open('test.txt', 'r') as rf:
+    with open('test_copy.txt', 'w') as wf:
+        for line in rf:
+            wf.write(line)
+
+
+# # Copy a Image
+
+with open('test.txt', 'r') as rf:
+    # ERROR UnicodeDecoder: utf-8 can't decode bytes at Addre in position 0
+
+# For Image we use binary mode
+with open('test.jpg', 'rb') as rf:
+    with open('test_copy.jpg', 'wb') as wf:
+        for line in rf:
+            wf.write(line)
+
+# More control : in chunk_size
+with open('bronx.jpg','rb') as rf:
+    with open('bronx_copy,jpg', 'wb') as wf:
+        chunk_size = 1024
+        rf_chunk = rf.read(chunk_size)
+        while len(rf_chunk):
+            wf.write(rf_chunk)
+            rf_chunk = rf.read(chunk_size)
+#+END_SRC
+
+*** Ex Rename mulitple files
+#+BEGIN_SRC python
+# Consister a dir as unorder videos which are to sorted by index in name
+
+# dir(path)
+"""
+>>>
+Earth - Our Solor System - #4
+Jupiter - Our Solar System -#6
+Mar - Our Solor System - #5
+Mecury - Our Solor System - #2
+Neptune - Our Solor System - #8
+Pluto - Our Solor System - #10
+Saturn - Our Solor System - #7
+The Sun - Our Solor System - #1
+Urans - Our Solor System - #9
+Venus- Our Solor System - #3
+"""
+
+import os
+
+path ='/home/dan/Downloads'
+
+os.chdir(path)
+
+for file in os.listdir():
+    f_name,f_ext = os.path.split(file)
+    # print(file_name,f_ext)
+
+    f_title, f_course, f_num = f_name.split('-')
+    # print(f_title, f_course, f_num) = f_name.split('-')
+
+    f_title = f_title.strip()
+    f_course = f_course.strip()
+    f_num = f_num.strip.()[1:].zfill(2) # zero padding by 2 and remove #
+    
+
+    #  print('{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext))
+    new_name = '{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext)
+    os.rename(f, new_name)
 #+END_SRC
 ** Read CSV module- read, parse, write
 CSV file: a plane txt and use delimiters like ',' '\n' 
@@ -2377,60 +2600,154 @@ John, Doe, john-doe@guseemail.com
 mary,smith,smith-mary@gmail.com.....
 
 #+BEGIN_SRC python
-  import csv
+import csv
 
-  # read csv file
+# read csv file
 
-  with open('names.csv', 'r') as csv_file:
-      csv_reader= csv.read(csv_file)
+with open('names.csv', 'r') as csv_file:
+   csv_reader= csv.read(csv_file)
 
-      print(csv_reader) # >>> object
+   print(csv_reader) # >>> object
 
-      for line in csv_reader:
-          print(line)
-      # >>> ['first_name', 'last_name','email']
-      # >>> ['John', 'Doe', 'john-doe@guseemail.com']
-      # >>> ['mary','smith','smith-mary@gmail.com']
-          print(line[2])
-      # >>> ['email']
-      # >>> [ 'john-doe@guseemail.com']
-      # >>> ['smith-mary@gmail.com']
+for line in csv_reader:
+   print(line)
+   # >>> ['first_name', 'last_name','email']
+   # >>> ['John', 'Doe', 'john-doe@guseemail.com']
+   # >>> ['mary','smith','smith-mary@gmail.com']
+   print(line[2])
+   # >>> ['email']
+   # >>> [ 'john-doe@guseemail.com']
+   # >>> ['smith-mary@gmail.com']
 
-      #    to remove ['email']
-  with open('names.csv', 'r') as csv_file:
-      csv_reader= csv.read(csv_file)
-      next(csv_reader)  # Remove the first line
-      for line  in csv_reader:
-          print(line[2])      
+  #    to remove ['email']
+with open('names.csv', 'r') as csv_file:
+  csv_reader= csv.read(csv_file)
+  next(csv_reader)  # Remove the first line
+  for line  in csv_reader:
+     print(line[2])      
+
+# ##################3
+# CSV WRITE WITH DIFFEERENT DELEMITTER 
+#####################333
+
+with open('names.csv', 'r') as csv_file:
+  csv_reader= csv.read(csv_file)
+  with open('new_names.csv', 'w') as new_file:
+     csv_writer = csv.writer(new_file,delimiter= '\t'  # '-'
+     for line  in csv_reader:
+        csv_writer.writerow(line)
+
+
+
+# #####################3
+# READ csv WITH different delimiter
+# #################33
+
+
+import csv 
+with open ('new_name.csv','r') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter='\t')
+    for line in csv_reader:
+       print(line)
+
+
 #+END_SRC
 
 **** Ex: Read and Write a csv file (as dict)
 #+BEGIN_SRC python
-  import csv
+import csv
 
-  with open('name.csv', 'r') as csv_file:
-      csv_reader = csv.DictReader(csv_file)
-
-      for line in csv_reader:
-          print(line['email'])
-
-
-  # To select unique card or no
-  with open('name.csv', 'r') as csv_file:
-      csv_reader = csv.DictReader(csv_file)
-      with open('name_copy.csv','w') as dictwirte_file:
-          field_name = ['first_name','last_name', 'email']
-          csv_writer = csv.DictWriter(new_file, fieldnames = field_name, dellimiter ='\t' )
-          csv_write.writeheader()
+with open('name.csv', 'r') as csv_file:
+  csv_reader = csv.DictReader(csv_file)
+  for line in csv_reader:
+     print(line['email'])
 
 
-          for line in csv_reader:
-            del line['email']
-              # remove email
-              csv_writer.writerow(line)
+# To select unique card or no
+with open('name.csv', 'r') as csv_file:
+  csv_reader = csv.DictReader(csv_file)
+  with open('name_copy.csv','w') as dictwirte_file:
+     field_name = ['first_name','last_name', 'email']
+     csv_writer = csv.DictWriter(new_file, fieldnames = field_name, dellimiter ='\t' )
+     csv_write.writeheader()
+
+for line in csv_reader:
+   del line['email']
+   # remove email
+   csv_writer.writerow(line)
 
 
 #+END_SRC
+
+**** Example 
+#+begin_src 
+import csv
+
+html_output = ''
+
+name =[]
+
+with open('patrons.csv') as data_file:
+   csv_data = csv.reader(data_file)
+   next(csv_data) # remove headerline
+   next(csv_data) # remove contribution flag, description
+   print(csv_data) # it is object
+#  print(list(csv_data))
+   for line in csv_data:
+       if line [0] == 'No Reward':
+          break
+       print(line)
+       name.append (f"{line[0]} {line[1]}")
+
+for name in names:
+    print(name)
+
+html_output += f'<p>There are currently {len(name) public  Contributors. Thank You!}</p>'
+
+print (html_output)
+
+html_output += '\n<ul>'
+for name in names:
+  html_output +=f'\n\t<li> {name} </li>'   
+      
+html_output += '\n<\ul>'
+
+print(html_output) 
+#+end_src
+
+**** Example with dict reader
+
+#+begin_src python
+import csv
+
+html_output = ''
+
+name =[]
+
+with open('patrons.csv') as data_file:
+   csv_data = csv.DictReader(data_file)
+   next(csv_data) # remove No Reward line  
+   for line in csv_data:
+       if line [FirstName] == 'No Reward':
+          break
+       print(line)
+       name.append (f"{line[FristName]} {line[LastName]}")
+
+for name in names:
+    print(name)
+
+html_output += f'<p>There are currently {len(name) public  Contributors. Thank You!}</p>'
+
+print (html_output)
+
+html_output += '\n<ul>'
+for name in names:
+  html_output +=f'\n\t<li> {name} </li>'   
+      
+html_output += '\n<\ul>'
+
+print(html_output)
+#+end_src
 
 ** Regular expression 
 
@@ -2445,8 +2762,8 @@ Raw string as r'expression'
 
 
 | Basic Patterns | matchs                                   |
-| .(period)      | any char except '\n'                     |
-|                |                                          |
+|----------------+------------------------------------------|
+| . (period)     | any char except '\n'                     |
 | \d             | Digit [0-9]                              |
 | \D             | Not a Digit(0-9)                         |
 |                |                                          |
@@ -2456,9 +2773,9 @@ Raw string as r'expression'
 | \s             | Whitespace (space, \n, tab )             |
 | \S             | Non-whitespcae(except space, \t, tab)    |
 |----------------+------------------------------------------|
-| ANCHORS       |                                          |
+| ANCHORS        |                                          |
 |----------------+------------------------------------------|
-|  ^             | matches start of string                  |
+| ^              | matches start of string                  |
 | $              | matches end of string                    |
 | \b             | Word Boundary btw word and non-word      |
 | \B             | Not a Word Boundary                      |
@@ -2482,6 +2799,212 @@ Raw string as r'expression'
 | '[A-Z]'      | seach upper char                  |
 | '[a-z][A-Z]' | search all lower and upper char   |
 |              |                                   |
+*** Example 
+#+begin_src 
+import re
+
+text_2_search = """
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+Ha HaHa
+
+MetaCharacters (Need to be escape)
+. ^ $ * + { } [ ] \ | ()
+
+
+coremys.com'
+
+321-555-4321
+123.555.1234
+123*555*1234
+800-555-4321
+900-555-4321
+Mr. Schafer
+Mr Smith
+Ms Davis
+
+Mrs. Robinson
+Mr. T
+
+
+cat
+batman
+path
+bat
+match
+
+"""
+
+emails = """
+CoreyMSchafer@gmail.com
+corey.schafer@university.edu
+corey-321-schafer@my-work.net
+
+"""
+sentence = 'Start a sentence and then bring it to end'
+urls = """
+https://www.google.com
+https://coreyms.com
+https://youtube.com
+https://www.nasa.gov """
+
+print(r'\tTab')
+
+pattern = re.compile(r'abc')  # matches for abc but not ABCd
+# IT is case sensitive
+pattern = re.compile(r'.')      # matches any character {a-z A-Z 0-9 _ }
+pattern = re.compile(r'\.')     # matches any '.' present in string
+pattern =  re.compiler(r'coreyms\.com')    # matches any string 'coreym.com'
+pattern = re.compile(r'\d')
+pattern  = re.compile(r'\D') 
+pattern = re.compile(r'\w')
+pattern = re.compile(r'\W')
+pattern = re.compile(r'\s')
+pattern = re.compile(r'\S')
+
+# Word Boundary
+pattern = re.compile(r'\bHa')  # match two Ha HaHa starting 'Ha' as at starting
+
+pattern = re.compile(r'\BHa') # match last Ha because it has no word boundary
+
+pattern = re.compile(r'^abc') # match word/char starting with 
+pattern = re.compile(r'xyz$') # match word/char ending with 
+
+pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d')
+pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
+pattern = re.compile(r'\d{3}[-.]\d{3}[-.]\d{4}') 
+pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
+pattern = re.compile(r'[89]00-.\d{3}.\d{4}')
+
+pattern = re.compile(r'[a-zA-Z]') # match char with a-z and A-Z
+pattern = re.compile(r'[^a-zA-Z]')  # match char which is not a-z and A-Z
+
+pattern = re.compile(r'[^b]at')  # match which doesnot include bat 
+
+# quantifiers
+pattern = re.compile(r' Mr\.?') # matches Mr. Schafer or Mr Smith  
+
+pattern = re.compile(r' Mr\.?\s[A-Z]') # matches Mr. S or Mr S
+pattern = re.compile(r' Mr\.?\s[A-Z]\w+') # matches all word but not Mr T 
+pattern = re.compile(r' Mr\.?\s[A-Z]\w*') # matches all word and  Mr T
+
+
+# Groups ()
+pattern = re.compile(r' M(r|s|rs)\.?\s[A-Z]\w+') # matches all word with Mr Ms Mrs 
+pattern = re.compile(r' (Mr|Ms|Mrs)\.?\s[A-Z]\w+') # matches all word with Mr Ms Mrs 
+
+# emails
+pattern = re.compile(r'[a-zA-Z]+ @ [a-zA-Z]+\.com')
+pattern = re.compile(r'[a-zA-Z0-9.-_]+ @ [a-zA-Z]+\.(com|edu|in|net)')
+pattern = re.compile(r'[a-zA-Z0-9.-_]+ @ [a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+')
+
+# urls
+
+pattern = re.compiler (r'https?://(www\.)?\w+\.\w+')
+pattern = re.compiler (r'https?://(www\.)?(\w+)(\.\w+)')
+
+sub_urls = pattern.sub(r'\2\3', urls)
+print(sub_urls)
+
+ # Note we can seperate domain name 
+for match in matches :
+  print(match.group(0)) #1,2,3
+
+# 
+
+matches = pattern.finditer(text_2_search)
+matches = pattern.findall(text_2_search)
+matches = pattern.match(sentence)
+matches = pattern.search(sentence) # only 1st match 
+
+# flages
+
+pattern = recompile(r'start', re.IGNORE)
+
+
+for match in matches:
+   print(match)
+
+
+#+end_src
+** Random module
+*** Introdution
+Shoulded to be used for crypthography use sectrets module instead
+
+Cread a random value btw (0 1)
+#+BEGIN_SRC python
+import random
+
+value = random.random()         # 0.2426467353658334
+value = random.uniform(1, 10)   # 6.223664645274
+dice = random.randint(1, 6)    # 1,2,6,2,3,5,4
+coin = random.randint(0, 1)
+
+print(value)
+
+greeting = ['Hello', 'Hi', 'Hey', 'Howdy', 'Hola']
+
+value = random.choice(greetins)
+print( value + " Corey")
+
+# Multiple choiess
+
+colors = ['Red', 'Black','Green']
+
+results = random.choices(colors, k=10) # how many time we pick a value
+print(results)
+# >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
+
+results = random.choices(colors,, weight = [18, 18, 2] k=10) # total w = 38, red is 18/38 chance, black is 18/38, green = 2/38
+print(results)
+# >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
+
+
+# Random generate a list of num of size 63 and range from [1 63]
+
+deck = list(range(1, 53))
+print(desk)
+# >>> [1, 2, 3, 4, ..........53 ]
+
+random.shuffle(deck)
+print(deck)
+# >>> [41 ,39, 29, 38,47, 50,6,20.....]
+
+
+# To select unique card or no
+
+random.sample(deck)
+print(deck, k =5)
+# >>> [41 ,39, 29, 38,47]
+
+
+
+# Grenerate fake  fist_names,last_name, street_name, fake_cites, states
+
+f_n = ['John', 'Jane', 'Corey', 'Travis'] #frist name 
+l_n = ['Smith', 'Doe', 'Jenkins', 'Robinson'] # last name
+s_n = ['Main', 'High', 'Pearl', 'Maple' ]   # street name
+c_n = ['Metropolics', 'Eerie','King', 'Landing'] # fake cite 
+states = [ 'AL','AK','AR','Pearl','Oak','Cedar','Elm']
+for num in range(100):
+    first = random.choice(f_n)
+    last = random.choice(l_n)
+
+    phone = f'{random.randint(100,999)}-555-{random.randint(1000,9999)}'
+    # 548-555-6572
+
+    s_num = random.randint(100,999)
+    street = random.choice(s_n)
+    city = random.choice(c_n)
+    state = random.choice(states)
+    zip_code = random.randint(10000,99999)
+    address = f'{street_name}{street} St., {city}{state}{zip_code}'
+
+    email = first.lower() + last.lower() + '@gmail.com'
+    print(f'{first}{last} \n {phone} \n {address} \n {email} \n')
+
+#+END_SRC
 * Import 
 *** Introduction
 
@@ -2857,6 +3380,190 @@ Example:
   print(int(kelvin2Farhrenheit(505.78)),"deg far")
   print(kelvin2Farhrenheit(-5),"deg far") # error is temp> 10 
 #+END_SRC
+* DuckTyping
+#+begin_src
+class Duck:
+   def quack(self):
+     print('Quack, quack')
+   def fly(self):
+     print('Flap , flap')
+
+#def quack_and_fly(thing):
+#   # Not Duck-Typed(Non-pythonic)
+#   if isinstance(thing, Duck):
+#      thing.quack()
+#      thing.fly()
+#   else:
+#      print('This has to be a Duck!')
+#   print()
+
+def quack_and_fly(thing)
+  thing.quack()
+  thing.quack()
+################################################
+  #LBYL :Look Before You Leave(Non-Pythonic)
+# We are asking permisson and run code
+  if hasattr(thing, 'quack'):
+     if callable(thing.quac):
+        thing.quack()
+  if hasattr(thing, 'fly'):
+     if callable(thing.fly):
+        thing.fly()
+###########################################
+# EAFP : it Eassier to Ask Forgiveness and Ask Permission
+  try:
+    thing.quack()
+    thing.quack()
+    thing.bark()
+  except AttributeError as e:
+    print()
+ 
+d = Duck()
+quack_and_fly(d)
+
+p = Person()
+quack_and_fly(p)
+
+#+end_src
+
+** Example2
+#+begin_src
+person = {'name':'Jess' , 'age': 23}
+person = {'name':'Jess' , 'age': 23, 'job':'Programmer'}
+###################################################################33
+# LBYL
+if 'name' in person and 'age' in person 'job' in person:
+  print("I'm {name}, I'm {age} year old and I am a {job}".format(**person))
+else :
+   print('Missing some keys)
+############################################################################
+# EAFP (Pythonic)
+try:
+   print("I'm {name}. I'm {age} years old and I am a {job}".format(**person)
+except KeyError as e:
+   print("Missing {} key".format(e))
+
+
+##
+# Example
+#####
+
+my_list = [1,2,3,4,5,6]
+
+# Non-Pythonic
+if len(my_list) >6:
+  pritn(my_list[5])
+else:
+  print('That index does not exist')
+
+# Pythonic
+try:
+  print(my_list[5])
+except IndexError:
+  print('That index does not exist')
+#+end_src
+
+** Why we use EAFP
+Example :
+EAFP : is good for race condition
+
+#+begin_src
+import os
+
+my_file = '/tmp/test.txt'
+
+# Race Conditon
+if os.access(my_file,os.R_OK):
+  with open(my_file) as f: # if file is deleted after condition
+     print(f.read())
+else:
+   print('File can not be accessed')
+
+# No Race-Conditon
+try:
+  f = open(my_file)
+except IOError as e:
+  print('File can not be accessed')
+else:
+  with f:
+    print(f.read())
+
+#+end_src
+* TODO Generators [033_Generator: Coreymschafer]
+* TODO Decorateors [034,035_Decorators: Dynamics]
+1st class fuction :
+closers:
+
+** 1st class Functions 
+#+begin_src
+def outer_function ():
+   message = 'Hi'
+   def inner_function():
+       print(message)
+#   return inner_function()
+   return inner_function()
+
+
+# outer_fuction()
+my_func = outer_function()
+
+my_func()
+my_func()
+my_func()
+
+
+def outer_function (msg):
+   message = msg
+   def inner_function():
+       print(message)
+   return inner_function()
+
+hi_func = outer_function('Hi')
+bye_func = outer_function('Bye')
+
+
+hi_func()
+bye_func()
+#+end_src
+** Decoreators
+#+begin_src
+
+# Decoreator
+
+def decorator_function(original_func):
+   def wrapper_function():
+       return original_func()
+   return wrapper_function
+
+
+def dispaly():
+  print('display function ran')
+
+decorated_display = decorator_function(dispaly)
+
+decoreated_display()
+
+#+end_src
+* Nametuple
+#+begin_src
+from collections import namedtuple
+
+color = (55,155,255)
+Color = namedtuple ('Color', ['red','green','blue'])
+
+gray = Color(127,127,127)
+gold = Color(255,215,0)
+orange =Color(255,165,0)
+tomato = Color(255,99,71)
+
+print gray[0]
+print gray.red
+print gold.red
+
+
+
+
+#+end_src
 * OOP [Objective Oriented Programming]
 *** Introductions
 
@@ -3123,6 +3830,26 @@ obj refrence count decreses when it's delete with del , its reference reassigned
 
 
 * ------------- other sources----------
+* Developer
+#+begin_src
+pip --help
+pip help install
+pip search Pympler
+pip install Pympler
+pip list
+pip list -o # give package which are outdate
+pip freeze > requirements.txt
+
+# install package using requirements
+pip install -r requirements.txt  # r: requirment file
+
+pip list --outdated
+# how to isntall 
+pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
+
+
+
+#+end_src
 * Python interviews
 ** begininners
 write code on whiteboard or paper
@@ -3261,3 +3988,8 @@ lhs_obj = rhs_obj
    print(list_1,list2)
   # (['Art', 'Math', 'Physics', 'CompSci'], ['Art', 'Math', 'Physics', 'CompSci'])
 #+END_SRC
+
+
+
+
+

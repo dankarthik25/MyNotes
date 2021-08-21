@@ -14,11 +14,11 @@
   # variable should consist of (a-z,A-Z,0-9, _ ) NO special symbol, variable should not start with number
 
   #EG:
-  a=10
-  b=15
+  a=10               # declare a varibale int(or) float types
+  b=15               # 
   salary=10000
-  name=sathish
-  surname='script'
+  surname='script'   # declare a string type varibale
+  name=sathish       # assign
   lastname="script"         
 
   echo "$a"            # 10 print the variable
@@ -86,6 +86,13 @@ echo "Your UID is ${UID}"    # UID special preset variable
 
 # Display the username
 #USER_NAME=$(id -un)
+id 
+#uid=1000(jayradhey) gid=1000(jayradhey) groups=1000(jayradhey),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),114(lpadmin),134(sambashare),999(docker)
+id -u     # -u  or --user >>> 1000 
+id -un    # -u  or --name #>>> jayradhey
+man id    # more details
+
+ 
 USER_NAME=`id -un`    # older style 
 echo "Your username is ${USER_NAME}"
 
@@ -111,6 +118,7 @@ id -un
 
 # whoami
 man whoami
+whoami   #>>>>  jayradhey
 
 # [[ is bash condtion not work in csh shell may not work
 # or 
@@ -138,9 +146,14 @@ dirname= /opt/software/apache-maven-3.6.3/bin/not/here
 #+END_SRC
 
 #+BEGIN_SRC sh
+dirname "/home/jayradhey/WorkSpace_Python"
+# /home/jayradhey
+basename "home/jayaradhe/WorkSpace_Python"
+#WorkSpace_Python
+# $pwd | xargs dirname  #>>> /home/jayradhey
+
 
 echo "You executeed in this command :${0}"
-
 echo "You used $(dirname ${0}) as the path to $(basename ${0}) script"
 
 NoOfParameter= "${#}"
@@ -151,10 +164,9 @@ then
     echo "Usage : ${0} USER_NAmE [USER_NAmE]]"
     exit 1
 fi
-
 #+END_SRC
 
-** IF statment 
+** IF statment
 #+BEGIN_SRC sh
   #
   # Decision making
@@ -254,7 +266,7 @@ fi
 #+END_SRC
 
 #+BEGIN_SRC sh
-! /bin/bash
+#! /bin/bash
 file=$1
 if [ -e $file ]
 then
@@ -262,6 +274,7 @@ then
 else
 	echo -e "File $file doesnt exists"
 fi
+# To check condition "man test"
 #+END_SRC
 
 #+BEGIN_SRC sh
@@ -482,6 +495,12 @@ do
 done
 #+END_SRC
 
+#+begin_src sh 
+for file in ~/.{path,bash_promt,exports,aliases,functions,extra};do
+  # do some thing
+  # do some thing
+done;
+#+end_src
 ** while and Shift loop
 #+BEGIN_SRC sh
 #!/bin/bash
@@ -705,6 +724,7 @@ else
   exit 1
 fi
 #+END_SRC
+
 ** Regular expression 
 Regular Expression
  - Flexible search pattern
@@ -734,8 +754,8 @@ Extended Regular Expression
 
 
 #+BEGIN_SRC sh
-cat sample |grep ^a  #
-cat sample | grep t$
+cat sample |grep ^a  # strat with a 
+cat sample | grep t$   # end with t
 echo -e "apple\npant\npeople" |grep -E p\{2}   # apple 
 echo -e "bat\nant\neat\npant\ntaste" | grep "a\+t" # bat, eat
 
@@ -776,14 +796,14 @@ cut -c 4- /etc/passwd
 cut -c 1,3,5,9 /etc/passwd 
 cut -c 1 /etc/passwd 
 echo "aefdadsfa\tasfadfad"  #>>> aefdadsfa\tasfadfad 
-echo -e "aefdadsfa\tasfadfad" #>>> aefdadsfaasfadfad 
+echo -e "aefdadsfa\tasfadfad" #>>> aefdadsfa   asfadfad 
 echo -e "aefdadsfa\nasfadfad" #>>> aefdadsfa #asfadfad
 echo -e 'one\ttwo\tthree'| cut -f 1 # f : field 
 echo -e  'one\ttwo\tthree'| cut -f 2 # f : field 
 echo -e 'one\ttwo\tthree'| cut -f 3 # f : field
  
 echo 'one,two,three' |cut -d ',' -f 1 # correct way to do 
-echo  'one,two,three' |cut -d , 2 # Error 
+echo 'one,two,three' |cut -d , 2 # Error 
 echo 'one,two,three' |cut -d, 3 #  Error 
 echo 'one\two\three' |cut -d \ 3 #ERROR : 
 echo 'one\two\three'  |cut -d '\' -f 3 #Correct way
