@@ -1,0 +1,135 @@
+#+TITLE: Test Title
+#+SUBTITLE: Author 
+#+DESCRIPTION : 
+#+DATE: 
+#+AUTHOR: Karthik
+#+OPTIONS: Timestamp: nil toc:nil date:nil author:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+EXPORT_FILE_NAME: 
+
+
+# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-NAME.setup
+# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+If you have theme.css file download or (url)  you can customize your html theme
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="<path to css>" 
+
+* Explain about Title, Subtitle, Description, Date, Author, Option, Setupfile, toc, Numbering ..etc
+[[https://youtu.be/K6S-AKm5snc][[Youtube] DistroTube : Create Beautiful Websites Using Emacs Org Mode]]
+Explain about Title, Describtion, Export using =setup file=
+* [Youtube:DistroTube] Build html using setupfile or css file 
+=Coverted in above section=
+[Youtube] DistroTube : Create Beautiful Websites Using Emacs Org Mode]]
+Explain about Title, Describtion, Export using =setup file=
+#+begin_src 
+C-c C-e 
+#+end_src
+* Org Themes collection
+Sample of Org Theme : https://gongzhitaao.org/orgcss/
+
+You can get the css file of [[https://olmon.gitlab.io/org-themes/][different theme]] file and embaded in your theme 
+
+Different themes in org2html mode
+bigblow
+[[https://olmon.gitlab.io/org-themes/comfy_inline/comfy_inline.html][comfy inline]]
+darksun
+[[https://olmon.gitlab.io/org-themes/gray/gray.html#org9d343ad][gray]]
+[[https://olmon.gitlab.io/org-themes/imagine_light/imagine_light.html][imagine light]]
+[[https://olmon.gitlab.io/org-themes/latexcss/latexcss.html][latexcss]]
+[[https://olmon.gitlab.io/org-themes/plain/plain.html][plain]]
+[[https://olmon.gitlab.io/org-themes/readtheorg_inline/readtheorg_inline.html][readtheorg inline]] : Similar to ansible online Doc : https://docs.ansible.com/ansible/latest/dev_guide/index.html
+rethink inline
+retro dark
+simple gray
+[[https://olmon.gitlab.io/org-themes/simple_inline/simple_inline.html][simple inline]] : Similar to readtheorg inline but toc is in right-side window
+simple white
+[[https://olmon.gitlab.io/org-themes/simple_whiteblue/simple_whiteblue.html][simple whiteblue]]
+solarized dark
+solarized light
+stylish white
+white clean
+https://gitlab.com/OlMon/org-themes/-/blob/master/public/comfy_inline/comfy_inline.html
+* [Youtube:System Crafters] Publish Site (Create local env folder, run httpd, style-codeblock) 
+Build Your Website with Org Mode
+https://www.youtube.com/watch?v=AfkrzFodoNw
+create a virtual environment for emacs and
+- install htmlizer,
+- simple-httpd
+- simple.css or (setup file ) 
+- create build.sh and run the script for testing
+      
+* Insert image in org-mode 
+images 
+[[file:highres.jpg][file:thumb.jpg]]
+or
+#+CAPTION: A black cat stalking a spider
+#+ATTR_HTML: :alt cat/spider image :title Action! :align right
+[[./img/a.jpg]]
+* Structure of CSS file for ORG-MODE 
+css file structure should be in form : https://orgmode.org/manual/CSS-support.html
+#+begin_quote
+p.author	author information, including email
+p.date	        publishing date
+p.creator	creator info, about org mode version
+.title	        document title
+.subtitle	document subtitle
+.todo	        TODO keywords, all not-done states
+.done	        the DONE keywords, all states that count as done
+.WAITING	each TODO keyword also uses a class named after itself
+.timestamp	timestamp
+.timestamp-kwd	keyword associated with a timestamp, like ‘SCHEDULED’
+.timestamp-wrapper	span around keyword plus timestamp
+.tag	        tag in a headline
+._HOME	        each tag uses itself as a class, “@” replaced by “_”
+.target	        target for links
+.linenr	        the line number in a code example
+.code-highlighted	for highlighting referenced code lines
+div.outline-N	div for outline level N (headline plus text)
+div.outline-text-N	extra div for text at outline level N
+.section-number-N	section number in headlines, different for each level
+.figure-number	label like “Figure 1:”
+.table-number	label like “Table 1:”
+.listing-number	label like “Listing 1:”
+div.figure	how to format an in-lined image
+pre.src	        formatted source code
+pre.example	normal example
+p.verse	        verse paragraph
+div.footnotes	footnote section headline
+p.footnote	footnote definition paragraph, containing a footnote
+.footref	a footnote reference number (always a <sup>)
+.footnum	footnote number in footnote definition (always <sup>)
+.org-svg	default class for a linked ‘.svg’ image
+#+end_quote
+
+
+
+
+and export to you desired theme
+* HTML Structure for ORG-MODE
+org2HTML -Export options
+https://orgmode.org/manual/HTML-Export.html
+
+#+begin_quote
+‘HTML_CONTAINER’ : Specify the HTML container, such as ‘div’, for wrapping sections and elements (org-html-container-element).
+#+end_quote
+
+
+
+
+For how to create a org2html with css file here is link 
+https://gongzhitaao.org/orgcss/
+This article serves as a complete demonstration for my org.css, a simple and clean stylesheet for org-exported HTML file. You may switch between the default style provided by Emacs Org mode, i.e., styles specified in the variable org-html-style-default and my customized stylesheet using the button at the top left corner.
+
+
+
+https://olmon.gitlab.io/org-themes/
+* Publish to site by org-jekyll
+http://juanreyero.com/open/org-jekyll/
+
+
+
+
+
+
+

@@ -1,0 +1,120 @@
+Resources:
+  MyEc2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      InstanceType: t2.small
+      ImageId: ami-009d6802948d06e52
+      SecurityGroup:
+      - !Ref SSHSecurityGroup
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #! /bin/bash -xe
+            yum update -y
+            yum install -y httpd 
+            systemctl start httpd 
+            systemctl enable httpd
+            echo "Hello World from user data" > /var/www/html/index.html
+
+Resources:
+  MyEc2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      InstanceType: t2.small
+      ImageId: ami-009d6802948d06e52
+      SecurityGroup:
+      - !Ref SSHSecurityGroup
+      UserData:
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash -xe
+            # Get the latest CloudFormation package
+            yum update -y aws-cfn-bootstrap 
+            /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEc2Instance --region ${AWS::Region} ||
+            error_exit 'Failed to run cfn-init'
+    Metadata:
+      Comment: ApacheInstall
+      AWS::CloudFormation::Init:
+        configSets:
+          Install:
+            - "ApacheInstall"
+        ApacheInstall:
+          packages:
+            yum:
+              httpd: []
+          files:
+            /var/www/html/index.html:
+              content: !Sub |
+                  <p>Hello!</p>
+              mode: '000644'
+              owner: root
+              group: root
+          services:
+            sysvinit:
+              httpd:
+                enabled: true
+                ensureRunning: true
+
+
+
+Resources:
+  MyEc2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      InstanceType: t2.small
+      ImageId: ami-009d6802948d06e52
+      SecurityGroup:
+      - !Ref SSHSecurityGroup
+      UserData:
+        Fn::Base64: |
+          #! /bin/bash -xe
+          yum update -y
+          yum install -y httpd 
+          systemctl start httpd 
+          systemctl enable httpd
+          echo "Hello World from user data" > /var/www/html/index.html
+
+SSHSecurityGroup:
+  Type: AWS::EC2:SecurityGroup
+  Properties:
+    GroupDescription: Enable SSH access via port 22 
+    SecurityGroupIngress:
+    - CidrIp: 0.0.0.0/0
+      FromPort: 22
+      IpProtocol: tcp
+      ToPort: 22
+
+Resources:
+  MyEc2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      InstanceType: t2.small
+      ImageId: ami-009d6802948d06e52
+
+NewVolume:
+  Type: "AWS::EC2::Volume"
+  Condition: CreateProdResources
+  Properties: 
+    Size: 100
+    AvailabilityZone: !GetAtt MyEc2Instance.AvailabilityZone
+
+SSHSecurityGroup:
+  Type: AWS::EC2:SecurityGroup
+  Properties:
+    GroupDescription: Enable SSH access via port 22 
+    SecurityGroupIngress:
+    - CidrIp: 0.0.0.0/0
+      FromPort: 22
+      IpProtocol: tcp
+      ToPort: 22
+
+Outputs:
+  StackSSecurityGroup:
+    Description: The SSH Security Group for our Company
+    Value: !Ref MyCompanyWideSSHSecurityGroup
+    Export: 
+      Name: SSHSecurityGroup

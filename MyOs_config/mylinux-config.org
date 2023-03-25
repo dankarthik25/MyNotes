@@ -1,0 +1,281 @@
+#+TITLE: mylinux-config
+#+AUTHOR:    D Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+install obs, snapd, emacs, telegram, vs code, zoom, slack 
+
+remove emacs 
+some times even if we remove using =sudo apt-get --pruge remove emacs=
+will not remove the the emacs so 
+https://askubuntu.com/questions/377245/how-to-completely-remove-my-emacs
+
+
+sudo apt-get remove emacs emacs23 emacs24 emacs25 emacs26 \
+                    emacs-bin-common emacs-common emacs-el 
+
+
+Unable to update Skype on Ubuntu 20.04 – GPG/signature error
+
+
+https://15.236.220.103/2021/07/unable-to-update-skype-on-ubuntu-20-04-gpg-signature-error/
+
+
+
+* Know every thing about ppa
+https://itsfoss.com/ppa-guide/
+add ppa and remove ppa , list ppa 
+https://askubuntu.com/questions/148932/how-can-i-get-a-list-of-all-repositories-and-ppas-from-the-command-line-into-an
+
+Advanced Package Tool (or APT),
+-  APT, is a free-software user interface that works with core libraries to handle the installation and removal of software on Debian, and Debian-based Linux Distributions.[4]
+- APT simplifies the process of managing software on Unix-like computer systems by automating the retrieval, configuration and installation of software packages, either from precompiled files or by compiling source code.[4]
+
+
+
+
+sudo apt-key list
+Using APT keys | GPG and Third Party Keys Explained
+https://www.youtube.com/watch?v=aO8BuQITnRw
+
+OpenSSH Full Guide - Everything you need to get started!
+ https://www.youtube.com/watch?v=YS5Zh7KExvE
+ 
+Configure Thunderbird
+ https://www.youtube.com/watch?v=4CBe29gGd-Y
+
+
+* Customize TERMINAL 
+
+To have same customize in bash profile and bashrc 
+bash profile : It is customized for evey terminal 
+bashrc : It is customized for evey login 
+
+#+begin_src sh
+#cat .bash_profile
+if [-f ~/.bashrc]; then # if file exist 
+   source ~/.bashrc     # then run bashrc
+fi
+# OR you can run 
+[-n "$PS1"] && source ~/.bashrc;
+# So we can have single customization file both bash_profile and bashrc
+#+end_src
+
+
+#+begin_src sh
+[ -r "$file"] && [-f "$file"] && source  "$file";
+# -r FILE   #FILE exists and read permission is granted
+# -f FILE   #FILE exists and is a regular file
+
+# If file "EXISTS, REGULAR" and "READ" 
+
+ 
+#+end_src
+My bashrc file 
+#+begin_src 
+#cat ~./bashrc
+PS1='->'
+#PS1='-Customize->'
+#PS1="\u@\h \W->";
+export PS1;
+
+# Special Characters:
+#\h   hostname up to first 
+#\n   newline
+#\s   name of shell
+#\t   current time in 24-hour format
+#\u   username of current user
+#\w   current working directory
+#\W   basename of current working directory
+#+end_src
+
+
+# If you google search dotfile : these are customized setting of users in github
+
+
+* Troubleshoot in ssh connection disconnect 
+https://serverfault.com/questions/283129/why-do-consoles-sometimes-hang-forever-when-ssh-connection-breaks
+
+#+begin_src 
+ ~.   - terminate connection (and any multiplexed sessions)
+ ~B   - send a BREAK to the remote system
+ ~C   - open a command line
+ ~R   - request rekey
+ ~V/v - decrease/increase verbosity (LogLevel)
+ ~^Z  - suspend ssh
+ ~#   - list forwarded connections
+ ~&   - background ssh (when waiting for connections to terminate)
+ ~?   - this message
+ ~~   - send the escape character by typing it twice
+(Note that escapes are only recognized immediately after newline.)
+~. to terminate the connection
+~^Z (press ~ then Ctrl+Z) to suspend the connection and type a command locally (run the command fg to return to the SSH session)
+#+end_src
+
+SSH offers a keep-alive facility. Add the following to your local ~/.ssh/config (create if it doesn't exist):
+#+begin_src 
+ServerAliveInterval 15
+ServerAliveCount 3
+#+end_src
+
+
+While this doesn't actually answer the question it may help reduce the effects of a connection hang: when I'm working remotely (and even usually when I'm not) I run through screen (with or without the byobu wrapper depending on its availability) so that if there is any sort of connection drop my session, with all its history, is preserved and available in the state I left it when I reconnect.
+* Tmux
+#+begin_src 
+sudo apt-get install tmux
+tmux # enter with out session-name
+
+
+# Here Window consist of bin(or tab-windows )
+
+# Window labling
+# [0] 0:bash* 
+# Create a new bin vertically(right) 
+Ctrl + b + % (Shfit +5)
+
+Create a new bin Horizontally (below)
+Ctrl + b + " 
+
+# MOve Cursor 
+Ctrl + b (ARROW)
+
+# Close a bin
+exit
+
+# Windows
+# Create a new Window
+Ctrl + b c
+# [0] 0:bash- 1:bash* #Currently we are in Window 1(window start at 0 )
+
+#  To switch windows 0
+Ctrl + b 0
+# Rename a window
+Ctrl + b ,
+
+
+# Resize the bin : CTRL +B + ARROW 
+# Close a window
+exit
+
+#
+# Sessions: even when ssh- disconect
+#
+# To detach a session
+Ctrl + b d
+
+# View the session running in temux
+tmux ls
+# 0:1 windows (created Wed Apr 8 22:57:26 2020) [123x31]
+# re-attach to that session
+tmux attach -t  0 # name is 0 because we didn't specified any thing at
+
+# Rename a session
+tmux rename-session -t 0 git # rename 0 to aws-DS
+aws-Ds: 3 windows (created Thu Sep  9 11:07:34 2021)
+
+# Create a new session as (aws)and login into it
+tmux new -s aws
+# [aws] 0:bash* 
+
+# Delete a session
+tmux kill-session -t docker
+
+https://www.youtube.com/watch?v=Yl7NFenTgIo
+#+end_src
+
+
+
+ Troubleshoot in ssh connection disconnect 
+https://serverfault.com/questions/283129/why-do-consoles-sometimes-hang-forever-when-ssh-connection-breaks
+
+#+begin_src 
+ ~.   - terminate connection (and any multiplexed sessions)
+ ~B   - send a BREAK to the remote system
+ ~C   - open a command line
+ ~R   - request rekey
+ ~V/v - decrease/increase verbosity (LogLevel)
+ ~^Z  - suspend ssh
+ ~#   - list forwarded connections
+ ~&   - background ssh (when waiting for connections to terminate)
+ ~?   - this message
+ ~~   - send the escape character by typing it twice
+(Note that escapes are only recognized immediately after newline.)
+~. to terminate the connection
+~^Z (press ~ then Ctrl+Z) to suspend the connection and type a command locally (run the command fg to return to the SSH session)
+#+end_src
+
+SSH offers a keep-alive facility. Add the following to your local ~/.ssh/config (create if it doesn't exist):
+#+begin_src 
+ServerAliveInterval 15
+ServerAliveCount 3
+#+end_src
+
+
+While this doesn't actually answer the question it may help reduce the effects of a connection hang: when I'm working remotely (and even usually when I'm not) I run through screen (with or without the byobu wrapper depending on its availability) so that if there is any sort of connection drop my session, with all its history, is preserved and available in the state I left it when I reconnect.
+
+
+* bash ,zsh, fish
+zxc : history based autocomplete 
+fish : dropdown auto fill option
+
+
+
+* How to change the file naming scheme for screen shot
+https://askubuntu.com/questions/55204/how-can-i-change-the-default-name-for-the-screenshots-made-by-gnome-screenshot
+
+Note that you will have to have root privileges for the following operations, so prefix each command with =sudo= or open a root shell with =sudo -i=. \\
+Move the original =gnome-screenshot= binary out of the way:
+#+BEGIN_SRC sh
+dpkg-divert --add --rename --divert /usr/bin/gnome-screenshot.real /usr/bin/gnome-screenshot
+#+END_SRC
+Open /usr/bin/gnome-screenshot in an editor (you should see a new empty file):
+#+BEGIN_SRC sh
+nano /usr/bin/gnome-screenshot
+#+END_SRC
+Paste the following two lines into the editor:
+#+BEGIN_SRC sh
+#!/bin/bash  
+gnome-screenshot.real -f "$HOME/Pictures/Screenshots_$(date +%Y-%m-%dT%H-%M-%S).png" $@
+#+END_SRC
+Make the newly created script executable:
+#+BEGIN_SRC sh
+chmod a+x /usr/bin/gnome-screenshot
+#+END_SRC
+Test formate using terminal cmd 
+#+BEGIN_SRC sh
+gnome-screenshot -f Screenshot_$(date "+%Y-%m-%dT%H-%M-%S").png
+#+END_SRC
+
+
+
+
+
+
+* Crop Image
+https://vitux.com/popular-tools-for-easily-cropping-and-resizing-images-in-ubuntu/
+https://www.makeuseof.com/tag/easily-crop-resize-images-linux/
+
+#+BEGIN_SRC 
+sudo apt install shotwell
+#+END_SRC
+
+* Install pandoc 
+#+BEGIN_SRC sh
+sudo apt-get install pandoc
+
+
+# Convert docx to org mode 
+#  https://emacs.stackexchange.com/questions/54400/export-a-docx-file-to-org-using-pandoc-but-without-the-property-drawers
+pandoc -s --filter ./noattrs-filter test.docx -o test.org 
+# error noattrs-filter 
+# Second Error : No image are show in org file 
+
+# Available Solution :  convert doc to html using liboffice and then form html to org mode 
+pandoc -s doc2html.html -o new_org.org 
+# TODO replace "Â "  with " " ; pandoc insted of whitespace it is creating new charater "Â "
+
+#+END_SRC

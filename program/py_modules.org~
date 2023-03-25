@@ -1,0 +1,8 @@
+#+TITLE: My Python Notes
+#+AUTHOR:    Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+ 

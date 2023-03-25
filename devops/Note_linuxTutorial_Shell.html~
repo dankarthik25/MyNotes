@@ -1,0 +1,1894 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 06:57 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux</title>
+<meta name="author" content="D Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Linux</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd0881bf">Shabang</a></li>
+<li><a href="#org89d76b4">Type of Shell</a></li>
+<li><a href="#org5ba4641">Shell Keyword</a></li>
+<li><a href="#org0c8016e">Run shell script</a></li>
+<li><a href="#org092b699">Variable</a></li>
+<li><a href="#org18861b5">Diff btw " and '</a></li>
+<li><a href="#org3c841a8">Special Variable</a></li>
+<li><a href="#org75b6da8">PATH variable,  basename N dirname variable</a></li>
+<li><a href="#orge6a42ef">IF statment</a></li>
+<li><a href="#org5e02d1d">If Condition Statment</a></li>
+<li><a href="#org3fd04f6">If vs Switch</a></li>
+<li><a href="#orgafd6302">Switch Statment II</a></li>
+<li><a href="#orgb23f64b">Switch</a></li>
+<li><a href="#org7bb6c31">for Loop</a></li>
+<li><a href="#org1676ad3">while and Shift loop</a></li>
+<li><a href="#org9410609">Argument in shell</a>
+<ul>
+<li><a href="#orgc637163">Argument Examples</a></li>
+</ul>
+</li>
+<li><a href="#orgf59b7eb">Function</a>
+<ul>
+<li><a href="#org19e026e">Example</a></li>
+<li><a href="#org97ead04">Functoin for backup files</a></li>
+</ul>
+</li>
+<li><a href="#orgc0c8868">Regular expression</a></li>
+<li><a href="#orgc86f666">cut and Awk</a></li>
+<li><a href="#orgf0c1c5b">Sort and uniq</a></li>
+<li><a href="#orge69384f">Sed and Streams (find and replace)</a></li>
+<li><a href="#orgc59d7b5">SSH (with password N with ssh-key)</a></li>
+<li><a href="#orgef6d929">I/O redirection</a></li>
+<li><a href="#org5793cf5">Redirect a file</a></li>
+<li><a href="#org2d40081">bel</a></li>
+<li><a href="#org756dfa6">READ</a></li>
+<li><a href="#orgdd027d7">RANDOm</a></li>
+<li><a href="#org8da946f">RANDOm II</a></li>
+<li><a href="#org82cbe3b">Example</a></li>
+<li><a href="#org264e515">Example</a></li>
+<li><a href="#org1bb47f6">Deletig and Disabling Linux</a></li>
+<li><a href="#orgaac408d">Parsing Command Line Option (getopts)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd0881bf" class="outline-2">
+<h2 id="orgd0881bf">Shabang</h2>
+<div class="outline-text-2" id="text-orgd0881bf">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/sh     # #! :shabang</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"print in termnal"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org89d76b4" class="outline-2">
+<h2 id="org89d76b4">Type of Shell</h2>
+<div class="outline-text-2" id="text-org89d76b4">
+<p>
+<a href="https://www.educba.com/types-of-shells-in-linux/">https://www.educba.com/types-of-shells-in-linux/</a>
+</p>
+<ul class="org-ul">
+<li>bash (build based on bourne shell ) default shell of many linux distribution</li>
+<li>csh (C Shell )</li>
+<li>tcsh (Tab C Shell)</li>
+<li>zsh <b>Z Shell</b> (Combined feature of bash + csh + ksh)</li>
+<li><b>Fish Shell</b>  (User Friendly Shell)</li>
+<li>Ksh  <b>Korn Shell</b></li>
+</ul>
+
+
+<div id="org256e9f4" class="figure">
+<p><img src="./linux-img/th-4143612218.jpeg" alt="th-4143612218.jpeg" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ba4641" class="outline-2">
+<h2 id="org5ba4641">Shell Keyword</h2>
+<div class="outline-text-2" id="text-org5ba4641">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Echo</td>
+<td class="org-left">if</td>
+<td class="org-left">until</td>
+<td class="org-left">trap</td>
+</tr>
+
+<tr>
+<td class="org-left">read</td>
+<td class="org-left">else</td>
+<td class="org-left">case</td>
+<td class="org-left">wait</td>
+</tr>
+
+<tr>
+<td class="org-left">set</td>
+<td class="org-left">fi</td>
+<td class="org-left">esac</td>
+<td class="org-left">eval</td>
+</tr>
+
+<tr>
+<td class="org-left">unset</td>
+<td class="org-left">while</td>
+<td class="org-left">break</td>
+<td class="org-left">exec</td>
+</tr>
+
+<tr>
+<td class="org-left">read-only</td>
+<td class="org-left">do</td>
+<td class="org-left">continue</td>
+<td class="org-left">ulmit</td>
+</tr>
+
+<tr>
+<td class="org-left">shift</td>
+<td class="org-left">Done</td>
+<td class="org-left">exit</td>
+<td class="org-left">umask</td>
+</tr>
+
+<tr>
+<td class="org-left">export</td>
+<td class="org-left">For</td>
+<td class="org-left">return</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0c8016e" class="outline-2">
+<h2 id="org0c8016e">Run shell script</h2>
+<div class="outline-text-2" id="text-org0c8016e">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">need to give full permission to the shell-file</span>
+chmod 777 name.sh
+./name.sh
+sh name.sh
+sh -x name.sh
+<span style="color: #3a81c3;">source</span> name.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org092b699" class="outline-2">
+<h2 id="org092b699">Variable</h2>
+<div class="outline-text-2" id="text-org092b699">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">varaiable </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">systax   &lt;variable-name&gt;=&lt;value&gt;</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">variable should consist of (a-z,A-Z,0-9, _ ) NO special symbol, variable should not start with number</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">EG:</span>
+<span style="color: #715ab1;">a</span>=10               <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">declare a varibale int(or) float types</span>
+<span style="color: #715ab1;">b</span>=15               <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
+<span style="color: #715ab1;">salary</span>=10000
+<span style="color: #715ab1;">surname</span>=<span style="color: #2d9574;">'script'</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">declare a string type varibale</span>
+<span style="color: #715ab1;">name</span>=sathish       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">assign</span>
+<span style="color: #715ab1;">lastname</span>=<span style="color: #2d9574;">"script"</span>         
+
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$a"</span>            <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">10 print the variable</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$b"</span>            <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">15</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$salary"</span>       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">10000</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"name"</span>          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">name </span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$name"</span>         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sathish</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${name}"</span>       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sathis</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'$name'</span>         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$name</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Hi my name is $name"</span>      <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Hi my name is sathish</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Hi my name is ${name}"</span>    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Hi my name is sathish</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${surname}ing is fun"</span>     <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">script is fun</span>
+ending
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"This is ${word}${ending}. "</span>
+<span style="color: #715ab1;">src</span>=$<span style="color: #715ab1;">HOME</span>
+<span style="color: #715ab1;">des</span>=$<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">HOME</span><span style="color: #3a81c3;">}</span>/../../media/$<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">USER</span><span style="color: #3a81c3;">}</span>/easystore/mySyn_Home_rsync/
+<span style="color: #3a81c3;">cd</span> $<span style="color: #715ab1;">src</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"pwd inside src: $(</span><span style="color: #6c3163;">pwd</span><span style="color: #2d9574;">)"</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt; pwd inside src: /home/karthik</span>
+<span style="color: #3a81c3;">cd</span> $<span style="color: #715ab1;">des</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"pwd inside des: $(</span><span style="color: #6c3163;">pwd</span><span style="color: #2d9574;">)"</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt; pwd inside des: /media/karthik/easystore/mySyn_Home_rsync</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ex : </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Eg :</span>
+
+<span style="color: #715ab1;">src</span>=/opt/sathish/scripts
+<span style="color: #715ab1;">dest</span>=/temp
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">will move sbi.war file from scr to dest</span>
+cp $<span style="color: #715ab1;">src</span>/sbi.war $<span style="color: #715ab1;">dest</span>/
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ex : write a script which will clone from git_url to dest</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Filename : clone.sh</span>
+<span style="color: #715ab1;">git_url</span>= https://github.com/devipsstephen/ibm.git
+<span style="color: #715ab1;">dest</span>= /opt/git_repo
+mkdir -p $<span style="color: #715ab1;">dest</span>
+<span style="color: #3a81c3;">cd</span> $<span style="color: #715ab1;">dest</span>
+<span style="color: #3a81c3;">pwd</span>
+git clone $<span style="color: #715ab1;">git_url</span>
+chrontab -e
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;"># insert</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">*/1 * * * * sh /opt/clone.sh  </span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org18861b5" class="outline-2">
+<h2 id="org18861b5">Diff btw " and '</h2>
+<div class="outline-text-2" id="text-org18861b5">
+<p>
+single quotes (') preserves the literal value of each character within the quotes. 
+Enclosing characters in double quotes (") preserves the literal value of all characters within the quotes, with the exception of $, `, \,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${name}"</span>       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt; sathis     # variable are passed ${}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'$name'</span>         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$name</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"echo PATH: ${PATH}"</span>            <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">here PATH is local linux OS global variable so we pass insdie ${}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"echo UID : $(</span><span style="color: #6c3163;">id -un</span><span style="color: #2d9574;">)"</span>          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">linux cmd  are executed inside string using $()</span>
+<span style="color: #3a81c3;">cd</span> $<span style="color: #715ab1;">src</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"pwd inside src: $(</span><span style="color: #6c3163;">pwd</span><span style="color: #2d9574;">)"</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt; pwd inside src: /home/karthik</span>
+<span style="color: #3a81c3;">cd</span> $<span style="color: #715ab1;">des</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"pwd inside des: $(</span><span style="color: #6c3163;">pwd</span><span style="color: #2d9574;">)"</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt; pwd inside des: /media/karthik/easystore/mySyn_Home_rsync</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3c841a8" class="outline-2">
+<h2 id="org3c841a8">Special Variable</h2>
+<div class="outline-text-2" id="text-org3c841a8">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">UID</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the UID and username of the user executing this script.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display if the user is the root user or not.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the UID</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Your UID is ${UID}"</span>    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">UID special preset variable </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt; Your UID is 1000</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">TO more about uid </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">man bash</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;"># vi key binding</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">/UID&lt;ENTER&gt;</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the username</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">USER_NAME=$(</span><span style="color: #6c3163;">id -un</span><span style="color: #2aa1ae; background-color: #ecf3ec;">)</span>
+id 
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">uid=1000(jayradhey) gid=1000(jayradhey) groups=1000(jayradhey),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),114(lpadmin),134(sambashare),999(docker)</span>
+id -u     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-u  or --user &gt;&gt;&gt; 1000 </span>
+id -un    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-u  or --name #&gt;&gt;&gt; jayradhey</span>
+man id    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">more details</span>
+
+
+<span style="color: #715ab1;">USER_NAME</span>=<span style="color: #6c3163;">`id -un`</span>    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">older style </span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Your username is ${USER_NAME}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display if the user is the root user or not.</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${UID}"</span> -eq 0 <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'You are root.'</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'You are not root.'</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#          </span><span style="color: #2aa1ae; background-color: #ecf3ec;">ID</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Print user and group information for  the specified USER or (for current user</span>
+
+man id
+<span style="color: #3a81c3;">type</span> -a id
+id -u
+id -u -n
+id -un
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">whoami</span>
+man whoami
+whoami   <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;&gt;&gt;  jayradhey</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">[[ is bash condtion not work in csh shell may not work</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">or </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">[  is older UNIX way</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org75b6da8" class="outline-2">
+<h2 id="org75b6da8">PATH variable,  basename N dirname variable</h2>
+<div class="outline-text-2" id="text-org75b6da8">
+<p>
+The search path for commands.  
+It is  a  colon-separated  list of directories  in  which  the  shell looks for commands
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #715ab1;">PATH</span>=$<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">PATH</span><span style="color: #3a81c3;">}</span>:/opt/softwares/apache-maven-3.6.3/bin
+
+<span style="color: #715ab1;">path_maven</span>= /opt/softwares/apache-maven-3.6.3 
+basename /opt/softwares/apache-maven-3.6.3
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt; apache-maven-3.6.3</span>
+
+dirname /opt/softwares/apache-maven-3.6.3
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt; /opt/softwares/</span>
+
+dirname /opt/software/apache-maven-3.6.3/bin/not/here
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt; /opt/softwar/apache-maven-3.6.3/bin/not</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">dirname <span style="color: #2d9574;">"~/WorkSpace_Python"</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">~</span>
+basename <span style="color: #2d9574;">"home/jayaradhe/WorkSpace_Python"</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">WorkSpace_Python</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$pwd | xargs dirname  #&gt;&gt;&gt; ~</span>
+
+
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You executeed in this command :${0}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You used $(</span><span style="color: #6c3163;">dirname ${0}</span><span style="color: #2d9574;">) as the path to $(</span><span style="color: #6c3163;">basename ${0}</span><span style="color: #2d9574;">) script"</span>
+
+<span style="color: #715ab1;">NoOfParameter</span>= <span style="color: #2d9574;">"${#}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You supplied ${NoOfParameters} arguments(s) on the command line."</span>
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${NoOfParameters}"</span> -lt 1<span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Usage : ${0} USER_NAmE [USER_NAmE]]"</span>
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge6a42ef" class="outline-2">
+<h2 id="orge6a42ef">IF statment</h2>
+<div class="outline-text-2" id="text-orge6a42ef">
+<pre class="example">
+#
+# Decision making
+#
+
+#syntax:
+#if [condition]
+#then
+#
+#
+#else
+#
+#fi
+
+# relation operators
+# == eq 
+# &gt;= ge 
+# &lt;= le 
+# =! ne
+# &lt; gt 
+# &gt; lt 
+
+#Ex
+
+age=20
+if [$age&gt;=18] # or [ $age -ge 18]
+then
+  echo "aligible for diving license"
+else
+  echo "not aligible"
+fi
+
+
+
+#Ex : if file(calender.war) exist then backback
+
+src= /opt/calender.war
+dest=/opt/backup
+mkdir -p $dest
+
+if [-f $src]
+then
+     mv $src $dest
+     echo "file is existing"  
+else
+     cp /tmp/Calender.war $dest
+     if [$? ==0]
+	then 
+	  echo "deployment is done successfull"
+     fi
+fi
+
+
+
+
+# Ex: Tell weather deployment is sucessfull or failure 
+sh deploy.sh
+
+if[ $? ==0]
+then
+  echo "deployment is done sucessfull"
+else 
+  echo "not success"
+if
+
+# Ex : check if disk space of /dev/xvda1 is more the 3GB then clean the space
+
+thershold=3
+disc= `df-h |grep /dev/xvda1 | awk '{print 4}'| cut -c 1`
+echo "$disc"
+
+if [$disk -gt $threshold]
+then 
+   echo"clean the space"
+else
+   echo"disc space is ok"
+fi
+
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5e02d1d" class="outline-2">
+<h2 id="org5e02d1d">If Condition Statment</h2>
+<div class="outline-text-2" id="text-org5e02d1d">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'start'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'stop'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'status'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+  <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+<span style="color: #715ab1;">file</span>=$<span style="color: #715ab1;">1</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span> -e $<span style="color: #715ab1;">file</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+        <span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"File $file exists"</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+        <span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"File $file doesnt exists"</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To check condition "man test"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Please enter first number"</span>
+<span style="color: #3a81c3;">read</span> first
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Please enter second number"</span>
+<span style="color: #3a81c3;">read</span> second
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span> $<span style="color: #715ab1;">first</span> -eq 0 <span style="color: #3a81c3;">]</span> &amp;&amp; <span style="color: #3a81c3;">[</span> $<span style="color: #715ab1;">second</span> -eq 0 <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Num1 and Num2 are zero"</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span> $<span style="color: #715ab1;">first</span> -eq $<span style="color: #715ab1;">second</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Both Values are equal"</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span> $<span style="color: #715ab1;">first</span> -gt $<span style="color: #715ab1;">second</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$first is greater than $second"</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$first is lesser than $second"</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span> &#8220;$<span style="color: #715ab1;">1</span>&#8221; == &#8220;moo&#8221; <span style="color: #3a81c3;">]</span> 
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$1 is moo"</span> 
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note: you can also use a single &#8220;=&#8221; instead of a double one.</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span> <span style="color: #6c3163;">`whoami`</span> != <span style="color: #2d9574;">'root'</span> <span style="color: #3a81c3;">]</span>; <span style="color: #3a81c3; font-weight: bold;">then</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Executing the installer script"</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+        <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Root is not allowed to execute the installer script"</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3fd04f6" class="outline-2">
+<h2 id="org3fd04f6">If vs Switch</h2>
+<div class="outline-text-2" id="text-org3fd04f6">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4e3163;">!</span>/bin/bash
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'start'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'stop'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span>
+<span style="color: #3a81c3; font-weight: bold;">elif</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${1}"</span> = <span style="color: #2d9574;">'status'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+  <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+This ideal format of a case statement follows.
+<span style="color: #3a81c3; font-weight: bold;">case</span> <span style="color: #2d9574;">"${1}"</span><span style="color: #3a81c3; font-weight: bold;"> in</span>
+  start)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span>
+    ;;
+  stop)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span>
+    ;;
+  status|state|--status|--state)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span>
+    ;;
+  *)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+    ;;
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+
+
+Here is a compact version of the case statement.
+
+<span style="color: #3a81c3; font-weight: bold;">case</span> <span style="color: #2d9574;">"${1}"</span><span style="color: #3a81c3; font-weight: bold;"> in</span>
+  start) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span> ;;
+  stop) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span> ;;
+  status) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span> ;;
+  *)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+    ;;
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This ideal format of a case statement follows.</span>
+<span style="color: #3a81c3; font-weight: bold;">case</span> <span style="color: #2d9574;">"${1}"</span><span style="color: #3a81c3; font-weight: bold;"> in</span>
+  start)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span>
+    ;;
+  stop)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span>
+    ;;
+  status|state|--status|--state)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span>
+    ;;
+  *)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+    ;;
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgafd6302" class="outline-2">
+<h2 id="orgafd6302">Switch Statment II</h2>
+<div class="outline-text-2" id="text-orgafd6302">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Here is a compact version of the case statement.</span>
+<span style="color: #3a81c3; font-weight: bold;">case</span> <span style="color: #2d9574;">"${1}"</span><span style="color: #3a81c3; font-weight: bold;"> in</span>
+  start) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Starting.'</span> ;;
+  stop) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Stopping.'</span> ;;
+  status) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Status:'</span> ;;
+  *)
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Supply a valid option.'</span> &gt;&amp;2
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+    ;;
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb23f64b" class="outline-2">
+<h2 id="orgb23f64b">Switch</h2>
+<div class="outline-text-2" id="text-orgb23f64b">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #715ab1;">env</span>=moday
+<span style="color: #3a81c3; font-weight: bold;">case</span> <span style="color: #2d9574;">"$env"</span><span style="color: #3a81c3; font-weight: bold;"> in</span> 
+
+<span style="color: #2d9574;">"monday"</span>) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"monday"</span>;;
+<span style="color: #2d9574;">"tuesday"</span>) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"tuesday"</span>;;
+<span style="color: #2d9574;">"*"</span>) <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"invalid opearation"</span>
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/</span><span style="color: #3a81c3; font-weight: bold;">sh</span>
+<span style="color: #715ab1;">day</span>= $<span style="color: #715ab1;">1</span>
+<span style="color: #3a81c3; font-weight: bold;">case</span> $<span style="color: #715ab1;">day</span><span style="color: #3a81c3; font-weight: bold;"> in</span> 
+<span style="color: #2d9574;">"monday"</span>) 
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"this is monday"</span>
+;;
+<span style="color: #3a81c3; font-weight: bold;">case</span> $<span style="color: #715ab1;">day</span><span style="color: #3a81c3; font-weight: bold;"> in</span> 
+<span style="color: #2d9574;">"tue"</span>) 
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"this is tuesday"</span>
+;;
+<span style="color: #2d9574;">"*"</span>)
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"invalid"</span>
+;;
+<span style="color: #3a81c3; font-weight: bold;">esac</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7bb6c31" class="outline-2">
+<h2 id="org7bb6c31">for Loop</h2>
+<div class="outline-text-2" id="text-org7bb6c31">
+<p>
+The `for' loop executes a sequence of commands for each member in list of items.  
+If `in WORDS &#x2026;;' is not present, then `in "$@"' is assumed.  
+For each element in WORDS, NAME is set to that element, and the COMMANDS are executed.
+</p>
+
+<p>
+more information man bash #vi /Specia Parameters  or @
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">for $vari in 1 2 3 4 5 </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">do</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">#statement</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">done</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! i in 1 2 3 4 5 </span>
+<span style="color: #3a81c3; font-weight: bold;">for</span> i<span style="color: #3a81c3; font-weight: bold;"> in</span> 1 2 3 4 5
+<span style="color: #3a81c3; font-weight: bold;">do</span> 
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$i"</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$i"</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+
+cat name
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">sathish</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">sanjay</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">prabhakar</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">karthik</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">vijay</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">santhosh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">prasad</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">ravi</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">raa</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">ggg</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">hh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">kk</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">for i in $(</span><span style="color: #6c3163;">cat people_data.csv</span><span style="color: #2aa1ae; background-color: #ecf3ec;">); do  echo "$i"; done</span>
+<span style="color: #3a81c3; font-weight: bold;">for</span> i<span style="color: #3a81c3; font-weight: bold;"> in</span> <span style="color: #6c3163;">`cat name`</span>
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$i"</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+
+touch test 
+vi test 
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">welcom </span>
+cp test test2
+cp test test3
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">FileName: file.sh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/sh</span>
+
+<span style="color: #3a81c3; font-weight: bold;">for</span> file<span style="color: #3a81c3; font-weight: bold;"> in</span> /d/chola/*
+<span style="color: #3a81c3; font-weight: bold;">do</span> 
+   <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #2d9574;">"${file}"</span> == <span style="color: #2d9574;">"/d/chola/test"</span><span style="color: #3a81c3;">]</span>
+      <span style="color: #3a81c3; font-weight: bold;">then</span>
+       sed -i <span style="color: #2d9574;">'s/welcome/devops/g'</span>
+      <span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+
+
+<span style="color: #3a81c3; font-weight: bold;">for</span> i<span style="color: #3a81c3; font-weight: bold;"> in</span> <span style="color: #6c3163;">`cat /d/chola/test`</span>
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$i"</span> |sed -i <span style="color: #2d9574;">'s/welcome/devops/g'</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3; font-weight: bold;">for</span> file<span style="color: #3a81c3; font-weight: bold;"> in</span> ~/.<span style="color: #3a81c3;">{</span>path,bash_promt,exports,aliases,functions,extra<span style="color: #3a81c3;">}</span>;<span style="color: #3a81c3; font-weight: bold;">do</span>
+  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">do some thing</span>
+  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">do some thing</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1676ad3" class="outline-2">
+<h2 id="org1676ad3">while and Shift loop</h2>
+<div class="outline-text-2" id="text-org1676ad3">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Demonstrate the use of shift and while loops.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the first three parameters.</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 1: ${1}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 2: ${2}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 3: ${3}"</span>
+<span style="color: #3a81c3;">echo</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Loop through all the positional parameters.</span>
+<span style="color: #3a81c3; font-weight: bold;">while</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${#}"</span> -gt 0 <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Number of parameters: ${#}"</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 1: ${1}"</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 2: ${2}"</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Parameter 3: ${3}"</span>
+  <span style="color: #3a81c3;">echo</span>
+  <span style="color: #3a81c3;">shift</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9410609" class="outline-2">
+<h2 id="org9410609">Argument in shell</h2>
+<div class="outline-text-2" id="text-org9410609">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">passing prameter in shell </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sh  tesh.sh 45 yes 25k shathish</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">then $0 is test.sh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">${0} is file name</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">${1} is 45</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">${2} is yes</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">${3} is 25k</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">${4} is shatish</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$#   is No.Of parameter in command line or ${#}</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$? : Exist Status of  previous cmd executed sucessfull : true / false(not exectued sucessfull)</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">"${@} : all parameter starting from 1 or ${1}${2}${3}${4}"</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc637163" class="outline-3">
+<h3 id="orgc637163">Argument Examples</h3>
+<div class="outline-text-3" id="text-orgc637163">
+<div class="org-src-container">
+<pre class="src src-sh">
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You executeed in this command :${0}"</span>
+
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You used $(</span><span style="color: #6c3163;">dirname ${0}</span><span style="color: #2d9574;">) as the path to $(</span><span style="color: #6c3163;">basename ${0}</span><span style="color: #2d9574;">) script"</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">dirname /home/jayradhe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt;/home</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">basename /home/jayrade</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt; jayradae</span>
+
+
+<span style="color: #715ab1;">NoOfParameter</span>= <span style="color: #2d9574;">"${#}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You supplied ${NoOfParameters} arguments(s) on the command line."</span>
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${NoOfParameters}"</span> -lt 1<span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Usage : ${0} USER_NAmE [USER_NAmE]]"</span>
+    <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Generate and display a password for each parameter</span>
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+ <span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s%N | sha256sum | head -c48</span><span style="color: #3a81c3;">)</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${USER_NAME}: ${PASSWORD}"</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf59b7eb" class="outline-2">
+<h2 id="orgf59b7eb">Function</h2>
+<div class="outline-text-2" id="text-orgf59b7eb">
+<div class="org-src-container">
+<pre class="src src-sh">env = $<span style="color: #715ab1;">1</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">delete all files in tmp fodler</span>
+<span style="color: #6c3163; font-weight: bold;">delete</span><span style="color: #3a81c3;">()</span>
+<span style="color: #3a81c3;">{</span>
+rm -rf /tmp/*
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">copy sbi.war file to username at ip:x.x.x.x  at /tmp</span>
+
+<span style="color: #6c3163; font-weight: bold;">deploy</span><span style="color: #3a81c3;">()</span>
+<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">username</span>= $<span style="color: #715ab1;">1</span>
+<span style="color: #715ab1;">passwd</span>=$<span style="color: #715ab1;">2</span>
+scp sbi.war $<span style="color: #715ab1;">username</span>@$<span style="color: #715ab1;">passwd</span>: /tmp
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> evn == dev
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+deploy dev 192.145.67.8
+<span style="color: #3a81c3; font-weight: bold;">fi</span> 
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> evn == sit     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">System Integration and Testing</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+deploy dev 192.145.67.8
+<span style="color: #3a81c3; font-weight: bold;">fi</span> 
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> evn == preprod
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+deploy dev 192.145.67.8
+<span style="color: #3a81c3; font-weight: bold;">fi</span> 
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> evn == prod
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+deploy dev 192.145.67.8
+<span style="color: #3a81c3; font-weight: bold;">fi</span> 
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">(){</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">local: The  scope variable inside func exist</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">"${@} : all parameter starting from 1 or ${1}${2}${3}${4}"</span>
+
+<span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">message</span>= <span style="color: #2d9574;">"${@}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${message}"</span> 
+<span style="color: #3a81c3;">}</span>
+log <span style="color: #2d9574;">'Hello!'</span>
+log <span style="color: #2d9574;">'This is fun'</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Or</span>
+<span style="color: #3a81c3; font-weight: bold;">function</span> <span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">{</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'You called the log function'</span>
+<span style="color: #3a81c3;">}</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org19e026e" class="outline-3">
+<h3 id="org19e026e">Example</h3>
+<div class="outline-text-3" id="text-org19e026e">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">(){</span>
+ <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">VERBOSE</span>=<span style="color: #2d9574;">"${1}"</span>
+ <span style="color: #3a81c3;">shift</span>
+ <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">message</span>= <span style="color: #2d9574;">"${@}"</span>         
+ <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #6c3163;">[</span><span style="color: #2d9574;">[</span><span style="color: #2d9574;">"${VERBOSE}"</span>= <span style="color: #2d9574;">'true'</span> <span style="color: #2d9574;">]</span><span style="color: #6c3163;">]</span>
+ <span style="color: #3a81c3; font-weight: bold;">then</span> 
+     <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${message}"</span>
+ <span style="color: #3a81c3; font-weight: bold;">fi</span> 
+<span style="color: #3a81c3;">}</span>
+log <span style="color: #2d9574;">'true'</span> <span style="color: #2d9574;">'Hello!'</span>
+
+<span style="color: #715ab1;">VERBOSE</span>=<span style="color: #2d9574;">'true'</span>
+log <span style="color: #2d9574;">"${VERBOSE}"</span> <span style="color: #2d9574;">'Hello!'</span>
+log <span style="color: #2d9574;">"${VERBOSE}"</span> <span style="color: #2d9574;">'This is fun'</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#       </span><span style="color: #2aa1ae; background-color: #ecf3ec;">READ ONLY VARIABE</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">(){</span>
+ <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">message</span>= <span style="color: #2d9574;">"${@}"</span>         
+ <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #6c3163;">[</span><span style="color: #2d9574;">[</span><span style="color: #2d9574;">"${VERBOSE}"</span>= <span style="color: #2d9574;">'true'</span> <span style="color: #2d9574;">]</span><span style="color: #6c3163;">]</span>
+ <span style="color: #3a81c3; font-weight: bold;">then</span> 
+     <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${message}"</span>
+ <span style="color: #3a81c3; font-weight: bold;">fi</span> 
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #3a81c3;">readonly</span> <span style="color: #715ab1;">VERBOSE</span>=<span style="color: #2d9574;">'true'</span>
+log  <span style="color: #2d9574;">'Hello!'</span>
+log <span style="color: #2d9574;">'This is fun'</span>
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Send msg to sys logger</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+<span style="color: #3a81c3;">type</span> -a logger
+man logger
+logger <span style="color: #2d9574;">'Hello from udemy course this is linux course'</span>
+sudo tail /var/log/messages
+
+logger -t myscript <span style="color: #2d9574;">'Tagging on'</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org97ead04" class="outline-3">
+<h3 id="org97ead04">Functoin for backup files</h3>
+<div class="outline-text-3" id="text-org97ead04">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script demonstrates the use of functions.</span>
+
+<span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">()</span> <span style="color: #3a81c3;">{</span>
+  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This function sends a message to syslog and to standard output if VERBOSE is true.</span>
+
+  <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">MESSAGE</span>=<span style="color: #2d9574;">"${@}"</span>
+  <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #6c3163;">[</span><span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"${VERBOSE}"</span> = <span style="color: #2d9574;">'true'</span> <span style="color: #2d9574;">]</span><span style="color: #6c3163;">]</span>
+  <span style="color: #3a81c3; font-weight: bold;">then</span>
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${MESSAGE}"</span>
+  <span style="color: #3a81c3; font-weight: bold;">fi</span>
+  logger -t luser-demo10.sh <span style="color: #2d9574;">"${MESSAGE}"</span>
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #6c3163; font-weight: bold;">backup_file</span><span style="color: #3a81c3;">()</span> <span style="color: #3a81c3;">{</span>
+  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This function creates a backup of a file.  Returns non-zero status on error.</span>
+
+  <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">FILE</span>=<span style="color: #2d9574;">"${1}"</span>
+
+  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Make sure the file exists.</span>
+  <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #6c3163;">[</span><span style="color: #2d9574;">[</span> -f <span style="color: #2d9574;">"${FILE}"</span> <span style="color: #2d9574;">]</span><span style="color: #6c3163;">]</span>
+  <span style="color: #3a81c3; font-weight: bold;">then</span>
+    <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">BACKUP_FILE</span>=<span style="color: #2d9574;">"/var/tmp/$(</span><span style="color: #6c3163;">basename ${FILE}</span><span style="color: #2d9574;">).$(</span><span style="color: #6c3163;">date +%F-%N</span><span style="color: #2d9574;">)"</span>
+    log <span style="color: #2d9574;">"Backing up ${FILE} to ${BACKUP_FILE}."</span>
+
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">The exit status of the function will be the exit sta tus of the cp command.</span>
+    cp -p $<span style="color: #6c3163;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #6c3163;">}</span> $<span style="color: #6c3163;">{</span><span style="color: #715ab1;">BACKUP_FILE</span><span style="color: #6c3163;">}</span>
+  <span style="color: #3a81c3; font-weight: bold;">else</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">The file does not exist, so return a non-zero exit status.</span>
+    <span style="color: #3a81c3; font-weight: bold;">return</span> 1
+  <span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #3a81c3;">readonly</span> <span style="color: #715ab1;">VERBOSE</span>=<span style="color: #2d9574;">'true'</span>
+log <span style="color: #2d9574;">'Hello!'</span>
+log <span style="color: #2d9574;">'This is fun!'</span>
+
+backup_file /etc/passwd
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Make a decision based on the exit status of the function.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note this is for demonstration purposes.  You could have</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">put this functionality inside of the backup_file function.</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${?}"</span> -eq <span style="color: #2d9574;">'0'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  log <span style="color: #2d9574;">'File backup succeeded!'</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+  log <span style="color: #2d9574;">'File backup failed!'</span>
+  <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc0c8868" class="outline-2">
+<h2 id="orgc0c8868">Regular expression</h2>
+<div class="outline-text-2" id="text-orgc0c8868">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-orgc86f666" class="outline-2">
+<h2 id="orgc86f666">cut and Awk</h2>
+<div class="outline-text-2" id="text-orgc86f666">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-orgf0c1c5b" class="outline-2">
+<h2 id="orgf0c1c5b">Sort and uniq</h2>
+<div class="outline-text-2" id="text-orgf0c1c5b">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-orge69384f" class="outline-2">
+<h2 id="orge69384f">Sed and Streams (find and replace)</h2>
+<div class="outline-text-2" id="text-orge69384f">
+<p>
+ Sed = Stream editor
+A stream is data that travels from :
+</p>
+<ul class="org-ul">
+<li>One process to another through a pip</li>
+<li>One file to another as a redirect</li>
+<li>One device to another.</li>
+</ul>
+
+<p>
+Standard Input = Standard Input Stream, etc
+Strems are typically textual data
+</p>
+
+<p>
+Sed perform text transformations on streams
+Example :
+</p>
+<ul class="org-ul">
+<li>Substitute some text for other text</li>
+<li>Remvoe lines</li>
+<li>Append textg after given lines</li>
+<li>Insert text before certain lines</li>
+</ul>
+
+<p>
+Sed is used programmatically,not interactively
+sed is 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">syantax : sed's/search-pattern/replacement-string/flags'</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Dwight is the assistant regional manager.'</span> &gt; manager.txt
+cat manager.txt
+sed <span style="color: #2d9574;">'s/assistant/assistant to the/'</span> manager.txt# s :substitute cmd
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sed also allow regex for search and repalce</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">the original file is not alter or change</span>
+ cat manager.txt
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to change original file</span>
+sed <span style="color: #2d9574;">'s/assistant/assistant to the/'</span> manager.txt
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Case insensitive :</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'I love my prabhupad'</span> love.txt
+sed <span style="color: #2d9574;">'s/PRABHUPAD/HH A.C.PRABHUPAD/i'</span> love.txt
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'This is line2'</span> &gt;&gt; love.txt 
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">By default sed replace first pattern on line  but not on whole line or multi accurance in same line .</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">replace  muti-occurance we use g-flage</span>
+sed <span style="color: #2d9574;">'s/PRABHUPAD/HH A.C.PRABHUPAD/g'</span> love.txt
+sed <span style="color: #2d9574;">'s/PRABHUPAD/HH A.C.PRABHUPAD/2'</span> love.txt <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">only 2nd occarance is changed</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create a backup</span>
+sed -i.bak  <span style="color: #2d9574;">'s/assistant/assistant to the/'</span> manager.txt
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc59d7b5" class="outline-2">
+<h2 id="orgc59d7b5">SSH (with password N with ssh-key)</h2>
+<div class="outline-text-2" id="text-orgc59d7b5">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgef6d929" class="outline-2">
+<h2 id="orgef6d929">I/O redirection</h2>
+<div class="outline-text-2" id="text-orgef6d929">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script demonstrates I/O redirection.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file.</span>
+<span style="color: #715ab1;">FILE</span>=<span style="color: #2d9574;">"/tmp/data"</span>
+head -n1 /etc/passwd &gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDIN to a program.</span>
+<span style="color: #3a81c3;">read</span> LINE &lt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"LINE contains: ${LINE}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file, overwriting the file.</span>
+head -n3 /etc/passwd &gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file, appending to the file.</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${RANDOM} ${RANDOM}"</span> &gt;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${RANDOM} ${RANDOM}"</span> &gt;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDIN to a program, using FD 0.</span>
+<span style="color: #3a81c3;">read</span> LINE 0&lt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"LINE contains: ${LINE}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file using FD 1, overwriting the file.</span>
+head -n3 /etc/passwd 1&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDERR to a file using FD 2.</span>
+<span style="color: #715ab1;">ERR_FILE</span>=<span style="color: #2d9574;">"/tmp/data.err"</span>
+head -n3 /etc/passwd /fakefile 2&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${ERR_FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT and STDERR to a file.</span>
+head -n3 /etc/passwd /fakefile &amp;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT and STDERR through a pipe.</span>
+<span style="color: #3a81c3;">echo</span>
+head -n3 /etc/passwd /fakefile |&amp; cat -n
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Send output to STDERR</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"This is STDERR!"</span> &gt;&amp;2
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDOUT</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDOUT:"</span>
+head -n3 /etc/passwd /fakefile &gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDERR</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDERR:"</span>
+head -n3 /etc/passwd /fakefile 2&gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDOUT and STDERR</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDOUT and STDERR:"</span>
+head -n3 /etc/passwd /fakefile &amp;&gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Clean up</span>
+rm $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span> $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span> &amp;&gt; /dev/null
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5793cf5" class="outline-2">
+<h2 id="org5793cf5">Redirect a file</h2>
+<div class="outline-text-2" id="text-org5793cf5">
+<p>
+Every process three File Descriptors :
+</p>
+<ul class="org-ul">
+<li>FD 0 STDIN  # Input</li>
+<li>FD 1 STDOUT # output</li>
+<li>FD 2 STDERR # error</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">id -un &gt; id
+<span style="color: #2d9574;">"${UID}"</span> &gt; uid
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">set password from file/variable</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"secret"</span> &gt; password
+sudo pass --stdin einstein &lt; password
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create a password </span>
+data | sha256sum | head -c10 &gt;&gt; password
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+
+<span style="color: #715ab1;">FILE</span>=<span style="color: #2d9574;">"/tmp/data"</span>
+head -n1 /etc/passwd &gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDIN to a program.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+
+<span style="color: #3a81c3;">read</span> LINE &lt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"LINE contains: ${LINE}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file, overwriting the file.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+
+head -n3 /etc/passwd &gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"secret"</span> &gt; password_file
+cat password_file
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file, appending to the file</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${RANDOM} ${RANDOM}"</span> &gt;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${RANDOM} ${RANDOM}"</span> &gt;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+
+READ X &lt; /etc/centos-release   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">implicit and </span>
+READ X 0&lt; /etc/centos-release  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">explicit</span>
+READ X 0 &lt; /etc/centos-release <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">SYANTAX ERROR</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${UDI}"</span> &gt; uid
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${UDI}"</span> 1&gt; uid
+
+man head <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print 1st 10 lines of each File to standard output, with more tha t 1file</span>
+head  -n1 /etc/passwd /etc/hosts
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">If file not exis then </span>
+
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile  
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">output in terminal is : Has both std output and std error message</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">STDOUTPUT : Are stored in head.out</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">STDERROR : Are stored in head.err</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">########################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">RE DIRECT : STDOUT, and print STDERROR</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33 </span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.out <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error message is re-directed to head.out but printed in terminal</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">########################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">RE DIRECT : STDERROR</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33 </span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2&gt; head.err <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error message is re-directed to head.out but printed in terminal</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33#</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">RE DIRECT : STDOUT and STDERROR :to seperate files</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33 </span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.out 2&gt;head.err
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">########################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">RE DIRECT : STDOUT and STDERROR :to seperate files</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33 </span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.both 2&gt;&amp;1 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">re-direct FD2 at address of Fd1</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">OR  (New way )</span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &amp;&gt; head.both
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &amp;&gt;&gt; head.both <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">append</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#  </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Append STD ERROR to STD OUT  : Doesn't flow(pass) through pipe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33# </span>
+man cat 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile | cat -n <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error: can't pass err msg</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">inorder to pass error throw pip we need to append pass stderr to stdout</span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2&gt;&amp;1 | cat -n  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Or</span>
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile |&amp; cat -n 
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#  </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Append STD OUT to STD ERROR  : Doesn't flow(pass) through pipe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33# </span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"error"</span> |cat -n
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"error"</span> &gt;&amp;2 |cat -n   <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">or</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"error"</span> 1&gt;&amp;2 |cat -n   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">same as &gt;&amp;2</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Why we need to send data from std out to std error ?</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To echo a msg which stdout  to std error </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ex:</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"This is a std error"</span> &gt;&amp;2
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDIN to a program, using FD 0.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">read</span> LINE 0&lt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"LINE contains: ${LINE}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT to a file using FD 1, overwriting the file.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+head -n3 /etc/passwd 1&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDERR to a file using FD 2.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #715ab1;">ERR_FILE</span>=<span style="color: #2d9574;">"/tmp/data.err"</span>
+head -n3 /etc/passwd /fakefile 2&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${ERR_FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT and STDERR to a file.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+head -n3 /etc/passwd /fakefile &amp;&gt; $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Contents of ${FILE}:"</span>
+cat $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Redirect STDOUT and STDERR through a pipe.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span>
+head -n3 /etc/passwd /fakefile |&amp; cat -n
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Send output to STDERR</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"This is STDERR!"</span> &gt;&amp;2
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDOUT</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDOUT:"</span>
+head -n3 /etc/passwd /fakefile &gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDERR</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDERR:"</span>
+head -n3 /etc/passwd /fakefile 2&gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Discard STDOUT and STDERR</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #3a81c3;">echo</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Discarding STDOUT and STDERR:"</span>
+head -n3 /etc/passwd /fakefile &amp;&gt; /dev/null
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Clean up</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">######################################################</span><span style="color: #2aa1ae; background-color: #ecf3ec;">33</span>
+rm $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">FILE</span><span style="color: #3a81c3;">}</span> $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">ERR_FILE</span><span style="color: #3a81c3;">}</span> &amp;&gt; /dev/null
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2d40081" class="outline-2">
+<h2 id="org2d40081">bel</h2>
+<div class="outline-text-2" id="text-org2d40081">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">(</span> speaker-test -t sine -f 1000 <span style="color: #3a81c3;">)</span>&amp; <span style="color: #715ab1;">pid</span>=$<span style="color: #715ab1;">!</span> ; sleep 1s ; <span style="color: #3a81c3;">kill</span> -9 $<span style="color: #715ab1;">pid</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org756dfa6" class="outline-2">
+<h2 id="org756dfa6">READ</h2>
+<div class="outline-text-2" id="text-org756dfa6">
+<p>
+read -p “ prompt<sub>text</sub>”
+</p>
+
+<p>
+Here we read the data along with some hint text . The hint text helps the user in what he/she has to enter . -p here stands for the prompt . The hint text also called the prompt text.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script creates an account on the local system.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">You will be prompted for the account name and password.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ask for the user name.</span>
+<span style="color: #3a81c3;">read</span> -p <span style="color: #2d9574;">'Enter the username to create: '</span> USER_NAME 
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ask for the real name.</span>
+<span style="color: #3a81c3;">read</span> -p <span style="color: #2d9574;">'Enter the name of the person who this account is for: '</span> USER_DETAILS
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ask for the password.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">read -p 'Enter the password to use for the account: ' PASSWORD</span>
+
+<span style="color: #3a81c3;">read</span> -s -p <span style="color: #2d9574;">"Enter Password: "</span> password
+<span style="color: #3a81c3;">echo</span> $<span style="color: #715ab1;">password</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Create the user.</span>
+useradd -c <span style="color: #2d9574;">"${USER_DETAILS}"</span> -m $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">USER_NAME</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Set the password for the user.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">NOTE: You can also use the following command:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">echo "${USER_NAME}:${PASSWORD}" | chpasswd</span>
+<span style="color: #3a81c3;">echo</span> $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">PASSWORD</span><span style="color: #3a81c3;">}</span> | passwd --stdin $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">USER_NAME</span><span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Force password change on first login.</span>
+passwd -e $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">USER_NAME</span><span style="color: #3a81c3;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdd027d7" class="outline-2">
+<h2 id="orgdd027d7">RANDOm</h2>
+<div class="outline-text-2" id="text-orgdd027d7">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script generates a list of random passwords.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A random number as a password.</span>
+<span style="color: #715ab1;">PASSWORD</span>=<span style="color: #2d9574;">"${RANDOM}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Three random numbers together.</span>
+<span style="color: #715ab1;">PASSWORD</span>=<span style="color: #2d9574;">"${RANDOM}${RANDOM}${RANDOM}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Use the current date/time as the basis for the password.</span>
+<span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s</span><span style="color: #3a81c3;">)</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Use nanoseconds to act as randomization.</span>
+<span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s%N</span><span style="color: #3a81c3;">)</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A better password.</span>
+<span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s%N | sha256sum | head -c32</span><span style="color: #3a81c3;">)</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">An even better password.</span>
+<span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s%N$</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">RANDOM</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;">$</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">RANDOM</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;"> | sha256sum | head -c48</span><span style="color: #3a81c3;">)</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Append a special character to the password.</span>
+<span style="color: #715ab1;">SPECIAL_CHARACTER</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">echo '!@#$%^&amp;*(</span><span style="color: #2d9574;">)_-+='</span> | fold -w1 | shuf | head -c1<span style="color: #3a81c3;">)</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}${SPECIAL_CHARACTER}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">shuf </span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"karthik"</span> | fold -w1                <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print each character in order</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"karthik"</span> | fold -w1| shuf          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print each character in random order</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"karthik"</span> | fold -w1| shuf |head -c1 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print one character in random</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8da946f" class="outline-2">
+<h2 id="org8da946f">RANDOm II</h2>
+<div class="outline-text-2" id="text-org8da946f">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script generates a random password for each user specified on the comand line.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display what the user typed on the command line.</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You executed this command: ${0}"</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the path and filename of the script.</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You used $(</span><span style="color: #6c3163;">dirname ${0}</span><span style="color: #2d9574;">) as the path to the $(</span><span style="color: #6c3163;">basename ${0}</span><span style="color: #2d9574;">) script."</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Tell them how many arguments they passed in.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">(Inside the script they are parameters, outside they are arguments.)</span>
+<span style="color: #715ab1;">NUMBER_OF_PARAMETERS</span>=<span style="color: #2d9574;">"${#}"</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"You supplied ${NUMBER_OF_PARAMETERS} argument(s) on the command line."</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Make sure they at least supply one argument.</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${NUMBER_OF_PARAMETERS}"</span> -lt 1 <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Usage: ${0} USER_NAME [USER_NAME]..."</span>
+  <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Generate and display a password for each parameter.</span>
+<span style="color: #3a81c3; font-weight: bold;">for</span> USER_NAME<span style="color: #3a81c3; font-weight: bold;"> in</span> <span style="color: #2d9574;">"${@}"</span>
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+  <span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date "+%s %N" | sha256sum | head -c48</span><span style="color: #3a81c3;">)</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${USER_NAME}: ${PASSWORD}"</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82cbe3b" class="outline-2">
+<h2 id="org82cbe3b">Example</h2>
+<div class="outline-text-2" id="text-org82cbe3b">
+<p>
+deployment process:
+</p>
+<ul class="org-ul">
+<li>step 1:
+<ul class="org-ul">
+<li>check file is existing or not is /opt</li>
+<li>if yes :take back up to buackup folder</li>
+<li>if no 
+<ul class="org-ul">
+<li>cp new war file to deployment folder /opt</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+or
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span> -f /opt/Calender.war<span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">if exist</span>
+mv
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create file copy</span>
+<span style="color: #3a81c3; font-weight: bold;">else</span>
+   <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">cp</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org264e515" class="outline-2">
+<h2 id="org264e515">Example</h2>
+<div class="outline-text-2" id="text-org264e515">
+<p>
+deployment :
+To developers
+To System Integration and Testing
+To Preproduction
+To production 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/</span><span style="color: #3a81c3; font-weight: bold;">sh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">FILEName : deployment.sh</span>
+env = $<span style="color: #715ab1;">1</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #2d9574;">'dev'</span> = $<span style="color: #715ab1;">env</span> <span style="color: #3a81c3;">]</span> &amp;&amp;<span style="color: #3a81c3;">[</span>/opt/Calender.war<span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+cp /tem/*.war /opt/dev
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #2d9574;">'sit'</span> = $<span style="color: #715ab1;">env</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+cp /tem/*.war /opt/sit
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #2d9574;">'preprod'</span> = $<span style="color: #715ab1;">env</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+cp /tem/*.war /opt/preprod
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #2d9574;">'prod'</span> = $<span style="color: #715ab1;">env</span> <span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span> 
+cp /tem/*.war /opt/prod
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sh deployment.sh sit</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1bb47f6" class="outline-2">
+<h2 id="org1bb47f6">Deletig and Disabling Linux</h2>
+<div class="outline-text-2" id="text-org1bb47f6">
+<p>
+type -a userdel    # not found
+which userdel      # no userdel in 
+</p>
+<ol class="org-ol">
+<li>options : userdel cmd is outside the path of shell</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-sh">
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaac408d" class="outline-2">
+<h2 id="orgaac408d">Parsing Command Line Option (getopts)</h2>
+<div class="outline-text-2" id="text-orgaac408d">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">getopts is builtin #type -a getopts</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">help getopts | less</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Getopts is used by shell procedures to parse position parameters</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script generates a random password.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">The user can set the password length with -l and add a special character with -s.</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Verbose mode can be enabled with -v.</span>
+
+<span style="color: #6c3163; font-weight: bold;">usage</span><span style="color: #3a81c3;">()</span> <span style="color: #3a81c3;">{</span>
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Usage: ${0} [-vs] [-l LENGTH]"</span> &gt;&amp;2
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Generate a random password.'</span> &gt;&amp;2
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'  -l LENGTH  Specify the password length.'</span> &gt;&amp;2
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'  -s         Append a special character to the password.'</span> &gt;&amp;2
+  <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'  -v         Increase verbosity.'</span> &gt;&amp;2
+  <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #6c3163; font-weight: bold;">log</span><span style="color: #3a81c3;">()</span> <span style="color: #3a81c3;">{</span>
+  <span style="color: #3a81c3;">local</span> <span style="color: #715ab1;">MESSAGE</span>=<span style="color: #2d9574;">"${@}"</span>
+  <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #6c3163;">[</span><span style="color: #2d9574;">[</span> <span style="color: #2d9574;">"${VERBOSE}"</span> = <span style="color: #2d9574;">'true'</span> <span style="color: #2d9574;">]</span><span style="color: #6c3163;">]</span>
+  <span style="color: #3a81c3; font-weight: bold;">then</span>
+    <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${MESSAGE}"</span>
+  <span style="color: #3a81c3; font-weight: bold;">fi</span>
+<span style="color: #3a81c3;">}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Set a default password length.</span>
+<span style="color: #715ab1;">LENGTH</span>=48
+
+<span style="color: #3a81c3; font-weight: bold;">while </span><span style="color: #3a81c3;">getopts</span> vl:s OPTION
+<span style="color: #3a81c3; font-weight: bold;">do</span>
+  <span style="color: #3a81c3; font-weight: bold;">case</span> $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">OPTION</span><span style="color: #3a81c3;">}</span> <span style="color: #3a81c3; font-weight: bold;">in</span>
+    v)
+      <span style="color: #715ab1;">VERBOSE</span>=<span style="color: #2d9574;">'true'</span>
+      log <span style="color: #2d9574;">'Verbose mode on.'</span>
+      ;;
+    l)
+      <span style="color: #715ab1;">LENGTH</span>=<span style="color: #2d9574;">"${OPTARG}"</span>
+      ;;
+    s)
+      <span style="color: #715ab1;">USE_SPECIAL_CHARACTER</span>=<span style="color: #2d9574;">'true'</span>
+      ;;
+    ?)
+      usage
+      ;;
+  <span style="color: #3a81c3; font-weight: bold;">esac</span>
+<span style="color: #3a81c3; font-weight: bold;">done</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Remove the options while leaving the remaining arguments.</span>
+<span style="color: #3a81c3;">shift</span> <span style="color: #2d9574;">"$(</span><span style="color: #6c3163;">( OPTIND - 1 </span><span style="color: #2d9574;">))"</span>
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${#}"</span> -gt 0 <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  usage
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+log <span style="color: #2d9574;">'Generating a password.'</span>
+
+<span style="color: #715ab1;">PASSWORD</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">date +%s%N$</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">RANDOM</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;">$</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">RANDOM</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;"> | sha256sum | head -c$</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">LENGTH</span><span style="color: #6c3163;">}</span><span style="color: #3a81c3;">)</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Append a special character if requested to do so.</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${USE_SPECIAL_CHARACTER}"</span> = <span style="color: #2d9574;">'true'</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
+<span style="color: #3a81c3; font-weight: bold;">then</span>
+  log <span style="color: #2d9574;">'Selecting a random special character.'</span>
+  <span style="color: #715ab1;">SPECIAL_CHARACTER</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">echo '!@#$%^&amp;*(</span><span style="color: #2d9574;">)_-+='</span> | fold -w1 | shuf | head -c1<span style="color: #3a81c3;">)</span>
+  <span style="color: #715ab1;">PASSWORD</span>=<span style="color: #2d9574;">"${PASSWORD}${SPECIAL_CHARACTER}"</span>
+<span style="color: #3a81c3; font-weight: bold;">fi</span>
+
+log <span style="color: #2d9574;">'Done.'</span>
+log <span style="color: #2d9574;">'Here is the password:'</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the password.</span>
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${PASSWORD}"</span>
+
+<span style="color: #3a81c3; font-weight: bold;">exit</span> 0
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: D Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 06:57</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

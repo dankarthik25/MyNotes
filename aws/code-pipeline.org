@@ -1,0 +1,104 @@
+
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+* Resources 
+how to write codebuild buildspec.yaml file
+https://malsouli.medium.com/10-smart-ways-to-use-aws-codebuild-22a8ee0d9302
+
+
+
+*CI/CD With AWS ECS + CodePipeline + CodeCommit + CodeBuild | DevOps With AWS Ep7* by Sandip Das
+https://www.youtube.com/watch?v=fPkO3644kDU
+
+*CI/CD With AWS ECS + CodePipeline + CodeDeploy + CodeCommit + CodeBuild + Docker* by Cloud Guru
+https://www.youtube.com/watch?v=d7PTjQiahOQ
+
+
+For Code Build : *All the AWS CodeBuild You Can Stomach in 45 Minutes* \\
+https://www.youtube.com/watch?v=yCVR-uqc4qk
+
+there is a aws-codebuild docker image so you can run codebuild locally using codebuild as docker container
+
+
+
+*Securely Passing Environment Variables - CodeCommit + CodeBuild + CodeDeploy | DevOps With AWS Ep.4* \\
+https://www.youtube.com/watch?v=dbHaCX14nKw
+
+
+How to get S3 objects from a codebuild buildspec ? (AccessDenied) \\
+https://stackoverflow.com/questions/66025922/how-to-get-s3-objects-from-a-codebuild-buildspec-accessdenied
+
+*How to run ssh ec2 command in codebuild*
+https://serverfault.com/questions/1001666/ssh-in-private-network-how-to-access-the-remote-machine-from-source-machine-wit
+
+
+*Let do simple codebuild and push docker to ecr* \\
+https://www.youtube.com/watch?v=3CcGtRidF9c
+
+
+
+* How to access s3 from ec2
+Create a s3 and ec2 instance
+- get s3: arn
+  
+
+In IAM : Create role 
+Create a role  :
+-role name : ____EC2-S3-FullAccess_______
+- role desc: ____________
+- Select role type : ___Amazon EC2__
+  - Attact Policy:
+    - AmazonS3FullAccess
+  
+
+SSH ec2 instance
+in ec2 instance :
+
+
+https://www.youtube.com/watch?v=NHAuCWIHevk
+Amazon Linux AMI has inbuild awscli lib so no need to install but other we need to install 
+ 
+
+#+begin_src 
+aws s3 ls  # list bucket 
+aws s3 mb s3://valaxyinfotech01 # make bucket valaxyinfotech01
+#+end_src
+* Manually Create ECS
+https://www.youtube.com/watch?v=fPkO3644kDU
+
+Steps :
+- Create a ECR Repo
+  - push docker image to ECR(get image uri)
+  
+- Create a Cluster
+  - Task Defination (image uri)
+    - Add Container
+      - images : 737976022831.dkr.ecr.us-east-1.amazonaws.com/ecs_mlflow:latest
+      - *container name* : mlmodel	
+      - Port: TCP 8080	
+      - enable logs
+  - Create Service
+    - No Load Balancer
+  - *Security Group*: Cluster > {Cluster_Name: MLModelCluster} > Services > Chosse {Health and metrics , Logs, Configuration and Tasks, Deployments and events, Networking,Tags} | Select *Network* > *Security Groups*
+    
+    Inside Cluster > ECS Instance > Choose instance  Id > Security Tab
+    add tcp 8080 form : all (0.0.0.0/0)    
+
+# ECS should be running 
+
+- Create Pipeline
+  - Create Pipeline
+    - Pipeline Name : CICD Demo
+      - Source: codecommit, Repo : repo_name
+      - repo: branch : master
+      - Create CodeBuild
+	- ENVIRONMENT VARIALBE : 
+	  - specify the *Container Name*: buildspec should contain container name and *artifact:imageDetails.json*  should be pass to code pipeline
+      - Deploy :
+	- AWS ECS
+	  - details
+	    imageDetail.json
+    	
+		
+
+  

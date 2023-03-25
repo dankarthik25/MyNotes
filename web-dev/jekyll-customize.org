@@ -1,0 +1,17 @@
+#+TITLE: jekyll-customize
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+Collapsing sidepanel
+
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapse_sidepanel
+
+Sidebar Navigation Menu With Animated Toggle Bar Using HTML And CSS | CSS Side Navbar Menu
+
+https://www.youtube.com/watch?v=1TZjgQ0Osic
+
+
+https://www.youtube.com/watch?v=M-pil5oHw0w
+
+
+Pure CSS Sidebar Toggle Menu Tutorial in Hindi / Urdu
+https://www.youtube.com/watch?v=RUlUc2kGDAw

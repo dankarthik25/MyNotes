@@ -1,0 +1,34 @@
+#+TITLE: jira
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+Jira Interview
+https://www.youtube.com/watch?v=QXm-7B6B654
+
+Jira Service Desk - Quick Introduction, Creating a Project and Raising Tickets 22 Mar 2020
+https://www.youtube.com/watch?v=L4cFKpGDU7c
+
+jira playlist
+https://www.youtube.com/c/RaviSagar1/playlists
+
+alternative to jira
+https://www.buggycoder.com/project-management-with-gitlab/
+
+alternative to jira
+https://www.guru99.com/jira-alternatives.html
+https://clickup.com/blog/jira-alternatives/
+
+
+easy redmine : paid version
+
+Open source Community Edition "open project" 
+I found that there is a Community edition of openproject which is free.
+Unlimited Users
+
+
+https://alternativeto.net/software/jira/
+
+
+bitrix24
+Demo video of who to use task and projec management
+https://www.youtube.com/watch?v=ylF7E9Afh38 

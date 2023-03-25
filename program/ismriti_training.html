@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ismriti_training</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">ismriti<sub>training</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8154be4">Student Registration</a>
+<ul>
+<li><a href="#org49075dc">Registration in website</a></li>
+<li><a href="#org397ff52">Amount payment , verifiation</a></li>
+<li><a href="#org5116d7a">CollegeID- card collection, verification for student /professinals</a></li>
+<li><a href="#org6273644">Passport Photo for ID- creation</a></li>
+</ul>
+</li>
+<li><a href="#org9c9a42f">Before Arrival of Students</a>
+<ul>
+<li><a href="#orgf6f0a42">Creating Id- Card</a></li>
+<li><a href="#org7a9012f">Creating Certificate</a></li>
+<li><a href="#org70cedcf">Creating IoT Kit</a></li>
+<li><a href="#org170ac5d">Accomodation/Food</a>
+<ul>
+<li><a href="#org04f5bf4">Getting permission for iitk  office from room-arrangement</a></li>
+<li><a href="#orgdc4b50e">Getting details of students : NO.of students, NO.of (male/Female) Accomdation, Arrival/Departure Dates</a></li>
+<li><a href="#org75c98c1">Getting Accomodation details (Hostel/Dormatory's)</a></li>
+<li><a href="#orgb3c67b8">Getting bed,id-card,wifi, number-lock,food,LAN, notebook, wifi, Greeting Card</a></li>
+<li><a href="#org6959f3b">Send excle sheet of {name, module, departure, emergency contact, alocated-room No, Food(y/n)} to hostel security</a></li>
+</ul>
+</li>
+<li><a href="#orgdd1c27e">Webserver</a>
+<ul>
+<li><a href="#orgf395181">send mails to student giving  user &amp; password in ismriti</a></li>
+<li><a href="#org7d94df8">send post regarding accomodation(location of stay), Time of class</a></li>
+<li><a href="#orga30cb96">Upload vidoes in server</a></li>
+<li><a href="#orgce91da7">Setting Webserver in IIT-Kanpur</a></li>
+<li><a href="#org265b7fb">marking (FB campaing, Linkedin, Internalshals, Google ads,&#x2026;.etc)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org30cd50e">After Arrival of Students</a>
+<ul>
+<li><a href="#org4c6581d">For Non-Hostel send  id-card, wifi,notebook, Greeting Card</a></li>
+<li><a href="#org42e256c">Class Room :</a>
+<ul>
+<li><a href="#org71f4c88">Clean Class Room before class-room start</a></li>
+<li><a href="#org5bad5aa">Water Dispensory 4 Bottel + 4 Glasses befor class</a></li>
+<li><a href="#org7f4d08a">Check mic and speaker, projector before before class</a></li>
+</ul>
+</li>
+<li><a href="#orge5bbaf4">maintaining server(Form)</a>
+<ul>
+<li><a href="#orgbc88786">Uploading videos</a></li>
+</ul>
+</li>
+<li><a href="#orgf4e7203">Buying Kit</a>
+<ul>
+<li><a href="#orgb95042f">Tell before 7 days completion of programm</a></li>
+</ul>
+</li>
+<li><a href="#org1f29dc3">Upgrading model</a>
+<ul>
+<li><a href="#orga669f02">Tell before 7 days completion of program</a></li>
+</ul>
+</li>
+<li><a href="#org49c1d4c">Giving Certificate</a></li>
+</ul>
+</li>
+<li><a href="#orgbfd9d8e">Scope</a>
+<ul>
+<li><a href="#orge078259">Work on Next Online course</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8154be4" class="outline-2">
+<h2 id="org8154be4">Student Registration</h2>
+<div class="outline-text-2" id="text-org8154be4">
+</div>
+<div id="outline-container-org49075dc" class="outline-3">
+<h3 id="org49075dc">Registration in website</h3>
+</div>
+<div id="outline-container-org397ff52" class="outline-3">
+<h3 id="org397ff52">Amount payment , verifiation</h3>
+</div>
+<div id="outline-container-org5116d7a" class="outline-3">
+<h3 id="org5116d7a">CollegeID- card collection, verification for student /professinals</h3>
+</div>
+<div id="outline-container-org6273644" class="outline-3">
+<h3 id="org6273644">Passport Photo for ID- creation</h3>
+</div>
+</div>
+<div id="outline-container-org9c9a42f" class="outline-2">
+<h2 id="org9c9a42f">Before Arrival of Students</h2>
+<div class="outline-text-2" id="text-org9c9a42f">
+</div>
+<div id="outline-container-orgf6f0a42" class="outline-3">
+<h3 id="orgf6f0a42">Creating Id- Card</h3>
+<div class="outline-text-3" id="text-orgf6f0a42">
+<p>
+getting vendor-details for plastic card printing
+bar-code, QR-code and mobile based  bar-code scanning attendance system
+</p>
+</div>
+</div>
+<div id="outline-container-org7a9012f" class="outline-3">
+<h3 id="org7a9012f">Creating Certificate</h3>
+</div>
+<div id="outline-container-org70cedcf" class="outline-3">
+<h3 id="org70cedcf">Creating IoT Kit</h3>
+</div>
+<div id="outline-container-org170ac5d" class="outline-3">
+<h3 id="org170ac5d">Accomodation/Food</h3>
+<div class="outline-text-3" id="text-org170ac5d">
+</div>
+<div id="outline-container-org04f5bf4" class="outline-4">
+<h4 id="org04f5bf4">Getting permission for iitk  office from room-arrangement</h4>
+</div>
+<div id="outline-container-orgdc4b50e" class="outline-4">
+<h4 id="orgdc4b50e">Getting details of students : NO.of students, NO.of (male/Female) Accomdation, Arrival/Departure Dates</h4>
+</div>
+<div id="outline-container-org75c98c1" class="outline-4">
+<h4 id="org75c98c1">Getting Accomodation details (Hostel/Dormatory's)</h4>
+</div>
+<div id="outline-container-orgb3c67b8" class="outline-4">
+<h4 id="orgb3c67b8">Getting bed,id-card,wifi, number-lock,food,LAN, notebook, wifi, Greeting Card</h4>
+</div>
+<div id="outline-container-org6959f3b" class="outline-4">
+<h4 id="org6959f3b">Send excle sheet of {name, module, departure, emergency contact, alocated-room No, Food(y/n)} to hostel security</h4>
+</div>
+</div>
+<div id="outline-container-orgdd1c27e" class="outline-3">
+<h3 id="orgdd1c27e">Webserver</h3>
+<div class="outline-text-3" id="text-orgdd1c27e">
+</div>
+<div id="outline-container-orgf395181" class="outline-4">
+<h4 id="orgf395181">send mails to student giving  user &amp; password in ismriti</h4>
+</div>
+<div id="outline-container-org7d94df8" class="outline-4">
+<h4 id="org7d94df8">send post regarding accomodation(location of stay), Time of class</h4>
+</div>
+<div id="outline-container-orga30cb96" class="outline-4">
+<h4 id="orga30cb96">Upload vidoes in server</h4>
+</div>
+<div id="outline-container-orgce91da7" class="outline-4">
+<h4 id="orgce91da7">Setting Webserver in IIT-Kanpur</h4>
+</div>
+<div id="outline-container-org265b7fb" class="outline-4">
+<h4 id="org265b7fb">marking (FB campaing, Linkedin, Internalshals, Google ads,&#x2026;.etc)</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-org30cd50e" class="outline-2">
+<h2 id="org30cd50e">After Arrival of Students</h2>
+<div class="outline-text-2" id="text-org30cd50e">
+</div>
+<div id="outline-container-org4c6581d" class="outline-3">
+<h3 id="org4c6581d">For Non-Hostel send  id-card, wifi,notebook, Greeting Card</h3>
+</div>
+<div id="outline-container-org42e256c" class="outline-3">
+<h3 id="org42e256c">Class Room :</h3>
+<div class="outline-text-3" id="text-org42e256c">
+</div>
+<div id="outline-container-org71f4c88" class="outline-4">
+<h4 id="org71f4c88">Clean Class Room before class-room start</h4>
+</div>
+<div id="outline-container-org5bad5aa" class="outline-4">
+<h4 id="org5bad5aa">Water Dispensory 4 Bottel + 4 Glasses befor class</h4>
+</div>
+<div id="outline-container-org7f4d08a" class="outline-4">
+<h4 id="org7f4d08a">Check mic and speaker, projector before before class</h4>
+</div>
+</div>
+<div id="outline-container-orge5bbaf4" class="outline-3">
+<h3 id="orge5bbaf4">maintaining server(Form)</h3>
+<div class="outline-text-3" id="text-orge5bbaf4">
+</div>
+<div id="outline-container-orgbc88786" class="outline-4">
+<h4 id="orgbc88786">Uploading videos</h4>
+</div>
+</div>
+
+<div id="outline-container-orgf4e7203" class="outline-3">
+<h3 id="orgf4e7203">Buying Kit</h3>
+<div class="outline-text-3" id="text-orgf4e7203">
+</div>
+<div id="outline-container-orgb95042f" class="outline-4">
+<h4 id="orgb95042f">Tell before 7 days completion of programm</h4>
+</div>
+</div>
+<div id="outline-container-org1f29dc3" class="outline-3">
+<h3 id="org1f29dc3">Upgrading model</h3>
+<div class="outline-text-3" id="text-org1f29dc3">
+</div>
+<div id="outline-container-orga669f02" class="outline-4">
+<h4 id="orga669f02">Tell before 7 days completion of program</h4>
+</div>
+</div>
+<div id="outline-container-org49c1d4c" class="outline-3">
+<h3 id="org49c1d4c">Giving Certificate</h3>
+</div>
+</div>
+<div id="outline-container-orgbfd9d8e" class="outline-2">
+<h2 id="orgbfd9d8e">Scope</h2>
+<div class="outline-text-2" id="text-orgbfd9d8e">
+</div>
+<div id="outline-container-orge078259" class="outline-3">
+<h3 id="orge078259">Work on Next Online course</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

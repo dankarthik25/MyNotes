@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CloudFormation-Udemy</title>
+<meta name="author" content="DeepAlgorithms" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">CloudFormation-Udemy</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgcc1fa5b">Manage aws-cli mulitipule  profiles</a></li>
+<li><a href="#org60de9a5">cross account pipeline for cloudformation deployment</a>
+<ul>
+<li><a href="#orgb528cd1">( <b>devops-account</b> ) Create a customer managed AWS KMS key that grants usage permissions to devops-account's CodePipeline service role and dev-account</a></li>
+<li><a href="#orgd088c81">( <b>devops-account</b> ) Create an Amazon S3 bucket with a bucket policy that grants dev-account access to the bucket</a></li>
+<li><a href="#orgd7ca703">( <b>dev-account</b> ) CREATE A CROSS-ACCOUNT IAM ROLE</a>
+<ul>
+<li><a href="#org5d74442">Create a second IAM policy that allows AWS KMS API actions</a></li>
+<li><a href="#orgcf88f72">Create the cross-account IAM role using the policies that you created</a></li>
+<li><a href="#org6125683">( <b>devops-account</b> ) Add the AssumeRole permission to devops-account's CodePipeline service role to allow it to assume the cross-account role in dev-account</a></li>
+<li><a href="#org02e092f">( <b>dev-account</b> ) Create a service role for the CloudFormation stack that includes the required permissions for the services deployed by the stack</a></li>
+</ul>
+</li>
+<li><a href="#orgd767748">AD</a></li>
+</ul>
+</li>
+<li><a href="#orgf82c759">Create Pipeline</a></li>
+<li><a href="#org4ad7b84">bash scripts</a></li>
+<li><a href="#org325cdca">CI/CD pipeline : (Cloudformation) s3 creation using aws-commit + aws-deploy (Cloudl Formation)</a></li>
+<li><a href="#orgbab49a0">sdfg</a></li>
+<li><a href="#org3ce3e04">get source-code in another account</a></li>
+<li><a href="#org25e209e">Pass role</a>
+<ul>
+<li><a href="#org99e9cc3"><span class="todo TODO">TODO</span> Need policy allow ecs:RegisterTaskDefinition to Run using CrossAccount-role-A-ECS</a></li>
+</ul>
+</li>
+<li><a href="#org856cc14">AWS CodeDeploy Blue / Green Deployment to Amazon ECS</a></li>
+<li><a href="#orgcb2bc60">Event Bridge for pipeline to codedeploy</a></li>
+</ul>
+</div>
+</div>
+<p>
+source : <a href="https://www.youtube.com/watch?v=vM7X9AO7r6c&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3">https://www.youtube.com/watch?v=vM7X9AO7r6c&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3</a>
+</p>
+
+
+
+<div id="outline-container-orgcc1fa5b" class="outline-2">
+<h2 id="orgcc1fa5b">Manage aws-cli mulitipule  profiles</h2>
+<div class="outline-text-2" id="text-orgcc1fa5b">
+<div class="org-src-container">
+<pre class="src src-sh">cat ~/.aws/credentials # list of profiles in aws
+
+aws ec2 describe-instances --profile myprofile  # list the isntance in my
+
+# SET DEFALUT PROFILE
+
+export AWS_DEFAULT_PROFILE=myprofile
+
+aws codepipeline list-pipelines
+aws codepipeline get-pipeline --name poc-dk-nginx-pipeline &gt;pipeline.json
+aws codepipeline list-pipelines --region us-east-1 --profile dan2505
+aws codepipeline get-pipeline --name test-cloudformation-cicd --region us-east-1 --profile dan2505  &gt; vpc-cf.json
+
+aws codepipeline create-pipeline --profile dan2505 --cli-input-json file://new-pipe.json
+
+aws codepipeline update-pipeline --profile dan2505 --cli-input-json file://new-pipe.json
+
+aws codepipeline get-pipeline --region eu-west-1 --name Cross-Account-CloudFormation-CICD --profile dan2505 &gt; failed-cross-pipeline.json
+
+aws codepipeline update-pipeline --region eu-west-1  --profile dan2505 --cli-input-json file://failed-cross-pipeline.json
+
+
+aws codepipeline update-pipeline --cli-input-json file://failed-cross-pipeline.json --profile dan2505
+
+
+CA-CF-getCodeCommit-CICD-2
+
+aws codepipeline get-pipeline --region eu-west-1 --name CA-CF-getCodeCommit-CICD-2 --profile dan2505 &gt; failed-cross-pipeline.json
+
+aws codepipeline update-pipeline --cli-input-json file://failed-cross-pipeline.json --profile dan2505
+</pre>
+</div>
+<p>
+aws ec2 describe-instances &#x2013;profile myprofile <br />
+<a href="https://www.youtube.com/watch?v=oXBknlO-9rg&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&amp;index=4">https://www.youtube.com/watch?v=oXBknlO-9rg&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&amp;index=4</a>
+IAAS
+cloud formation can be either json or yml formate
+Structure of aws cloud formation json file
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">AWSTemplateFormatVersion: "2010-09-09"
+Description:
+Parameters:
+Metadata:
+Resources:
+Mappings:
+Conditions:
+Outputs:
+Resources:
+
+</pre>
+</div>
+<p>
+run cloudformation using aws-cli
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">aws cloudformation validate-template --template-body file://template.json
+aws cloudformation create-stack --stack-name exampleStack --template-body file://template.json
+aws cloudformation delete-stack --stack-name examplestack
+aws cloudformation creatre-stack --stack-name vpc --template-body file://./infra/vpc.yml
+aws cloudformation creatre-stack --stack-name iam --template-body file://./infra/iam.yml --capabilities CAPABILITY_IAM
+
+# create loadbalancer
+aws cloudformation create-stack --stack-name app-cluster --template-body file://infra/app-cluster.yml
+
+# deploy docker image form ecr repo to ecs{Fargate}
+# container defination
+# service defination
+# task defination
+#
+aws cloudformation create-stack --stack-name api --template-body file://infra/app.yml
+aws cloudformation delete-stack --stack-name api
+aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+
+aws sts assume-role \
+--role-arn arn:aws:iam::123456789012:role/Developer \
+--role-session-name Mary-Major \
+–-tags Key=displayName,Value="Mary Major" Key=emailAddress,Value="mary_major@example.com" \
+--external-id Example987
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org60de9a5" class="outline-2">
+<h2 id="org60de9a5">cross account pipeline for cloudformation deployment</h2>
+<div class="outline-text-2" id="text-org60de9a5">
+<p>
+<a href="https://www.youtube.com/watch?v=IbCg548TLbc">https://www.youtube.com/watch?v=IbCg548TLbc</a>
+</p>
+
+<ul class="org-ul">
+<li>Goal : There are two account <b>devops-account</b> and <b>dev-account</b>
+<b>dev-account</b> consist of codecommit resources  which are need to run in other account
+<b>devops-account</b> consist of codepipeline resource
+Lets consider
+dev-account : 877078200476
+devops-account : 133602912138</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>[ <b>devops-account</b> ]
+Create a customer managed AWS Key Management Service (AWS KMS) key that grants key usage permissions to the following:
+<ul class="org-ul">
+<li>devops-account's CodePipeline service role</li>
+<li>dev-account</li>
+</ul></li>
+
+<li>[ <b>devops-account</b> ]
+Create an Amazon Simple Storage Service (Amazon S3) bucket with a bucket policy that grants dev-account access to the bucket.</li>
+
+<li>[ <b>dev-account</b> ]
+Create a cross-account AWS Identity and Access Management (IAM) role that allows the following:
+<ul class="org-ul">
+<li>CloudFormation API actions</li>
+<li>Access to the Amazon S3 bucket in devops-account</li>
+<li>Decryption with the customer managed AWS KMS key in devops-account</li>
+</ul></li>
+
+<li>[ <b>devops-account</b> ]
+Add the AssumeRole permission to devops-account's CodePipeline service role to allow it to assume the cross-account role in dev-account.</li>
+
+<li>[ <b>dev-account</b> ]
+Create a service role for the CloudFormation stack that includes the required permissions for the services deployed by the stack.</li>
+
+<li>[ <b>devops-account</b> ]
+Update the CodePipeline configuration in devops-account to include the resources associated with dev-account</li>
+</ul>
+<ul class="org-ul">
+<li>Resolution</li>
+</ul>
+</div>
+<div id="outline-container-orgb528cd1" class="outline-3">
+<h3 id="orgb528cd1">( <b>devops-account</b> ) Create a customer managed AWS KMS key that grants usage permissions to devops-account's CodePipeline service role and dev-account</h3>
+<div class="outline-text-3" id="text-orgb528cd1">
+<ul class="org-ul">
+<li>In devops-account, open the AWS KMS console.</li>
+<li>In the navigation pane, choose Customer managed keys.</li>
+<li>Choose Create key. Then, choose Symmetric.
+Note: In the Advanced options section, leave the origin as KMS.</li>
+<li>For Alias, enter a name for your key.</li>
+<li>(Optional) Add tags based on your use case. Then, choose Next.</li>
+<li>On the Define key administrative permissions page, for Key administrators, choose your AWS Identity and Access Management (IAM) user. Also, any other users or groups that you want to serve as administrators for the key. Then, choose Next.</li>
+<li>On the Define key usage permissions page, for This account, add the IAM identities that you want to have access to the key. For example: The CodePipeline service role..</li>
+<li>In the Other AWS accounts section, choose Add another AWS account. Then, enter the Amazon Resource Name (ARN) of the IAM role in dev-account.</li>
+<li>Choose Next. Then, choose Finish.</li>
+<li>In the Customer managed keys section, choose the key that you just created. Then, copy the key's ARN.
+Important: You must have the AWS KMS key's ARN when you update your pipeline and configure your IAM policies.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd088c81" class="outline-3">
+<h3 id="orgd088c81">( <b>devops-account</b> ) Create an Amazon S3 bucket with a bucket policy that grants dev-account access to the bucket</h3>
+<div class="outline-text-3" id="text-orgd088c81">
+<ul class="org-ul">
+<li>In devops-account, open the Amazon S3 console.
+<ul class="org-ul">
+<li>Choose an existing Amazon S3 bucket or create a new S3 bucket to use as the ArtifactStore for CodePipeline.
+Note: Artifacts can include a stack template file, a template configuration file, or both. CodePipeline uses these artifacts to work with CloudFormation stacks and change sets. In your template configuration file, you must specify template parameter values, a stack policy, and tags.</li>
+</ul></li>
+<li>On the Amazon S3 details page for your bucket, choose Permissions.</li>
+<li>Choose Bucket Policy.</li>
+<li><p>
+In the bucket policy editor, enter the following policy:
+Important: Replace codepipeline-source-artifact with the SourceArtifact bucket name for CodePipeline. Replace ACCOUNT<sub>B</sub><sub>NO</sub> with dev-account's account number.
+</p>
+<pre class="example">
+{
+  "ID": "POLICY1553183091390",
+  "VERSION": "2012-10-17",
+  "STATEMENT": [{
+      "SID": "",
+      "ACTION": [
+	"S3:GET*",
+	"S3:PUT*"
+      ],
+      "EFFECT": "ALLOW",
+      "RESOURCE": "ARN:AWS:S3:::CODEPIPELINE-SOURCE-ARTIFACT/*",
+      "PRINCIPAL": {
+	"AWS": [
+	  "ARN:AWS:IAM::ACCOUNT_B_NO:ROOT"
+	]
+      }
+    },
+    {
+      "SID": "",
+      "ACTION": [
+	"S3:LISTBUCKET"
+      ],
+      "EFFECT": "ALLOW",
+      "RESOURCE": "ARN:AWS:S3:::CODEPIPELINE-SOURCE-ARTIFACT",
+      "PRINCIPAL": {
+	"AWS": [
+	  "ARN:AWS:IAM::ACCOUNT_B_NO:ROOT"
+	]
+      }
+    }
+  ]
+}
+</pre>
+<ul class="org-ul">
+<li>CHOOSE SAVE.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd7ca703" class="outline-3">
+<h3 id="orgd7ca703">( <b>dev-account</b> ) CREATE A CROSS-ACCOUNT IAM ROLE</h3>
+<div class="outline-text-3" id="text-orgd7ca703">
+<p>
+CREATE AN IAM POLICY THAT ALLOWS THE FOLLOWING:
+</p>
+<ul class="org-ul">
+<li>THE PIPELINE IN devops-account TO ASSUME THE CROSS-ACCOUNT IAM ROLE IN dev-account</li>
+<li>CLOUDFORMATION API ACTIONS</li>
+<li>AMAZON S3 API ACTIONS RELATED TO THE SOURCEARTIFACT</li>
+
+<li>In dev-account, open the IAM console.</li>
+<li>In the navigation pane, choose Policies. Then, choose Create policy.</li>
+<li><p>
+Choose the JSON tab. Then, enter the following policy into the JSON editor:
+Important: Replace codepipeline-source-artifact with your pipeline's Artifact store's bucket name.
+</p>
+<pre class="example">
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Effect": "Allow",
+      "Action": [
+	"cloudformation:*",
+	"iam:PassRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+	"s3:Get*",
+	"s3:Put*",
+	"s3:ListBucket"
+      ],
+      "Resource": [
+	"arn:aws:s3:::codepipeline-source-artifact/*"
+      ]
+    }
+  ]
+}
+</pre></li>
+<li>Choose Review policy.</li>
+<li>For Name, enter a name for the policy.</li>
+<li>Choose Create policy.</li>
+</ul>
+</div>
+<div id="outline-container-org5d74442" class="outline-4">
+<h4 id="org5d74442">Create a second IAM policy that allows AWS KMS API actions</h4>
+<div class="outline-text-4" id="text-org5d74442">
+<ul class="org-ul">
+<li>In dev-account, open the IAM console.</li>
+<li>In the navigation pane, choose Policies. Then, choose Create policy.</li>
+<li><p>
+Choose the JSON tab. Then, enter the following policy into the JSON editor:
+Important: Replace arn:aws:kms:REGION:ACCOUNT<sub>A</sub><sub>NO</sub>:key/key-id with your AWS KMS key's ARN that you copied earlier.
+</p>
+<pre class="example">
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt"
+    ],
+    "Resource": [
+      "arn:aws:kms:REGION:ACCOUNT_A_NO:key/key-id"
+    ]
+  }]
+}
+</pre></li>
+<li>Choose Review policy.</li>
+<li>For Name, enter a name for the policy.</li>
+<li>Choose Create policy.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcf88f72" class="outline-4">
+<h4 id="orgcf88f72">Create the cross-account IAM role using the policies that you created</h4>
+<div class="outline-text-4" id="text-orgcf88f72">
+<ul class="org-ul">
+<li>In dev-account, open the IAM console.</li>
+<li>In the navigation pane, choose Roles.</li>
+<li>Choose Create role.</li>
+<li>Choose Another AWS account.</li>
+<li>For Account ID, enter devops-account's account ID.</li>
+<li>Choose Next: Permissions. Then, complete the steps to create the IAM role.</li>
+<li>Attach the cross-account role policy and KMS key policy to the role that you created. For instructions, see Adding and removing IAM identity permissions.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6125683" class="outline-4">
+<h4 id="org6125683">( <b>devops-account</b> ) Add the AssumeRole permission to devops-account's CodePipeline service role to allow it to assume the cross-account role in dev-account</h4>
+<div class="outline-text-4" id="text-org6125683">
+<ul class="org-ul">
+<li>In devops-account, open the IAM console.</li>
+<li>In the navigation pane, choose Roles.</li>
+<li>Choose the IAM service role that you're using for CodePipeline.</li>
+<li>Choose Add inline policy.</li>
+<li><p>
+Choose the JSON tab. Then, enter the following policy into the JSON editor:
+Important: Replace ACCOUNT<sub>B</sub><sub>NO</sub> with dev-account's account number.
+</p>
+<pre class="example">
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "sts:AssumeRole",
+    "Resource": [
+      "arn:aws:iam::ACCOUNT_B_NO:role/*"
+    ]
+  }
+}
+</pre></li>
+<li>Choose Review policy, and then create the policy.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org02e092f" class="outline-4">
+<h4 id="org02e092f">( <b>dev-account</b> ) Create a service role for the CloudFormation stack that includes the required permissions for the services deployed by the stack</h4>
+<div class="outline-text-4" id="text-org02e092f">
+<p>
+Note: This service role is configured directly on the CloudFormation stack in dev-account. The role must include the permissions for the services deployed by the stack.
+</p>
+
+<ul class="org-ul">
+<li>In dev-account, open the IAM console.</li>
+
+<li>In the navigation pane, choose Roles.</li>
+
+<li>Create a role for AWS CloudFormation to use when launching services on your behalf.</li>
+
+<li>Apply permissions to your role based on your use case.</li>
+</ul>
+
+<p>
+Important: Make sure that your trust policy is for AWS CloudFormation, and that your role has permissions to access services deployed by the stack.
+[ <b>devops-account</b> ] Update the CodePipeline configuration to include the resources associated with dev-account
+</p>
+
+<p>
+Note: If you receive errors when running AWS Command Line Interface (AWS CLI) commands, make sure that you’re using the most recent AWS CLI version.
+</p>
+
+<p>
+You can't use the CodePipeline console to create or edit a pipeline that uses resources associated with another account. However, you can use the console to create the general structure of the pipeline. Then, you can use the AWS CLI to edit the pipeline and add the resources associated with the other account. Or, you can update a current pipeline with the resources for the new pipeline. For more information, see Create a pipeline in CodePipeline.
+</p>
+
+<ul class="org-ul">
+<li><p>
+Get the pipeline JSON structure by running the following AWS CLI command:
+</p>
+<pre class="example">
+aws codepipeline list-pipelines
+aws codepipeline get-pipeline --name poc-dk-nginx-pipeline &gt;pipeline.json
+</pre></li>
+<li>In your local pipeline.json file, confirm that the encryptionKey ID under artifactStore contains the ID with the AWS KMS key's ARN.
+Note: For more information on pipeline structure, see create-pipeline in the AWS CLI Command Reference.</li>
+<li>In the pipeline.json file, update the AWS CloudFormation action configuration.
+Note: The RoleArn inside the action configuration JSON structure for your pipeline is the role for the CloudFormation stack (CFN<sub>STACK</sub><sub>ROLE</sub>). The roleArn outside the action configuration JSON structure is the cross-account role that the pipeline assumes to operate a CloudFormation stack (CROSS<sub>ACCOUNT</sub><sub>ROLE</sub>).</li>
+<li><p>
+Verify that the role is updated for both of the following:
+The RoleArn inside the action configuration JSON structure for your pipeline.
+The roleArn outside the action configuration JSON structure for your pipeline.
+Note: In the following code example, RoleArn is the role passed to AWS CloudFormation to launch the stack. CodePipeline uses roleArn to operate an AWS CloudFormation stack.
+</p>
+<pre class="example">
+{
+  "name": "Prod_Deploy",
+  "actions": [{
+    "inputArtifacts": [{
+      "name": "MyApp"
+    }],
+    "name": "test-cfn-x",
+    "actionTypeId": {
+      "category": "Deploy",
+      "owner": "AWS",
+      "version": "1",
+      "provider": "CloudFormation"
+    },
+    "outputArtifacts": [],
+    "configuration": {
+      "ActionMode": "CHANGE_SET_REPLACE",
+      "ChangeSetName": "test",
+      "RoleArn": "ARN_FOR_CFN_STACK_ROLE",
+      "Capabilities": "CAPABILITY_IAM",
+      "StackName": "test-cfn-sam",
+      "TemplatePath": "MyApp::template.yaml"
+    },
+    "roleArn": "ARN_FOR_CROSS_ACCOUNT_ROLE",
+    "runOrder": 1
+  }]
+}
+</pre></li>
+<li><p>
+Remove the metadata configuration from the pipeline.json file. For example:
+</p>
+<pre class="example">
+"metadata": {
+  "pipelineArn": "arn:aws:codepipeline:REGION:ACC:my_test",
+  "updated": 1551216777.183,
+  "created": 1551207202.964
+}
+</pre>
+<p>
+Important: To align with proper JSON formatting, remove the comma before the metadata section.
+</p></li>
+<li><p>
+(Optional) To create a pipeline and update the JSON structure, run the following command to update the pipeline with the new configuration file:
+</p>
+<pre class="example">
+aws codepipeline update-pipeline --cli-input-json file://pipeline.json
+</pre></li>
+<li>(Optional) To use a current pipeline and update the JSON structure, run the following command to create a new pipeline:</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd767748" class="outline-3">
+<h3 id="orgd767748">AD</h3>
+<div class="outline-text-3" id="text-orgd767748">
+<p>
+Account A: 836475480064  TSCTESTING
+Account B:  749613781581 AWSReservedSSO<sub>Admin</sub><sub>7db</sub>
+</p>
+
+<ul class="org-ul">
+<li>[Account A] Create Role  <b>cross-account-role-A</b>
+<ul class="org-ul">
+<li><p>
+Role Name : <b>cross-account-role-A</b>
+</p>
+<ul class="org-ul">
+<li><p>
+Trust Relationship
+</p>
+<pre class="example">
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+	"Effect": "Allow",
+	"Principal": {
+	  "Service": "codepipeline.amazonaws.com" 
+	},
+	"Action": "sts:AssumeRole",
+	}
+    ]
+}
+</pre></li>
+</ul>
+<ul class="org-ul">
+<li>Permission
+<ul class="org-ul">
+<li>AmazonS3FullAccess</li>
+<li>AWSCodeCommitFullAccess</li>
+</ul></li>
+</ul></li>
+<li>get the <b>Role ARN</b>: arn:as:iam::836475480064:role/cross-account-role-A</li>
+</ul></li>
+<li>[Account A] Create CMK's (KMS) : 
+<ul class="org-ul">
+<li>symmetic</li>
+<li>KMS</li>
+<li><b>alias: crosskey</b></li>
+<li><b>key administrative permission</b></li>
+<li>[AWS Identitiy and IAM user or group who want to give permission] <code>[/]</code> [User]</li>
+<li><b>key usage permissions</b>
+<ul class="org-ul">
+<li>choose : <b>cross-account</b> that we create above</li>
+</ul></li>
+
+<li>Attach the above role <b>cross-account-role-A</b></li>
+<li>Other <b>AWS accounts</b>
+<ul class="org-ul">
+<li>Give Account ANR : arn:aws:iam:: <b>749613781581</b> : root</li>
+</ul></li>
+<li>get cmk-kms ARN : <b>arn:aws:kms:us-east-2:836475480064:key/9cfa5357-8011-47f9-9565-28982e63100</b></li>
+</ul></li>
+<li>[Account A] Create S3 buckets:
+<ul class="org-ul">
+<li>Name: <b>source-artifact-india</b> ,</li>
+<li>access:  block all public acess</li>
+<li><p>
+add policy to s3 bucket
+</p>
+<pre class="example">
+{
+  "Id": "Policy1553183091390",
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Sid": "",
+      "Action": [
+	"s3:Get*",
+	"s3:Put*"
+      ],
+       "Effect": "Allow",
+      "Resource": "arn:aws:s3:::codepipeline-source-artifact/*",
+      "Principal": {
+	"AWS": [
+	  "arn:aws:iam::ACCOUNT_B_NO:root"
+	]
+      }
+    },
+    {
+      "Sid": "",
+      "Action": [
+	"s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::codepipeline-source-artifact",
+      "Principal": {
+	"AWS": [
+	  "arn:aws:iam::ACCOUNT_B_NO:root"
+	]
+      }
+    }
+  ]
+}
+</pre></li>
+</ul></li>
+<li>[Account B] Create Policy :  <b>cross-account-s3-access</b> : Allow access to S3 (read and write) to codepipeline
+<ul class="org-ul">
+<li>Name: cross-account-s3-access</li>
+<li><p>
+json file repalce <b>source-artifact-inida</b> with your [Account A] S3 Bucket
+</p>
+<pre class="example">
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Effect": "Allow",
+      "Action": [
+	"cloudformation:*",
+	"iam:PassRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+	"s3:Get*",
+	"s3:Put*",
+	"s3:ListBucket"
+      ],
+      "Resource": [
+	"arn:aws:s3:::codepipeline-source-artifact/*"
+      ]
+    }
+  ]
+}
+</pre></li>
+</ul></li>
+<li>[Account B] Create Policy :  <b>cross-account-kms-key-access</b> Allow KMS to run from other [Account A]
+<ul class="org-ul">
+<li>Name : <b>cross-account-kms-key-access</b></li>
+<li><p>
+json file <b>replace</b> <b>Resource kms-key with [Account A] ARN</b>
+</p>
+<pre class="example">
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt"
+    ],
+    "Resource": [
+      "arn:aws:kms:REGION:ACCOUNT_A_NO:key/key-id"
+    ]
+  }]
+}
+</pre></li>
+</ul></li>
+<li>[Account B] Create Role : <b>cross-account-role-B</b> Allow to access S3[from Account A] and Key[from Account B] 
+<ul class="org-ul">
+<li>Trusted Entity : <b>Another  AWS account</b>  
+<ul class="org-ul">
+<li>Accound ID: 87647580064</li>
+</ul></li>
+<li>Seletec Policy
+<ul class="org-ul">
+<li>cross-account-s3-access</li>
+<li>cross-account-kms-key-access create above</li>
+</ul></li>
+</ul></li>
+<li>[Account B] Create Role: <b>cross-account-role-CF-role</b> Allow to run Cloudformation
+<ul class="org-ul">
+<li>Attach Policy : AdministratorsAccess</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf82c759" class="outline-2">
+<h2 id="orgf82c759">Create Pipeline</h2>
+<div class="outline-text-2" id="text-orgf82c759">
+<ul class="org-ul">
+<li>[Account A] Create a pipeline with role: <b>cross-account-role-A</b>
+<ul class="org-ul">
+<li>Name: cross-account-pipeline</li>
+<li>Existing Service: <b>cross-account-role-A</b></li>
+<li>Artifact store:
+<ul class="org-ul">
+<li>Custome:  <b>source-artifiacts-india</b></li>
+</ul></li>
+<li>Source stage : CodeCommit
+<ul class="org-ul">
+<li>Repo :</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="outline-container-org4ad7b84" class="outline-2">
+<h2 id="org4ad7b84">bash scripts</h2>
+<div class="outline-text-2" id="text-org4ad7b84">
+<p>
+find . -name *.c | xargs grep "writeText"
+</p>
+
+<p>
+aws cloudformation deploy &#x2013;template-file /path<sub>to</sub><sub>template</sub>/template.json &#x2013;stack-name my-new-stack &#x2013;parameter-overrides Key1=Value1 Key2=Value2 &#x2013;tags Key1=Value1 Key2=Value2
+</p>
+</div>
+</div>
+
+<div id="outline-container-org325cdca" class="outline-2">
+<h2 id="org325cdca">CI/CD pipeline : (Cloudformation) s3 creation using aws-commit + aws-deploy (Cloudl Formation)</h2>
+<div class="outline-text-2" id="text-org325cdca">
+<p>
+<a href="https://www.youtube.com/watch?v=oXBknlO-9rg&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&amp;index=4">https://www.youtube.com/watch?v=oXBknlO-9rg&amp;list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&amp;index=4</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgbab49a0" class="outline-2">
+<h2 id="orgbab49a0">sdfg</h2>
+<div class="outline-text-2" id="text-orgbab49a0">
+<p>
+Account A :                     dankarthik2505@gmail.condition
+Account-ID :                    918175365727
+codecommit ARN :                arn:aws:codecommit:us-east-1:918175365727:test-cf
+</p>
+<ul class="org-ul">
+<li>repo :                        test-cf</li>
+<li>branch :                      master</li>
+</ul>
+<p>
+KMS CMK key ARN                 arn:aws:kms:eu-west-1:918175365727:key/7bc79cce-3b1a-4a61-862e-747990aa1173
+S3 ARN                          arn:aws:s3:::artifact-source
+cross-account-role-A ARN        arn:aws:iam::918175365727:role/cross-account-role-A
+</p>
+
+<p>
+Account B :                    @deepalgorithms.in
+Account-ID :                   548593215839
+cross-account-role-B  ARN      arn:aws:iam::548593215839:role/cross-account-role-B
+cross-CF-role  ARN             arn:aws:iam::548593215839:role/CloudformationExecutionRole
+</p>
+
+<p>
+Stack Name : 
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3ce3e04" class="outline-2">
+<h2 id="org3ce3e04">get source-code in another account</h2>
+<div class="outline-text-2" id="text-org3ce3e04">
+<p>
+pipeline structure :
+<a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html">https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html</a>
+permission json
+</p>
+
+<p>
+<a href="https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html">https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html</a>
+</p>
+
+<p>
+<a href="https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html">https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html</a>
+AWS managed policy: AWSCodeCommitFullAccess
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+    "Version": "2012-10-17",
+    "Statement": [
+	{
+	    "Sid": "VisualEditor0",
+	    "Effect": "Allow",
+	    "Action": [
+		"iam:PassRole",
+		"cloudformation:*",
+		"codecommit:*"
+	    ],
+	    "Resource": "*"
+	},
+	{
+	    "Sid": "VisualEditor1",
+	    "Effect": "Allow",
+	    "Action": "s3:ListBucket",
+	    "Resource": "arn:aws:s3:::artifact-source/*"
+	},
+	{
+	    "Sid": "VisualEditor2",
+	    "Effect": "Allow",
+	    "Action": [
+		"s3:Get*",
+		"s3:Put*"
+	    ],
+	    "Resource": "arn:aws:s3:::artifact-source/*"
+	}
+    ]
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org25e209e" class="outline-2">
+<h2 id="org25e209e">Pass role</h2>
+<div class="outline-text-2" id="text-org25e209e">
+<p>
+Cross-Account-RoleA POLIICES
+</p>
+
+<p>
+AWSCodeCommitFullAccess		
+AmazonS3FullAccess
+AWSCodeDeployFullAccess
+AmazonECSTaskExecutionRolePolicy
+AWSCodeBuildAdminAccess
+CrossAccount-Role-A-STS-Policy
+</p>
+
+<p>
+Error calling startBuild: User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657207152885 is not authorized to perform: codebuild:StartBuild on resource: arn:aws:codebuild:us-east-1:548593215839:project/poc-548593215839-BuildProject because no identity-based policy allows the codebuild:StartBuild action (Service: AWSCodeBuild; Status Code: 400; Error Code: AccessDeniedException; Request ID: 6de88b05-0e0d-48e8-bfd6-8ccf621d65a6; Proxy: null)
+</p>
+
+
+<p>
+User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657207827303 is not authorized to perform: codedeploy:GetApplication on resource: arn:aws:codedeploy:us-east-1:548593215839:application:AppECS-poc-Cluster-poc-ECS-Service because no identity-based policy allows the codedeploy:GetApplication action
+</p>
+
+<p>
+User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657208881769 is not authorized to perform: ecs:RegisterTaskDefinition on resource: * because no identity-based policy allows the ecs:RegisterTaskDefinition action
+</p>
+
+<p>
+Policy:
+</p>
+
+<p>
+AmazonECSTaskExecutionRolePolicy
+</p>
+
+<p>
+Trust Relationship:
+</p>
+
+<pre class="example">
+{
+    "Version": "2008-10-17",
+    "Statement": [
+	{
+	    "Effect": "Allow",
+	    "Principal": {
+		"Service": "ecs-tasks.amazonaws.com"
+	    },
+	    "Action": "sts:AssumeRole"
+	}
+    ]
+}
+</pre>
+</div>
+
+<div id="outline-container-org99e9cc3" class="outline-3">
+<h3 id="org99e9cc3"><span class="todo TODO">TODO</span> Need policy allow ecs:RegisterTaskDefinition to Run using CrossAccount-role-A-ECS</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org856cc14" class="outline-2">
+<h2 id="org856cc14">AWS CodeDeploy Blue / Green Deployment to Amazon ECS</h2>
+<div class="outline-text-2" id="text-org856cc14">
+<p>
+<a href="https://www.youtube.com/watch?v=ekh2uW1VU6U">https://www.youtube.com/watch?v=ekh2uW1VU6U</a>
+Create a CodeDeploy Task for ECS Bluegreen usign appspec.yaml file in s3 bucket
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcb2bc60" class="outline-2">
+<h2 id="orgcb2bc60">Event Bridge for pipeline to codedeploy</h2>
+<div class="outline-text-2" id="text-orgcb2bc60">
+<p>
+<a href="https://www.youtube.com/watch?v=joxRfHu26zc">https://www.youtube.com/watch?v=joxRfHu26zc</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+  "source": ["aws.codebuild"],
+  "detail-type": ["CodeBuild Build State Change"],
+ "Resource": ["arn:aws:codebuild:us-east-1:548593215839:project/poc-548593215839-BuildProject"],
+  "detail": {
+    "build-status": ["SUCCEEDED"]
+  }
+}
+</pre>
+</div>
+
+
+
+<p>
+Service role ARN
+arn:aws:iam::548593215839:role/BlueGreenService-CodeDeployRoleForECS
+</p>
+
+<pre class="example">
+aws apprunner start-deployment --cli-input-json file://input.json
+</pre>
+
+<pre class="example">
+{
+    "ServiceArn": "arn:aws:apprunner:us-east-1:123456789012:service/python-app/8fe1e10304f84fd2b0df550fe98a71fa"
+}
+</pre>
+
+<p>
+<a href="https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment.html">https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment.html</a>
+</p>
+<pre class="example">
+aws deploy create-deployment \
+    --application-name WordPress_App \
+    --deployment-config-name CodeDeployDefault.OneAtATime \
+    --deployment-group-name WordPress_DG \
+    --description "My demo deployment" \
+    --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-json">{
+    "applicationName": "AppECS-poc-Cluster-poc-ECS-Service",
+    "deploymentGroupName": "DgpECS-poc-Cluster-poc-ECS-Service",
+    "revision": {
+	"revisionType": "S3",
+	"s3Location": {
+	    "bucket": "cross-account-role-a-mybucket",
+	    "key": "appspec.yaml",
+	    "bundleType": "YAML"
+	}
+    }
+}
+</pre>
+</div>
+
+
+<pre class="example">
+aws deploy create-deployment \
+    --cli-input-json file://create-deployment.json \
+    --region us-east-1
+
+aws deploy create-deployment --cli-input-json file://create-deployment.json --region us-east-1
+</pre>
+
+<pre class="example">
+import boto3
+
+client = boto3.client('codedeploy')
+
+response = client.continue_deployment(
+    deploymentId='string',
+    deploymentWaitType='READY_WAIT'|'TERMINATION_WAIT'
+)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

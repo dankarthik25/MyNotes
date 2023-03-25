@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_Ansible_prac</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>Ansible</sub><sub>prac</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1b4dc94">Inventory</a>
+<ul>
+<li><a href="#orga7ebdee">static inventory</a></li>
+<li><a href="#orgfa1762c">Static Inventory Example</a></li>
+</ul>
+</li>
+<li><a href="#orge1aa2ed">INI to yaml to json convertion</a></li>
+<li><a href="#org09e11d2">Install docker in ubuntu using ansible</a></li>
+<li><a href="#orgd792550"><span class="todo TODO">TODO</span> Create a User with Password using Ansible</a></li>
+<li><a href="#org8194a86"><span class="todo TODO">TODO</span> Give sudo privilege to user 'devops'  using Ansible</a></li>
+<li><a href="#org567aa24"><span class="todo TODO">TODO</span> Enable RSAauthentication and pem using Ansible</a></li>
+<li><a href="#org1db15b9"><span class="todo TODO">TODO</span> Create and Copy RSA Key to remote user using Ansible</a></li>
+<li><a href="#orgfca9d7f"><span class="todo TODO">TODO</span> Enable SSH-Connect Jenkins-ec2 instance to all docker-ec2 instance</a></li>
+<li><a href="#orgb39ea50"><span class="todo TODO">TODO</span> Make sure docker is avaiable after ec2 resarts with any error</a></li>
+<li><a href="#org3601519">restart docker container,compose,stack if container is in exited state</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1b4dc94" class="outline-2">
+<h2 id="org1b4dc94">Inventory</h2>
+<div class="outline-text-2" id="text-org1b4dc94">
+<div class="org-src-container">
+<pre class="src src-sh">ansible all -i hosts -m ping
+ansible all -i hosts -a "ls -latr"
+ansible docker -i hosts -a "docker ps" --become
+ansible docker -i hosts -m file -a "mode:777 path:/var/lib/docker.sock"
+ansible docker -i hosts -a "chmod 777 /var/lib/docker.sock" --become
+# ansible docker -i hosts -m file -a "mode:777 path:/var/lib/docker.sock" --become
+#var/run/docker.sock:
+ansible jenkins -i hosts -a "systemctl restart jenkins.serveice" --become
+ansible -i aws-hosts.txt -a "docker ps" --become i-0f143cf96e81cdce6
+
+# Alternative form 
+ansible -i hosts -m ping jenkins
+
+
+ansible-inventory -i hosts  --list &gt; inventory.json
+ansible-inventory -i hosts -y --list &gt; inventory.yaml
+
+
+ansible-playbook sample.yml --syntax-check
+ansible-playbook sample.yml --list-hosts
+ansible-playbook sample.yml # to run yml file
+ansible-playbook all -i host.txt playbook.yml  # static inventory
+
+
+# dynamic inventory
+ansible-playbook all -i host.py playbook.yml 
+ansible-playbook -i host.py app --list-hosts
+ansible-playbook -i host.py all --list-hosts
+ansible-playbook -i host.py all -m ping
+
+# 
+#  Ansible vault 
+# 
+ansible-vault encrypt inventory.txt    # To encrypth inventory file
+ansible-playbook test.yml -i inventory.txt -ask-vault-pass   # run encrypted inventory file
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass # pass file(vault_pass) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass.py    # pass script(vault_pass.py) containing password
+ansible-vault view inventory.txt # view contant of encrpyted file 
+</pre>
+</div>
+</div>
+<div id="outline-container-orga7ebdee" class="outline-3">
+<h3 id="orga7ebdee">static inventory</h3>
+<div class="outline-text-3" id="text-orga7ebdee">
+<p>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories">https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories</a>
+static inventory with path <code>ansible -i hosts -a "echo nico" jenkins</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml">[webservers]
+173.82.115.165
+
+[database_servers]
+173.82.220.239
+
+[ec2]
+jenkins      ansible_host=3.250.64.70    ansible_ssh_private_key_file=~/aws-dan2505/credencials/devops.pem 	    ansible_ssh_user=ubuntu
+
+[datacenter:children]
+webservers
+database_servers
+</pre>
+</div>
+
+<p>
+As you can see in the inventory file above, we have created 2 host groups: webservers and database<sub>servers</sub>. Also, we have created an additional group called datacenter that includes a group of host groups denoted by ': children' suffix as seen above.
+</p>
+
+<p>
+Ansible also allows groups of hosts to be placed under a group name. In the inventory file above, the webservers and database<sub>servers</sub> groups have been placed under the datacenter.
+</p>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgfa1762c" class="outline-3">
+<h3 id="orgfa1762c">Static Inventory Example</h3>
+<div class="outline-text-3" id="text-orgfa1762c">
+<p>
+hosts
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#cat hosts
+[ec2]
+jenkins      ansible_host=3.250.64.70    ansible_ssh_private_key_file=~/aws-dan2505/credencials/devops.pem 	    ansible_ssh_user=ubuntu
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">ansible -i hosts -a "echo nico" jenkins
+ansible -i hosts -m ping jenkins
+ansible -i hosts -a "ls -latr" jenkins
+ansible all -i hosts -m user -a"name=devops password=devops@123" --become
+
+# Or
+
+ansible jenkins -i hosts -a "echo nico"
+#jenkins | CHANGED | rc=0 &gt;&gt;
+#nico
+ansible jenkins -i hosts -m ping 
+#jenkins | SUCCESS =&gt; {
+#    "ansible_facts": {
+#        "discovered_interpreter_python": "/usr/bin/python3"
+#    },
+#    "changed": false,
+#    "ping": "pong"
+#}
+ansible jenkins -i hosts -a "ls -latr"
+#jenkins | CHANGED | rc=0 &gt;&gt;
+#total 32
+#-rw-r--r-- 1 ubuntu ubuntu  807 Feb 25  2020 .profile
+#-rw-r--r-- 1 ubuntu ubuntu 3771 Feb 25  2020 .bashrc
+#-rw-r--r-- 1 ubuntu ubuntu  220 Feb 25  2020 .bash_logout
+#drwxr-xr-x 3 root   root   4096 Apr 15 23:27 ..
+#drwx------ 2 ubuntu ubuntu 4096 Apr 15 23:27 .ssh
+#drwx------ 2 ubuntu ubuntu 4096 Apr 16 09:52 .cache
+#drwx------ 3 ubuntu ubuntu 4096 Apr 16 09:52 .ansible
+#-rw-r--r-- 1 ubuntu ubuntu    0 Apr 16 10:03 .sudo_as_admin_successful
+#drwxr-xr-x 5 ubuntu ubuntu 4096 Apr 16 10:03 .
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge1aa2ed" class="outline-2">
+<h2 id="orge1aa2ed">INI to yaml to json convertion</h2>
+<div class="outline-text-2" id="text-orge1aa2ed">
+<div class="org-src-container">
+<pre class="src src-sh">#ansible-inventory -i hosts -y --list &gt; inventory.yaml
+#cat inventory.yaml 
+all:
+  children:
+    ec2:
+      hosts:
+	jenkins:
+	  ansible_host: 3.250.64.70
+	  ansible_ssh_private_key_file: ~/aws-dan2505/credencials/devops.pem
+	  ansible_ssh_user: ubuntu
+    ungrouped: {}
+#ansible-inventory -i hosts  --list &gt; inventory.json
+#cat inventory.json 
+{
+    "_meta": {
+	"hostvars": {
+	    "jenkins": {
+		"ansible_host": "3.250.64.70",
+		"ansible_ssh_private_key_file": "~/aws-dan2505/credencials/devops.pem",
+		"ansible_ssh_user": "ubuntu"
+	    }
+	}
+    },
+    "all": {
+	"children": [
+	    "ec2",
+	    "ungrouped"
+	]
+    },
+    "ec2": {
+	"hosts": [
+	    "jenkins"
+	]
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org09e11d2" class="outline-2">
+<h2 id="org09e11d2">Install docker in ubuntu using ansible</h2>
+<div class="outline-text-2" id="text-org09e11d2">
+<p>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"># cat install_doc.yml
+---
+- hosts: all
+  become: true
+  vars:
+    container_count: 4
+    default_container_name: docker
+    default_container_image: ubuntu
+    default_container_command: sleep 1d
+
+  tasks:
+    - name: Install aptitude
+      apt:
+	name: aptitude
+	state: latest
+	update_cache: true
+
+    - name: Install required system packages
+      apt:
+	pkg:
+	  - apt-transport-https
+	  - ca-certificates
+	  - curl
+	  - software-properties-common
+	  - python3-pip
+	  - virtualenv
+	  - python3-setuptools
+	state: latest
+	update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+	url: https://download.docker.com/linux/ubuntu/gpg
+	state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+	repo: deb https://download.docker.com/linux/ubuntu focal stable
+	state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+	name: docker-ce
+	state: latest
+	update_cache: true
+
+    - name: Install Docker Module for Python
+      pip:
+	name: docker
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">#ansible-playbook install_docker_playbook.yml -i hosts -l jenkins 
+
+PLAY [all] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [jenkins]
+
+TASK [Install aptitude] *************************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Install required system packages] *********************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Add Docker GPG apt Key] *******************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Add Docker Repository] ********************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Update apt and install docker-ce] *********************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Install Docker Module for Python] *********************************************************************************************************************************
+changed: [jenkins]
+
+PLAY RECAP **************************************************************************************************************************************************************
+jenkins                    : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+</pre>
+</div>
+
+<p>
+Check if docker is installed or not 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#ansible jenkins -i hosts -a "docker ps" --become 
+jenkins | CHANGED | rc=0 &gt;&gt;
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-yaml">---
+- hosts: all
+  become: true
+  vars:
+    container_count: 4
+    default_container_name: docker
+    default_container_image: ubuntu
+    default_container_command: sleep 1d
+
+  tasks:
+    - name: Pull default Docker image
+      community.docker.docker_image:
+	name: "{{ default_container_image }}"
+	source: pull
+
+    - name: Create default containers
+      community.docker.docker_container:
+	name: "{{ default_container_name }}{{ item }}"
+	image: "{{ default_container_image }}"
+	command: "{{ default_container_command }}"
+	state: present
+      with_sequence: count={{ container_count }}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd792550" class="outline-2">
+<h2 id="orgd792550"><span class="todo TODO">TODO</span> Create a User with Password using Ansible</h2>
+<div class="outline-text-2" id="text-orgd792550">
+<p>
+ansible all -i hosts -m user -a"name=devops password=devops@123" &#x2013;become
+</p>
+</div>
+</div>
+<div id="outline-container-org8194a86" class="outline-2">
+<h2 id="org8194a86"><span class="todo TODO">TODO</span> Give sudo privilege to user 'devops'  using Ansible</h2>
+<div class="outline-text-2" id="text-org8194a86">
+<p>
+<a href="https://stackoverflow.com/questions/37333305/ansible-create-a-user-with-sudo-privileges">https://stackoverflow.com/questions/37333305/ansible-create-a-user-with-sudo-privileges</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org567aa24" class="outline-2">
+<h2 id="org567aa24"><span class="todo TODO">TODO</span> Enable RSAauthentication and pem using Ansible</h2>
+<div class="outline-text-2" id="text-org567aa24">
+<p>
+<a href="https://www.howtoforge.com/tutorial/setup-new-user-and-ssh-key-authentication-using-ansible/">https://www.howtoforge.com/tutorial/setup-new-user-and-ssh-key-authentication-using-ansible/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1db15b9" class="outline-2">
+<h2 id="org1db15b9"><span class="todo TODO">TODO</span> Create and Copy RSA Key to remote user using Ansible</h2>
+<div class="outline-text-2" id="text-org1db15b9">
+<p>
+<a href="https://www.middlewareinventory.com/blog/ansible-ec2-ssh-key/">https://www.middlewareinventory.com/blog/ansible-ec2-ssh-key/</a>
+<a href="https://github.com/AKSarav/Add-SSH-Key-EC2-Ansible">https://github.com/AKSarav/Add-SSH-Key-EC2-Ansible</a>
+<a href="https://www.youtube.com/watch?v=kfWfj76-am8">https://www.youtube.com/watch?v=kfWfj76-am8</a>
+</p>
+
+
+<p>
+ansible-playbook add-key.yml  -e "key=/tmp/rohit<sub>new</sub><sub>employee.pub</sub> status=present"
+ansible-playbook add-key.yml -e "key=/tmp/rohit<sub>new</sub><sub>employee.pub</sub> status=absent"
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfca9d7f" class="outline-2">
+<h2 id="orgfca9d7f"><span class="todo TODO">TODO</span> Enable SSH-Connect Jenkins-ec2 instance to all docker-ec2 instance</h2>
+<div class="outline-text-2" id="text-orgfca9d7f">
+<p>
+<a href="https://www.youtube.com/watch?v=Zx_zi_GABS0">https://www.youtube.com/watch?v=Zx_zi_GABS0</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb39ea50" class="outline-2">
+<h2 id="orgb39ea50"><span class="todo TODO">TODO</span> Make sure docker is avaiable after ec2 resarts with any error</h2>
+<div class="outline-text-2" id="text-orgb39ea50">
+<p>
+chmod 777 /var/lib/docker.sock
+</p>
+</div>
+</div>
+<div id="outline-container-org3601519" class="outline-2">
+<h2 id="org3601519">restart docker container,compose,stack if container is in exited state</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

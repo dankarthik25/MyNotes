@@ -1,0 +1,262 @@
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#  This file is the notese of Coreshef- Linux Tutorial
+
+#+TITLE: GitLab
+#+AUTHOR:    D Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+#+Setupfile: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+
+
+[[https://www.youtube.com/watch?v=8aV5AxJrHDg][Learn GitLab in 3 Hours | GitLab Complete Tutorial For Beginners]] : Need to take snapshot on merge request and pull request
+
+* Price comparision
+IMP : NO.OF COLLABORATOR : =UNLIMITED= source : https://about.gitlab.com/blog/2019/01/07/github-offering-free-private-repos-for-up-to-three-collaborators/
+
+| Free functionality        | GitLab      | GitHub                                 |
+|---------------------------+-------------+----------------------------------------|
+| Private repositories      | Yes         | Yes                                    |
+| Number of collaborators   | =Unlimited= | 3                                      | 
+| Wiki                      | Yes         | No (public or paid only)               |
+| Pages                     | Yes         | Yes-need to check                      |
+| Capacity                  | 10GB        | 1GB                                    |
+| Indicates who is paying   | No          | Yes                                    |
+| Free CI                   | 2,000 min.  | Maybe a free tier for Actions on Azure |
+| Entire DevOps lifecycle   | Yes         | No                                     |
+| Location of the repo      | Anywhere    | Not in groups/orgs                     |
+| API concurrent rate limit | 36000       | 5000                                   |
+
+
+| feature                          | Free        | Premium            | Ultimate            |
+|                                  | gitlab OR   | $19 per user/month | $ 99 per user/month |
+|                                  | self-host   | annual: $228       | annually: $1188     |
+|----------------------------------+-------------+--------------------+---------------------|
+| CI/CD minutes per month          | 400 minutes | 10,000 minutes     | 50,000 minutes      |
+| Storage                          | 5GB         | 50GB               | 250GB               |
+| Transfer per month               | 10GB        | 100GB              | 500GB               |
+| CI/CD mints per month            | 400mints    | 10K mints          | 50K mints           |
+| Support                          | No          | Yes                | Yes                 |
+| =Enterprise agile planning=      | No          | Yes                | Yes                 |
+|----------------------------------+-------------+--------------------+---------------------|
+| Open Source - MIT License        | Yes         | Yes                | Yes                 |
+| Bring your own GitLab CI runners | Yes         | Yes                | Yes                 |
+| Includes free static websites    | Yes         | Yes                | Yes                 |
+| Faster code reviews              | No          | Yes                | Yes                 |
+| Advanced CI/CD                   | No          | Yes                | Yes                 |
+| Release controls                 | No          | Yes                | Yes                 |
+| Self-managed reliability         | No          | Yes                | Yes                 |
+
+Other Price
+CI/CD Minutes : $10 per 10,000 minutes
+Storage       : $60 per 10GB & 20Gb (transfer per month )
+Enterprise agile planning : [[https://www.youtube.com/watch?v=cVC8bcV8zsQ][Youtube-link:GitLab Agile Project Management Demo]]
+
+-  Can i add more user to my Subscription ?
+  - Yes. You have a few options. You can add users to your subscription any time during the subscription period. You can log in to your account via the GitLab Customers Portal and add more seats or contact sales for a quote.
+  - In either case, the cost will be prorated from the date of quote/purchase through the end of the subscription period. You may also pay for the additional licenses per our true-up model.
+  -  
+* Srum Master (Jira )
+* Moving to Gitlab (self host/ gitlab-host) 
+* Gitlab
+** Gitlab Terminology
+*** Gitlab Group :
+  - Description:
+      - allow you to o manage settings across multiple project
+      - logically categorize multiple users or projects
+      - cross projecg view (merge request)
+  - Activity
+  - Labels =LABLES IMP FOR PROJGET MANAGEMENT=
+  - Members :
+      - add/remove members
+      - access permission : owner, maintainer, developer, repoter, guest
+        - =NOTE: owner, mainter, developer have permission to read, write,create, delete the project but not write=
+        - =NOTE: repoter and guset have permission to read but not write=
+  - Issuse :
+      - List
+      - Board : =Kanban=
+      - Milestone
+  - Merge Request
+  - CI/CD : =Runner= : set runner for group
+  - Setting :
+      - General: =Transfer group=
+        
+*** Gitlab Project :
+    - description:
+      - git reposiotory
+      - Build CI/CD
+      - ISSUSE tracking
+      - Collaboration Tools
+      - =NOTE: YOUR SOFTWARE DEVELOPMENT WORKFLOW BEGINS WITH ISSUSE=
+    - Project Info :
+      - Activity
+      - Label
+      - Member
+    - git Reposiotory
+      - Files
+      - Commits
+      - Branches
+      - Tags
+      - Contributors
+      - Graph
+      - Compare
+    - Issuse :
+      - List
+      - Board : =Kanban=
+      - Milestone   =gantt chart=   
+    - CI/CD :
+      - Pipeline
+      - Editor
+      - Jobs
+      - Schedule
+    - Merge request :
+    - Wiki
+    - Setting
+      - General
+      - Pages
+*** Issuse : 
+    - Description:
+      - way to track work (git project)
+      - report bugs
+      - request *new features* (there are many feature ) 
+      - questions and more
+    - List
+    - Board
+    - Milestone         
+
+
+** TODO Branching Strategies
+- git flow
+- github
+- gitlab     
+
+** Host html in gitlab
+
+** Group Member access Permission
+*owner Access* - add/remove members , add/remove permission to members, create pages, wiki pages read/write
+*maintainer Access*   - createe pages, wiki pages, read/write, create projects and group , cann't delete any project/group
+*developer Access* - read/write
+*reporter  Access* - read
+*Guest Access* - read 
+https://docs.gitlab.com/ee/user/permissions.html
+* Remote access
+- Personal Access Token
+- SSH configuration
+
+- *gitlab/User Setting* : 
+    - Personal Access Token
+    - SSH Key
+      
+* FAQ
+** Create static html and host in gitlab  
+*** Install Gitlab Runner in local OS for gitlab project or group
+
+https://docs.gitlab.com/runner/install/
+
+[[https://www.youtube.com/watch?v=G8ZONHOTAQk][youtube link:]]
+
+
+Note: in project or github repo go Setting/ CI/CD/ Runner
+install Runner 
+# # Get the command in gitlab:<group-name>/<CI/CD>/Runner
+- Click Follow the [[insall and register][installation and registration instructions]] to set up a runner. or
+- Click : [[ad][Register a group runner]]  
+#+begin_src sh
+# Download the binary for your system
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+# Give it permission to execute
+sudo chmod +x /usr/local/bin/gitlab-runner
+
+# Create a GitLab Runner user
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+# Install and run as a service
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+
+# Command to register runner
+# NOTE : GITLAB will generate the token 
+sudo gitlab-runner register --url https://gitlab.com/ --registration-token GR1348941AxBu37cTfuz9eH48gyD9 
+#+end_src
+*** Create static html page using gitlab
+https://www.youtube.com/watch?v=kvZ9teaA5zI
+** how-to-change-the-project-owner-in-gitlab
+
+https://stackoverflow.com/questions/21579693/how-to-change-the-project-owner-in-gitlab
+
+Because one user cannot "own" another namespace (not even admins), the only option to set up a scenario where two users own the same namespace is with a group. Perform the following steps to accomplish this.
+
+- Create a new group.
+- Add the user that you want to transfer your project to as an owner member of that group.
+- Transfer your project to that group (a namespace you manage because you are an owner).
+- Login as the other user, then transfer the group project to the "other user" namespace.
+
+At this point you will be left as a master in the project. You can now remove yourself from the project entirely if desired.
+
+
+
+
+* NEXT [#A] GitLab Project Management: How to use Issue, Labels, and Boards
+https://www.youtube.com/watch?v=J2u7OqBA_aQ
+GitLab Project Management: How to use Issue, Labels, and Boards
+
+* Gitlab Issuse
+https://www.youtube.com/watch?v=YshvUGgF_3o
+
+issuse template
+https://www.youtube.com/watch?v=ObNWS3trqIY
+https://www.youtube.com/watch?v=UPsCXqxxJUA
+* Gitlab Member Permissions : ower, maintainer, developer, reporter, guest
+- access permission : owner, maintainer, developer, repoter, guest
+* Gitlab Lables :
+https://docs.gitlab.com/ee/user/project/labels.html
+
+Create a lable : [[https://www.youtube.com/watch?v=YshvUGgF_3o][Newbostan:Git Tutorial - 23 - GitHub Issues and Labels]]
+
+https://gitlab.com/gitlab-org/quality/triage-reports/-/labels?page=7
+Use scoped labels in GitLab 11.10 for custom fields and custom workflows
+
+
+[[https://www.youtube.com/watch?v=4BCBby6du3c][Use scoped labels in GitLab 11.10 for custom fields and custom workflows]]
+This(Scope label) is only avaible for premium tire 
+
+https://www.youtube.com/watch?v=35V2FJX4sAs
+Demo - Service Desk 
+
+** Lable : priortiy label
+- Lable issue with priority
+- Standard Planing Board
+    
+* 
+* Git 
+* Git Issuse Board
+
+* Git Milestone
+https://www.youtube.com/watch?v=ZBjCmOYNb5Q
+Gitlab Project Management: Sprints, User Stories, and Tasks
+
+https://www.youtube.com/watch?v=tv4UM1ruQRs
+
+https://www.youtube.com/watch?v=enMumwvLAug
+Introduction to GitLab Workflow
+* TODO Gitlab jira intergration
+https://www.youtube.com/watch?v=p56zrZtrhQE
+
+GitLab-Jira Integration - Jira Automation Triggers
+
+https://www.youtube.com/watch?v=DhAGIg04uaQ
+
+GitLab-Jira Integration - Jira Deployments
+https://www.youtube.com/watch?v=i_Gzxp8A2l4
+
+* TODO Gitlab Issuse <board> kanban
+https://www.youtube.com/watch?v=CiolDtBIOA0
+ GitLab issue boards demo
+
+* Git Issuse and Milestone
+https://www.youtube.com/watch?v=tv4UM1ruQRs
+

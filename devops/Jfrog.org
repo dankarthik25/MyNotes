@@ -1,0 +1,65 @@
+#+TITLE: Jfrog
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* What is artifactory ?
+Place to store your packages (artifactory) and maintain repository
+
+scr > binary > package
+git > maven > zip,war,exe,docker-image,vagrant
+
+Why do we need to store the package in artifactory ?
+- 1. Security of package (if some bugee package abile to hack client)
+  2. Process driven (
+      In Traditial way of package- FTP|Shared Drive
+      - Need to store 30 package in day : 365*30 package
+        - How can you NAME, LABEL, CLEAN
+      By artifactory is process driven : automate
+  3. Dependency Management:
+     - Internla Dependencecy (module1 dep on m4 and m4 depen on m5...etc )
+     - External Dependencecy  (dependent on external dependenency)
+  4. Integrity of package
+     - During deploy/download package is corrupted.
+       - If you use FTP : we can't check before complete download
+  5. Admin:
+      user:
+      group
+      permission
+      authenticated
+  6. Backup and Cleanup Efficiency
+
+Alternative : Sonatype Nexus,Jfrog,Nuget,
+
+Which Flavors you want ?
+Artifactory OSS   (Free,opensource)
+Artifactory Pro   (PAID)- installed in your server
+Artifactory Cloud (SAAS) 
+                    
+* [NOTE: DEPRECATED 30 days trail is available now]Installation
+Jfrog has now give free trial for 30 days 
+https://jfrog.com/download-jfrog-platform/
+
+#+begin_src
+# rmp
+wget https://releases.jfrog.io/artifactory/artifactory-pro-rpms/artifactory-pro-rpms.repo -O jfrog-artifactory-pro-rpms.repo;
+sudo mv jfrog-artifactory-pro-rpms.repo /etc/yum.repos.d/;
+sudo yum update && sudo yum install jfrog-artifactory-pro
+# deb
+# To determine your distribution, run lsb_release -c or cat /etc/os-release
+# Example:echo "deb https://releases.jfrog.io/artifactory/artifactory-pro-debs xenial main" | sudo tee -a /etc/apt/sources.list;
+wget -qO - https://releases.jfrog.io/artifactory/api/gpg/key/public | sudo apt-key add -;
+echo "deb https://releases.jfrog.io/artifactory/artifactory-pro-debs {distribution} main" | sudo tee -a /etc/apt/sources.list;
+sudo apt-get update && sudo apt-get install jfrog-artifactory-pro
+# linux
+https://releases.jfrog.io/artifactory/artifactory-pro/org/artifactory/pro/jfrog-artifactory-pro/[RELEASE]/jfrog-artifactory-pro-[RELEASE]-linux.tar.gz
+
+# run /artifactory-pro-7.21.7/app/bin/artifactory.sh # install or run
+# user : admin , jfrog-Password :password(change: Small)
+
+#+end_src
+
+
+* Sathish Anna
+https://github.com/ravdy/DevOps/tree/master/Artifactory
+https://www.youtube.com/watch?v=eB6CDSR8VCA
+https://www.youtube.com/watch?v=BVxhLIfunmI
+

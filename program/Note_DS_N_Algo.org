@@ -1,0 +1,19 @@
+#+TITLE: Note_DS_N_Algo
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+| point              | Recursion | Iteration | Result                                                                   |
+|--------------------+-----------+-----------+--------------------------------------------------------------------------|
+| Space Effiecient ? | No        | Yes       | No stack memory required in case of interation                           |
+| Time Effiecient ?  | No        | Yes       | pop and push elements increase time                                      |
+| Easy to code ?     | Yes       | No        | recursion is used especially when problem is sub divided into subproblem |
+|                    |           |           |                                                                          |
+
+adfa
+| sigma | filter size | not sutable | mid point |
+|-------+-------------+-------------+-----------|
+|     1 |           5 |           4 |         2 |
+|     2 |           7 |             |         3 |
+|     3 |          11 |          10 |         5 |
+|     4 |          13 |             |         6 |
+|     5 |          17 |          16 |         8 |
+|       |             |             |           |

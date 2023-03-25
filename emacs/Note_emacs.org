@@ -1,0 +1,841 @@
+#+TITLE: Note_emacs
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+* All Short Cuts
+         | Short Key    Cmd        | Describtion                                             |
+         |-------------------------+---------------------------------------------------------|
+         | File Manage Cmd         |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | C-g                     | quit                                                    |
+         | C-x C-f                 | file                                                    |
+         | C-x C-s                 | save                                                    |
+         | C-x C-w                 | save as                                                 |
+         | C-x C-x                 | exit                                                    |
+         |                         |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | Navigation              |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | C-f                     | Left                                                    |
+         | C-b                     | Right                                                   |
+         | C-p                     | Up                                                      |
+         | C-n                     | Down                                                    |
+         |-------------------------+---------------------------------------------------------|
+         | M-f                     | forword by 1 word                                       |
+         | M-b                     | backword by 1 word                                      |
+         | C- left                 | one word left                                           |
+         | C- right                | one word left                                           |
+         |-------------------------+---------------------------------------------------------|
+         | C-a                     | begin of line                                           |
+         | C-e                     | end of line                                             |
+         | home                    | begin of line                                           |
+         | end                     | end of line                                             |
+         |-------------------------+---------------------------------------------------------|
+         | M-a                     | begin of sentence                                       |
+         | M-e                     | end of sentence                                         |
+         |                         |                                                         |
+         | C-up                    | move one para up                                        |
+         | C-down                  | move one para down                                      |
+         |                         |                                                         |
+         |                         |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | C-v                     | PgUp                                                    |
+         | M-v                     | PgDN                                                    |
+         | M-<                     | Begin of file                                           |
+         | M->                     | End of file                                             |
+         | M-"-"                   | End of buffer                                           |
+         |-------------------------+---------------------------------------------------------|
+         | C-l                     | Move screen to center                                   |
+         | C-x +                   | Zoom in                                                 |
+         | C-x -                   | Zoom out                                                |
+         |-------------------------+---------------------------------------------------------|
+         | Edit Cmd                |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | C-w                     | cut                                                     |
+         | M-w                     | copy                                                    |
+         | C-y                     | paste                                                   |
+         |                         |                                                         |
+         | C-/                     | Undo                                                    |
+         | C-x u                   | Undo                                                    |
+         | C-_                     | Undo                                                    |
+         | C-S-'-'                 | Undo                                                    |
+         | C-S-backspace           | del line                                                |
+         |                         |                                                         |
+         | del                     | Delete charter just befor(left) curoser                 |
+         | C-d                     | Del next char after cursor                              |
+         | M-del                   | kill word befor cursor                                  |
+         | C-d                     | del                                                     |
+         |                         |                                                         |
+         | C-s                     | search (case insensitive)                               |
+         | C-S                     | search (case sensitive)                                 |
+         |                         | C-s     Forword Search                                  |
+         |                         | C-r     Backword Search                                 |
+         |                         |                                                         |
+         | M-%                     | query replace                                           |
+         |                         | "space"    :  Yes   replace                             |
+         |                         | "n"        :  No    skip                                |
+         |                         | "!"        :  replace all                               |
+         |                         |                                                         |
+         | M-u                     | Change to upper case                                    |
+         | M-l                     | change to Lower case                                    |
+         | M-c                     | Captalize word                                          |
+         |                         |                                                         |
+         | C-x r m                 | bookmark-set                                            |
+         | C-x r b                 | bookmark-jump                                           |
+         |                         |                                                         |
+         | C-q C-@                 | Insert  "^@"                                            |
+         | c-q C-A                 | Insert  "^A"                                            |
+         |                         |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | Buffer Mangae  Cmd      |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | C-x b                   | switch btw buffers/windows                              |
+         | C-x C-b                 | *Buffer list*                                           |
+         |                         | g :  Refresh buffer list                                |
+         |                         | m :  mark file                                          |
+         |                         | t :  Mark all                                           |
+         |                         | u :  Unmark                                             |
+         |                         | U :  Unmark all files                                   |
+         |                         | d :  mark for Delete                                    |
+         |                         | x :  execute                                            |
+         |-------------------------+---------------------------------------------------------|
+         |                         |                                                         |
+         | C-x right               | In current window :      right-cycle through buffer     |
+         | C-x left                | In current window :      left-cycle through buffer      |
+         | C-x k                   | Kill the buffer                                         |
+         | C-x o                   | jump cursor btw buffers                                 |
+         | C-x 0                   | del the current window/ NOT BUFFER (does't kill buffer) |
+         | M-x clean-buffer-list   | Clean buffer                                            |
+         |-------------------------+---------------------------------------------------------|
+         | Windows Mange           | Note : Dosen't kill the Buffer                          |
+         |-------------------------+---------------------------------------------------------|
+         | C-x 0                   | Del current buffer                                      |
+         | C-x 1                   | Show in full screen                                     |
+         | C-x 2                   | Split Horizontal :                                      |
+         | C-x 3                   | Split Vertical:                                         |
+         | C-x o                   | Jump cursor btw buffer                                  |
+         |-------------------------+---------------------------------------------------------|
+         | Macros                  |                                                         |
+         |-------------------------+---------------------------------------------------------|
+         | f3                      | Start macro                                             |
+         | f4                      | End a macro                                             |
+         | C-x (                   | Start the macro                                         |
+         | C-x )                   | End a macro                                             |
+         | f4                      | call macro                                              |
+         | C-u-{n}-f4              | n-times (call macro)                                    |
+         |                         |                                                         |
+         | M-x name-last-kbd-macro | Naming a Macro                                          |
+         | (name) =  bullet-list   |                                                         |
+         |                         |                                                         |
+         | M-x bullet-list         | Call Named Macro                                        |
+         |                         | then f4 to call                                         |
+         |                         |                                                         |
+         |                         |                                                         |
+
+* Emacs Shortcuts keys
+** Introduction
+*** Notations
+Esc , Meta, Alt, Ctrl, Shift
+Esc, Meta(Alt), Ctrl, Shift
+
+
+Key Sequences Concepts
+
+Complete Key sequence and Incomplete Key sequence
+
+Control			C
+Meta(alt,Esc)	M
+Shift			S
+Window			s
+
+note :
+| C-x C-f | press Ctrl X release and then press Ctrl F |
+|         | (press & hold) Ctrl and press X then F     |
+|---------+--------------------------------------------|
+| C-x f   | press Ctrl X release Ctrl and then press f |
+|         |                                            |
+|         |                                            |
+** File Commands
+
+         | Short Key | Describtion |
+         |-----------+-------------|
+         | C-g       | quit        |
+         | C-x C-f   | file        |
+         | C-x C-s   | save        |
+         | C-x C-w   | save as     |
+         | C-x C-x   | exit        |
+         |           |             |
+** Navigation Cmd 
+
+         | Short Key | Desribtion         |
+         |-----------+--------------------|
+         | C-f       | Left               |
+         | C-b       | Right              |
+         | C-p       | Up                 |
+         | C-n       | Down               |
+         |-----------+--------------------|
+         | M-f       | forword by 1 word  |
+         | M-b       | backword by 1 word |
+         | C- left   | one word left      |
+         | C- right  | one word left      |
+         | C-a       | begin of line      |
+         | C-e       | end of line        |
+         | M-a       | begin of sentence  |
+         | M-e       | end of sentence    |
+         |           |                    |
+
+         | home      | begin of line         |
+         | end       | end of line           |
+         | C-up      | move one para up      |
+         | C-down    | move one para down    |
+         |-----------+-----------------------|
+         | C-v       | PgUp                  |
+         | M-v       | PgDN                  |
+         | M-<       | Begin of file         |
+         | M->       | End of file           |
+         | M-"-"     | End of buffer         |
+         |-----------+-----------------------|
+         | C-l       | Move screen to center |
+         | C-x +     | Zoom in               |
+         | C-x -     | Zoom out              |
+
+
+** Edit Cmd
+         | Keys  | Describution                            |
+         |-------+-----------------------------------------|
+         | C-w   | cut                                     |
+         | M-w   | copy                                    |
+         | C-y   | paste                                   |
+         | del   | Delete charter just befor(left) curoser |
+         | C-d   | Del next char after cursor              |
+         | M-del | kill word befor cursor                  |
+         |       |                                         |
+
+         | C-s           | search (case insensitive)  |
+         | C-S           | search (case sensitive)    |
+         |               | C-s     Forword Search     |
+         |               | C-r     Backword Search    |
+         | C-/           | Undo                       |
+         | C-x u         | Undo                       |
+         | C-_           | Undo                       |
+         | C-S-'-'       | Undo                       |
+         | M-%           | query replace              |
+         |               | "space"    :   replace     |
+         |               | "n"        :   skip        |
+         |               | "!"        :   replace all |
+         |               |                            |
+         | M-u           | Change to upper case       |
+         | M-l           | change to Lower case       |
+         | M-c           | Captalize word             |
+         | C-d           | del                        |
+         | C-S-backspace | del line                   |
+         | C-q C-@       | Insert  "^@"               |
+         | c-q C-A       | Insert  "^A"               |
+         | C-x r m       | bookmark-set               |
+         | C-x r b       | bookmark-jump              |
+         |               |                            |
+*** kill region
+    | C-SPACE | set region(begining/end)                  |
+    | C-w     | kill region                               |
+    | C-k     | kill region point and end of current line |
+    | M-k     | kill t end of current sentence            |
+    | M-w     | kill region without deleting              |
+    | C-y     | yank region from kill ring                |
+    | M-y     | previous item in kill ring                |
+    | M-Y     | next item in kill ring                    |
+
+
+*** kill region Vs kill region without deleting
+The difference is that 
+In basic text editors you can only copy or cut one piece of text at a time. 
+In Emacs there is =kill ring=,which hold multiple regions of text that you have killed. 
+
+When you are yanking in =kill region=,you will yanking  it off from kill ring to the buffer. 
+
+So if you =kill a region without deleting=, you are =copying the contents of the region= into the =kill ring= =without deleting the region= from the buffer.
+*** kill ring
+
+** Buffer Manage Cmd
+   The longer you use emacs you will find more buffers 
+
+         | Cmd                   | Describtion                |
+         |-----------------------+----------------------------|
+         | C-x b                 | switch btw buffers         |
+         | C-x C-b               | *Buffer list*              |
+         |-----------------------+----------------------------|
+         | C-x C-b               | *Buffer list*              |
+         |                       | g :  Refresh buffer list   |
+         |                       | m :  mark file             |
+         |                       | t :  Mark all              |
+         |                       | u :  Unmark                |
+         |                       | U :  Unmark all files      |
+         |                       | d :  mark for Delete       |
+         |                       | x :  execute               |
+         |-----------------------+----------------------------|
+         | C-x 0                 | del the current window     |
+         |                       | does't kill buffer         |
+         | C-x right             | right-cycle through buffer |
+         | C-x left              | left-cycle through buffer  |
+         | C-x k                 | Kill the buffer            |
+         | C-x o                 | jump cursor btw buffers    |
+         | M-x clean-buffer-list | Clean buffer               |
+
+*** Switch btw buffer:
+C-x b  >   Tab(view possible in min-buffer)   > type buffer-name > Enter
+C-x C-b  > buffer list (open-horiz)  > C-x o > C-p/C-n to sel > Enter
+** Dired-Mode 
+You can view the dir or *Buffer List* 
+- C-x C-b
+- by  searching file by : C-x C-f  "path"
+This view is dired-mode 
+
+To select 2 or more files  to delete > d(selec) > x(exe)
+Create file  + or C-x C-f "new-fiel name"
+
+                    | Cmd | Describtion      |
+                    |-----+------------------|
+                    | g   | Refresh dir list |
+                    | ^   | parent dir       |
+                    | RET | go Sub dir       |
+                    | m   | mark file        |
+                    | t   | Mark all         |
+                    | u   | Unmark           |
+                    | U   | Unmark all files |
+                    | d   | mark to Delete   |
+                    | x   | execute          |
+                    | +   | create new file  |
+                    | C   | Copy to          |
+                    | R   | Rename           |
+                    | D   | Delete           |
+
+|                 |                                                                         |
+| C-x d Enter     | Open Dired                                                              |
+| C-x C-f         | Find File (Create New File)                                             |
+| +               | Create New Directory                                                    |
+| d               | Mark for deletion (x runs deletion)                   |
+| R (Capital R)   | Rename File. Marking multiple files before Shift+R will MOVE all files. |
+| m (lowercase m) | Mark a file. Used for actions on multiple files at once                 |
+| u               | unmark a file/directory                                                 |
+| x (lowercase)   | Run actions on the files                                                |
+
+** Windows Manage 
+|-------+------------------------|
+| Cmd   | Describtion            |
+|-------+------------------------|
+| C-x 0 | Del current buffer     |
+| C-x 1 | Show in full screen    |
+| C-x 2 | Split Horizontal :     |
+| C-x 3 | Split Vertical:        |
+| C-x o | Jump cursor btw buffer |
+
+** Ido mode 
+If you there are 100 buffers and it is difficult to switch between the bufffer
+ 
+| cmd     | In (M-x ido-mode)           |
+| C-x b   | Provide the list of buffers |
+| C-s,C-r | To move right/left          |
+
+
+If emacs have two same file name then it will show file name with <2> extention which is difficult to distinvish 
+
+M-x customize-group > uniquify > select buffer name style >post-forword 		
+then it will show  fileName|folderName
+  
+** Macro
+
+*** Cmd
+| cmd                     | Describtion          |
+|-------------------------+----------------------|
+| f3                      | Start macro          |
+| f4                      | End a macro          |
+| C-x (                   | Start the macro      |
+| C-x )                   | End a macro          |
+| f4                      | call macro           |
+| C-u-{n}-f4              | n-times (call macro) |
+|                         |                      |
+| M-x name-last-kbd-macro | Naming a Macro       |
+| (name) =  bullet-list   |                      |
+|                         |                      |
+| M-x bullet-list         | Call Named Macro     |
+|                         | then f4 to call      |
+|                         |                      |
+
+
+Macros: there are more than one macro
+#+BEGIN_EXAMPLE
+Amy, Derek, Grant, Ben, Tom, Benedict, Julia, July, Rob, Ram, Laxman, Hanuman
+
+Convert above to list of bulites as show below
+ - Amy
+ - Derek
+....etc
+
+#+END_EXAMPLE
+*** Creating
+#+BEGIN_QUOTE
+Create Macor def :When cursor is starting of list
+f3 
+space - space M-f del del Enter
+f4
+
+#+END_QUOTE
+
+*** Calling a Macro
+#+BEGIN_QUOTE
+Call Macro :
+f4
+#+END_QUOTE
+
+
+*** {No.} {Calling a Macro}
+Consider if string is 100 list then we can't command for each word. Insted we can give no.of times Macro should be played.
+
+We can all n-no.of time by eg :C-u 12 f4
+
+*** Naming Macro
+#+BEGIN_QUOTE
+M-x name-last-kbd-macro
+=Name for last kbd Macro:= bullet-list
+#+END_QUOTE
+*** Call Named Macro
+Named Macro can be used a function, 
+But they are not persistance: macro will be del if emacs is closed
+ 
+#+BEGIN_QUOTE
+M-x bullet-list
+#+END_QUOTE 
+
+*** Save Macro Peremently
+Run 
+#+BEGIN_QUOTE
+M-x insert-kbd-macro
+=Insert kbd macro (name):= bulllet-list 
+#+END_QUOTE
+This will give us code snippet
+#+BEGIN_QUOTE
+(fset 'bullet-list
+   [?  ?- ?  ?\M-f delete delete return])
+#+END_QUOTE
+
+The above code snippet can used in config emacs, and we can even bind to hot-key
+
+*** Numbering using macro
+#+BEGIN_QUOTE
+No. from 0 :
+f3          
+f3 
+enter 
+f4
+No. from 1:
+C-u 1 f3
+f3
+space 
+enter  
+C-a       | begin of line
+f4 
+#+END_QUOTE
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+** help
+All help commands 	: C-h
+			: C-h i "index"
+			: C-h t "tutorial"
+In index "M-" command promant
+* Introduction to Emacs
+** History Emacs
+Gnu 1978(editor macro by karnicars, moon ).......
+80's by Richard Stalman made open source
+Kernal
+Lisp
+Elips
+** Emacs GNU Overview
+*** overview 
++----------------------------------------------------------------------+
+|Buffers | Files | Tools | Edit | Search | Mule | Help |               |  	MENU BAR
++----------------------------------------------------------------------+
+|                                                                      |	WINDOW
+|                    Welcome to GNU Emacs,                             |
+|           one component of a Linux-based GNU system.                 |
+|                                                                      |
+|                                                                      |
+| [] Cursor                                                            |
+|                                                                      |
++----------------------------------------------------------------------+
+|---1:---F1  *scratch*         (Lisp Interaction)--L1--All-------------|	Status-bar or Mode-line
++----------------------------------------------------------------------+
+| For information about the GNU Project and its goals, type C-h C-p.   |    Min-buffer 
++----------------------------------------------------------------------+
+
+*** Frame 
+*** Menu Bar
++----------------------------------------------------------------------+
+|Buffers | Files | Tools | Edit | Search | Mule | Help |               |  	MENU BAR
++----------------------------------------------------------------------+
+*** Tool Bar
+*** Windows
+**** overview 
++----------------------------------------------------------------------+
+|                                                                      |	Buffer
+|Welcome to GNU Emacs, one component of a Linux-based GNU system.      |
+|                                                                      |
+|                                                                      |
+|                                                                      |
+| []                                                                   |
+|                                                                      |
++----------------------------------------------------------------------+
+|---1:---F1  *scratch*         (Lisp Interaction)--L1--All-------------|	Status-bar or Mode-line
++----------------------------------------------------------------------+
+**** buffer
+**** scroll
+**** mode-line or status-bar
+*** min-buffer
+**** over view
++----------------------------------------------------------------------+
+|For information about the GNU Project and its goals, type C-h C-p.    |	Min-buffer
++----------------------------------------------------------------------+
+*** Cursor or Point or Region 
+** Advangaes of Emacs 
+Elisp Interpretor :C ( core 30% ) and lisp(70%) lisp work as a  interpretor
+
+But implecation: 
+ You can write your own function and add you external functionality in emacs that why emacs is alive  33years dev are adding extension,packages,resources...etc
+emacs is basically writen in elisp (70% prg is writen in elisp)
+
+- Easy Syntax : elisp is easy to read and write unlike other languauges
+
+- Extension : we can write own fucntion (extenstion) and intergrate it with lips which increases scope of the elisp.
+
+- Community: Unlike vim emacs community can add extension which drastically increase in functionality becoming more and more popular
+
+- primarly latex editor 
+
+- cross-platform any platform
+
+- Basically it is used for Text Editing
+
+- Now Note ORG Mode
+
+- In future it can become best editor
+
+- We can write "entire script" ,"software"...etc
+* What Emacs can Do?
+To know how to use Chart, Email, Checker, Framework...etc 
+http://spacemacs.org/layers/LAYERS.html
+
+Emacs is different things to different people. Depending who you ask, you'll could get any of the following responses
+*** TextEditor
+     For c,c++,python,bash....etc
+**** python 
+#+BEGIN_SRC py
+#!/user/bin/python
+#+END_SRC
+*** Game
+Tetrics   M-x tetrics
+*** Doctor
+     M-x doctor
+  Alisa program in 60`s-80`s auto program 
+ 
+*** LaTex, Doc, Org, PPT, ORG2HTML
+For ORG2HTML : Ox-Hug https://github.com/kaushalmodi/ox-hugo/blob/master/README.org 
+*** Intergrated Develpoment Environment
+*** Chat
+**** erc
+***** Description
+
+Layer for ERC IRC chat.
+***** Features
+
+    Highlight nicks (using erc-hl-nicks)
+    Image inline support (using erc-image)
+    Logging to ~/.emacs.d/.cache/erc-logs and ViewLogMode for viewing logs (using erc-view-log)
+    YouTube videos Thumbnails inline (using erc-yt)
+    Social Graph for ERC messages (using erc-social-graph)
+    Optional SASL authentication via the variable erc-enable-sasl-auth (using erc-sasl)
+    Completion of Emojis using company-emoji (still needs a way of showing, either using the emoji layer or having a proper font) :clap:
+***** Install
+***** Layer
+
+To use this configuration layer, add it to your ~/.spacemacs. You will need to add erc to the existing dotspacemacs-configuration-layers list in this file.
+***** OS X
+
+It's recommended to install the terminal-notifier gem so that you get notifications via the OS X Notification Center.
+***** Social graph
+
+erc-social-graph needs graphviz to be installed on your system.
+***** Default servers
+
+You can define the default servers in the ERC custom layout by setting the variable erc-server-list. Setting :ssl non nil will connect with erc-tls. You can also use <leader>aiD to connect to your default servers outside the custom layout.
+#+BEGIN_SRC emacs-lisp
+  (setq-default dotspacemacs-configuration-layers
+               '((erc :variables
+                      erc-server-list
+                      '(("irc.freenode.net"
+                         :port "6697"
+                         :ssl t
+                         :nick "some-user"
+                         :password "secret")
+                        ("irc.myworkirc.net"
+                         :port "1234"
+                         :nick "some-suit"
+                         :password "hunter2")))))
+#+END_SRC
+***** Security Note
+
+You should not store your passwords in the clear in your .spacemacs, and that goes double if you version your config file. ERC allows for a number of ways of protecting this information.
+
+First, ERC will check your ~/.authinfo.gpg, looking for lines like
+
+machine <irc.server.url> login <yournick> password <yourpassword> port <portnumber>
+
+You can omit :password in this case.
+
+You could also set an environment variable (or otherwise secret variable) and read that in :password.
+***** Key bindings
+| Key Binding | Description                                           |
+| SPC a i e   | Starts ERC                                            |
+| SPC a i E   | Starts ERC via TLS/SSL                                |
+| SPC a i i   | Switch to next active ERC buffer                      |
+| SPC a i D   | Start ERC with default servers                        |
+| SPC m b     | Switch between ERC buffers                            |
+| SPC m d     | Interactively input a user action and send it to IRC. |
+| SPC m D     | Draw Social Graph using erc-social-graph              |
+| SPC m j     | Join a channel, executes the /join command            |
+| SPC m n     | Run "/names #channel" in the current channel.         |
+| SPC m l     | Run the /list command                                 |
+| SPC m p     | Part from the channel                                 |
+| SPC m q     | Quit server                                           |
+
+Note: If you want to connect securely to an IRC server, you must run erc-tls command on SPC a i E instead of the erc command.
+5 Spacemacs Layout Support
+
+ERC buffers are added automatically to the default layout for ERC controlled by the variable erc-spacemacs-layout-name (defaults to "@ERC") and the default binding ("E") is controlled by erc-spacemacs-layout-binding
+
+**** jabber
+**** rcirc
+**** slack
+
+**** Discord
+*** E-mail
+**** VM (View Mail)
+**** gnus
+**** mu4e
+*** Checkers
+**** spell-chekling
+**** syntax- checking
+*** Auto-Completion
+**** auto-completion
+**** company
+**** helm
+**** ivy
+*** Frameworks
+**** django
+**** react
+**** ruby-on-rail
+*** verion control
+**** git
+**** github
+**** perforce
+**** version-control
+*** Web services
+**** elfeed 
+**** everynote
+**** search-engine
+**** spotify
+**** twitter
+**** waktime
+* Install Emacs
+Command for Installation: 
+#+BEGIN_SRC sh 
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs25
+sudo apt remove emacs25 emacs25-nox && sudo apt autoremove
+#  =============================================================
+
+sudo apt install build-essential checkinstall
+sudo apt-get build-dep emacs24
+cd ~/downloads/emacs-25.1
+./configure 
+make
+sudo checkinstall
+# ============================================================
+
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get build-dep emacs24
+cd ~/Downloads
+wget "http://gnu.mirrors.hoobly.com/gnu/emacs/emacs-24.5.tar.gz"
+tar xvzf emacs-24.*.tar.gz
+cd emacs-24.*
+./configure --without-x
+make
+sudo make install
+#+END_SRC 
+* Emacs Configuraton
+Emacs Configuration is done =.emacs= configuration file (=Init File=) 
+
+=Portability=: we can copy this =Init File= to backup or share the configuration to one other
+
+=Init File= is writen in elisp 
+
+Configration is done in two ways 
+*** Automatic
+In emacs it provide a setting were prg'ers can select fonts, themes, packages, repositores....etc 
+
+The disadvantagae is we can't know make the customize setting
+
+*** Manually 
+We write elisp code in =Init File=  this give user to customize according to there own 
+manually method is prefered which provied better understanding of emacs
+* Learn elisp
+visit: http://spacemacs.org/doc/LAYERS.html
+* Buffers & Files
+Emacs reads the file into a buffer in memory. When write the buffer nothing is changed on disk.
+Only when you actually save the buffer then file on disk get updated.
+There are advantages and disadvantages to this approach but it is only important that you understand that it works this way.
+
+*Messages* buffer to display information and error messages about Emacs itself.
+*scratch* buffer: 
+*Completions* buffer is included in the list of buffers
+* Modes
+In vim there are 3 modes (normal-mode, insert-mode, visual-mode)
+But in emacs as lots of modes we can create our own modes
+
+In genral there are classed in 2 modes
+** Major mode
+*** Fundamental
+To view in shell 
+- write "  #!/bin/bash "  at top of buffer
+- To vew in org Mode > M-x org-mode and reload the buffer (M-x revert buffer)
+
+Not stored in disk it is stored in buffer 
+*** Text Editor
+text,latex,org...etc
+*** IDE 
+ c,c++,pythods,shell...etc
+*** Web development
+html,org2html,
+*** XML/HTML
+
+** Minor Mode
+*** Flyspell
+*** auto-fill-mode(M-x)
+                  | C-x f           | set fill column |
+                  | M-o M-s         | center          |
+                  | M-x fill-region |                 |
+                  | M-q             | fill paragarph  |
+     
+*** yasnippetes mode 
+ - add the ability to paste in repeating 
+*** overwrite mode
+*** line-mode
+*** ascii-mode
+*** Wrapping text
+If you type a lot of words into Emacs, you will notice that it does
+not automatically wrap the text. This can be very annoying both for
+moving the point around if you are typing full paragraphs, because
+Emacs will treat the paragraph as a single line, and for readability.
+|-----+------------------|
+| M-q | To wrap the text |
+|-----+------------------|
+
+* TODO View Terminal 
+emacs view only one terminal
+Term is having issuse  when in "line mode"  give error
+
+but term has no errro only in characer mode : 
+
+| CMD | fUNCTON |
+|     |         |
+
+** Multi Terminal
+- But we can use mulit by tumx   
+ |$tmux (in emacs terminal)|
+- Package multi-term
+** use eshell
+* TODO Other Resources
+** Books
+
+There are a a few really good books available for learning Emacs. In addition to these, you'll find that many Linux and Unix books also contain a chapter or two about Emacs (and vi).
+
+*** Learning GNU Emacs
+Authors	: 	Debra Cameron, Bill Rosenblatt, Eric S. Raymond
+Publisher	: 	O'Reilly & Associates - http://www.ora.com/
+
+Commentary:
+This is probably the best book to start with. After you've read the HOWTO and looked through the FAQ this book serves as a comprehensive and very approachable tutorial.
+
+*** Writing GNU Emacs Extensions
+Author	: 	Bob Glickstein
+Publisher	: 	O'Reilly & Associates - http://www.ora.com/
+
+Commentary:
+After you've used Emacs for a while and have decided that you'd like to try writing your own mode or maybe try out some advanced customization, this is the book for you. While it doesn't attempt to teach Lisp, it does contain a brief introduction to the language.
+
+*** Programming in Emacs Lisp: An Introduction
+Author	: 	Robert J. Chasselle
+
+Commentary:
+This is an elementary introduction to programming in Emacs Lisp for people who are not programmers, and who are not necessarily interested in programming, but who do want to customize or extend their computing environment. 
+
+You can retrieve the manual in its entirety via anonymous FTP from the GNU FTP server:  ftp://prep.ai.mit.edu/gnu/emacs/.
+
+Commentary: This a good introductory manual for Emacs Lisp--even if you're not a heavy-duty programmer.
+
+*** The GNU Emacs Lisp Reference Manual
+Author	: 	Richard Stallman
+Publisher	: 	The Free Software Foundation - http://www.fsf.org/
+
+You can retrieve the manual in its entirety via anonymous FTP from the GNU FTP server: ftp://prep.ai.mit.edu/gnu/emacs/.
+
+Commentary: This is the definitive guide to the Emacs Lisp programming language.
+
+** Web Sites
+EMACSulation
+EMACSulation is a column written by Eric Marsden that appears in the on-line magazine Linux Gazette located at http://www.linuxgazette.com/. The most recent column as of this writing is located at http://www.linuxgazette.com/issue39/marsden.html. Scan to the bottom of the article for links to previous ones.
+
+** Newsgroups
+
+Search you local news feed for newsgroups which contain the string ``emacs'' and you'll probably find many. Those which my server carries are:
+
+    comp.emacs
+    comp.emacs.sources
+    gnu.emacs
+    gnu.emacs.bug
+    gnu.emacs.help
+    gnu.emacs.sources
+
+** Mailing Lists
+
+There is a mailing list for GNU Emacs which is hosted by the Free Software Foundation. See the web site http://mail.gnu.org/mailman/listinfo/help-gnu-emacs for more information.
+
+The only mailing list devoted to Emacs that I know of right now is the NT-Emacs list. It is a list for folks who are using the Micro$oft Windows version of Emacs. See the NT-Emacs FAQ http://www.cs.washington.edu/homes/voelker/ntemacs.html for more information.
+
+** The Emacs Lisp Archive
+
+From the Emacs Lisp Archive README:
+ The Emacs Lisp archives on ftp.cis.ohio-state.edu contain various pieces and packages of Emacs Lisp code. Emacs Lisp is the language used to extend the GNU Emacs editor published by the Free Software Foundation. Although much Emacs Lisp code is included in the GNU Emacs distribution, many people have written packages to interface with other systems, to better support editing the programming language they use, to add new features, or to change Emacs' default behavior. Most of the contents of this archive have been written by individuals and distributed publicly over the Internet through the info-emacs or info-gnu-emacs mailing lists or the comp.emacs, gnu.emacs, or gnu.emacs.sources newsgroups. 
+
+The archives are available via anonymous FTP from ftp://ftp.cis.ohio-state.edu/pub/emacs-lisp/.
+
+NOTE: As far as I can tell, the Emacs Lisp Archive is slowly becoming out of date. I see very few new (or updated) packages appearing there, though I know they exist. They do get posted to the comp.emacs.sources newsgroup. (Feel free to correct me if this is wrong.) 
+* TODO Emacs as python IDE
+http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/

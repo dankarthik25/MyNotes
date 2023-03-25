@@ -1,0 +1,42 @@
+#+TITLE: temp
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+GIT
+- WHAT IS GIT
+  - GIT IS a open source version control system created by linux torvaldss in 2005
+- WHAT IS VCS ?
+  - vcs  is used to track all the changes in project
+- What are the advantages of git
+  - *No data loss* so  *undo previous changes* in data/code
+  - all users  *remotly access and share* the projects
+  - *security* :
+    - outsides can't acess and edit the prj
+  - git is *distributed vcs*  
+- What is diff distributed vcs and centralised vcs ?
+- What are three Stagging Area in git ?
+  Workdir, Stagging Area, Local Repositore
+- Explain git branching model
+  - If you are doing *Continous Delivery*  then it is suggested to use *git branching model*
+
+  - *git branching model* again divied into two groups : *main branches* and *supporting branches*
+    - main branches  *infinite life time*
+      - master branch
+      - developer branch
+    - Supporting branch *limited life time*
+      - feature branch
+      - realase branch
+      - hotfix branch
+
+- How to inicialize a project for version control ?
+  git init in project dirctory
+- How to check which files in project are working dir , stagging area, local repo ? OR status of file in project ?
+  git status
+- How to add/remove files from working dir to staging area
+  git add <file-name>
+  git restore --staged <file-name> # unstage the file
+- How to commit stagged files
+  git commit -m "message"
+- How to   
+  
+    
+

@@ -1,0 +1,3088 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_emacs</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>emacs</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3f8ca9d">All Short Cuts</a></li>
+<li><a href="#org5ce6839">Emacs Shortcuts keys</a>
+<ul>
+<li><a href="#org07d7496">Introduction</a>
+<ul>
+<li><a href="#org931e5a2">Notations</a></li>
+</ul>
+</li>
+<li><a href="#org6f940a3">File Commands</a></li>
+<li><a href="#org0425ed2">Navigation Cmd</a></li>
+<li><a href="#org8303ea0">Edit Cmd</a>
+<ul>
+<li><a href="#org881ed05">kill region</a></li>
+<li><a href="#org9428083">kill region Vs kill region without deleting</a></li>
+<li><a href="#org88e1058">kill ring</a></li>
+</ul>
+</li>
+<li><a href="#org5ee9a36">Buffer Manage Cmd</a>
+<ul>
+<li><a href="#orgf2e6909">Switch btw buffer:</a></li>
+</ul>
+</li>
+<li><a href="#org9de0765">Dired-Mode</a></li>
+<li><a href="#org5c73bb2">Windows Manage</a></li>
+<li><a href="#orgfe5a36f">Ido mode</a></li>
+<li><a href="#orgcd02c25">Macro</a>
+<ul>
+<li><a href="#orgc2aafad">Cmd</a></li>
+<li><a href="#orga8a6380">Creating</a></li>
+<li><a href="#org935ee1c">Calling a Macro</a></li>
+<li><a href="#org9545e0d">{No.} {Calling a Macro}</a></li>
+<li><a href="#org34aa5fc">Naming Macro</a></li>
+<li><a href="#org59af68a">Call Named Macro</a></li>
+<li><a href="#org01ab6d5">Save Macro Peremently</a></li>
+<li><a href="#orgf576abb">Numbering using macro</a></li>
+</ul>
+</li>
+<li><a href="#org3972f42">help</a></li>
+</ul>
+</li>
+<li><a href="#org9b45dbe">Introduction to Emacs</a>
+<ul>
+<li><a href="#org3b086ad">History Emacs</a></li>
+<li><a href="#org4cc293c">Emacs GNU Overview</a>
+<ul>
+<li><a href="#orgca4e5b9">overview</a></li>
+<li><a href="#orgfa61c3d">Frame</a></li>
+<li><a href="#org18be1d7">Menu Bar</a></li>
+<li><a href="#org83d7b71">Tool Bar</a></li>
+<li><a href="#org61b2751">Windows</a></li>
+<li><a href="#org675580e">min-buffer</a></li>
+<li><a href="#org3b4fa85">Cursor or Point or Region</a></li>
+</ul>
+</li>
+<li><a href="#org2219fe5">Advangaes of Emacs</a></li>
+</ul>
+</li>
+<li><a href="#orge432b38">What Emacs can Do?</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org1a5425f">TextEditor</a></li>
+<li><a href="#org108f5b2">Game</a></li>
+<li><a href="#orgf0a6fab">Doctor</a></li>
+<li><a href="#orgb034287">LaTex, Doc, Org, PPT, ORG2HTML</a></li>
+<li><a href="#orge948eac">Intergrated Develpoment Environment</a></li>
+<li><a href="#org84942b4">Chat</a></li>
+<li><a href="#orge72d79a">E-mail</a></li>
+<li><a href="#org407f35d">Checkers</a></li>
+<li><a href="#orgb4a5ea8">Auto-Completion</a></li>
+<li><a href="#org14246d6">Frameworks</a></li>
+<li><a href="#org56216f8">verion control</a></li>
+<li><a href="#org93db871">Web services</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org672a17b">Install Emacs</a></li>
+<li><a href="#org78a9bbe">Emacs Configuraton</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org2d6d0fc">Automatic</a></li>
+<li><a href="#orgeab41be">Manually</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8212dd0">Learn elisp</a></li>
+<li><a href="#org6cde1e3">Buffers &amp; Files</a></li>
+<li><a href="#org04498c8">Modes</a>
+<ul>
+<li><a href="#org291b037">Major mode</a>
+<ul>
+<li><a href="#orgf5c7de0">Fundamental</a></li>
+<li><a href="#orgc29fc37">Text Editor</a></li>
+<li><a href="#orge867fd6">IDE</a></li>
+<li><a href="#org43f6acd">Web development</a></li>
+<li><a href="#orge20521e">XML/HTML</a></li>
+</ul>
+</li>
+<li><a href="#org3a34bb4">Minor Mode</a>
+<ul>
+<li><a href="#org837573c">Flyspell</a></li>
+<li><a href="#orgd9e0a2f">auto-fill-mode(M-x)</a></li>
+<li><a href="#org2cc07d3">yasnippetes mode</a></li>
+<li><a href="#org0ce8b26">overwrite mode</a></li>
+<li><a href="#orgecca869">line-mode</a></li>
+<li><a href="#orgb89a8c6">ascii-mode</a></li>
+<li><a href="#org4134df7">Wrapping text</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgdd5aa73"><span class="todo TODO">TODO</span> View Terminal</a>
+<ul>
+<li><a href="#orgaf29d5d">Multi Terminal</a></li>
+<li><a href="#org59e965f">use eshell</a></li>
+</ul>
+</li>
+<li><a href="#orgb187b4a"><span class="todo TODO">TODO</span> Other Resources</a>
+<ul>
+<li><a href="#org6eea34a">Books</a>
+<ul>
+<li><a href="#orgd7b5c2c">Learning GNU Emacs</a></li>
+<li><a href="#orgc9ced4f">Writing GNU Emacs Extensions</a></li>
+<li><a href="#orge17ddab">Programming in Emacs Lisp: An Introduction</a></li>
+<li><a href="#org6c1ef72">The GNU Emacs Lisp Reference Manual</a></li>
+</ul>
+</li>
+<li><a href="#org39a3493">Web Sites</a></li>
+<li><a href="#org9e6cb5e">Newsgroups</a></li>
+<li><a href="#orgbe2c258">Mailing Lists</a></li>
+<li><a href="#org9b85ca1">The Emacs Lisp Archive</a></li>
+</ul>
+</li>
+<li><a href="#orga5ffea8"><span class="todo TODO">TODO</span> Emacs as python IDE</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3f8ca9d" class="outline-2">
+<h2 id="org3f8ca9d">All Short Cuts</h2>
+<div class="outline-text-2" id="text-org3f8ca9d">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Short Key    Cmd</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">File Manage Cmd</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-g</td>
+<td class="org-left">quit</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-f</td>
+<td class="org-left">file</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-s</td>
+<td class="org-left">save</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-w</td>
+<td class="org-left">save as</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-x</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Navigation</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-f</td>
+<td class="org-left">Left</td>
+</tr>
+
+<tr>
+<td class="org-left">C-b</td>
+<td class="org-left">Right</td>
+</tr>
+
+<tr>
+<td class="org-left">C-p</td>
+<td class="org-left">Up</td>
+</tr>
+
+<tr>
+<td class="org-left">C-n</td>
+<td class="org-left">Down</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-f</td>
+<td class="org-left">forword by 1 word</td>
+</tr>
+
+<tr>
+<td class="org-left">M-b</td>
+<td class="org-left">backword by 1 word</td>
+</tr>
+
+<tr>
+<td class="org-left">C- left</td>
+<td class="org-left">one word left</td>
+</tr>
+
+<tr>
+<td class="org-left">C- right</td>
+<td class="org-left">one word left</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-a</td>
+<td class="org-left">begin of line</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">end of line</td>
+</tr>
+
+<tr>
+<td class="org-left">home</td>
+<td class="org-left">begin of line</td>
+</tr>
+
+<tr>
+<td class="org-left">end</td>
+<td class="org-left">end of line</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-a</td>
+<td class="org-left">begin of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left">M-e</td>
+<td class="org-left">end of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-up</td>
+<td class="org-left">move one para up</td>
+</tr>
+
+<tr>
+<td class="org-left">C-down</td>
+<td class="org-left">move one para down</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-v</td>
+<td class="org-left">PgUp</td>
+</tr>
+
+<tr>
+<td class="org-left">M-v</td>
+<td class="org-left">PgDN</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&lt;</td>
+<td class="org-left">Begin of file</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&gt;</td>
+<td class="org-left">End of file</td>
+</tr>
+
+<tr>
+<td class="org-left">M-"-"</td>
+<td class="org-left">End of buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-l</td>
+<td class="org-left">Move screen to center</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x +</td>
+<td class="org-left">Zoom in</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x -</td>
+<td class="org-left">Zoom out</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Edit Cmd</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-w</td>
+<td class="org-left">cut</td>
+</tr>
+
+<tr>
+<td class="org-left">M-w</td>
+<td class="org-left">copy</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">paste</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-/</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x u</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-_</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S-'-'</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S-backspace</td>
+<td class="org-left">del line</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">del</td>
+<td class="org-left">Delete charter just befor(left) curoser</td>
+</tr>
+
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">Del next char after cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">M-del</td>
+<td class="org-left">kill word befor cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">del</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s</td>
+<td class="org-left">search (case insensitive)</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S</td>
+<td class="org-left">search (case sensitive)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">C-s     Forword Search</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">C-r     Backword Search</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-%</td>
+<td class="org-left">query replace</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"space"    :  Yes   replace</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"n"        :  No    skip</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"!"        :  replace all</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-u</td>
+<td class="org-left">Change to upper case</td>
+</tr>
+
+<tr>
+<td class="org-left">M-l</td>
+<td class="org-left">change to Lower case</td>
+</tr>
+
+<tr>
+<td class="org-left">M-c</td>
+<td class="org-left">Captalize word</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x r m</td>
+<td class="org-left">bookmark-set</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x r b</td>
+<td class="org-left">bookmark-jump</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-q C-@</td>
+<td class="org-left">Insert  "^@"</td>
+</tr>
+
+<tr>
+<td class="org-left">c-q C-A</td>
+<td class="org-left">Insert  "<sup>A</sup>"</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Buffer Mangae  Cmd</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-x b</td>
+<td class="org-left">switch btw buffers/windows</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-b</td>
+<td class="org-left"><b>Buffer list</b></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">g :  Refresh buffer list</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">m :  mark file</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">t :  Mark all</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">u :  Unmark</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">U :  Unmark all files</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">d :  mark for Delete</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x :  execute</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x right</td>
+<td class="org-left">In current window :      right-cycle through buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x left</td>
+<td class="org-left">In current window :      left-cycle through buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x k</td>
+<td class="org-left">Kill the buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x o</td>
+<td class="org-left">jump cursor btw buffers</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 0</td>
+<td class="org-left">del the current window/ NOT BUFFER (does't kill buffer)</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x clean-buffer-list</td>
+<td class="org-left">Clean buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Windows Mange</td>
+<td class="org-left">Note : Dosen't kill the Buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-x 0</td>
+<td class="org-left">Del current buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 1</td>
+<td class="org-left">Show in full screen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 2</td>
+<td class="org-left">Split Horizontal :</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 3</td>
+<td class="org-left">Split Vertical:</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x o</td>
+<td class="org-left">Jump cursor btw buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Macros</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">f3</td>
+<td class="org-left">Start macro</td>
+</tr>
+
+<tr>
+<td class="org-left">f4</td>
+<td class="org-left">End a macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x (</td>
+<td class="org-left">Start the macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x )</td>
+<td class="org-left">End a macro</td>
+</tr>
+
+<tr>
+<td class="org-left">f4</td>
+<td class="org-left">call macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u-{n}-f4</td>
+<td class="org-left">n-times (call macro)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x name-last-kbd-macro</td>
+<td class="org-left">Naming a Macro</td>
+</tr>
+
+<tr>
+<td class="org-left">(name) =  bullet-list</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x bullet-list</td>
+<td class="org-left">Call Named Macro</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">then f4 to call</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org5ce6839" class="outline-2">
+<h2 id="org5ce6839">Emacs Shortcuts keys</h2>
+<div class="outline-text-2" id="text-org5ce6839">
+</div>
+<div id="outline-container-org07d7496" class="outline-3">
+<h3 id="org07d7496">Introduction</h3>
+<div class="outline-text-3" id="text-org07d7496">
+</div>
+<div id="outline-container-org931e5a2" class="outline-4">
+<h4 id="org931e5a2">Notations</h4>
+<div class="outline-text-4" id="text-org931e5a2">
+<p>
+Esc , Meta, Alt, Ctrl, Shift
+Esc, Meta(Alt), Ctrl, Shift
+</p>
+
+
+<p>
+Key Sequences Concepts
+</p>
+
+<p>
+Complete Key sequence and Incomplete Key sequence
+</p>
+
+<p>
+Control			C
+Meta(alt,Esc)	M
+Shift			S
+Window			s
+</p>
+
+<p>
+note :
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">C-x C-f</th>
+<th scope="col" class="org-left">press Ctrl X release and then press Ctrl F</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">(press &amp; hold) Ctrl and press X then F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-x f</td>
+<td class="org-left">press Ctrl X release Ctrl and then press f</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f940a3" class="outline-3">
+<h3 id="org6f940a3">File Commands</h3>
+<div class="outline-text-3" id="text-org6f940a3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Short Key</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-g</td>
+<td class="org-left">quit</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-f</td>
+<td class="org-left">file</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-s</td>
+<td class="org-left">save</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-w</td>
+<td class="org-left">save as</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-x</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org0425ed2" class="outline-3">
+<h3 id="org0425ed2">Navigation Cmd</h3>
+<div class="outline-text-3" id="text-org0425ed2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Short Key</th>
+<th scope="col" class="org-left">Desribtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-f</td>
+<td class="org-left">Left</td>
+</tr>
+
+<tr>
+<td class="org-left">C-b</td>
+<td class="org-left">Right</td>
+</tr>
+
+<tr>
+<td class="org-left">C-p</td>
+<td class="org-left">Up</td>
+</tr>
+
+<tr>
+<td class="org-left">C-n</td>
+<td class="org-left">Down</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-f</td>
+<td class="org-left">forword by 1 word</td>
+</tr>
+
+<tr>
+<td class="org-left">M-b</td>
+<td class="org-left">backword by 1 word</td>
+</tr>
+
+<tr>
+<td class="org-left">C- left</td>
+<td class="org-left">one word left</td>
+</tr>
+
+<tr>
+<td class="org-left">C- right</td>
+<td class="org-left">one word left</td>
+</tr>
+
+<tr>
+<td class="org-left">C-a</td>
+<td class="org-left">begin of line</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">end of line</td>
+</tr>
+
+<tr>
+<td class="org-left">M-a</td>
+<td class="org-left">begin of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left">M-e</td>
+<td class="org-left">end of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">home</th>
+<th scope="col" class="org-left">begin of line</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">end</th>
+<th scope="col" class="org-left">end of line</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">C-up</th>
+<th scope="col" class="org-left">move one para up</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">C-down</th>
+<th scope="col" class="org-left">move one para down</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-v</td>
+<td class="org-left">PgUp</td>
+</tr>
+
+<tr>
+<td class="org-left">M-v</td>
+<td class="org-left">PgDN</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&lt;</td>
+<td class="org-left">Begin of file</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&gt;</td>
+<td class="org-left">End of file</td>
+</tr>
+
+<tr>
+<td class="org-left">M-"-"</td>
+<td class="org-left">End of buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-l</td>
+<td class="org-left">Move screen to center</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x +</td>
+<td class="org-left">Zoom in</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x -</td>
+<td class="org-left">Zoom out</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org8303ea0" class="outline-3">
+<h3 id="org8303ea0">Edit Cmd</h3>
+<div class="outline-text-3" id="text-org8303ea0">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keys</th>
+<th scope="col" class="org-left">Describution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-w</td>
+<td class="org-left">cut</td>
+</tr>
+
+<tr>
+<td class="org-left">M-w</td>
+<td class="org-left">copy</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">paste</td>
+</tr>
+
+<tr>
+<td class="org-left">del</td>
+<td class="org-left">Delete charter just befor(left) curoser</td>
+</tr>
+
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">Del next char after cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">M-del</td>
+<td class="org-left">kill word befor cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">C-s</td>
+<td class="org-left">search (case insensitive)</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S</td>
+<td class="org-left">search (case sensitive)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">C-s     Forword Search</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">C-r     Backword Search</td>
+</tr>
+
+<tr>
+<td class="org-left">C-/</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x u</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-_</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S-'-'</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">M-%</td>
+<td class="org-left">query replace</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"space"    :   replace</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"n"        :   skip</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"!"        :   replace all</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-u</td>
+<td class="org-left">Change to upper case</td>
+</tr>
+
+<tr>
+<td class="org-left">M-l</td>
+<td class="org-left">change to Lower case</td>
+</tr>
+
+<tr>
+<td class="org-left">M-c</td>
+<td class="org-left">Captalize word</td>
+</tr>
+
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">del</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S-backspace</td>
+<td class="org-left">del line</td>
+</tr>
+
+<tr>
+<td class="org-left">C-q C-@</td>
+<td class="org-left">Insert  "^@"</td>
+</tr>
+
+<tr>
+<td class="org-left">c-q C-A</td>
+<td class="org-left">Insert  "<sup>A</sup>"</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x r m</td>
+<td class="org-left">bookmark-set</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x r b</td>
+<td class="org-left">bookmark-jump</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-org881ed05" class="outline-4">
+<h4 id="org881ed05">kill region</h4>
+<div class="outline-text-4" id="text-org881ed05">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">C-SPACE</td>
+<td class="org-left">set region(begining/end)</td>
+</tr>
+
+<tr>
+<td class="org-left">C-w</td>
+<td class="org-left">kill region</td>
+</tr>
+
+<tr>
+<td class="org-left">C-k</td>
+<td class="org-left">kill region point and end of current line</td>
+</tr>
+
+<tr>
+<td class="org-left">M-k</td>
+<td class="org-left">kill t end of current sentence</td>
+</tr>
+
+<tr>
+<td class="org-left">M-w</td>
+<td class="org-left">kill region without deleting</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">yank region from kill ring</td>
+</tr>
+
+<tr>
+<td class="org-left">M-y</td>
+<td class="org-left">previous item in kill ring</td>
+</tr>
+
+<tr>
+<td class="org-left">M-Y</td>
+<td class="org-left">next item in kill ring</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org9428083" class="outline-4">
+<h4 id="org9428083">kill region Vs kill region without deleting</h4>
+<div class="outline-text-4" id="text-org9428083">
+<p>
+The difference is that 
+In basic text editors you can only copy or cut one piece of text at a time. 
+In Emacs there is <code>kill ring</code>,which hold multiple regions of text that you have killed. 
+</p>
+
+<p>
+When you are yanking in <code>kill region</code>,you will yanking  it off from kill ring to the buffer. 
+</p>
+
+<p>
+So if you <code>kill a region without deleting</code>, you are <code>copying the contents of the region</code> into the <code>kill ring</code> <code>without deleting the region</code> from the buffer.
+</p>
+</div>
+</div>
+<div id="outline-container-org88e1058" class="outline-4">
+<h4 id="org88e1058">kill ring</h4>
+</div>
+</div>
+
+<div id="outline-container-org5ee9a36" class="outline-3">
+<h3 id="org5ee9a36">Buffer Manage Cmd</h3>
+<div class="outline-text-3" id="text-org5ee9a36">
+<p>
+The longer you use emacs you will find more buffers 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Cmd</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-x b</td>
+<td class="org-left">switch btw buffers</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-b</td>
+<td class="org-left"><b>Buffer list</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-x C-b</td>
+<td class="org-left"><b>Buffer list</b></td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">g :  Refresh buffer list</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">m :  mark file</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">t :  Mark all</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">u :  Unmark</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">U :  Unmark all files</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">d :  mark for Delete</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">x :  execute</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-x 0</td>
+<td class="org-left">del the current window</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">does't kill buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x right</td>
+<td class="org-left">right-cycle through buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x left</td>
+<td class="org-left">left-cycle through buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x k</td>
+<td class="org-left">Kill the buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x o</td>
+<td class="org-left">jump cursor btw buffers</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x clean-buffer-list</td>
+<td class="org-left">Clean buffer</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgf2e6909" class="outline-4">
+<h4 id="orgf2e6909">Switch btw buffer:</h4>
+<div class="outline-text-4" id="text-orgf2e6909">
+<p>
+C-x b  &gt;   Tab(view possible in min-buffer)   &gt; type buffer-name &gt; Enter
+C-x C-b  &gt; buffer list (open-horiz)  &gt; C-x o &gt; C-p/C-n to sel &gt; Enter
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9de0765" class="outline-3">
+<h3 id="org9de0765">Dired-Mode</h3>
+<div class="outline-text-3" id="text-org9de0765">
+<p>
+You can view the dir or <b>Buffer List</b> 
+</p>
+<ul class="org-ul">
+<li>C-x C-b</li>
+<li>by  searching file by : C-x C-f  "path"</li>
+</ul>
+<p>
+This view is dired-mode 
+</p>
+
+<p>
+To select 2 or more files  to delete &gt; d(selec) &gt; x(exe)
+Create file  + or C-x C-f "new-fiel name"
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Cmd</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">g</td>
+<td class="org-left">Refresh dir list</td>
+</tr>
+
+<tr>
+<td class="org-left">^</td>
+<td class="org-left">parent dir</td>
+</tr>
+
+<tr>
+<td class="org-left">RET</td>
+<td class="org-left">go Sub dir</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">mark file</td>
+</tr>
+
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">Mark all</td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-left">Unmark</td>
+</tr>
+
+<tr>
+<td class="org-left">U</td>
+<td class="org-left">Unmark all files</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">mark to Delete</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">execute</td>
+</tr>
+
+<tr>
+<td class="org-left">+</td>
+<td class="org-left">create new file</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">Copy to</td>
+</tr>
+
+<tr>
+<td class="org-left">R</td>
+<td class="org-left">Rename</td>
+</tr>
+
+<tr>
+<td class="org-left">D</td>
+<td class="org-left">Delete</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x d Enter</td>
+<td class="org-left">Open Dired</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-f</td>
+<td class="org-left">Find File (Create New File)</td>
+</tr>
+
+<tr>
+<td class="org-left">+</td>
+<td class="org-left">Create New Directory</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">Mark for deletion (x runs deletion)</td>
+</tr>
+
+<tr>
+<td class="org-left">R (Capital R)</td>
+<td class="org-left">Rename File. Marking multiple files before Shift+R will MOVE all files.</td>
+</tr>
+
+<tr>
+<td class="org-left">m (lowercase m)</td>
+<td class="org-left">Mark a file. Used for actions on multiple files at once</td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-left">unmark a file/directory</td>
+</tr>
+
+<tr>
+<td class="org-left">x (lowercase)</td>
+<td class="org-left">Run actions on the files</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org5c73bb2" class="outline-3">
+<h3 id="org5c73bb2">Windows Manage</h3>
+<div class="outline-text-3" id="text-org5c73bb2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Cmd</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-x 0</td>
+<td class="org-left">Del current buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 1</td>
+<td class="org-left">Show in full screen</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 2</td>
+<td class="org-left">Split Horizontal :</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 3</td>
+<td class="org-left">Split Vertical:</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x o</td>
+<td class="org-left">Jump cursor btw buffer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgfe5a36f" class="outline-3">
+<h3 id="orgfe5a36f">Ido mode</h3>
+<div class="outline-text-3" id="text-orgfe5a36f">
+<p>
+If you there are 100 buffers and it is difficult to switch between the bufffer
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">cmd</td>
+<td class="org-left">In (M-x ido-mode)</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x b</td>
+<td class="org-left">Provide the list of buffers</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s,C-r</td>
+<td class="org-left">To move right/left</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+If emacs have two same file name then it will show file name with &lt;2&gt; extention which is difficult to distinvish 
+</p>
+
+<p>
+M-x customize-group &gt; uniquify &gt; select buffer name style &gt;post-forword 		
+then it will show  fileName|folderName
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcd02c25" class="outline-3">
+<h3 id="orgcd02c25">Macro</h3>
+<div class="outline-text-3" id="text-orgcd02c25">
+</div>
+<div id="outline-container-orgc2aafad" class="outline-4">
+<h4 id="orgc2aafad">Cmd</h4>
+<div class="outline-text-4" id="text-orgc2aafad">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">cmd</th>
+<th scope="col" class="org-left">Describtion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">f3</td>
+<td class="org-left">Start macro</td>
+</tr>
+
+<tr>
+<td class="org-left">f4</td>
+<td class="org-left">End a macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x (</td>
+<td class="org-left">Start the macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x )</td>
+<td class="org-left">End a macro</td>
+</tr>
+
+<tr>
+<td class="org-left">f4</td>
+<td class="org-left">call macro</td>
+</tr>
+
+<tr>
+<td class="org-left">C-u-{n}-f4</td>
+<td class="org-left">n-times (call macro)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x name-last-kbd-macro</td>
+<td class="org-left">Naming a Macro</td>
+</tr>
+
+<tr>
+<td class="org-left">(name) =  bullet-list</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x bullet-list</td>
+<td class="org-left">Call Named Macro</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">then f4 to call</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Macros: there are more than one macro
+</p>
+<pre class="example" id="orgf6ce6f0">
+Amy, Derek, Grant, Ben, Tom, Benedict, Julia, July, Rob, Ram, Laxman, Hanuman
+
+Convert above to list of bulites as show below
+ - Amy
+ - Derek
+....etc
+
+</pre>
+</div>
+</div>
+<div id="outline-container-orga8a6380" class="outline-4">
+<h4 id="orga8a6380">Creating</h4>
+<div class="outline-text-4" id="text-orga8a6380">
+<blockquote>
+<p>
+Create Macor def :When cursor is starting of list
+f3 
+space - space M-f del del Enter
+f4
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org935ee1c" class="outline-4">
+<h4 id="org935ee1c">Calling a Macro</h4>
+<div class="outline-text-4" id="text-org935ee1c">
+<blockquote>
+<p>
+Call Macro :
+f4
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-org9545e0d" class="outline-4">
+<h4 id="org9545e0d">{No.} {Calling a Macro}</h4>
+<div class="outline-text-4" id="text-org9545e0d">
+<p>
+Consider if string is 100 list then we can't command for each word. Insted we can give no.of times Macro should be played.
+</p>
+
+<p>
+We can all n-no.of time by eg :C-u 12 f4
+</p>
+</div>
+</div>
+
+<div id="outline-container-org34aa5fc" class="outline-4">
+<h4 id="org34aa5fc">Naming Macro</h4>
+<div class="outline-text-4" id="text-org34aa5fc">
+<blockquote>
+<p>
+M-x name-last-kbd-macro
+<code>Name for last kbd Macro:</code> bullet-list
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org59af68a" class="outline-4">
+<h4 id="org59af68a">Call Named Macro</h4>
+<div class="outline-text-4" id="text-org59af68a">
+<p>
+Named Macro can be used a function, 
+But they are not persistance: macro will be del if emacs is closed
+</p>
+
+<blockquote>
+<p>
+M-x bullet-list
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org01ab6d5" class="outline-4">
+<h4 id="org01ab6d5">Save Macro Peremently</h4>
+<div class="outline-text-4" id="text-org01ab6d5">
+<p>
+Run 
+</p>
+<blockquote>
+<p>
+M-x insert-kbd-macro
+<code>Insert kbd macro (name):</code> bulllet-list 
+</p>
+</blockquote>
+<p>
+This will give us code snippet
+</p>
+<blockquote>
+<p>
+(fset 'bullet-list
+   [?  ?- ?  ?\M-f delete delete return])
+</p>
+</blockquote>
+
+<p>
+The above code snippet can used in config emacs, and we can even bind to hot-key
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf576abb" class="outline-4">
+<h4 id="orgf576abb">Numbering using macro</h4>
+<div class="outline-text-4" id="text-orgf576abb">
+<blockquote>
+<p>
+No. from 0 :
+f3          
+f3 
+enter 
+f4
+No. from 1:
+C-u 1 f3
+f3
+space 
+enter  
+C-a       | begin of line
+f4 
+</p>
+</blockquote>
+<p>
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3972f42" class="outline-3">
+<h3 id="org3972f42">help</h3>
+<div class="outline-text-3" id="text-org3972f42">
+<p>
+All help commands 	: C-h
+</p>
+<pre class="example">
+C-h i "index"
+C-h t "tutorial"
+</pre>
+
+<p>
+In index "M-" command promant
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9b45dbe" class="outline-2">
+<h2 id="org9b45dbe">Introduction to Emacs</h2>
+<div class="outline-text-2" id="text-org9b45dbe">
+</div>
+<div id="outline-container-org3b086ad" class="outline-3">
+<h3 id="org3b086ad">History Emacs</h3>
+<div class="outline-text-3" id="text-org3b086ad">
+<p>
+Gnu 1978(editor macro by karnicars, moon )&#x2026;&#x2026;.
+80's by Richard Stalman made open source
+Kernal
+Lisp
+Elips
+</p>
+</div>
+</div>
+<div id="outline-container-org4cc293c" class="outline-3">
+<h3 id="org4cc293c">Emacs GNU Overview</h3>
+<div class="outline-text-3" id="text-org4cc293c">
+</div>
+<div id="outline-container-orgca4e5b9" class="outline-4">
+<h4 id="orgca4e5b9">overview</h4>
+<div class="outline-text-4" id="text-orgca4e5b9">
+<!-- This HTML table template is generated by emacs 28.2 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      Buffers&nbsp;|&nbsp;Files&nbsp;|&nbsp;Tools&nbsp;|&nbsp;Edit&nbsp;|&nbsp;Search&nbsp;|&nbsp;Mule&nbsp;|&nbsp;Help&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome&nbsp;to&nbsp;GNU&nbsp;Emacs,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;one&nbsp;component&nbsp;of&nbsp;a&nbsp;Linux-based&nbsp;GNU&nbsp;system.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;[]&nbsp;Cursor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      ---1:---F1&nbsp;&nbsp;*scratch*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Lisp&nbsp;Interaction)--L1--All-------------
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;For&nbsp;information&nbsp;about&nbsp;the&nbsp;GNU&nbsp;Project&nbsp;and&nbsp;its&nbsp;goals,&nbsp;type&nbsp;C-h&nbsp;C-p.&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgfa61c3d" class="outline-4">
+<h4 id="orgfa61c3d">Frame</h4>
+</div>
+<div id="outline-container-org18be1d7" class="outline-4">
+<h4 id="org18be1d7">Menu Bar</h4>
+<div class="outline-text-4" id="text-org18be1d7">
+<!-- This HTML table template is generated by emacs 28.2 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      Buffers&nbsp;|&nbsp;Files&nbsp;|&nbsp;Tools&nbsp;|&nbsp;Edit&nbsp;|&nbsp;Search&nbsp;|&nbsp;Mule&nbsp;|&nbsp;Help&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+<div id="outline-container-org83d7b71" class="outline-4">
+<h4 id="org83d7b71">Tool Bar</h4>
+</div>
+<div id="outline-container-org61b2751" class="outline-4">
+<h4 id="org61b2751">Windows</h4>
+<div class="outline-text-4" id="text-org61b2751">
+</div>
+<ul class="org-ul">
+<li><a id="org3098ec8"></a>overview<br />
+<div class="outline-text-5" id="text-org3098ec8">
+<!-- This HTML table template is generated by emacs 28.2 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      Welcome&nbsp;to&nbsp;GNU&nbsp;Emacs,&nbsp;one&nbsp;component&nbsp;of&nbsp;a&nbsp;Linux-based&nbsp;GNU&nbsp;system.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;[]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      ---1:---F1&nbsp;&nbsp;*scratch*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Lisp&nbsp;Interaction)--L1--All-------------
+    </td>
+  </tr>
+</table>
+</div>
+</li>
+<li><a id="org712fdaf"></a>buffer<br /></li>
+<li><a id="orga8e587a"></a>scroll<br /></li>
+<li><a id="orgb337ccd"></a>mode-line or status-bar<br /></li>
+</ul>
+</div>
+<div id="outline-container-org675580e" class="outline-4">
+<h4 id="org675580e">min-buffer</h4>
+<div class="outline-text-4" id="text-org675580e">
+</div>
+<ul class="org-ul">
+<li><a id="org17d4648"></a>over view<br />
+<div class="outline-text-5" id="text-org17d4648">
+<!-- This HTML table template is generated by emacs 28.2 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      For&nbsp;information&nbsp;about&nbsp;the&nbsp;GNU&nbsp;Project&nbsp;and&nbsp;its&nbsp;goals,&nbsp;type&nbsp;C-h&nbsp;C-p.&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org3b4fa85" class="outline-4">
+<h4 id="org3b4fa85">Cursor or Point or Region</h4>
+</div>
+</div>
+<div id="outline-container-org2219fe5" class="outline-3">
+<h3 id="org2219fe5">Advangaes of Emacs</h3>
+<div class="outline-text-3" id="text-org2219fe5">
+<p>
+Elisp Interpretor :C ( core 30% ) and lisp(70%) lisp work as a  interpretor
+</p>
+
+<p>
+But implecation: 
+ You can write your own function and add you external functionality in emacs that why emacs is alive  33years dev are adding extension,packages,resources&#x2026;etc
+emacs is basically writen in elisp (70% prg is writen in elisp)
+</p>
+
+<ul class="org-ul">
+<li>Easy Syntax : elisp is easy to read and write unlike other languauges</li>
+
+<li>Extension : we can write own fucntion (extenstion) and intergrate it with lips which increases scope of the elisp.</li>
+
+<li>Community: Unlike vim emacs community can add extension which drastically increase in functionality becoming more and more popular</li>
+
+<li>primarly latex editor</li>
+
+<li>cross-platform any platform</li>
+
+<li>Basically it is used for Text Editing</li>
+
+<li>Now Note ORG Mode</li>
+
+<li>In future it can become best editor</li>
+
+<li>We can write "entire script" ,"software"&#x2026;etc</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge432b38" class="outline-2">
+<h2 id="orge432b38">What Emacs can Do?</h2>
+<div class="outline-text-2" id="text-orge432b38">
+<p>
+To know how to use Chart, Email, Checker, Framework&#x2026;etc 
+<a href="http://spacemacs.org/layers/LAYERS.html">http://spacemacs.org/layers/LAYERS.html</a>
+</p>
+
+<p>
+Emacs is different things to different people. Depending who you ask, you'll could get any of the following responses
+</p>
+</div>
+<div id="outline-container-org1a5425f" class="outline-4">
+<h4 id="org1a5425f">TextEditor</h4>
+<div class="outline-text-4" id="text-org1a5425f">
+<p>
+For c,c++,python,bash&#x2026;.etc
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="orgf8143c8"></a>python<br />
+<div class="outline-text-5" id="text-orgf8143c8">
+<div class="org-src-container">
+<pre class="src src-py">#!/user/bin/python
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org108f5b2" class="outline-4">
+<h4 id="org108f5b2">Game</h4>
+<div class="outline-text-4" id="text-org108f5b2">
+<p>
+Tetrics   M-x tetrics
+</p>
+</div>
+</div>
+<div id="outline-container-orgf0a6fab" class="outline-4">
+<h4 id="orgf0a6fab">Doctor</h4>
+<div class="outline-text-4" id="text-orgf0a6fab">
+<p>
+   M-x doctor
+Alisa program in 60`s-80`s auto program 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb034287" class="outline-4">
+<h4 id="orgb034287">LaTex, Doc, Org, PPT, ORG2HTML</h4>
+<div class="outline-text-4" id="text-orgb034287">
+<p>
+For ORG2HTML : Ox-Hug <a href="https://github.com/kaushalmodi/ox-hugo/blob/master/README.org">https://github.com/kaushalmodi/ox-hugo/blob/master/README.org</a> 
+</p>
+</div>
+</div>
+<div id="outline-container-orge948eac" class="outline-4">
+<h4 id="orge948eac">Intergrated Develpoment Environment</h4>
+</div>
+<div id="outline-container-org84942b4" class="outline-4">
+<h4 id="org84942b4">Chat</h4>
+<div class="outline-text-4" id="text-org84942b4">
+</div>
+<ul class="org-ul">
+<li><a id="org2e51b9a"></a>erc<br />
+<ul class="org-ul">
+<li><a id="org1abd466"></a>Description<br />
+<div class="outline-text-6" id="text-org1abd466">
+<p>
+Layer for ERC IRC chat.
+</p>
+</div>
+</li>
+<li><a id="org1efaba6"></a>Features<br />
+<div class="outline-text-6" id="text-org1efaba6">
+<p>
+Highlight nicks (using erc-hl-nicks)
+Image inline support (using erc-image)
+Logging to ~/.emacs.d/.cache/erc-logs and ViewLogMode for viewing logs (using erc-view-log)
+YouTube videos Thumbnails inline (using erc-yt)
+Social Graph for ERC messages (using erc-social-graph)
+Optional SASL authentication via the variable erc-enable-sasl-auth (using erc-sasl)
+Completion of Emojis using company-emoji (still needs a way of showing, either using the emoji layer or having a proper font) :clap:
+</p>
+</div>
+</li>
+<li><a id="orga08f14f"></a>Install<br /></li>
+<li><a id="orgc3c6daf"></a>Layer<br />
+<div class="outline-text-6" id="text-orgc3c6daf">
+<p>
+To use this configuration layer, add it to your ~/.spacemacs. You will need to add erc to the existing dotspacemacs-configuration-layers list in this file.
+</p>
+</div>
+</li>
+<li><a id="org8e470fc"></a>OS X<br />
+<div class="outline-text-6" id="text-org8e470fc">
+<p>
+It's recommended to install the terminal-notifier gem so that you get notifications via the OS X Notification Center.
+</p>
+</div>
+</li>
+<li><a id="org7c68c4b"></a>Social graph<br />
+<div class="outline-text-6" id="text-org7c68c4b">
+<p>
+erc-social-graph needs graphviz to be installed on your system.
+</p>
+</div>
+</li>
+<li><a id="org41a0460"></a>Default servers<br />
+<div class="outline-text-6" id="text-org41a0460">
+<p>
+You can define the default servers in the ERC custom layout by setting the variable erc-server-list. Setting :ssl non nil will connect with erc-tls. You can also use &lt;leader&gt;aiD to connect to your default servers outside the custom layout.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq-default dotspacemacs-configuration-layers
+	     '((erc :variables
+		    erc-server-list
+		    '(("irc.freenode.net"
+		       :port "6697"
+		       :ssl t
+		       :nick "some-user"
+		       :password "secret")
+		      ("irc.myworkirc.net"
+		       :port "1234"
+		       :nick "some-suit"
+		       :password "hunter2")))))
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org0fef105"></a>Security Note<br />
+<div class="outline-text-6" id="text-org0fef105">
+<p>
+You should not store your passwords in the clear in your .spacemacs, and that goes double if you version your config file. ERC allows for a number of ways of protecting this information.
+</p>
+
+<p>
+First, ERC will check your ~/.authinfo.gpg, looking for lines like
+</p>
+
+<p>
+machine &lt;irc.server.url&gt; login &lt;yournick&gt; password &lt;yourpassword&gt; port &lt;portnumber&gt;
+</p>
+
+<p>
+You can omit :password in this case.
+</p>
+
+<p>
+You could also set an environment variable (or otherwise secret variable) and read that in :password.
+</p>
+</div>
+</li>
+<li><a id="org3be03ec"></a>Key bindings<br />
+<div class="outline-text-6" id="text-org3be03ec">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Key Binding</td>
+<td class="org-left">Description</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC a i e</td>
+<td class="org-left">Starts ERC</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC a i E</td>
+<td class="org-left">Starts ERC via TLS/SSL</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC a i i</td>
+<td class="org-left">Switch to next active ERC buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC a i D</td>
+<td class="org-left">Start ERC with default servers</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m b</td>
+<td class="org-left">Switch between ERC buffers</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m d</td>
+<td class="org-left">Interactively input a user action and send it to IRC.</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m D</td>
+<td class="org-left">Draw Social Graph using erc-social-graph</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m j</td>
+<td class="org-left">Join a channel, executes the /join command</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m n</td>
+<td class="org-left">Run "/names #channel" in the current channel.</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m l</td>
+<td class="org-left">Run the /list command</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m p</td>
+<td class="org-left">Part from the channel</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC m q</td>
+<td class="org-left">Quit server</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note: If you want to connect securely to an IRC server, you must run erc-tls command on SPC a i E instead of the erc command.
+5 Spacemacs Layout Support
+</p>
+
+<p>
+ERC buffers are added automatically to the default layout for ERC controlled by the variable erc-spacemacs-layout-name (defaults to "@ERC") and the default binding ("E") is controlled by erc-spacemacs-layout-binding
+</p>
+</div>
+</li>
+</ul>
+</li>
+
+<li><a id="org3621163"></a>jabber<br /></li>
+<li><a id="org4c8bf14"></a>rcirc<br /></li>
+<li><a id="orgef82c61"></a>slack<br /></li>
+
+<li><a id="org2012a65"></a>Discord<br /></li>
+</ul>
+</div>
+<div id="outline-container-orge72d79a" class="outline-4">
+<h4 id="orge72d79a">E-mail</h4>
+<div class="outline-text-4" id="text-orge72d79a">
+</div>
+<ul class="org-ul">
+<li><a id="orgacec77f"></a>VM (View Mail)<br /></li>
+<li><a id="org763e03e"></a>gnus<br /></li>
+<li><a id="org8386d38"></a>mu4e<br /></li>
+</ul>
+</div>
+<div id="outline-container-org407f35d" class="outline-4">
+<h4 id="org407f35d">Checkers</h4>
+<div class="outline-text-4" id="text-org407f35d">
+</div>
+<ul class="org-ul">
+<li><a id="orgbe48fee"></a>spell-chekling<br /></li>
+<li><a id="org3647396"></a>syntax- checking<br /></li>
+</ul>
+</div>
+<div id="outline-container-orgb4a5ea8" class="outline-4">
+<h4 id="orgb4a5ea8">Auto-Completion</h4>
+<div class="outline-text-4" id="text-orgb4a5ea8">
+</div>
+<ul class="org-ul">
+<li><a id="org8c80311"></a>auto-completion<br /></li>
+<li><a id="org0149464"></a>company<br /></li>
+<li><a id="orgb193615"></a>helm<br /></li>
+<li><a id="org4c94401"></a>ivy<br /></li>
+</ul>
+</div>
+<div id="outline-container-org14246d6" class="outline-4">
+<h4 id="org14246d6">Frameworks</h4>
+<div class="outline-text-4" id="text-org14246d6">
+</div>
+<ul class="org-ul">
+<li><a id="orga4d7c9a"></a>django<br /></li>
+<li><a id="orgf7054d1"></a>react<br /></li>
+<li><a id="orgd17f552"></a>ruby-on-rail<br /></li>
+</ul>
+</div>
+<div id="outline-container-org56216f8" class="outline-4">
+<h4 id="org56216f8">verion control</h4>
+<div class="outline-text-4" id="text-org56216f8">
+</div>
+<ul class="org-ul">
+<li><a id="orgeeb9bd5"></a>git<br /></li>
+<li><a id="org866b2a3"></a>github<br /></li>
+<li><a id="org70cefd9"></a>perforce<br /></li>
+<li><a id="org1adba02"></a>version-control<br /></li>
+</ul>
+</div>
+<div id="outline-container-org93db871" class="outline-4">
+<h4 id="org93db871">Web services</h4>
+<div class="outline-text-4" id="text-org93db871">
+</div>
+<ul class="org-ul">
+<li><a id="org7009e37"></a>elfeed<br /></li>
+<li><a id="org51a71de"></a>everynote<br /></li>
+<li><a id="org40d7a3b"></a>search-engine<br /></li>
+<li><a id="org467faec"></a>spotify<br /></li>
+<li><a id="org2fa036b"></a>twitter<br /></li>
+<li><a id="orgd172a83"></a>waktime<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org672a17b" class="outline-2">
+<h2 id="org672a17b">Install Emacs</h2>
+<div class="outline-text-2" id="text-org672a17b">
+<p>
+Command for Installation: 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs25
+sudo apt remove emacs25 emacs25-nox &amp;&amp; sudo apt autoremove
+#  =============================================================
+
+sudo apt install build-essential checkinstall
+sudo apt-get build-dep emacs24
+cd ~/downloads/emacs-25.1
+./configure 
+make
+sudo checkinstall
+# ============================================================
+
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get build-dep emacs24
+cd ~/Downloads
+wget "http://gnu.mirrors.hoobly.com/gnu/emacs/emacs-24.5.tar.gz"
+tar xvzf emacs-24.*.tar.gz
+cd emacs-24.*
+./configure --without-x
+make
+sudo make install
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org78a9bbe" class="outline-2">
+<h2 id="org78a9bbe">Emacs Configuraton</h2>
+<div class="outline-text-2" id="text-org78a9bbe">
+<p>
+Emacs Configuration is done <code>.emacs</code> configuration file (<code>Init File</code>) 
+</p>
+
+<p>
+<code>Portability</code>: we can copy this <code>Init File</code> to backup or share the configuration to one other
+</p>
+
+<p>
+<code>Init File</code> is writen in elisp 
+</p>
+
+<p>
+Configration is done in two ways 
+</p>
+</div>
+<div id="outline-container-org2d6d0fc" class="outline-4">
+<h4 id="org2d6d0fc">Automatic</h4>
+<div class="outline-text-4" id="text-org2d6d0fc">
+<p>
+In emacs it provide a setting were prg'ers can select fonts, themes, packages, repositores&#x2026;.etc 
+</p>
+
+<p>
+The disadvantagae is we can't know make the customize setting
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeab41be" class="outline-4">
+<h4 id="orgeab41be">Manually</h4>
+<div class="outline-text-4" id="text-orgeab41be">
+<p>
+We write elisp code in <code>Init File</code>  this give user to customize according to there own 
+manually method is prefered which provied better understanding of emacs
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8212dd0" class="outline-2">
+<h2 id="org8212dd0">Learn elisp</h2>
+<div class="outline-text-2" id="text-org8212dd0">
+<p>
+visit: <a href="http://spacemacs.org/doc/LAYERS.html">http://spacemacs.org/doc/LAYERS.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org6cde1e3" class="outline-2">
+<h2 id="org6cde1e3">Buffers &amp; Files</h2>
+<div class="outline-text-2" id="text-org6cde1e3">
+<p>
+Emacs reads the file into a buffer in memory. When write the buffer nothing is changed on disk.
+Only when you actually save the buffer then file on disk get updated.
+There are advantages and disadvantages to this approach but it is only important that you understand that it works this way.
+</p>
+
+<p>
+<b>Messages</b> buffer to display information and error messages about Emacs itself.
+<b>scratch</b> buffer: 
+<b>Completions</b> buffer is included in the list of buffers
+</p>
+</div>
+</div>
+<div id="outline-container-org04498c8" class="outline-2">
+<h2 id="org04498c8">Modes</h2>
+<div class="outline-text-2" id="text-org04498c8">
+<p>
+In vim there are 3 modes (normal-mode, insert-mode, visual-mode)
+But in emacs as lots of modes we can create our own modes
+</p>
+
+<p>
+In genral there are classed in 2 modes
+</p>
+</div>
+<div id="outline-container-org291b037" class="outline-3">
+<h3 id="org291b037">Major mode</h3>
+<div class="outline-text-3" id="text-org291b037">
+</div>
+<div id="outline-container-orgf5c7de0" class="outline-4">
+<h4 id="orgf5c7de0">Fundamental</h4>
+<div class="outline-text-4" id="text-orgf5c7de0">
+<p>
+To view in shell 
+</p>
+<ul class="org-ul">
+<li>write "  #!/bin/bash "  at top of buffer</li>
+<li>To vew in org Mode &gt; M-x org-mode and reload the buffer (M-x revert buffer)</li>
+</ul>
+
+<p>
+Not stored in disk it is stored in buffer 
+</p>
+</div>
+</div>
+<div id="outline-container-orgc29fc37" class="outline-4">
+<h4 id="orgc29fc37">Text Editor</h4>
+<div class="outline-text-4" id="text-orgc29fc37">
+<p>
+text,latex,org&#x2026;etc
+</p>
+</div>
+</div>
+<div id="outline-container-orge867fd6" class="outline-4">
+<h4 id="orge867fd6">IDE</h4>
+<div class="outline-text-4" id="text-orge867fd6">
+<p>
+c,c++,pythods,shell&#x2026;etc
+</p>
+</div>
+</div>
+<div id="outline-container-org43f6acd" class="outline-4">
+<h4 id="org43f6acd">Web development</h4>
+<div class="outline-text-4" id="text-org43f6acd">
+<p>
+html,org2html,
+</p>
+</div>
+</div>
+<div id="outline-container-orge20521e" class="outline-4">
+<h4 id="orge20521e">XML/HTML</h4>
+</div>
+</div>
+
+<div id="outline-container-org3a34bb4" class="outline-3">
+<h3 id="org3a34bb4">Minor Mode</h3>
+<div class="outline-text-3" id="text-org3a34bb4">
+</div>
+<div id="outline-container-org837573c" class="outline-4">
+<h4 id="org837573c">Flyspell</h4>
+</div>
+<div id="outline-container-orgd9e0a2f" class="outline-4">
+<h4 id="orgd9e0a2f">auto-fill-mode(M-x)</h4>
+<div class="outline-text-4" id="text-orgd9e0a2f">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">C-x f</td>
+<td class="org-left">set fill column</td>
+</tr>
+
+<tr>
+<td class="org-left">M-o M-s</td>
+<td class="org-left">center</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x fill-region</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M-q</td>
+<td class="org-left">fill paragarph</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org2cc07d3" class="outline-4">
+<h4 id="org2cc07d3">yasnippetes mode</h4>
+<div class="outline-text-4" id="text-org2cc07d3">
+<ul class="org-ul">
+<li>add the ability to paste in repeating</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0ce8b26" class="outline-4">
+<h4 id="org0ce8b26">overwrite mode</h4>
+</div>
+<div id="outline-container-orgecca869" class="outline-4">
+<h4 id="orgecca869">line-mode</h4>
+</div>
+<div id="outline-container-orgb89a8c6" class="outline-4">
+<h4 id="orgb89a8c6">ascii-mode</h4>
+</div>
+<div id="outline-container-org4134df7" class="outline-4">
+<h4 id="org4134df7">Wrapping text</h4>
+<div class="outline-text-4" id="text-org4134df7">
+<p>
+If you type a lot of words into Emacs, you will notice that it does
+not automatically wrap the text. This can be very annoying both for
+moving the point around if you are typing full paragraphs, because
+Emacs will treat the paragraph as a single line, and for readability.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">M-q</td>
+<td class="org-left">To wrap the text</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd5aa73" class="outline-2">
+<h2 id="orgdd5aa73"><span class="todo TODO">TODO</span> View Terminal</h2>
+<div class="outline-text-2" id="text-orgdd5aa73">
+<p>
+emacs view only one terminal
+Term is having issuse  when in "line mode"  give error
+</p>
+
+<p>
+but term has no errro only in characer mode : 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">CMD</td>
+<td class="org-left">fUNCTON</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgaf29d5d" class="outline-3">
+<h3 id="orgaf29d5d">Multi Terminal</h3>
+<div class="outline-text-3" id="text-orgaf29d5d">
+<ul class="org-ul">
+<li><p>
+But we can use mulit by tumx   
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">$tmux (in emacs terminal)</td>
+</tr>
+</tbody>
+</table></li>
+<li>Package multi-term</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59e965f" class="outline-3">
+<h3 id="org59e965f">use eshell</h3>
+</div>
+</div>
+<div id="outline-container-orgb187b4a" class="outline-2">
+<h2 id="orgb187b4a"><span class="todo TODO">TODO</span> Other Resources</h2>
+<div class="outline-text-2" id="text-orgb187b4a">
+</div>
+<div id="outline-container-org6eea34a" class="outline-3">
+<h3 id="org6eea34a">Books</h3>
+<div class="outline-text-3" id="text-org6eea34a">
+<p>
+There are a a few really good books available for learning Emacs. In addition to these, you'll find that many Linux and Unix books also contain a chapter or two about Emacs (and vi).
+</p>
+</div>
+
+<div id="outline-container-orgd7b5c2c" class="outline-4">
+<h4 id="orgd7b5c2c">Learning GNU Emacs</h4>
+<div class="outline-text-4" id="text-orgd7b5c2c">
+<p>
+Authors	: 	Debra Cameron, Bill Rosenblatt, Eric S. Raymond
+Publisher	: 	O'Reilly &amp; Associates - <a href="http://www.ora.com/">http://www.ora.com/</a>
+</p>
+
+<p>
+Commentary:
+This is probably the best book to start with. After you've read the HOWTO and looked through the FAQ this book serves as a comprehensive and very approachable tutorial.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc9ced4f" class="outline-4">
+<h4 id="orgc9ced4f">Writing GNU Emacs Extensions</h4>
+<div class="outline-text-4" id="text-orgc9ced4f">
+<p>
+Author	: 	Bob Glickstein
+Publisher	: 	O'Reilly &amp; Associates - <a href="http://www.ora.com/">http://www.ora.com/</a>
+</p>
+
+<p>
+Commentary:
+After you've used Emacs for a while and have decided that you'd like to try writing your own mode or maybe try out some advanced customization, this is the book for you. While it doesn't attempt to teach Lisp, it does contain a brief introduction to the language.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge17ddab" class="outline-4">
+<h4 id="orge17ddab">Programming in Emacs Lisp: An Introduction</h4>
+<div class="outline-text-4" id="text-orge17ddab">
+<p>
+Author	: 	Robert J. Chasselle
+</p>
+
+<p>
+Commentary:
+This is an elementary introduction to programming in Emacs Lisp for people who are not programmers, and who are not necessarily interested in programming, but who do want to customize or extend their computing environment. 
+</p>
+
+<p>
+You can retrieve the manual in its entirety via anonymous FTP from the GNU FTP server:  <a href="ftp://prep.ai.mit.edu/gnu/emacs/">ftp://prep.ai.mit.edu/gnu/emacs/</a>.
+</p>
+
+<p>
+Commentary: This a good introductory manual for Emacs Lisp&#x2013;even if you're not a heavy-duty programmer.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c1ef72" class="outline-4">
+<h4 id="org6c1ef72">The GNU Emacs Lisp Reference Manual</h4>
+<div class="outline-text-4" id="text-org6c1ef72">
+<p>
+Author	: 	Richard Stallman
+Publisher	: 	The Free Software Foundation - <a href="http://www.fsf.org/">http://www.fsf.org/</a>
+</p>
+
+<p>
+You can retrieve the manual in its entirety via anonymous FTP from the GNU FTP server: <a href="ftp://prep.ai.mit.edu/gnu/emacs/">ftp://prep.ai.mit.edu/gnu/emacs/</a>.
+</p>
+
+<p>
+Commentary: This is the definitive guide to the Emacs Lisp programming language.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org39a3493" class="outline-3">
+<h3 id="org39a3493">Web Sites</h3>
+<div class="outline-text-3" id="text-org39a3493">
+<p>
+EMACSulation
+EMACSulation is a column written by Eric Marsden that appears in the on-line magazine Linux Gazette located at <a href="http://www.linuxgazette.com/">http://www.linuxgazette.com/</a>. The most recent column as of this writing is located at <a href="http://www.linuxgazette.com/issue39/marsden.html">http://www.linuxgazette.com/issue39/marsden.html</a>. Scan to the bottom of the article for links to previous ones.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e6cb5e" class="outline-3">
+<h3 id="org9e6cb5e">Newsgroups</h3>
+<div class="outline-text-3" id="text-org9e6cb5e">
+<p>
+Search you local news feed for newsgroups which contain the string ``emacs'' and you'll probably find many. Those which my server carries are:
+</p>
+
+<p>
+comp.emacs
+comp.emacs.sources
+gnu.emacs
+gnu.emacs.bug
+gnu.emacs.help
+gnu.emacs.sources
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe2c258" class="outline-3">
+<h3 id="orgbe2c258">Mailing Lists</h3>
+<div class="outline-text-3" id="text-orgbe2c258">
+<p>
+There is a mailing list for GNU Emacs which is hosted by the Free Software Foundation. See the web site <a href="http://mail.gnu.org/mailman/listinfo/help-gnu-emacs">http://mail.gnu.org/mailman/listinfo/help-gnu-emacs</a> for more information.
+</p>
+
+<p>
+The only mailing list devoted to Emacs that I know of right now is the NT-Emacs list. It is a list for folks who are using the Micro$oft Windows version of Emacs. See the NT-Emacs FAQ <a href="http://www.cs.washington.edu/homes/voelker/ntemacs.html">http://www.cs.washington.edu/homes/voelker/ntemacs.html</a> for more information.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b85ca1" class="outline-3">
+<h3 id="org9b85ca1">The Emacs Lisp Archive</h3>
+<div class="outline-text-3" id="text-org9b85ca1">
+<p>
+From the Emacs Lisp Archive README:
+ The Emacs Lisp archives on ftp.cis.ohio-state.edu contain various pieces and packages of Emacs Lisp code. Emacs Lisp is the language used to extend the GNU Emacs editor published by the Free Software Foundation. Although much Emacs Lisp code is included in the GNU Emacs distribution, many people have written packages to interface with other systems, to better support editing the programming language they use, to add new features, or to change Emacs' default behavior. Most of the contents of this archive have been written by individuals and distributed publicly over the Internet through the info-emacs or info-gnu-emacs mailing lists or the comp.emacs, gnu.emacs, or gnu.emacs.sources newsgroups. 
+</p>
+
+<p>
+The archives are available via anonymous FTP from <a href="ftp://ftp.cis.ohio-state.edu/pub/emacs-lisp/">ftp://ftp.cis.ohio-state.edu/pub/emacs-lisp/</a>.
+</p>
+
+<p>
+NOTE: As far as I can tell, the Emacs Lisp Archive is slowly becoming out of date. I see very few new (or updated) packages appearing there, though I know they exist. They do get posted to the comp.emacs.sources newsgroup. (Feel free to correct me if this is wrong.) 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga5ffea8" class="outline-2">
+<h2 id="orga5ffea8"><span class="todo TODO">TODO</span> Emacs as python IDE</h2>
+<div class="outline-text-2" id="text-orga5ffea8">
+<p>
+<a href="http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/">http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

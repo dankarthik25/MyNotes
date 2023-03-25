@@ -1,0 +1,2050 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_Ansible</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>Ansible</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2492a71">Ansible</a>
+<ul>
+<li><a href="#orgd658603">Why Ansible:</a>
+<ul>
+<li><a href="#orgde894d6">Advantages:</a></li>
+<li><a href="#org7c99f54">What is Ansible tool:</a></li>
+</ul>
+</li>
+<li><a href="#org7a6e2ba">SSH-Key connection between master and all slave</a>
+<ul>
+<li><a href="#orgb83ce2f">Prerequirement-I : Create a common user with root privillage and ssh-key base authentication</a></li>
+<li><a href="#org6b0f4a8">Prerequirement-II: Generate ssh-key in master and share it with all slave</a></li>
+</ul>
+</li>
+<li><a href="#orgc5891ff">Using Virtual machine</a></li>
+<li><a href="#orgddcc128">Installation</a></li>
+<li><a href="#orgf12156b">Introduction</a>
+<ul>
+<li><a href="#org60efdb5">Inventory: list of servers or host grouped together</a></li>
+<li><a href="#org8c03309">Example</a></li>
+</ul>
+</li>
+<li><a href="#org553c782">Ad-hoc commands</a>
+<ul>
+<li><a href="#org9588530">modules : Adhoc cmd are converted in module for simple and easy use</a></li>
+<li><a href="#org7d361f7">Playbook(.yaml)</a></li>
+</ul>
+</li>
+<li><a href="#orgc525962">modules</a></li>
+<li><a href="#orgad2dd64">Playbook for file-module</a></li>
+<li><a href="#org79b039a">Palybook service (state: reloaded, restarted, started, stopped)</a></li>
+<li><a href="#org1eaf949">Palybook copy-module</a></li>
+<li><a href="#org07c95e0">Varaible</a></li>
+<li><a href="#org9febeba">Looping</a>
+<ul>
+<li><a href="#orgabe4fc8">With<sub>item</sub></a></li>
+</ul>
+</li>
+<li><a href="#org82e5f73">Condtions</a></li>
+<li><a href="#org124bce2">With<sub>file</sub></a>
+<ul>
+<li><a href="#org5c8f3fd">With url</a></li>
+<li><a href="#orgdfc8d99">With mongodb:</a></li>
+<li><a href="#orgb295983">With<sub>*</sub></a></li>
+</ul>
+</li>
+<li><a href="#org43cf556">Condtionals in Loop</a></li>
+<li><a href="#org5e8db5a">Condtionals &amp; Register</a></li>
+<li><a href="#org35376ec">Roles</a></li>
+<li><a href="#org35ff4a4">Find Roles</a></li>
+<li><a href="#orgbb72d67">Use Roles</a></li>
+<li><a href="#orgeab145f">List Roles</a></li>
+<li><a href="#orgea50040">Playbook Java installation:</a></li>
+<li><a href="#org19c9da9">varibale</a></li>
+<li><a href="#org288a5c6">Patter</a></li>
+<li><a href="#orgead97ff">Dynamic Inventory:</a></li>
+<li><a href="#org7a4b0f7">Custom modules:</a></li>
+<li><a href="#orgf667382">Jinja Template :</a></li>
+<li><a href="#org3d3e219">Satish Anna Lectures</a></li>
+</ul>
+</li>
+<li><a href="#orgfcc9ac9">(Advance)</a>
+<ul>
+<li><a href="#org74b74a9">Role</a></li>
+<li><a href="#org374d535">Asynchronous Actions</a>
+<ul>
+<li><a href="#org173cc4c">Why Asynchronous</a></li>
+</ul>
+</li>
+<li><a href="#orgd1493e1">Strategy</a></li>
+<li><a href="#org5769ca1">Forks</a></li>
+<li><a href="#org32d70f5">Error Handling</a>
+<ul>
+<li><a href="#org97810c5">ignore<sub>errors</sub>:</a></li>
+<li><a href="#org33673aa">failed<sub>when</sub>:</a></li>
+</ul>
+</li>
+<li><a href="#org814a0fd">Jinja 2 Templating(Filters)</a>
+<ul>
+<li><a href="#orgf6b8ca6">String manipualtion</a></li>
+<li><a href="#org64de710">List and Set based filter</a></li>
+<li><a href="#org7939d48">File based Filter</a></li>
+<li><a href="#org0dffed2">more Info about Jinja2 Filters</a></li>
+</ul>
+</li>
+<li><a href="#org7b93db7">Lookups</a></li>
+<li><a href="#orge9c6988">Vault</a></li>
+<li><a href="#org16854ba">Dynamic Inventory</a></li>
+<li><a href="#orgb7648d7">Custom modules</a></li>
+<li><a href="#org4371d86">Plugins</a></li>
+<li><a href="#orga671275">Example</a></li>
+</ul>
+</li>
+<li><a href="#orgb0d8198">ansible vault for github</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2492a71" class="outline-2">
+<h2 id="org2492a71">Ansible</h2>
+<div class="outline-text-2" id="text-org2492a71">
+</div>
+<div id="outline-container-orgd658603" class="outline-3">
+<h3 id="orgd658603">Why Ansible:</h3>
+<div class="outline-text-3" id="text-orgd658603">
+<p>
+For Sys Administator usually do lot of repetative task
+</p>
+<ul class="org-ul">
+<li>Provisioning  : Sizing or Creating new host or VM</li>
+<li>Configuration management : Fine Configuration</li>
+<li>Continous Delivery       :</li>
+<li>Application Deployment   : Deploy build files(jar,war,ear) to sit,uat,preroduction,</li>
+<li>Security Compliance :</li>
+</ul>
+</div>
+<div id="outline-container-orgde894d6" class="outline-4">
+<h4 id="orgde894d6">Advantages:</h4>
+<div class="outline-text-4" id="text-orgde894d6">
+<p>
+Ansible provies
+</p>
+<ul class="org-ul">
+<li>Simple</li>
+<li>Powerful</li>
+<li>Agentless</li>
+<li>Lite Weight</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7c99f54" class="outline-4">
+<h4 id="org7c99f54">What is Ansible tool:</h4>
+<div class="outline-text-4" id="text-org7c99f54">
+<p>
+Ansible is a configuration tool to depoly code and install in muiltiple servers at a time.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7a6e2ba" class="outline-3">
+<h3 id="org7a6e2ba">SSH-Key connection between master and all slave</h3>
+<div class="outline-text-3" id="text-org7a6e2ba">
+</div>
+<div id="outline-container-orgb83ce2f" class="outline-4">
+<h4 id="orgb83ce2f">Prerequirement-I : Create a common user with root privillage and ssh-key base authentication</h4>
+<div class="outline-text-4" id="text-orgb83ce2f">
+<ul class="org-ul">
+<li>Step to connect using SSH-Key:  
+<ul class="org-ul">
+<li>Create common user for all users (master and slave))</li>
+<li>Give root privilege to common-user for both master and slave</li>
+<li>Enable ssh-key based authentication( and restart sshd server)</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+USER_NAME='ansible'    # $1
+PASSWORD='karthik@123'   #$USER_NAME
+
+##################################################################################
+#   Create a common user 
+##################################################################################
+useradd ${USER_NAME}
+echo ${PASSWORD} | passwd --stdin ${USER_NAME}
+passwd -e ${USER_NAME}
+
+if [[ "${?}" -ne 0 ]]   # # if [ "#?" !=0]
+then
+  echo "Password create sucessfull"
+else
+      exit 1
+fi
+#check if user is created or not 
+# cat/etc/passwd
+##################################################################################
+# Give root privilege
+##################################################################################
+if grep -q "${USER_NAME}" "/etc/sudoers"    #[[ "${?}" -ne 0 ]]
+then
+  echo "Alread exiting "
+else
+  echo "Need to add to sudoers"
+  echo -e "## Allow ${USER_NAME} to run any commands anywhere\n${USER_NAME}\tALL=(ALL)\tNOPASSWD: ALL" &gt;&gt; /etc/sudoers
+  # sed -i 's/root    ALL=(ALL)       ALL/root    ALL=(ALL)       ALL \n${USER_NAME}\tALL=(ALL)/g' /etc/sudoers
+fi
+grep "$USER_NAME" "/etc/sudoers"
+##################################################################################
+# Enable ssh-key based authentication
+##################################################################################
+sed -i 's/^PasswordAuthentication no/#PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+grep 'PasswordAuthentication' /etc/ssh/sshd_config
+service sshd restart
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6b0f4a8" class="outline-4">
+<h4 id="org6b0f4a8">Prerequirement-II: Generate ssh-key in master and share it with all slave</h4>
+<div class="outline-text-4" id="text-org6b0f4a8">
+<ul class="org-ul">
+<li>Create ssh-key in master</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">ssh-keygen   #check key "id_ras.pub" ls -latr /home/ansible/.ssh
+ssh-copy-id devops@slave_ip
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>check ssh without password</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">ssh &lt;user-name&gt;@ip
+# show-key : cat /home/&lt;user-name&gt;/devops/.ssh/authorizzed_keys
+exit() # to exist 
+#NOTE: we can connect from master to slave but not from slave to master
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5891ff" class="outline-3">
+<h3 id="orgc5891ff">Using Virtual machine</h3>
+</div>
+<div id="outline-container-orgddcc128" class="outline-3">
+<h3 id="orgddcc128">Installation</h3>
+<div class="outline-text-3" id="text-orgddcc128">
+<div class="org-src-container">
+<pre class="src src-sh">wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm
+yum repolist
+#yum install epel-release
+yum update
+yum install git python openssl ansible -y
+ansible --version
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf12156b" class="outline-3">
+<h3 id="orgf12156b">Introduction</h3>
+<div class="outline-text-3" id="text-orgf12156b">
+</div>
+<div id="outline-container-org60efdb5" class="outline-4">
+<h4 id="org60efdb5">Inventory: list of servers or host grouped together</h4>
+<div class="outline-text-4" id="text-org60efdb5">
+<p>
+PROS: 
+Agent-less (No installation in slave host)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># Sample inventory files
+web ansible_host=server1.company.com
+db ansible_host=server2.company.com
+mail ansible_host=server3.company.com
+web2 ansible_host=server4.company.com
+
+# #Inventory Parameters   # https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+# ansible_connection - ssh/winrm/localhost
+# ansible_port -  22/5986
+# ansible_user - root/administrator/ec2-user/ubuntu
+# ansible_ssh_pass - Password
+# ansible_ssh_private_key_file
+
+#
+web ansible_host=server1.company.com ansible_connection=ssh
+db ansible_host=server2.company.com ansible_ssh_pass=osboxes.org
+mail ansible_host=server3.company.com ansible_ssh_pass=osboxes.org
+web2 ansible_host=server4.company.com ansible_connection=ssh
+
+#
+#Ex:
+
+localhost ansible_connection=localhost
+
+[brt]
+#ubuntu ansible_ssh_host=2.3.249.200
+ubuntu ansible_host=ec2-13-235-0-126.ap-south-1.compute.amazonaws.com
+[brt:vars]
+ansible_ssh_private_key_file=~/WorkSpace_DigivalSolution/Workspace_elk/elk-keypair.pem
+ansible_ssh_user=ubuntu
+ansible_connection=ssh
+
+
+[my host]
+my-dev      ansible_ssh_host=54.79.31.51    ansible_ssh_private_key_file=/Users/dev/.ssh/dev.pem    ansible_ssh_user=ec2-user
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8c03309" class="outline-4">
+<h4 id="org8c03309">Example</h4>
+<div class="outline-text-4" id="text-org8c03309">
+<div class="org-src-container">
+<pre class="src src-sh"># /etc/ansible/host           # contain all information slave host in yaml file
+
+#eg: Ansible has inventory files where host info are stored and used.
+# inventory = /etc/ansible/host
+#vi /etc/ansible/hosts   # System given examples
+
+#[web]
+# 192.147.58.9
+#[app]
+# 192.147.59.7
+#[dbserevr]
+# 192.34.5.6
+# using host file we create cluster in order to run cmd on cluster we 
+
+# Enable /etc/ansible/host by un-commenting &lt;inventory&gt; in ansible.cfg file
+#vi /etc/ansible/ansible.cfg
+#inventory = /etc/ansible/hosts
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org553c782" class="outline-3">
+<h3 id="org553c782">Ad-hoc commands</h3>
+<div class="outline-text-3" id="text-org553c782">
+<p>
+You could execute a quick one-liner cmd in ansible with-out writing playbook
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ansible [groupname] -a "command"      # a : attributes
+
+# Ex:
+ansible test -a "ls -l /opt"
+ansible test -a "cat /etc/passwd"
+ansible servername -a "touch /opt/test123" -s
+ansible servername -a "ls -l /opt"
+ansible all -a "yum remove httpd -y" -s
+ansible test -s -a "useradd batch31"
+ansible all -a "ls -l /opt"
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">ansible-doc -l | wc
+ansible-doc -s module-name
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9588530" class="outline-4">
+<h4 id="org9588530">modules : Adhoc cmd are converted in module for simple and easy use</h4>
+<div class="outline-text-4" id="text-org9588530">
+<p>
+There different types of module  <a href="https://docs.ansible.com/ansible/latest/user_guide/modules_intro.html">Introduction to module</a>
+</p>
+
+<p>
+Modules (also referred to as “task plugins” or “library plugins”) are discrete units of code that can be used from the command line or in a playbook task. Ansible executes each module, usually on the remote target node, and collects return values.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"># 
+ansible [pattern] -m [module-name] -a "[module-option]"
+# pattern : group or cluster in inventory file
+
+# -a      : attributes of module
+# -m      : module
+# $ansible-doc -l |wc
+#$ ansible-doc yum
+#$ ansible-doc yum 
+# Example: # state=latest or present, absent(remove install)
+# ansible 
+ansible web -m yum -a "name=httpd state=latest"# ################################
+#                yml file
+# ##############################
+- name: install latest version of Apache
+  yum:
+    name: httpd
+    state: latest
+
+#############################################
+#$ ansible-doc service   
+# Example: state : started, stopped,restarted
+ansible web -m service -a "name=httpd state=started" --become # install apache server
+
+#                yml file
+- name: start service hhtpd
+  service:
+    name: httpd
+    state: started
+##################################
+
+ansible web -a "service httpd status" --become 
+ansible web -m yum -a "name=httpd state=stopped" --become
+#
+ansible web -m yum -a "name=httpd state=absent"# uninstall httpd(apache)
+
+# #############################################
+#  Create users
+# #############################################
+# Encrpt password :https://www.radb.net/crypt_calculator 
+ansible all -m user -a"name=test password=cFl0NSByhlhXc" --become
+ansible all -a"cat /etc/passwd" --become # check user is created
+
+# #########################################
+#  Custom inventory file
+##########################################
+#path of inventory file path: /opt/hosts
+ansible -i /opt/hosts app -a "ls -latr /opt"
+ansible -i /opt/hosts app -a "ping"
+ansible -i /opt/host -m yum -a "name=git state=latest"#
+ansible -i /opt/host -m yum -a "name=tomcat state=latest"#
+</pre>
+</div>
+</div>
+<ul class="org-ul">
+<li><a id="org92a4ae0"></a>Example<br />
+<div class="outline-text-5" id="text-org92a4ae0">
+<div class="org-src-container">
+<pre class="src src-sh">ansible webserver -m yum -a "name=git state=latest"
+
+ansible all -m yum -a "name=httpd state=latest"
+
+ansible test -m ping
+
+ansible all -m copy -a "src=/opt/docker-compose.yaml dest=/opt" -s
+
+ansible appserver -m yum -s -a "name=httpd state=present"
+
+ansible all -m yum -s -a "name=httpd state=absent"
+
+ansible all -m yum -s -a "name=git state=latest"
+
+ansible test -m user -s -a "name=batch31"
+
+ansible test -m user -s -a "name=batch31 state=absent"
+
+ansible all -m service -s -a "name=httpd state=started"
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org7d361f7" class="outline-4">
+<h4 id="org7d361f7">Playbook(.yaml)</h4>
+<div class="outline-text-4" id="text-org7d361f7">
+<p>
+module: to run single tast or one time task
+</p>
+
+<p>
+To run multiple task , run repeted task
+</p>
+
+<p>
+<a href="https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/">https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/</a>
+</p>
+
+<p>
+to get yaml formate example:
+yml consist of ( hosts,variable,tasks) and task is array 
+</p>
+
+<p>
+variable: optional 
+task contain : module and attributes informations
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ansible-doc git
+</pre>
+</div>
+</div>
+
+<ul class="org-ul">
+<li><a id="org7b2e673"></a>Command type playbook<br />
+<div class="outline-text-5" id="text-org7b2e673">
+<div class="org-src-container">
+<pre class="src src-sh">#cat sample.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install python
+    yum:
+      name: python
+      state: latest
+##########################################
+ansible-playbook sample.yml --syntax-check
+ansible-playbook sample.yml --list-hosts
+ansible-playbook sample.yml # to run yml file
+
+
+#cat useradd.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: creating user
+    yum:
+      name: statish
+      state: /pL2AYR6csdTI
+ansible-playbook useradd.yml --syntax-check
+ansible-playbook useradd.yml 
+ansible app -a "cat /etc/passwrd" --become
+##########################################
+#cat httpd_installNrun.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install httpd
+     yum:
+       name: httpd
+       state: latest
+  - name:start service
+     service:
+	name: httpd
+	state: started
+ansible-playbook httpd_installNrun.yml --syntax-check
+ansible-playbook httpd_installNrun.yml
+##########################################
+#cat create_file.yml
+##################################
+---
+- hosts: app
+  tasks:
+  - name: create file
+     file:
+      path: /opt/vbs
+       state: touch
+ansible-playbook create_file.yml --syntax-check
+ansible-playbook create_file.yml
+
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc525962" class="outline-3">
+<h3 id="orgc525962">modules</h3>
+<div class="outline-text-3" id="text-orgc525962">
+<ul class="org-ul">
+<li>modules
+<ul class="org-ul">
+<li>System (User, Group, Hostname, Iptables, Lvg, Lvol, make, mount,ping, Timezone, Systemd, Service)</li>
+<li>Commands (Command, Expect , RAW, Script, Shell)</li>
+<li>Files (Acl, Archive, File, Find, Lineinfile, Replace, Stat, Template, Unarchive)</li>
+<li>Database(mongodb,mssql,mysql, Postgresql, Proxysql, vertica)</li>
+<li>Cloud (Amazon, Atomic, Azure, Centrylink,Cloudscale,Cloudstack,Digital Ocean, Docker,Google, Linode, Openstack, Rackspace, Smartos, Softlayer, Vmware)</li>
+<li>Windows (In windows environment)</li>
+<li>git ()</li>
+<li>&#x2026;..</li>
+<li></li>
+
+<li>shell</li>
+<li>command</li>
+<li>script</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">-
+ name: Play 1
+ hosts: localhost
+ tasks:
+ - name: Execute command ‘date’
+   command: date
+
+ - name: Display resolv.conf contents
+   command: cat /etc/resolv.conf
+
+ - name: Display resolv.conf contents
+   command: cat resolv.conf chdir=/etc
+
+ - name: Display resolv.conf contents
+   command: mkdir /folder creates=/folder
+
+ - name: Copy file from source to destination
+   copy: src=/source_file dest=/destination
+
+ - name: Run a script on remote server
+   script: /some/local/script.sh -arg1 -arg2
+# Services : Started,Stopped,Resatared
+ - name: Start the database service
+   service: name=postgresql state=started
+
+ - name: Start the httpd service
+   service: name=httpd state=started
+
+ - name: Start the nginx service
+   service:
+     name: nginx
+     state: started
+ - name: Start the database service
+   service:
+     name: postgresql
+     state: started
+# Lineinfile
+# Search for a line in a file and replace it or add it if it doesn’t exist.
+- lineinfile:
+    path: /etc/resolv.conf
+    line: 'nameserver 10.1.250.10'
+# Ping
+  - name: Ping test
+    ping:
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgad2dd64" class="outline-3">
+<h3 id="orgad2dd64">Playbook for file-module</h3>
+<div class="outline-text-3" id="text-orgad2dd64">
+<p>
+Basic yml to be remember during interviews
+<a href="https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/">https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># $ansible-doc file # go to example
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/some_directory
+    state: directory
+    mode: '0755'
+
+
+- name: Remove file (delete file)
+  file:
+    path: /etc/foo.txt
+    state: absent
+
+- name: Recursively remove directory
+  file:
+    path: /etc/foo
+    state: absent
+
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd /opt
+#vi dry.yml
+---
+- hosts: web
+  become: true
+  task:
+  - name: create dir
+    file:
+      path: /opt/test_dir
+      state: directory
+      mode: '0755'
+  - name: change permission and ownership
+    file:
+      path: /opt/test_dir
+      owner: ansible
+      group: ansible
+      mode: '0777'
+  - name: create touch
+    file:
+      path: /opt/test.txt
+      state: touch
+      mode: '0755'
+  - name: create multiple touch
+    file:
+      path: "{{item}}"
+      state: touch
+      mode: '0755'
+    with_item:
+      - "/opt/satishP"
+      - "/opt/satishT"
+      - "/opt/rajit"
+      - "/opt/karthik"
+
+  - name: Remove file (delete file)
+    file:
+      path: /opt/test.txt
+      state: absent
+  - name: Recursively remove directory
+    file:
+      path: /opt/etc/foo
+      state: absent
+
+...
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org79b039a" class="outline-3">
+<h3 id="org79b039a">Palybook service (state: reloaded, restarted, started, stopped)</h3>
+<div class="outline-text-3" id="text-org79b039a">
+<div class="org-src-container">
+<pre class="src src-sh">- name: start serveice
+  service:
+     name: httpd
+     state: started # reloaded, restarted, started, stopped
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1eaf949" class="outline-3">
+<h3 id="org1eaf949">Palybook copy-module</h3>
+<div class="outline-text-3" id="text-org1eaf949">
+<div class="org-src-container">
+<pre class="src src-sh">#$ansible-doc copy
+- name: Copy file with owner and permissions
+  copy:
+    src: /srv/myfiles/foo.conf
+    dest: /etc/foo.conf
+- name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+    validate: /usr/sbin/visudo -csf %s
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd /opt
+#vi copy_pb.yml
+---
+- hosts: web
+  task:
+  - name: copy file
+    copy:
+      src: /opt/sbi.war
+      dest: /tmp/sbi.war
+...
+# #########################333
+#   Using SRC
+# #########################3
+- hosts: web
+  become:true
+  vars:
+    dst_path: /opt
+    src_path: /opt/icici.war
+  task:
+  - name: copy file
+    copy:
+      src: "{{src_path}}"
+      dest: "{{dst_path}}"
+...
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org07c95e0" class="outline-3">
+<h3 id="org07c95e0">Varaible</h3>
+<div class="outline-text-3" id="text-org07c95e0">
+<div class="org-src-container">
+<pre class="src src-sh">-
+ name: Add DNS server to resolv.conf
+ hosts: localhost
+ vars:
+   dns_server: 10.1.250.10
+ tasks:
+ - lineinfile:
+     path: /etc/resolv.conf
+     line: 'nameserver {{dns_server }}’
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">- 
+  name: Set Firewall Configurations
+  hosts: web
+  var:
+    http_port: 8081
+    snmp_port: 161-162
+    inter_ip_range: 192.0.2.0
+  tasks:
+  - firewalld:
+      service: https
+      permanent: true
+      state: enabled
+
+  - firewalld:
+      port: ‘{{ http_port }}’/tcp
+      permanent: true
+      state: disabled
+  - firewalld:
+      port: ‘{{snmp_port}}’/udp
+      permanent: true
+      state: disabled
+  - firewalld: 
+      source: ‘{{ inter_ip_range}}’/24
+      Zone: internal
+      state: enabled
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9febeba" class="outline-3">
+<h3 id="org9febeba">Looping</h3>
+<div class="outline-text-3" id="text-org9febeba">
+<div class="org-src-container">
+<pre class="src src-sh">-
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: name= ‘{{ item }}’
+    loop:
+      - joe
+      - george
+      - ravi
+      - mani
+      - kiran
+      - jazlan
+      - emaan
+      - mazin
+      - izaan
+      - mike
+      - menaal
+      - shoeb
+      - rani
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">- 
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: 
+      name= ‘{{item.name}}’  
+      state= present
+      uid= '{{ item.uid}}’
+
+    loop:
+     - name: joe
+       uid: 1010
+     - name: george
+       uid: 1010 
+     - name :ravi
+       uid: 1012
+     - name:mani
+       uid: 1013
+     - name:kiran
+       uid: 1014
+     - name:jazlan
+       uid: 1015
+     - name:emaan
+       uid: 1016
+     - name:mazin
+       uid: 1017
+     - name:izaan 
+     - name:kiran
+       uid: 1018
+     - name:mike 
+</pre>
+</div>
+</div>
+<div id="outline-container-orgabe4fc8" class="outline-4">
+<h4 id="orgabe4fc8">With<sub>item</sub></h4>
+<div class="outline-text-4" id="text-orgabe4fc8">
+<div class="org-src-container">
+<pre class="src src-sh">- name: Create users 
+  hosts: localhost 
+  task: 
+  - user: name='{{ item }}'
+    state: present 
+    with_item: 
+    - joe 
+    - george 
+    - ravi 
+    - mani
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org82e5f73" class="outline-3">
+<h3 id="org82e5f73">Condtions</h3>
+<div class="outline-text-3" id="text-org82e5f73">
+<div class="org-src-container">
+<pre class="src src-sh">---
+- name: Install NGINX
+  hosts: all
+  tasks:
+  - name: Install NGINX on Debian
+      apt:
+	name: nginx
+	state: present
+      when: ansible_os_family == “Debian” and
+	    ansible_distribution_version == “16.04”
+ - name: Install NGINX on Redhat
+     yum:
+       name: nginx
+       state: present
+     when: ansible_os_family == “RedHat” or
+	   ansible_os_family == "SUSE"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org124bce2" class="outline-3">
+<h3 id="org124bce2">With<sub>file</sub></h3>
+<div class="outline-text-3" id="text-org124bce2">
+<div class="org-src-container">
+<pre class="src src-sh">- name: Create users 
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_file: 
+    - "/etc/hosts"
+    - "/etc/resolve.conf"
+    - "/etc/ntp.conf"
+</pre>
+</div>
+</div>
+<div id="outline-container-org5c8f3fd" class="outline-4">
+<h4 id="org5c8f3fd">With url</h4>
+<div class="outline-text-4" id="text-org5c8f3fd">
+<div class="org-src-container">
+<pre class="src src-sh">- name: get multiple urls
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_url: 
+    - "https://site1.com/get-servers"
+    - "https://site2.com/get-servers"
+    - "https://site3.com/get-servers"
+    - "https://site4.com/get-servers"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdfc8d99" class="outline-4">
+<h4 id="orgdfc8d99">With mongodb:</h4>
+<div class="outline-text-4" id="text-orgdfc8d99">
+<div class="org-src-container">
+<pre class="src src-sh">- name: get multiple mongodbs
+  hosts: localhost 
+  task: 
+  - debug: msg "DB={{item.database}} PID={{item.pid}}"
+    with_url: 
+    - database: dev
+      connection_string : "mongodb://dev.mongo/"
+    - database: dev
+      connection_string : "mongodb://prod.mongo/"
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb295983" class="outline-4">
+<h4 id="orgb295983">With<sub>*</sub></h4>
+<div class="outline-text-4" id="text-orgb295983">
+<blockquote>
+<p>
+with<sub>items</sub>
+with<sub>file</sub>
+with<sub>url</sub>
+with<sub>mongodb</sub>
+with<sub>dict</sub>
+with<sub>etcd</sub>
+with<sub>env</sub>
+with<sub>filetree</sub>
+With<sub>ini</sub>
+With<sub>inventory</sub><sub>hostnames</sub>
+With<sub>k8s</sub>
+With<sub>manifold</sub>
+With<sub>nested</sub>
+With<sub>nios</sub>
+With<sub>openshift</sub>
+With<sub>password</sub>
+With<sub>pipe</sub>
+With<sub>rabbitmq</sub>
+With<sub>redis</sub>
+With<sub>sequence</sub>
+With<sub>skydive</sub>
+With<sub>subelements</sub>
+With<sub>template</sub>
+With<sub>together</sub>
+With<sub>varnames</sub>
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org43cf556" class="outline-3">
+<h3 id="org43cf556">Condtionals in Loop</h3>
+</div>
+<div id="outline-container-org5e8db5a" class="outline-3">
+<h3 id="org5e8db5a">Condtionals &amp; Register</h3>
+</div>
+<div id="outline-container-org35376ec" class="outline-3">
+<h3 id="org35376ec">Roles</h3>
+<div class="outline-text-3" id="text-org35376ec">
+<p>
+Ansible: assigne a role to server or host : like (mysql, gameserver: nginx,)
+The same work can be done by palybook why we use role ?
+</p>
+
+<p>
+This are task which are comman used by all dev, or with in organiziatoin.,,,etc
+</p>
+</div>
+</div>
+<div id="outline-container-org35ff4a4" class="outline-3">
+<h3 id="org35ff4a4">Find Roles</h3>
+<div class="outline-text-3" id="text-org35ff4a4">
+<p>
+ansible-galaxy :web UI
+$ansible-galaxy search mysql
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb72d67" class="outline-3">
+<h3 id="orgbb72d67">Use Roles</h3>
+<div class="outline-text-3" id="text-orgbb72d67">
+<div class="org-src-container">
+<pre class="src src-sh">ansible-glaxy install geerlingguy.msql
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeab145f" class="outline-3">
+<h3 id="orgeab145f">List Roles</h3>
+<div class="outline-text-3" id="text-orgeab145f">
+<div class="org-src-container">
+<pre class="src src-sh">ansible-galaxy init mysql # 
+# How to use mysql in my playbook 
+# move role to comman dir where ansible can find the location (/etc/ansible/roles)
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea50040" class="outline-3">
+<h3 id="orgea50040">Playbook Java installation:</h3>
+</div>
+<div id="outline-container-org19c9da9" class="outline-3">
+<h3 id="org19c9da9">varibale</h3>
+<div class="outline-text-3" id="text-org19c9da9">
+<p>
+SOURCE: <a href="https://gist.github.com/andershedstrom/7c7d0bb5b9450c54a907">https://gist.github.com/andershedstrom/7c7d0bb5b9450c54a907</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">---
+- hosts: web
+  become: true
+  vars:
+   download_url: http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+   dst_path: /opt/software
+  tasks:
+  - name: Create a directory if it does not exist
+      file:
+	path: "{{dst_path}}"
+	state: directory
+	mode: '0777'
+
+  - name: Download JDK tar file
+    command: "wget --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{download_url}} "
+    args:
+      chdir: "{{dst_path}}"
+  - name: Extract tar file
+    command: "tar -xvzf jdk-8u131-linux-x64.tar.gz;rm -rf jdk-8u131-linux-x64.tar.gz"
+  - name: Set JAVA PATH
+      shell: echo "# JAVA ENVIRONmENT VARIABLES" &gt;&gt; ~/.bash_profile; echo "export JAVA_HOME=/opt/softwares/jdk1.8.0_131"&gt;&gt; ~/.bash_profile; echo "export PATH=\$PATH:/opt/softwares/jdk1.8.0_131/bin"&gt;&gt; ~/.bash_profile
+
+  - name: restart bash and check version
+      shell:   - name: Set JAVA PATH
+      shell: source ~/.bash_profile; java -version
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org288a5c6" class="outline-3">
+<h3 id="org288a5c6">Patter</h3>
+<div class="outline-text-3" id="text-org288a5c6">
+<div class="org-src-container">
+<pre class="src src-sh">- 
+ name: Play1
+ hosts : localhost, # Host*, *.company.com # Host1,Host2,Host3,
+ tasks:
+ - name: Copy file with owner and permissions
+   copy:
+     src: /srv/myfiles/foo.conf
+     dest: /etc/foo.conf
+ - name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgead97ff" class="outline-3">
+<h3 id="orgead97ff">Dynamic Inventory:</h3>
+<div class="outline-text-3" id="text-orgead97ff">
+<div class="org-src-container">
+<pre class="src src-sh">ansible-playbook -i inventory.txt palybook.yml #static inventory
+ansible-playbook -i inventory.py playbook.yml # dynamic inventory
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7a4b0f7" class="outline-3">
+<h3 id="org7a4b0f7">Custom modules:</h3>
+<div class="outline-text-3" id="text-org7a4b0f7">
+<p>
+<a href="https://docs.ansible.com/ansible/2.3/dev_guide/developing_modules_general.html">https://docs.ansible.com/ansible/2.3/dev_guide/developing_modules_general.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf667382" class="outline-3">
+<h3 id="orgf667382">Jinja Template :</h3>
+<div class="outline-text-3" id="text-orgf667382">
+<p>
+Insted of copy we use Jinja template which move the only contant of file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">---
+- hosts: azure
+  become: true
+  vars:
+    src_path: /opt/devops.j2
+    dst_path: /var/www/html/index.html
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+  - name: start serveice
+    service:
+       name: httpd
+       state: started
+  - name: copy module
+    template:
+     src: "{{ src_path }}"
+     dest: "{{ dst_path }}"
+    notify:
+    - restart apache
+  handlers:
+    - name: restart apache
+      service:
+       name: httpd
+       state: restarted
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;html&gt;
+&lt;header&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/header&gt;
+&lt;body&gt;
+Hello CARONA world CUP 2020 fwefwefgwe
+gwrgrgrgrgrgrgrg
+rgr
+greg
+reg
+rger
+grg
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d3e219" class="outline-3">
+<h3 id="org3d3e219">Satish Anna Lectures</h3>
+<div class="outline-text-3" id="text-org3d3e219">
+<div class="org-src-container">
+<pre class="src src-sh">--- 
+- 
+  become: true
+  hosts: azure
+  tasks: 
+    - 
+      name: "install httpd"
+      yum: 
+	name: httpd
+	state: latest
+    - 
+      name: "start serveice"
+      service: 
+	name: httpd
+	state: started
+    - 
+      file: 
+	mode: "0777"
+	path: /var/www
+	state: directory
+      name: "Create a directory if it does not exist"
+    - 
+      copy: 
+	dest: /var/www/html/index.html
+	src: /opt/scripts/index.html
+      name: "copy module"
+    - 
+      name: "restart serveice"
+      service: 
+	name: httpd
+	state: resarted
+# ansible-playbook ansible_pb1.yml --syntax-check
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">- name: copy module
+  copy:
+   src: /opt/index.html
+   dest: /var/www/html/index.html
+  notify:
+  - restart apache
+handlers:
+  - name: restart apache
+    service:
+     name: httpd
+     state: restarted
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfcc9ac9" class="outline-2">
+<h2 id="orgfcc9ac9">(Advance)</h2>
+<div class="outline-text-2" id="text-orgfcc9ac9">
+</div>
+<div id="outline-container-org74b74a9" class="outline-3">
+<h3 id="org74b74a9">Role</h3>
+</div>
+
+<div id="outline-container-org374d535" class="outline-3">
+<h3 id="org374d535">Asynchronous Actions</h3>
+<div class="outline-text-3" id="text-org374d535">
+</div>
+<div id="outline-container-org173cc4c" class="outline-4">
+<h4 id="org173cc4c">Why Asynchronous</h4>
+<div class="outline-text-4" id="text-org173cc4c">
+<p>
+Time when we need to execute a long task that excceds the ssh-time out
+Insted of extending we  make a check on it later time
+</p>
+
+<p>
+To run mulitpule processes at once and check on it later
+</p>
+
+<p>
+To run  one or more process and not check it staus
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">- name: Deploy Web Application
+  hosts: web
+  tasks:
+  - command: /opt/monitor_webapp.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: webapp_result
+	       # poll: 0 , Not waiting check and go to other task
+
+
+  - command: /opt/monitor_database.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: database_result
+	       # poll: 0 , Not waiting check and go to other task
+
+  - name: Check status of tasks
+    async_status: jid={{webapp_result.ansible_job_id}}
+    register: job_result.finished
+    retries: 30
+
+# Not all module support async
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd1493e1" class="outline-3">
+<h3 id="orgd1493e1">Strategy</h3>
+<div class="outline-text-3" id="text-orgd1493e1">
+<p>
+How playbook is executed in ansible
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">-
+ name: Deploy Web Applications
+ strategy: free
+# Batch 
+# serial:3(linear for 1st 3 server) later are free strategy
+ hosts: server1
+ tasks:
+  - name: Install dependencies
+     ########################
+  - name: Install mySQL databases
+     ########################
+  - name: Start mysql service
+     ########################
+  - name: Install Python Flask dependencies
+     ########################
+  - name: Run web-server 
+     ########################
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5769ca1" class="outline-3">
+<h3 id="org5769ca1">Forks</h3>
+<div class="outline-text-3" id="text-org5769ca1">
+<p>
+How many server can it talk to at a time ?
+If we have 100 servers ? will servers run at atime ?
+How many servers will ansible take at atime ?
+</p>
+
+<p>
+Ansible uses parallel process called frok  communicate with host 
+default ansible talk 5 servers at atime.
+</p>
+</div>
+</div>
+<div id="outline-container-org32d70f5" class="outline-3">
+<h3 id="org32d70f5">Error Handling</h3>
+<div class="outline-text-3" id="text-org32d70f5">
+<p>
+In strategy topic we see linear, free, batch
+</p>
+
+<p>
+If one server there is error &lt;like  mysql server&gt; then ansible take error out of list and continue the playbook
+</p>
+
+<p>
+If we want to stop execution if there is an error in execution use <b>any<sub>errors</sub><sub>fatal</sub></b>
+</p>
+</div>
+<div id="outline-container-org97810c5" class="outline-4">
+<h4 id="org97810c5">ignore<sub>errors</sub>:</h4>
+<div class="outline-text-4" id="text-org97810c5">
+<p>
+consider we want to send a mail at end of task telling &lt;Web Server Deployed&gt;
+How ever stmp server is not stable so we don't want to give error because of it and stop, FOR this kind of thinks we want to ignore the error
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">- mail:
+    to: devops@corp.com
+    subject: Server Deployed!
+    body: Web Server Deployed
+  ignore_errors: yes
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org33673aa" class="outline-4">
+<h4 id="org33673aa">failed<sub>when</sub>:</h4>
+<div class="outline-text-4" id="text-org33673aa">
+<p>
+We want to check the <b>Error log</b> and see if there is an error in it or not then we want to fail the if error as occured
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">- command: cat /var/log/server.log
+  register: command_output
+  failed_when: " 'ERROR' in command_output.stdout"
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org814a0fd" class="outline-3">
+<h3 id="org814a0fd">Jinja 2 Templating(Filters)</h3>
+<div class="outline-text-3" id="text-org814a0fd">
+<p>
+What is Templating : process of dynamic content :
+</p>
+<div class="org-src-container">
+<pre class="src src-yml">- 
+ name: Test Template Playbook
+ hosts: localhost
+ vars:
+   my_name: karthik
+ tasks:
+  - debug:
+       msg: "my name is {{my_name}}"
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf6b8ca6" class="outline-4">
+<h4 id="orgf6b8ca6">String manipualtion</h4>
+<div class="outline-text-4" id="text-orgf6b8ca6">
+<blockquote>
+<p>
+The name is {{my<sub>name</sub>}}=&gt; The name is karthik
+The name is {{my<sub>name</sub> | upper}}=&gt; The name is KARTHIK
+The name is {{my<sub>name</sub> | lower}}=&gt; The name is karthik
+The name is {{my<sub>name</sub> | title}}=&gt; The name is Karthik
+The name is {{my<sub>name</sub> | repalce("karthik","Sai Teja")}}=&gt; The name is Sai Teja
+The name is {{my<sub>name</sub> | default("James")}} {{my<sub>name</sub>}}=&gt; The name is James Karthik
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org64de710" class="outline-4">
+<h4 id="org64de710">List and Set based filter</h4>
+<div class="outline-text-4" id="text-org64de710">
+<div class="org-src-container">
+<pre class="src src-yml">{{ [1,2,3] | min }}                &gt;&gt; 1
+{{ [1,2,3] | max }}                &gt;&gt; 3
+{{ [1,2,3,2] |unique }}                &gt;&gt; 1,2,3
+{{ [1,2,3,4] |union([4,5])}}                &gt;&gt; 1,2,3,4,5
+{{ [1,2,3,4] | interset([4,5]}}                &gt;&gt; 4
+{{ 100 | random }}                &gt;&gt; Random number
+{{ ["The", "name", "is","Bond"] | join (" ")}}                &gt;&gt; The name is Bond
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7939d48" class="outline-4">
+<h4 id="org7939d48">File based Filter</h4>
+<div class="outline-text-4" id="text-org7939d48">
+<div class="org-src-container">
+<pre class="src src-yml">{{ "/etc/hosts" | basename}}            &gt;&gt; hosts
+{{"c"\windows\hosts" | win_basedname }}            &gt;&gt; hosts
+{{ "c:\windows\hosts" | win_splitdrive }}            &gt;&gt; ["C:","\windows\hosts"]
+{{ "c:\windows\hosts" | win_splitdrive| first }}            &gt;&gt; "C:"
+{{ "c:\windows\hosts" | win_splitdrive| last }}            &gt;&gt; "\windows\hosts"
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0dffed2" class="outline-4">
+<h4 id="org0dffed2">more Info about Jinja2 Filters</h4>
+<div class="outline-text-4" id="text-org0dffed2">
+<p>
+GOogle Search: jinja2 List of Builtin Filters
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b93db7" class="outline-3">
+<h3 id="org7b93db7">Lookups</h3>
+<div class="outline-text-3" id="text-org7b93db7">
+<p>
+If we store hosts and password in csv file we can read the password we can use lookup plugin
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#$ cat credentials.csv
+#Hostname, Password
+#Target1, PasswOrd1
+#Target2, PasswOrd2
+
+
+{{lockup('csvfile', 'target1 file=/tmp/credentials.csv delimiter=,')}} &gt;&gt; PasswOrd1
+</pre>
+</div>
+
+<p>
+There are other type of Lookups like INI,DNS,mongodb
+Source : Web : Ansible Documentation &gt; Playbooks:Special Topic &gt; Lookups 
+</p>
+</div>
+</div>
+<div id="outline-container-orge9c6988" class="outline-3">
+<h3 id="orge9c6988">Vault</h3>
+<div class="outline-text-3" id="text-orge9c6988">
+<p>
+We are storing password in host or inventory file 
+Ansible vault help to encript the host or inventory file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"># To encrypth inventory file
+ansible-vault encrypt inventory.txt
+# $ask for password
+
+
+# run encrypted inventory file
+ansible-playbook test.yml -i inventory.txt -ask-vault-pass
+
+# pass file(vault_pass) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass
+
+# pass script(vault_pass.py) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass.py
+
+# view contant of encrpyted file 
+ansible-vault view inventory.txt
+
+# To create an encrypted file 
+ansible-vault create inventory.txt
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org16854ba" class="outline-3">
+<h3 id="org16854ba">Dynamic Inventory</h3>
+<div class="outline-text-3" id="text-org16854ba">
+<p>
+host.py need to accept &#x2013;list and &#x2013;host
+Note &#x2013;host is used if no _meta key is present 
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=9nn21eHBkXg">https://www.youtube.com/watch?v=9nn21eHBkXg</a>
+copy in aws-ec2 with ansible 
+<a href="https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory/ec2.py">https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory/ec2.py</a>
+<a href="https://github.com/ansible/ansible/blob/stable-2.9/contrib/inventory/ec2.ini">https://github.com/ansible/ansible/blob/stable-2.9/contrib/inventory/ec2.ini</a>
+</p>
+
+<p>
+Run ansible using ansible ec2 plugin in local os with pem key to connect aws ec2 instances
+</p>
+
+<p>
+Step by Step - Ansible AWS dynamic inventory Demo | Ansible Dynamic Inventory EC2 Plugin | Easy Way
+<a href="https://www.youtube.com/watch?v=C5mazUJ1dsg">https://www.youtube.com/watch?v=C5mazUJ1dsg</a>
+</p>
+
+
+
+
+<p>
+Create dynamic invetory py with real time boto3 lib <a href="https://www.youtube.com/watch?v=daME4v9BkeY">https://www.youtube.com/watch?v=daME4v9BkeY</a>
+</p>
+
+
+<p>
+python example :
+Dynamic inve without any boto3 
+<a href="https://github.com/r3ap3rpy/ansibler/blob/master/custom_inventory.py">https://github.com/r3ap3rpy/ansibler/blob/master/custom_inventory.py</a>
+<a href="https://gist.github.com/tuxfight3r/8aec44824c4258c960b2">https://gist.github.com/tuxfight3r/8aec44824c4258c960b2</a> # &#x2013;list and &#x2013;host as argprase but host is not impleted 
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=daME4v9BkeY">https://www.youtube.com/watch?v=daME4v9BkeY</a>
+Ansible Tutorials | Creation of Dynamic inventory script for AWS
+host json formate python code is used to generate and test it with <code>ansible -i host.py --list</code>
+</p>
+
+
+
+<p>
+<a href="https://medium.com/geekculture/a-complete-overview-of-ansible-dynamic-inventory-a9ded104df4c">https://medium.com/geekculture/a-complete-overview-of-ansible-dynamic-inventory-a9ded104df4c</a>
+Using yaml insted of host.py file we use yaml file 
+</p>
+
+<pre class="example">
+ansible -i aws_dy.py app --list
+</pre>
+
+<p>
+<a href="https://github.com/surfer190/fixes/blob/master/docs/ansible/ansible-dynamic-inventory.md">https://github.com/surfer190/fixes/blob/master/docs/ansible/ansible-dynamic-inventory.md</a>
+</p>
+
+<p>
+<a href="https://adamj.eu/tech/2016/12/04/writing-a-custom-ansible-dynamic-inventory-script/">https://adamj.eu/tech/2016/12/04/writing-a-custom-ansible-dynamic-inventory-script/</a>
+</p>
+
+<p>
+dynamic inventory for ansible install in aws-ec2 instance 
+<a href="https://www.golinuxcloud.com/ansible-inventory-files/">https://www.golinuxcloud.com/ansible-inventory-files/</a>
+</p>
+
+
+<p>
+<a href="https://www.youtube.com/watch?v=ZpAMGn-ZNkQ&amp;list=PL2qzCKTbjutIyQAe3GglWISLnLTQLGm7e&amp;index=23">https://www.youtube.com/watch?v=ZpAMGn-ZNkQ&amp;list=PL2qzCKTbjutIyQAe3GglWISLnLTQLGm7e&amp;index=23</a>
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">#!/usr/bin/env python
+
+import json
+
+def get_inventory_data():
+    return {
+	'databases': {
+	    'hosts': [ip_address],
+	    'vars': {
+	       "ansible_ssh_pass":"PasswOrd",
+	       "ansible_ssh_host":"192.168.1.1"
+	    }
+	}
+	'web': {
+	    'hosts': ["web_servers"],
+	     'vars' : {
+	       "ansible_ssh_pass":"PasswOrd2",
+	       "ansible_ssh_host":"192.168.1.2"  
+		}
+	    }
+	}
+
+if __name__ == '__main__':
+    inventory_data = get_inventory_data()
+    print(json.dumps(inventory_data))
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb7648d7" class="outline-3">
+<h3 id="orgb7648d7">Custom modules</h3>
+</div>
+<div id="outline-container-org4371d86" class="outline-3">
+<h3 id="org4371d86">Plugins</h3>
+</div>
+
+<div id="outline-container-orga671275" class="outline-3">
+<h3 id="orga671275">Example</h3>
+<div class="outline-text-3" id="text-orga671275">
+<div class="org-src-container">
+<pre class="src src-sh">---
+- name: Play 1
+  hosts: test
+  become: yes
+  tasks:
+      - name: Installing the git package
+      - yum: name=git state=present
+
+2))
+---
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: copying the files from server to client
+      - copy: src=/etc/passwd dest=/opt
+
+3))
+----
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: Installing multiple packages
+      - yum: state=present name={{ item }}
+   with_items:
+- git
+- wget
+- httpd
+- tar
+- vim
+4))
+
+---
+- hosts: all
+become: yes
+tasks:
+- name: Installing jenkins
+yum:
+name: /opt/jenkins-2.129-1.1.noarch.rpm
+state: present
+- service:
+name=jenkins state=started
+
+5))
+----
+---
+- hosts: all
+become: yes
+tasks:
+- name: Sample playbooks
+yum: name=httpd state=present
+- name: starting httpd services
+service: name=httpd state=started
+
+
+
+
+- hosts: appserver
+
+remote_user: ansible1
+
+become: true
+
+tasks:
+- name: Install Apache Webserver
+yum: pkg=httpd state=latest
+- name: restart apache
+service: name=httpd state=restarted
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb0d8198" class="outline-2">
+<h2 id="orgb0d8198">ansible vault for github</h2>
+<div class="outline-text-2" id="text-orgb0d8198">
+<pre class="example">
+# if you are using gitlab private repositories 
+git clone https://gitlab.com/dankarthik2505/sample.git 
+#$enter password 
+
+# To use ansible vault 
+
+--- 
+#ansible-vault.yml
+
+---
+-name ansible playbook to test ansible vault
+ hosts: all 
+ become: true 
+ vars_files: 
+  - vault-pass.yml 
+ tasks: 
+ - name: clone a repo 
+   git: 
+     repo: https://dankarthik2505:{{password }}gitlab.com/dankarthik2505/sample.git
+     dest: /opt/git-repo
+
+cat vault-pass.yml # Note gitlab password is encripted in vault-pass.yml file it need phrase key to open the file 
+
+#|1|tYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3Y=
+
+$ansible-playbook -i hosts ansible-vault.yml --ask-vault-pass   # ask for encript key to open yml 
+$ENTERT THE PASSWORD    # to automate the file 
+
+cat pass.yml # store ansible-vault key here 
+#myansiblevault_password 
+
+$ansible-playbook -i hosts ansible-vault.yml --vault-password-file pass.yml
+</pre>
+
+<pre class="example">
+# ###########################
+# create a vault
+# ###########################
+nano ~/.vault_key 
+# INSERT: 5ltHN9ehn22Tsy9y2J
+chmod 600 ~/.vault_key
+nano touch some-text.txt
+# hi this is a some randomw text
+# ###########################
+# Check if ansible-vault install
+# ###########################
+which ansible-vault
+
+# ###########################
+# Encript 
+# ###########################
+ansible-vault encrypt some-text.txt
+#New Vault password : 
+#Confirm New Vault password :
+
+# ###########################
+# Confirm if vault is suscefull or not 
+# ###########################
+cat some-text.txt
+|1|tYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3Y=
+
+# ###########################
+# Decrypt the file 
+# ########################ansible-vault decrypt --vault-password-file ~/.vault_key some-text.txt
+
+# ######################
+# pass vault_key as a file 
+# ########################
+ansible-vault encrypt --vault-password-file ~/.vault_key some-text.txt
+#Encryption sucessfull 
+
+# #######################
+# check encryption is successfull 
+# ############################
+
+#ZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3YYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAA=
+
+
+# #########################################
+# edit the encrypted file without decrypt
+# #####################################
+ansible-vault edit --vault-password-file ~/.vault_key some-text.txt
+# above cmd will open default editor vi/nano to edit file without decrypting the file 
+
+# #########################################
+# view the encrypted file without decrypt
+# #####################################
+ansible-vault view  --vault-password-file ~/.vault_key some-text.txt
+# above cmd will cat decrypted  edit file without decrypting the file
+
+</pre>
+
+<p>
+encrypt files 
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=PRpEbFZi7nI">https://www.youtube.com/watch?v=PRpEbFZi7nI</a>
+How to run Ansible playbook from Jenkins pipeline job | Ansible Jenkins Integration| DevOps Tutorial
+</p>
+
+<p>
+Run ansible vault with play book in jenikins pipeline
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

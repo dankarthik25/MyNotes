@@ -1,0 +1,300 @@
+#+TITLE: Note_Ansible_prac
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Inventory
+
+#+begin_src sh
+ansible all -i hosts -m ping
+ansible all -i hosts -a "ls -latr"
+ansible docker -i hosts -a "docker ps" --become
+ansible docker -i hosts -m file -a "mode:777 path:/var/lib/docker.sock"
+ansible docker -i hosts -a "chmod 777 /var/lib/docker.sock" --become
+# ansible docker -i hosts -m file -a "mode:777 path:/var/lib/docker.sock" --become
+#var/run/docker.sock:
+ansible jenkins -i hosts -a "systemctl restart jenkins.serveice" --become
+ansible -i aws-hosts.txt -a "docker ps" --become i-0f143cf96e81cdce6
+
+# Alternative form 
+ansible -i hosts -m ping jenkins
+
+
+ansible-inventory -i hosts  --list > inventory.json
+ansible-inventory -i hosts -y --list > inventory.yaml
+
+
+ansible-playbook sample.yml --syntax-check
+ansible-playbook sample.yml --list-hosts
+ansible-playbook sample.yml # to run yml file
+ansible-playbook all -i host.txt playbook.yml  # static inventory
+
+
+# dynamic inventory
+ansible-playbook all -i host.py playbook.yml 
+ansible-playbook -i host.py app --list-hosts
+ansible-playbook -i host.py all --list-hosts
+ansible-playbook -i host.py all -m ping
+ 
+# 
+#  Ansible vault 
+# 
+ansible-vault encrypt inventory.txt    # To encrypth inventory file
+ansible-playbook test.yml -i inventory.txt -ask-vault-pass   # run encrypted inventory file
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass # pass file(vault_pass) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass.py    # pass script(vault_pass.py) containing password
+ansible-vault view inventory.txt # view contant of encrpyted file 
+#+end_src
+** static inventory
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories
+static inventory with path =ansible -i hosts -a "echo nico" jenkins=
+
+#+begin_src yaml
+[webservers]
+173.82.115.165
+
+[database_servers]
+173.82.220.239
+
+[ec2]
+jenkins      ansible_host=3.250.64.70    ansible_ssh_private_key_file=~/aws-dan2505/credencials/devops.pem 	    ansible_ssh_user=ubuntu
+
+[datacenter:children]
+webservers
+database_servers
+#+end_src
+
+As you can see in the inventory file above, we have created 2 host groups: webservers and database_servers. Also, we have created an additional group called datacenter that includes a group of host groups denoted by ': children' suffix as seen above.
+
+Ansible also allows groups of hosts to be placed under a group name. In the inventory file above, the webservers and database_servers groups have been placed under the datacenter.
+
+
+
+
+** Static Inventory Example 
+hosts
+#+begin_src sh
+#cat hosts
+[ec2]
+jenkins      ansible_host=3.250.64.70    ansible_ssh_private_key_file=~/aws-dan2505/credencials/devops.pem 	    ansible_ssh_user=ubuntu
+#+end_src
+
+#+begin_src sh
+ansible -i hosts -a "echo nico" jenkins
+ansible -i hosts -m ping jenkins
+ansible -i hosts -a "ls -latr" jenkins
+ansible all -i hosts -m user -a"name=devops password=devops@123" --become
+
+# Or
+
+ansible jenkins -i hosts -a "echo nico"
+#jenkins | CHANGED | rc=0 >>
+#nico
+ansible jenkins -i hosts -m ping 
+#jenkins | SUCCESS => {
+#    "ansible_facts": {
+#        "discovered_interpreter_python": "/usr/bin/python3"
+#    },
+#    "changed": false,
+#    "ping": "pong"
+#}
+ansible jenkins -i hosts -a "ls -latr"
+#jenkins | CHANGED | rc=0 >>
+#total 32
+#-rw-r--r-- 1 ubuntu ubuntu  807 Feb 25  2020 .profile
+#-rw-r--r-- 1 ubuntu ubuntu 3771 Feb 25  2020 .bashrc
+#-rw-r--r-- 1 ubuntu ubuntu  220 Feb 25  2020 .bash_logout
+#drwxr-xr-x 3 root   root   4096 Apr 15 23:27 ..
+#drwx------ 2 ubuntu ubuntu 4096 Apr 15 23:27 .ssh
+#drwx------ 2 ubuntu ubuntu 4096 Apr 16 09:52 .cache
+#drwx------ 3 ubuntu ubuntu 4096 Apr 16 09:52 .ansible
+#-rw-r--r-- 1 ubuntu ubuntu    0 Apr 16 10:03 .sudo_as_admin_successful
+#drwxr-xr-x 5 ubuntu ubuntu 4096 Apr 16 10:03 .
+
+#+end_src
+
+* INI to yaml to json convertion
+#+begin_src sh
+#ansible-inventory -i hosts -y --list > inventory.yaml
+#cat inventory.yaml 
+all:
+  children:
+    ec2:
+      hosts:
+        jenkins:
+          ansible_host: 3.250.64.70
+          ansible_ssh_private_key_file: ~/aws-dan2505/credencials/devops.pem
+          ansible_ssh_user: ubuntu
+    ungrouped: {}
+#ansible-inventory -i hosts  --list > inventory.json
+#cat inventory.json 
+{
+    "_meta": {
+        "hostvars": {
+            "jenkins": {
+                "ansible_host": "3.250.64.70",
+                "ansible_ssh_private_key_file": "~/aws-dan2505/credencials/devops.pem",
+                "ansible_ssh_user": "ubuntu"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ec2",
+            "ungrouped"
+        ]
+    },
+    "ec2": {
+        "hosts": [
+            "jenkins"
+        ]
+    }
+}
+#+end_src
+
+
+* Install docker in ubuntu using ansible
+https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04
+
+#+begin_src yaml
+# cat install_doc.yml
+---
+- hosts: all
+  become: true
+  vars:
+    container_count: 4
+    default_container_name: docker
+    default_container_image: ubuntu
+    default_container_command: sleep 1d
+
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+#+end_src
+
+
+#+begin_src sh
+#ansible-playbook install_docker_playbook.yml -i hosts -l jenkins 
+
+PLAY [all] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [jenkins]
+
+TASK [Install aptitude] *************************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Install required system packages] *********************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Add Docker GPG apt Key] *******************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Add Docker Repository] ********************************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Update apt and install docker-ce] *********************************************************************************************************************************
+changed: [jenkins]
+
+TASK [Install Docker Module for Python] *********************************************************************************************************************************
+changed: [jenkins]
+
+PLAY RECAP **************************************************************************************************************************************************************
+jenkins                    : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+#+end_src
+
+Check if docker is installed or not 
+#+begin_src sh
+#ansible jenkins -i hosts -a "docker ps" --become 
+jenkins | CHANGED | rc=0 >>
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+#+end_src
+
+# COMMENTED PART showing error during docker installation 
+#+begin_src yaml 
+---
+- hosts: all
+  become: true
+  vars:
+    container_count: 4
+    default_container_name: docker
+    default_container_image: ubuntu
+    default_container_command: sleep 1d
+
+  tasks:
+    - name: Pull default Docker image
+      community.docker.docker_image:
+        name: "{{ default_container_image }}"
+        source: pull
+
+    - name: Create default containers
+      community.docker.docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        image: "{{ default_container_image }}"
+        command: "{{ default_container_command }}"
+        state: present
+      with_sequence: count={{ container_count }}
+#+end_src
+* TODO Create a User with Password using Ansible 
+ansible all -i hosts -m user -a"name=devops password=devops@123" --become
+* TODO Give sudo privilege to user 'devops'  using Ansible 
+https://stackoverflow.com/questions/37333305/ansible-create-a-user-with-sudo-privileges
+* TODO Enable RSAauthentication and pem using Ansible
+https://www.howtoforge.com/tutorial/setup-new-user-and-ssh-key-authentication-using-ansible/
+
+* TODO Create and Copy RSA Key to remote user using Ansible 
+
+# ################################################
+# How to Add SSH Key into AWS EC2 instance - EC2 Add Key
+# ################################################
+https://www.middlewareinventory.com/blog/ansible-ec2-ssh-key/
+https://github.com/AKSarav/Add-SSH-Key-EC2-Ansible
+https://www.youtube.com/watch?v=kfWfj76-am8
+
+
+ansible-playbook add-key.yml  -e "key=/tmp/rohit_new_employee.pub status=present"
+ansible-playbook add-key.yml -e "key=/tmp/rohit_new_employee.pub status=absent"
+ 
+
+* TODO Enable SSH-Connect Jenkins-ec2 instance to all docker-ec2 instance
+https://www.youtube.com/watch?v=Zx_zi_GABS0
+
+* TODO Make sure docker is avaiable after ec2 resarts with any error
+
+chmod 777 /var/lib/docker.sock
+* restart docker container,compose,stack if container is in exited state

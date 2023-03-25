@@ -1,0 +1,46 @@
+#+TITLE: loadbalancer
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+SELECT  THE name  DNS for your web app:
+Create a target group attach instances and make sure that health is good 
+create a application load balancer
+- add lisener with your selected dns name
+- get the loadbalancer dns name
+create a dns name using route53
+- attach dns name with alb dns name
+
+create ssl certificate using amc
+- 
+
+
+
+
+Load balancer is a servie which uniformly distributes traffic [network, http, https,...etc] and worklaod
+
+
+ELB(Elastic Load Balancer ): aws 
+
+Type of Load Balancer:
+- Classic Load Balancer:
+- Network Load Balancer :
+- Application Load Balancer: application
+- Cross-Zone Load Balancer:
+  
+Classic Load Balancer:
+
+
+https://www.youtube.com/watch?v=IMn9kUYR27M
+How to implement host and path based routing on ELB | AWS Application Load balancer
+
+* Route 53 :
+Buy  a DNS NAME :
+Link DNS to AWS :
+- Route 53 buy a dns and add your server in dns-service provider
+Create a Route Table:
+Name: ______________.digivalsolutions.com
+Type(prerequisite create a new target group):
+
+*
+How to create a alb using lisening: path (order, payment) and using loadbalancer-dns name 
+
+

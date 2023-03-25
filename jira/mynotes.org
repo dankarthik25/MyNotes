@@ -1,0 +1,13 @@
+#+TITLE: mynotes
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Intro Section
+
+* Agil concepts with Jira
+
+* Working within an agile team with Jira
+* Managing an agile team with Jira
+* Jira Administation
+* Team-Managed/Next-Gen Projects
+* Bonus Section
+* Confuluence

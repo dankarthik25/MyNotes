@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>git</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">git</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org43aa538">git</a>
+<ul>
+<li><a href="#orgf54eb69">What is git</a>
+<ul>
+<li><a href="#org40becef"><span class="todo TODO">TODO</span> Q) git Vs SVN (Subversion)</a></li>
+</ul>
+</li>
+<li><a href="#orgf60d063">short tutorial</a></li>
+<li><a href="#org9620589">Installation and Configuration Cmd</a></li>
+<li><a href="#orga69e08c"><span class="todo TODO">TODO</span> Q)three main states in git</a>
+<ul>
+<li><a href="#orgad6e471">How to Commit files ?</a></li>
+<li><a href="#org553a289">Connect Local Repository to Remote Repository</a></li>
+<li><a href="#org037ceeb">Push Local Repository to Remote Repository (git push)</a></li>
+<li><a href="#org70f52e0"><span class="todo TODO">TODO</span> Pull Remote Repository to Local Repository</a></li>
+</ul>
+</li>
+<li><a href="#orgf4f92b9">Clonning a repository</a></li>
+<li><a href="#orga6ec69e">Q)Pull vs fetch</a></li>
+<li><a href="#org0fea745">Creating a Branch (git branch &lt;branch-name&gt;)</a></li>
+<li><a href="#orgc32930b">log</a></li>
+<li><a href="#orge7f2225">revert :</a></li>
+<li><a href="#org1cfda81">reset vs revert</a>
+<ul>
+<li><a href="#org6a4b6a2">Git reset</a></li>
+<li><a href="#org9dd43a7">Three types of reset</a></li>
+<li><a href="#org6b57783"><span class="todo TODO">TODO</span> revert (Need to check if revert altering history of commits)</a></li>
+</ul>
+</li>
+<li><a href="#org242f9f3">Git branching Modeling</a></li>
+<li><a href="#org045ad2d">merge</a></li>
+<li><a href="#orgc5c60ab"><span class="todo TODO">TODO</span> merge vs rebase vs cherrypick</a>
+<ul>
+<li><a href="#org10fd704">cheery pik</a></li>
+</ul>
+</li>
+<li><a href="#org287f899">conflicts</a></li>
+<li><a href="#org1dd7534">Interview Qusestion</a>
+<ul>
+<li><a href="#org780e4bf">what is use of git</a></li>
+<li><a href="#org78ab06d">Different type of vcs</a></li>
+</ul>
+</li>
+<li><a href="#orgfc9ca2f"><span class="todo TODO">TODO</span> Q) fork and clone</a></li>
+</ul>
+</li>
+<li><a href="#org2db8726">connect local meachine (git) to remote meachine (github)</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org2497ff1">tell git about ssh key that we generated</a></li>
+<li><a href="#orgbae18da">push locally create repo (local-repo)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6002180">Git GUI</a></li>
+<li><a href="#org2a8e8cb">Interview Git</a></li>
+<li><a href="#orgd48196b">Git AWS Setting</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org43aa538" class="outline-2">
+<h2 id="org43aa538">git</h2>
+<div class="outline-text-2" id="text-org43aa538">
+</div>
+<div id="outline-container-orgf54eb69" class="outline-3">
+<h3 id="orgf54eb69">What is git</h3>
+<div class="outline-text-3" id="text-orgf54eb69">
+<ul class="org-ul">
+<li>git is free and opensouce VCS (Version Control System) created by linux torvaldss in 2005. Version Control System  mean which is used to track all change in project</li>
+<li>Using git
+<ul class="org-ul">
+<li>No data is lost and undo previous data using his</li>
+<li>all users can access and share the project</li>
+<li>security: outsiders can access and edit the project</li>
+<li>git has (distributed repo )</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org40becef" class="outline-4">
+<h4 id="org40becef"><span class="todo TODO">TODO</span> Q) git Vs SVN (Subversion)</h4>
+<div class="outline-text-4" id="text-org40becef">
+<p>
+SVN is centralised VCS , Git is distributed VCS
+SVN is still used because of its performance with large files won't be satisfied with Git.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf60d063" class="outline-3">
+<h3 id="orgf60d063">short tutorial</h3>
+<div class="outline-text-3" id="text-orgf60d063">
+<ul class="org-ul">
+<li>Creating a version control of local repository
+<ul class="org-ul">
+<li>We need to Create a version contol file (<code>.git</code>) it create by <code>git init</code></li>
+</ul></li>
+</ul>
+
+<pre class="example">
+git init                                  # Inicialize or Create a version control 
+git status                                # View the Stagging Area
+git add &lt;file&gt;                            # Add files to stagging Area
+git add -A
+git rim --cached &lt;file&gt;                   # Remove files in Stagging Area
+touch .gitignore                          #  list all files  that are need to ignore                    # Ignore files in Stagging Area
+git commit -m "fist commit"               # Save-Commit  to Local Repo
+git remote add orgin https://github.com/....                      # Connect Local Repo to Remote Repo
+git push origin master                    # Upload Local Repo to Remote Repo
+git pull                                  # Update Local Repo
+git clone https://github.com/..git        # clone to current dir   # Clone
+git diff  &lt;commit id&gt; &lt;commit id&gt;         # diff : View changes in fiels
+
+## Creat Branch ,push, delete:
+git branch &lt;branch-name&gt;       # create a new branch
+git chechout -b &lt;branchname&gt;    # to create and moveing to the   
+git branch                      # list of branch
+git branch --list               # list of branch
+git checkout UncleDaveEmacs     # Switch one branch to other
+git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
+git branch -D UncleDaveEmacs  # delete a branch
+git push orign &lt;branch-name&gt;     # push branch to remote repo
+git branch -D devop     # git delete a branch in local repository
+git push origin --delete &lt;branch name&gt;     # delete branch at remote repositort
+git push origin --delete UncleDaveEmacs # delete a branch in remote repository
+
+# Merge
+git chekout master # to go to destination (master)
+git merge &lt;branch-name&gt;     # merge brach to master git
+</pre>
+</div>
+</div>
+<div id="outline-container-org9620589" class="outline-3">
+<h3 id="org9620589">Installation and Configuration Cmd</h3>
+<div class="outline-text-3" id="text-org9620589">
+<div class="org-src-container">
+<pre class="src src-sh">git --version   # &gt;&gt; git version 2.3.2
+
+# Configuration 
+git config --global user.name "Dankarthik25"
+git config -global user.email "dankarthik25@gmail.com"
+
+# help
+git help config
+git config --help
+
+#
+cat ~/.gitconfig
+#[user]
+#        email = dankarthik25@gmail.com
+#        name = Dankarthik25
+#[log]
+#  date = relative
+#[format]
+#  pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%&gt;(12,trunc)%ad %C(auto,green)%&lt;(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga69e08c" class="outline-3">
+<h3 id="orga69e08c"><span class="todo TODO">TODO</span> Q)three main states in git</h3>
+<div class="outline-text-3" id="text-orga69e08c">
+<ul class="org-ul">
+<li>Git has three main states that your files can reside in:
+<ul class="org-ul">
+<li>Working-Dir, Stagging Area, Local repo, Remote repo</li>
+<li><code>Working-Dir</code>      File but have not have <code>Version Control</code> (committed)</li>
+<li><code>Stagging Area</code>    Marked a modified file  which are to be commit</li>
+<li><code>Committed</code>      Current files are commented/safed in local Repository <code>.git directory</code>.</li>
+<li><code>Remote Repository</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-orgad6e471" class="outline-4">
+<h4 id="orgad6e471">How to Commit files ?</h4>
+<div class="outline-text-4" id="text-orgad6e471">
+</div>
+<ul class="org-ul">
+<li><a id="org3e59118"></a>initialize  the file or local-repository  (git init):()<br />
+<div class="outline-text-5" id="text-org3e59118">
+<p>
+Create a version control folder or <code>initialize</code> or track (changes or versions) we have to initialize the folder 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"># go the directory (Local-Repositore) that has to be version control 
+git init
+</pre>
+</div>
+
+<p>
+This will create a <code>.git</code> file in the current directory  which consist of all the change that are to be done
+</p>
+</div>
+</li>
+<li><a id="org613628d"></a>Adding files to git (git add file)<br />
+<div class="outline-text-5" id="text-org613628d">
+<p>
+files which are uncommited are changed to <code>staged</code> 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git add &lt;file&gt;             # add files to git
+git add -A                     # add all file
+git status                     # show &lt;file&gt; or all file are change to commited area
+</pre>
+</div>
+</div>
+<ul class="org-ul">
+<li><a id="orgb12d762"></a>Example:<br />
+<div class="outline-text-6" id="text-orgb12d762">
+<div class="org-src-container">
+<pre class="src src-sh">git add .gitignore
+git add .emacs
+git add .vimrc
+</pre>
+</div>
+<p>
+<code>.gitignore</code>  which was in untracked () is changed to staging area or committed
+</p>
+</div>
+</li>
+</ul>
+</li>
+<li><a id="org56a8dbd"></a>Removing files from git (git reset file)<br />
+<div class="outline-text-5" id="text-org56a8dbd">
+<div class="org-src-container">
+<pre class="src src-sh">git reset &lt;file&gt;                     # remove  files from stating area( committed)
+git reset                                  # remove all files
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgb8dac24"></a>.gitignore<br />
+<div class="outline-text-5" id="text-orgb8dac24">
+<p>
+hidden file <code>.gitignore</code>  contain the list of the all the file and folder that ignore by git for version control
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">touch .gitignore
+ls -a &gt;&gt; .gitigonre	# and remove the files need to be VC
+</pre>
+</div>
+</div>
+<ul class="org-ul">
+<li><a id="org452fe65"></a>Example<br />
+<div class="outline-text-6" id="text-org452fe65">
+<p>
+in file add the file or folders that are to ignored by git
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"># file that are to ignore
+.DS_Store
+.project
+*.pyc
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</li>
+<li><a id="orgd73acdb"></a>Commit files (git commit)<br />
+<div class="outline-text-5" id="text-orgd73acdb">
+<p>
+Note : All files are need to to add/ignored then only we can commit files
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git add -A
+git commit -m "Initial Commit"                        # file are commited 
+git status                                                                  # show nothing to commit , working directoru clean    
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org553a289" class="outline-4">
+<h4 id="org553a289">Connect Local Repository to Remote Repository</h4>
+<div class="outline-text-4" id="text-org553a289">
+<div class="org-src-container">
+<pre class="src src-sh">git remote add origin url    # eg: git remote add origin https://github.com/dankarthik25/pythonUdemyTutorial  
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org037ceeb" class="outline-4">
+<h4 id="org037ceeb">Push Local Repository to Remote Repository (git push)</h4>
+<div class="outline-text-4" id="text-org037ceeb">
+<div class="org-src-container">
+<pre class="src src-sh">git push origin master
+# git push origin master -f     # Force if cmd not works
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org70f52e0" class="outline-4">
+<h4 id="org70f52e0"><span class="todo TODO">TODO</span> Pull Remote Repository to Local Repository</h4>
+<div class="outline-text-4" id="text-org70f52e0">
+<div class="org-src-container">
+<pre class="src src-sh">git pull
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf4f92b9" class="outline-3">
+<h3 id="orgf4f92b9">Clonning a repository</h3>
+<div class="outline-text-3" id="text-orgf4f92b9">
+<div class="org-src-container">
+<pre class="src src-sh">git clone &lt;url&gt; &lt;path- which dir&gt;
+git clone ../remote_repo.git .
+git clone &lt;url&gt; .                        # . means current direcory
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga6ec69e" class="outline-3">
+<h3 id="orga6ec69e">Q)Pull vs fetch</h3>
+<div class="outline-text-3" id="text-orga6ec69e">
+<ul class="org-ul">
+<li>In the simplest terms, git pull does a git fetch followed by a git merge.</li>
+<li>git fetch
+<ul class="org-ul">
+<li>Update your remote-tracking branches under refs/remotes/&lt;remote&gt;/.</li>
+<li>No change in local repo/branch,Staging Area, Working Dir.</li>
+</ul></li>
+<li>git pull
+<ul class="org-ul">
+<li>Update your remote-tracking branches under refs/remotes/&lt;remote&gt;/.</li>
+<li>Change local branch and Working Dir
+<ul class="org-ul">
+<li>Note: All the Untracked data will be lost in Working Dir</li>
+<li>Note: merge only current branch wich it is pulled</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh"># fetch hold data(fetch data from remote  repository to local repository)  r  but not merges with current reposiotory
+git fetch
+git merge # it merges local repository to current repository 
+
+# pull
+git pull origin &lt;branch-name&gt; # git fetch and git merge
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0fea745" class="outline-3">
+<h3 id="org0fea745">Creating a Branch (git branch &lt;branch-name&gt;)</h3>
+<div class="outline-text-3" id="text-org0fea745">
+<p>
+source : <a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a> 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">## Creat Branch ,push, delete:
+git branch &lt;branch-name&gt;                  # create a new branch
+git branch UncleDaveEmacs       # Create a branch
+git branch                      # list of branch
+git branch --list               # list of branch
+git checkout UncleDaveEmacs     # Switch one branch to other
+git chechout -b &lt;branchname&gt;    # to create and moveing to the &lt;branch-name&gt;
+git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
+git branch -D UncleDaveEmacs  # delete a branch
+git push orign &lt;branch-name&gt;     # push branch to remote repo
+git branch -D devop     # git delete a branch in local repository
+git push origin --delete &lt;branch name&gt;     # delete branch at remote repositort
+git push origin --delete UncleDaveEmacs # delete a branch in remote repository
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc32930b" class="outline-3">
+<h3 id="orgc32930b">log</h3>
+<div class="outline-text-3" id="text-orgc32930b">
+<p>
+Consist of &lt; commit id, Author, Date, Comment on commit &gt; 
+ mode on your branch
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git log  # give &lt;git id,author, date, commit message&gt;
+git log --online # give short version only &lt; commit id, comment- message &gt;
+
+#commit 874357761ce77a9a925c1066d9cef6e81a5881a5
+#Author: Dankarthik25 &lt;dankarthik25@gmail.com&gt;
+#Date:   Fri Apr 10 06:56:16 2020 +0530
+
+ #   Revised Docker
+
+#commit 7432654c56923fe3bc18b19d7ac69e70300d86f4
+#Author: Dankarthik25 &lt;dankarthik25@gmail.com&gt;
+#Date:   Thu Apr 9 07:16:05 2020 +0530
+
+ #   Seperate Docker_Kubernetics
+
+
+#    my Notes on Prog
+git log --oneline
+# 70da939 (HEAD -&gt; master, origin/master) New Change
+# 53dd0ee New Change
+# f537b27 New Change
+# 432784e New Change
+# 546bc17 Link and Compose added
+# 8743577 Revised Docker
+# 7432654 Seperate Docker_Kubernetics
+# e981603 Seperate Ansible
+# abb9dee last commit
+# 9ab9c9a Added Ansible and Docker, Kubernetic files
+# c39821d my Notes
+# 370fca2 my Notes on Prog
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge7f2225" class="outline-3">
+<h3 id="orge7f2225">revert :</h3>
+<div class="outline-text-3" id="text-orge7f2225">
+<p>
+when code is pushed to remote but you want changes back from remote &gt; local 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git log --oneline # to get the commit id
+
+git revert 77592f3   # to change code frome to remote to local repo
+
+# to change the code from local to remote we need to push from local to remote
+
+git push origin master
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1cfda81" class="outline-3">
+<h3 id="org1cfda81">reset vs revert</h3>
+<div class="outline-text-3" id="text-org1cfda81">
+</div>
+<div id="outline-container-org6a4b6a2" class="outline-4">
+<h4 id="org6a4b6a2">Git reset</h4>
+<div class="outline-text-4" id="text-org6a4b6a2">
+<p>
+The git reset command allows you to RESET your current head to a specified state. You can reset the state of specific files as well as an entire branch. This is useful if you haven't pushed your commit up to GitHub or another remote repository yet.
+</p>
+</div>
+</div>
+<div id="outline-container-org9dd43a7" class="outline-4">
+<h4 id="org9dd43a7">Three types of reset</h4>
+<div class="outline-text-4" id="text-org9dd43a7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Type of reset</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">soft</td>
+<td class="org-left">keep all changes in stagging area, remove from local repo</td>
+</tr>
+
+<tr>
+<td class="org-left">mixed</td>
+<td class="org-left">keep all changes in workind dir, remove from stagging and local repo</td>
+</tr>
+
+<tr>
+<td class="org-left">hard</td>
+<td class="org-left">removes all changes from local repo,stagging and local repo</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>In the simplest terms:</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Type of reset</th>
+<th scope="col" class="org-left">Workdir</th>
+<th scope="col" class="org-left">Stagging Area</th>
+<th scope="col" class="org-left">Local Repo</th>
+<th scope="col" class="org-left">git log</th>
+<th scope="col" class="org-left">Remote Repo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">soft</td>
+<td class="org-left">Prescent</td>
+<td class="org-left">moved to Stagging Area</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Prescent</td>
+</tr>
+
+<tr>
+<td class="org-left">mixed</td>
+<td class="org-left">Moved to Workdir</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Prescent</td>
+</tr>
+
+<tr>
+<td class="org-left">hard</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Removed</td>
+<td class="org-left">Prescent</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org6b57783" class="outline-4">
+<h4 id="org6b57783"><span class="todo TODO">TODO</span> revert (Need to check if revert altering history of commits)</h4>
+<div class="outline-text-4" id="text-org6b57783">
+<p>
+Both the git revert and git reset commands undo previous commits. But if you've already pushed your commit to a remote repository, it is recommended that you do not use git reset since it rewrites the history of commits. This can make working on a repository with other developers and maintaining a consistent history of commits very difficult.
+</p>
+
+<p>
+Instead, it is better to use git revert, which undoes the changes made by a previous commit by creating an entirely new commit, all without altering the history of commits.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sh"># delete file in local and remote repo
+
+# To remove file for remote to  
+git revert &lt;commitid&gt; 
+git commit - m "remove from remote"
+
+got log --oneline
+
+#commit id : 1
+#commit id : 2
+#commit id : 3
+#commit id : 4
+#commit id : 5
+git reset --soft 2 # keep the commit after 2 (3,4,5) 
+#commit id : 3
+#commit id : 4
+#commit id : 5
+
+
+git reset --hard 77592f3  # 
+git reset --soft 77592f3  # local repo to stagging 
+git reset --mixed 77592f3 #  local repo to work - dir
+
+git log --oneline
+# beef857 Revert "created test3 file"
+# 77592f3 created test3 file
+# 1c08f78 created test2 file
+# 78b777d created test1 file
+# a7968c1 Created hh
+# 4b30445 Created bb
+# 2e435ca Created gg file to intall git
+
+git revert 1c08f78
+git push origin master
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org242f9f3" class="outline-3">
+<h3 id="org242f9f3">Git branching Modeling</h3>
+<div class="outline-text-3" id="text-org242f9f3">
+<p>
+If your team is doing continuous delivery then it is suggested to follow Git branch model. Here is a simple version of it
+<a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a>
+</p>
+
+<p>
+At the core, the development model is greatly inspired by existing models out there. The central repo holds two main branches(master(origin) , developer)
+with an <b>infinite lifetime</b>:
+</p>
+<ul class="org-ul">
+<li>master :
+We consider origin/master to be the main branch</li>
+<li><p>
+develop:
+When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number.
+</p>
+
+<p>
+Therefore, each time when changes are merged back into master, this is a new production release by definition. We tend to be very strict at this, so that theoretically, we could use a Git hook script to automatically build and roll-out our software to our production servers everytime there was a commit on master
+</p>
+
+<p>
+Any feature branch from develop Must merge back into develop. feature branches are limited time branch which will eventually merged back to develop branch
+</p></li>
+
+<li><p>
+Supporting branches:
+Development model uses a variety of supporting branches to aid
+</p>
+<ul class="org-ul">
+<li>parallel development between team members,</li>
+<li>ease tracking of features,</li>
+<li>prepare for production releases and to</li>
+<li>assist in quickly (bug)fixing live production problems.</li>
+</ul>
+
+<p>
+Unlike the main branches, these branches always have a <b>limited life time</b>, since they will be removed eventually.
+</p></li>
+</ul>
+
+<p>
+The different types of branches we may use are:
+</p>
+<ul class="org-ul">
+<li><p>
+feature
+Any feature branch from develop Must merge back into develop. feature branches are limited time branch which will eventually merged back to develop branch 
+</p>
+
+<p>
+naming convention:anything except master, develop, release-<b>, or hotfix-</b>
+</p>
+
+<p>
+Feature branches (topic branches) are used to develop new features for the upcoming or a distant future release.
+When starting development of a feature, the target release in which this feature will be incorporated may well be unknown at that point. The essence of a feature branch is that it exists as long as the feature is in development, but will eventually be merged back into develop (to definitely add the new feature to the upcoming release) or discarded (in case of a disappointing experiment).
+</p></li>
+
+<li><p>
+release branch
+Any Release branches from develop and Must merge back into develop and master. naming convention(release-*)
+</p>
+<ul class="org-ul">
+<li>Release branches support preparation of a new production release.</li>
+<li>Allow for minor bug fixes and</li>
+<li>preparing meta-data for a release (version number, build dates, etc.).</li>
+</ul>
+
+<p>
+By doing all of this work on a release branch, the develop branch is cleared to receive features for the next big release.
+</p>
+
+<p>
+The key moment off a new release branch when
+</p>
+<ul class="org-ul">
+<li>atleast all features that are targeted for the release-to-be-built must be merged in to develop at this point in time.</li>
+<li>All features targeted at future releases may not—they must wait until after the release branch is branched off.</li>
+</ul></li>
+
+<li><p>
+hotfix(BUG-fix)
+Any hotfix branch from master Must merge back into develop and master
+naming convention:hotfix-* 
+</p>
+
+<p>
+They arise from the necessity to
+</p>
+<ul class="org-ul">
+<li>act immediately upon an undesired state of a live production version.</li>
+<li>When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.</li>
+</ul>
+
+<p>
+The essence is that team members (on the develop branch) can continue, while another person is preparing a quick production fix.
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org045ad2d" class="outline-3">
+<h3 id="org045ad2d">merge</h3>
+<div class="outline-text-3" id="text-org045ad2d">
+<div class="org-src-container">
+<pre class="src src-sh">git checkout master # to git &lt;branch-name&gt;
+git merge devop # git merge &lt;other-branch-name&gt;
+
+##  Example 
+
+# create nn file in "devop"  branch
+git checkout devop
+touch nn
+git add .
+git commit -m "created nn file"
+git push  origin devop
+
+# merge "devop" branch to  "master branch"
+git chekchout master
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc5c60ab" class="outline-3">
+<h3 id="orgc5c60ab"><span class="todo TODO">TODO</span> merge vs rebase vs cherrypick</h3>
+<div class="outline-text-3" id="text-orgc5c60ab">
+<p>
+git merge :
+</p>
+<ul class="org-ul">
+<li>Is a non-destructive operations</li>
+<li>Existing branes are not change in any way</li>
+<li>Create new &lt;commit-id&gt; in original(main) branch</li>
+<li>Normal merge changes history and squash merge will not change history all original but new commit-id is created .</li>
+</ul>
+
+<p>
+git rebase:
+</p>
+<ul class="org-ul">
+<li>Moves the entire 2nd branch to main branch</li>
+<li>Re-writes the project history</li>
+<li>We get much cleaner and linear project</li>
+</ul>
+
+<p>
+git cherry-pick:
+</p>
+<ul class="org-ul">
+<li>Add specific &lt;commit -id&gt;  to 1st branch</li>
+<li>For cherry-pick add particular &lt;commit -id&gt;</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git checkout master
+touch aaa
+git add aaa
+git commit -m "created aaa file in master"
+
+git checkhout -b "release-1.0"
+git rebase master
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org10fd704" class="outline-4">
+<h4 id="org10fd704">cheery pik</h4>
+<div class="outline-text-4" id="text-org10fd704">
+<p>
+Not all commit id in branch are merged in main branch
+but selected commit id are merged in main branch
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git checkout -b future
+touch ww
+git add .
+git commit -m "create ww file"
+touch ww
+
+touch www
+git add .
+git commit - m "create www file"
+
+
+touch wwww
+git add
+git commit - m "create wwww file"
+
+touch wwwww | git add .
+git commit -m "create wwwww file"
+
+git log --online 
+# c459d7a created wwwwww file
+# b866590 created wwwww file
+# b510fa6 created www file
+# b6b5153 created ww file
+# 9d75eb8 created aaa file in master
+# 7fb9174 created file called mm
+
+# Q) merge only www file from future brach to master
+git log --online # to get the &lt;commit -id&gt; of www file : b877590
+
+git checkout master
+
+git cherry-pick b877590
+git log --online 
+# b866590 created wwwww file
+# 9d75eb8 created aaa file in master
+# 7fb9174 created file called mm
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org287f899" class="outline-3">
+<h3 id="org287f899">conflicts</h3>
+<div class="outline-text-3" id="text-org287f899">
+<p>
+When two branch &lt;kar&gt; &lt;sanjay&gt; make different change in a same file 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git checkout master
+vi ww
+# hello
+
+git add  .
+git commit -m "modified ww file"
+
+git log 
+
+git checkout future
+vi ww
+# hello,
+# book ticktes
+
+git commit -m "modifiled ww file"
+
+git checkout master
+
+git merge future 
+#ERROR mESSAGE: CONFLICT (content): merge confilct in ww
+#             : fix conflicts and then commit the results
+vi ww
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1dd7534" class="outline-3">
+<h3 id="org1dd7534">Interview Qusestion</h3>
+<div class="outline-text-3" id="text-org1dd7534">
+<ul class="org-ul">
+<li>Q)If branch and merge, and pull and push  are done my devops then what is role of devops</li>
+<li>Ans) devops role is to create hotfix branch and and set a maile to devops</li>
+</ul>
+</div>
+<div id="outline-container-org780e4bf" class="outline-4">
+<h4 id="org780e4bf">what is use of git</h4>
+<div class="outline-text-4" id="text-org780e4bf">
+<ul class="org-ul">
+<li>to  track all changes in file or directory in VCS [Version Control System]</li>
+<li>can not lose data -delete -revert</li>
+<li>all users can access and send data</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org78ab06d" class="outline-4">
+<h4 id="org78ab06d">Different type of vcs</h4>
+<div class="outline-text-4" id="text-org78ab06d">
+<ul class="org-ul">
+<li>cenrtal vcs svn</li>
+<li>distributed vs : github or bitbucket</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfc9ca2f" class="outline-3">
+<h3 id="orgfc9ca2f"><span class="todo TODO">TODO</span> Q) fork and clone</h3>
+</div>
+</div>
+
+<div id="outline-container-org2db8726" class="outline-2">
+<h2 id="org2db8726">connect local meachine (git) to remote meachine (github)</h2>
+<div class="outline-text-2" id="text-org2db8726">
+<div class="org-src-container">
+<pre class="src src-bash">  ssh-keygen -t rsa -b 4096 -C "&lt;email-address.com&gt;"
+# Enter file in which to save the key : test_key
+ls | grep test_key
+test_key      # private key  # can't be shared 
+test_key.pub  # public key  can be shared 
+cat test_key.pub
+</pre>
+</div>
+
+<p>
+In github setting &gt;&gt; SSH and GPG Keys &gt;&gt; New SSH Key
+Title : Key name
+Key : past test<sub>key.pub</sub>
+</p>
+</div>
+
+<div id="outline-container-org2497ff1" class="outline-4">
+<h4 id="org2497ff1">tell git about ssh key that we generated</h4>
+<div class="outline-text-4" id="text-org2497ff1">
+<p>
+Visit Github about :
+Generating a new SSH key and adding it to the ssh-agent
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git push origin master # no hhtp address required and no github email_id and password is required as we done ssh connection
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgbae18da" class="outline-4">
+<h4 id="orgbae18da">push locally create repo (local-repo)</h4>
+<div class="outline-text-4" id="text-orgbae18da">
+<p>
+create a empty repo in github with same name in local-repo
+copy http link of github repo <a href="http:github_repo">http:github_repo</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">    # Inside local-repo
+  git remote add origin &lt;http:github_repo&gt;
+git push -u origin master
+</pre>
+</div>
+<p>
+git push origin master
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org6002180" class="outline-2">
+<h2 id="org6002180">Git GUI</h2>
+<div class="outline-text-2" id="text-org6002180">
+<p>
+GUI
+git kraken    PAID git diff
+Sublime merge PAID
+git tower    paid
+git sourcetree   free    dev: git bucket  available: win, mac , Not Linux
+github
+git ahead   free 
+Webstore
+VS Code + git panel + inbuild termial
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2a8e8cb" class="outline-2">
+<h2 id="org2a8e8cb">Interview Git</h2>
+<div class="outline-text-2" id="text-org2a8e8cb">
+<p>
+What is git?
+<a href="https://www.edureka.co/blog/interview-questions/git-interview-questions/">Edureka interview questions</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgd48196b" class="outline-2">
+<h2 id="orgd48196b">Git AWS Setting</h2>
+<div class="outline-text-2" id="text-orgd48196b">
+<p>
+<a href="https://stackoverflow.com/questions/50635130/aws-codecommit-fatal-repository-https-git-codecommit-us-east-1-not-foun">AWS CodeCommit - fatal: repository 'https://git-codecommit.us-east-1..' not found</a>
+</p>
+<pre class="example">
+git config --global credential.UseHttpPath true
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

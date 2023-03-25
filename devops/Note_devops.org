@@ -1,0 +1,3672 @@
+#+TITLE: Note_devops
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* History of DevOps
+
+Before DevOps, We had two approaches for software development namely the Waterfall and the Agile.
+** Waterfall Model
+*** Top-down approch
+**** Introduction
+https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2019/06/Waterfall-Phases-403x300.png
+The waterfall model is a software development model that is pretty straight forward and linear. This model follows a top-down approach.
+**** > Requirement Gathering and Analysis[Client + Developers]
+This model starting with *Requirements gathering and analysis*. In this phase we  get the requirements from the client for developing an application. After this, you try to analyze these requirements.And make a blueprint of software
+**** > Design[Developers +..  ]
+The next phase is the Design phase where you prepare a blueprint of the software. Here, you think about how the software is actually going to look like.
+
+**** > Implementation[Developers]
+Once the design is ready, you move further to Implementation phase where you begin with the coding for the application. The team of developers works together on various components of the application.
+**** > Testing[Testers]
+Once you complete the application development, you test it in the *Verification phase*. There are various tests conducted on the application such as unit testing, integration testing, performance testing, etc.
+**** > Depolyment [Developers + Testers]
+After all the tests on the application are completed, it is *deployed* onto the production servers.
+**** > maintenance phase[Operator]
+At last, comes the *Maintenance phase*. In this phase, the application is monitored for performance. Any issues related to the performance of the application are resolved in this phase.
+
+*** Advantages of the Waterfall Model:
+- Simple to understand and use
+- Allows for easy testing and analysis
+- Saves a significant amount of time and money
+- Good for small projects if all requirements are clearly defined
+- Allows for departmentalization & managerial control
+*** Disadvantages of Waterfall Model:
+- Risky and uncertain
+- Lack of visibility of the current progress
+- Not suitable when the requirements keep changing
+- Difficult to make changes to the product when it is in the testing phase
+- The end product is available only at the end of the cycle
+- Not suitable for large and complex projects
+
+** Agile Methodology
+https://www.hashminds.com/wp-content/uploads/2018/01/agile3-e1516054093712.jpg
+Agile Methodology is a people-focused, results-focused approach to software development that respects our rapidly changing world.
+It’s centered around adaptive planning, self-organization, and short delivery times. It’s flexible, fast, and aims for continuous improvements in quality
+Agile Methodology is an iterative based software development approach where the software project is broken down into various iterations or sprints.
+Each iteration has phases like the waterfall model such as Requirements Gathering, Design, Development, Testing, and Maintenance.
+The duration of each iteration is generally (2-8)(1-4) weeks or (1-2 months).
+
+*** Agile Methodology Overview
+
+- It abandons the risk of spending months or years on a process that ultimately fails because of some small mistake in an early phase.It relies instead on trusting employees and teams to work directly with customers to understand the goals and provide solutions in a fast and incremental way.
+  - Faster, smaller. Traditional software development relied on phases like outlining the requirements, planning, design, building, testing, and delivery.
+    Agile methodology, by contrast, looks to deploy the first increment in a couple weeks and the entire piece of software in a couple months.
+  - Communication. Agile teams within the business work together daily at every stage of the project through face-to-face meetings. This collaboration and communication ensure the process stays on track even as conditions change.
+  - Feedback. Rather than waiting until the delivery phase to gauge success, teams leveraging Agile methodology track the success and speed of the development process regularly. Velocity is measured after the delivery of each increment.
+  - Trust. Agile teams and employees are self-organizing. Rather than following a manifesto of rules from management intended to produce the desired result, they understand the goals and create their own path to reach them.
+  - Adjust. Participants tune and adjust the process continually, following the KIS or Keep It Simple principle.
+*** model Agile Process
+- In Agile, a company releases the application with some high priority features in the first iteration.
+- After its release, the end-users or the customers give you feedback about the performance of the application.
+- Then you make the necessary changes into the application along with some new features and the application is again released which is the second iteration.
+- You repeat this entire procedure until you achieve the desired software quality.
+  Benefits of Agile Methodology
+
+
+**** Advantages of Agile Model
+- It adaptively responds to requirement changes favorably
+- Fixing errors early in the development process makes this process more cost-effective
+- Improves the quality of the product and makes it highly error-free
+- Allows for direct communication between people involved in software project
+- Highly suitable for large & long-term projects
+- Minimum resource requirements & very easy to manage
+The benefits of Agile are tied directly to its faster, lighter, more engaged mindset. The process, in a nutshell, delivers what the customer wants, when the customer wants it. There’s much less wasted time spent developing in the wrong direction, and the entire system is quicker to respond to changes. For a more comprehensive list of benefits, see this post.
+- Faster. Speed is one of the biggest benefits of Agile Methodology. A faster software development life cycle means less time between paying and getting paid. That, in turn, means a more profitable business.
+- Increased customer satisfaction. With Agile, customers don’t wait for months or years, only to get exactly what they didn’t want. Instead, they get iterations of something very close to what they want, very fast. The system adjusts quickly to refine the successful customer solution, adapting as it goes to changes in the overall environment.
+- Values employees. Employees whose ideas are valued are vastly more productive than those who are ordered to follow a set of rules. The Agile Methodology respects employees by giving them the goal, then trusting them to reach it. Since they’re the ones with their hands on the controls and the ones who see the obstacles that crop up every day, employees are in the best position to respond to challenges and meet the goals at hand.
+- Eliminates rework. By involving the customer at more than just the phases of requirements and delivery, the project remains on-task and in-tune with customer needs at every step. This means less backtracking and less “out on a limb” time between the time we do the work and the time the customer suggests revisions.
+**** Disadvantages of Agile Model
+- Highly dependent on clear customer requirements
+- Quite Difficult to predict time and effort for larger projects
+- Not suitable for complex projects
+- Lacks documentation efficiency
+- Increased maintainability risks
+**** The advantages of the Agile Model are as follows −
+- Is a very realistic approach to software development.
+- Promotes teamwork and cross training.
+- Functionality can be developed rapidly and demonstrated.
+- Resource requirements are minimum.
+- Suitable for fixed or changing requirements
+- Delivers early partial working solutions.
+- Good model for environments that change steadily.
+- Minimal rules, documentation easily employed.
+- Enables concurrent development and delivery within an overall planned context.
+- Little or no planning required.
+- Easy to manage.
+- Gives flexibility to developers.
+
+**** The disadvantages of the Agile Model are as follows −
+- Not suitable for handling complex dependencies.
+- More risk of sustainability, maintainability and extensibility.
+- An overall plan, an agile leader and agile PM practice is a must without which it will not work.
+- Strict delivery management dictates the scope, functionality to be delivered, and adjustments to meet the deadlines.
+- Depends heavily on customer interaction, so if customer is not clear, team can be driven in the wrong direction.
+- There is a very high individual dependency, since there is minimum documentation generated.
+- Transfer of technology to new team members may be quite challenging due to lack of documentation.
+  
+*** Diagram 
+agile.png
+Real time there are 5 environment
+- dev env
+- sit env or (SIT:System Integration Test or, QA) 
+- uat env or (UAT: User Acceptanec Test)
+- pre production : 
+- production :
+(development, sit (System Integration and Testing),uat (User Acceptance Testing),prod)
+** DevOps
+https://www.ibm.com/cloud/learn/devops-a-complete-guide
+DevOps is a set of practices that combines software development (Dev) and IT operations (Ops).It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.
+DevOps is complementary with Agile software development; several DevOps aspects came from the Agile methodology. 
+
+By definition, DevOps outlines a software development process and an organizational culture shift that speeds the delivery of higher quality software by automating and integrating the efforts of development and IT operations teams – two groups that traditionally practiced separately from each other, or in silos.
+*** Stages and Tools
+source : good explaination  https://dzone.com/articles/how-to-orc0hestrate-devops-tools-together-to-solve
+As mentioned earlier, the various stages such as 
+ - continuous development, 
+ - continuous testing,
+ - continuous integration, 
+ - continuous deployment, and 
+ - continuous monitoring 
+constitute the DevOps Life cycle [[img] [https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2017/10/devops-explanation.png]]. Now let us have a look at each of the stages of DevOps life cycle one by one.
+
+
+*** Stage – 1: Continuous Development [ Planning(Requirement Gathering & Analysis + Design) + Coding]
+- Tools Used: Git, SVN, Mercurial, CVS and JIRA(Atlassian Company(includes bitbucket,bamboo,Trello))
+- Process Flow: https://i.stack.imgur.com/UvZ0M.png
+- This is the phase that involves ‘planning‘ and ‘coding‘ of the software.
+  You decide the project vision during the planning phase and the developers begin developing the code for the application.
+- There are no DevOps tools that are required for planning, but there are a number of tools for maintaining the code.
+- The code can be in any language, but you maintain it by using Version Control tools. This process of maintaining the code is known as Source Code Management.
+- After the code is developed, then you move to the Continuous Integration phase.
+
+*** Stage – 2: Continuous Integration
+- Tools: Jenkins, TeamCity, Travis 
+- Process Flow:
+- This stage is the core of the entire DevOps life cycle. It is a practice in which the developers require to commit changes to the source code more frequently. This may be either on a daily or weekly basis.
+- You then build every commit and this allows early detection of problems if they are present. Building code not only involves compilation but it also includes code review, unit testing, integration testing, and packaging.
+- The code supporting new functionality is continuously integrated with the existing code. Since there is a continuous development of software, you need to integrate the updated code continuously as well as smoothly with the systems to reflect changes to the end-users.
+- In this stage, you use the tools for building/ packaging the code into an executable file so that you can forward it to the next phases.
+
+*** Stage – 3: Continuous Testing [Build Code + Testing (Test performacne + Test functional + SIT + UAT + Preproduction + Production )]
+
+- Tools: Jenkins, Selenium TestNG, JUnit
+- Process Flow:
+- This is the stage where you test the developed software continuously for bugs using automation testing tools. These tools allow QAs to test multiple code-bases thoroughly in parallel to ensure that there are no flaws in the functionality. In this phase, you can use Docker Containers for simulating the test environment.
+- Selenium is used for automation testing, and the reports are generated by TestNG. You can automate this entire testing phase with the help of a Continuous Integration tool called Jenkins.
+- Suppose you have written a selenium code in Java to test your application. Now you can build this code using ant or maven. Once you build the code, you then test it for User Acceptance Testing (UAT). This entire process can be automated using Jenkins.
+
+*** Stage – 4: Continuous Deployment
+
+Tools Used: 
+*** Stage – 5: Contionous monitoring 
+* Cloud Services
+** Intro
+- Different type of clouds service's available 
+  - AWS, Google Cloud Platform,Azure,Linode, Digital Ocean ,, Vm-ware, openstack,
+*** In MNC's which Cloud Service genrelly used      
+- Note: What is diff btw server,vm's,containers is explained in docker intro
+** Inside AWS
+- AWS Ec2 Installation
+- aws > services > EC2 > Lanch Instance
+- Lanch Instance
+  - Chose AMI > Choose Instance Types > Configure Instance > Add Storage > Add Tags > Congigure Security Group > Review
+
+- AMI(AMazon Image)
+   - Linux,Red Hat Enterprise, Ubuntu , Windows
+- Instance Type
+  - t2.nano   (1 , 0.5gb,ram)
+  - t2.micro  (1 , 1gb,ram)
+  - t2.small  (1, 2gb,ram)
+  - t2.medius (2, 4gb)
+  - t2.large()
+  - t2.Xlarge () <Compancys>
+  - m5.large  
+- Configur Instance
+  - No.of Instance : ___________
+- Add Storgae
+  - Volume Type (SSD) , Size
+- Add Tag
+  - key: name
+  - Value : Devops
+- Security Group
+  - ssh : 22
+  - http :80
+  - tomcat:8080
+- Review Instance Launch
+  - Create key-pair (new-keyPair.pem key) > Download keyPair
+  - Key pair must not be publicly viewable for SSH
+    - chmod 400 newdevops.pem
+  - Public DNS
+    - ec2-18-220-93-246.us-east-2.computer.amazonaws.com
+  - SSH
+    - using Public DNS
+      - ssh -i "new-keyPair.pem" Public_DNS
+    - using ip
+      - ssh -i ec2.user@ip # ssh -i ec2.user@18.220.93.246 
+             
+#+begin_src sh
+ssh -i ec2.user@ip
+#+end_src
+
+* Linux and Shell
+Visit : Linux Tutorial for both Linux and Shell
+What is different btw normal user and root user
+
+#+BEGIN_SRC sh
+sudo su -
+ls -latr
+#+END_SRC
+
+* Vi Editor Tutorial
+Visit : vim tutorial
+* git
+** What is git
+- git is free and opensouce VCS (Version Control System) created by linux torvaldss in 2005.
+  - Version Control System  mean which is used to track all change in project
+- Using git
+  -  No data is lost and undo previous data using his
+  -  all users can access and share the project
+  -  security: outsiders can access and edit the project
+  -  git has (distributed repo )
+
+*** TODO Q) git Vs SVN (Subversion)
+SVN is centralised VCS , Git is distributed VCS
+SVN is still used because of its performance with large files won't be satisfied with Git.
+*** In Companys (MNC's) which vcs is used
+- general we use bitbucket(atlassian compancy),git,mecury
+  
+** short tutorial
+- Creating a version control of local repository
+  - We need to Create a version contol file (=.git=) it create by =git init=
+    
+#+BEGIN_SRC
+git --version
+git config --global user.name "Dankarthik25"
+git config --global user.email "dankarthik25@gmail.com"
+git config --list
+
+git remote -v # info of remote repository
+
+###################################
+git init                                  # Inicialize or Create a version control 
+git status                                # View the Stagging Area
+git add <file>                            # Add files to stagging Area
+git add -A                                # add all 
+git add -
+git reset    # unstage all change in stagging area
+git add -A my_dir/             # add all the files and dir inside my_dir
+git add --no-all my_dir
+git add -u       # used to add all the modefied files but it will not add any new files
+git add . # current dir
+# but git add . and git add -A
+git add * # not recommended 
+git add --update # same as -u   
+git rim --cached <file>                   # Remove files in Stagging Area
+
+touch .gitignore                          #  list all files  that are need to ignore                    # Ignore files in Stagging Area
+cat .gitignore
+# .DS_Store
+# .project
+# *.pyc
+
+
+git commit -m "fist commit"               # Save-Commit  to Local Repo
+git remote add orgin https://github.com/....                      # Connect Local Repo to Remote Repo
+git push origin master                    # Upload Local Repo to Remote Repo
+git pull                                  # Update Local Repo
+git clone https://github.com/..git        # clone to current dir   # Clone
+git diff  <commit id> <commit id>         # diff : View changes in fiels
+
+# Commit
+git status
+git log
+git log --oneline
+
+# how to edit previous commit in git
+git commit --amend -m "Completed Subtract Function"
+git commit --amend  # NEW WINDOW 
+
+## Creat Branch ,push, delete:
+git branch <branch-name>       # create a new branch
+git chechout -b <branchname>    # to create and moveing to the
+
+git branch                      # list of branch
+git branch --list               # list of branch
+
+git checkout UncleDaveEmacs     # Switch one branch to other
+
+git push -u origin UncleDavesEmacs  # push branch from local repo to remote repo
+git branch -D UncleDaveEmacs  # delete a branch
+git push orign <branch-name>     # push branch to remote repo
+git branch -D devop     # git delete a branch in local repository
+git push origin --delete <branch name>     # delete branch at remote repositort
+git push origin --delete UncleDaveEmacs # delete a branch in remote repository
+
+# Merge
+git chekout master # to go to destination (master)
+git merge <branch-name>     # merge brach to master git
+
+# rebase
+git rebase master
+# who to undo the rebase
+
+# CherryPick
+git cherrypick <commit-id>
+
+# git reset 
+git reset --hard 77592f3  # remove files for workdir,stagging,local
+git clean -df #
+git reset --soft 77592f3  # local repo to stagging 
+git reset --mixed 77592f3 #  local repo to work - dir
+
+# How to undo hard reset
+git reflog
+#ee46246 HEAD@{0}: reset :moving to 2e7520782
+#1b818d3 HEAD@{0}: checkout: moving form subtract-feature to master 
+#672915a HEAD@{1}: commit: Note_linux_os:How to config linux for obs external mike
+#ed066f3 HEAD@{2}: reset: moving to HEAD~
+#460650a HEAD@{3}: commit: Note_linux_os:How to config linux for obs external mike
+#ed066f3 HEAD@{4}: commit: Docker_Overview:small changes
+#c5e4e3e HEAD@{5}: commit: JFrog:cre Seperate file,need to practice but free trial(30 days)
+# 
+git checkout 1b818d3
+git log # presently we are IN DETACH HEAD STATE and sys will clean after some time
+# To save some changes and creatre a new branch
+git branch backup
+# To undo the reset
+#TODO :
+
+
+git checkout 
+# 
+git revert 1c08f78
+git push origin master
+
+#
+# Coreshef : Git tutorial git stash
+#
+# Git Stash : Save repo tempo but n't commit in log
+git stash save "Worked on stash"
+git stash list
+# stash@{0}: On add : Worked on add function
+git checkout <other-branch>
+git checkout <1st branch>
+git stash apply                #  apply changes
+git stash -- .
+git stash pop                 # apply and drop the stash
+git stash drop              # drop or remove the change
+git stash clear             # clear
+
+# Explane when is git stash is helpfull
+
+
+#+END_SRC
+** Installation and Configuration Cmd
+#+BEGIN_SRC 
+git --version   # >> git version 2.3.2
+
+# Configuration 
+git config --global user.name "Dankarthik25"
+git config -global user.email "dankarthik25@gmail.com"
+
+# help
+git help config
+git config --help
+
+#
+cat ~/.gitconfig
+git config -l
+#[user]
+#        email = dankarthik25@gmail.com
+#        name = Dankarthik25
+#[log]
+#  date = relative
+#[format]
+#  pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+
+# To store TOKEN for next use
+# Generate TOKEN : GITHUB > Settings > Developer setting  > Personal acess Token > Generate TOKEN 
+git config --global credential.helper cache   #   
+git config --global --unset credential.helper # To unset the user-name and password
+# https://www.youtube.com/watch?v=kHkQnuYzwoo
+
+#+END_SRC
+
+** TODO Q)THREE MAIN STATES IN GIT 
+- GIT HAS THREE MAIN STATES THAT YOUR FILES CAN RESIDE IN:
+  - WORKING-DIR, STAGGING AREA, LOCAL REPO, REMOTE REPO 
+  - =WORKING-DIR=       FILE SYSTEM (DIR/FILES)WHICH IS  NOT  =VERSION CONTROL= (NOT COMMITTED/NOT SAFE)
+  - =STAGGING AREA=     MARKED AS MODIFIED WHICH NEED VERSION CONTROL (NEED TO COMMIT/NEED TO SAFED)
+  - =LOCAL REPOSITORY=  FILE SYSTEM (DIR/FILES) WHICH IS VERSION CONTROL (COMMENTED/SAFED) 
+  - =REMOTE REPOSITORY= LOCAL REPOSIOTORY IS BACKUP/UPDATING CENTRAL-REPOSIOTORY 
+    IN LOCAL REPOSITORY =.GIT DIRECTORY=.
+*** HOW TO COMMIT FILES ? 
+**** INITIALIZE  THE FILE OR LOCAL-REPOSITORY  (GIT INIT):()
+CREATE A VERSION CONTROL FOLDER OR =INITIALIZE= OR TRACK (CHANGES OR VERSIONS) WE HAVE TO INITIALIZE THE FOLDER 
+#+BEGIN_SRC SH
+# GO THE DIRECTORY (LOCAL-REPOSITORE) THAT HAS TO BE VERSION CONTROL 
+GIT INIT
+#+END_SRC
+
+THIS WILL CREATE A =.GIT= FILE IN THE CURRENT DIRECTORY  WHICH CONSIST OF ALL THE CHANGE THAT ARE TO BE DONE
+**** ADDING FILES TO GIT (GIT ADD FILE)
+FILES WHICH ARE UNCOMMITED ARE CHANGED TO =STAGED= 
+#+BEGIN_SRC SH
+GIT ADD <FILE>             # ADD FILES TO GIT
+GIT ADD -A                     # ADD ALL FILE
+GIT STATUS                     # SHOW <FILE> OR ALL FILE ARE CHANGE TO COMMITED AREA
+#+END_SRC
+***** EXAMPLE:
+#+BEGIN_SRC SH
+GIT ADD .GITIGNORE
+GIT ADD .EMACS
+GIT ADD .VIMRC
+#+END_SRC
+ =.GITIGNORE=  WHICH WAS IN UNTRACKED () IS CHANGED TO STAGING AREA OR COMMITTED
+**** REMOVING FILES FROM GIT (GIT RESET FILE)
+#+BEGIN_SRC SH
+GIT RESET <FILE>                     # REMOVE  FILES FROM STATING AREA( COMMITTED)
+GIT RESET                                  # REMOVE ALL FILES
+#+END_SRC
+**** .GITIGNORE
+HIDDEN FILE =.GITIGNORE=  CONTAIN THE LIST OF THE ALL THE FILE AND FOLDER THAT IGNORE BY GIT FOR VERSION CONTROL
+#+BEGIN_SRC SH
+TOUCH .GITIGNORE
+LS -A >> .GITIGONRE	# AND REMOVE THE FILES NEED TO BE VC
+#+END_SRC
+***** EXAMPLE
+IN FILE ADD THE FILE OR FOLDERS THAT ARE TO IGNORED BY GIT
+#+BEGIN_SRC SH
+# FILE THAT ARE TO IGNORE
+.DS_STORE
+.PROJECT
+*.PYC
+#+END_SRC
+**** COMMIT FILES (GIT COMMIT)
+NOTE : ALL FILES ARE NEED TO TO ADD/IGNORED THEN ONLY WE CAN COMMIT FILES
+#+BEGIN_SRC SH
+  GIT ADD -A
+  GIT COMMIT -M "INITIAL COMMIT"                        # FILE ARE COMMITED 
+  GIT STATUS                                                                  # SHOW NOTHING TO COMMIT , WORKING DIRECTORU CLEAN    
+#+END_SRC
+*** CONNECT LOCAL REPOSITORY TO REMOTE REPOSITORY
+  #+BEGIN_SRC SH
+GIT REMOTE ADD ORIGIN URL    # EG: GIT REMOTE ADD ORIGIN HTTPS://GITHUB.COM/DANKARTHIK25/PYTHONUDEMYTUTORIAL  
+  #+END_SRC
+*** PUSH LOCAL REPOSITORY TO REMOTE REPOSITORY (GIT PUSH)
+#+BEGIN_SRC SH
+GIT PUSH ORIGIN MASTER
+# GIT PUSH ORIGIN MASTER -F     # FORCE IF CMD NOT WORKS
+#+END_SRC
+*** TODO PULL REMOTE REPOSITORY TO LOCAL REPOSITORY
+#+BEGIN_SRC SH
+GIT PULL
+#+END_SRC
+** CLONNING A REPOSITORY
+#+BEGIN_SRC SH
+GIT CLONE <URL> <PATH- WHICH DIR>
+GIT CLONE ../REMOTE_REPO.GIT .
+GIT CLONE <URL> .                        # . MEANS CURRENT DIRECORY
+#+END_SRC
+
+** Q)PULL VS FETCH
+- IN THE SIMPLEST TERMS, GIT PULL DOES A GIT FETCH FOLLOWED BY A GIT MERGE.
+- GIT FETCH
+  - UPDATE YOUR REMOTE-TRACKING BRANCHES UNDER REFS/REMOTES/<REMOTE>/.
+  - NO CHANGE IN LOCAL REPO/BRANCH,STAGING AREA, WORKING DIR.
+- GIT PULL
+  - UPDATE YOUR REMOTE-TRACKING BRANCHES UNDER REFS/REMOTES/<REMOTE>/.
+  - CHANGE LOCAL BRANCH AND WORKING DIR
+    - NOTE: ALL THE UNTRACKED DATA WILL BE LOST IN WORKING DIR
+    - NOTE: MERGE ONLY CURRENT BRANCH WICH IT IS PULLED
+      
+#+BEGIN_SRC SH
+# FETCH HOLD DATA(FETCH DATA FROM REMOTE  REPOSITORY TO LOCAL REPOSITORY)  R  BUT NOT MERGES WITH CURRENT REPOSIOTORY
+GIT FETCH
+GIT MERGE # IT MERGES LOCAL REPOSITORY TO CURRENT REPOSITORY 
+
+# PULL
+GIT PULL ORIGIN <BRANCH-NAME> # GIT FETCH AND GIT MERGE
+#+END_SRC
+
+** LOG
+CONSIST OF < COMMIT ID, AUTHOR, DATE, COMMENT ON COMMIT > 
+ MODE ON YOUR BRANCH
+#+BEGIN_SRC SH 
+GIT LOG  # GIVE <GIT ID,AUTHOR, DATE, COMMIT MESSAGE>
+GIT LOG --ONLINE # GIVE SHORT VERSION ONLY < COMMIT ID, COMMENT- MESSAGE >
+
+#COMMIT 874357761CE77A9A925C1066D9CEF6E81A5881A5
+#AUTHOR: DANKARTHIK25 <DANKARTHIK25@GMAIL.COM>
+#DATE:   FRI APR 10 06:56:16 2020 +0530
+
+ #   REVISED DOCKER
+
+#COMMIT 7432654C56923FE3BC18B19D7AC69E70300D86F4
+#AUTHOR: DANKARTHIK25 <DANKARTHIK25@GMAIL.COM>
+#DATE:   THU APR 9 07:16:05 2020 +0530
+
+ #   SEPERATE DOCKER_KUBERNETICS
+
+
+#    MY NOTES ON PROG
+GIT LOG --ONELINE
+# 70DA939 (HEAD -> MASTER, ORIGIN/MASTER) NEW CHANGE
+# 53DD0EE NEW CHANGE
+# F537B27 NEW CHANGE
+# 432784E NEW CHANGE
+# 546BC17 LINK AND COMPOSE ADDED
+# 8743577 REVISED DOCKER
+# 7432654 SEPERATE DOCKER_KUBERNETICS
+# E981603 SEPERATE ANSIBLE
+# ABB9DEE LAST COMMIT
+# 9AB9C9A ADDED ANSIBLE AND DOCKER, KUBERNETIC FILES
+# C39821D MY NOTES
+# 370FCA2 MY NOTES ON PROG
+
+#+END_SRC
+** CREATING A BRANCH (GIT BRANCH <BRANCH-NAME>)
+SOURCE : HTTPS://NVIE.COM/POSTS/A-SUCCESSFUL-GIT-BRANCHING-MODEL/ 
+#+BEGIN_SRC SH
+    ## CREAT BRANCH ,PUSH, DELETE:
+    GIT BRANCH <BRANCH-NAME>                  # CREATE A NEW BRANCH
+    GIT BRANCH UNCLEDAVEEMACS       # CREATE A BRANCH
+    GIT BRANCH                      # LIST OF BRANCH
+    GIT BRANCH --LIST               # LIST OF BRANCH
+    GIT CHECKOUT UNCLEDAVEEMACS     # SWITCH ONE BRANCH TO OTHER
+    GIT CHECHOUT -B <BRANCHNAME>    # TO CREATE AND MOVEING TO THE <BRANCH-NAME>
+    GIT PUSH -U ORIGIN UNCLEDAVESEMACS  # PUSH BRANCH FROM LOCAL REPO TO REMOTE REPO
+    GIT BRANCH -D UNCLEDAVEEMACS  # DELETE A BRANCH
+    GIT PUSH ORIGN <BRANCH-NAME>     # PUSH BRANCH TO REMOTE REPO
+    GIT BRANCH -D DEVOP     # GIT DELETE A BRANCH IN LOCAL REPOSITORY
+    GIT PUSH ORIGIN --DELETE <BRANCH NAME>     # DELETE BRANCH AT REMOTE REPOSITORT
+    GIT PUSH ORIGIN --DELETE UNCLEDAVEEMACS # DELETE A BRANCH IN REMOTE REPOSITORY
+#+END_SRC
+** GIT BRANCHING MODELING
+ IF YOUR TEAM IS DOING CONTINUOUS DELIVERY THEN IT IS SUGGESTED TO FOLLOW GIT BRANCH MODEL. HERE IS A SIMPLE VERSION OF IT
+HTTPS://NVIE.COM/POSTS/A-SUCCESSFUL-GIT-BRANCHING-MODEL/
+
+AT THE CORE, THE DEVELOPMENT MODEL IS GREATLY INSPIRED BY EXISTING MODELS OUT THERE. THE CENTRAL REPO HOLDS TWO MAIN BRANCHES(MASTER(ORIGIN) , DEVELOPER)
+WITH AN *INFINITE LIFETIME*:
+- MASTER :
+  WE CONSIDER ORIGIN/MASTER TO BE THE MAIN BRANCH 
+- DEVELOP:
+  WHEN THE SOURCE CODE IN THE DEVELOP BRANCH REACHES A STABLE POINT AND IS READY TO BE RELEASED, ALL OF THE CHANGES SHOULD BE MERGED BACK INTO MASTER SOMEHOW AND THEN TAGGED WITH A RELEASE NUMBER.
+
+  THEREFORE, EACH TIME WHEN CHANGES ARE MERGED BACK INTO MASTER, THIS IS A NEW PRODUCTION RELEASE BY DEFINITION. WE TEND TO BE VERY STRICT AT THIS, SO THAT THEORETICALLY, WE COULD USE A GIT HOOK SCRIPT TO AUTOMATICALLY BUILD AND ROLL-OUT OUR SOFTWARE TO OUR PRODUCTION SERVERS EVERYTIME THERE WAS A COMMIT ON MASTER
+
+  ANY FEATURE BRANCH FROM DEVELOP MUST MERGE BACK INTO DEVELOP. FEATURE BRANCHES ARE LIMITED TIME BRANCH WHICH WILL EVENTUALLY MERGED BACK TO DEVELOP BRANCH
+   
+- SUPPORTING BRANCHES:
+  DEVELOPMENT MODEL USES A VARIETY OF SUPPORTING BRANCHES TO AID
+  - PARALLEL DEVELOPMENT BETWEEN TEAM MEMBERS,
+  - EASE TRACKING OF FEATURES,
+  - PREPARE FOR PRODUCTION RELEASES AND TO
+  - ASSIST IN QUICKLY (BUG)FIXING LIVE PRODUCTION PROBLEMS.
+    
+  UNLIKE THE MAIN BRANCHES, THESE BRANCHES ALWAYS HAVE A *LIMITED LIFE TIME*, SINCE THEY WILL BE REMOVED EVENTUALLY.
+
+THE DIFFERENT TYPES OF BRANCHES WE MAY USE ARE:
+  - FEATURE
+    ANY FEATURE BRANCH FROM DEVELOP MUST MERGE BACK INTO DEVELOP. FEATURE BRANCHES ARE LIMITED TIME BRANCH WHICH WILL EVENTUALLY MERGED BACK TO DEVELOP BRANCH 
+
+    NAMING CONVENTION:ANYTHING EXCEPT MASTER, DEVELOP, RELEASE-*, OR HOTFIX-*
+     
+    FEATURE BRANCHES (TOPIC BRANCHES) ARE USED TO DEVELOP NEW FEATURES FOR THE UPCOMING OR A DISTANT FUTURE RELEASE.
+    WHEN STARTING DEVELOPMENT OF A FEATURE, THE TARGET RELEASE IN WHICH THIS FEATURE WILL BE INCORPORATED MAY WELL BE UNKNOWN AT THAT POINT. THE ESSENCE OF A FEATURE BRANCH IS THAT IT EXISTS AS LONG AS THE FEATURE IS IN DEVELOPMENT, BUT WILL EVENTUALLY BE MERGED BACK INTO DEVELOP (TO DEFINITELY ADD THE NEW FEATURE TO THE UPCOMING RELEASE) OR DISCARDED (IN CASE OF A DISAPPOINTING EXPERIMENT).
+    
+  - RELEASE BRANCH
+    ANY RELEASE BRANCHES FROM DEVELOP AND MUST MERGE BACK INTO DEVELOP AND MASTER. NAMING CONVENTION(RELEASE-*)
+    - RELEASE BRANCHES SUPPORT PREPARATION OF A NEW PRODUCTION RELEASE.
+    - ALLOW FOR MINOR BUG FIXES AND
+    - PREPARING META-DATA FOR A RELEASE (VERSION NUMBER, BUILD DATES, ETC.).
+      
+    BY DOING ALL OF THIS WORK ON A RELEASE BRANCH, THE DEVELOP BRANCH IS CLEARED TO RECEIVE FEATURES FOR THE NEXT BIG RELEASE.
+
+    THE KEY MOMENT OFF A NEW RELEASE BRANCH WHEN
+    - ATLEAST ALL FEATURES THAT ARE TARGETED FOR THE RELEASE-TO-BE-BUILT MUST BE MERGED IN TO DEVELOP AT THIS POINT IN TIME.
+    - ALL FEATURES TARGETED AT FUTURE RELEASES MAY NOT—THEY MUST WAIT UNTIL AFTER THE RELEASE BRANCH IS BRANCHED OFF.
+      
+  - HOTFIX(BUG-FIX)
+    ANY HOTFIX BRANCH FROM MASTER MUST MERGE BACK INTO DEVELOP AND MASTER
+    NAMING CONVENTION:HOTFIX-* 
+
+    THEY ARISE FROM THE NECESSITY TO
+     - ACT IMMEDIATELY UPON AN UNDESIRED STATE OF A LIVE PRODUCTION VERSION.
+     - WHEN A CRITICAL BUG IN A PRODUCTION VERSION MUST BE RESOLVED IMMEDIATELY, A HOTFIX BRANCH MAY BE BRANCHED OFF FROM THE CORRESPONDING TAG ON THE MASTER BRANCH THAT MARKS THE PRODUCTION VERSION.
+
+     THE ESSENCE IS THAT TEAM MEMBERS (ON THE DEVELOP BRANCH) CAN CONTINUE, WHILE ANOTHER PERSON IS PREPARING A QUICK PRODUCTION FIX.
+     
+** REVERT :
+WHEN CODE IS PUSHED TO REMOTE BUT YOU WANT CHANGES BACK FROM REMOTE > LOCAL 
+#+BEGIN_SRC SH
+GIT LOG --ONELINE # TO GET THE COMMIT ID
+
+GIT REVERT 77592F3   # TO CHANGE CODE FROME TO REMOTE TO LOCAL REPO
+
+# TO CHANGE THE CODE FROM LOCAL TO REMOTE WE NEED TO PUSH FROM LOCAL TO REMOTE
+
+GIT PUSH ORIGIN MASTER
+
+
+#+END_SRC
+
+** RESET VS REVERT
+*** GIT RESET
+THE GIT RESET COMMAND ALLOWS YOU TO RESET YOUR CURRENT HEAD TO A SPECIFIED STATE. YOU CAN RESET THE STATE OF SPECIFIC FILES AS WELL AS AN ENTIRE BRANCH. THIS IS USEFUL IF YOU HAVEN'T PUSHED YOUR COMMIT UP TO GITHUB OR ANOTHER REMOTE REPOSITORY YET.
+*** THREE TYPES OF RESET 
+  |---------------+----------------------------------------------------------------------|
+  | TYPE OF RESET | DESCRIPTION                                                          |
+  |---------------+----------------------------------------------------------------------|
+  | SOFT          | KEEP ALL CHANGES IN STAGGING AREA, REMOVE FROM LOCAL REPO            |
+  | MIXED         | KEEP ALL CHANGES IN WORKIND DIR, REMOVE FROM STAGGING AND LOCAL REPO |
+  | HARD          | REMOVES ALL CHANGES FROM LOCAL REPO,STAGGING AND LOCAL REPO          |
+  |---------------+----------------------------------------------------------------------|
+ 
+- IN THE SIMPLEST TERMS:
+  
+| TYPE OF RESET | WORKDIR          | STAGGING AREA          | LOCAL REPO | GIT LOG | REMOTE REPO |
+|---------------+------------------+------------------------+------------+---------+-------------|
+| SOFT          | PRESCENT         | MOVED TO STAGGING AREA | REMOVED    | REMOVED | PRESCENT    |
+| MIXED         | MOVED TO WORKDIR | REMOVED                | REMOVED    | REMOVED | PRESCENT    |
+| HARD          | REMOVED          | REMOVED                | REMOVED    | REMOVED | PRESCENT    |
+|---------------+------------------+------------------------+------------+---------+-------------|
+
+*** TODO REVERT (NEED TO CHECK IF REVERT ALTERING HISTORY OF COMMITS)
+BOTH THE GIT REVERT AND GIT RESET COMMANDS UNDO PREVIOUS COMMITS. BUT IF YOU'VE ALREADY PUSHED YOUR COMMIT TO A REMOTE REPOSITORY, IT IS RECOMMENDED THAT YOU DO NOT USE GIT RESET SINCE IT REWRITES THE HISTORY OF COMMITS. THIS CAN MAKE WORKING ON A REPOSITORY WITH OTHER DEVELOPERS AND MAINTAINING A CONSISTENT HISTORY OF COMMITS VERY DIFFICULT.
+
+INSTEAD, IT IS BETTER TO USE GIT REVERT, WHICH UNDOES THE CHANGES MADE BY A PREVIOUS COMMIT BY CREATING AN ENTIRELY NEW COMMIT, ALL WITHOUT ALTERING THE HISTORY OF COMMITS.
+
+
+#+BEGIN_SRC SH
+# DELETE FILE IN LOCAL AND REMOTE REPO
+
+# TO REMOVE FILE FOR REMOTE TO  
+GIT REVERT <COMMITID> 
+GIT COMMIT - M "REMOVE FROM REMOTE"
+
+GOT LOG --ONELINE
+
+#COMMIT ID : 1
+#COMMIT ID : 2
+#COMMIT ID : 3
+#COMMIT ID : 4
+#COMMIT ID : 5
+GIT RESET --SOFT 2 # KEEP THE COMMIT AFTER 2 (3,4,5) 
+#COMMIT ID : 3
+#COMMIT ID : 4
+#COMMIT ID : 5
+
+
+GIT RESET --HARD 77592F3  # 
+GIT RESET --SOFT 77592F3  # LOCAL REPO TO STAGGING 
+GIT RESET --MIXED 77592F3 #  LOCAL REPO TO WORK - DIR
+
+GIT LOG --ONELINE
+# BEEF857 REVERT "CREATED TEST3 FILE"
+# 77592F3 CREATED TEST3 FILE
+# 1C08F78 CREATED TEST2 FILE
+# 78B777D CREATED TEST1 FILE
+# A7968C1 CREATED HH
+# 4B30445 CREATED BB
+# 2E435CA CREATED GG FILE TO INTALL GIT
+
+GIT REVERT 1C08F78
+GIT PUSH ORIGIN MASTER
+#+END_SRC
+** MERGE
+#+BEGIN_SRC SH
+GIT CHECKOUT MASTER # TO GIT <BRANCH-NAME>
+GIT MERGE DEVOP # GIT MERGE <OTHER-BRANCH-NAME>
+
+##  EXAMPLE 
+
+# CREATE NN FILE IN "DEVOP"  BRANCH
+GIT CHECKOUT DEVOP
+TOUCH NN
+GIT ADD .
+GIT COMMIT -M "CREATED NN FILE"
+GIT PUSH  ORIGIN DEVOP
+
+# MERGE "DEVOP" BRANCH TO  "MASTER BRANCH"
+GIT CHEKCHOUT MASTER
+
+#+END_SRC
+** TODO MERGE VS REBASE VS CHERRYPICK
+GIT MERGE :
+- IS A NON-DESTRUCTIVE OPERATIONS
+- EXISTING BRANES ARE NOT CHANGE IN ANY WAY
+- CREATE NEW <COMMIT-ID> IN ORIGINAL(MAIN) BRANCH
+- NORMAL MERGE CHANGES HISTORY AND SQUASH MERGE WILL NOT CHANGE HISTORY ALL ORIGINAL BUT NEW COMMIT-ID IS CREATED .
+
+GIT REBASE:
+- MOVES THE ENTIRE 2ND BRANCH TO MAIN BRANCH
+- RE-WRITES THE PROJECT HISTORY
+- WE GET MUCH CLEANER AND LINEAR PROJECT
+    
+GIT CHERRY-PICK:
+- ADD SPECIFIC <COMMIT -ID>  TO 1ST BRANCH 
+- FOR CHERRY-PICK ADD PARTICULAR <COMMIT -ID>
+#+BEGIN_SRC SH
+GIT CHECKOUT MASTER
+TOUCH AAA
+GIT ADD AAA
+GIT COMMIT -M "CREATED AAA FILE IN MASTER"
+
+GIT CHECKHOUT -B "RELEASE-1.0"
+GIT REBASE MASTER
+#+END_SRC
+
+*** CHEERY PIK
+NOT ALL COMMIT ID IN BRANCH ARE MERGED IN MAIN BRANCH
+BUT SELECTED COMMIT ID ARE MERGED IN MAIN BRANCH
+
+#+BEGIN_SRC SH
+GIT CHECKOUT -B FUTURE
+TOUCH WW
+GIT ADD .
+GIT COMMIT -M "CREATE WW FILE"
+TOUCH WW
+
+TOUCH WWW
+GIT ADD .
+GIT COMMIT - M "CREATE WWW FILE"
+
+
+TOUCH WWWW
+GIT ADD
+GIT COMMIT - M "CREATE WWWW FILE"
+
+TOUCH WWWWW | GIT ADD .
+GIT COMMIT -M "CREATE WWWWW FILE"
+
+GIT LOG --ONLINE 
+# C459D7A CREATED WWWWWW FILE
+# B866590 CREATED WWWWW FILE
+# B510FA6 CREATED WWW FILE
+# B6B5153 CREATED WW FILE
+# 9D75EB8 CREATED AAA FILE IN MASTER
+# 7FB9174 CREATED FILE CALLED MM
+
+# Q) MERGE ONLY WWW FILE FROM FUTURE BRACH TO MASTER
+GIT LOG --ONLINE # TO GET THE <COMMIT -ID> OF WWW FILE : B877590
+
+GIT CHECKOUT MASTER
+
+GIT CHERRY-PICK B877590
+GIT LOG --ONLINE 
+# B866590 CREATED WWWWW FILE
+# 9D75EB8 CREATED AAA FILE IN MASTER
+# 7FB9174 CREATED FILE CALLED MM
+
+#+END_SRC
+** CONFLICTS
+ EDUREKA HTTPS://WWW.YOUTUBE.COM/WATCH?V=KMOMW19ZCGS&T=9872S
+WHEN TWO BRANCH <KAR> <SANJAY> MAKE DIFFERENT CHANGE IN A SAME FILE 
+#+BEGIN_SRC SH
+GIT CHECKOUT MASTER
+VI WW
+# HELLO
+
+GIT ADD  .
+GIT COMMIT -M "MODIFIED WW FILE"
+
+GIT LOG 
+
+GIT CHECKOUT FUTURE
+VI WW
+# HELLO,
+# BOOK TICKTES
+
+GIT COMMIT -M "MODIFILED WW FILE"
+
+GIT CHECKOUT MASTER
+
+GIT MERGE FUTURE 
+#ERROR MESSAGE: CONFLICT (CONTENT): MERGE CONFILCT IN WW
+#             : FIX CONFLICTS AND THEN COMMIT THE RESULTS
+VI WW
+
+#+END_SRC
+
+THERE TOOLS WHICH USE TO RESOLVE THE CONFLICTS
+WIN-MERGE
+KDIFF3 # IN GIT
+
+#+BEGIN_SRC
+# install kdiff3 merge tool in git 
+git config --global merge.tool kdiff3
+git merge future 
+#error message: conflict (content): merge confilct in ww
+#             : fix conflicts and then commit the results
+git mergetool
+
+#+END_SRC
+** STASHING
+IT IS WAY TO CREATE A CHECKPOINT FOR NON-COMMITTED CHANGES.
+IT SAVES ALL THE CHANGES TO A TEMPORARY LOCATION SO THE USER CAN PERFORM OTHER TASK SUCH AS SWITCHING BRANCHES, REVERTING ETC.
+THESE CHANGES CAN THEN BE  REAPPLIED ELSEWHERE.
+
+- STASH (CLEAR AND STORE) THE CHANGES IN DIRTY WORKING DIRCTORY
+- STASH COMMAND ONLY TAKES *UNCOMMIED* CHANGES (EITHER IN WORKING DIR OR STAGING AREA)
+- STASH COMMAND FLOW:
+  - RECORDS CURRENT STATE OF WORKING DIRCTORY AND INDEX
+  - SAVES LOCAL UNCOMMITED CHANGES SEPARATELY AND REVERT WORKING DIR TO HEAD COMMIT
+- AFTER THESE YOU WILL GET A CLEAN BRANCH
+- WE CAN RE-APPLY STASH CHANGES AGAIN USING STASH POP OR STASH APPLY
+#+BEGIN_SRC SH
+GIT STASH  # STASH LOCAL CHANGES
+GIT STASH LIST # LIST MODIFIED STASHED 
+GIT SHOW STASH # TO INSPECT OR CHECK DETAILS OF PARTICUAL STASH:
+GIT STASH APPLY   # APPLY CHANGES  IN WRK DIR AND KEEP STASH IF REQUIRED FOR OTHER BRANCH
+GIT STASH POP  # REMOVED STASH CHANGES AND ADD THEM IN CURRENT WRK
+#+END_SRC
+
+#+BEGIN_SRC SH
+# IN MASTER  BRANCH 
+TOUCH TEST.TXT README.MD
+GIT ADD README.MD
+# SWITCH TO MASTER BRANCH
+GIT CHEKOUT FEATURE 
+# ERROR : YOUR LOCAL CHANGES TO THE FOLLOWING FILES WOULD BE OVERWRITTEN BY CHECKOUT: TEST.TXT
+#PLEASE COMMIT : YOUR CHANGES OR STASH THEM BEFORE YOU SWITCH BRANCHES.
+GIT STASH
+GIT CHECKOUT FEATURE
+GIT STATUS : # ONLY SEE UNSTAGES FILES (TEXT.TXT) FILE NOT STAGED FILES (README.MD)
+GIT CHECKOUT MASTER
+GIT SHOW STASH
+GIT STATUS # NOTE: FILES IN STAGED AREA(README.MD) ARE MOVED TO UNSTAGE AREA(TEST.TXT)
+GIT STASH
+# SAVED WORKING DIRECTORY AND INDEX STATES WIP ON MASTER : 9037DFC UPDATE README
+GIT STATUS
+#ON MASTER BRANCH
+GIT STASH
+#+END_SRC
+** SQUASH
+
+** INTERVIEW QUSESTION
+- Q)IF BRANCH AND MERGE, AND PULL AND PUSH  ARE DONE MY DEVOPS THEN WHAT IS ROLE OF DEVOPS 
+- ANS) DEVOPS ROLE IS TO CREATE HOTFIX BRANCH AND AND SET A MAILE TO DEVOPS  
+*** WHAT IS USE OF GIT 
+- TO  TRACK ALL CHANGES IN FILE OR DIRECTORY IN VCS [VERSION CONTROL SYSTEM]
+- CAN NOT LOSE DATA -DELETE -REVERT
+- ALL USERS CAN ACCESS AND SEND DATA
+*** DIFFERENT TYPE OF VCS
+- CENRTAL VCS SVN
+- DISTRIBUTED VS : GITHUB OR BITBUCKET
+** TODO Q) FORK AND CLONE
+* MAVEN
+** What is maven
+- Maven is a *java base build tool* which help developers to build (Projects) or  create *artifacts* (jar, war, ear)
+         - jar java archive,
+         - war web archive ,
+         - ear enterprise archive
+      - A built tool is used to automate everything related to building the software project.
+      - Why Maven ?
+        -  Maven comes with POM, most of prj has to use 3rd patry library which also updates with time for this we need our team to share  dependencecy  info(documentation) and all developer need to maually config Prj with this dependencies. But with POM all the dependencecy automate so developers need not spend time conf and documenting 3rd parties or dependencecy.
+                    
+      - is a *project management  tool* based on concept of Project Object model(POm) which can  manage 
+          - project build
+          - reporting and 
+          - documentation for central piece of information
+** TODO Difference btw jar war ear
+** Why developers use maven ?
+Developers using maven because it provide
+  - a standard way to build  the project
+  - a clear defination of what  the project consisted of 
+  -  an easy way to publish project infor and a 
+  - way to share/deploy JAR across serveral  projects
+  
+** maven repository
+- Maven has three repos
+  - Local Repo (dir by name .m2 local os where maven is installed )
+  - Central Repo (Internet): Created and maintained by apache maven community 
+  - Remote Repo (In general for  custome repository  jfrog artifactory is used)
+** Why we need maven repo ?
+When we run =mvn archetype:generate= it serach for all dependencies in local,central,remote repo and then move them to local repo for next execution
+** What is POm.xml
+- Contains information about dependencies,project and configuration details used by maven to build project 
+- Pom consits of 
+  - Description
+  - Name and Version, Artifact Type, Source Code Location, Dependencies
+  - Plugins
+  - Profiles
+
+** Install of maven
+*** extract maven
+#+BEGIN_SRC sh
+# Download maven in /temp using wget
+wget wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+# extract the archive to /opt directory
+sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+#  more control over maven version and update we will create a symbolic link<maven> that will point to maven installation directory
+sudo ln -s /opt/apache-maven-3.6.0 /opt/maven
+#+END_SRC
+https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/
+
+*** Setup environment variable
+#+BEGIN_SRC sh
+# Open mavenenv.sh in /etc/profile.d dir
+sudo nano /etc/profile.d/maven.sh
+
+# add environment variables
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+# save and close the file 
+
+# change mod of maven to execute
+sudo chmod +x /etc/profile.d/maven.sh
+
+# load the environment variable using source command
+source /etc/profile.d/maven.sh
+
+# verify the installation
+mvn -version
+#+END_SRC
+
+** Build server: 
+Build server job is take the code from git and build artifact (jar,war, ear )
+#+BEGIN_SRC sh
+mvn archetype:generate # Need 3 input : group Id, version, artifact Id
+#+END_SRC
+  
+** Create maven project
+#+BEGIN_SRC sh
+cd /Workspace/Devops # Directory for maven project here pom.xml file
+
+mvn archetype:generate -DgroupId=world -DartifactId=india -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+# [INFO] ----------------------------------------------------------------------------
+# [INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-webapp:1.0
+# [INFO] ----------------------------------------------------------------------------
+# [INFO] Parameter: basedir, Value: /home/jayradhe/Workspace/Devops
+# [INFO] Parameter: package, Value: world
+# [INFO] Parameter: groupId, Value: world
+# [INFO] Parameter: artifactId, Value: india
+# [INFO] Parameter: packageName, Value: world
+# [INFO] Parameter: version, Value: 1.0-SNAPSHOT
+# [INFO] project created from Old (1.x) Archetype in dir: /home/jayradhe/Workspace/Devops/india
+# [INFO] ------------------------------------------------------------------------
+pwd
+# ~/Workspace/Devops
+ls
+# india |- src    # india : ArtifactId
+#       |-pom.xml 
+
+ # Developers put there code in and push it to github
+# artifact_Id/src/main/java/group_Id
+
+# Pull the code and build artifact
+maven comple
+maven package
+maven install
+maven deploy
+
+#+END_SRC
+** Maven Lifecycle and 8  Phases
+In general maven lifecycle has 8 phases: [Need to visit : javatpoint.com maven-life-cycle: 8items=> validate,test,clean  ]
+- validate          : all necessary information is available and validate the project is correct.
+- compile           : compile the source.
+- test              : test the compiled source using  unit testing framework. 
+- package           : take the compiled code and package it in its distributable format, such as a JAR,war
+- intergration test :
+- verify            : run any checks on results of integration tests to ensure quality criteria are met
+- install           : install the package into the local repository, for use as a dependency in other projects locally
+- deploy            : copies the final package to the remote repository for sharing with other developers and projects.
+#+BEGIN_SRC sh
+# hello.java 
+mvn clean # clean of 
+mvn complie  #  To compile     
+mvn test-compile
+mvn test 
+mvn package   # To create a package
+mvn install   # Copy Package to local repos (.m2) with dependency  # create a .war file
+mvn deploy    # deploy to (remote repo)
+
+
+hello.class -compile -mvn compile #
+# TO create a package 
+mvn package  
+#+END_SRC
+
+** Integrate Maven with git
+- Step 1: OPS : Create git repo and send to all dev
+- Step 2: DEV : clone the repo,create (src, pom.xml) and  push code into github 
+- Step 3: OPS : clone the repo,Build artifacts (war file: mvn package)
+- Step 4: OPS : push(scp) war file  to dev,sit,preproduct, prod servers
+
+#+BEGIN_QUOTE
+- Developers will create maven file and in src file they will uploade developer code and push code to github
+- OR
+- Developerss will 1st create a maven project and then it will write the code then they will version control (git) and upload them th remote repository (github)
+*Note* :For Continous Testing & Deployment:  We need to deploy the artifacts to different envirnoment (development, sit (System Integration and Testing),uat (User Acceptance Testing),prod)
+#+END_QUOTE
+
+#+BEGIN_SRC sh
+mvn archetype:generate -DgroupId=world -DartifactId=india -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+#tree -L 1
+#LG
+#|- india/
+#|     |-  src/
+#|     |-  pom.xml
+#|
+#|- READ.md
+
+
+
+#- Step 1: OPS : Create git repo and send to all dev
+#- Step 2: DEV : clone the repo
+#- Step 3: DEV : push code into github (contain src and pom.xml in github)
+# Above all code is writen by developers with devops are also present
+git add india
+git commit -m "created mvn project"
+git push origin master
+
+#
+#  How to create war file for github
+#
+git clone https://github.com/kliakos/sparkjava-war-example.git
+cd sparkjava-war-example
+
+#- Step 5: OPS : Build artifacts (war file: mvn package)
+mvn install  # will create a war file 
+
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#- Step 6: OPS : push(scp) war file  to dev,sit,preproduct, prod servers
+
+src=india/target/web.war
+dest=/opt/
+env=$1
+if [$env=='sit']
+then
+   scp $src username@192.124.24.5:$dest
+fi
+
+#+END_SRC
+** Question and Answer
+- Q)Who create src file and pom.xml file ?
+  - =mvn archetype:generate -DgroupId=world -DartifactId=india -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false= create src dir and pom.xml
+  - maven is a project management tool and we need 3 argument: group Id, Artifact Id, Version
+- Q) What is actually pom.xml  file
+  - Consist of 
+    - group Id, 
+    - artifact Id, 
+    - version
+    - dependency-links
+    - Link to remote repository 
+- Q)For running maven cmd (compile,package,install,deploy)  why it should present in the same directory where pom.xml is present
+- Q)why we use build tool 
+  - Ex) To build artifacts(jar,ear,war)(java artive,web archive, enterpashilp archive)
+- Q) Why it is called maven life cycle ?
+  - Ex if we need to run install : we need to go step by step like compile, package, install
+- Q) What is difference between Snapshot and Version ?
+  - Snapshot : For every realased snapshot is increased or updated.
+  - But version is different it not updated or increased for every deployment but for final-deployment Version is updated.
+- Q) What is =maven archtype:generate= ?
+  - It is a maven plugin use to generate src and pom.xml file
+- Q) how to ignore test cases in maven ?
+  - mvn install -DskipTests
+** Q) how to create multi module project 
+  - parent pom - superpom
+  -     child pom
+
+
+parent pom.xml file
+sbi/pom.xml           # super pom
+├── India/pom.xml     # child pom
+├── AP/pom.xml        # child pom 
+└── Hyderabad/pom.xml # child pom
+
+#+BEGIN_SRC xml
+<packaging>pom </packaging>
+<modules>
+<module>India/pom.xml</module>
+<module>AP/pom.xml</module>
+<module>Hyderabad/pom.xml</module>
+ </modules>
+
+#+END_SRC
+
+** Q)how to use profiles
+A) to set of configuration file
+profile
+dev/application
+sit
+pre production
+production
+
+tomcat jboss weblogics
+war     ear     cluster :dev1 dev2 dev3
+
+jar micro-servies 
+
+* Servers (Tomcat) 
+** Introduction
+Server contains: 
+  - Start and shutdown programs (irctc ticket booking at night 12am)
+  - Can be supported to run war or ear files continously
+     Ex: sbi.war is copied in to server then sbi site is opend
+
+Type of Servers
+ - Webservers - Eg: apache tomcat 
+    -  it can be supported only war file it wont support ear files
+ - Application Servers : jboss
+   - it can be supported  ear file
+ - Cluser: 
+   - web logics
+   - group of servers
+   - support ear files  
+
+
+
+# By default tomcat server is 8080 
+# We can change server in conf/server.xml - conncetor port
+# After starting if there is some error then check log file
+
+we are using tomcat 9 server there is 10 but 10 is alpha and 9 is stable version
+** Deployment process
+
+tomcat9/ 
+├── bin                  # start and shutdow files 
+├── config               # default port:8080
+|       └── server.xml   # to change port Number
+├── log                  # If server is not working check logs
+└── webapps              # all jar,war files are moved from maven
+
+Deployment Process
+- Stop the server process
+- take required backups sbi.war-> sbi.war'data'.zip
+- Deploy sbi.war(build server (scp * .war $user@$ip :opt/apache-tomcat-9.0.16/webapps/*.war )
+  - Deployed to dev,sat,uat,pre-production,production ((development, sit (System Integration and Testing),uat (User Acceptance Testing),prod))
+- start the server
+- check it in web browser
+
+** installation
+https://www.youtube.com/watch?v=Feui5F42bII
+#+BEGIN_SRC sh
+  # cd Workspace/Devops/tomcat # directory where tomcat is install 
+  # get link for tomcat 9 tar file
+  wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.31/bin/apache-tomcat-9.0.31.tar.gz
+
+
+  # extract tar file
+  tar -xvzf apache-tomcat-9.0.31.tar.gz
+
+  # install java file # /software/jdk1.8.0_131
+  vi ~/.bashrc
+
+  # insert below text
+  # JAVA ENVIRONmENT VARIABLES
+  export CATALINA_HOME=~/Workspace/Devops/tomcat
+  export JAVA_HOME=/usr/lib/jvm/default-java
+  # cd /usr/lib/jvm ;ls -l # choose any one from it  
+  # run bash
+  source ~/.bash_profile
+
+  cd Workspace/Devops/tomcat
+  sh startup.sh
+
+  # Run tomcat server
+  sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/startup.sh
+
+  # Stop tomcat server
+  sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/shutdown.sh
+
+
+  ## Create symbolic link 
+  #ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/startup.sh /usr/local/bin/tomcatup
+  #ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/shutdown.sh /usr/local/bin/tomcatdown
+
+  ## To start tomcat as root anywhere in shell
+  #tomcatup
+  ## To stop tomcat
+  #tomcatdown
+
+  sudo ufw allow 9090
+  firefox localhost:9090 # By default tomcat server is 8080 
+  # We can change server in conf/server.xml - conncetor port
+  # After starting if there is some error then check log file
+#+END_SRC
+
+
+** Change Port Number
+*** Tomcat File system
+#+BEGIN_SRC sh
+Tomcat
+├── bin  # executable file : start up and shutdown
+├── conf # server.xml : change config 
+|     └──server.xml # like port by default port is  :8080
+├── log    
+└── webapps 
+      └── sbi.war 
+#+END_SRC
+*** Edit server.xml 
+#+BEGIN_SRC sh
+cat server.xml
+######################################################
+# Change port :8080 
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+
+#+END_SRC
+** Configure the Tomcat Web Management Interface
+
+Follow the command below to add a login to your Tomcat user and edit the tomcat-users.xml file:
+#+begin_src 
+sudo nano /opt/tomcat/conf/tomcat-users.xml
+#+end_src
+Now, define the user who can access the files and add username and passwords:
+#+begin_src xml
+<role rolename="manager-script"/>
+<role rolename="manager-gui"/>
+<user username="tomcat" password="tomcat" roles="manager-script,manager-gui" />
+#+end_src
+
+** install using apt-get 
+https://www.youtube.com/watch?v=26ipmonPmRw
+#+BEGIN_SRC sh
+sudo apt-get install tomcat9-docs
+sudo apt-get install tomcat9-examples
+sudo apt-get install tomcat9-admin
+sudo start tomcat9
+sudo status tomcat9
+sudo service tomcat9 stop
+sudo status tomcat9
+#+END_SRC
+
+** Example 
+SampleWebApp.war file
+https://www.middlewareinventory.com/blog/sample-web-application-war-file-download/
+#+BEGIN_SRC sh
+# download  or SampleWebApp.war file to tomcat/webapps dir # 
+# /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/webapps
+#+END_SRC
+
+** Example 2
+https://github.com/kliakos/sparkjava-war-example
+
+#+BEGIN_SRC sh 
+# get clone to local repository
+# cd /home/jayradhe/Workspace/Devops # local repository
+git clone https://github.com/kliakos/sparkjava-war-example.git
+#+END_SRC
+** TODO Deploy war file to tomcat
+#+BEGIN_SRC sh
+#!/bin/bash
+env=$1
+if[$env='dev']
+then 
+scp sbi.war dev@192.145.67.8: tomcat/webapps
+fi
+
+#+END_SRC
+** How to Deploy (automate) git code to tomcat server  [029 Udemy Lecture]
+- Steps required
+  - Configure Tomcat or Create User for remote acess
+  - Create Job to Produce Tomcat Deployable Artifacts
+  - Install "Copy Artifact" & "Deploy to Containers" Plugins
+  - Create Job to Deploy Artifacts to Tomcat server or(Staging Env).
+*** Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
+#+BEGIN_SRC sh
+  cd /opt/tomcat/conf
+  # update tomcat-users.xml file
+  # roles : manger-script & manger-gui
+  # Set password:tomcat
+
+  #  <role rolename="manager-script"/>    # tomcat manage, jenkins
+  #  <role rolename="manager-gui"/>
+  #  <user username="tomcat" password="tomcat" roles="manager-script,admin-gui" />
+  #</tomcat-users>
+
+
+  # Restart the tomcat server
+  /opt/tomcat/bin/shutdown.sh
+  /opt/tomcat/bin/startup.sh
+
+#+END_SRC
+*** Create Job to Produce Tomcat Deployable Artifacts
+#+begin_SRC
+Create a view :
+View Name : _TomcatDeploy_View_
+List View : select
+
+Inside "TomcatDeploy_View"
+
+Create a New JOB   :
+             New item > Name _Package_Application_
+Genral :        
+    Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
+    Discard Old Build: 5 days and 5 builds
+Source Code management:
+    git :https://github.com/anshulc55/Jenkins_Upgradev3.git 
+
+Build Trigger :
+    Poll SCm: * * * * *
+Build: _Invoke top-level maven target_
+    goal: clean pacakge
+    pom : _location of pox.xml(java-tomcat-sample/pom.xml)_
+
+Post-build Action : _Archive the artifacts_
+    Files to archive : _**/*.war_
+
+Post-build Action : _Build Other Project_
+    Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
+    Trigger only if build is stable : Ok
+Save Job
+#+end_SRC
+
+*** Create Job to Deploy Artifacts to Tomcat server or(Staging Env)
+#+begin_SRC
+Step 1:  Install "Copy Artifact" & "Deploy to Containers" Plugins
+Step 2:
+New item > Name : _Depoly Application Staging Env_
+           FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+     Project Name :  _Package_Application_   (Project Name for above Prj)
+     Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : Same page url.
+#+end_SRC    
+* Jenkins
+** [02nd march]-installation
+- Jenkins can be install in 3 ways
+  - 1. using executal file (unzip and install)
+  - 2. using java    (java -jar jenkins.war)
+  - 3. inside tomcat (jenkins.war files) 
+    - install tomcat then copy jenkins.war to tomcat/webapps
+    - run tomcat start and open https://localhost:8080/jenkins
+  - 4.Install inside VM : Vagrant
+  - 5. Install inside docker      
+*** Using zip file
+#+BEGIN_SRC sh
+# Install java(jenkins is java 8 app) so install openjdk
+sudo apt update
+sudo apt install openjdk-8-jdk
+ 
+# add Jenkins debian repository 
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - 
+# above cmd  should output OK which means that the key has been successfully imported and packages from this repository will be considered trusted.
+
+# add Jenkins repository to sys 
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+
+# install jenkins
+sudo apt update
+sudo apt install jenkins # automatically run jenkins
+
+# check running status of jenkins server 
+systemctl stauts jenkins
+
+
+# start jenkins
+sudo systemctl start jenkins
+
+sudo service jenkins restart
+sudo service jenkins stop
+sudo service jenkins start
+
+# OR : alternate
+sudo systemctl start jenkins.service  
+sudo systemctl stop jenkins.service # To stop 
+sudo systemctl restart jenkins.service # To restart
+sudo systemctl 
+sudo systemctl reload application.service # To relaod 
+
+
+#The above commands are useful for auto-starting or stopping services during the current session or login . To tell systemd to start services automatically at boot, you must enable them.
+sudo systemctl enable application.service
+# For more info visit  https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+
+#To disable the service from starting automatically, you can type:
+sudo systemctl disable application.service
+
+# Open Firewall
+
+sudo ufw allow 8080
+
+# set Wrokspace
+
+systemctl list-units   #  not-good 
+service --status-all
+
+# give administator password from : ..../Jenkins/secrets/initialAdminPassword file
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+# select <install suggested plugins>
+
+# sign in to jenkins 
+user     : admin
+password : /Jenkins/secrets/initialAdminPassword
+
+create user : dankarthik
+passwrod : dankarthik
+ 
+#+END_SRC
+*** Install using java
+#+BEGIN_SRC sh
+java -jar jenkins.war
+java -jar jenkins.war --httpPort=9090
+#+END_SRC
+*** Configure  Port 
+In case you want to change the default jenkins port on Linux,
+You can go to /etc/default/jenkins  
+add --httpPort=9999 or whatever port to JENKINS_ARGS
+#+BEGIN_SRC sh
+vi /etc/default/jenkins
+# # port for HTTP connector (default 8080; disable with -1)
+# HTTP_PORT=8080
+
+#+END_SRC
+
+*** Install jenkins in tomcat
+#+BEGIN_SRC sh
+cd /opt/softwares/apache-tomcat-9.0.31/webapps
+ 
+wget https://updates.jenkins-ci.org/download/war/2.204/jenkins.war
+
+tomcatdown
+tomcatup
+
+#+END_SRC
+*** install Jenkins  in  tomcat server (using war file)
+
+- Install tomcat using above section on  Tomcat
+- Download Jenkins war file on any version above 2
+- Save war file in tomcat/webapp directory
+- restart tomcat and load : local:8080/jenkins
+
+├── bin  # executable file : start up and shutdown
+├── conf # server.xml : change config 
+|     └──server.xml # like port by default port is  :8080
+├── log    
+└── webapps 
+      └── sbi.war
+*** Install Jenkins inside docker with volume bind
+#+begin_src 
+# https://github.com/jenkinsci/docker/blob/master/README.md
+
+#volume tutorial
+# https://www.youtube.com/watch?v=VOK06Q4QqvE
+
+# How to run Jenkins on Docker container | How to create Jenkins Volumes on Docker
+# https://www.youtube.com/watch?v=VOK06Q4QqvE
+
+# How backup Data Volume (export/import) volume
+https://www.youtube.com/watch?v=ReQ6oCTCyeY
+https://www.youtube.com/watch?v=fbebMrc0Ybc
+#+end_src
+** Plugis :
+Manage jenkins > manage plugis
+[update,avaiable,installed,customed]
+- Plugins
+  - If there is No execute powershell in build then install 
+    - Manage jenkins > manage plugins > avaiable > search powershell
+      - and install
+  - *Maven Integration* deep integration, Automatic trigger btw prj depending on SNAPSHOTS, automated config of Junit....etc
+         
+** [03rd march] SideBar Overview
+
+|-------------------+-------------------------------------|
+| New Item          | Create a job or project             |
+|-------------------+-------------------------------------|
+| People            | User which are connected to Jenkins |
+|-------------------+-------------------------------------|
+| Build             | Build                               |
+|-------------------+-------------------------------------|
+| manage Jenkins    | manage                              |
+|-------------------+-------------------------------------|
+| my views          |                                     |
+|-------------------+-------------------------------------|
+| lockable resource |                                     |
+|-------------------+-------------------------------------|
+| credentials       | Create Credentials                  |
+|-------------------+-------------------------------------|
+| new view          |                                     |
+|-------------------+-------------------------------------|
+** Freestyle Overview
+
+- *General* :
+  - *Description*:   ___GENERAL DESCRIPTION OF Project for other understanding_
+  - *Discard Old Builds* :
+    - Determines if  build records for this project should be discarded.
+    - Build records include the console output, archived artifacts, and any other metadata related to a particular build.
+    - less disk space will be used in the Build Record Root Directory
+    - Jenkins offers two options for determining when builds should be discarded:
+      - *Build age*: discard builds when they reach a certain age; for example, seven days old.
+      - *Build count*: discard the oldest build when a certain number of builds already exist.
+  - *GitHub Project*
+    - *Project url* :
+  - *Project is parameterised* :
+    - explain : https://www.youtube.com/watch?v=xmZ3CEW7nH8&list=PL6XT0grm_Tfi21F8O0TvHmb78P2uEmhDq&index=20
+    we can add parameter to project while building project.There are different kinds of parameters like
+    - =String, Choice,File parameter, Choice Parameter,Boolean Parameter=
+  - *Throttle Build* :
+    - explain : https://www.youtube.com/watch?v=QKPhg-_my98
+    - Enforces a minimum *time period*: _<>_ between builds based on the desired maximum rate (*Number of Build*).
+      - *No.of Build* : _<1,2,3>_
+      - *Time Period* : _<Seconds>_
+  - *Execute concurrent build it necessary*
+    - Explain :https://www.youtube.com/watch?v=uQqzmRGrBXA&list=PL6XT0grm_Tfi21F8O0TvHmb78P2uEmhDq&index=26      
+               
+- *Source Code Management* :
+  Maintaining Code by using Version Control tools is know ad Source Code Management.
+  - *Git* : __<https://github/......prj.git>_____
+- *Build Triggers* :
+  In general build is not manually run. It is automated :remotely, periodically,after other build(pipelined),github hook trigger,Poll SCM
+  - *Trigger build remotely* : we generate url using token and run it remotely
+  - *Build after other project is build* :# it used for pipeline the Jenkins Jobs where sucessfull build of other prj  will trigger this project
+  - *Build Periodically* : Crontab based trigger, where it build this project periodically with respective crontab
+    - MINUTE	Minutes within the hour (0–59)
+    - HOUR	The hour of the day (0–23)
+    - DOM	The day of the month (1–31)
+    - MONTH	The month (1–12)
+    - DOW	The day of the week (0–7) where 0 and 7 are Sunday.
+  - *GitHub hook trigger for GITScm Polling* : github is config with hook to trigger jenkins using <url>
+    Githhub > repo > setting > githook
+    - url of jenkins
+    - generate webhook   
+  - *Poll SCM* :
+    Check github periodically if any new push and automate the build
+- *Build Environment*
+  - *Delete Workspace before build starts*
+    - Explain : https://www.youtube.com/watch?v=XqYWQbpeQ18&list=PL6XT0grm_Tfi21F8O0TvHmb78P2uEmhDq&index=11
+    - (discard old build and files  result and start fresh build)
+       
+  - Use secret text or file
+    - password protection
+  - *Abort build if it's stuck* (Timeout)
+    - explain : https://www.youtube.com/watch?v=hlS3LvtjvFA&list=PL6XT0grm_Tfi21F8O0TvHmb78P2uEmhDq&index=24
+  - *Add timestamp to the Console Output*:
+    - explain : https://www.youtube.com/watch?v=uA8xb-B5brM    
+- *Build* :
+  - either build prj using <manven,ant,gradel> or run shell,powershell scripts like <Copy Artifacts from Another Prj> 
+  - *Execute shell* :
+    Runs a shell script (defaults to sh, but this is configurable) for building the project. The script will be run with the workspace as the current directory.
+  - *Execute Powershell* :
+    Runs a Windows batch script for building the project. The script will be run with the workspace as the current directory. The text you enter in the text box will be executed as a batch file.
+  - *Invoke top-level Maven targents*
+    For projects that use Maven as the build system. This causes Jenkins to invoke Maven with the given goals and options. A non-zero exit code from Maven makes Jenkins mark the build as a failure. Some Maven versions have a bug where it doesn't return the exit code correctly.  
+- *Post-build Actions*
+  - *E-mail Notification*
+  - *Build other Projects*  
+  - Editable Notification
+  - Git Publisher
+  - Set Github commit status
+  - Delete workspace when build is done
+
+
+(menu)Jenkins > New Items > FreeStyles >
+
+#+begin_quote
+- General 
+  - Description        :
+  - Discard old builds : # Remove  the old build for N(No.of) days or Max(No.of) builds
+      - Days to keep builds    :__________
+      - max # of build to keep :__________
+  - GitHub Project 
+      - give url for source code:________
+  - TODO :Build requires lockable resource
+
+  - Project is parametrized :
+         : Project require agruments to be passed 
+  - Throttle builds   # No.of Concurrent(parallel) build
+
+      
+- *Source Code management*      # Check source-code from VCS(version control system) which is need to build later trigger is automated.
+   Git : _______url_________  # github prj <http:github......prj.git> for private account <acc name, acc password> are required 
+   Subversion:
+
+
+- *Build Triggers*            # In general build is not manually run. It is automated :remotely, periodically,after other build(pipelined),
+   - Trigger Build remotely: _using url or (Authentication Token)_
+   - Build after other project are build : ______<existing project-name>____
+   - Build Periodically  _* * * * *_  # Crontab <mm hh dd m w> 
+   - Github hook for GIT_SCM Polling        # https://www.youtube.com/watch?v=9b-K9aG06ow&t=460s
+                                            # If code in pushed to github and github hook(url) is enabled then it will automate build.   
+   - Poll SCM                               # Check github periodically if any new push and automate the build
+     
+- Build Environment
+  - Delete Workspace before build starts (discard old build result and start fresh build)
+  - Use secret text or file
+         - password protection
+    - Abort build if it's stuck
+    - Inspect build log for published Gradle build scans
+- Build
+   - Execute shell
+   - Execute Powershell
+     
+- Post-build Actions
+  - E-mail Notification
+  - Editable Notification
+  - Git Publisher
+  - Set Github commit status
+  - Delete workspace when build is done
+
+
+
+Build a job
+Double Click Project > Build Now
+
+#+end_quote
+** 1st Jobs build periodically
+(menu)Jenkins > New Items > FreeStyles >
+
+- General
+  - Discard odl builds : Remove  the old build
+      - Days to keep builds    :__________
+      - max # of build to keep :__5________
+  - GitHub Project 
+      - give url for source code: ____give github http clone link___https://github.com/dankarthik25/my-app.git _  # Note should consist of pom file
+- Source Code management
+- Build Triggers
+   - Build Periodically 
+#+BEGIN_SRC sh
+# * * * * *  # build for every minite
+#+END_SRC  
+** Job Build Trigger remotely(from scripts, url)
+- Build is done using url or script
+
+htttp:localhost:8008/job/FirstJob/build?token=dkarthik25
+#+begin_quote
+- General
+- Source Code management
+- Build Triggers
+   - Trigger build remotely (eg., from scripts)
+     TOKEN_NAME: dkarthik25
+#+end_quote
+htttp:localhost:8008/job/FirstJob/build?token=dkarthik25
+
+** [07 march]Integrating with gmail
+how to send an email to other ?
+ - why should i share user and pwd to other client,middle-men, higher secured so we need to configure  and we send only log file to client,manager...etc
+#+BEGIN_SRC
+step1: 
+manage jenkins - 
+    configure system - 
+       Extended email notification: # New version is released need research
+          SmTP server                  : smtp.gmail.com
+          Default user E-mail suffix   : @gmail.com
+          Use SmTP Authentication      : Check-Ok
+          Username                     : sanjy@gmail.com
+          passwd                       :
+          Use ssl                      : Check-Ok
+          SmTP port                    : 456
+
+       E-mail Notification:
+          SmTP server                  : smtp.gmail.com
+          Default user E-mail suffix   : @gmail.com
+          Use SmTP Authentication      : Check-Ok
+          Username                     : sanjy@gmail.com
+          passwd                       :
+          Use ssl                      : Check-Ok
+          SmTP port                    : 456
+          Test configuration by sending test e-mail: Check-ok
+
+step2: go to google account -> security-> on less security 
+test:
+
+
+go to job:
+post build actions 
+       editable email notification :
+            Project From            : jenkins
+            Project Recipient List  : cc:omshiva003@gmail.com
+            Attach Build Log        : Attach Build Log
+            Content Token Reference : Advance
+                               Trigger : Always (Always form Add Trigger)
+Save
+Build now 
+
+#+END_SRC
+** [09 march]Permissions Add-Users Account (Role Based management) 
+Steps 1 :
+- Install Plugins
+  Manage jenkins > manage plugis >avaiable
+   - "Role-based Authorization Strategy",
+   - "matrix based authentication"   default-installed
+   - "Project based Authentication"  default-installed 
+
+  Step 2: Create Users
+- Manage jenkins > Manage Users > Create Users
+  - Username : sanjay
+  - Password :
+  - Confirm password:
+  - Full name :
+  - E-mail address:
+  Create User
+
+*** Project based
+- Step :
+  - Enable Project based Security :{Manage jenkins>Configure Global Security>Project based security : enable}
+  - Create Project with Project based Security Enable
+    - New item > Name: Phani-Project >  Free Style Based >General :Enable Project based Security
+    - add users {phani,sanjay...etc} to matrix
+      - Note : give all permission to root user
+
+|User/group        |  Over all      |  Credentials                                      |
++------------------+----------------+---------+--------+----------------+--------+------+
+|User/group        |Adminster| Read |  Create | Delete | mangae Domains | Update | View | 
++------------------+---------+------+---------+--------+----------------+--------+------|
+|Authenticated User|         |      |         |        |                |        |      |
+|admin             |         |      |         |        |                |        |      |
+|sanjay            |  check  |check |         |        |                |        | check|
+
+*** Enable matrix based Security
+- Step : Enable matrix based Security 
+  - Manage jenkins - 
+    - Configure Global Security -
+      - Matrix-based security : enable
+        - add users {phani,sanjay...etc} to matrix
+          - Note : give all permission to root user
+
+|User/group        |  Over all      |  Credentials                                      |
++------------------+----------------+---------+--------+----------------+--------+------+
+|User/group        |Adminster| Read |  Create | Delete | mangae Domains | Update | View | 
+|Authenticated User|         |      |         |        |                |        |      |
+|admin             |         |      |         |        |                |        |      |
+|sanjay            |  check  |check |         |        |                |        | check|
+
+
+*** Role based Authentication
+- Step 1 : Enable Role based
+#+BEGIN_SRC sh
+Enable Role-based Authorization Strategy
+
+  Manage jenkins - 
+      Configure Global Security - 
+           Matrix based authentication: 
+           Project based authentication: 
+           Role-based Authorization Strategy : enable
+
+
+#+END_SRC
+
+- Step 2: Create and Assign Role
+  - Step 3: Create Role :
+    - Manage Jenkins >manage and assign roles >manage roles :
+      -create roles like manager (create,delete,build,developer(read,create),tester (read) )
+
+|Role              |  Over all      |  Credentials                                      |
++------------------+----------------+---------+--------+----------------+--------+------+
+|User/group        |Adminster| Read |  Create | Delete | mangae Domains | Update | View | 
++------------------+---------+------+---------+--------+----------------+--------+------|
+|Authenticated User|         |      |         |        |                |        |      |
++------------------+---------+------+---------+--------+----------------+--------+------|
+|admin             |         |      |         |        |                |        |      |
++------------------+---------+------+---------+--------+----------------+--------+------|
+|dev               |         |check |Create   |        |                |check   | check|
++------------------+---------+------+---------+--------+----------------+--------+------|
+|test              |         |check |         |        |                |        | check|
++------------------+---------+------+---------+--------+----------------+--------+------|
+      - Assign Role:
+        - Manage Jenkins >manage and assign roles >assign roles :
+          - add users(sathish,sanjay,venkat,karthik) to roles
+| manage role | admin | dev   | manager | test  |
+|-------------+-------+-------+---------+-------|
+| admin       | check |       |         |       |
+| sathish     | check |       |         |       |
+| sanjay      |       | check |         |       |
+| venkat      |       |       | check   |       |
+| karthik     |       |       |         | check |
+|-------------+-------+-------+---------+-------|
+*** TODO Difference matrix-based Vs Project based Vs Role Based
+*** TODO LDAP  and Active Directory
+Jenkins new users and there authentication is done in local linux using ldap and active directory 
+**** LDAP
+#+begin_src 
+yum isntall ldap
+
+devopers - 4851,2458,9563,245697,24566,25665,
+mangaer= 4582.31287,1258652
+tester= 4521,324522
+[/jenkins]
+@devopers=r
+@manager=rw
+@tester=r
+
+[\git]
+@devopers=r
+@manager=rw
+@tester=r
+#+end_src
+
+**** Active Directory
+Install Active Directory Plugin
+- Manage jenkins - 
+  - Configure Global Security -
+    - Active Directory
+      - Add Domain :
+
+** [12-13 march]master -slave :
+https://www.youtube.com/watch?v=8dZKT79DUfk
+copy D:\jenkins\worksape\sample\target\*.war D:\tomcat\webapps
+
+Find tomcat installation folder
+delete hello-world (Note : tomacat server is shutdown then delete)
+
+AIm : directly paste helloworld.war or all war file using jenkins in windows(install powershell plugin )
+
+
+
+
+install java,git, maven in linux aws- server
+
+What is master -slave concepts ?
+master ? where your cloud install jenkins
+workspace : eg :/roor/.jenkins
+            eg :D:/Workspace/jenkins/
+
+consider master in Window and slave is aws-ec2-linux(jenkins is not install)
+
+Aim : all master job should be done in slave (/opt/devops)
+
+Step 1 : Create AWS EC-2 as slave (get ip address, key) and install (java, maven,git) in slave
+Step 2 : Create New Node(In Jenkins Node means Salve-server ) and Connect to Node to Jenkins  
+*** Step 1: Create AWS EC-2 as slave and install java,maven,git
+In genreal we use shell scripts to install java,git and maven in slave node but for lecture we are manually isntall app.
+**** INSTALL JAVA
+#+BEGIN_SRC sh
+# #####################################################
+#   Java(1.8_0191,1.8_0131) installation in Linux# ####################################################
+# dir to install software
+
+sudo su-
+mkdir sofwares
+
+cd /opt/softwares
+
+
+# install java- 8 (does not support higher version)
+# updated for jdk 8u191
+#wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" "https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz"
+
+# updated for jdk 8u131
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz"
+
+# extract tar file
+tar -xvzf jdk-8u131-linux-x64.tar.gz
+rm -rf jdk-8u131-linux-x64.tar.gz
+
+ # install java file # /software/jdk1.8.0_131
+ vi ~/.bash_profile
+
+# insert below text
+# JAVA ENVIRONmENT VARIABLES
+export JAVA_HOME=/opt/softwares/jdk1.8.0_131
+export PATH=$PATH:/opt/softwares/jdk1.8.0_131/bin
+
+# run bash
+source ~/.bash_profile
+java -version
+#+END_SRC
+
+**** INSTALL GIT AND maven
+#+BEGIN_SRC sh
+yum install git -y
+#+END_SRC
+
+**** INSTALL maven
+#+BEGIN_SRC sh
+cd /opt/softwares/
+
+wget https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+
+vi ~/.bash_profile
+#insert 
+export M2_HOME=/opt/softwares/apache-maven-3.6.3
+export PATH=$PATH:/opt/softwares/apache-maven-3.6.3/bin
+
+# run bash_profile
+source ~/.profile
+
+mvn -version
+#+END_SRC
+
+*** Step 2: Create and Connect Node(Slave-servet) to Jenkins(master- server)
+- Step 1: Create a Slave :
+  - Manage Jenkins > mange Node(Slave) 
+     - New Node  
+       - Node name : _<Slave-Server Name>_
+       - Permanaent Agent : enable
+       - OK
+- Step 2: Configure Slave
+  - executors : 1
+  - remote root directory : _/opt/deploy/_  # dir in slave server
+  - label            : _orange_
+  - Launch method    : _Launch agents via SSH_
+    - Host Name   : _18.188.173.210_ <AWS-Public Id>      
+    - Credentials : _Jenkins_
+       - Kind    : _SSH Username with private key_
+       - Usernaem: _ec2-user_
+       - Private key : enable
+       - key : _<copy the key>_
+    - Host Key Verification Strategy : _Non verification Strategy_
+  - Node Progeries :
+    - Toot Locations :
+      - Name : _Java_
+      - Home : _/opt/software/jdk1.8.0_131_
+      - Name : _maven_
+      - Home : _/opt/software/apache-maven-3.6.3/_
+- BUG : if java, maven are not present then
+  - Jenkins > mangae Jenkins > Global Tool Configuratoin > JDK (Add JDK) , maver(Add maven)
+  - manage jenkins > mange nodes
+- Step 3: Launch the Slave
+  - Go to Slave Node and Lanunch the Node
+*** Step 3: Run job in Slave Node
+- New Job or Job > Config >
+  - General
+    - Description
+    - Discrad old build
+    - GitHub project
+    -
+    -
+    - Restrict where this project can be run
+      - Lable : __<Give Slave Node Lable>___
+** [14 march]Backup and Restoring point
+- Step 1: Install "Backup or ThinBackup"
+  - manage jenkins > manage plugins > install Backup OR ThinBackup
+- Step 2: Configur  backup
+  - manage jenkins > Backup Manager or (ThinBackup) >
+    - Setup :
+      - Background Configuration:
+        - Backup dirctory : D:/paytm
+        - Formate : zip/tar
+        - File name template : backup_@date@.@extension@
+          
+- Step 3: Create a backup
+  - manage jenkins > Backup Manager or (ThinBackup) >
+    - Backup Hudson Configuration [ENABLE] # IT will CREATE BACKUP
+      
+- Step 4: Restore a backup
+  - manage jenkins > Backup Manager or (ThinBackup) >
+    - Resotre Hudson Configuration
+      - Choose backup_file for backup        
+** [12 march]Upstream and Downstream
+There are diffrent job and jobs should be executive in order respectively
+- world job
+- india job
+- hyd  job 
+How do we auto-mate three jobs in order respectively
+*** Create Jobs and pipline the jobs
+For World job , {india,hyd} job are downstream and World in upstream
+- Create world,india,hyd job 
+- Pipeline Job :
+  - Job : india job 
+    -  Build Triggers :
+       - Build after project are build
+         - Projects to watch : _________world________
+           - Trigger only if build is stable
+  - Job : hyd job 
+    -  Build Triggers :
+       - Build after project are build
+         - Projects to watch : _________india________
+           - Trigger only if build is stable
+             
+
+
+*** To View Pipeline
+- Step 1: Install "Build Pipline Plugin"
+  - manage jenkins > manage plugins > install Build Pipeline
+- Step 2 : Create a View Pipeline
+   - Create a View{Name:Earth} > Build Pipeline View: Ok
+   - Inside:localhost:8080/view/Earth/configure
+     - Pipeline Flow: 
+       - Select Initial Job: world
+     - Trigger Options
+       - Restrict trigger to most recent successful build : yes
+       - Always allow manual tigger on pipeline steps : yes
+ - Step 3: Save and apply changes          
+
+
+*** Example
+git [trigger build by change in git-code]
+maven [build the code]
+deploy [copy the build to tomcat/webapps]
+archive artifacts
+** [19- march] Pass parameters in Jenkins
+Ceate a script in path : /opt/softaware/scripts/test.sh
+#+BEGIN_SRC sh
+#!/bin/sh
+echo "$1 is a good boy and $2 is a innocent guy"
+#+END_SRC
+*** String Parameter
+-Step 1: Create a New job:
+ - new item > free style  name: parameterijenkns
+   - Genral
+     - This project is parameterised :
+       - String  Parameter : 
+         - Name          : param1
+         - Default Value : mahesh 
+                                           
+     - String  Parameter : 
+       - Name          : param2
+       - Default Value : pawan 
+   - Build 
+     - Execute shell
+       - command : echo "1st Paramenter is ${param1}"
+       - command : echo "2nd Parameter is ${param2}"  
+       - command : sh /opt/softaware/scripts/test.sh $param1 @param2
+- *Build with Parameter*
+   - In UI : name : __"${param1}"___
+   - *Build*            
+
+*** Choices Parameter
+-Step 1: Create a New job:
+ - new item > free style  name: parameterijenkns
+   - Genral
+     - This project is parameterised :
+       - Add Parameters:
+         -      _Choice  Parameter_ : 
+                  - Name    : param
+                  - Choices : mahesh 
+                      -     : pawan
+                      -     : shastri                        
+   - Build 
+      -  Execute shell
+          - command : sh /opt/softaware/scripts/test.sh $param # only one is select in before execution
+
+- *Build with Parameter*
+   - In UI :
+     - myboolpara : enable/disable
+   - *Build*
+
+*** Boolean  Parameter
+-Step 1: Create a New job:
+ - new item > free style  name: parameterijenkns
+   - Genral
+     - This project is parameterised :
+       - Boolean  Parameter : 
+         - Name          : myboolpara
+
+   - Build 
+     - Execute shell
+       - command : echo "Boolean Paramenter is ${myboolpara}"
+
+- *Build with Parameter*
+   - In UI :
+     - myboolpara : enable/disable
+   - *Build*
+** Learn Groovy script
+https://learnxinyminutes.com/docs/groovy/
+** TODO DSL Scripting and yaml file for jenkins pipline [Domain Specific Langaugae]
+Two Types of scripted pipeline
+Scripted Pipeline
+Declarative pipeline
+
+
+Prescently we are using yml file instead fo DSL scripting
+For Pipline syntax : https://www.jenkins.io/doc/book/pipeline/syntax/
+Visit Udemy-Jenkins
+https://www.jenkins.io/doc/book/pipeline/#scripted-pipeline-fundamentals : below code 
+#+begin_src 
+
+Jenkinsfile (Scripted Pipeline)
+
+node {  
+    stage('Build') { 
+        // 
+    }
+    stage('Test') { 
+        // 
+    }
+    stage('Deploy') { 
+        // 
+    }
+}
+#+end_src
+
+#+begin_src 
+
+Jenkinsfile (Declarative Pipeline)
+
+pipeline { 
+    agent any  # none, all
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'make' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'make check'
+                junit 'reports/**/*.xml' 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'make publish'
+            }
+        }
+    }
+}
+
+
+#+end_src
+*** Example 2. Stage-level Agent Section
+
+#+begin_src
+pipeline {
+    agent none 
+    stages {
+        stage('Example Build') {
+            agent { docker 'maven:3.8.1-adoptopenjdk-11' } 
+            steps {
+                echo 'Hello, Maven'
+                sh 'mvn --version'
+            }
+        }
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' } 
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
+        }
+    }
+}
+
+
+
+#+end_src
+*** Post
+#+begin_src 
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
+    }
+}
+#+end_src
+* Ansible :
+** Introduction
+*** Before Ansible
+sys-admin use to take all time inupdating severs and creating new servers but there  no-time to moniotir servers to know which servers are corrupt/not-functioning servers.
+*Configuration Management tool*: organization tool which help manage ,configure and monitor all servers efficienctly
+Eg: At New year there was "Mega Sale" so there huge rise in traffic, so we need web servers to handille using(load balancer + servers(increase) + db) in *short period* of time. This is possible by *Configuration Management*
+*** Advantages of Configuration Management tool:
+- Scalability
+  -  before sys-admin manually launch and config servers but with configuration tool we can
+  -  automate laucch and configure servers
+- work-velocity:
+  - when developer pushes code and wanted new testing then  sys-admin take time to configure,during this time developer will be idels which affect the work flow with configuration tool we can maintain work-flow
+- Roll back :
+  - New Version of software are released beta version some time user/customer are not happy or some bug was present. We need to switch back to older version as quickly as possible this can happen with configuration management
+    - *Example: New York Stock*
+      - There was a bug in new-software  during lauch which cause loss in stock and they quickly move to old-software which is possible by configuration management tool.
+*** Alternative to Ansible (Different Configuration Management tool):
+- Ansible ,SaltStack : push based Configuration tool
+- Chef puppet : pull based Comfiguration Management tool
+*** WHY Ansible
+- Configuration Management tool & deployment & Orchestration tool
+- push based Conf Mange tool
+- automate
+- Features :
+  - Agentless
+  - Simple            
+  - Powerfull
+  - efficienct
+**** Case Study :NASA moving Private Servers to Cloud using ansible [[https://www.youtube.com/watch?v=dCQpaTTTv9][Edureka Youtube]]
+**** Architechture
+- Ansible
+  - Automate Engine
+  - Inventory
+  - Playbook
+    - module : lib 
+    - plugins : execute ansible-task as jobs,plugins can to action, call-back,
+    - api
+  - CMDB
+  - Hosts(servers) [connect through ssh or ...]
+    
+*** [20 march] SSH-Key connection between master and all slave 
+**** Prerequirement-I : Create a common user with root privillage and ssh-key base authentication
+
+- Step to connect using SSH-Key:  
+ - Create common user for all users (master and slave))
+ - Give root privilege to common-user for both master and slave
+ - Enable ssh-key based authentication( and restart sshd server)
+#+BEGIN_SRC sh
+#!/bin/bash
+USER_NAME='ansible'    # $1
+PASSWORD='karthik@123'   #$USER_NAME
+
+##################################################################################
+#   Create a common user 
+##################################################################################
+useradd ${USER_NAME}
+echo ${PASSWORD} | passwd --stdin ${USER_NAME}
+passwd -e ${USER_NAME}
+
+if [[ "${?}" -ne 0 ]]   # # if [ "#?" !=0]
+then
+  echo "Password create sucessfull"
+else
+      exit 1
+fi
+#check if user is created or not 
+# cat/etc/passwd
+##################################################################################
+# Give root privilege
+##################################################################################
+# verify if user exit cat /etc/passwd
+if grep -q "${USER_NAME}" "/etc/sudoers"    #[[ "${?}" -ne 0 ]]
+then
+  echo "Alread exiting "
+else
+  echo "Need to add to sudoers"
+  echo -e "## Allow ${USER_NAME} to run any commands anywhere\n${USER_NAME}\tALL=(ALL)\tNOPASSWD: ALL" >> /etc/sudoers
+  # sed -i 's/root    ALL=(ALL)       ALL/root    ALL=(ALL)       ALL \n${USER_NAME}\tALL=(ALL)/g' /etc/sudoers
+fi
+grep "$USER_NAME" "/etc/sudoers"
+##################################################################################
+# Enable ssh-key based authentication
+##################################################################################
+sed -i 's/^PasswordAuthentication no/#PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+grep 'PasswordAuthentication' /etc/ssh/sshd_config
+service sshd restart
+#+END_SRC
+
+**** Prerequirement-II: Generate ssh-key in master and share it with all slave  
+
+ - Create ssh-key in master 
+#+BEGIN_SRC sh
+ssh-keygen   #check key "id_ras.pub" ls -latr /home/ansible/.ssh
+ssh-copy-id devops@slave_ip
+#+END_SRC
+
+ - check ssh without password
+#+BEGIN_SRC sh
+ssh <user-name>@ip
+# show-key : cat /home/<user-name>/devops/.ssh/authorizzed_keys
+exit() # to exist 
+#NOTE: we can connect from master to slave but not from slave to master
+#+END_SRC
+*** [21 march] Installation
+
+#+BEGIN_SRC sh
+wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm
+yum repolist
+#yum install epel-release
+yum update
+yum install git python openssl ansible -y
+ansible --version
+
+#+END_SRC
+
+*** [21 march ] Inventory Enable and Example
+**** Config Ansible for Inventory
+#+BEGIN_SRC sh
+# Enable /etc/ansible/host by un-commenting <inventory> in ansible.cfg file
+#vi /etc/ansible/ansible.cfg
+    #inventory = /etc/ansible/hosts
+    #host_key_checking = False. # This is to disable SSH key host checking:
+# /etc/ansible/host           # contain all information slave host in yaml file
+
+#EXAmPLE : Ansible has inventory files where host info are stored and used.
+# inventory = /etc/ansible/host
+#vi /etc/ansible/hosts   # System given examples
+#############################################################################################
+#  Inventory file
+#[web]
+# 192.147.58.9
+#[app]
+# 192.147.59.7
+#[dbserevr]
+# 192.34.5.6
+# using host file we create cluster in order to run cmd on cluster we
+#+END_SRC
+**** Invertory Parameters
+***** Formate
+#+begin_src sh
+# #Inventory Parameters
+# ansible_host - 192.168.25.15 IP
+# ansible_host - server1.company.com DNS
+
+# ansible_connection - ssh/winrm/localhost 
+# ansible_port -  22/5986
+# ansible_user - root/administrator/ansible
+# ansible_ssh_pass - Password
+
+#+end_src
+***** Example1 
+#+begin_src sh 
+###########################################################33
+web1 ansible_host - 192.147.58.1
+web2 ansible_host - 192.147.58.2
+web3 ansible_host - 192.147.58.3
+db1  ansible_host - 192.147.59.1
+db2 ansible_host - 192.147.59.2
+db3 ansible_host - 192.147.59.3
+
+[webservers]
+web[1:3]
+
+[dbservers]
+db[1:3]
+
+# parent : child
+[prodserver]
+webserver
+dbserevr
+#+end_src
+
+***** Example2
+#+begin_src sh
+cat inventory.txt
+# webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+ansible webserver1 -m ping -i inventory.txt 
+#+end_src
+
+#+BEGIN_SRC sh
+# Sample inventory files
+web ansible_host=server1.company.com
+db ansible_host=server2.company.com
+mail ansible_host=server3.company.com
+web2 ansible_host=server4.company.com
+web3 ansible_host=192.168.25.15 ansible_ssh_pass=password
+
+#
+web ansible_host=server1.company.com ansible_connection=ssh
+db ansible_host=server2.company.com ansible_ssh_pass=osboxes.org
+mail ansible_host=server3.company.com ansible_ssh_pass=osboxes.org
+web2 ansible_host=server4.company.com ansible_connection=ssh
+
+localhost1 ansible_connection=localhost
+#+END_SRC
+
+***** Example ansible with pem key for aws login
+#+begin_src yaml
+#ubuntu ansible_ssh_host=2.3.249.200
+ubuntu ansible_host=ec2-3-249-86-200.eu-west-1.compute.amazonaws.com
+
+
+[brt:vars]
+ansible_ssh_private_key_file=/home/mjgoncalves/ansible/chave/aws-ansible.pem
+ansible_ssh_user=ubuntu
+ansible_connection=ssh
+#+end_src
+*** TODO Security of Inventory File
+Digital Ocean
+https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data-on-ubuntu-16-04
+*** Example 3
+#+begin_src sh
+webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver2 ansible_host=192.168.25.17 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver3 ansible_host=192.168.25.18 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+sqlserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+nfsserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+[webservers]
+webserver1
+webserver2
+webserver3
+
+[dbservers]
+dbserver1
+dbserver2
+dbserver3
+
+[nfsservers]
+nfsserver1
+nfsserver2
+nfsserver3
+#+end_src
+
+In the above file, we can also label servers as - 
+#+begin_src sh
+[nfsservers]
+nfsserver[1:3]
+#+end_src
+
+And, it is also possible to aggregate multiple groups as children under a “parent” group. The “parent” is then called a metagroup.
+#+begin_src sh
+webserver1 ansible_host=192.168.25.15 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver2 ansible_host=192.168.25.17 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+webserver3 ansible_host=192.168.25.18 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+sqlserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+sqlserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+
+nfsserver1 ansible_host=192.168.25.19 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver2 ansible_host=192.168.25.20 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+nfsserver3 ansible_host=192.168.25.21 ansible_ssh_pass=password ansible_connection=ssh ansible_port=22 ansible_user=root
+[webservers]
+webserver1
+webserver2
+webserver3
+
+[dbservers]
+dbserver1
+dbserver2
+dbserver3
+
+[nfsservers]
+nfsserver[1:3]
+
+[production:children]
+webservers
+dbservers
+#+end_src
+*** [21 march ]Ad-hoc commands
+You could execute a quick one-liner cmd in ansible with-out writing playbook
+#+BEGIN_SRC sh
+ansible [groupname] -a "command"      # a : attributes
+
+# Ex:
+ansible test -a "ls -l /opt"
+ansible test -a "cat /etc/passwd"
+ansible servername -a "touch /opt/test123" -s
+ansible servername -a "ls -l /opt"
+ansible all -a "yum remove httpd -y" -s
+ansible test -s -a "useradd batch31"
+ansible all -a "ls -l /opt"
+
+
+
+# module
+ansible web -a "service httpd status" --become 
+ansible web -m yum -a "name=httpd state=stopped" --become
+ansible web -m yum -a "name=httpd state=absent"# uninstall httpd(apache)
+ansible web -a"service httpd status" --become
+#
+
+ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"
+# change file permission and ownership
+ansible web -m file -a "dest=/srv/foo/b.txt mode=600 owner=meheen group=maheen"
+# #############################################
+#  Create users
+# #############################################
+# Encrpt password :https://www.radb.net/crypt_calculator 
+ansible all -m user -a"name=test password=cFl0NSByhlhXc" --become
+ansible all -a"cat /etc/passwd" --become # check user is created
+
+# #########################################
+#  Custom inventory file
+# #########################################
+#path of inventory file path: /opt/hosts
+ansible -i /opt/hosts app -a "ls -latr /opt"
+ansible -i /opt/hosts app -a "ping"
+ansible -i /opt/host -m yum -a "name=git state=latest"#
+ansible -i /opt/host -m yum -a "name=tomcat state=latest"#
+
+#+END_SRC
+
+ansible help cmd
+#+BEGIN_SRC sh
+ansible-doc -l | wc
+# ansible-doc -s module-name
+ansible-doc -s yum
+#+END_SRC
+*** modules : Adhoc cmd are converted in module for simple and easy use
+There different types of module  [[https://docs.ansible.com/ansible/latest/user_guide/modules_intro.html][Introduction to module]]
+
+Modules (also referred to as “task plugins” or “library plugins”) are discrete units of code that can be used from the command line or in a playbook task. Ansible executes each module, usually on the remote target node, and collects return values.
+#+BEGIN_SRC sh
+# 
+ansible [pattern] -m [module-name] -a "[module-option]"
+# pattern : group or cluster in inventory file
+
+# -a      : attributes of module
+# -m      : module
+# $ansible-doc -l |wc
+#$ ansible-doc yum
+#$ ansible-doc yum 
+# Example: # state=latest or present, absent(remove install)
+# ansible 
+ansible web -m yum -a "name=httpd state=latest"# ################################
+#                yml file
+# ##############################
+- name: install latest version of Apache
+  yum:
+    name: httpd
+    state: latest
+
+#############################################
+#$ ansible-doc service   
+# Example: state : started, stopped,restarted
+ansible web -m service -a "name=httpd state=started" --become # install apache server
+
+#                yml file
+- name: start service hhtpd
+  service:
+    name: httpd
+    state: started
+##################################
+
+ansible web -a "service httpd status" --become 
+ansible web -m yum -a "name=httpd state=stopped" --become
+#
+ansible web -m yum -a "name=httpd state=absent"# uninstall httpd(apache)
+
+# #############################################
+#  Create users
+# #############################################
+# Encrpt password :https://www.radb.net/crypt_calculator 
+ansible all -m user -a"name=test password=cFl0NSByhlhXc" --become
+ansible all -a"cat /etc/passwd" --become # check user is created
+
+# #########################################
+#  Custom inventory file
+##########################################
+#path of inventory file path: /opt/hosts
+ansible -i /opt/hosts app -a "ls -latr /opt"
+ansible -i /opt/hosts app -a "ping"
+ansible -i /opt/host -m yum -a "name=git state=latest"#
+ansible -i /opt/host -m yum -a "name=tomcat state=latest"#
+#+END_SRC
+***** Example
+#+BEGIN_SRC sh
+ansible webserver -m yum -a "name=git state=latest"
+
+ansible all -m yum -a "name=httpd state=latest"
+
+ansible test -m ping
+
+ansible all -m copy -a "src=/opt/docker-compose.yaml dest=/opt" -s
+
+ansible appserver -m yum -s -a "name=httpd state=present"
+
+ansible all -m yum -s -a "name=httpd state=absent"
+
+ansible all -m yum -s -a "name=git state=latest"
+
+ansible test -m user -s -a "name=batch31"
+
+ansible test -m user -s -a "name=batch31 state=absent"
+
+ansible all -m service -s -a "name=httpd state=started"
+
+
+#+END_SRC
+**** Playbook(.yaml)
+module: to run single tast or one time task
+
+To run multiple task , run repeted task
+
+https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/
+
+to get yaml formate example:
+yml consist of ( hosts,variable,tasks) and task is array 
+
+variable: optional 
+task contain : module and attributes informations
+
+#+BEGIN_SRC sh
+ansible-doc git
+#+END_SRC
+
+***** Command type playbook
+#+BEGIN_SRC sh
+#cat sample.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install python
+    yum:
+      name: python
+      state: latest
+##########################################
+ansible-playbook sample.yml --syntax-check
+ansible-playbook sample.yml --list-hosts
+ansible-playbook sample.yml # to run yml file
+
+
+#cat useradd.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: creating user
+    yum:
+      name: statish
+      state: /pL2AYR6csdTI
+ansible-playbook useradd.yml --syntax-check
+ansible-playbook useradd.yml 
+ansible app -a "cat /etc/passwrd" --become
+##########################################
+#cat httpd_installNrun.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install httpd
+     yum:
+       name: httpd
+       state: latest
+  - name:start service
+     service:
+        name: httpd
+        state: started
+ansible-playbook httpd_installNrun.yml --syntax-check
+ansible-playbook httpd_installNrun.yml
+##########################################
+#cat create_file.yml
+##################################
+---
+- hosts: app
+  tasks:
+  - name: create file
+     file:
+      path: /opt/vbs
+       state: touch
+ansible-playbook create_file.yml --syntax-check
+ansible-playbook create_file.yml
+
+#+END_SRC
+*** modules
+- modules
+  - System (User, Group, Hostname, Iptables, Lvg, Lvol, make, mount,ping, Timezone, Systemd, Service)
+  - Commands (Command, Expect , RAW, Script, Shell)
+  - Files (Acl, Archive, File, Find, Lineinfile, Replace, Stat, Template, Unarchive)
+  - Database(mongodb,mssql,mysql, Postgresql, Proxysql, vertica)
+  - Cloud (Amazon, Atomic, Azure, Centrylink,Cloudscale,Cloudstack,Digital Ocean, Docker,Google, Linode, Openstack, Rackspace, Smartos, Softlayer, Vmware)
+  - Windows (In windows environment)
+  - git ()
+  - .....
+  - 
+  - shell
+  - command
+  - script
+#+BEGIN_SRC sh
+-
+ name: Play 1
+ hosts: localhost
+ tasks:
+ - name: Execute command ‘date’
+   command: date
+
+ - name: Display resolv.conf contents
+   command: cat /etc/resolv.conf
+
+ - name: Display resolv.conf contents
+   command: cat resolv.conf chdir=/etc
+
+ - name: Display resolv.conf contents
+   command: mkdir /folder creates=/folder
+
+ - name: Copy file from source to destination
+   copy: src=/source_file dest=/destination
+
+ - name: Run a script on remote server
+   script: /some/local/script.sh -arg1 -arg2
+# Services : Started,Stopped,Resatared
+ - name: Start the database service
+   service: name=postgresql state=started
+
+ - name: Start the httpd service
+   service: name=httpd state=started
+
+ - name: Start the nginx service
+   service:
+     name: nginx
+     state: started
+ - name: Start the database service
+   service:
+     name: postgresql
+     state: started
+# Lineinfile
+# Search for a line in a file and replace it or add it if it doesn’t exist.
+- lineinfile:
+    path: /etc/resolv.conf
+    line: 'nameserver 10.1.250.10'
+# Ping
+  - name: Ping test
+    ping:
+
+#+END_SRC
+*** Playbook
+Playbooks offer repeatable, reusable, simple configuration management. It can be used for configuration management, orchestrating steps of any manual process on multiple machines in synchronous or asynchronous order.
+**** (yml file ) Playbook create, run , check 
+- TOP LEVELS
+ - HOST SECTION
+ - VARABLE SECTION
+ - TASKS  SECTION
+Different YAML Tags
+Let us now go through the different tags in a playbook-
+- *name*: Logical name of the task which specifies what this playbook will be doing
+- *hosts*: This specifies the lists of hosts against which we want to run the task
+- *vars*: This allows you to define and use variables in your playbook
+- *tasks*: Tasks are a list of actions the playbook will perform
+- *handler*
+- loop:
+  - loop
+  - with_items
+  - with_files
+  - with_urls
+  - with_{mongodb,dict,evn,filetree,ini,inventoryhostnames,k8s,manifold,nestd,nios,openshift,password,pipe,rabbitmq,redis,sequence,skydive,subelements,template,together,varnames}
+  - become:
+#+begin_src
+---
+- hosts: all
+  become: ture
+  vars: 
+      dest_path: /opt
+      src_path: /opt/icici.war
+  tasks:
+  - name: copy
+    copy:
+        src:"{{src_path}}"
+        dest:"{{dest_path}}"
+
+  - name: create multiple touch
+    file:
+      path: "{{item}}"
+      state: touch
+      mode: '0755'
+    with_item:
+      - "/opt/satishP"
+      - "/opt/satishT"
+      - "/opt/rajit"
+      - "/opt/karthik"
+
+...
+
+#+end_src
+**** Run yml file
+#+BEGIN_SRC sh
+ls
+# python install
+
+# chek sytanx
+ansible-playbook pythonisntall.yml --syntax-check
+ansible-playbook pythonisntall.yml --list-host
+ansible-playbook pythonisntall.yml # to run  playbook
+ansible-playbook -i inventory.txt palybook.yml #static inventory
+#+END_SRC
+
+*** [24 march] when should we use ad-hoc and playbook
+For ad-hoc to run commands which are used rarely
+      For runing single instruction
+
+For playbook:
+     For running set of/complex insrtuction 
+     For createing same enviroment 
+#+BEGIN_SRC sh
+ansible-doc -s yum
+#+END_SRC
+*** [24 march] Palybook service (state: reloaded, restarted, started, stopped)
+#+BEGIN_SRC sh
+ - name: start serveice
+   service:
+      name: httpd
+      state: started # reloaded, restarted, started, stopped,abscent
+
+#+END_SRC
+*** Palybook copy-module
+#+BEGIN_SRC sh
+#$ansible-doc copy
+- name: Copy file with owner and permissions
+  copy:
+    src: /srv/myfiles/foo.conf
+    dest: /etc/foo.conf
+- name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+    validate: /usr/sbin/visudo -csf %s
+
+#+END_SRC
+ 
+#+BEGIN_SRC sh
+cd /opt
+#vi copy_pb.yml
+---
+- hosts: web
+  task:
+  - name: copy file
+    copy:
+      src: /opt/sbi.war
+      dest: /tmp/sbi.war
+...
+# #########################333
+#   Using SRC
+# #########################3
+- hosts: web
+  become:true
+  vars:
+    dst_path: /opt
+    src_path: /opt/icici.war
+  task:
+  - name: copy file
+    copy:
+      src: "{{src_path}}"
+      dest: "{{dst_path}}"
+...
+#+END_SRC
+*** Playbook for create a user 
+#+BEGIN_SRC sh
+ansible-doc user # search for playbook example
+#+END_SRC
+
+#+BEGIN_SRC sh
+- name: Add user 
+  user:
+    name: johnd
+    comment: John Doe
+    uid : 1040
+    group: admin
+
+ansible all -m user -a"name=test password=cFl0NSByhlhXc" --become
+# passing password in playbook is not best practice
+# In generall we pass encripted password 
+# google search encrypted password
+# replace password with encrypted
+
+#+END_SRC
+*** (yml file ) Playbook create, run , check 
+- TOP LEVELS
+ - HOST SECTION
+ - VARABLE SECTION
+ - TASKS  SECTION
+
+For interview please pratice using online examples :
+https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/
+#+BEGIN_SRC sh
+--- 
+- 
+  become: true
+  hosts: azure
+  tasks: 
+    - 
+      name: "install httpd"
+      yum: 
+        name: httpd
+        state: latest
+    - 
+      name: "start serveice"
+      service: 
+        name: httpd
+        state: started
+    - 
+      file: 
+        mode: "0777"
+        path: /var/www
+        state: directory
+      name: "Create a directory if it does not exist"
+    - 
+      copy: 
+        dest: /var/www/html/index.html
+        src: /opt/scripts/index.html
+      name: "copy module"
+    - 
+      name: "restart serveice"
+      service: 
+        name: httpd
+        state: resarted
+# ansible-playbook ansible_pb1.yml --syntax-check
+#+END_SRC
+
+#+BEGIN_SRC sh
+  - name: copy module
+    copy:
+     src: /opt/index.html
+     dest: /var/www/html/index.html
+    notify:
+    - restart apache
+  handlers:
+    - name: restart apache
+      service:
+       name: httpd
+       state: restarted
+#+END_SRC
+**** Run yml file
+#+BEGIN_SRC sh
+ls
+# python install
+
+# chek sytanx
+ansible-playbook pythonisntall.yml --syntax-check
+ansible-playbook pythonisntall.yml --list-host
+ansible-playbook pythonisntall.yml # to run  playbook
+#+END_SRC
+*** [24 march] Playbook for file-module 
+Basic yml to be remember during interviews
+https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/
+
+#+BEGIN_SRC sh
+# $ansible-doc file # go to example
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/some_directory
+    state: directory
+    mode: '0755'
+
+
+- name: Remove file (delete file)
+  file:
+    path: /etc/foo.txt
+    state: absent
+
+- name: Recursively remove directory
+  file:
+    path: /etc/foo
+    state: absent
+
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+cd /opt
+#vi dry.yml
+---
+- hosts: web
+  become: true
+  task:
+  - name: create dir
+    file:
+      path: /opt/test_dir
+      state: directory
+      mode: '0755'
+  - name: change permission and ownership
+    file:
+      path: /opt/test_dir
+      owner: ansible
+      group: ansible
+      mode: '0777'
+  - name: create touch
+    file:
+      path: /opt/test.txt
+      state: touch
+      mode: '0755'
+  - name: create multiple touch
+    file:
+      path: "{{item}}"
+      state: touch
+      mode: '0755'
+    with_item:
+      - "/opt/satishP"
+      - "/opt/satishT"
+      - "/opt/rajit"
+      - "/opt/karthik"
+
+  - name: Remove file (delete file)
+    file:
+      path: /opt/test.txt
+      state: absent
+  - name: Recursively remove directory
+    file:
+      path: /opt/etc/foo
+      state: absent
+    
+...
+#+END_SRC
+*** Varaible
+#+BEGIN_SRC sh
+---
+ name: Add DNS server to resolv.conf
+ hosts: localhost
+ vars:
+   dns_server: 10.1.250.10
+ tasks:
+ - lineinfile:
+     path: /etc/resolv.conf
+     line: 'nameserver {{dns_server }}’
+#+END_SRC
+
+#+BEGIN_SRC sh
+---
+- hosts: all
+  become: ture
+  vars: 
+      dest_path: /opt
+      src_path: /opt/icici.war
+  tasks:
+  - name: copy
+    copy:
+        src:"{{src_path}}"
+        dest:"{{dest_path}}" 
+...
+#+END_SRC
+
+#+BEGIN_SRC sh
+- 
+  name: Set Firewall Configurations
+  hosts: web
+  var:
+    http_port: 8081
+    snmp_port: 161-162
+    inter_ip_range: 192.0.2.0
+  tasks:
+  - firewalld:
+      service: https
+      permanent: true
+      state: enabled
+
+  - firewalld:
+      port: ‘{{ http_port }}’/tcp
+      permanent: true
+      state: disabled
+  - firewalld:
+      port: ‘{{snmp_port}}’/udp
+      permanent: true
+      state: disabled
+  - firewalld: 
+      source: ‘{{ inter_ip_range}}’/24
+      Zone: internal
+      state: enabled
+#+END_SRC
+*** [24 march] Playbook Java installation:
+**** varibale
+ SOURCE: https://gist.github.com/andershedstrom/7c7d0bb5b9450c54a907
+#+BEGIN_SRC sh
+---
+- hosts: web
+  become: true
+  vars:
+   download_url: http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+   dst_path: /opt/software
+  tasks:
+  - name: Create a directory if it does not exist
+      file:
+        path: "{{dst_path}}"
+        state: directory
+        mode: '0777'
+
+  - name: Download JDK tar file
+    command: "wget --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{download_url}} "
+    args:
+      chdir: "{{dst_path}}"
+
+  - name: Extract tar file
+    command: "tar -xvzf jdk-8u131-linux-x64.tar.gz;rm -rf jdk-8u131-linux-x64.tar.gz"
+
+  - name: Set JAVA PATH
+      shell: echo "# JAVA ENVIRONmENT VARIABLES" >> ~/.bash_profile; echo "export JAVA_HOME=/opt/softwares/jdk1.8.0_131">> ~/.bash_profile; echo "export PATH=\$PATH:/opt/softwares/jdk1.8.0_131/bin">> ~/.bash_profile
+
+  - name: restart bash and check version
+      shell:   - name: Set JAVA PATH
+      shell: source ~/.bash_profile; java -version
+#+END_SRC
+*** Looping
+#+BEGIN_SRC sh
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: name= ‘{{ item }}’
+    loop:
+      - joe
+      - george
+      - ravi
+      - mani
+      - kiran
+      - jazlan
+      - emaan
+      - mazin
+      - izaan
+      - mike
+      - menaal
+      - shoeb
+      - rani
+#+END_SRC
+
+#+BEGIN_SRC sh
+- 
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: 
+      name= ‘{{item.name}}’  
+      state= present
+      uid= '{{ item.uid}}’
+
+    loop:
+     - name: joe
+       uid: 1010
+     - name: george
+       uid: 1010 
+     - name :ravi
+       uid: 1012
+     - name:mani
+       uid: 1013
+     - name:kiran
+       uid: 1014
+     - name:jazlan
+       uid: 1015
+     - name:emaan
+       uid: 1016
+     - name:mazin
+       uid: 1017
+     - name:izaan 
+     - name:kiran
+       uid: 1018
+     - name:mike 
+#+END_SRC
+**** With_item
+#+BEGIN_SRC sh
+- name: Create users 
+  hosts: localhost 
+  task: 
+  - user: name='{{ item }}'
+    state: present 
+    with_item: 
+    - joe 
+    - george 
+    - ravi 
+    - mani
+#+END_SRC
+
+
+**** With_file
+#+BEGIN_SRC sh
+- name: Create users 
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_file: 
+    - "/etc/hosts"
+    - "/etc/resolve.conf"
+    - "/etc/ntp.conf"
+#+END_SRC
+**** With url
+#+BEGIN_SRC sh
+- name: get multiple urls
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_url: 
+    - "https://site1.com/get-servers"
+    - "https://site2.com/get-servers"
+    - "https://site3.com/get-servers"
+    - "https://site4.com/get-servers"
+#+END_SRC
+**** With mongodb:
+#+BEGIN_SRC sh
+- name: get multiple mongodbs
+  hosts: localhost 
+  task: 
+  - debug: msg "DB={{item.database}} PID={{item.pid}}"
+    with_url: 
+    - database: dev
+      connection_string : "mongodb://dev.mongo/"
+    - database: dev
+      connection_string : "mongodb://prod.mongo/"
+
+#+END_SRC
+**** With_*
+#+BEGIN_QUOTE
+with_items
+with_file
+with_url
+with_mongodb
+with_dict
+with_etcd
+with_env
+with_filetree
+With_ini
+With_inventory_hostnames
+With_k8s
+With_manifold
+With_nested
+With_nios
+With_openshift
+With_password
+With_pipe
+With_rabbitmq
+With_redis
+With_sequence
+With_skydive
+With_subelements
+With_template
+With_together
+With_varnames
+#+END_QUOTE
+*** Condtions
+#+BEGIN_SRC sh
+---
+- name: Install NGINX
+  hosts: all
+  tasks:
+  - name: Install NGINX on Debian
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == “Debian” and
+            ansible_distribution_version == “16.04”
+ - name: Install NGINX on Redhat
+     yum:
+       name: nginx
+       state: present
+     when: ansible_os_family == “RedHat” or
+           ansible_os_family == "SUSE"
+#+END_SRC
+*** Condtionals in Loop
+*** Condtionals & Register
+*** [25 march] Roles
+Ansible: assigne a role to server or host : like (mysql, gameserver: nginx,)
+The same work can be done by palybook why we use role ?
+
+This are task which are comman used by all dev, or with in organiziatoin.,,,etc
+*** Find Roles
+ansible-galaxy :web UI
+$ansible-galaxy search mysql
+*** TODO Use Roles
+#+BEGIN_SRC sh
+ansible-glaxy install geerlingguy.msql
+#+END_SRC
+*** List Roles
+#+BEGIN_SRC sh
+ansible-galaxy init mysql # 
+# How to use mysql in my playbook 
+# move role to comman dir where ansible can find the location (/etc/ansible/roles)
+#+END_SRC
+
+*** Patter 
+#+BEGIN_SRC sh
+- 
+ name: Play1
+ hosts : localhost, # Host*, *.company.com # Host1,Host2,Host3,
+ tasks:
+ - name: Copy file with owner and permissions
+   copy:
+     src: /srv/myfiles/foo.conf
+     dest: /etc/foo.conf
+ - name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+
+#+END_SRC
+*** Dynamic Inventory:
+#+BEGIN_SRC sh
+ansible-playbook -i inventory.txt palybook.yml #static inventory
+ansible-playbook -i inventory.py playbook.yml # dynamic inventory
+#+END_SRC
+*** Custom modules:
+https://docs.ansible.com/ansible/2.3/dev_guide/developing_modules_general.html
+*** [25 march]Jinja Template : 
+Insted of copy we use Jinja template which move the only contant of file
+#+BEGIN_SRC sh
+---
+- hosts: azure
+  become: true
+  vars:
+    src_path: /opt/devops.j2
+    dst_path: /var/www/html/index.html
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+  - name: start serveice
+    service:
+       name: httpd
+       state: started
+  - name: copy module
+    template:
+     src: "{{ src_path }}"
+     dest: "{{ dst_path }}"
+    notify:
+    - restart apache
+  handlers:
+    - name: restart apache
+      service:
+       name: httpd
+       state: restarted
+#+END_SRC
+
+#+BEGIN_SRC html
+  <html>
+  <header><title>This is title</title></header>
+  <body>
+  Hello CARONA world CUP 2020 fwefwefgwe
+  gwrgrgrgrgrgrgrg
+  rgr
+  greg
+  reg
+  rger
+  grg
+  </body>
+  </html>
+
+#+END_SRC
+* Ansible(Advance) 
+*** Role
+*** Asynchronous Actions
+**** Why Asynchronous
+Time when we need to execute a long task that excceds the ssh-time out
+Insted of extending we  make a check on it later time
+
+To run mulitpule processes at once and check on it later
+
+To run  one or more process and not check it staus
+#+BEGIN_SRC sh
+- name: Deploy Web Application
+  hosts: web
+  tasks:
+  - command: /opt/monitor_webapp.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: webapp_result
+               # poll: 0 , Not waiting check and go to other task
+
+
+  - command: /opt/monitor_database.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: database_result
+               # poll: 0 , Not waiting check and go to other task
+
+  - name: Check status of tasks
+    async_status: jid={{webapp_result.ansible_job_id}}
+    register: job_result.finished
+    retries: 30
+
+# Not all module support async
+#+END_SRC
+*** Strategy
+How playbook is executed in ansible
+#+BEGIN_SRC sh
+-
+ name: Deploy Web Applications
+ strategy: free
+# Batch 
+# serial:3(linear for 1st 3 server) later are free strategy
+ hosts: server1
+ tasks:
+  - name: Install dependencies
+     ########################
+  - name: Install mySQL databases
+     ########################
+  - name: Start mysql service
+     ########################
+  - name: Install Python Flask dependencies
+     ########################
+  - name: Run web-server 
+     ########################
+#+END_SRC
+*** Forks
+How many server can it talk to at a time ?
+If we have 100 servers ? will servers run at atime ?
+How many servers will ansible take at atime ?
+
+Ansible uses parallel process called frok  communicate with host 
+default ansible talk 5 servers at atime.
+*** Error Handling
+In strategy topic we see linear, free, batch
+
+If one server there is error <like  mysql server> then ansible take error out of list and continue the playbook
+
+If we want to stop execution if there is an error in execution use *any_errors_fatal*
+**** ignore_errors: 
+consider we want to send a mail at end of task telling <Web Server Deployed>
+How ever stmp server is not stable so we don't want to give error because of it and stop, FOR this kind of thinks we want to ignore the error
+#+BEGIN_SRC sh
+- mail:
+    to: devops@corp.com
+    subject: Server Deployed!
+    body: Web Server Deployed
+  ignore_errors: yes
+#+END_SRC
+**** failed_when:
+We want to check the *Error log* and see if there is an error in it or not then we want to fail the if error as occured
+#+BEGIN_SRC sh
+- command: cat /var/log/server.log
+  register: command_output
+  failed_when: " 'ERROR' in command_output.stdout"
+#+END_SRC
+
+*** Jinja 2 Templating(Filters)
+What is Templating : process of dynamic content :
+#+BEGIN_SRC yml
+- 
+ name: Test Template Playbook
+ hosts: localhost
+ vars:
+   my_name: karthik
+ tasks:
+  - debug:
+       msg: "my name is {{my_name}}"
+
+#+END_SRC
+
+**** String manipualtion
+#+BEGIN_QUOTE
+The name is {{my_name}}=> The name is karthik
+The name is {{my_name | upper}}=> The name is KARTHIK
+The name is {{my_name | lower}}=> The name is karthik
+The name is {{my_name | title}}=> The name is Karthik
+The name is {{my_name | repalce("karthik","Sai Teja")}}=> The name is Sai Teja
+The name is {{my_name | default("James")}} {{my_name}}=> The name is James Karthik
+#+END_QUOTE
+**** List and Set based filter
+#+BEGIN_SRC yml
+{{ [1,2,3] | min }}                >> 1
+{{ [1,2,3] | max }}                >> 3
+{{ [1,2,3,2] |unique }}                >> 1,2,3
+{{ [1,2,3,4] |union([4,5])}}                >> 1,2,3,4,5
+{{ [1,2,3,4] | interset([4,5]}}                >> 4
+{{ 100 | random }}                >> Random number
+{{ ["The", "name", "is","Bond"] | join (" ")}}                >> The name is Bond
+#+END_SRC
+**** File based Filter
+#+BEGIN_SRC yml
+{{ "/etc/hosts" | basename}}            >> hosts
+{{"c"\windows\hosts" | win_basedname }}            >> hosts
+{{ "c:\windows\hosts" | win_splitdrive }}            >> ["C:","\windows\hosts"]
+{{ "c:\windows\hosts" | win_splitdrive| first }}            >> "C:"
+{{ "c:\windows\hosts" | win_splitdrive| last }}            >> "\windows\hosts"
+
+#+END_SRC
+**** more Info about Jinja2 Filters 
+GOogle Search: jinja2 List of Builtin Filters
+*** Lookups
+If we store hosts and password in csv file we can read the password we can use lookup plugin
+#+BEGIN_SRC sh
+#$ cat credentials.csv
+#Hostname, Password
+#Target1, PasswOrd1
+#Target2, PasswOrd2
+
+
+{{lockup('csvfile', 'target1 file=/tmp/credentials.csv delimiter=,')}} >> PasswOrd1
+#+END_SRC
+
+There are other type of Lookups like INI,DNS,mongodb
+Source : Web : Ansible Documentation > Playbooks:Special Topic > Lookups 
+*** Vault
+We are storing password in host or inventory file 
+Ansible vault help to encript the host or inventory file
+#+BEGIN_SRC sh
+# To encrypth inventory file
+ansible-vault encrypt inventory.txt
+# $ask for password
+
+
+# run encrypted inventory file
+ansible-playbook test.yml -i inventory.txt -ask-vault-pass
+
+# pass file(vault_pass) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass
+
+# pass script(vault_pass.py) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass.py
+
+# view contant of encrpyted file 
+ansible-vault view inventory.txt
+
+# To create an encrypted file 
+ansible-vault create inventory.txt
+
+#+END_SRC
+*** Dynamic Inventory
+
+#+BEGIN_SRC python
+#!/usr/bin/env python
+
+import json
+
+def get_inventory_data():
+    return {
+        'databases': {
+            'hosts': [ip_address],
+            'vars': {
+               "ansible_ssh_pass":"PasswOrd",
+               "ansible_ssh_host":"192.168.1.1"
+            }
+        }
+        'web': {
+            'hosts': ["web_servers"],
+             'vars' : {
+               "ansible_ssh_pass":"PasswOrd2",
+               "ansible_ssh_host":"192.168.1.2"  
+                }
+            }
+        }
+    
+if __name__ == '__main__':
+    inventory_data = get_inventory_data()
+    print(json.dumps(inventory_data))
+
+#+END_SRC
+*** Custom modules
+*** Plugins
+** Example
+#+BEGIN_SRC sh
+---
+- name: Play 1
+  hosts: test
+  become: yes
+  tasks:
+      - name: Installing the git package
+      - yum: name=git state=present
+
+2))
+---
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: copying the files from server to client
+      - copy: src=/etc/passwd dest=/opt
+
+3))
+----
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: Installing multiple packages
+      - yum: state=present name={{ item }}
+   with_items:
+- git
+- wget
+- httpd
+- tar
+- vim
+4))
+
+---
+- hosts: all
+become: yes
+tasks:
+- name: Installing jenkins
+yum:
+name: /opt/jenkins-2.129-1.1.noarch.rpm
+state: present
+- service:
+name=jenkins state=started
+
+5))
+----
+---
+- hosts: all
+become: yes
+tasks:
+- name: Sample playbooks
+yum: name=httpd state=present
+- name: starting httpd services
+service: name=httpd state=started
+
+
+
+
+- hosts: appserver
+
+remote_user: ansible1
+
+become: true
+
+tasks:
+- name: Install Apache Webserver
+yum: pkg=httpd state=latest
+- name: restart apache
+service: name=httpd state=restarted
+
+#+END_SRC
+
+* Next Topics to covered
+** TODO Continuous Deployment
+** TODO Phase 5: Continuous Monitoring 
+(Tools Used: Splunk, ELK Stack, Nagios, New Relic)
+Nagios: is a monitoring tool
+
+- disc space
+- services 
+- URL avaialbility
+
+
+www.dev-facbook.com
+www.sit-facebook.com
+www.preprod-facebook.com
+www.prod-facebook.com
+
+master - nagios
+
+slave - linux  NRPE 
+window - slave NSclient
+** Real Time Sceanior
+Real time there are 5 environment
+- dev env
+- sit env
+- uat env 
+- pre production
+- production
+
+(development, sit (System Integration and Testing),uat (User Acceptance Testing),prod)
+Real time : In dev env has 6 servers : shared a and shared b
+sit -6
+uat -9 servers (performance is also tested)
+pre-production (16 -servers)
+production (20-servers)
+
+`
+
+
+
+* Docker app for examin or mqc app 
+https://www.youtube.com/watch?v=-FbRu0akVIw
+django app but need to modify the the concent 
+
+gate cse django app  carbaon copy of above  but nicely optimized
+https://www.youtube.com/watch?v=c3E3tfMK34w
+Docker file 
+https://github.com/aryan29/Quizoo
+surveyjs
+https://www.youtube.com/watch?v=Klo5b3d7Qfo

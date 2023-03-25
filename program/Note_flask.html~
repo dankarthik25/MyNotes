@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-08-05 Fri 21:24 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>flask Notes</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="DeepAlgorithms" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">flask Notes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge510a25">Flask Introduction</a></li>
+<li><a href="#orgf30e60d">Create Virtual Env</a></li>
+<li><a href="#org10f14d9">Run Flask app</a></li>
+<li><a href="#org9990db0">Create about page</a></li>
+<li><a href="#orgf09465e">Create a templates</a></li>
+<li><a href="#orge294186">Create Forms and  Validate User Input</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge510a25" class="outline-2">
+<h2 id="orge510a25">Flask Introduction</h2>
+<div class="outline-text-2" id="text-orge510a25">
+<p>
+Intro 
+</p>
+</div>
+</div>
+<div id="outline-container-orgf30e60d" class="outline-2">
+<h2 id="orgf30e60d">Create Virtual Env</h2>
+<div class="outline-text-2" id="text-orgf30e60d">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">cd</span> myflask-app
+
+conda create --name flask-webapp
+conda activate flask-webapp
+conda install flask
+
+touch flaskblog.py
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">The contant of flaskblog.py is below  </span>
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">myflask-app/flaskblog.py</span>
+
+
+<span style="color: #3a81c3; font-weight: bold;">from</span> flask <span style="color: #3a81c3; font-weight: bold;">import</span> Flask
+<span style="color: #715ab1;">app</span> = Flask(<span style="color: #3a81c3;">__name__</span>)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/"</span>)
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/home"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">home</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> <span style="color: #2d9574;">"&lt;h1&gt;Home Page&lt;/h1&gt;"</span>
+
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">__name__</span> == <span style="color: #2d9574;">'__main__'</span>:
+    app.run(debug=<span style="color: #4e3163;">True</span>)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org10f14d9" class="outline-2">
+<h2 id="org10f14d9">Run Flask app</h2>
+<div class="outline-text-2" id="text-org10f14d9">
+<p>
+We can run flask in two ways
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">FLASK_APP</span>=main.py
+<span style="color: #3a81c3;">export</span> <span style="color: #715ab1;">FLASK_DEBUG</span>=1
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To run the app using flask</span>
+flask run
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Run using python</span>
+python flaskblog.py <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">or</span>
+flask run 
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9990db0" class="outline-2">
+<h2 id="org9990db0">Create about page</h2>
+<div class="outline-text-2" id="text-org9990db0">
+<p>
+see if <code>about</code> page is created by routing to about page  <code>localhost:5000/about</code>
+If about page is created
+</p>
+<ul class="org-ul">
+<li>Then it will redirect to about page</li>
+<li>if not it will send <code>ERROR 404</code> <code>Page Not Found</code></li>
+</ul>
+
+<p>
+Create about page 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">myflask-app/flaskblog.py</span>
+
+
+<span style="color: #3a81c3; font-weight: bold;">from</span> flask <span style="color: #3a81c3; font-weight: bold;">import</span> Flask
+<span style="color: #715ab1;">app</span> = Flask(<span style="color: #3a81c3;">__name__</span>)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/"</span>)
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/home"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">home</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> <span style="color: #2d9574;">"&lt;h1&gt;Home Page&lt;/h1&gt;"</span>
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/about"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">about</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> <span style="color: #2d9574;">"&lt;h1&gt;About Page&lt;/h1&gt;"</span>
+
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">__name__</span> == <span style="color: #2d9574;">'__main__'</span>:
+    app.run(debug=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf09465e" class="outline-2">
+<h2 id="orgf09465e">Create a templates</h2>
+<div class="outline-text-2" id="text-orgf09465e">
+<p>
+Instead of returning html tag in <code>return "&lt;h1&gt; Home Page &lt;/h1&gt;"</code> we can use template dir which stores tempalate file like <code>layout, home, footer, about, posts...etc</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">cd</span> myflask-app
+mkdir templates static
+touch static/main.css
+<span style="color: #3a81c3;">cd</span> templates
+touch about.tml home.html layout.html
+</pre>
+</div>
+
+<p>
+The flask app with template
+</p>
+<ul class="org-ul">
+<li>To render from tempate we use <code>import render_tempalate</code></li>
+<li>To convert relative path and add to absolute path we use <code>url_for</code> eg : add css and js from the <b>static dir</b></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">myflask-app/flaskblog.py</span>
+<span style="color: #3a81c3; font-weight: bold;">from</span> flask <span style="color: #3a81c3; font-weight: bold;">import</span> Flask, render_template, url_for
+<span style="color: #715ab1;">app</span> = Flask(<span style="color: #3a81c3;">__name__</span>)
+
+<span style="color: #715ab1;">posts</span> = [
+    {
+        <span style="color: #2d9574;">'author'</span>: <span style="color: #2d9574;">'Corey Schafer'</span>,
+        <span style="color: #2d9574;">'title'</span>: <span style="color: #2d9574;">'Blog Post 1'</span>,
+        <span style="color: #2d9574;">'content'</span>: <span style="color: #2d9574;">'First post content'</span>,
+        <span style="color: #2d9574;">'date_posted'</span>: <span style="color: #2d9574;">'April 20, 2018'</span>
+    },
+    {
+        <span style="color: #2d9574;">'author'</span>: <span style="color: #2d9574;">'Jane Doe'</span>,
+        <span style="color: #2d9574;">'title'</span>: <span style="color: #2d9574;">'Blog Post 2'</span>,
+        <span style="color: #2d9574;">'content'</span>: <span style="color: #2d9574;">'Second post content'</span>,
+        <span style="color: #2d9574;">'date_posted'</span>: <span style="color: #2d9574;">'April 21, 2018'</span>
+    }
+]
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/"</span>)
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/home"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">home</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'home.html'</span>, posts=posts)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/about"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">about</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'about.html'</span>, title=<span style="color: #2d9574;">'About'</span>)
+
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">__name__</span> == <span style="color: #2d9574;">'__main__'</span>:
+    app.run(debug=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<p>
+The css file is give below
+</p>
+<div class="org-src-container">
+<pre class="src src-css"><span style="color: #2aa1ae; background-color: #ecf3ec;">/* </span><span style="color: #2aa1ae; background-color: #ecf3ec;">myflask-app/static/main.css</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> */</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">/* </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/02-Templates/static/main.css</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> */</span>
+
+<span style="color: #6c3163; font-weight: bold;">body </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #fafafa;">#fafafa</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #333333;">#333333</span>;
+  <span style="color: #3a81c3; font-weight: bold;">margin-top</span>: 5rem;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h1, h2, h3, h4, h5, h6 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #444444;">#444444</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.bg-steel </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background-color</span>: <span style="color: #ffffff; background-color: #5f788a;">#5f788a</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.site-header .navbar-nav .nav-link </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #000000; background-color: #cbd5db;">#cbd5db</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.site-header .navbar-nav .nav-link:hover </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #000000; background-color: #ffffff;">#ffffff</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.site-header .navbar-nav .nav-link.active </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: 500;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.content-section </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ffffff;">#ffffff</span>;
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: 10px 20px;
+  <span style="color: #3a81c3; font-weight: bold;">border</span>: 1px solid <span style="color: #000000; background-color: #dddddd;">#dddddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-radius</span>: 3px;
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 20px;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-title </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #444444;">#444444</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a.article-title:hover </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #428bca;">#428bca</span>;
+  <span style="color: #3a81c3; font-weight: bold;">text-decoration</span>: none;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-content </span>{
+  <span style="color: #3a81c3; font-weight: bold;">white-space</span>: pre-line;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-img </span>{
+  <span style="color: #3a81c3; font-weight: bold;">height</span>: 65px;
+  <span style="color: #3a81c3; font-weight: bold;">width</span>: 65px;
+  <span style="color: #3a81c3; font-weight: bold;">margin-right</span>: 16px;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-metadata </span>{
+  <span style="color: #3a81c3; font-weight: bold;">padding-bottom</span>: 1px;
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 4px;
+  <span style="color: #3a81c3; font-weight: bold;">border-bottom</span>: 1px solid <span style="color: #000000; background-color: #e3e3e3;">#e3e3e3</span>
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-metadata a:hover </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #333;">#333</span>;
+  <span style="color: #3a81c3; font-weight: bold;">text-decoration</span>: none;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.article-svg </span>{
+  <span style="color: #3a81c3; font-weight: bold;">width</span>: 25px;
+  <span style="color: #3a81c3; font-weight: bold;">height</span>: 25px;
+  <span style="color: #3a81c3; font-weight: bold;">vertical-align</span>: middle;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.account-img </span>{
+  <span style="color: #3a81c3; font-weight: bold;">height</span>: 125px;
+  <span style="color: #3a81c3; font-weight: bold;">width</span>: 125px;
+  <span style="color: #3a81c3; font-weight: bold;">margin-right</span>: 20px;
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 16px;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.account-heading </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 2.5rem;
+}
+
+</pre>
+</div>
+
+<p>
+We will create a <code>layout</code> for our blog  with css file in <code>myflask-app/static/main.css</code> 
+</p>
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">layout.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+&lt;<span style="color: #3a81c3; font-weight: bold;">!DOCTYPE</span> html&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">add css and js files</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+    &lt;<span style="color: #6c3163; font-weight: bold;">link</span> <span style="color: #715ab1;">rel</span>=<span style="color: #2d9574;">"stylesheet"</span> <span style="color: #715ab1;">type</span>=<span style="color: #2d9574;">"text/css"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"{{ url_for('static', filename='main.css') }}"</span>&gt;
+    {% if title %}
+        &lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Flask Blog - {{ title }}</span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+    {% else %}
+        &lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Flask Blog</span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+    {% endif %}
+&lt;/<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+   &lt;<span style="color: #6c3163; font-weight: bold;">div</span>  <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"container"</span>&gt;
+          {% block content %}
+          {% endblock %}
+   &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jQuery, JavaScript, Bootstrap JS files</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>   
+&lt;/<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+</pre>
+</div>
+
+<p>
+home page template
+python flask uses template using <code>jinja2 template</code>
+</p>
+<ul class="org-ul">
+<li>for <code>inserting or including file</code> or <code>loop</code>, <code>condition</code>  we use <code>{}</code> tags</li>
+<li>for python variable we use <code>{{dict.key}}</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">home.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+        &lt;<span style="color: #6c3163; font-weight: bold;">article</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"media content-section"</span>&gt;
+          &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"media-body"</span>&gt;
+            &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"article-metadata"</span>&gt;
+              &lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"mr-2"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"#"</span>&gt;{{ post.author }}&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;
+              &lt;<span style="color: #6c3163; font-weight: bold;">small</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"text-muted"</span>&gt;<span style="color: #655370; background-color: #fbf8ef;">{{ post.date_posted }}</span>&lt;/<span style="color: #6c3163; font-weight: bold;">small</span>&gt;
+            &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+            &lt;<span style="color: #6c3163; font-weight: bold;">h2</span>&gt;&lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"article-title"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"#"</span>&gt;{{ post.title }}&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;&lt;/<span style="color: #6c3163; font-weight: bold;">h2</span>&gt;
+            &lt;<span style="color: #6c3163; font-weight: bold;">p</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"article-content"</span>&gt;{{ post.content }}&lt;/<span style="color: #6c3163; font-weight: bold;">p</span>&gt;
+          &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+        &lt;/<span style="color: #6c3163; font-weight: bold;">article</span>&gt;
+    {% endfor %}
+{% endblock content %}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">about.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+{% extends "layout.html" %}
+{% block content %}
+    &lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">About Page</span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+{% endblock content %}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge294186" class="outline-2">
+<h2 id="orge294186">Create Forms and  Validate User Input</h2>
+<div class="outline-text-2" id="text-orge294186">
+<p>
+Create a registeration page to create account and  login and logout
+</p>
+<ul class="org-ul">
+<li>Make sure name, email are valid</li>
+<li>password should be valid either 6 char</li>
+</ul>
+
+<p>
+For users details account creation and validation we are using lib <code>flask-wtf</code>
+install <code>pip install flask-wtf</code>
+</p>
+
+
+<p>
+Create a seperate code-file <code>form.py</code>
+</p>
+
+<p>
+we use validators to validate the field-value
+</p>
+<ul class="org-ul">
+<li><b>Name:</b>     <code>StringField</code> : Lenght min :2 and max :20</li>
+<li><b>email:</b>    <code>StringField</code> : Email()[make sure it is valid email]</li>
+<li><b>password:</b> <code>PasswordField</code> :</li>
+<li><b>confirm-password:</b> <code>EqualTo()</code> : [Make sure it is same password enter]</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">file: myflask-app/forms.py</span>
+<span style="color: #3a81c3; font-weight: bold;">from</span> flask_wtf <span style="color: #3a81c3; font-weight: bold;">import</span> FlaskForm
+<span style="color: #3a81c3; font-weight: bold;">from</span> wtforms <span style="color: #3a81c3; font-weight: bold;">import</span> StringField, PasswordField, SubmitField, BooleanField
+<span style="color: #3a81c3; font-weight: bold;">from</span> wtforms.validators <span style="color: #3a81c3; font-weight: bold;">import</span> DataRequired, Length, Email, EqualTo
+
+
+<span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">RegistrationForm</span>(FlaskForm):
+    <span style="color: #715ab1;">username</span> = StringField(<span style="color: #2d9574;">'Username'</span>, validators=[DataRequired(), Length(<span style="color: #3a81c3;">min</span>=2, <span style="color: #3a81c3;">max</span>=20)])
+    email = StringField(<span style="color: #2d9574;">'Email'</span>,validators=[DataRequired(), Email()])
+    password = PasswordField(<span style="color: #2d9574;">'Password'</span>, validators=[DataRequired()])
+    confirm_password = PasswordField(<span style="color: #2d9574;">'Confirm Password'</span>, validators=[DataRequired(), EqualTo(<span style="color: #2d9574;">'password'</span>)])
+    submit = SubmitField(<span style="color: #2d9574;">'Sign Up'</span>)
+
+
+<span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">LoginForm</span>(FlaskForm):
+    email = StringField(<span style="color: #2d9574;">'Email'</span>,validators=[DataRequired(), Email()])
+    password = PasswordField(<span style="color: #2d9574;">'Password'</span>, validators=[DataRequired()])
+    remember = BooleanField(<span style="color: #2d9574;">'Remember Me'</span>)
+    submit = SubmitField(<span style="color: #2d9574;">'Login'</span>)
+</pre>
+</div>
+
+
+<p>
+Now we need to set a <code>secret key</code> for our Application
+</p>
+<ul class="org-ul">
+<li>Secret Key is used to protect form 
+<ul class="org-ul">
+<li>Modifying Cookies</li>
+<li>Cross-site request</li>
+<li>Forgery Attacts</li>
+</ul></li>
+
+<li><p>
+Generate a secret key
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">python
+&gt;&gt;&gt; import secrets
+&gt;&gt;&gt; secrets.token_hex(16)
+<span style="color: #2d9574;">'5791628bb0b13ce0c676dfde280ba245'</span>
+</pre>
+</div></li>
+</ul>
+
+
+<p>
+Import <code>class (form , login)</code> from <code>form.py</code> &gt;&gt; <code>from forms import RegistrationForm, LoginForm</code>
+</p>
+<ul class="org-ul">
+<li>And add route <code>register, login</code> and create template <code>register.html, login.html</code></li>
+<li>If registration is not valid user need to notify in register.html page
+<ul class="org-ul">
+<li>add <code>flask-message</code> in <code>register.html</code>  if users didn't give valid message</li>
+</ul></li>
+<li>After registeration is <b>successful</b> need to notify the user using <code>flash-message</code> <code>flash(f'Account created for {form.username.data}!', 'success')</code> in <code>flaskblog.py</code> after registeration and re-route to <code>home page</code></li>
+<li>Add <code>flask-message</code> to html layout <code>layout.html</code>
+<ul class="org-ul">
+<li><code>flash-message(flash("Register is created","Successful"))</code> has to input <code>message and category</code> which is stored as  <code>messages</code>
+<ul class="org-ul">
+<li>this flash data is used in jinja2 template in layout.html or register.html or login.html which will be discussed below</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">myflask-app/flaskblog.py</span>
+<span style="color: #3a81c3; font-weight: bold;">from</span> flask <span style="color: #3a81c3; font-weight: bold;">import</span> Flask, render_template, url_for, flash, redirect
+<span style="color: #3a81c3; font-weight: bold;">from</span> forms <span style="color: #3a81c3; font-weight: bold;">import</span> RegistrationForm, LoginForm
+
+<span style="color: #715ab1;">app</span> = Flask(<span style="color: #3a81c3;">__name__</span>)
+app.<span style="color: #715ab1;">config</span>[<span style="color: #2d9574;">'SECRET_KEY'</span>] = <span style="color: #2d9574;">'5791628bb0b13ce0c676dfde280ba245'</span>
+
+<span style="color: #715ab1;">posts</span> = [
+    {
+        <span style="color: #2d9574;">'author'</span>: <span style="color: #2d9574;">'Corey Schafer'</span>,
+        <span style="color: #2d9574;">'title'</span>: <span style="color: #2d9574;">'Blog Post 1'</span>,
+        <span style="color: #2d9574;">'content'</span>: <span style="color: #2d9574;">'First post content'</span>,
+        <span style="color: #2d9574;">'date_posted'</span>: <span style="color: #2d9574;">'April 20, 2018'</span>
+    },
+    {
+        <span style="color: #2d9574;">'author'</span>: <span style="color: #2d9574;">'Jane Doe'</span>,
+        <span style="color: #2d9574;">'title'</span>: <span style="color: #2d9574;">'Blog Post 2'</span>,
+        <span style="color: #2d9574;">'content'</span>: <span style="color: #2d9574;">'Second post content'</span>,
+        <span style="color: #2d9574;">'date_posted'</span>: <span style="color: #2d9574;">'April 21, 2018'</span>
+    }
+]
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/"</span>)
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/home"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">home</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'home.html'</span>, posts=posts)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/about"</span>)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">about</span>():
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'about.html'</span>, title=<span style="color: #2d9574;">'About'</span>)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/register"</span>, methods=[<span style="color: #2d9574;">'GET'</span>, <span style="color: #2d9574;">'POST'</span>])
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">register</span>():
+    form = RegistrationForm()
+    <span style="color: #3a81c3; font-weight: bold;">if</span> form.validate_on_submit():
+        flash(f<span style="color: #2d9574;">'Account created for </span>{form.username.data}<span style="color: #2d9574;">!'</span>, <span style="color: #2d9574;">'success'</span>)
+        <span style="color: #3a81c3; font-weight: bold;">return</span> redirect(url_for(<span style="color: #2d9574;">'home'</span>))
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'register.html'</span>, title=<span style="color: #2d9574;">'Register'</span>, form=form)
+
+
+<span style="color: #ba2f59; font-weight: bold;">@app.route</span>(<span style="color: #2d9574;">"/login"</span>, methods=[<span style="color: #2d9574;">'GET'</span>, <span style="color: #2d9574;">'POST'</span>])
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">login</span>():
+    form = LoginForm()
+    <span style="color: #3a81c3; font-weight: bold;">if</span> form.validate_on_submit():
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This is for testing or development</span>
+        <span style="color: #3a81c3; font-weight: bold;">if</span> form.email.data == <span style="color: #2d9574;">'admin@blog.com'</span> <span style="color: #3a81c3; font-weight: bold;">and</span> form.password.data == <span style="color: #2d9574;">'password'</span>:
+            flash(<span style="color: #2d9574;">'You have been logged in!'</span>, <span style="color: #2d9574;">'success'</span>)
+            <span style="color: #3a81c3; font-weight: bold;">return</span> redirect(url_for(<span style="color: #2d9574;">'home'</span>))
+        <span style="color: #3a81c3; font-weight: bold;">else</span>:
+            flash(<span style="color: #2d9574;">'Login Unsuccessful. Please check username and password'</span>, <span style="color: #2d9574;">'danger'</span>)
+    <span style="color: #3a81c3; font-weight: bold;">return</span> render_template(<span style="color: #2d9574;">'login.html'</span>, title=<span style="color: #2d9574;">'Login'</span>, form=form)
+
+
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">__name__</span> == <span style="color: #2d9574;">'__main__'</span>:
+    app.run(debug=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+Add flash-message(<code>flash() in flaskblog.py</code>) if there is a message then print <code>get_flashed_message()</code> to html template in <code>layout.html</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">layout.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+&lt;<span style="color: #3a81c3; font-weight: bold;">!DOCTYPE</span> html&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+
+    &lt;<span style="color: #6c3163; font-weight: bold;">link</span> <span style="color: #715ab1;">rel</span>=<span style="color: #2d9574;">"stylesheet"</span> <span style="color: #715ab1;">type</span>=<span style="color: #2d9574;">"text/css"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"{{ url_for('static', filename='main.css') }}"</span>&gt;
+
+    {% if title %}
+        &lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Flask Blog - {{ title }}</span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+    {% else %}
+        &lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Flask Blog</span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+    {% endif %}
+&lt;/<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+    &lt;<span style="color: #6c3163; font-weight: bold;">main</span> <span style="color: #715ab1;">role</span>=<span style="color: #2d9574;">"main"</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"container"</span>&gt;
+        &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"col-md-8"</span>&gt;
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Flask message block Strat</span><span style="color: #2aa1ae; background-color: #ecf3ec;">--&gt;</span>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"alert alert-{{ category }}"</span>&gt;
+                  {{ message }}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Flask message block End</span><span style="color: #2aa1ae; background-color: #ecf3ec;">--&gt;</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Content Block Strat</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+          {% block content %}
+          {% endblock %}
+<span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Content Block End</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+      &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+  &lt;/<span style="color: #6c3163; font-weight: bold;">main</span>&gt;
+
+
+&lt;/<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+
+</pre>
+</div></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>If registration is not valid user need to notify in register.html page
+<ul class="org-ul">
+<li>add <code>flask-message</code> in <code>register.html</code>  if users didn't give valid input in user-name, email, password print the error using <code>flash message</code></li>
+</ul></li>
+</ul>
+
+<p>
+Below code is without flash Error message (if No Valid Input is given) in Registration template <code>register.html</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">register.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+{% extends "layout.html" %}
+{% block content %}
+    &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"content-section"</span>&gt;
+        &lt;<span style="color: #6c3163; font-weight: bold;">form</span> <span style="color: #715ab1;">method</span>=<span style="color: #2d9574;">"POST"</span> <span style="color: #715ab1;">action</span>=<span style="color: #2d9574;">""</span>&gt;
+            {{ form.hidden_tag() }}
+            &lt;<span style="color: #6c3163; font-weight: bold;">fieldset</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">legend</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"border-bottom mb-4"</span>&gt;Join Today&lt;/<span style="color: #6c3163; font-weight: bold;">legend</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.username(class="form-control form-control-lg") }}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.email.label(class="form-control-label") }}
+                    {{ form.email(class="form-control form-control-lg") }}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password(class="form-control form-control-lg") }}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+            &lt;/<span style="color: #6c3163; font-weight: bold;">fieldset</span>&gt;
+            &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                {{ form.submit(class="btn btn-outline-info") }}
+            &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+        &lt;/<span style="color: #6c3163; font-weight: bold;">form</span>&gt;
+    &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+    &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"border-top pt-3"</span>&gt;
+        &lt;<span style="color: #6c3163; font-weight: bold;">small</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"text-muted"</span>&gt;
+            Already Have An Account? &lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"ml-2"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"{{ url_for('login') }}"</span>&gt;Sign In&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;
+        &lt;/<span style="color: #6c3163; font-weight: bold;">small</span>&gt;
+    &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+{% endblock content %}
+
+</pre>
+</div>
+
+<p>
+Below code is if error message then print the flash message     
+</p>
+<div class="org-src-container">
+<pre class="src src-html"><span style="color: #2aa1ae; background-color: #ecf3ec;">&lt;!-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">register.html</span><span style="color: #2aa1ae; background-color: #ecf3ec;"> --&gt;</span>
+{% extends "layout.html" %}
+{% block content %}
+    &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"content-section"</span>&gt;
+        &lt;<span style="color: #6c3163; font-weight: bold;">form</span> <span style="color: #715ab1;">method</span>=<span style="color: #2d9574;">"POST"</span> <span style="color: #715ab1;">action</span>=<span style="color: #2d9574;">""</span>&gt;
+            {{ form.hidden_tag() }}
+            &lt;<span style="color: #6c3163; font-weight: bold;">fieldset</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">legend</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"border-bottom mb-4"</span>&gt;Join Today&lt;/<span style="color: #6c3163; font-weight: bold;">legend</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"invalid-feedback"</span>&gt;
+                            {% for error in form.username.errors %}
+                                &lt;<span style="color: #6c3163; font-weight: bold;">span</span>&gt;{{ error }}&lt;/<span style="color: #6c3163; font-weight: bold;">span</span>&gt;
+                            {% endfor %}
+                        &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"invalid-feedback"</span>&gt;
+                            {% for error in form.email.errors %}
+                                &lt;<span style="color: #6c3163; font-weight: bold;">span</span>&gt;{{ error }}&lt;/<span style="color: #6c3163; font-weight: bold;">span</span>&gt;
+                            {% endfor %}
+                        &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"invalid-feedback"</span>&gt;
+                            {% for error in form.password.errors %}
+                                &lt;<span style="color: #6c3163; font-weight: bold;">span</span>&gt;{{ error }}&lt;/<span style="color: #6c3163; font-weight: bold;">span</span>&gt;
+                            {% endfor %}
+                        &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"invalid-feedback"</span>&gt;
+                            {% for error in form.confirm_password.errors %}
+                                &lt;<span style="color: #6c3163; font-weight: bold;">span</span>&gt;{{ error }}&lt;/<span style="color: #6c3163; font-weight: bold;">span</span>&gt;
+                            {% endfor %}
+                        &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+            &lt;/<span style="color: #6c3163; font-weight: bold;">fieldset</span>&gt;
+            &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"form-group"</span>&gt;
+                {{ form.submit(class="btn btn-outline-info") }}
+            &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+        &lt;/<span style="color: #6c3163; font-weight: bold;">form</span>&gt;
+    &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+    &lt;<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"border-top pt-3"</span>&gt;
+        &lt;<span style="color: #6c3163; font-weight: bold;">small</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"text-muted"</span>&gt;
+            Already Have An Account? &lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">class</span>=<span style="color: #2d9574;">"ml-2"</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"{{ url_for('login') }}"</span>&gt;Sign In&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;
+        &lt;/<span style="color: #6c3163; font-weight: bold;">small</span>&gt;
+    &lt;/<span style="color: #6c3163; font-weight: bold;">div</span>&gt;
+{% endblock content %}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2022-08-05 Fri 21:24</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

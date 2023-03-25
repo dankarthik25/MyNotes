@@ -1,0 +1,26 @@
+https://orgmode.org/manual/Applying-custom-styles.html
+
+
+https://orgmode.org/manual/Advanced-topics-in-ODT-export.html#x_002doverriding_002dfactory_002dstyles
+
+the emacs :org2odt search for template in default path 
+~/.emacs.d/elpa/org-20210125/etc/styles
+
+Need to study the template and create your own template
+
+
+https://stackoverflow.com/questions/14249811/markdown-to-docx-including-complex-template
+
+
+
+# Automate the report and table used to present in  doc formate
+
+https://wiki.dolibarr.org/index.php/Create_an_ODT_document_template
+
+
+# Rube based  xhtml to odt need to check
+https://github.com/abompard/xhtml2odt
+
+
+
+https://emacs.stackexchange.com/questions/56410/org-odt-export-edit-text-body-style-font

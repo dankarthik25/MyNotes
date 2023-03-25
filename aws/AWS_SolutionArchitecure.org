@@ -1,0 +1,1426 @@
+#+TITLE:     Lambda
+#+AUTHOR:    DeepAlgorithms
+#+OPTIONS: num:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+
+
+C-c C-x Cv
+* Amazon Web Services : AWS Services
+* TODO History : Cloud , Cloud Services AWS Origin 
+* TODO Create AWS Account :
+- Create a Fake gmail
+- Mobile, credit/debit card
+- Sign-in
+  Free tire :     
+* TODO Create EC2 instance
+** TODO ssh with Tmux : manage your ec2 isntance using TMUX
+
+
+* S3 Scalabel Storage Class
+S3  is a cloud storage device where we can uplaod/download, store files/dataare
+global we can access in around
+We can upload the data upto : 5TB
+We can uplaod a file size max is 5GB
+
+S3 is global: means we can access s3 storage globally
+
+Bucket :
+S3 consits of Buckets and Buckets consits of files and folders.
+We store the file/data in Bucket
+Bucket are containers used to store the data
+Bucket Name should be unique and DOESN'T CONTAIN SPACES or UPPER LETTERS
+
+
+** Create S3 Bucket
+AWS S3 Dashboard > Bucket > Create Bucket
+- Bucket name : _ *1stBucket* _
+- AWS Region : ___________________ 
+- Block Public Access :
+  - [+] Block ALL public access
+        - [+] Block pubic access to bucket and objects granted through new access control list
+        - [+] Block public access to buckets and objects granted through any acess control list
+        - [+] Block public access to buckets and objects granted though new public buckets or access policy
+        - [+] Block public and cross-account access to buckets and objects through any public bucket or access points polices
+          
+- [-] Version Control Buckets                   
+ *Create Bucket*
+        
+** Upload file in S3 Bucet
+AWS S3 Dashboard  > Bucket >  Select Bucket: 1stBucket 
+- 1stBucket
+  - *Object* in {Object| Properties | Permission| Metrics|Managent| AccessPoint}
+    - Upload
+- *Upload*
+
+To Get *file url link*   
+AWS S3 Dashboard  > Bucket >  Select Bucket: 1stBucket
+- Select the file
+  - give info and also url 
+** Make "file" Public Access of S3 bucket
+*** S3 Config
+AWS > Search S3 > { Select Bucket}: 1stBucket>  Permission
+
+- Block public access *EDIT*
+  - Uncheck *Block all public access*
+- *Save Change*
+*** file Config
+1stBucket > Object > "file-name" > Action > *Make Public*
+** Enable Version Control
+AWS S3 Dashboard > Select Bucket:  *1stBucket* > Properties
+- Bucket Versioning : *Edit* > Enable
+   
+** Create Folder
+** Pemission (Access Control List)
+In AWS S3 we can contorl the access of files/folders
+Means
+- which users/group can access the this files ?
+  - What are permission we are assinging like read/write
+Object Owner (your account)      : read, write
+Authenticated AWS user/group     : READ,WRITE
+Everyone(pubic access link)      : read     
+
+    
+
+AWS > Search S3 > { Select Bucket} > *1stBucket* > *{file_name/folder name }* > Permission > ACL
+
+owner: 
+everyone
+
+** Management LifeCycle and Storage Class :
+Lifecycle Rules :
+- set of actions/rules defined on  AWS S3
+- We can set rules
+  - archiving,
+  - Transistion to other storage class ,
+  - delete them after specific time. 
+
+AWS > Search S3 > { Select Bucket} > *1stBucket*  > Management  > *Create Lifecycle*
+
+*Create Lifecycle Rule*:
+- Name : _ *ScopeOf1stBucket* _
+- Choose a rule scope:
+  -[+] [check] Limit the scope : This rule uses one or more filter
+  -[ ] [uncheck] This rule applies to all objects in buckets
+        
+- Lifecycle rule action 
+  - *[+] Transition current version of object btw storage*
+  - [ ] Transition previous version of  
+- Transition current version of object btw storgae class
+
+  Storage Class transition
+  - Standard-IA (min 30days)         : in frequently access data, 
+  - Intelligent-Tiering(min 30days)  : changing/unknow access pattern
+  - One Zone -IA(min 30days)         : infrequently access, non-critical data
+  - Glacier(min 90 days)             : long-term data archiving, retrival time: min to hours 
+  - Deep Glacier Archive: retrival time : long-term data archiving ,12 hours
+* IAM [Identity and Access Mangaer]
+** Intro:
+*** User and Group  in Linux
+*Root account* created by default  : should n't be shared or used
+*User account* : people/roles within your organisatoin
+*Groups* : only contain user, not other groups
+
+*Note*: A users can join has many as Groups as possible
+- Example 
+  - Group : Develpers
+    - Alice
+    - Bod
+    - *Charles*
+  - Group : Operator
+    - *David*
+    - Edward
+  - Group : Audit Team
+    - Charles
+    - David
+    
+Q) Why do we create users and groups ?
+
+*** Why IAM: Polices/Permissions ?
+Q) Why do we create users and groups ? or Why do we need for permission ?
+Ans
+- AWS Cloud does not give full permission to all users.
+- IAM *POLICES* to set the  *permission* to users and groups
+  
+AWS Follow *least privilage principe* :
+- Don't give more permissions than a user needs. (Because AWS as so many serves which cost lot money )
+
+Users or Groups are assigned *POLICES* 
+These polices defined the *permissions* of the *users*
+** Add Users 
+In AWS web-console > serach iam > Side-bar <Users> : Add user 
+- Create users :
+  1. Set User details  
+     - User name : _Jessy________________________
+     - Access type :
+       - [+]Programmatic access: acess using ssh {we can use for aws-cli,terraform}  
+       - [+]AWS Management Console acess: acess using web-ui
+         - Console password:
+     - Console Password    
+       - [+] Autogenerated password
+       - [ ] Custom password  : _________________       
+     - Require password reset :
+       - [-] User must create new password and next login
+  2. Set permissions
+     - Adding user to group {created/existing}
+       - *Create a GROUP*: admin 
+     - Copy permissions form existing users
+     - Attach existing policies directly
+  3. Add Tags
+     - Idea is that with tags we can catogorise users or groups.
+     - User information such as email, or job titles
+     - Used the tag to orgainize, Tracking, Control Access
+       - *key:value* pairs
+       - Department: Electrical
+       - Location:  kanpur
+       - Spectialzation: control system, power system, Neural Networks
+  4. Review 
+    *CREATE USER*
+  -  Download the *<user-password.csv>* file
+    #+begin_src csv
+User name,Password,Access key ID,Secret access key,Console login link
+  CEO,,xxx, AKIA3K3WQJCB66Z2UMMI,1Sl6E6uNH0kkjwR4x4N/PD8jEymqhZQpElI8J6D8,https://779248224387.signin.aws.amazon.com/console 
+    #+end_src
+
+Here IAM : Accout Id (12digits) :779248224387     
+    
+*We have Created User in AWS*
+** MFA : Multi Factor Acess :
+Double Layer Access  using password and OPT { In mobile installing Google App : Microsft Authenticator App}
+
+IAM Dashboard >  User >  {Select Users-Name : jessy} 
+
+- jessy User
+ - in {Permission, Group, Tag, Security Credientials,Acces Advisor}
+SELECT Security Credientials
+  - Assigne MFA device :
+   - [+] Virtual MFA device:             Authenticator app install in mobile or computer 
+   - [ ] U2F security key :              u2f device
+   - [ ] Other hardware MFA device:      Gemalto token
+  In Mobile > Google App : Authenticator App
+** Change AMI-User : access-key
+IAM Dashboard > User > {Select User:jessy} > Security Credential > Access Key
+- *Create access key*
+- *Download New Access key*
+- *Note:* Access is is generated only once we can only downlaod access key ones when it is created.
+          
+** AWS-CLI config for IAM-User  
+In order to connect aws to jenkins,teraform, local-server we use access key, Secrect access key form *user-password.csv*
+
+Q) In teraform how you are connecting console ? with awscli
+#+begin_src sh
+yum install awscli
+aws configure # Enter acess key and Scret Access Key
+#AWS Acces Key ID :AKIA3K3WQJCB66Z2UMMI
+#AWS Secret Access Key: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
+#Default region name [None]
+#Default output format [None]:
+
+##### Check if you are connected or not ?
+
+# How to list s3 buckets in aws-cli
+aws s3api list-buckets
+#+end_src
+** IAM Groups
+IAM Dashboard > User groups  > Create Groups
+Create User Groups
+- Name :
+- Add Users to groups (optional) : add existing users to group
+- Add polices to groups(optional) 
+*Create Group*
+*** Add new users to existing group
+AMI Dashboard > User > Create User >
+Create User
+- Set User details
+- Set permission
+  - *Add user to group*
+    - *Create a group*
+    - Add user to existing user 
+** IAM Polices
+IAM Dashboard > Polices > Create Policy
+
+Create Policy
+  - Visual Editor
+    - use browser AWS-Console GUI support for creating policy
+      - Serivice
+      - Actions
+      - Resources      
+  - JSON File
+- Tag
+- Review
+*Create Policy*      
+
+*** IAM Polices - Json Structure 
+- inheritance with group
+- IAM Polices Structure 
+  - Consists of :
+    - *Version*: policy language version, always include '2012-10-17'
+    - *Id*: an identity for the policy (optional)
+    - *Statement*: one or more individual statement (required)
+  - Each statement consists of
+    - *Sid* : *Statement Id* (Identifier )
+    - *Effect*: Whether the statement allows or denies access (Allow, Deny )
+    - Principe: account/user/role to which this policy applied to
+    - *Action* : list of actions this policy allows or denies
+    - *Resource*: list of resource to which the actions applied to
+    - Condition : Conditions for when this policy is in effect(optional)                
+
+#+begin_src json
+{
+    "Version": "2012-10-17",
+    "Statement": [ 
+        {
+            "Sid": "MyReadOnlyBucketPolicyV1",
+            "Effect": "Allow",
+            "Action": [
+     	      "s3:ListBucket",
+                "s3:GetObject*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-bucket-ro",
+                "arn:aws:s3:::s3-bucket-ro/*"
+            ]
+        }
+    ]
+}
+#+end_src
+
+** TODO IAM Polices [Exersice]
+See Udemy : 14 IAM Polices Hands On  video
+
+** TODO Create alias IAM user-id 
+- Give aliase url name instead of *iam-id*
+  - IAM Dashboard > Sig-in URL for IAM (Edit)
+** AWS CLI
+Install aws cli in windows/linux
+#+begin_src
+aws config
+aws iam list-users
+#+end_src
+** TODO Cloud Shell
+** IAM Role :
+Some AWS service will need to perform actions on your behalf
+To do so, we will assign permission to AWS services with IAM Roles
+
+Common roles:
+- EC2 Instance Role
+- Lambda Function Role
+- Role for CloudFormation
+
+- Example : EC2 instance IAM role
+  IAM > role > creaete role >
+  choose a use case:
+  - ec2 instance : > attach a policy >  attach tag > review >
+    - Role Name : Demo-ec2-role
+** IAM Security Tools
+IAM Credentials Report (account-level)
+- list all your account's user and
+- status of their various credential
+
+IAM > Credentials Report > Downlaod Report > csv-file
+
+IAM Access Advisor (user-level)
+
+- show the service permissions granted to a user
+- show service that were last accesed
+- Revise the policy that are
+
+Ex : IAM > User > Select User: stephan > access advisor
+
+- Audit permission of your account/IAM User with IAM Credential Report/Access Advisor
+** Summary and Best Practices
+Users: mapped to a physical user, has a password for AWS Console
+Group: Contains users only
+Poices: JSON document that outline permission for users and groups
+Roles: for EC2 instance or AWS-services
+Security : MFA + Password Policy
+Access Keys: access AWS using the cli or sdk
+Audit : IAM Credential Report & IAM Access Advisor
+* ECR : Elastic Container Registry
+** Intro
+- It is use to store docker repository in AWS
+
+** Step to isntall and use ECR Repo
+  1. create a private repo       : For storing docker images 
+  2. configure local AWS-CLI and docker    : For No-password based authentication
+  3. Creaate Docker File and  Docker build Image and push to ECR repo
+
+** 1. Create Private Repo 
+AWS > Serach ECR > Create ECR 
+
+- Create ECR :
+  - [+] Private
+  - [ ] Public
+  - Repository Name : ___ *test_ecr_repo* ____
+*Create repo*
+
+To get the *push CMD* in ECR 
+ECR > Repositories > {Select : Repo} > Push commands 
+
+#+begin_src sh
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+
+#docker build -t <ECR-REPO-NAME> .
+#docker tag <ECR-REPO-NAME>:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/<ECR-REPO-NAME>:latest
+
+#docker build -t <DOCKER-NAME>:1.1 .
+#docker tag <DOCKER-NAME>:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/<ECR-REPO-NAME>:latest
+
+#docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/<ECR-REPO-NAME>:latest
+
+docker build -t test_ecr_repo .
+docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+#+end_src
+
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+
+** 2. Config AWS-cli and docker-cli 
+#+begin_src sh
+# Connect local machine to AWS Console
+aws configure
+#AWS Acces Key ID :AKIA3K3WQJCB66Z2UMMI
+#AWS Secret Access Key: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
+#Default region name [None]
+#Default output format [None]:
+
+# Docker auto login OR Docker link AWS ECR repo
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+#+end_src
+** 3. Create,Push docker-img in ECR
+#+begin_src
+cat Dockerfile
+#FROM TOMCAT:8
+#WORKDIR /opt
+#COPY *.war .
+#EXPOSE 8080
+
+docker build -t mywar:1.1 .
+docker tag mywar:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+#docker build -t test_ecr_repo .
+#docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+docker images
+# Push to ecr repo
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+#+end_src
+
+ECR Dashboard > Repo > Select Repo :
+- Image URL : 
+** TODO Example: Create docker file and upload in  ECR repository
+
+#+begin_src
+cd project_war/
+git push origin master
+mvn package # in create target/ *.war files
+cd target/
+touch Dockerfile
+cat Dockerfile
+#FROM TOMCAT:8
+#WORKDIR /opt
+#COPY *.war .
+#EXPOSE 8080
+
+docker build -t mywar:1.1 .
+docker tag mywar:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+# docker images
+
+
+# mywar 1:1
+
+
+#
+# Push to ecr repo
+#
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+docker 
+
+docker build -t test_ecr_repo .
+docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+
+
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+#+end_src
+
+
+next step is to create cluster
+
+* ECS: Elastic Container Service
+Amazon Elastic Container Service
+ECS object
+- Cluster :
+  - Task definition
+    - Container definition : added docker image url 
+  - Service
+        
+EC2 backend of ECS
+
+
+** What is Fargate : #Serverless #
+Launch Docker Containers on AWS
+You don't provision the infrastructure (no EC2 instance to mange) - simpler
+Serveless offering
+AWS just runs containers for you based on CPU/RAM you need
+
+Farget is a type of ECS
+Farget lauch Task
+To access Fargate Task we need ENI (Elastic Network Interface)
+For each Task there will have a ENI
+
+** Create Cluster using Fargate
+- Steps in Creating Cluster using Fargate
+  1. Create ECS Cluster :  { Cluster Type + Cluster }    
+  2. ├── Create Task Defination  {Cluster Type + Size(cpu,ram),ecr_img link, port mapping }
+  3. ├────── Create a Service and Lauch Cluster {Cluster Type, Task defination, No.of task,VPC,Ip, Load Balancer, Auto Scaling}
+  4. └───────────Container Defination : __ *ECR img url* ___
+
+After creating cluster we need to create service for that we need to create a *task Defination*     
+*** Get ECR img url
+1. AWS > Search ECR > Select ECR: {repo-name}
+2. Choose docker img with version either latest or preference and click on it
+3. get {docker img url}
+*** Create ECS Cluster :  { Cluster Type + Cluster }
+- AWS > Search ECS > Create ECS
+- *Select Cluster Template*
+  - [+]Network Only Fargate (VPC,Subnets)  
+  - [ ]EC2 Linux + Network (Cluster, VPC, Subnets, Auto Scaling with AMI)
+  - [ ]EC2 Windows+Networking(Cluster, VPC, Subnets, Auto Scaling with AMI)   
+- *Create ECS*  
+  - Cluster name : dev-cluster
+- Create Cluster 
+ 
+Simillary we can create {qa-cluster, sit-cluster, uat-cluster}
+*** Create Task Defination {Cluster Type + Size(cpu,ram),ecr_img link, port mapping }
+ECS DASHBOARD  > *Task Defination* > Create New Task
+
+- *Select launch type compatibility*
+  - [+] Fargate
+  - [ ] EC2
+  - [ ] External
+- *Configure task and Container*
+  - Task Name : __*mydev_task*______
+  - Task size :
+    - Task Memory (GB) :  __ *0.5GB* __
+    - Task CPU (vCPU) :  ___*0.25vCPU* __
+  - ADD Container:
+        - Container name* : __ *myhttpd* __
+        - Image* : __ *ECR url* __  
+        - Port mappings: _ *80* _
+*CREATED TASK DEFINATION*
+*Note:* Task Definition is version control
+       - Revised Task Defination can be update in Task Defination
+*** Create a Service  and Lauch Cluster {Cluster Type, Task defination, No.of task,VPC,Ip, Load Balancer, Auto Scaling}
+AWS > Search Cluster > Select {dev-cluster} > Service> Create Service
+- *Configure Service*
+  - Lauch Type :
+    - [+] fargate
+    - [ ] EC2
+    - [ ] EXTERNAL    
+  - Task define : __ *mydev_task* __
+  - Cluster : __ *dev-cluster* __
+  - Service name :__ *myservice* __
+  - No.of task :__ *1* __
+  - Min/Max Health % : __ *100,200* __
+  - Deployment type : __ *Rolling update* __
+  - Cluster VPC :__ *ALL* __
+  - Subnets : __ *ALL* __
+  - Auto-assign public IP : __ *ENABLE* __
+  - LOAD BALANCER :__ *NO* __
+  - AUTO SCALING: __ *NO* __
+- *Configure Network*
+- *Set Auto Scaling (optional)*
+- *Review*              
+*CREATE A SERVICE*
+** --------------------------------------------
+** TODO IAM Roles for ECS Task 
+ECS Agent : every EC2 node in ECS cluster will have ECS Agent
+
+ECS Agent : ECS Service, ECR Service, CloudWatch Logs
+- Makes API calls to ECS service
+- Send container logs to CloudWatch Logs
+- Pull Docker image from ECR
+- Ref sensitive data in Secrets Manager or SSM Paramenter Store
+
+ECS TASK Role:
+Allow each task to have a specific role
+Use different roles for the differnt ECS Service you runs
+Task Role is defined in the task definition
+
+** TODO How do we share db(data)  How do we have data Volume in ECS
+
+EC2 + EFS NFS(File System)
+
+
+Work for both EC2 Tasks and Fargate tasks
+Ability to mount EFS volume onto tasks
+Tasks launched in any AZ will be able to share the same data in the EFS Volume.
+
+Fargate + EFS = serverless + data storage without managing servers
+Use case: persistent mulit-AZ shared storage for your containers
+** TODO ECS Services & Tasks
+Application Load Balancer :
+** TODO Load Balancing for Fargate :
+Each task has a unique IP:
+You must allow on the ENI's security group _the task port_ form the ALB secrity group
+
+** TODO ECS Task invoked by Event Bridge
+Tutorial : https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26099498#announcements
+
+Video.No: 197 consist of S3, A
+
+
+Client send or upload to S3 Bucket
+S3 will trigger EVENT to AmazonEventBridge.
+AmazonEventbridge:
+ -Rule : Run ECS Task
+  - (It would create new Fargate task ) for us
+  - The new task
+    - Get object for S3 Bucket
+    - Save result in Amazon Dynamo DB
+** TODO ECS Hands on
+** TODO ECS Scaling - Service CPU Usage Example
+Auto scaling :
+
+** TODO ECS Rolling Updates
+Whne
+** TODO ECR Overview
+** TODO EKS Overview
+* Load Balancer :
+** Intro
+Problem of Individual SERVER is if server is down the entire web-site will be down
+So have more than one server and are connected to Load Balancer
+We will create a dns attached to Load Balancer
+
+Load Balancer : Job is to assign load to servers and maintain load 
+Advanatage  :
+1.server is having high-availability 
+2.even if one server is down we can we can manage
+3 As we assigning dns to load balancer we are able to hide the servers.
+
+There are there types of Load Balancer
+
+- LOAD BALANCER 
+  - ALB : Application Load Balancer
+  - NLB : Network Load Balancer
+  - Gateway Load Balancer
+** Application Load Balancer vs Network Load Balancer 
+ALB : Application Load Balancer
+ - In OSI model (7th Layer)
+ - handle http and https
+    
+In NLB:
+- In OSI model (4th Layer)
+- it can handle millions of responce
+- tcp, TLS and UDP
+- IP Stat
+#+STARTUP: inlineimages
+[[file:./Images/ISO-MODEL.jpeg]] 
+
+https://www.youtube.com/watch?v=WqJDac1H81I
+
+The Differene between ALB and NLB is
+ALB: operates at layer 7 Application Layer (http,https) mean
+- ALB it able to inspect appliction level (http,https)
+  - it means it can differenciat between different urls
+    - It can route /bar and /foo to different ec2-instance
+      - It load balance the ec2-instance based on (url,http,https)
+
+NLB: operate at layer 4 : Transportation  (tcp,udp)
+- NLB it able to inspect appliction level (tcp,udp)
+  - it means it can differenciat between different urls
+    - It load balance the ec2-instance based on Network-Traffic (tcp,udp) and balance the load
+#+STARTUP: inlineimages
+[[file:./Images/ALB_vs_NLB.png]]
+
+* How to create load balancer(NLB) :
+
+Steps
+1. Create ec2 servers which are need to be NLB
+2. Create a target group  : Register EC2 instance in Target Group
+3. Create a Load Balancer :
+
+#+STARTUP: inlineimages
+[[file:./Images/NLB.png]]   
+** Create ec2 {3 to 4 with server name a,b,c} servers in aws
+ - Choose AMI
+ -  Choose Instance Type
+ -   Configure Instance
+     -  User data: # run below code when vm runs 
+      #+begin_src sh
+#!/bin/bash
+yum install httpd -y
+systemctl enable httpd
+echo "<h1> This is server A{A,B,C}</h1>" > /var/www/html/index.html
+systemctl start httpd
+#+end_src
+- Configure Security Group :
+      Custom TCP : <Protocol :TCP,Port Range: 80, Source: Anywhere >
+** CREATE A TARGET GROUP : {Register EC2 instance in Target Group}
+AWS EC2 Dashboard > Load Balancer > Target Group} > Create Target Group
+- Create Target Group
+   - Choose a target type : *_Instance_* {Instance, Ip addresses, Lambda function}
+   - Target group name : __MyNLB_targetGroupName__
+   - Protocol : TCP
+   - Port: 80
+   - VPC : {Choose VPC}
+- Register targets (Add EC2 instance)  
+     - MyNLB_targetGroupName : __ *Choose { running < ec2 instance > }* __
+- Click *create target group*
+  
+** Create a NLB 
+- AWS EC2 Dashboard >  {Load Balancer > Load Balancer}
+  - Choose Load Balancer Type : {ALB (http,https), NLB{Network},Gateway Load Balancer}
+ - Scheme :
+   - Internet-facing [check]
+   - Internal [un-check]
+ - IP address type :
+    - [+]IPv4
+    - [ ]Ip6  
+ - Network mapping :
+   - Mapping
+     - Subnets : _ *ALL* _
+   - Assigned by AWS {or Elastic Ip }
+ 
+Listener:
+   - Protocol :TCP
+   - Port : 80
+   - Choose Target Group :  __MyNLB_targetGroupName__
+CLICK *Create NLB*
+AWS  will create DNS name and attach NLB.
+** Get dns for NLB
+GOTO
+AWS EC2 Dashboard > {Load Balancer > Load Balancer} > Select Load Balancer
+- get DNS Below
+** TODO Trouble NLB :
+Know Traget Group should healthy Before connect to Load Balancers
+If your target group is not healty
+- Check your docker-file or docker compose/stack file make sure the healtcheck is enable and it is working properly
+
+* TODO Create ALB
+https://www.youtube.com/watch?v=WqJDac1H81I
+
+ALB setting for ssl certification, dns-name 
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-28_20-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+
+
+* Auto Scaling
+** Intro
+During high-traffic period like 25th Dec or New-Year server are experiencing high-traffic
+Simillary Amazon  "BUMPER DIWALI OFFER" during this time we all seriver are having high-traffic.
+
+So by Auto Scaling we can auto-scale the server if load >80% approximately
+
+There are two types of Auto Scalling
+- Horizontal  : ec2 (load >80%) -> ec2 (another ec2 instance is launched)
+- Vertical    : ec2 (load >80%) -> increase memory
+
+There are two type of Policy
+- [+]Scaling policy/Dynamic Scaling policy
+  - [+]Target Tracking Scaling policy
+  - [ ]Step Scaling policy 
+  - [ ]Simple Scaling policy       
+- [ ]Predictive Policy
+- [ ]Schedule policy
+  
+In Scaling policy : we track the servers and auto load
+In Schedule policy : we schedule policy like festivals, sunday, peak-working time
+
+Advanatage :
+High availability
+You can increase/decrease servers based on cpu load.
+
+** Steps
+Auto Scaling
+1. Create Lauch Template:
+   - [+]Lauch Template : Version control is availabe (Instaces > Lauch Template)
+   - [ ]Lauch Configration : NO - Version(Auto Scaling > Lauch Configration)  
+2. Create Auto Scaling Group
+3. Scaling policy
+   - Traget Tracking
+4. Schedule policy
+   - Crontab based
+** Create Lauch Template
+AWS EC2 Dashboard  >  (Instance > Lauch Template) > Create Lauch Template
+
+Create Lauch Template
+- Name : __ *my_own* __
+- Version describe : __ *It's of web-server auto scaling* __
+- Choose AMI : __________________
+- Instance : __ *t2.small* __
+- Keypair : __________________        
+- Networking Setting: ____ VPC _____  
+- Security Group: ____________
+- *Create Lauch Template*
+** Create AutoScaling Group
+AWS EC2 Dashboard > ( Auto Scaling  > Auto Scaling Group) > Select AutoScalinggroup: myASG >
+
+Choose  *Auto ScalingGroup* form {Details,Activity, Automatic scaling, Instance, Source Management, Monitoring, Instance refresh}
+
+Create AutoScalingGroup
+- Name : myASG
+- Lauch template :  my_own  # Name of Lauch Template create above
+- Instace Purchase Options :
+  - [+] Adhere to launch template
+  - [ ] Combine purchase options and instance     
+- VPC : _ *ALL* _
+- SUBNET : _ *ALL* __  # *NOTE*: auto scalling happens in any palce SUBNET
+- Group Size :
+  - Desire Capacity: 2
+  - Min Capacity: 1
+  - Max Capacity : 4
+- Scaling polices
+  - [+] Target tracking scaling policy (*imp*)
+*Create Auto Scaling Group*    
+
+** Automate Scaling Policies
+EC2 Dashboard > Auto Scaling: Select AutoScaling Group : myASG(Click)
+
+- Auto Scaling Group: (myASG)
+  - Automatic scaling
+          --------------------------------------------------------------  
+    - [+] *Dynamic scaliing policies*
+
+      - Policy type:
+        - [+] *Traget Tracking scaling*
+        - [ ] Step scaling
+        - [ ] Simple scaling
+      - Scaling Policy name : 
+      - Metric type :
+        - [+] Avg(CPU %)
+      - Target value : __ *50* __
+      - Instance need
+        __300___ sec warm up before including in meter
+         
+      *Create Scaling Policy*  
+    --------------------------------------------------------    
+    - [+] Scheduled action
+          - Create Schedule action
+            - Name : ____
+            - Desire Capacity :
+            - Min Capacity:
+            - Max Capacity:
+            - Recurrence : __ * * * * * __ (crontab)
+            - Timezone :
+            - Specific start time
+              - Start time : 2021/08/09 10:00 Etc/UTC
+              - End time   : 2021/08/09 23:00 Etc/UTC                
+    - Predictive scaling policies
+    - Scheduled action    
+
+      adapting
+* vpc : Virtual Private Cloud
+Draws your own aws VPC diagram in draw.io https://www.youtube.com/watch?v=cLnuMtuTB2M 
+** Intro
+*** AWS Structure
+VPC Virtual Private Cloud
+Consist of
+- Internet gateway (IGW)
+- Subnet(Public, Private)
+- routing
+  - creaete route
+  - add subnets
+- Attach EC2 instance to VPC Subnet
+
+*** What is a public IP address?
+
+A public IP address is an IP address that can be accessed directly over the internet and is assigned to your network router by your internet service provider (ISP).
+
+*** What is a private IP address?
+
+A private IP address is the address your network router assigns to your device. Each device within the same network is assigned a unique private IP address (sometimes called a private network address) — this is how devices on the same internal network talk to each other.
+
+*** What are differnet Ip in VPC :
+ Two diff Ip
+-  Pubic Ip:
+-  Private Ip: 
+Ex : school ID/ RollNo. and SSC-ID
+Here school ID can be same if two person are from different school but SSC-ID is will be not same and it is globally accepted.
+
+*** Public and private IP address ranges
+
+Your private IP address exists within specific private IP address ranges reserved by the Internet Assigned Numbers Authority (IANA) and should never appear on the internet. There are millions of private networks across the globe, all of which include devices assigned private IP addresses within these ranges:
+    Class A: 10.0.0.0        — 10.255.255.255
+    Class B: 172.16.0.0      — 172.31.255.255
+    Class C: 192.168.0.0     — 192.168.255.255
+Example of private Ip
+172.20.0.1
+192.168.1.8
+*** What is different Btw Private IP and Public IP :
+*** CIDR (In aws min size:0:0:0:0/28 (16 IP) and max 0:0:0:0/16 (65536) )
+
+CIDR : Classless inter-domain routing (CIDR)
+- Is a method for allocating IP addresses and IP routing.
+- A collection of Internet Protocol (IP) standards is used to create unique identifiers for networks and individual devices. 
+
+IP4<Format>: 0-255.0-255.0-255.0-255 : 8bits, 8bits, 8bits,8bits = 32bits=>2^{32}=4.2X10^9= 0.42Billion possible  Ip are available
+
+By CIDR NOTAION to calcualte the available Ip
+Example :
+- 10.0.0.0/16 :
+  - Means 1st 16 bits are fixed so possible ip are
+    - 10.0.0-255.0-255 : 256*256 = 65,536 Ip or 16bit Ip are possible
+- 10.0.0.0/24:
+  - Means 1st 24 bits are fixed so available Ip
+    - 10.0.0.0-255 : 256 Ip or  are possible
+- 10.0.0.0/8:
+  - Means 1st 8 bits are fixed so available Ip
+    - 10.0-255.0-255.0-255 : 256*256*256 Ip are possible   
+- 0.0.0.0/0 :
+  - Means 0 bits are fixed so avialable Ip
+    - 0-255.0-255.0-255.0-255 : all Ip are available
+- 10.0.0.32
+  - Means 1st 32 bits are fixed means there is only one ip:
+
+Example :
+- 10.0.0.0/16 : 16 bit Ip or 65,536 are possible
+- 10.0.0.0/24:   8 bit Ip  or 256 Ip are possible
+- 10.0.0.0/8:   24 bit Ip or 2^24 Ip are possible
+- 0.0.0.0/0:    32 bit Ip or 2^32 Ip are possible   NOTE: aws allow  CIDR>16,24 and (0.0.0.0/0:    32 bit Ip or 2^32 Ip are possible) is not allowed
+- 10.0.0.0/32:   0 bit Ip or 2^0=1 Ip are possible
+- 10.0.0.0/26:   6 bit Ip or 2^6=64 Ip are possible
+  
+  In aws if we take 10.0.0.0/24: in 256 ip
+  5 ip are already taken
+   
+We can calcualte Ip range in CIDR from internet
+http://jodies.de/ipcalc?host=10.0.0.0&mask1=8&mask2
+
+***  VPC- Subnet reserver 5 IP add(first 4 & last 1) in each subnet
+if CIDR block is 10.0.0.0/24, then reserved IP addre:
+10.0.0.0 - Network Address
+10.0.0.1 - resrved by AWS for VPC router
+10.0.0.2 - reserved by aws for mapping to AWS-providing-DNS
+10.0.0.3 -
+10.0.0..255 Newtwork broadcast address (aws don't support broadcast so assign ip)
+
+*** revise
+  
+Sub net : it is a part of network
+
+Class A
+Class B
+Class C - /16
+Class D - /24
+
+EX:
+10.1.0.0/24    24=8*3                10.1.0.X  (X:0-251)
+10.1.0.0/16    16=8*2                10.1.X.X  (X:0-251) 4 : ARE RESERVERD
+
+** Create VPC Public with IWG, 3-Subnet in Different Zone(High Availability) ,3-EC2 instance
+*** Steps
+**** Calculate and Assign IP(CIDR) for vpc and subnets 
+1. Create VPC 10.0.0.0/16 : 2^16 = 65536      NOTE: aws allow 16,24 and (0.0.0.0/0:    32 bit Ip or 2^32 Ip are possible) is not allowed 
+   - Enable public DNS
+2. Create a Subnets(3 Subnets+ EC2 instance in each subnet)
+   - 10.0.1.0/24 : 2^8 = 256
+   - 10.0.2.0/24 : 2^8 = 256
+   - 10.0.3.0/24 : 2^8 = 256
+3. Create a route and add routing policy
+   - all subnets
+4. Create IGW (Internet Gateway)
+                  
+*** 1.Create VPC
+VPC Dashboard > Your VPCs > Create VPCs
+- *Create VPCs*
+  - Name :  ___ *myown-vpc* ___
+  - IPv4 :  ___ *10.0.0.0/16* ___
+*Creat VPC*
+
+Attach DSN to vpcs
+VPC Dashboard > Your VPCs > {Select VPC : myown-vpc} > Action > Edit DNS Hostnames
+- [ENABLE] DNS hostnames
+*Save Changes*  
+
+*** 2.Create IGW
+VPC Dashboard > Internet Gateway > Create Gateway
+- Create Internet Gateway
+  - Name : ___ *myown-igw* ___
+*Create IGW*
+
+VPC is not attached we need to attach to IGW
+VPC Dashboard > Internet Gateway > {Select: myown-igw} > Attach to VPC
+
+- *Attach to VPC*
+  - Available VPCs : ____ *myown-vpc* ___
+
+*Attach Internet gatewa*
+
+Now we have successfully attach IGW to VPC.
+
+*** 3.Create 3- Subnets
+VPC Dashboard > Subnets > Create Subnet
+- Create Subnet
+  - Subnet Name  : ___ *myown-sub-01* ___
+  - Availability Zone : ___ *Mumbai/ap-south-1a* ___
+  - IPv4 :  ___ *10.0.1.0/24* ___  
+*Create Subnet*
+
+- Create Subnet
+  - Subnet Name  : ___ *myown-sub-02* ___
+  - Availability Zone : ___ *Mumbai/ap-south-1b* ___
+  - IPv4 :  ___ *10.0.2.0/24* ___  
+*Create Subnet*
+
+- Create Subnet
+  - Subnet Name  : ___ *myown-sub-03* ___
+  - Availability Zone : ___ *Mumbai/ap-south-1c* ___
+  - IPv4 :  ___ *10.0.3.0/24* ___  
+*Create Subnet*
+
+*** 4.Create Routing table
+VPC Dashboard > Route Table > Create Route Table
+
+*Create Route table*
+- Name : ___ *myown-route-table* ___
+- VPC  : ___ *myown-vpc* ___
+*Create Route Table*
+
+**** Assign Subnet to route table
+VPC Dashboard > Route Table > Select *myown-route-table*
+
+*myown-route-table*
+ - *Subnet associatiions*
+   - [+] myown-sub-01
+   - [+] myown-sub-02
+   - [+] myown-sub-03
+**** Route or Connect route table to internet
+VPC Dashboard > Route Table > Select *myown-route-table*
+*myown-route-table*
+ - *route*
+   - Add route
+     - Ip : 0.0.0.0/0
+     - Target : Internet Gateway (myown-igw)
+ *Save Change*
+*** Create and connect ec2 to 3-subnets we define 
+AWS Dashboard > Lauch Instance >
+- Choose AMI : Redhat
+- Choose Instance : t2.micro
+- Configure Instance :
+  - Network : ___ *myown-vpc* ___
+  - Subnet : ___ *myown-sub-01* ___
+  - Auto-assign Public IP : Enable
+  - Enable termination protection : [+] Protect against accident termination
+----------------------------------------------------------------------    
+AWS Dashboard > Lauch Instance >
+- Choose AMI : Redhat
+- Choose Instance : t2.micro
+- Configure Instance :
+  - Network : ___ *myown-vpc* ___
+  - Subnet : ___ *myown-sub-02* ___
+  - Auto-assign Public IP : Enable
+  - Enable termination protection : [+] Protect against accident termination
+----------------------------------------------------------------------    
+AWS Dashboard > Lauch Instance >
+- Choose AMI : Redhat
+- Choose Instance : t2.micro
+- Configure Instance :
+  - Network : ___ *myown-vpc* ___
+  - Subnet : ___ *myown-sub-03* ___
+  - Auto-assign Public IP : Enable
+  - Enable termination protection : [+] Protect against accident termination
+
+** Create VPC Peering
+*** Steps
+1. Create Two VPC[1-IGW,1-SUBNET,1-EC2,1-Routingtable]
+2. Create VPC Peering
+3. Routing connect Both RoutingTable to vpc-peering
+4. Check connect using ping      
+*** 1. Create TWo- VPC Cloud
+Two VPC where each VPC consist of
+VPC : 10.1.0.0/16
+IGW :
+Subnet : 
+Route Table :
+==========================================
+VPC : 10.2.0.0/16
+IGW :
+Subnet:
+RouteTable :
+-------------------------------------------------------------
+- VPC > Your VPCs > *Create VPC* :
+    - Name : myvpc_01
+    - IPv4 : 10.1.0.0/16
+  - CONFIG{myvpc_01}.Action.{Edit DNS Hostname} : Enable
+- VPC > IGWs > *Create internet gateway* 
+    - Name : myvpc_01-igw
+  - CONFIG{myvpc_01-igw}.Action.{Attacah to VPC} :  ___ *myvpc-01* ___
+- VPC > Subnets > *Create subnets*
+  - VPC ID : myvpc_01
+  - Subnets setting
+    - subnet name : myvpc01-sub01
+    - Availability Zone: N.Virginia
+    - CIDR : 10.1.0.0/24      
+- VPC > Rout Table > *Create Route table*
+    - Name :myvpc_01-rt
+    - VPC  : myvpc-01
+  - CONFIG{myvpc_01-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH
+  - CONGIG{myvpc_01-rt}.Routes :
+     - ADD ROUTE :
+       - Destination | Target :
+         10.1.0.0/16 | local  
+       - 0.0.0.0/0   | IGW {myvpc01-igw}                 
+-----------------------------------------------------------
+- VPC > Your VPCs > *Create VPC* :
+    - Name : myvpc_02
+    - IPv4 : 10.2.0.0/16
+  - CONFIG{myvpc_01}.Action.{Edit DNS Hostname} : Enable
+- VPC > IGWs > *Create internet gateway* 
+    - Name : myvpc_02-igw
+  - CONFIG{myvpc_01-igw}.Action.{Attacah to VPC} :  ___ *myvpc-02* ___
+- VPC > Subnets > *Create subnets*
+  - VPC ID : myvpc_02
+  - Subnets setting
+    - subnet name : myvpc02-sub01
+    - Availability Zone: N.Virginia
+    - CIDR : 10.1.0.0/24      
+- VPC > Rout Table > *Create Route table*
+    - Name :myvpc_02-rt
+    - VPC  : myvpc-02
+  - CONFIG{myvpc_02-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH
+  - CONGIG{myvpc_02-rt}.Routes :
+     - ADD ROUTE :
+       - Destination | Target :
+         10.1.0.0/16 | local  
+       - 0.0.0.0/0   | IGW {myvpc02-igw}                 
+-------------------------------------------------------------------
+- EC2 > Lauch Instance > Instance : name : ec2-vpc01
+  - Choose AMI :
+  - Choose Instance
+  - Configure Instance
+    - VPC : myvpc_01
+    - SUBNET : myvpc01-sub01
+    - Auto-assign IP : Enable    
+  - Add Storage
+  - Add Tags
+  - Configure Security Group
+    - Type : all traffic
+    - Source : any where  : 0:0:0:0/0  
+  - Review
+  - get public ip
+      
+- EC2 > Lauch Instance > Instance : name : ec2-vpc02
+  - Choose AMI :
+  - Choose Instance
+  - Configure Instance
+    - VPC : myvpc_02
+    - SUBNET : myvpc02-sub01
+    - Auto-assign IP : Enable    
+  - Add Storage
+  - Add Tags
+  - Configure Security Group
+    - Type : all traffic
+    - Source : any where  : 0:0:0:0/0  
+  - Review
+  - get public ip
+*** 2. Create VPC Peering
+Requestor :
+source : 10.1.0.0/16
+
+Acceptor :
+10.2.0.0/16
+
+VPC > Peering Connections > Create Peering
+- Name : vpc01-02
+- requestor : vpc01
+- Select another VPC to peer with
+  - [+] My account
+  - [ ] Another account
+- Region
+  - [+] This Region
+  - [ ] Another Region
+- VPC ID
+  - acceptor : vpc02
+*CREATED VPC PEERING CONNECTION*
+- CONFIG{vpc01-02}.Action.{*Accept request*,Reject Request}
+  - *Accept Request*
+    
+*** 3. Routing connect Both RoutingTable to vpc-peering    
+- VPC > Rout Table > Select{myvpc_01-rt}
+    - VPC  : myvpc-01
+  - CONFIG{myvpc_02-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH
+  - CONGIG{myvpc_02-rt}.Routes :
+    - Destination : 10.2.0.0/16- Target: vpc01-vpc02   
+
+- VPC > Rout Table > Select{myvpc_02-rt}
+    - VPC  : myvpc-02
+  - CONFIG{myvpc_02-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH
+  - CONGIG{myvpc_02-rt}.Routes :
+    - Destination : 10.1.0.0/0
+    - Target: vpc01-vpc02        
+*** 4. Check ping from both ec2-servers
+#+begin_src sh
+# From ec2 -vpc01
+ping ip{ec2-vpc02}
+#+end_src
+** Create Private Subnet with NAT Gateway 
+In Private we don't allow Internet
+But for internet we use NAT gateway(which is connected to Public Subnet) NAT and
+We assing EIP: Elastic Ip for NAT Gateway
+
+*** Private Subnet Into
+Condtions: Subnet CIDR should be private:
+- Class A,B,C either
+- 10.0.0.0,172.16.0.0,192,168.0.0
+
+Eg: Public Subnet:
+10.0.0.0/16  -> local
+0.0.0.0/0    -> IGW 
+Eg:
+3.4.5.6     - > IGW
+
+In public subnet : routetable will connect any ip-adderss (0.0.0.0/0) to IGW 
+
+But in private subnet :
+subnet is not  will be not connection to IGW  only local
+
+*Note* : If you create a ec2 instance in private subnet then we cann't ssh from local meachine
+#+begin_src sh
+ssh i "myvpc01.pem" ec2-user@10.0.4.151
+#ssh: connection to host 10.0.4.151 port 22: Connection time out  
+#+end_src
+Because : ec2 ip cann't be connect for Out off range CIDR
+*** Create NAT Gateway
+- VPC > NAT gateway > Create NAT gateway
+  - Name : ___ *myNAT-Gateway* __
+  - Subnet : ___ *myPublicSubnet* __
+  - Connectivity type :
+    - [+] Public        
+    - [ ] Private
+  - Elastic Ip : [Allocate]
+  *CREATE NAT Gateway*
+
+- CONFIG{myNAT-Gateway}.Routes
+  - Destination : Target
+  - 0.0.0.0/0   : NAT Gatway      
+* EBS Elastic Block Storage
+In EC2 instance : Add Storage : 8Gb(default) but we can change
+
+** Add EBS
+EC2 Dashboard > Create Volume  >
+Volume Type :___ *General Purpose SSD (gp2)* ___
+- {General Purpose SSD (gp2),
+  General Purpose SSD (gp3),
+  Povisioned IOP SSD(io1),
+  Provisioned IOP SSD (io2) ,
+  Magnetic}
+Size (GiB) : 5GB
+IOPS  : Inputs Outputs Per Seconds :  
+IOPS : 100/3000
+Availability Zone : __ *us-east-2a* __
+Snapshot ID :
+*CREATE VOLUE*
+
+** Attach Volume to EC2 instance
+EC2 Dashboard > EBS > SELECT {Volume} >
+CONFIG.{Selected Volume}.Actions Volume
+- Volume : vol-02636cefc86a58a84 in us-east-2c
+  Instance : ___CHOOSE INSTANCE_____
+  Device : /dev/sdf
+*Successfully Created Volume and attached to instance*
+
+** Check if volume is created
+#+begin_src 
+# Step 1:
+lsblk
+
+# Step 2:
+fdisk /dev/xvdf
+# n - new partitions
+# p - print
+# w - save or write
+
+# Step3:
+mkfs.ext4 /dev/xvdf1
+mkdir /devops
+mount /dev/xvdf1 /devops
+
+#+end_src
+  
+Volume Type
+- General Purpose SSD (gp2) : 100Gb, 300/3000(min 100, max 3000)
+  General Purpose SSD (gp3) :                (3000 ,16000)
+  Povisioned IOP SSD(io1):  100, 64000
+  Provisioned IOP SSD (io2) : 100 256000
+  Magnetic
+
+** Snapshot in EBS
+Snapshot is Incremental Backup
+EBS > Select EBS > Action > Create Snapshot
+Description : take backup
+*Created Snapshot*
+** Created Snapshot Lifecycle Policy
+CONFIG{select-volume}.Create Snapshot Lifecycle Policy
+- Lifecycle Policy
+  - [+] EBS Snapshot Policy
+  - [ ] EBS-backend AMI Policy
+  - [ ] Cross-accout copy event policy
+- Target Resource types:
+  - [+] Volume
+  - [ ] Instance
+
+- Target resource tags :
+  - key : name
+  - value : dev-volume
+- Description
+  - Policy describtion
+    - ___ *every day 8AM* __
+*Created Snapshot Lifecycle Policy*
+
+* Create AMI of Instance
+select Instance > Action > Image and Template > Create Image
+No Reboot : [Enable]
+
+By default when we create AMI it will create snapshot of all volume attached
+
+By this AMI we can lauch a new instance or copy it other aws-user in different region
+
+* CodeCommit
+* HOLD Serverless in AWS
+:LOGBOOK:
+- State "HOLD"       from "WAIT"       [2022-04-14 Thu 04:27]
+- State "WAIT"       from "REVIEW"     [2022-04-14 Thu 04:27]
+- State "DONE"       from "NEXT"       [2022-04-14 Thu 04:27]
+:END:
+AWS Lambda
+Dynamo DB
+AWS Cognito
+AWS API Gateway
+Amazon S3
+AWS SNS & SQS
+AWS Kinesis Data Firehose
+Aurora Serverless
+Step Function
+Fargate
+
+* TODO Lamdb
+Playlist :
+https://www.youtube.com/playlist?list=PL5KTLzN85O4KO0qEeUVvwTTcHFsdE6Dhx
+https://github.com/srcecde/aws-tutorial-code/tree/master/lambda
+
+
+Channel : Scre Cde
+
+This notes for : https://www.youtube.com/watch?v=97q30JjEq9Y
+
+Feature of AWS Lambda
+What is AWS Lambda 
+Where AWS Lambda is used
+How AWS lAMBDA works
+Use Case- Backing up data.
+No worries about the server :
+- write code to lamdda
+  
+Automatic Scaling :
+- automatic scaling
+  - code run parellel
+  - process each trigger individual scaling preciessly
+  - It scales the app  running the code response to each trigger that it recives
+Billing :
+- Only pay the amount of time you run code means you will not charge for servers. The only  payment is the amount of time you run the code
+
+Lambda Overview[Udemy]
+*** Status of ec2 instance : save changes in aws log
+**** Create a iam role : ec2read(EC2ReadOnlyAcess), aws-log-write(LambdaBasicExecution Role)
+**** Create 2-3 ec2 instance
+**** go to lamda and create new function with role
+
+** Execute command remotely on EC2 via lambda function
+https://assistanz.com/steps-to-configure-e-mail-notification-for-ec2-instance/
+
+
+** Serverless CRON Job
+CloudWatch Events EventBridge > Trigger Every 1 hour > AWS Lambda Function perform a task
+
+** Lambda Limits
+Execution:
+- Memory alloatin:128 MB -10GB (64MB increament)
+- Maximum execution time: 900 sec (15 mints)
+- Environment varialbe (4KB)
+- Disk capacity in the "function container" (in /tmp) :512 MB
+- Concurrency execution: 1000 (can be increased)
+
+Deployment:
+- Lambda function deployment size (compressed.zip) : 50MB
+- Size of uncompressed deployment (code + dependencies) : 250 MB
+- Can use the /tmp directory to laod other files at startup
+- Size of environment varibale : 4KB       
+** Lambda@Edge
+You have deployed a CDN using CloudFront
+What if you wanted to run a global AWS Lambda alongside
+Or how to implement request filtering before reaching your application
+
+For this, you can use Lambda@Edge.
+deploy Lambda function alongside your CloudFront CDN
+
+
+- Build more responsive application
+- You don't manage servers, Lambda is deployed globally
+- Customize the CDN content
+- Pay only for what you use
+
+Lambda@Edge
+- You can use Lambda to change CloudFront requests and responces
+  - After CloudFront receives a request from a viewer (viewer request)
+     user ----viewer request  --> CloudFront ----Origin Request ----> <---- Origin Response ----- Origin  
+  - Before CloudFront forward the request to the origin (origin request)
+  - After CloudFront receives the response from origin(origin response)
+  - Before CloudFront forwards the response to the viewer (origin  response)
+  - Before CloudFront forwards the response to the viewer (viewer response)
+          
+- You can also generate responses to viewer without ever sending the request to the origin.
+*** Use Cases
+Website Security and Privacy
+Dynamic Web Application at the Edge
+Search Engine Optimization(SEO)
+Intelligent Route Across Origin and Data Centers
+Bot Mitigation at the Edge
+Real-time Image Transformation
+A/B Testing
+User Authentication and Authorition
+User Prioritization
+User Tracking and Analytics
+
+Global Application :
+Amazon S3 Bucket -> User visits website -Dynamic API requests > CloudFront  <--------> Lambda@Edge function (running globally )  <----Query data ----> Amazon Dynamo DB
+
+* TODO SES : Simple Message Servie
+buy : email : kathik@digivalsolution.com  
+default: 1000 mails
+but we 50,000 mails
+* TODO SNS
+noreply@digivalsolution.com
+info@digivalsolution.com
+* TODO Route 53
+Need to buy a dns name: 
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-28_20-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+* TODO Certificate Management
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-28_20-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+* TODO Cloud Monitoring
+* TODO Mongodb
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-29_09-51-47-KT-Mongo-DB.mp4
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-29_10-52-00-KT-Mongo-DB-2.mp4
+
+* 
+* TODO ELK
+
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-29_19-53-15-Doubt-on-build-parameter-and-docker-gitlab-repository.mp4
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-30_20-32-17-KT-Kibana.mp4
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-30_20-33-32-KT-Kibana-II.mp4
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-10-08_22-07-59-PERSONAL-KIBANA-REINSTALL-IN-EC2.mp4
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-10-08_23-12-15-KIBANA-Config-s3-restore.mp4
+
+* TODO Demo | Three-tier web app in AWS with VPC, ALB, EC2 & RDS
+https://www.youtube.com/watch?v=sCBTeMd0Jj4
+* TODO Jenkins
+Create pipeline: using dsl
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-29_19-16-34-build-Jenkins-Jobs-deploy-EC2-instance.mp4
+
+dsl for build with parameter
+/media/jayradhey/myVolume/Video_Tutorials/mytube-Tutorials/Digival-Video/2021-09-29_19-53-15-Doubt-on-build-parameter-and-docker-gitlab-repository.mp4

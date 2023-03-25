@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Devops_SonarQube</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Devops<sub>SonarQube</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org75903a7">25th Sonarqube -quality tool</a>
+<ul>
+<li><a href="#org5b1dc12">What is SonarQube?</a></li>
+<li><a href="#org4ac7f54">What quality Rules(Bugs, Vulnerabilities,Code Smell) and How to check</a></li>
+<li><a href="#org6895872">Installation</a>
+<ul>
+<li><a href="#org37d0bb7">Linux Installation</a></li>
+<li><a href="#orga4cd124">Install sonarscanner</a></li>
+<li><a href="#org6ed8482">Configure sonar-scanner</a></li>
+<li><a href="#org3eb6f01">How to run sonar for git project without maven</a></li>
+<li><a href="#org76f5eda">How to Intgerate sonar with mvn</a></li>
+</ul>
+</li>
+<li><a href="#orga7c4a0f">Install using docker compose</a></li>
+<li><a href="#orgab570f0">What is work of a devops</a></li>
+<li><a href="#org042365d">Q and Ans</a></li>
+<li><a href="#org4876b4f"><span class="todo TODO">TODO</span> git java prj which need to quality anallysis</a></li>
+<li><a href="#org3e140b2">[old version] Install sonarqube with mysql and sonar-scanner</a>
+<ul>
+<li><a href="#org134b750">Install sonar-server( sonarqube):</a></li>
+<li><a href="#org0b2b8f0">Database setup</a></li>
+<li><a href="#orge29bc9f">Configure the sonar</a></li>
+<li><a href="#orgcf79296">install sonar scanner</a></li>
+</ul>
+</li>
+<li><a href="#org029f1e9">Integrate maven with sonar</a></li>
+<li><a href="#orgb948bf1"><span class="todo TODO">TODO</span> How to Intgrate  sonar with Jenkins</a></li>
+</ul>
+</li>
+<li><a href="#org8798f8e">26th maven Q-Ans session</a>
+<ul>
+<li><a href="#orgae6680a">ignore Test case</a></li>
+<li><a href="#org7462b49">how to create multi module project</a></li>
+<li><a href="#org91d15fb">profiles</a>
+<ul>
+<li><a href="#org3486aab">create a profile</a></li>
+<li><a href="#org8498d56">edit pom.xml file</a></li>
+<li><a href="#org3384a68">pacakge with profile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org75903a7" class="outline-2">
+<h2 id="org75903a7">25th Sonarqube -quality tool</h2>
+<div class="outline-text-2" id="text-org75903a7">
+<p>
+<a href="https://www.swtestacademy.com/sonarqube-tutorial/">https://www.swtestacademy.com/sonarqube-tutorial/</a> 
+</p>
+</div>
+
+
+<div id="outline-container-org5b1dc12" class="outline-3">
+<h3 id="org5b1dc12">What is SonarQube?</h3>
+<div class="outline-text-3" id="text-org5b1dc12">
+<p>
+Sonar is an <b>open-source software quality platform</b> . <b>showcases</b> them in a rich <b>web-based dashboard</b> by <b>various static &amp; dynamic code analysis tools</b>. 
+</p>
+
+<p>
+What is Code Quality ?
+Indicate <b>how quickly</b> developers can <b>add business</b> to <b>software</b> system is know as Code quality
+Alterative gerrit&#x2026;etc
+<a href="https://604223-1956433-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2015/10/sonar_CI_2016-01-26_21-33-42.png">Sonarqube CI</a> 
+</p>
+<ul class="org-ul">
+<li>Developers (Write Code and push on SCm(git,svm, ))</li>
+<li>Automatic Build(Jenkins, Bamboo or TeamCity) + Code Analysis
+<ul class="org-ul">
+<li>Code (Analysis)
+<ul class="org-ul">
+<li>Publish Analysis Report to SQ</li>
+<li>manage Issues : Report to Developers</li>
+<li>Sonar Qube Database 
+<ul class="org-ul">
+<li>Oracle</li>
+<li>mysql</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+Supports languages: Java, C/C++, Objective-C, C#, PHP, Flex, Groovy, JavaScript, Python, PL/SQL, COBOL, etc. (note that some of them are commercial)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ac7f54" class="outline-3">
+<h3 id="org4ac7f54">What quality Rules(Bugs, Vulnerabilities,Code Smell) and How to check</h3>
+<div class="outline-text-3" id="text-org4ac7f54">
+<ul class="org-ul">
+<li>Quality
+<ul class="org-ul">
+<li>Bug
+<ul class="org-ul">
+<li>An issue that represents something wrong in the code. If this has not broken yet, it will, and probably at the worst possible moment. This needs to be fixed.</li>
+</ul></li>
+<li><p>
+Code Smell
+</p>
+<ul class="org-ul">
+<li>A maintainability-related issue in the code. Leaving it as-is means that at best maintainers will have a harder time than they should making changes to the code. At worst, they'll be so confused by the state of the code that they'll introduce additional errors as they make changes.</li>
+</ul>
+<ul class="org-ul">
+<li>Vulnerability	
+<ul class="org-ul">
+<li>A security-related issue which represents a backdoor for attackers. See also Security-related rules</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6895872" class="outline-3">
+<h3 id="org6895872">Installation</h3>
+<div class="outline-text-3" id="text-org6895872">
+</div>
+<div id="outline-container-org37d0bb7" class="outline-4">
+<h4 id="org37d0bb7">Linux Installation</h4>
+<div class="outline-text-4" id="text-org37d0bb7">
+<p>
+For sonarqube -6 jdk 8 is required
+For sonarqube -7 jdk 11 is required
+ Install
+</p>
+
+<ul class="org-ul">
+<li>Prerequirement 
+<ul class="org-ul">
+<li>SonarQube to show GUI</li>
+<li>Sonar scanner,sonar runner (Code Quality)</li>
+<li>JDK (jdk-11 for sq-7, jdk-8 for sq-6 )</li>
+</ul></li>
+</ul>
+
+<p>
+<a href="https://www.youtube.com/watch?v=UjCVCvdI73w">https://www.youtube.com/watch?v=UjCVCvdI73w</a> this is very lenghty installation go for
+<a href="https://www.youtube.com/watch?v=UjCVCvdI73w">https://www.youtube.com/watch?v=UjCVCvdI73w</a>  SonarQube Fundamental Tutorial By Rajesh Kumar in 2020
+</p>
+<ul class="org-ul">
+<li>Installation setps
+<ul class="org-ul">
+<li>update yum,install wget,zip,jdk-11</li>
+<li>install jdk-11</li>
+<li>install sonarqube</li>
+<li>run /sonarqube/linux-x86-64/sonar.sh</li>
+<li>edit config sonarqube/conf/sonar.properties</li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo yum install wget unzip -y
+sudo yum update -y # Step 1: Update the server.
+sudo yum install wget unzip -y # Step 2: Install wget &amp; unzip
+sudo yum install java-11-openjdk-devel -y # Step 3: Install java 11
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+sudo unzip sonarqube-7.6.zip
+sudo mv sonarqube-7.6 sonarqube
+# Run sonarqube
+cd sonarqube/linux-x86-64/
+./sonar.sh status # check status
+./sonar.sh status #run sonar
+
+# Edit Configuration file
+nano sonarqube/conf/sonar.properties # conf database,post,ip,host....etc
+#13.232.191.19:9000
+# admin admin are user/passwd
+
+# sonarqube -6 jdk 8
+# sonarqube -7 jdk 11
+#Not root account must be there to start a sonarqube server
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga4cd124" class="outline-4">
+<h4 id="orga4cd124">Install sonarscanner</h4>
+<div class="outline-text-4" id="text-orga4cd124">
+<ul class="org-ul">
+<li>Pre requirement
+<ul class="org-ul">
+<li>jar file.</li>
+<li>Agent (build) ur source code 
+<ul class="org-ul">
+<li>maven ,gradel,jenkins,msbuild,cmds</li>
+</ul></li>
+</ul></li>
+<li>Installation setps
+<ul class="org-ul">
+<li>install sonar-scanner</li>
+<li>connect sonar-scanner with sonar-server(sonarqube)
+<ul class="org-ul">
+<li>config scanner sonar-scanner/conf/soar-scanner.properties</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+mv sonar-scanner-cli-4.6.2.2472-linux scanner 
+# scanner need to communicate to sonarqube server 
+#### for this we need to conf in scanner
+#nano sonar-scanner/conf/soar-scanner.properties 
+# but server and scanner are on same host no need nedd to config
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6ed8482" class="outline-4">
+<h4 id="org6ed8482">Configure sonar-scanner</h4>
+<div class="outline-text-4" id="text-org6ed8482">
+<div class="org-src-container">
+<pre class="src src-sh"># configure sonar scanner
+cd sonar-scanner/conf
+cat sonar-scanner.properties
+#sonar.host.url=http://localhost:9090
+
+sonar.login=data
+sonar.password=admin
+sonar.projectKey=devoproject
+#sonar.projectName= carona
+sonar.projectVersion=1.0
+sonar.source=D:/spark/sparkjava-war-example/src/main/java
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3eb6f01" class="outline-4">
+<h4 id="org3eb6f01">How to run sonar for git project without maven</h4>
+<div class="outline-text-4" id="text-org3eb6f01">
+<ol class="org-ol">
+<li>clone git project in local host say prj<sub>git</sub></li>
+<li>Note we need to run the scanner on soure code</li>
+<li>get pwd of scanner  :~/scanner/bin/sonar-scanner</li>
+<li>got to prg : cd ~/prj<sub>git</sub></li>
+<li># RUN sonar-scanner in source-code 
+-[ git<sub>prj</sub>] $cd ~/scanner/bin/sonar-scanner # this will scan the git<sub>prg</sub></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org76f5eda" class="outline-4">
+<h4 id="org76f5eda">How to Intgerate sonar with mvn</h4>
+<div class="outline-text-4" id="text-org76f5eda">
+<ul class="org-ul">
+<li>Step1: Go to maven mvn installed</li>
+<li>Step2: Open setting.xml under conf
+<i>opt/maven/conf</i> 
+	    ├── logging
+	    ├── settings.xml
+	    └── toolchains.xml</li>
+<li>Step3: Added (Sonar &amp; sonar profile: server <a href="https://192.168.2.174:9000">https://192.168.2.174:9000</a>) plugin to setting.xml file</li>
+<li>Step4: run following cmd
+mvn package sonar:sonar</li>
+</ul>
+<p>
+<a href="https://blog.knoldus.com/integrate-maven-project-sonarqube/">https://blog.knoldus.com/integrate-maven-project-sonarqube/</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">  &lt;plugin&gt;
+      &lt;groupId&gt;org.sonarsource.scanner.maven&lt;/groupId&gt;
+      &lt;artifactId&gt;sonar-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;3.5.0.1254&lt;/version&gt;
+      &lt;executions&gt;
+	&lt;execution&gt;
+	  &lt;phase&gt;verify&lt;/phase&gt;
+	  &lt;goals&gt;
+	    &lt;goal&gt;sonar&lt;/goal&gt;
+	  &lt;/goals&gt;
+	&lt;/execution&gt;
+      &lt;/executions&gt;
+    &lt;/plugin&gt;
+    &lt;plugin&gt;
+
+&lt;profile&gt;
+  &lt;id&gt;sonar&lt;/id&gt;
+  &lt;activation&gt;
+    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+  &lt;/activation&gt;
+  &lt;properties&gt;
+    &lt;sonar.host.url&gt;https://192.168.2.174:9000&lt;/sonar.host.url&gt;
+  &lt;/properties&gt;
+&lt;/profile&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">mvn package sonar:sonar
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga7c4a0f" class="outline-3">
+<h3 id="orga7c4a0f">Install using docker compose</h3>
+<div class="outline-text-3" id="text-orga7c4a0f">
+<div class="org-src-container">
+<pre class="src src-python">#https://gist.github.com/Warchant/0d0f0104fe7adf3b310937d2db67b512
+version: "3"
+
+services:
+  sonarqube:
+    image: sonarqube
+    expose:
+      - 9000
+    ports:
+      - "127.0.0.1:9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+
+networks:
+  sonarnet:
+
+volumes:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  postgresql:
+  postgresql_data:
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab570f0" class="outline-3">
+<h3 id="orgab570f0">What is work of a devops</h3>
+<div class="outline-text-3" id="text-orgab570f0">
+<ul class="org-ul">
+<li>Setup sonar</li>
+<li>install sonar and sonar scanner</li>
+<li>Soar scanner and env variable also configured</li>
+<li></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org042365d" class="outline-3">
+<h3 id="org042365d">Q and Ans</h3>
+<div class="outline-text-3" id="text-org042365d">
+<p>
+Q)Do you know sonar  ? 
+It is a quality
+</p>
+
+<p>
+Q) What you do in sonar ?
+Setup sonarq
+sonar-scanner: 
+    sonar.conf: to to add user.., 
+</p>
+</div>
+</div>
+<div id="outline-container-org4876b4f" class="outline-3">
+<h3 id="org4876b4f"><span class="todo TODO">TODO</span> git java prj which need to quality anallysis</h3>
+<div class="outline-text-3" id="text-org4876b4f">
+<p>
+<a href="https://www.youtube.com/watch?v=31igoWxauEQ">https://www.youtube.com/watch?v=31igoWxauEQ</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3e140b2" class="outline-3">
+<h3 id="org3e140b2">[old version] Install sonarqube with mysql and sonar-scanner</h3>
+<div class="outline-text-3" id="text-org3e140b2">
+</div>
+<div id="outline-container-org134b750" class="outline-4">
+<h4 id="org134b750">Install sonar-server( sonarqube):</h4>
+<div class="outline-text-4" id="text-org134b750">
+<div class="org-src-container">
+<pre class="src src-sh">sudo adduser --system --no-create-home --group --disabled-login sonarqube
+sudo apt-get install unzip
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.5.zip
+sudo unzip sonarqube-7.5.zip
+sudo rm sonarqube-7.5.zip
+sudo chown -R sonarqube:sonarqube /opt/sonarqube
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0b2b8f0" class="outline-4">
+<h4 id="org0b2b8f0">Database setup</h4>
+<div class="outline-text-4" id="text-org0b2b8f0">
+<div class="org-src-container">
+<pre class="src src-sh">mysql&gt; CREATE USER sonarqube@'localhost' IDENTIFIED BY 'Dev@1234';
+GRANT ALL ON sonarqube.* to sonarqube@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge29bc9f" class="outline-4">
+<h4 id="orge29bc9f">Configure the sonar</h4>
+<div class="outline-text-4" id="text-orge29bc9f">
+<div class="org-src-container">
+<pre class="src src-sh">sudo nano sonarqube-7.5/conf/sonar.properties
+
+# SonarQube wil use to access the database to the username and password you created for MySQL:
+
+#sonar.jdbc.username=sonarqube
+#sonar.jdbc.password=Dev@1234
+
+# SonarQube to use MySQL as the database driver:
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Tell SonarQube to use MySQL as the database driver:
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+#sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance&amp;useSSL=false
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Nginx will handle the communication between the SonarQube clients and your server, so you will tell SonarQube to only listen to the local address.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+# sonar.web.javaAdditionalOpts=-server
+# sonar.web.host=127.0.0.1
+
+# you will use Systemd to configure SonarQube to run as a service so that it will start automatically upon a reboot.
+# sudo nano /etc/systemd/system/sonarqube.service
+
+
+
+#
+# start sonarqube service 
+#
+service sonarqube start
+service sonarqube status
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcf79296" class="outline-4">
+<h4 id="orgcf79296">install sonar scanner</h4>
+<div class="outline-text-4" id="text-orgcf79296">
+<div class="org-src-container">
+<pre class="src src-sh">mkdir /opt/sonarscanner
+cd /opt/sonar/scanner
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+
+sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo rm sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo nano sonar-scanner-3.2.0.1227-linux/conf/sonar-scanner.properties
+vi /opt/sonarscanner/sonar-scanner-3.2.0.1277-linux
+# sonar.host.url=https://sonarqube.example.com
+sudo chmod +x sonar-scanner-3.2.0.1277-linux/bin/sonar-scanner
+
+sudo ln -s /opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org029f1e9" class="outline-3">
+<h3 id="org029f1e9">Integrate maven with sonar</h3>
+<div class="outline-text-3" id="text-org029f1e9">
+<p>
+<a href="https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/">https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb948bf1" class="outline-3">
+<h3 id="orgb948bf1"><span class="todo TODO">TODO</span> How to Intgrate  sonar with Jenkins</h3>
+<div class="outline-text-3" id="text-orgb948bf1">
+<p>
+<a href="https://computingforgeeks.com/how-to-integrate-sonarqube-with-jenkins/">https://computingforgeeks.com/how-to-integrate-sonarqube-with-jenkins/</a>
+Manage Jenkins 
+</p>
+<ul class="org-ul">
+<li>Manage Plugins 
+<ul class="org-ul">
+<li>Install Sonar Gerrit</li>
+</ul></li>
+<li>Login SonarQube &gt; My account &gt; Security &gt;  Generate Token  &gt; Copy Token</li>
+</ul>
+
+<p>
+Manage Jenkins &gt; Configure System &gt; 
+[+] SonarQube Server    [Enable SonarQube]
+</p>
+<ol class="org-ol">
+<li>Step  Install Sonar Qube with user-name</li>
+<li>Generate token in sonar qube</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org8798f8e" class="outline-2">
+<h2 id="org8798f8e">26th maven Q-Ans session</h2>
+<div class="outline-text-2" id="text-org8798f8e">
+<ul class="org-ul">
+<li>how to ignore test cases
+<ul class="org-ul">
+<li>mvn install -DskipTests</li>
+</ul></li>
+<li>how to create multi module project</li>
+<li>how to use profile</li>
+<li>what is snapshot and version</li>
+<li>diff ant and mvn</li>
+</ul>
+</div>
+<div id="outline-container-orgae6680a" class="outline-3">
+<h3 id="orgae6680a">ignore Test case</h3>
+<div class="outline-text-3" id="text-orgae6680a">
+<div class="org-src-container">
+<pre class="src src-sh">mvn archetype:generate  -DgroupId=apr -DartifactId=sunday -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+tree -L 1
+#|- sunday/
+#|     |-  src/
+#|     |-  pom.xml
+cd sunday
+mvn install # by default test is running
+mvn clean install -DskipTests
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7462b49" class="outline-3">
+<h3 id="org7462b49">how to create multi module project</h3>
+<div class="outline-text-3" id="text-org7462b49">
+<p>
+parent pom : super pom
+</p>
+<ul class="org-ul">
+<li>child pom :</li>
+</ul>
+
+<p>
+Q) how to create multi module project 
+parent pom - superpom
+       child pom
+</p>
+
+
+<p>
+parent pom.xml file
+india sbi
+├── deposit/pom.xml  # child pom file
+├── credit/pom.xml   # child pom file
+├── loan/pom.xml     # child pom file
+└── pom.xml          #  parent pom file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">mvn archetype:generate  -DgroupId=india -DartifactId=sbi -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+rm src 
+
+mvn archetype:generate  -DgroupId=india -DartifactId=deposit -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+
+mvn archetype:generate  -DgroupId=india -DartifactId=credit -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+mvn archetype:generate  -DgroupId=india -DartifactId=loan -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-xml">&lt;-- cat pom.xml  --&gt;# remove build and plugins 
+&lt;packaging&gt;pom&lt;/packaging&gt;  
+
+&lt;modules&gt;
+&lt;module&gt;deposit&lt;/module&gt;
+&lt;module&gt;credit&lt;/module&gt;
+&lt;module&gt;loan&lt;/module&gt;
+ &lt;/modules&gt;
+
+mvn package
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org91d15fb" class="outline-3">
+<h3 id="org91d15fb">profiles</h3>
+<div class="outline-text-3" id="text-org91d15fb">
+<p>
+Q)why do we use profile ?
+A) - to set of configuration file
+</p>
+<ul class="org-ul">
+<li>Using profile
+<ul class="org-ul">
+<li>you can customize build for diff enviroment.</li>
+</ul></li>
+</ul>
+<p>
+<a href="https://books.sonatype.com/mvnref-book/reference/profiles-sect-maven-profiles.html">https://books.sonatype.com/mvnref-book/reference/profiles-sect-maven-profiles.html</a>
+</p>
+
+<p>
+sunprofile
+├──dev/application.property 
+├──sit/application.property
+├──pre production/application.property
+└──production/application.property
+</p>
+
+<p>
+tomcat  - is consist of war file 
+jboss   - is consist of ear file
+weblogics - is cluster ( :dev1 dev2 dev3)
+</p>
+
+<p>
+profile consist of # jar micro-servies
+</p>
+</div>
+<div id="outline-container-org3486aab" class="outline-4">
+<h4 id="org3486aab">create a profile</h4>
+<div class="outline-text-4" id="text-org3486aab">
+<div class="org-src-container">
+<pre class="src src-sh">mvn archetype:generate  -DgroupId=aprprofile -DartifactId=sunprofile -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+#├── pom.xml
+#└── src
+#    ├── main
+#    │    └── java
+#    │         └── app.java
+#    └── test
+cd src/main/
+mkdir profiles
+cd profiles/
+mkdir dev sit preprod prod
+echo -e  "env=dev\nurl=https:10.9.68.7:8080/dev\nusername=dev\npasswd=dev@123" &gt; dev/application.property
+echo -e  "env=sit\n\nurl=https:10.9.68.7:8080/dev\username=sit\npasswd=sit@123" &gt; sit/application.property
+echo -e  "env=preprod\n\nurl=https:10.9.68.7:8080/dev\username=preprod\npasswd=preprod@123" &gt; preprod/application.property
+echo -e  "env=prod\nurl=https:10.9.68.7:8080/\ndev\username=prod\npasswd=prod@123" &gt; prod/application.property
+#├── pom.xml
+#└── src
+#    ├── main
+#    │   ├── java
+#    │   │   └── app.java
+#    │   └── profile
+#    │       ├── dev
+#    │       │   └── application.property
+#    │       ├── preprod
+#    │       │   └── application.property
+#    │       ├── prod
+#    │       │   └── application.property
+#    │       └── sit
+#    │           └── application.property
+#    └── test
+
+# add profile dev,sit,preprod,prod in pom.xml
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8498d56" class="outline-4">
+<h4 id="org8498d56">edit pom.xml file</h4>
+<div class="outline-text-4" id="text-org8498d56">
+<div class="org-src-container">
+<pre class="src src-xml">&lt;profiles&gt;
+    &lt;profile&gt;
+	&lt;id&gt;dev&lt;/id&gt; 
+	&lt;properties&gt;  
+	       &lt;build.profile.id&gt;dev&lt;/build.profile.id&gt; 
+	&lt;/properties&gt;  
+	       &lt;build&gt;
+		   &lt;resources&gt;
+		       &lt;resource&gt; 
+			   &lt;directory&gt;src/main/profiles/dev&lt;/directory&gt;
+		       &lt;/resource&gt; 
+		   &lt;/resources&gt;
+	       &lt;/build&gt;
+	&lt;id&gt;sit&lt;/id&gt; 
+	&lt;properties&gt;  
+	       &lt;build.profile.id&gt;sit&lt;/build.profile.id&gt; 
+	&lt;/properties&gt;  
+	       &lt;build&gt;
+		   &lt;resources&gt;
+		       &lt;resource&gt; 
+			   &lt;directory&gt;src/main/profiles/sit&lt;/directory&gt;
+		       &lt;/resource&gt; 
+		   &lt;/resources&gt;
+	       &lt;/build&gt;
+	&lt;id&gt;preprod&lt;/id&gt; 
+	&lt;properties&gt;  
+	       &lt;build.profile.id&gt;preprod&lt;/build.profile.id&gt; 
+	&lt;/properties&gt;  
+	       &lt;build&gt;
+		   &lt;resources&gt;
+		       &lt;resource&gt; 
+			   &lt;directory&gt;src/main/profiles/preprod&lt;/directory&gt;
+		       &lt;/resource&gt; 
+		   &lt;/resources&gt;
+	       &lt;/build&gt;
+	&lt;id&gt;prod&lt;/id&gt; 
+	&lt;properties&gt;  
+	       &lt;build.profile.id&gt;prod&lt;/build.profile.id&gt; 
+	&lt;/properties&gt;  
+	       &lt;build&gt;
+		   &lt;resources&gt;
+		       &lt;resource&gt; 
+			   &lt;directory&gt;src/main/profiles/prod&lt;/directory&gt;
+		       &lt;/resource&gt; 
+		   &lt;/resources&gt;
+	       &lt;/build&gt;
+   &lt;/profile&gt;
+&lt;/profiles&gt;
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3384a68" class="outline-4">
+<h4 id="org3384a68">pacakge with profile</h4>
+<div class="outline-text-4" id="text-org3384a68">
+<p>
+#+BEGIN<sub>SRC</sub> sh
+mvn package -Pdev
+mvn package -Psit
+mvn package -Ppreprod
+mvn package -Pprod
+</p>
+
+<p>
+cd sunprofile
+cd target
+ls 
+</p>
+
+<p>
+if [-f credi.jar]then;
+service credit start
+service credit status
+service credit stop
+service credit restart
+</p>
+
+<p>
+if [all]
+credit.jar
+deposit.jar
+</p>
+
+<p>
+#+END<sub>SRCSonar</sub> Qube 
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Test Title</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Test Title
+<br />
+<span class="subtitle">Author</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf7dc893">Org-MODE</a></li>
+<li><a href="#org78e55b7">Introduction</a></li>
+<li><a href="#orga9704f5"><span class="todo TODO">TODO</span> Expanding and Collapse org mode tree</a></li>
+<li><a href="#orgfe02c86"><span class="todo TODO">TODO</span> Word Processing</a></li>
+<li><a href="#org652ed2d">Export the file to other formates</a></li>
+<li><a href="#orgf00b301">Comment</a></li>
+<li><a href="#org347847c">Lists</a></li>
+<li><a href="#org5c7ab3e">Header (M + RET)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ecams">Ecams</span></span></a></li>
+<li><a href="#org35941ba">TO CREATE A SUB BULLITE (M+ RET M+ -&gt;)</a></li>
+<li><a href="#orge1b550f">TO MOVE THE BULLITES PRESS ( M + UP)</a></li>
+<li><a href="#org421a00a">TO CHANGE SUB BULLIES TO BULLITES  (M + -&gt; OR M + &lt;-)</a></li>
+<li><a href="#org97485b1"><span class="todo TODO">TODO</span> items</a></li>
+<li><a href="#org30e9a52"><span class="todo TODO">TODO</span> TO MARK ITEM AS TODO :</a></li>
+<li><a href="#org29f193b"><span class="done DONE">DONE</span> to change item as DO : S + -&gt;</a></li>
+<li><a href="#org0295bb8">CREATE CHECK BOX <code>[1/3]</code> : OR U CAN USE % FOR PERCENTAGE&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CHECKBOX">CHECKBOX</span></span></a></li>
+<li><a href="#orgcd58a5a">AGENDA VIEW</a></li>
+<li><a href="#org96d7f54">DATE AND TIME (NO TIME ZONE)</a></li>
+<li><a href="#org4bedaa7">Scheduling  Deadline for a task and Agenda</a></li>
+<li><a href="#org70dc42e">Repeating task</a></li>
+<li><a href="#org7734f8b">Advance GENDA</a></li>
+<li><a href="#org0ff9a84">Custamised agenda view</a></li>
+<li><a href="#orgff23fe3">LINKS</a></li>
+<li><a href="#org11b9e5a">To edit the link</a></li>
+<li><a href="#orgc8e1c78">Build table</a></li>
+<li><a href="#orgedc05ad">View image in org</a></li>
+<li><a href="#org5edf584">Write Source Code, Quotes, Examples :</a>
+<ul>
+<li><a href="#orgcd167e8">Source Code (&lt;s ,&lt;se, &lt;ss )</a></li>
+<li><a href="#org762ab84">To run the code in Block (C-c C-c)</a></li>
+<li><a href="#org9b8fa65">Quote (&lt;q)</a></li>
+<li><a href="#orgb6364f1">Example (&lt;e)</a></li>
+</ul>
+</li>
+<li><a href="#org5f3ccfd">SEQ<sub>TODO</sub>: TODO(t) WAIT(w) | DONE(d)</a></li>
+<li><a href="#org0ef1216">set tags</a></li>
+</ul>
+</li>
+<li><a href="#org1be8a29">----------------------------------------------------------------</a>
+<ul>
+<li><a href="#org67a7450">SET TAGS FOR THE TASKS C-c C-c&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ECAMS">ECAMS</span></span></a></li>
+<li><a href="#orgd3b6b36">BTech 1stYear&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Education">Education</span>&#xa0;<span class="BTech">BTech</span>&#xa0;<span class="2008">2008</span></span></a></li>
+<li><a href="#org0862e04">Grossery List&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Home">Home</span></span></a></li>
+<li><a href="#org1ed5c9a">Java Coching&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Education">Education</span>&#xa0;<span class="Tution">Tution</span></span></a></li>
+<li><a href="#org7bdbfc2">Orgmode E03S02: Splitting your system up to several files</a></li>
+</ul>
+</li>
+<li><a href="#org0e1ca4d">Replace jupyter with orgmode</a></li>
+<li><a href="#orgff324e4">Convert org to html with parameter</a></div>
+</div>
+<p>
+source: <a href="https://orgmode.org/worg/org-tutorials/org4beginners.html">https://orgmode.org/worg/org-tutorials/org4beginners.html</a>
+</p>
+<div id="outline-container-orgf7dc893" class="outline-3">
+<h3 id="orgf7dc893">Org-MODE</h3>
+<div class="outline-text-3" id="text-orgf7dc893">
+<p>
+For more info visit <a href="https://orgmode.org/org.html">https://orgmode.org/org.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org78e55b7" class="outline-3">
+<h3 id="org78e55b7">Introduction</h3>
+<div class="outline-text-3" id="text-org78e55b7">
+<p>
+Origally meant for orgranize  create todo list, schedule, do** TODO Data Abstractingc,latex,ppt,
+People use emacs only because of org mode
+</p>
+
+<p>
+Most important is we can Emacs Configuration file by Org-moDifference in Reference variable and pointer variable
+References are generally implemented using pointers. A reference is same object, just with a different name and reference must refer to an object. Since references can’t be NULL, they are safer to use.
+</p>
+
+<p>
+A pointer can be re-assigned while reference cannot, and must be assigned at initialization only.
+Pointer can be assigned NULL directly, whereas reference cannot.
+Pointers can iterate over an array, we can use ++ to go to the next item that a pointer is pointing to.
+A pointer is a variable that holds a memory address. A reference has the same memory address as the item it references.
+A pointer to a class/struct uses ‘-&gt;'(arrow operator) to access it’s members whereas a reference uses a ‘.'(dot operator)
+A pointer needs to be dereferenced with * to access the memory location it points to, whereas a reference can be used directly.de 
+</p>
+
+<p>
+We can export to html,pdf,latex,ppt&#x2026;.etc
+</p>
+
+<p>
+This tutorial we will Configure .emacs file
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">
+</pre>
+</div>
+
+<p>
+We can write many lang like c,c++,python,shell,lisp,emac-lisp
+</p>
+
+<p>
+What great about emacs-lisp is when we launch emacs all " emacs-lisp code" in ORG File is extrated in other file and this file is executed by Init file (.emacs)
+</p>
+
+<p>
+To create call all function in  Init file we use a function called org-babel
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(org-babel-load-file (expand-file-name "~/.emacs.d/myconfig.org"))
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">cmd</td>
+<td class="org-left">ORG function</td>
+</tr>
+
+<tr>
+<td class="org-left">&lt;s</td>
+<td class="org-left">Create the block to insert code</td>
+</tr>
+
+<tr>
+<td class="org-left">C-c '</td>
+<td class="org-left">open window to insert code</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<p>
+M-x org-mode          To view in org mode
+</p>
+
+
+
+
+<p>
+Press tab in heading  
+</p>
+</div>
+</div>
+<div id="outline-container-orga9704f5" class="outline-3">
+<h3 id="orga9704f5"><span class="todo TODO">TODO</span> Expanding and Collapse org mode tree</h3>
+<div class="outline-text-3" id="text-orga9704f5">
+<p>
+&lt;Tab&gt;    
+S-&lt;Tab&gt;         To expand adn collapse all 
+</p>
+</div>
+</div>
+<div id="outline-container-orgfe02c86" class="outline-3">
+<h3 id="orgfe02c86"><span class="todo TODO">TODO</span> Word Processing</h3>
+<div class="outline-text-3" id="text-orgfe02c86">
+<p>
+For <b>bold</b> , <i>italics</i> , <span class="underline">underscore</span> , <code>code</code>, <code>verbatin</code> , <del>adsfad</del>,
+</p>
+</div>
+</div>
+<div id="outline-container-org652ed2d" class="outline-3">
+<h3 id="org652ed2d">Export the file to other formates</h3>
+<div class="outline-text-3" id="text-org652ed2d">
+<p>
+C-c C-e           - export to file/select text to html,latex,pdf
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf00b301" class="outline-3">
+<h3 id="orgf00b301">Comment</h3>
+<div class="outline-text-3" id="text-orgf00b301">
+</div>
+</div>
+<div id="outline-container-org347847c" class="outline-3">
+<h3 id="org347847c">Lists</h3>
+<div class="outline-text-3" id="text-org347847c">
+<ul class="org-ul">
+<li>entry
+<ul class="org-ul">
+<li>subentry 1</li>
+<li>subentry2</li>
+</ul></li>
+</ul>
+<p>
+-entry 2
+</p>
+<ul class="org-ul">
+<li>my 1st change
+-sublist
+-sublist2</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5c7ab3e" class="outline-3">
+<h3 id="org5c7ab3e">Header (M + RET)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ecams">Ecams</span></span></h3>
+</div>
+<div id="outline-container-org35941ba" class="outline-3">
+<h3 id="org35941ba">TO CREATE A SUB BULLITE (M+ RET M+ -&gt;)</h3>
+</div>
+<div id="outline-container-orge1b550f" class="outline-3">
+<h3 id="orge1b550f">TO MOVE THE BULLITES PRESS ( M + UP)</h3>
+</div>
+<div id="outline-container-org421a00a" class="outline-3">
+<h3 id="org421a00a">TO CHANGE SUB BULLIES TO BULLITES  (M + -&gt; OR M + &lt;-)</h3>
+</div>
+<div id="outline-container-org97485b1" class="outline-3">
+<h3 id="org97485b1"><span class="todo TODO">TODO</span> items</h3>
+</div>
+<div id="outline-container-org30e9a52" class="outline-3">
+<h3 id="org30e9a52"><span class="todo TODO">TODO</span> TO MARK ITEM AS TODO :</h3>
+<div class="outline-text-3" id="text-org30e9a52">
+<p>
+S + (Righ arrow/ left arrow )     toggle normal, TODO,DONE
+C-c C-t                           toggle norma, TODO,DONE 
+</p>
+</div>
+</div>
+<div id="outline-container-org29f193b" class="outline-3">
+<h3 id="org29f193b"><span class="done DONE">DONE</span> to change item as DO : S + -&gt;</h3>
+</div>
+<div id="outline-container-org0295bb8" class="outline-3">
+<h3 id="org0295bb8">CREATE CHECK BOX <code>[1/3]</code> : OR U CAN USE % FOR PERCENTAGE&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CHECKBOX">CHECKBOX</span></span></h3>
+<div class="outline-text-3" id="text-org0295bb8">
+<ul class="org-ul">
+<li class="on"><code>[X]</code> FLOWERS : TO TICK MARK THE ITEM C-C C-C  &amp; TO UNTICK MARK SAME</li>
+<li class="off"><code>[&#xa0;]</code> FRUITS</li>
+<li class="off"><code>[&#xa0;]</code> PAY BILL</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcd58a5a" class="outline-3">
+<h3 id="orgcd58a5a">AGENDA VIEW</h3>
+<div class="outline-text-3" id="text-orgcd58a5a">
+<p>
+IN ORG MODE PROVIDE THE AGENDA VIEW TO MANGE AND VIEW TODO LIST &amp; DEADLINES
+COMMAND : C-C[  : ENABLE AGENDA VIEW
+TO VIEW : 
+M-X ORG    - AGENDA  VIEW
+M-x org-agenda-view
+M-x org-agenda-year-view(y)
+</p>
+
+<p>
+C-C A      – AGENDA
+C-C [      – ADD DOCUMENT TO THE LIST OF AGENDA FILES
+C-C ]      – REMOVE DOCUMENT FROM THE LIST OF AGENDA FILES
+C-C .      – ADD DATE
+C-U C-C .  – ADD TIME AND DATE
+C-G        – STOP DOING WHAT YOU ARE TRYING TO DO, ESCAPE
+</p>
+
+
+<p>
+IF SCREEN SPLIT THEN DO C-C 0
+</p>
+</div>
+</div>
+
+<div id="outline-container-org96d7f54" class="outline-3">
+<h3 id="org96d7f54">DATE AND TIME (NO TIME ZONE)</h3>
+<div class="outline-text-3" id="text-org96d7f54">
+<p>
+C-C .          – ADD DATE<span class="timestamp-wrapper"><span class="timestamp">&lt;2018-08-07 Tue&gt;</span></span>
+S-&lt;UP/DOWN&gt;    - CHANGE + OR -   
+C-U C-C . – ADD TIME AND DATE
+</p>
+</div>
+</div>
+<div id="outline-container-org4bedaa7" class="outline-3">
+<h3 id="org4bedaa7">Scheduling  Deadline for a task and Agenda</h3>
+<div class="outline-text-3" id="text-org4bedaa7">
+<p>
+C-c C-s : Schedule or M-x org-schedule
+C-c C-d : Calender is show and date is selected
+C-u C-c . : inset current date and time
+</p>
+
+<p>
+Agenda
+C-c a
+</p>
+
+<p>
+Follow mode with Shift F
+To view next -week shcedule : F
+To view previous =-week schedule: B
+</p>
+</div>
+</div>
+<div id="outline-container-org70dc42e" class="outline-3">
+<h3 id="org70dc42e">Repeating task</h3>
+<div class="outline-text-3" id="text-org70dc42e">
+<p>
+<a href="https://www.youtube.com/watch?v=nbC-gL5wcf4&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=5">https://www.youtube.com/watch?v=nbC-gL5wcf4&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=5</a>
++1w
++1d
++4w
+(w=week, d=day, m=month, y=year)
+</p>
+</div>
+</div>
+<div id="outline-container-org7734f8b" class="outline-3">
+<h3 id="org7734f8b">Advance GENDA</h3>
+<div class="outline-text-3" id="text-org7734f8b">
+<p>
+<a href="https://www.youtube.com/watch?v=u00pglDfgX4&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=8">https://www.youtube.com/watch?v=u00pglDfgX4&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=8</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ff9a84" class="outline-3">
+<h3 id="org0ff9a84">Custamised agenda view</h3>
+<div class="outline-text-3" id="text-org0ff9a84">
+<p>
+<a href="https://www.youtube.com/watch?v=PJ3qHIl-eOM&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=8">https://www.youtube.com/watch?v=PJ3qHIl-eOM&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=8</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgff23fe3" class="outline-3">
+<h3 id="orgff23fe3">LINKS</h3>
+<div class="outline-text-3" id="text-orgff23fe3">
+<ul class="org-ul">
+<li><a href="http://google.com">http://google.com</a></li>
+<li><a href="http://google.com">Google</a></li>
+</ul>
+
+<p>
+<a href="http://google.com">Google</a>  
+</p>
+</div>
+</div>
+<div id="outline-container-org11b9e5a" class="outline-3">
+<h3 id="org11b9e5a">To edit the link</h3>
+<div class="outline-text-3" id="text-org11b9e5a">
+<p>
+C-c C-l
+</p>
+</div>
+</div>
+<div id="outline-container-orgc8e1c78" class="outline-3">
+<h3 id="orgc8e1c78">Build table</h3>
+<div class="outline-text-3" id="text-orgc8e1c78">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Table</th>
+<th scope="col" class="org-left">contenat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">asdf</td>
+<td class="org-left">dsfsdfsdfeasdfasd</td>
+</tr>
+
+<tr>
+<td class="org-left">sfsdf</td>
+<td class="org-left">dfsdfasdf</td>
+</tr>
+
+<tr>
+<td class="org-left">dEDd</td>
+<td class="org-left">adfdsff</td>
+</tr>
+
+<tr>
+<td class="org-left">ED</td>
+<td class="org-left">DDE</td>
+</tr>
+
+<tr>
+<td class="org-left">df</td>
+<td class="org-left">fsdl</td>
+</tr>
+
+<tr>
+<td class="org-left">asdf'</td>
+<td class="org-left">adfa</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+what happen if expot it ?
+</p>
+</div>
+</div>
+<div id="outline-container-orgedc05ad" class="outline-3">
+<h3 id="orgedc05ad">View image in org</h3>
+<div class="outline-text-3" id="text-orgedc05ad">
+<p>
+Add the following code to my init.el file:
+</p>
+<pre class="example">
+(setq org-image-actual-width nil)
+</pre>
+
+
+<p>
+<a href="https://orgmode.org/manual/Images.html">https://orgmode.org/manual/Images.html</a>
+</p>
+
+<p>
+Then insert this code in my document, where I want the image to appear:
+</p>
+<pre class="example">
+#+ATTR_ORG: :width 300
+[[./my_image.jpg]]
+# [C-c C-x C-v] to toggle image
+</pre>
+
+
+<p>
+On executing org-toggle-inline-images the image appears in the buffer, 300px wide, as expected.
+</p>
+
+
+
+<div id="org60bf136" class="figure">
+<p><img src="file:///home/karthik/mynotes/MTechCard.jpg" alt="MTechCard.jpg" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5edf584" class="outline-3">
+<h3 id="org5edf584">Write Source Code, Quotes, Examples :</h3>
+<div class="outline-text-3" id="text-org5edf584">
+</div>
+<div id="outline-container-orgcd167e8" class="outline-4">
+<h4 id="orgcd167e8">Source Code (&lt;s ,&lt;se, &lt;ss )</h4>
+<div class="outline-text-4" id="text-orgcd167e8">
+<p>
+Babble is a subtool used to insert code (c,c++,py,shell,lisp,elisp&#x2026;etc)
+Eg:
+shortcut : " &lt;s TAB  "
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">echo "Hello world" # C-c C-c to run the code in the brackests
+</pre>
+</div>
+
+<p>
+Note : org-bable package is required to run the code in org-mod
+</p>
+</div>
+</div>
+<div id="outline-container-org762ab84" class="outline-4">
+<h4 id="org762ab84">To run the code in Block (C-c C-c)</h4>
+<div class="outline-text-4" id="text-org762ab84">
+<p>
+m nn
+move the cursor to the +begin line and press C-c C-c 
+</p>
+</div>
+</div>
+<div id="outline-container-org9b8fa65" class="outline-4">
+<h4 id="org9b8fa65">Quote (&lt;q)</h4>
+<div class="outline-text-4" id="text-org9b8fa65">
+<p>
+short cut : " 
+&lt;q TAB "
+</p>
+
+<blockquote>
+<p>
+Do me the favor, do me the biggest favor, matter of fact do yourself the biggest favor and integrate those into your workflow.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgb6364f1" class="outline-4">
+<h4 id="orgb6364f1">Example (&lt;e)</h4>
+<div class="outline-text-4" id="text-orgb6364f1">
+<pre class="example" id="orgbd9e40e">
+ASFDASDFDSAFSFDSDFASDF
+ASDADFSFAD Sasdfasdf
+</pre>
+
+<p>
+short cut:  "  &lt;e  TAB  "
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5f3ccfd" class="outline-3">
+<h3 id="org5f3ccfd">SEQ<sub>TODO</sub>: TODO(t) WAIT(w) | DONE(d)</h3>
+<div class="outline-text-3" id="text-org5f3ccfd">
+<p>
+<a href="https://www.youtube.com/watch?v=15w3I6MwCfs&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=2">https://www.youtube.com/watch?v=15w3I6MwCfs&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=2</a>
+</p>
+
+<p>
+C-c C-t set todo
+with colour  visit <a href="https://emacs.stackexchange.com/questions/4104/how-to-put-todo-faces-in-the-file">https://emacs.stackexchange.com/questions/4104/how-to-put-todo-faces-in-the-file</a>
+</p>
+
+<p>
+OrgMode E03S01: Automatic logging of status changes
+7,115 views
+Jun 19, 2016
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=R4QSTDco_w8&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=11">https://www.youtube.com/watch?v=R4QSTDco_w8&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=11</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org0ef1216" class="outline-3">
+<h3 id="org0ef1216">set tags</h3>
+<div class="outline-text-3" id="text-org0ef1216">
+<p>
+<a href="https://www.youtube.com/watch?v=GcUVvlClo9k&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=7">https://www.youtube.com/watch?v=GcUVvlClo9k&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=7</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org1be8a29" class="outline-2">
+<h2 id="org1be8a29">----------------------------------------------------------------</h2>
+<div class="outline-text-2" id="text-org1be8a29">
+</div>
+<div id="outline-container-org67a7450" class="outline-3">
+<h3 id="org67a7450">SET TAGS FOR THE TASKS C-c C-c&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ECAMS">ECAMS</span></span></h3>
+</div>
+<div id="outline-container-orgd3b6b36" class="outline-3">
+<h3 id="orgd3b6b36">BTech 1stYear&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Education">Education</span>&#xa0;<span class="BTech">BTech</span>&#xa0;<span class="2008">2008</span></span></h3>
+</div>
+<div id="outline-container-org0862e04" class="outline-3">
+<h3 id="org0862e04">Grossery List&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Home">Home</span></span></h3>
+</div>
+<div id="outline-container-org1ed5c9a" class="outline-3">
+<h3 id="org1ed5c9a">Java Coching&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Education">Education</span>&#xa0;<span class="Tution">Tution</span></span></h3>
+<div class="outline-text-3" id="text-org1ed5c9a">
+<p>
+In tags we can search in current exiting by pressing tab
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7bdbfc2" class="outline-3">
+<h3 id="org7bdbfc2">Orgmode E03S02: Splitting your system up to several files</h3>
+<div class="outline-text-3" id="text-org7bdbfc2">
+<p>
+<a href="https://www.youtube.com/watch?v=ECWtf6mAi9k&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=12">https://www.youtube.com/watch?v=ECWtf6mAi9k&amp;list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&amp;index=12</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e1ca4d" class="outline-2">
+<h2 id="org0e1ca4d">Replace jupyter with orgmode</h2>
+<div class="outline-text-2" id="text-org0e1ca4d">
+<p>
+<a href="https://rgoswami.me/posts/jupyter-orgmode/">https://rgoswami.me/posts/jupyter-orgmode/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgff324e4" class="outline-2">
+<h2 id="orgff324e4">Convert org to html with parameter</h2>
+<div class="outline-text-2" id="text-orgff324e4">
+<p>
+<a href="https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html">https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html</a>
+</p>
+
+<p>
+<a href="https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/">https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/</a>
+</p>
+
+<p>
+<a href="https://niklasfasching.github.io/go-org/#headline-2">https://niklasfasching.github.io/go-org/#headline-2</a>
+</p>
+
+
+<p>
+<a href="https://www.mail-archive.com/emacs-orgmode@gnu.org/msg18072.html">https://www.mail-archive.com/emacs-orgmode@gnu.org/msg18072.html</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

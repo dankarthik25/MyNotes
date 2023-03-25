@@ -1,0 +1,62 @@
+#+TITLE: Notes_sql_DBMS
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+https://www.youtube.com/watch?v=kBdlM6hNDAE&list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y
+* Database Management System (DBMS OR RDMS)
+
+** Basic Introduction 
+Defination : 
+2tier,3tier (3 schema, 3 level of abstraction)
+(data independance 
+Network Model 
+Heirarchical Model 
+Relation Model 
+ER Model 
+Object Oriented 
+** ER Model
+attributes 
+relationship 
+type of relationship
+
+** Basic of Keys 
+primary key 
+candidate key 
+super key 
+foreign key 
+
+
+** Normalization 
+Closure Method 
+Function Dep 
+1st Normal Form 
+2ND Normal Form 
+3rd Normal Form 
+BCLF
+** Transactoin Control & Concurrencty 
+ACID : Atomic 
+Problem :
+- Read - Write 
+- Write - Read 
+- Write - Write 
+Confllict Serialization 
+Recoverability 
+2-PL, timestamp
+
+
+** SQL and Relation algebra 
+DDL
+DML
+DCL
+Constrains 
+- Primary KEY
+- Unique Key Constrains
+- Not Null Constrains
+Aggragete Function 
+Joins 
+Nested Query
+- In, Not In, any, all
+
+** Indexing 
+- Single Level Indexing : Primary, Cluster, Secondary 
+- Multi Level : Btree, B+tree 
+

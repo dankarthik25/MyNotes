@@ -1,0 +1,4029 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-11 Sat 23:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>pandas</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Karthik" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">pandas</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgcb8458a">Resources</a></li>
+<li><a href="#org7f6feb1">Install pandas</a></li>
+<li><a href="#orgd99d635">Import and Export</a>
+<ul>
+<li><a href="#org8ac4b4c">Import</a></li>
+<li><a href="#org496e426">Export</a>
+<ul>
+<li><a href="#org2861bac">Export to csv</a></li>
+<li><a href="#orgb2c9c21">Export to excel</a></li>
+<li><a href="#org3c63f3b">Export to html</a></li>
+<li><a href="#org85bb128">Export to markdown</a></li>
+<li><a href="#org873be01">Export to database sqllite3</a></li>
+<li><a href="#orgf8bfbe2">Export to org-mode or psql formate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3d11899">View</a></li>
+<li><a href="#org6fdf285">Create dataframe</a>
+<ul>
+<li><a href="#org9a493f5">Using dictionary each <code>key is column name</code>  <code>value is list_of elements in column</code></a></li>
+<li><a href="#org641621d">Create Empty dataframe</a></li>
+<li><a href="#org94d5064">Create db with list of dictionary</a></li>
+<li><a href="#org508200b">Create with json data or dictionary</a></li>
+<li><a href="#org029ce9f">Create empty column</a></li>
+<li><a href="#org12490b1">Add Empty Colum to existing dataframe</a></li>
+</ul>
+</li>
+<li><a href="#orgced7612">Header or Column Name or Field</a>
+<ul>
+<li><a href="#org1b441d3">Get all Header or Field or Columns Name</a></li>
+<li><a href="#org89c3c8f">rename  header or column name</a></li>
+<li><a href="#org1f997de">Add Empty Colum to existing dataframe</a></li>
+<li><a href="#org22c54dc">Drop or delete Column</a></li>
+<li><a href="#org7b085e3">Drop Row</a></li>
+</ul>
+</li>
+<li><a href="#orga22ec42">getting data form dataframe</a>
+<ul>
+<li><a href="#org1a44644">If index is datetime.date we can slice</a></li>
+</ul>
+</li>
+<li><a href="#orgb45f852">Set Index</a></li>
+<li><a href="#orgf0af4fa">unique element in row/column</a></li>
+<li><a href="#orgac009a7">Inplace</a></li>
+<li><a href="#org094d387">For loop in pandas</a></li>
+<li><a href="#orgc5c9716">Selection</a>
+<ul>
+<li><a href="#org6bcc76f">Lables (.loc)</a></li>
+<li><a href="#org2a5d7ae">iloc</a></li>
+<li><a href="#org41f6648">set value using iloc</a></li>
+<li><a href="#orgd838ecb">at</a></li>
+<li><a href="#orgc8cf2c3">iat</a></li>
+<li><a href="#org0e32a48">loc to  iloc and iloc to loc</a></li>
+</ul>
+</li>
+<li><a href="#org008c231">Filters</a>
+<ul>
+<li><a href="#orgc6b6ede">filter get named index</a></li>
+</ul>
+</li>
+<li><a href="#org1265a6c">Update element in dataframe</a>
+<ul>
+<li><a href="#org4ccce4e">Update element in data fram</a>
+<ul>
+<li><a href="#org903de64">Using loc</a></li>
+<li><a href="#org692ee10">Using at</a></li>
+<li><a href="#org1977563">Using fuctions</a></li>
+<li><a href="#org0211b6c">Using lambda</a></li>
+<li><a href="#orga8ff19d">Using list compression</a></li>
+<li><a href="#orgb883b0a">Using pandas 'apply'</a></li>
+<li><a href="#orgd9a193f">Using pandas 'applymap''</a></li>
+<li><a href="#orgc53d18b">Using pandas 'map'</a></li>
+<li><a href="#orga729283">Error in map if some elements in column is not specific</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgaee3a02">Add and remove rows and columns</a>
+<ul>
+<li><a href="#org8160dc7">Add column</a></li>
+<li><a href="#org9aa96d0">Remove column</a></li>
+<li><a href="#orge999106">Creating column</a></li>
+<li><a href="#org904c5df">Add new row in dataframe using append</a></li>
+<li><a href="#orgd7cad2f">Add two dataframe in row using append</a></li>
+<li><a href="#org180f083">Remove row with index no or by value</a></li>
+</ul>
+</li>
+<li><a href="#org48bfac4">Sorting-Data</a>
+<ul>
+<li><a href="#orgbe88ae0">Sort by one column</a></li>
+<li><a href="#orgb4a7599">Sort by two column</a></li>
+<li><a href="#org6cbbb42">Sort by two column with multiple sort values</a></li>
+<li><a href="#orgc45a7af">Example 2</a>
+<ul>
+<li><a href="#orgeedb482">Sort Salary in Desending Order  based Country(in ascending Order)</a></li>
+<li><a href="#orge30f365">Sort dataframe based on salary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6fc311c">Grouping and Aggregates</a></li>
+<li><a href="#org8f87144">Cleaning-Data</a></li>
+<li><a href="#org337d0cb">pandas with datetime</a></li>
+<li><a href="#orgbf7c840">Join</a>
+<ul>
+<li><a href="#org1216788">Inner Join</a></li>
+<li><a href="#org4f4e0fa">Outer Join</a></li>
+<li><a href="#org28382a4">Right Join</a></li>
+<li><a href="#org12c21fd">Left Join</a></li>
+</ul>
+</li>
+<li><a href="#org2f3ce4a">Horizontal Join</a>
+<ul>
+<li><a href="#orgaa86ab1">pandas append</a></li>
+<li><a href="#orga0021ef">pandas concat</a></li>
+</ul>
+</li>
+<li><a href="#orgebd4ff7">Copy or shallow copy</a></li>
+<li><a href="#org3b87589">Resampling</a></li>
+<li><a href="#org61e19c9">Aggreagtes for ohlc</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcb8458a" class="outline-2">
+<h2 id="orgcb8458a">Resources</h2>
+<div class="outline-text-2" id="text-orgcb8458a">
+<p>
+Youtube Corey Schafer Pandas Playlist :<a href="https://www.youtube.com/watch?v=ZyhVh-qRZPA&amp;list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS">https://www.youtube.com/watch?v=ZyhVh-qRZPA&amp;list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS</a>
+10 min  pandas : <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html">https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f6feb1" class="outline-2">
+<h2 id="org7f6feb1">Install pandas</h2>
+<div class="outline-text-2" id="text-org7f6feb1">
+<p>
+install pandas
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">pip install pandas
+pip install jupyter notebook
+pip install jupyterlab
+</pre>
+</div>
+
+<p>
+download data
+stack Overflow Annual Developer Survey
+</p>
+</div>
+</div>
+<div id="outline-container-orgd99d635" class="outline-2">
+<h2 id="orgd99d635">Import and Export</h2>
+<div class="outline-text-2" id="text-orgd99d635">
+<p>
+<a href="./pandas-sub-doc/Import-Export.html">./pandas-sub-doc/Import-Export.html</a>
+</p>
+</div>
+<div id="outline-container-org8ac4b4c" class="outline-3">
+<h3 id="org8ac4b4c">Import</h3>
+<div class="outline-text-3" id="text-org8ac4b4c">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #715ab1;">df</span> = pd.read_csv(<span style="color: #2d9574;">'data/survey_results_public.csv'</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Set index from the file </span>
+<span style="color: #715ab1;">df</span> = pd.read_csv(<span style="color: #2d9574;">'data/survey_results_public.csv'</span>,index=dates)
+df = pd.read_excel(<span style="color: #3a81c3;">open</span>(<span style="color: #2d9574;">'tmp.xlsx'</span>, <span style="color: #2d9574;">'rb'</span>),
+              sheet_name=<span style="color: #2d9574;">'Sheet3'</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">if index is date or datetime you need to convert it datetime formate to sort or do datetime operations</span>
+df = pd.read_clipboard(sep=r<span style="color: #2d9574;">"[ ]{2,}"</span>)  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://stackoverflow.com/questions/61605415/how-can-we-resample-ohlcv-1-minute-pandas-dataframe-into-a-5-minute-dataframe</span>
+df = pf.read_html(<span style="color: #2d9574;">'https://simple.wikiepedia.org/wiki/List_of_U.S._states'</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">TODO read from databsae : sqllite3, mysql,psql, mongodb</span>
+</pre>
+</div>
+<p>
+For more information on read excel <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html#">link</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org496e426" class="outline-3">
+<h3 id="org496e426">Export</h3>
+<div class="outline-text-3" id="text-org496e426">
+</div>
+<div id="outline-container-org2861bac" class="outline-4">
+<h4 id="org2861bac">Export to csv</h4>
+</div>
+<div id="outline-container-orgb2c9c21" class="outline-4">
+<h4 id="orgb2c9c21">Export to excel</h4>
+<div class="outline-text-4" id="text-orgb2c9c21">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> openpyxl
+<span style="color: #715ab1;">file_rpath</span> = <span style="color: #2d9574;">'../database/option_trading-banknifty/HDFCBANK_historical_data'</span><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">os.path.splittext('/temp/test.txt'))</span>
+<span style="color: #715ab1;">file_name</span> = file_rpath+<span style="color: #2d9574;">".xlsx"</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">df.to_excel(file_name,sheet_name='1minute',,index=False) can't write other sheets in this file</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">if we use =to_excel= to write next sheet then it will rewrite entire file and all the data will be lost </span>
+
+<span style="color: #3a81c3; font-weight: bold;">with</span> pd.ExcelWriter(file_name, mode=<span style="color: #2d9574;">"w"</span>,engine=<span style="color: #2d9574;">"openpyxl"</span>)<span style="color: #3a81c3; font-weight: bold;">as</span> writer:
+    df.to_excel(writer, sheet_name=<span style="color: #2d9574;">"1minute"</span>)
+    df_temp =down_sample_by_minute(df,2)
+    df_temp.to_excel(writer,sheet_name=<span style="color: #2d9574;">'2minute'</span>)
+    df_temp =down_sample_by_minute(df,3)
+    df_temp.to_excel(writer,sheet_name=<span style="color: #2d9574;">'3minute'</span>)
+    df_temp =down_sample_by_minute(df,5)
+    df_temp.to_excel(writer,sheet_name=<span style="color: #2d9574;">'5minute'</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3c63f3b" class="outline-4">
+<h4 id="org3c63f3b">Export to html</h4>
+</div>
+<div id="outline-container-org85bb128" class="outline-4">
+<h4 id="org85bb128">Export to markdown</h4>
+<div class="outline-text-4" id="text-org85bb128">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.datasets <span style="color: #3a81c3; font-weight: bold;">import</span> load_iris
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #715ab1;">data</span> = load_iris()
+<span style="color: #715ab1;">df</span> = pd.DataFrame(data.data,
+                  columns=data.feature_names)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Converts the dataframe into str object with formatting</span>
+<span style="color: #3a81c3;">print</span>(df.to_markdown())
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org873be01" class="outline-4">
+<h4 id="org873be01">Export to database sqllite3</h4>
+<div class="outline-text-4" id="text-org873be01">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">from</span> sqlalchemy <span style="color: #3a81c3; font-weight: bold;">import</span> create_engine
+<span style="color: #3a81c3; font-weight: bold;">import</span> psycopg2
+
+<span style="color: #715ab1;">engine</span> = create_engine(<span style="color: #2d9574;">'postgresql://dbuser:dbpass@localhost:5432/sample_db'</span>)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To READ or IMPORT </span>
+<span style="color: #715ab1;">sql_df</span> = pd.read_sql(<span style="color: #2d9574;">'sample_table'</span>, engine, index_col=<span style="color: #2d9574;">'Respondent'</span>)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">TO EXPORT or WRITE</span>
+india_df.to_sql(<span style="color: #2d9574;">'sample_table'</span>, engine, if_exists=<span style="color: #2d9574;">'replace'</span>)
+</pre>
+</div>
+
+
+<p>
+For sqlite
+</p>
+
+<p>
+<a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#reading-tables">https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#reading-tables</a>
+</p>
+
+<p>
+<a href="https://stackoverflow.com/questions/36028759/how-to-open-and-convert-sqlite-database-to-pandas-dataframe">https://stackoverflow.com/questions/36028759/how-to-open-and-convert-sqlite-database-to-pandas-dataframe</a>
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> sqlite3
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Create your connection.</span>
+<span style="color: #715ab1;">cnx</span> = sqlite3.connect(<span style="color: #2d9574;">'file.db'</span>)
+
+<span style="color: #715ab1;">df</span> = pd.read_sql_query(<span style="color: #2d9574;">"SELECT * FROM table_name"</span>, cnx)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf8bfbe2" class="outline-4">
+<h4 id="orgf8bfbe2">Export to org-mode or psql formate</h4>
+<div class="outline-text-4" id="text-orgf8bfbe2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">from</span> tabulate <span style="color: #3a81c3; font-weight: bold;">import</span> tabulate
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #715ab1;">df</span> = pd.DataFrame({<span style="color: #2d9574;">'col_two'</span> : [0.0001, 1e-005 , 1e-006, 1e-007],
+                   <span style="color: #2d9574;">'column_3'</span> : [<span style="color: #2d9574;">'ABCD'</span>, <span style="color: #2d9574;">'ABCD'</span>, <span style="color: #2d9574;">'long string'</span>, <span style="color: #2d9574;">'ABCD'</span>]})
+
+<span style="color: #3a81c3;">print</span>(tabulate(df, headers=<span style="color: #2d9574;">'keys'</span>, tablefmt=<span style="color: #2d9574;">'psql'</span>))
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">+----+-----------+-------------+</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|    |   col_two | column_3    |</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|----+-----------+-------------|</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|  0 |    0.0001 | ABCD        |</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|  1 |    1e-05  | ABCD        |</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|  2 |    1e-06  | long string |</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|  3 |    1e-07  | ABCD        |</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">+----+-----------+-------------+</span>
+
+</pre>
+</div>
+
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">col two</th>
+<th scope="col" class="org-left">column 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">0.0001</td>
+<td class="org-left">ABCD</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1e-05</td>
+<td class="org-left">ABCD</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">1e-06</td>
+<td class="org-left">long string</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">1e-07</td>
+<td class="org-left">ABCD</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d11899" class="outline-2">
+<h2 id="org3d11899">View</h2>
+<div class="outline-text-2" id="text-org3d11899">
+<div class="org-src-container">
+<pre class="src src-python">df <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
+display(df) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">style  works only in jupyter not in terminal </span>
+<span style="color: #3a81c3;">print</span>(df) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">plane text</span>
+
+df.tail(10)
+df.head(10)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To set the maximum rows and columns to view </span>
+pd.set_option(<span style="color: #2d9574;">'display.max_columns'</span>, 85)
+pd.set_option(<span style="color: #2d9574;">'display.max_rows'</span>, 85)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to get the no.of rows and no.of columns </span>
+df.shape  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">(88883,85) # no.of rows:88883 , # no.of columns: 85</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6fdf285" class="outline-2">
+<h2 id="org6fdf285">Create dataframe</h2>
+<div class="outline-text-2" id="text-org6fdf285">
+<p>
+Types of creating dataframe
+</p>
+<ul class="org-ul">
+<li>using dictionary</li>
+</ul>
+</div>
+<div id="outline-container-org9a493f5" class="outline-3">
+<h3 id="org9a493f5">Using dictionary each <code>key is column name</code>  <code>value is list_of elements in column</code></h3>
+<div class="outline-text-3" id="text-org9a493f5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">"first"</span>: [<span style="color: #2d9574;">"Corey"</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>], 
+    <span style="color: #2d9574;">"last"</span>: [<span style="color: #2d9574;">"Schafer"</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+    <span style="color: #2d9574;">"email"</span>: [<span style="color: #2d9574;">"CoreyMSchafer@gmail.com"</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>],
+    <span style="color: #2d9574;">"employee id"</span>: [<span style="color: #2d9574;">"2022B001"</span>,<span style="color: #2d9574;">"2022B002"</span>,<span style="color: #2d9574;">"2022B003"</span>]
+}
+
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org641621d" class="outline-3">
+<h3 id="org641621d">Create Empty dataframe</h3>
+<div class="outline-text-3" id="text-org641621d">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">data</span> = pd.DataFrame(columns=[<span style="color: #2d9574;">'date'</span>, <span style="color: #2d9574;">'open'</span>, <span style="color: #2d9574;">'high'</span>, <span style="color: #2d9574;">'low'</span>, <span style="color: #2d9574;">'close'</span>, <span style="color: #2d9574;">'volume'</span>])
+<span style="color: #3a81c3;">print</span>(data)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Empty DataFrame</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Columns: [date, open, high, low, close, volume]</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Index: []</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">display(data)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94d5064" class="outline-3">
+<h3 id="org94d5064">Create db with list of dictionary</h3>
+<div class="outline-text-3" id="text-org94d5064">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">my_list</span> = [{<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 15, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 529.05, <span style="color: #2d9574;">'high'</span>: 529.95, <span style="color: #2d9574;">'low'</span>: 528.9, <span style="color: #2d9574;">'close'</span>: 529.8, <span style="color: #2d9574;">'volume'</span>: 99353},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 16, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 529.8, <span style="color: #2d9574;">'high'</span>: 530.35, <span style="color: #2d9574;">'low'</span>: 529.5, <span style="color: #2d9574;">'close'</span>: 529.8, <span style="color: #2d9574;">'volume'</span>: 50971},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 17, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 529.75, <span style="color: #2d9574;">'high'</span>: 530, <span style="color: #2d9574;">'low'</span>: 528.65, <span style="color: #2d9574;">'close'</span>: 528.65, <span style="color: #2d9574;">'volume'</span>: 76733},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 18, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 528.75, <span style="color: #2d9574;">'high'</span>: 528.75, <span style="color: #2d9574;">'low'</span>: 528, <span style="color: #2d9574;">'close'</span>: 528.35, <span style="color: #2d9574;">'volume'</span>: 50487},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 19, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 528.35, <span style="color: #2d9574;">'high'</span>: 528.4, <span style="color: #2d9574;">'low'</span>: 527.65, <span style="color: #2d9574;">'close'</span>: 527.9, <span style="color: #2d9574;">'volume'</span>: 45933},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 20, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 527.9, <span style="color: #2d9574;">'high'</span>: 527.9, <span style="color: #2d9574;">'low'</span>: 526.5, <span style="color: #2d9574;">'close'</span>: 526.5, <span style="color: #2d9574;">'volume'</span>: 61776},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 21, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 526.65, <span style="color: #2d9574;">'high'</span>: 527.05, <span style="color: #2d9574;">'low'</span>: 526.4, <span style="color: #2d9574;">'close'</span>: 526.9, <span style="color: #2d9574;">'volume'</span>: 52064},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 22, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 527, <span style="color: #2d9574;">'high'</span>: 527.8, <span style="color: #2d9574;">'low'</span>: 526.4, <span style="color: #2d9574;">'close'</span>: 527.8, <span style="color: #2d9574;">'volume'</span>: 44571},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 23, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 527.55, <span style="color: #2d9574;">'high'</span>: 527.9, <span style="color: #2d9574;">'low'</span>: 527.3, <span style="color: #2d9574;">'close'</span>: 527.65, <span style="color: #2d9574;">'volume'</span>: 29982},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 24, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)),
+        <span style="color: #2d9574;">'open'</span>: 527.5, <span style="color: #2d9574;">'high'</span>: 528.4, <span style="color: #2d9574;">'low'</span>: 527.45, <span style="color: #2d9574;">'close'</span>: 528.25, <span style="color: #2d9574;">'volume'</span>: 51639},
+    {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 25, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)), 
+        <span style="color: #2d9574;">'open'</span>: 528.3, <span style="color: #2d9574;">'high'</span>: 529.4, <span style="color: #2d9574;">'low'</span>: 528.3, <span style="color: #2d9574;">'close'</span>: 529.2, <span style="color: #2d9574;">'volume'</span>: 70639}, 
+        {<span style="color: #2d9574;">'date'</span>: datetime.datetime(2022, 8, 1, 9, 26, tzinfo=tzoffset(<span style="color: #4e3163;">None</span>, 19800)), 
+        <span style="color: #2d9574;">'open'</span>: 529.2, <span style="color: #2d9574;">'high'</span>: 529.2, <span style="color: #2d9574;">'low'</span>: 528.3, <span style="color: #2d9574;">'close'</span>: 528.55, <span style="color: #2d9574;">'volume'</span>: 46564}]
+
+data = pd.DataFrame(my_list)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">date</th>
+<th scope="col" class="org-right">open</th>
+<th scope="col" class="org-right">high</th>
+<th scope="col" class="org-right">low</th>
+<th scope="col" class="org-right">close</th>
+<th scope="col" class="org-right">volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">2022-08-01 09:15:00</td>
+<td class="org-right">529.05</td>
+<td class="org-right">529.95</td>
+<td class="org-right">528.9</td>
+<td class="org-right">529.8</td>
+<td class="org-right">99353</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">2022-08-01 09:16:00</td>
+<td class="org-right">529.8</td>
+<td class="org-right">530.35</td>
+<td class="org-right">529.5</td>
+<td class="org-right">529.8</td>
+<td class="org-right">50971</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">2022-08-01 09:17:00</td>
+<td class="org-right">529.75</td>
+<td class="org-right">530</td>
+<td class="org-right">528.65</td>
+<td class="org-right">528.65</td>
+<td class="org-right">76733</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">2022-08-01 09:18:00</td>
+<td class="org-right">528.75</td>
+<td class="org-right">528.75</td>
+<td class="org-right">528</td>
+<td class="org-right">528.35</td>
+<td class="org-right">50487</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">2022-08-01 09:19:00</td>
+<td class="org-right">528.35</td>
+<td class="org-right">528.4</td>
+<td class="org-right">527.65</td>
+<td class="org-right">527.9</td>
+<td class="org-right">45933</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">2022-08-01 09:20:00</td>
+<td class="org-right">527.9</td>
+<td class="org-right">527.9</td>
+<td class="org-right">526.5</td>
+<td class="org-right">526.5</td>
+<td class="org-right">61776</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">2022-08-01 09:21:00</td>
+<td class="org-right">526.65</td>
+<td class="org-right">527.05</td>
+<td class="org-right">526.4</td>
+<td class="org-right">526.9</td>
+<td class="org-right">52064</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">2022-08-01 09:22:00</td>
+<td class="org-right">527</td>
+<td class="org-right">527.8</td>
+<td class="org-right">526.4</td>
+<td class="org-right">527.8</td>
+<td class="org-right">44571</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">2022-08-01 09:23:00</td>
+<td class="org-right">527.55</td>
+<td class="org-right">527.9</td>
+<td class="org-right">527.3</td>
+<td class="org-right">527.65</td>
+<td class="org-right">29982</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left">2022-08-01 09:24:00</td>
+<td class="org-right">527.5</td>
+<td class="org-right">528.4</td>
+<td class="org-right">527.45</td>
+<td class="org-right">528.25</td>
+<td class="org-right">51639</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">2022-08-01 09:25:00</td>
+<td class="org-right">528.3</td>
+<td class="org-right">529.4</td>
+<td class="org-right">528.3</td>
+<td class="org-right">529.2</td>
+<td class="org-right">70639</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left">2022-08-01 09:26:00</td>
+<td class="org-right">529.2</td>
+<td class="org-right">529.2</td>
+<td class="org-right">528.3</td>
+<td class="org-right">528.55</td>
+<td class="org-right">46564</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org508200b" class="outline-3">
+<h3 id="org508200b">Create with json data or dictionary</h3>
+</div>
+<div id="outline-container-org029ce9f" class="outline-3">
+<h3 id="org029ce9f">Create empty column</h3>
+<div class="outline-text-3" id="text-org029ce9f">
+<pre class="example">
+data = yf.download("MSFT", period ='2d', interval="1m")    # Working from april 2020
+del data['Close']
+data.rename(columns={'Open': 'open','High':'high','Low':'low','Adj Close' : 'close','Volume':'volume'}, inplace=True)
+data = data.tz_localize(None)
+
+data=data.assign(gain="",loss='',rsi='',ma_fast='',ma_slow='',macd='')
+print(data)
+</pre>
+</div>
+</div>
+<div id="outline-container-org12490b1" class="outline-3">
+<h3 id="org12490b1">Add Empty Colum to existing dataframe</h3>
+<div class="outline-text-3" id="text-org12490b1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">df</span> = pd.DataFrame({<span style="color: #2d9574;">"A"</span>: [1,2,3], <span style="color: #2d9574;">"B"</span>: [2,3,4]})
+df
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[18]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A  B</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0  1  2</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1  2  3</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2  3  4</span>
+
+df.assign(C=<span style="color: #2d9574;">""</span>,D=np.nan)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[21]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A  B C   D</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0  1  2   NaN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1  2  3   NaN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2  3  4   NaN</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgced7612" class="outline-2">
+<h2 id="orgced7612">Header or Column Name or Field</h2>
+<div class="outline-text-2" id="text-orgced7612">
+</div>
+<div id="outline-container-org1b441d3" class="outline-3">
+<h3 id="org1b441d3">Get all Header or Field or Columns Name</h3>
+<div class="outline-text-3" id="text-org1b441d3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Import pandas package</span>
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">making data frame</span>
+<span style="color: #715ab1;">data</span> = pd.read_csv(<span style="color: #2d9574;">"nba.csv"</span>)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">iterating the columns</span>
+<span style="color: #3a81c3; font-weight: bold;">for</span> col <span style="color: #3a81c3; font-weight: bold;">in</span> data.columns:
+        <span style="color: #3a81c3;">print</span>(col)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Method 2 </span>
+<span style="color: #3a81c3;">print</span>(<span style="color: #3a81c3;">list</span>(data.columns)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Method 3</span>
+<span style="color: #3a81c3;">print</span>(data.keys())
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Method 4</span>
+<span style="color: #3a81c3;">print</span>(<span style="color: #3a81c3;">list</span>(data.columns.values))
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Method 5</span>
+<span style="color: #3a81c3;">print</span>(<span style="color: #3a81c3;">list</span>(data.columns.values.tolist()))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org89c3c8f" class="outline-3">
+<h3 id="org89c3c8f">rename  header or column name</h3>
+<div class="outline-text-3" id="text-org89c3c8f">
+<div class="org-src-container">
+<pre class="src src-python">df[[<span style="color: #2d9574;">'ConvertedComp'</span>,<span style="color: #2d9574;">'Hobbyist'</span>,<span style="color: #2d9574;">'Country'</span>]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Respondent</th>
+<th scope="col" class="org-right">ConvertedComp</th>
+<th scope="col" class="org-left">Hobbyist</th>
+<th scope="col" class="org-left">Country</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">nan</td>
+<td class="org-left">Yes</td>
+<td class="org-left">United Kingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">nan</td>
+<td class="org-left">No</td>
+<td class="org-left">Bosnia and Herzegovina</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">8820</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Thailand</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">61000</td>
+<td class="org-left">No</td>
+<td class="org-left">United States</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">nan</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Ukraine</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python">df.rename(columns={<span style="color: #2d9574;">'ConvertedComp'</span>: <span style="color: #2d9574;">'SalaryUSD'</span>}, inplace=<span style="color: #4e3163;">True</span>)
+df[[<span style="color: #2d9574;">'SalaryUSD'</span>,<span style="color: #2d9574;">'Hobbyist'</span>,<span style="color: #2d9574;">'Country'</span>]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Respondent</th>
+<th scope="col" class="org-right">ConvertedComp</th>
+<th scope="col" class="org-left">Hobbyist</th>
+<th scope="col" class="org-left">Country</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">nan</td>
+<td class="org-left">Yes</td>
+<td class="org-left">United Kingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">nan</td>
+<td class="org-left">No</td>
+<td class="org-left">Bosnia and Herzegovina</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">8820</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Thailand</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">61000</td>
+<td class="org-left">No</td>
+<td class="org-left">United States</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">nan</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Ukraine</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org1f997de" class="outline-3">
+<h3 id="org1f997de">Add Empty Colum to existing dataframe</h3>
+<div class="outline-text-3" id="text-org1f997de">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">df</span> = pd.DataFrame({<span style="color: #2d9574;">"A"</span>: [1,2,3], <span style="color: #2d9574;">"B"</span>: [2,3,4]})
+df
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[18]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A  B</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0  1  2</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1  2  3</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2  3  4</span>
+
+df.assign(C=<span style="color: #2d9574;">""</span>,D=np.nan)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[21]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A  B C   D</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0  1  2   NaN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1  2  3   NaN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2  3  4   NaN</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org22c54dc" class="outline-3">
+<h3 id="org22c54dc">Drop or delete Column</h3>
+<div class="outline-text-3" id="text-org22c54dc">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">df</span> = df.drop(<span style="color: #2d9574;">'column_name'</span>, axis=1)
+df = df.drop(columns=[<span style="color: #2d9574;">'column_nameA'</span>, <span style="color: #2d9574;">'column_nameB'</span>])
+
+df.drop(<span style="color: #2d9574;">'column_name'</span>, axis=1, inplace=<span style="color: #4e3163;">True</span>)
+
+df.drop([<span style="color: #2d9574;">'column_nameA'</span>, <span style="color: #2d9574;">'column_nameB'</span>], axis=1, inplace=<span style="color: #4e3163;">True</span>)
+
+<span style="color: #3a81c3; font-weight: bold;">del</span> df[<span style="color: #2d9574;">'column_name'</span>]
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b085e3" class="outline-3">
+<h3 id="org7b085e3">Drop Row</h3>
+<div class="outline-text-3" id="text-org7b085e3">
+<div class="org-src-container">
+<pre class="src src-python">data.drop([<span style="color: #2d9574;">"row_name1"</span>, <span style="color: #2d9574;">"row_name2"</span>, <span style="color: #2d9574;">"row_name3"</span>,<span style="color: #2d9574;">"row_name4"</span>], inplace = <span style="color: #4e3163;">True</span>)
+df = df.drop(df.index [ [ 0,2 ] ])
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga22ec42" class="outline-2">
+<h2 id="orga22ec42">getting data form dataframe</h2>
+<div class="outline-text-2" id="text-orga22ec42">
+<p>
+Get the specific column for dataframe 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'email'</span>]
+</pre>
+</div>
+
+<pre class="example">
+0    CoreyMSchafer@gmail.com
+1          JaneDoe@email.com
+2          JohnDoe@email.com
+Name: email, dtype: object
+
+</pre>
+<p>
+or you can use as class elements to get the column
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.email
+</pre>
+</div>
+
+<pre class="example">
+0    CoreyMSchafer@gmail.com
+1          JaneDoe@email.com
+2          JohnDoe@email.com
+Name: email, dtype: object
+
+</pre>
+
+<p>
+Slice Column for dataframe 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df[[<span style="color: #2d9574;">'last'</span>, <span style="color: #2d9574;">'email'</span>]]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Slice row form dataframe
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df[1:3]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python">df.columns
+</pre>
+</div>
+<pre class="example">
+Index(['first', 'last', 'email', 'employee id'], dtype='object')
+</pre>
+
+<p>
+To get the header list of dataframe
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3;">list</span>(df.columns.values)
+</pre>
+</div>
+</div>
+<div id="outline-container-org1a44644" class="outline-3">
+<h3 id="org1a44644">If index is datetime.date we can slice</h3>
+<div class="outline-text-3" id="text-org1a44644">
+<p>
+<code>df['2022-01-01' :'2022-02-01']</code> we give you sliced dataframe from horizontal
+</p>
+
+<p>
+You can get slice from loc and iloc also
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb45f852" class="outline-2">
+<h2 id="orgb45f852">Set Index</h2>
+<div class="outline-text-2" id="text-orgb45f852">
+<p>
+The index of pandas can be either a integer or float or string
+we can set the index of the data frame like
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.set_index(<span style="color: #2d9574;">"employee id"</span>)
+</pre>
+</div>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">2022B001</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-left">2022B003</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+We can reset the index by
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.reset_index(inplace=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgf0af4fa" class="outline-2">
+<h2 id="orgf0af4fa">unique element in row/column</h2>
+<div class="outline-text-2" id="text-orgf0af4fa">
+<p>
+To get the unique value in all column
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">"first"</span>: [<span style="color: #2d9574;">"Corey"</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>], 
+    <span style="color: #2d9574;">"last"</span>: [<span style="color: #2d9574;">"Schafer"</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+    <span style="color: #2d9574;">"email"</span>: [<span style="color: #2d9574;">"CoreyMSchafer@gmail.com"</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>],
+    <span style="color: #2d9574;">"employee id"</span>: [<span style="color: #2d9574;">"2022B001"</span>,<span style="color: #2d9574;">"2022B002"</span>,<span style="color: #2d9574;">"2022B003"</span>]
+}
+
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">for</span> col <span style="color: #3a81c3; font-weight: bold;">in</span> df:
+  <span style="color: #3a81c3;">print</span>(df[col].unique())
+</pre>
+</div>
+
+<pre class="example">
+['Corey' 'Jane' 'John']
+['Schafer' 'Doe']
+['CoreyMSchafer@gmail.com' 'JaneDoe@email.com' 'JohnDoe@email.com']
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgac009a7" class="outline-2">
+<h2 id="orgac009a7">Inplace</h2>
+<div class="outline-text-2" id="text-orgac009a7">
+<p>
+In general any operation performed in dataframe will not result in dataframe we need to assigne the change to the dataframe or
+</p>
+
+<p>
+Pandas has inbuild function to save the change performed on dataframe
+eg:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.set_index(<span style="color: #2d9574;">"employee id"</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">no change in df</span>
+<span style="color: #715ab1;">df</span> = df.set_index(<span style="color: #2d9574;">"employee id"</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">df is updated</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">or</span>
+df.set_index(<span style="color: #2d9574;">"employee id"</span>, inplace=<span style="color: #4e3163;">True</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">df is updated</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org094d387" class="outline-2">
+<h2 id="org094d387">For loop in pandas</h2>
+<div class="outline-text-2" id="text-org094d387">
+<p>
+loop thorugh column
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">for</span> (columnName, columnData) <span style="color: #3a81c3; font-weight: bold;">in</span> inf_df.iteritems():
+   <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">'Colunm Name : '</span>, columnName)
+   <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">'Column Contents : '</span>, columnData.values)
+</pre>
+</div>
+
+<p>
+column
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">for</span> col <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #715ab1;">df</span>:                                                                      
+    alleles = <span style="color: #3a81c3;">list</span>()                                                                
+    <span style="color: #3a81c3; font-weight: bold;">for</span> num, allele <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">enumerate</span>(letterOrder):                                      
+        alleles.append(df[col].<span style="color: #3a81c3;">str</span>.count(allele).<span style="color: #3a81c3;">sum</span>())                             
+
+    <span style="color: #715ab1;">full_results</span>[<span style="color: #715ab1;">col</span>] = [letterOrder[np.argmax(alleles)], np.<span style="color: #3a81c3;">max</span>(alleles)]
+</pre>
+</div>
+
+<p>
+loop thouugh rows
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">for</span> idx, row <span style="color: #3a81c3; font-weight: bold;">in</span> df.iterrows():
+    <span style="color: #3a81c3;">print</span>(idx, row[<span style="color: #2d9574;">'Year'</span>], row[<span style="color: #2d9574;">'Sales'</span>])
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Returns:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">0 2018 1000</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1 2019 2300</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2 2020 1900</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">3 2021 3400</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc5c9716" class="outline-2">
+<h2 id="orgc5c9716">Selection</h2>
+<div class="outline-text-2" id="text-orgc5c9716">
+<p>
+data access methods, <code>.at</code>, <code>.iat</code>, <code>.loc</code> and <code>.iloc</code>.
+</p>
+</div>
+<div id="outline-container-org6bcc76f" class="outline-3">
+<h3 id="org6bcc76f">Lables (.loc)</h3>
+<div class="outline-text-3" id="text-org6bcc76f">
+<p>
+We can access the row using <code>index value(loc)</code> or <code>index no(iloc)</code> <br />
+By default the index is <code>not set</code> then the <code>index value</code> will be row number starting with zero
+</p>
+
+<p>
+If nothing else is specified, the values are labeled with their index number. First value has index 0, second value has index 1 etc.
+</p>
+
+<p>
+This label can be used to access a specified value.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">df.set_index(<span style="color: #2d9574;">"employee id"</span>,inplace=<span style="color: #4e3163;">True</span>)
+
+df.loc[<span style="color: #2d9574;">'2022B003'</span>] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note need to set index</span>
+</pre>
+</div>
+
+<pre class="example">
+first                 John
+last                   Doe
+email    JohnDoe@email.com
+Name: 2022B003, dtype: object
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.loc[<span style="color: #2d9574;">'2022B002'</span>:<span style="color: #2d9574;">'2022B003'</span>] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note need to set index</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-left">2022B003</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Slice by row and column
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.loc[<span style="color: #2d9574;">'2022B002'</span>:<span style="color: #2d9574;">'2022B003'</span>,[<span style="color: #2d9574;">'first'</span>,<span style="color: #2d9574;">'email'</span>]] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note need to set index</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-left">2022B003</td>
+<td class="org-left">John</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">"first"</span>: [<span style="color: #2d9574;">"Corey"</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>], 
+    <span style="color: #2d9574;">"last"</span>: [<span style="color: #2d9574;">"Schafer"</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+    <span style="color: #2d9574;">"email"</span>: [<span style="color: #2d9574;">"CoreyMSchafer@gmail.com"</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>],
+    <span style="color: #2d9574;">"employee id"</span>: [<span style="color: #2d9574;">"2022B001"</span>,<span style="color: #2d9574;">"2022B002"</span>,<span style="color: #2d9574;">"2022B003"</span>]
+}
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+<span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">'df.index.name :</span>{df.index.name}<span style="color: #2d9574;">'</span>)
+<span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">'df.index.values:</span>{df.index.values}<span style="color: #2d9574;">'</span>) 
+
+df.set_index(<span style="color: #2d9574;">"employee id"</span>,inplace=<span style="color: #4e3163;">True</span>)
+<span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">'after setting index as employee'</span>)
+<span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">'df.index.name :</span>{df.index.name}<span style="color: #2d9574;">'</span>)
+<span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">'df.index.values:</span>{df.index.values}<span style="color: #2d9574;">'</span>) 
+display(df)
+
+
+df.index[df[<span style="color: #2d9574;">"first"</span>]==<span style="color: #2d9574;">'Jane'</span>].tolist()
+</pre>
+</div>
+
+<p>
+result 
+</p>
+<blockquote>
+<p>
+df.index.name :None <br />
+df.index.values:[0 1 2] <br />
+after setting index as employee <br />
+df.index.name :employee id <br />
+df.index.values:['2022B001' '2022B002' '2022B003']
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org2a5d7ae" class="outline-3">
+<h3 id="org2a5d7ae">iloc</h3>
+<div class="outline-text-3" id="text-org2a5d7ae">
+<p>
+iloc is simillar to loc insted of index value we will use index number
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.set_index(<span style="color: #2d9574;">"employee id"</span>,inplace=<span style="color: #4e3163;">True</span>)
+df.iloc[2] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note need to set index</span>
+</pre>
+</div>
+
+<pre class="example">
+first                 John
+last                   Doe
+email    JohnDoe@email.com
+Name: 2022B003, dtype: object
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.iloc[1:3] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note need to set index</span>
+</pre>
+</div>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Slice by row and column in iloc 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.iloc[[1,2],[0,2]]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org41f6648" class="outline-3">
+<h3 id="org41f6648">set value using iloc</h3>
+<div class="outline-text-3" id="text-org41f6648">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">idx</span> = start_idx <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">388</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">for idx in range(data.shape[0]):</span>
+<span style="color: #715ab1;">diff</span> = data.iloc[idx][<span style="color: #2d9574;">'close'</span>] - data.iloc[idx-1][<span style="color: #2d9574;">'close'</span>]
+<span style="color: #3a81c3; font-weight: bold;">if</span> diff &gt;=0:
+    data.<span style="color: #715ab1;">iloc</span>[idx,data.columns.get_loc(<span style="color: #2d9574;">"gain"</span>)] = diff
+    data.<span style="color: #715ab1;">iloc</span>[idx,data.columns.get_loc(<span style="color: #2d9574;">'loss'</span>)] = 0
+
+<span style="color: #3a81c3; font-weight: bold;">else</span>:
+    data.iloc[idx,data.columns.get_loc(<span style="color: #2d9574;">"gain"</span>)] = 0
+    data.<span style="color: #715ab1;">iloc</span>[idx,data.columns.get_loc(<span style="color: #2d9574;">'loss'</span>)] = -1*diff
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd838ecb" class="outline-3">
+<h3 id="orgd838ecb">at</h3>
+</div>
+<div id="outline-container-orgc8cf2c3" class="outline-3">
+<h3 id="orgc8cf2c3">iat</h3>
+</div>
+<div id="outline-container-org0e32a48" class="outline-3">
+<h3 id="org0e32a48">loc to  iloc and iloc to loc</h3>
+<div class="outline-text-3" id="text-org0e32a48">
+<div class="org-src-container">
+<pre class="src src-python">df.iloc[0].name <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">give loc Timestamp('2020-01-01 09:15:00')</span>
+<span style="color: #715ab1;">named_index</span> = df.iloc[0].name
+df.index.get_loc(named_index)  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">gives iloc value </span>
+</pre>
+</div>
+
+<pre class="example">
+df.index.get_loc(window_stop_row.name)
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">In [131]:</span>
+<span style="color: #715ab1;">dates</span> = pd.date_range(<span style="color: #2d9574;">'1/1/2000'</span>, periods=8)
+df = pd.DataFrame(np.random.randn(8, 4), index=dates, columns=[<span style="color: #2d9574;">'A'</span>, <span style="color: #2d9574;">'B'</span>, <span style="color: #2d9574;">'C'</span>, <span style="color: #2d9574;">'D'</span>])
+df
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[131]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#                   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">A         B         C         D</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-01  0.095234 -1.000863  0.899732 -1.742152</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-02 -0.517544 -1.274137  1.734024 -1.369487</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-03  0.134112  1.964386 -0.120282  0.573676</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-04 -0.737499 -0.581444  0.528500 -0.737697</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-05 -1.777800  0.795093  0.120681  0.524045</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-06 -0.048432 -0.751365 -0.760417 -0.181658</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-07 -0.570800  0.248608 -1.428998 -0.662014</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2000-01-08 -0.147326  0.717392  3.138620  1.208639</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">In [133]:    </span>
+window_stop_row = df[df.index &lt; <span style="color: #2d9574;">'2000-01-04'</span>].iloc[-1]
+window_stop_row.name
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[133]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Timestamp('2000-01-03 00:00:00', offset='D')</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">In [134]:</span>
+df.index.get_loc(window_stop_row.name)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Out[134]:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2  # iloc value </span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org008c231" class="outline-2">
+<h2 id="org008c231">Filters</h2>
+<div class="outline-text-2" id="text-org008c231">
+<p>
+<a href="https://datatofish.com/filter-pandas-dataframe/">https://datatofish.com/filter-pandas-dataframe/</a>
+<a href="https://www.statology.org/pandas-filter-by-index-value/">https://www.statology.org/pandas-filter-by-index-value/</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">'|': or comparisoin operator </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">'&amp;' : and  comparison operator </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">'~' : not operator</span>
+
+<span style="color: #715ab1;">filt</span> = (df[<span style="color: #2d9574;">'last'</span>] == <span style="color: #2d9574;">'Schafer'</span>) | (df[<span style="color: #2d9574;">'first'</span>] == <span style="color: #2d9574;">'John'</span>)
+filt
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Result </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">0     True</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1    False</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2     True</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">dtype: bool</span>
+df[filt]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python">df[~filt] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">select which is not filtered</span>
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Filter column 'LanguageWorkedWith' where it shouldn't have any <code>NaN</code> value
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3;">print</span>(df[<span style="color: #2d9574;">'LanguageWorkedWith'</span>])
+</pre>
+</div>
+
+<pre class="example">
+Respondent
+1                          HTML/CSS;Java;JavaScript;Python
+2                                      C++;HTML/CSS;Python
+3                                                 HTML/CSS
+4                                      C;C++;C#;Python;SQL
+5              C++;HTML/CSS;Java;JavaScript;Python;SQL;VBA
+			       ...                        
+88377                        HTML/CSS;JavaScript;Other(s):
+88601                                                  NaN
+88802                                                  NaN
+88816                                                  NaN
+88863    Bash/Shell/PowerShell;HTML/CSS;Java;JavaScript...
+Name: LanguageWorkedWith, Length: 88883, dtype: object
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">filt
+</pre>
+</div>
+
+<pre class="example">
+Respondent
+1         True
+2         True
+3        False
+4         True
+5         True
+	 ...  
+88377    False
+88601    False
+88802    False
+88816    False
+88863    False
+Name: LanguageWorkedWith, Length: 88883, dtype: bool
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.loc[filt]
+</pre>
+</div>
+<pre class="example">
+Respondent                                                   ...                                                   
+1           I am a student who is learning to code      Yes  ...  Appropriate in length  Neither easy nor difficult
+2           I am a student who is learning to code       No  ...  Appropriate in length  Neither easy nor difficult
+4                   I am a developer by profession       No  ...  Appropriate in length                        Easy
+5                   I am a developer by profession      Yes  ...  Appropriate in length                        Easy
+8                      I code primarily as a hobby      Yes  ...  Appropriate in length  Neither easy nor difficult
+...                                            ...      ...  ...                    ...                         ...
+84539                                          NaN      Yes  ...  Appropriate in length                        Easy
+85738                                          NaN      Yes  ...              Too short                        Easy
+86566                                          NaN      Yes  ...  Appropriate in length                        Easy
+87739                                          NaN      Yes  ...  Appropriate in length                        Easy
+88212                                          NaN       No  ...  Appropriate in length                        Easy
+
+[36443 rows x 84 columns]
+
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.loc[filt, <span style="color: #2d9574;">'LanguageWorkedWith'</span>]
+</pre>
+</div>
+
+<pre class="example">
+Respondent
+1                          HTML/CSS;Java;JavaScript;Python
+2                                      C++;HTML/CSS;Python
+4                                      C;C++;C#;Python;SQL
+5              C++;HTML/CSS;Java;JavaScript;Python;SQL;VBA
+8        Bash/Shell/PowerShell;C;C++;HTML/CSS;Java;Java...
+			       ...                        
+84539    Bash/Shell/PowerShell;C;C++;HTML/CSS;Java;Java...
+85738      Bash/Shell/PowerShell;C++;Python;Ruby;Other(s):
+86566      Bash/Shell/PowerShell;HTML/CSS;Python;Other(s):
+87739             C;C++;HTML/CSS;JavaScript;PHP;Python;SQL
+88212                           HTML/CSS;JavaScript;Python
+Name: LanguageWorkedWith, Length: 36443, dtype: object
+</pre>
+</div>
+<div id="outline-container-orgc6b6ede" class="outline-3">
+<h3 id="orgc6b6ede">filter get named index</h3>
+<div class="outline-text-3" id="text-orgc6b6ede">
+<pre class="example">
+filter1 = (edf['breakout']==True)
+# edf[(edf['breakout']==True)]
+# display(filter1)
+print(filter1.index)
+print(filter1.index.values)
+</pre>
+
+<p>
+result 
+</p>
+<pre class="example">
+DatetimeIndex(['2022-08-01 09:15:00', '2022-08-01 09:17:00',
+	       '2022-08-01 09:19:00', '2022-08-01 09:21:00',
+	       '2022-08-01 09:23:00', '2022-08-01 09:25:00',
+	       '2022-08-01 09:27:00', '2022-08-01 09:29:00',
+	       '2022-08-01 09:31:00', '2022-08-01 09:33:00',
+	       ...
+	       '2022-08-30 15:11:00', '2022-08-30 15:13:00',
+	       '2022-08-30 15:15:00', '2022-08-30 15:17:00',
+	       '2022-08-30 15:19:00', '2022-08-30 15:21:00',
+	       '2022-08-30 15:23:00', '2022-08-30 15:25:00',
+	       '2022-08-30 15:27:00', '2022-09-01 09:15:00'],
+	      dtype='datetime64[ns]', name='date', length=3741, freq=None)
+
+['2022-08-01T09:15:00.000000000' '2022-08-01T09:17:00.000000000'
+ '2022-08-01T09:19:00.000000000' ... '2022-08-30T15:25:00.000000000'
+ '2022-08-30T15:27:00.000000000' '2022-09-01T09:15:00.000000000']
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1265a6c" class="outline-2">
+<h2 id="org1265a6c">Update element in dataframe</h2>
+<div class="outline-text-2" id="text-org1265a6c">
+</div>
+<div id="outline-container-org4ccce4e" class="outline-3">
+<h3 id="org4ccce4e">Update element in data fram</h3>
+<div class="outline-text-3" id="text-org4ccce4e">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+     <span style="color: #2d9574;">"first"</span>: [<span style="color: #2d9574;">"Corey"</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>], 
+     <span style="color: #2d9574;">"last"</span>: [<span style="color: #2d9574;">"Schafer"</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+     <span style="color: #2d9574;">"email"</span>: [<span style="color: #2d9574;">"CoreyMSchafer@gmail.com"</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>],
+     <span style="color: #2d9574;">"employee id"</span>: [<span style="color: #2d9574;">"2022B001"</span>,<span style="color: #2d9574;">"2022B002"</span>,<span style="color: #2d9574;">"2022B003"</span>]
+}
+
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+</pre>
+</div>
+
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org903de64" class="outline-4">
+<h4 id="org903de64">Using loc</h4>
+<div class="outline-text-4" id="text-org903de64">
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #715ab1;">loc</span>[2] = [<span style="color: #2d9574;">'John'</span>, <span style="color: #2d9574;">'Smith'</span>, <span style="color: #2d9574;">'JohnSmith@email.com'</span>]
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Smith</td>
+<td class="org-left">JohnSmith@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-python">df[filt][<span style="color: #2d9574;">'last'</span>] = <span style="color: #2d9574;">'Smith'</span> <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error: Can't copy SettingWithCopyWarning</span>
+df.loc[2, <span style="color: #2d9574;">'last'</span>] = <span style="color: #2d9574;">'Smith'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org692ee10" class="outline-4">
+<h4 id="org692ee10">Using at</h4>
+<div class="outline-text-4" id="text-org692ee10">
+<p>
+simillar to loc 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #715ab1;">loc</span>[2, <span style="color: #2d9574;">'last'</span>] = <span style="color: #2d9574;">'Smith'</span>
+df.<span style="color: #715ab1;">at</span>[2, <span style="color: #2d9574;">'last'</span>] = <span style="color: #2d9574;">'Doe'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1977563" class="outline-4">
+<h4 id="org1977563">Using fuctions</h4>
+<div class="outline-text-4" id="text-org1977563">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'email'</span>].<span style="color: #3a81c3;">str</span>.upper()
+</pre>
+</div>
+
+<pre class="example">
+0    COREYMSCHAFER@GMAIL.COM
+1          JANEDOE@EMAIL.COM
+2          JOHNDOE@EMAIL.COM
+Name: email, dtype: object
+</pre>
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'email'</span>].<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3;">len</span>)
+</pre>
+</div>
+<pre class="example">
+0    23
+1    17
+2    17
+Name: email, dtype: int64
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">update_email</span>(email):
+    <span style="color: #3a81c3; font-weight: bold;">return</span> email.capitalize()
+df[<span style="color: #2d9574;">'email'</span>].<span style="color: #3a81c3;">apply</span>(update_email)
+</pre>
+</div>
+
+<pre class="example">
+0    Coreymschafer@gmail.com
+1          Janedoe@email.com
+2          Johndoe@email.com
+Name: email, dtype: object
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0211b6c" class="outline-4">
+<h4 id="org0211b6c">Using lambda</h4>
+<div class="outline-text-4" id="text-org0211b6c">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'email'</span>].<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3; font-weight: bold;">lambda</span> x: x.upper())
+</pre>
+</div>
+
+<pre class="example">
+0    coreymschafer@gmail.com
+1          janedoe@email.com
+2          johndoe@email.com
+Name: email, dtype: object
+</pre>
+</div>
+</div>
+<div id="outline-container-orga8ff19d" class="outline-4">
+<h4 id="orga8ff19d">Using list compression</h4>
+<div class="outline-text-4" id="text-orga8ff19d">
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #715ab1;">columns</span> = [x.upper() <span style="color: #3a81c3; font-weight: bold;">for</span> x <span style="color: #3a81c3; font-weight: bold;">in</span> df.columns]
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">FIRST</th>
+<th scope="col" class="org-left">LAST</th>
+<th scope="col" class="org-left">EMAIL</th>
+<th scope="col" class="org-left">EMPLOYEE ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Smith</td>
+<td class="org-left">JohnSmith@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgb883b0a" class="outline-4">
+<h4 id="orgb883b0a">Using pandas 'apply'</h4>
+<div class="outline-text-4" id="text-orgb883b0a">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'email'</span>].<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3;">len</span>)
+</pre>
+</div>
+
+<pre class="example">
+0    23
+1    17
+2    17
+Name: email, dtype: int64
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3;">len</span>, axis=<span style="color: #2d9574;">'columns'</span>)
+</pre>
+</div>
+<pre class="example">
+0    3
+1    3
+2    3
+dtype: int64
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #3a81c3;">apply</span>(pd.Series.<span style="color: #3a81c3;">min</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">first                      Corey</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">last                         Doe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">email    coreymschafer@gmail.com</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">dtype: object</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python">df.<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3; font-weight: bold;">lambda</span> x: x.<span style="color: #3a81c3;">min</span>())
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">first                      Corey</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">last                         Doe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">email    coreymschafer@gmail.com</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">dtype: object</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd9a193f" class="outline-4">
+<h4 id="orgd9a193f">Using pandas 'applymap''</h4>
+<div class="outline-text-4" id="text-orgd9a193f">
+<div class="org-src-container">
+<pre class="src src-python">df.applymap(<span style="color: #3a81c3;">len</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#       </span><span style="color: #2aa1ae; background-color: #ecf3ec;">first   last    email</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0      5       7       23</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      4       3       17</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2      4       5       17</span>
+df.applymap(<span style="color: #3a81c3;">str</span>.lower)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#       </span><span style="color: #2aa1ae; background-color: #ecf3ec;">first   last    email</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0      corey   schafer         coreymschafer@gmail.com</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      jane    doe     janedoe@email.com</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2      john    smith   johndoe@email.com</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc53d18b" class="outline-4">
+<h4 id="orgc53d18b">Using pandas 'map'</h4>
+<div class="outline-text-4" id="text-orgc53d18b">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'Hobbyist'</span>]
+</pre>
+</div>
+
+<pre class="example">
+Respondent
+1        Yes
+2         No
+3        Yes
+4         No
+5        Yes
+	... 
+88377    Yes
+88601     No
+88802     No
+88816     No
+88863    Yes
+Name: Hobbyist, Length: 88883, dtype: object
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'Hobbyist'</span>].<span style="color: #3a81c3;">map</span>({<span style="color: #2d9574;">'Yes'</span>: <span style="color: #4e3163;">True</span>, <span style="color: #2d9574;">'No'</span>: <span style="color: #4e3163;">False</span>})
+<span style="color: #715ab1;">df</span>[<span style="color: #2d9574;">'Hobbyist'</span>] = df[<span style="color: #2d9574;">'Hobbyist'</span>].<span style="color: #3a81c3;">map</span>({<span style="color: #2d9574;">'Yes'</span>: <span style="color: #4e3163;">True</span>, <span style="color: #2d9574;">'No'</span>: <span style="color: #4e3163;">False</span>})
+df[<span style="color: #2d9574;">'Hobbyist'</span>]
+</pre>
+</div>
+
+<pre class="example">
+Respondent
+1         True
+2        False
+3         True
+4        False
+5         True
+	 ...  
+88377     True
+88601    False
+88802    False
+88816    False
+88863     True
+Name: Hobbyist, Length: 88883, dtype: bool
+</pre>
+</div>
+</div>
+<div id="outline-container-orga729283" class="outline-4">
+<h4 id="orga729283">Error in map if some elements in column is not specific</h4>
+<div class="outline-text-4" id="text-orga729283">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'first'</span>].<span style="color: #3a81c3;">map</span>({<span style="color: #2d9574;">'Corey'</span>: <span style="color: #2d9574;">'Chris'</span>, <span style="color: #2d9574;">'Jane'</span>: <span style="color: #2d9574;">'Mary'</span>})
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0    Chris</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1     Mary</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2      NaN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Name: first, dtype: object</span>
+df[<span style="color: #2d9574;">'first'</span>].replace({<span style="color: #2d9574;">'Corey'</span>: <span style="color: #2d9574;">'Chris'</span>, <span style="color: #2d9574;">'Jane'</span>: <span style="color: #2d9574;">'Mary'</span>})
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">0    Chris</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">1     Mary</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">2     Smit</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Name: first, dtype: object</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaee3a02" class="outline-2">
+<h2 id="orgaee3a02">Add and remove rows and columns</h2>
+<div class="outline-text-2" id="text-orgaee3a02">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">"first"</span>: [<span style="color: #2d9574;">"Corey"</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>], 
+    <span style="color: #2d9574;">"last"</span>: [<span style="color: #2d9574;">"Schafer"</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+    <span style="color: #2d9574;">"email"</span>: [<span style="color: #2d9574;">"CoreyMSchafer@gmail.com"</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>],
+    <span style="color: #2d9574;">"employee id"</span>: [<span style="color: #2d9574;">"2022B001"</span>,<span style="color: #2d9574;">"2022B002"</span>,<span style="color: #2d9574;">"2022B003"</span>]
+}
+
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-org8160dc7" class="outline-3">
+<h3 id="org8160dc7">Add column</h3>
+<div class="outline-text-3" id="text-org8160dc7">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">df</span>[<span style="color: #2d9574;">'full name'</span>] = df[<span style="color: #2d9574;">'first'</span>] + <span style="color: #2d9574;">' '</span> + df[<span style="color: #2d9574;">'last'</span>]
+df
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">full name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+<td class="org-left">Corey Schafer</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane Doe</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+<td class="org-left">John Doe</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org9aa96d0" class="outline-3">
+<h3 id="org9aa96d0">Remove column</h3>
+<div class="outline-text-3" id="text-org9aa96d0">
+<div class="org-src-container">
+<pre class="src src-python">df.drop(columns=[ <span style="color: #2d9574;">'last'</span>,<span style="color: #2d9574;">'full name'</span>], inplace=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-python">df.drop(columns=[<span style="color: #2d9574;">'first'</span>, <span style="color: #2d9574;">'last'</span>], inplace=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">full name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+<td class="org-left">Corey Schafer</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane Doe</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+<td class="org-left">John Doe</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orge999106" class="outline-3">
+<h3 id="orge999106">Creating column</h3>
+<div class="outline-text-3" id="text-orge999106">
+<div class="org-src-container">
+<pre class="src src-python">df[[<span style="color: #2d9574;">'first'</span>, <span style="color: #2d9574;">'last'</span>]] = df[<span style="color: #2d9574;">'full_name'</span>].<span style="color: #3a81c3;">str</span>.split(<span style="color: #2d9574;">' '</span>, expand=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+<th scope="col" class="org-left">full name</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+<td class="org-left">Corey Schafer</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+<td class="org-left">Jane Doe</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+<td class="org-left">John Doe</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org904c5df" class="outline-3">
+<h3 id="org904c5df">Add new row in dataframe using append</h3>
+<div class="outline-text-3" id="text-org904c5df">
+<div class="org-src-container">
+<pre class="src src-python">df.append({<span style="color: #2d9574;">'first'</span>: <span style="color: #2d9574;">'Tony'</span>}, ignore_index=<span style="color: #4e3163;">True</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">NOTE this method is deprecated in future version use pandas.concat </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd7cad2f" class="outline-3">
+<h3 id="orgd7cad2f">Add two dataframe in row using append</h3>
+<div class="outline-text-3" id="text-orgd7cad2f">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">'first'</span>: [<span style="color: #2d9574;">'Tony'</span>, <span style="color: #2d9574;">'Steve'</span>], 
+    <span style="color: #2d9574;">'last'</span>: [<span style="color: #2d9574;">'Stark'</span>, <span style="color: #2d9574;">'Rogers'</span>], 
+    <span style="color: #2d9574;">'email'</span>: [<span style="color: #2d9574;">'IronMan@avenge.com'</span>, <span style="color: #2d9574;">'Cap@avenge.com'</span>]
+}
+<span style="color: #715ab1;">df2</span> = pd.DataFrame(people)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">full name</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">IronMan@avenge.com</td>
+<td class="org-left">Tony Stark</td>
+<td class="org-left">Tony</td>
+<td class="org-left">Stark</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Cap@avenge.com</td>
+<td class="org-left">Steve Rogers</td>
+<td class="org-left">Steve</td>
+<td class="org-left">Rogers</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python">df.append(df2, ignore_index=<span style="color: #4e3163;">True</span>, sort=<span style="color: #4e3163;">False</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Tony</td>
+<td class="org-left">Stark</td>
+<td class="org-left">IronMan@avenge.com</td>
+<td class="org-left">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Steve</td>
+<td class="org-left">Rogers</td>
+<td class="org-left">Cap@avenge.com</td>
+<td class="org-left">nan</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org180f083" class="outline-3">
+<h3 id="org180f083">Remove row with index no or by value</h3>
+<div class="outline-text-3" id="text-org180f083">
+<div class="org-src-container">
+<pre class="src src-python">df.drop(index=4)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-left">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-left">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+<td class="org-left">2022B002</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+<td class="org-left">2022B003</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Tony</td>
+<td class="org-left">Stark</td>
+<td class="org-left">IronMan@avenge.com</td>
+<td class="org-left">nan</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">filt</span> = df[<span style="color: #2d9574;">'last'</span>] == <span style="color: #2d9574;">'Doe'</span>
+df =df.drop(index=df[filt].index)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+<th scope="col" class="org-right">employee id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+<td class="org-right">2022B001</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Tony</td>
+<td class="org-left">Stark</td>
+<td class="org-left">IronMan@avenge.com</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Steve</td>
+<td class="org-left">Rogers</td>
+<td class="org-left">Cap@avenge.com</td>
+<td class="org-right">nan</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org48bfac4" class="outline-2">
+<h2 id="org48bfac4">Sorting-Data</h2>
+<div class="outline-text-2" id="text-org48bfac4">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">people</span> = {
+    <span style="color: #2d9574;">'first'</span>: [<span style="color: #2d9574;">'Corey'</span>, <span style="color: #2d9574;">'Jane'</span>, <span style="color: #2d9574;">'John'</span>, <span style="color: #2d9574;">'Adam'</span>], 
+    <span style="color: #2d9574;">'last'</span>: [<span style="color: #2d9574;">'Schafer'</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>, <span style="color: #2d9574;">'Doe'</span>], 
+    <span style="color: #2d9574;">'email'</span>: [<span style="color: #2d9574;">'CoreyMSchafer@gmail.com'</span>, <span style="color: #2d9574;">'JaneDoe@email.com'</span>, <span style="color: #2d9574;">'JohnDoe@email.com'</span>, <span style="color: #2d9574;">'A@email.com'</span>]
+}
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1;">df</span> = pd.DataFrame(people)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Adam</td>
+<td class="org-left">Doe</td>
+<td class="org-left">A@email.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-orgbe88ae0" class="outline-3">
+<h3 id="orgbe88ae0">Sort by one column</h3>
+<div class="outline-text-3" id="text-orgbe88ae0">
+<div class="org-src-container">
+<pre class="src src-python">df.sort_values(by=<span style="color: #2d9574;">'last'</span>, ascending=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Adam</td>
+<td class="org-left">Doe</td>
+<td class="org-left">A@email.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgb4a7599" class="outline-3">
+<h3 id="orgb4a7599">Sort by two column</h3>
+<div class="outline-text-3" id="text-orgb4a7599">
+<div class="org-src-container">
+<pre class="src src-python">df.sort_values(by=[<span style="color: #2d9574;">'last'</span>, <span style="color: #2d9574;">'first'</span>], ascending=<span style="color: #4e3163;">False</span>)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Adam</td>
+<td class="org-left">Doe</td>
+<td class="org-left">A@email.com</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6cbbb42" class="outline-3">
+<h3 id="org6cbbb42">Sort by two column with multiple sort values</h3>
+<div class="outline-text-3" id="text-org6cbbb42">
+<div class="org-src-container">
+<pre class="src src-python">df.sort_values(by=[<span style="color: #2d9574;">'last'</span>, <span style="color: #2d9574;">'first'</span>], ascending=[<span style="color: #4e3163;">False</span>, <span style="color: #4e3163;">True</span>], inplace=<span style="color: #4e3163;">True</span>)
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">first</th>
+<th scope="col" class="org-left">last</th>
+<th scope="col" class="org-left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Corey</td>
+<td class="org-left">Schafer</td>
+<td class="org-left">CoreyMSchafer@gmail.com</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Adam</td>
+<td class="org-left">Doe</td>
+<td class="org-left">A@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Jane</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JaneDoe@email.com</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-left">JohnDoe@email.com</td>
+</tr>
+</tbody>
+</table>
+<p>
+<del>----</del>---------<del>---------</del>--------------------&#x2013;&#x2014;+
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'last'</span>].sort_values()
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">3        Doe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1        Doe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2        Doe</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">0    Schafer</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Name: last, dtype: object</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc45a7af" class="outline-3">
+<h3 id="orgc45a7af">Example 2</h3>
+<div class="outline-text-3" id="text-orgc45a7af">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">dir_name</span>= <span style="color: #2d9574;">'/media/jayradhey/myVolume/WorkSpace_Python/pandas/'</span>
+<span style="color: #715ab1;">file_name</span>=<span style="color: #2d9574;">'data/survey_results_public.csv'</span>
+<span style="color: #715ab1;">schema_name</span>=<span style="color: #2d9574;">'data/survey_results_schema.csv'</span>
+<span style="color: #715ab1;">schema_path</span>=dir_name + schema_name
+<span style="color: #715ab1;">file_path</span> =  dir_name + file_name
+<span style="color: #3a81c3;">print</span>(file_path, schema_path)
+
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1;">df</span> = pd.read_csv(file_path, index_col=<span style="color: #2d9574;">'Respondent'</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">, index_col='Respondent'</span>
+schema_df = pd.read_csv(schema_path, index_col=<span style="color: #2d9574;">'Column'</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgeedb482" class="outline-4">
+<h4 id="orgeedb482">Sort Salary in Desending Order  based Country(in ascending Order)</h4>
+<div class="outline-text-4" id="text-orgeedb482">
+<div class="org-src-container">
+<pre class="src src-python">df.sort_values(by=[<span style="color: #2d9574;">'Country'</span>, <span style="color: #2d9574;">'ConvertedComp'</span>], ascending=[<span style="color: #4e3163;">True</span>, <span style="color: #4e3163;">False</span>], inplace=<span style="color: #4e3163;">True</span>)
+df[[<span style="color: #2d9574;">'Country'</span>, <span style="color: #2d9574;">'ConvertedComp'</span>]].head(50) 
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Respondent</th>
+<th scope="col" class="org-left">Country</th>
+<th scope="col" class="org-right">ConvertedComp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">63129</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">1e+06</td>
+</tr>
+
+<tr>
+<td class="org-right">50499</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">153216</td>
+</tr>
+
+<tr>
+<td class="org-right">39258</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">19152</td>
+</tr>
+
+<tr>
+<td class="org-right">58450</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">17556</td>
+</tr>
+
+<tr>
+<td class="org-right">7085</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">14364</td>
+</tr>
+
+<tr>
+<td class="org-right">22450</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">7980</td>
+</tr>
+
+<tr>
+<td class="org-right">48436</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">4464</td>
+</tr>
+
+<tr>
+<td class="org-right">10746</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">3996</td>
+</tr>
+
+<tr>
+<td class="org-right">8149</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">1596</td>
+</tr>
+
+<tr>
+<td class="org-right">29736</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">1116</td>
+</tr>
+
+<tr>
+<td class="org-right">722</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">28638</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">6417</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">7353</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">12310</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">26340</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">29045</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">33178</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">37802</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">40000</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">43106</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">44403</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">45854</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">47110</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">49702</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">50767</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">51859</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">58760</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">59560</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">60569</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">60946</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">62168</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">62525</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">74386</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">80926</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">85715</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">85825</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">86362</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">86932</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">87091</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">88582</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">88731</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">2782</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">63019</td>
+<td class="org-left">Afghanistan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">38308</td>
+<td class="org-left">Albania</td>
+<td class="org-right">187668</td>
+</tr>
+
+<tr>
+<td class="org-right">3787</td>
+<td class="org-left">Albania</td>
+<td class="org-right">114550</td>
+</tr>
+
+<tr>
+<td class="org-right">9270</td>
+<td class="org-left">Albania</td>
+<td class="org-right">74474</td>
+</tr>
+
+<tr>
+<td class="org-right">6716</td>
+<td class="org-left">Albania</td>
+<td class="org-right">60000</td>
+</tr>
+
+<tr>
+<td class="org-right">10303</td>
+<td class="org-left">Albania</td>
+<td class="org-right">57300</td>
+</tr>
+
+<tr>
+<td class="org-right">66280</td>
+<td class="org-left">Albania</td>
+<td class="org-right">41244</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orge30f365" class="outline-4">
+<h4 id="orge30f365">Sort dataframe based on salary</h4>
+<div class="outline-text-4" id="text-orge30f365">
+<div class="org-src-container">
+<pre class="src src-python">df[<span style="color: #2d9574;">'ConvertedComp'</span>].nlargest(10)
+</pre>
+</div>
+<pre class="example">
+25983    2000000.0
+87896    2000000.0
+22013    2000000.0
+28243    2000000.0
+72732    2000000.0
+78151    2000000.0
+80200    2000000.0
+52132    2000000.0
+75561    2000000.0
+32250    2000000.0
+Name: ConvertedComp, dtype: float64
+</pre>
+<div class="org-src-container">
+<pre class="src src-python">df.nsmallest(10, <span style="color: #2d9574;">'ConvertedComp'</span>)
+</pre>
+</div>
+<pre class="example">
+Respondent
+722      0.0
+28638    0.0
+13825    0.0
+40913    0.0
+30630    0.0
+69049    0.0
+19340    0.0
+16214    0.0
+29355    0.0
+1685     0.0
+Name: ConvertedComp, dtype: float64
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6fc311c" class="outline-2">
+<h2 id="org6fc311c">Grouping and Aggregates</h2>
+<div class="outline-text-2" id="text-org6fc311c">
+<p>
+<a href="./pandas-sub-doc/Pandas-Grouping-Aggregates.html">./pandas-sub-doc/Pandas-Grouping-Aggregates.html</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">dir_name</span>= <span style="color: #2d9574;">'/media/jayradhey/myVolume/WorkSpace_Python/pandas/'</span>
+<span style="color: #715ab1;">file_name</span>=<span style="color: #2d9574;">'data/survey_results_public.csv'</span>
+<span style="color: #715ab1;">schema_name</span>=<span style="color: #2d9574;">'data/survey_results_schema.csv'</span>
+<span style="color: #715ab1;">schema_path</span>=dir_name + schema_name
+<span style="color: #715ab1;">file_path</span> =  dir_name + file_name
+<span style="color: #3a81c3;">print</span>(file_path, schema_path)
+
+<span style="color: #715ab1;">df</span> = pd.read_csv(file_path, index_col=<span style="color: #2d9574;">'Respondent'</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">, index_col='Respondent'</span>
+schema_df = pd.read_csv(schema_path, index_col=<span style="color: #2d9574;">'Column'</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python">df.describe()
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">CompTotal</th>
+<th scope="col" class="org-right">ConvertedComp</th>
+<th scope="col" class="org-right">WorkWeekHrs</th>
+<th scope="col" class="org-right">CodeRevHrs</th>
+<th scope="col" class="org-right">Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">count</td>
+<td class="org-right">55945</td>
+<td class="org-right">55823</td>
+<td class="org-right">64503</td>
+<td class="org-right">49790</td>
+<td class="org-right">79210</td>
+</tr>
+
+<tr>
+<td class="org-left">mean</td>
+<td class="org-right">5.51901e+11</td>
+<td class="org-right">127111</td>
+<td class="org-right">42.1272</td>
+<td class="org-right">5.08431</td>
+<td class="org-right">30.3367</td>
+</tr>
+
+<tr>
+<td class="org-left">std</td>
+<td class="org-right">7.33193e+13</td>
+<td class="org-right">284152</td>
+<td class="org-right">37.2876</td>
+<td class="org-right">5.51393</td>
+<td class="org-right">9.17839</td>
+</tr>
+
+<tr>
+<td class="org-left">min</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">25%</td>
+<td class="org-right">20000</td>
+<td class="org-right">25777.5</td>
+<td class="org-right">40</td>
+<td class="org-right">2</td>
+<td class="org-right">24</td>
+</tr>
+
+<tr>
+<td class="org-left">50%</td>
+<td class="org-right">62000</td>
+<td class="org-right">57287</td>
+<td class="org-right">40</td>
+<td class="org-right">4</td>
+<td class="org-right">29</td>
+</tr>
+
+<tr>
+<td class="org-left">75%</td>
+<td class="org-right">120000</td>
+<td class="org-right">100000</td>
+<td class="org-right">44.75</td>
+<td class="org-right">6</td>
+<td class="org-right">35</td>
+</tr>
+
+<tr>
+<td class="org-left">max</td>
+<td class="org-right">1e+16</td>
+<td class="org-right">2e+06</td>
+<td class="org-right">4850</td>
+<td class="org-right">99</td>
+<td class="org-right">99</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org8f87144" class="outline-2">
+<h2 id="org8f87144">Cleaning-Data</h2>
+<div class="outline-text-2" id="text-org8f87144">
+<p>
+Snipped <a href="./pandas-sub-doc/Pandas-Cleaning-Data.html">./pandas-sub-doc/Pandas-Cleaning-Data.html</a>
+Stackoverflow <a href="./pandas-sub-doc/Pandas-Cleaning-Data-stackoverflow.html">./pandas-sub-doc/Pandas-Cleaning-Data-stackoverflow.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org337d0cb" class="outline-2">
+<h2 id="org337d0cb">pandas with datetime</h2>
+<div class="outline-text-2" id="text-org337d0cb">
+<p>
+<a href="https://stackoverflow.com/questions/26763344/convert-pandas-column-to-datetime">https://stackoverflow.com/questions/26763344/convert-pandas-column-to-datetime</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">raw_data</span>[<span style="color: #2d9574;">"date"</span>] =  pd.to_datetime(raw_data[<span style="color: #2d9574;">"data"</span>], <span style="color: #3a81c3;">format</span>=<span style="color: #2d9574;">'%d%b%Y:%H:%M:%S.%f'</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Note: the format argument isn't required. to_datetime is smart. Go ahead and try it without trying to match your data</span>
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">If more than one colum </span>
+df[[<span style="color: #2d9574;">"col1"</span>, <span style="color: #2d9574;">"col2"</span>, <span style="color: #2d9574;">"col3"</span>]] = df[[<span style="color: #2d9574;">"col1"</span>, <span style="color: #2d9574;">"col2"</span>, <span style="color: #2d9574;">"col3"</span>]].<span style="color: #3a81c3;">apply</span>(pd.to_datetime)
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">TO remove the timezone from the dataframe</span>
+
+df[<span style="color: #2d9574;">"date"</span>] =  pd.to_datetime(df[<span style="color: #2d9574;">"date"</span>])
+df.set_index(<span style="color: #2d9574;">"date"</span>,inplace=<span style="color: #4e3163;">True</span>)
+df.index = pd.to_datetime(df.index)      <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">convert col='date' to datetime object</span>
+df =df.tz_localize(<span style="color: #4e3163;">None</span>)                 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">remove timezone </span>
+
+</pre>
+</div>
+
+<p>
+<a href="./pandas-sub-doc/Datetime-Timeseries.html">./pandas-sub-doc/Datetime-Timeseries.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgbf7c840" class="outline-2">
+<h2 id="orgbf7c840">Join</h2>
+<div class="outline-text-2" id="text-orgbf7c840">
+</div>
+<div id="outline-container-org1216788" class="outline-3">
+<h3 id="org1216788">Inner Join</h3>
+</div>
+<div id="outline-container-org4f4e0fa" class="outline-3">
+<h3 id="org4f4e0fa">Outer Join</h3>
+</div>
+<div id="outline-container-org28382a4" class="outline-3">
+<h3 id="org28382a4">Right Join</h3>
+</div>
+<div id="outline-container-org12c21fd" class="outline-3">
+<h3 id="org12c21fd">Left Join</h3>
+</div>
+</div>
+<div id="outline-container-org2f3ce4a" class="outline-2">
+<h2 id="org2f3ce4a">Horizontal Join</h2>
+<div class="outline-text-2" id="text-org2f3ce4a">
+</div>
+<div id="outline-container-orgaa86ab1" class="outline-3">
+<h3 id="orgaa86ab1">pandas append</h3>
+<div class="outline-text-3" id="text-orgaa86ab1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">historical_data</span>(ticker,from_date,to_date,interval):
+    <span style="color: #715ab1;">df</span> = pd.DataFrame()   
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print(from_date)</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print(to_date)</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print(interval_limit[interval])</span>
+    <span style="color: #715ab1;">interval_limit</span> = {<span style="color: #2d9574;">'minute'</span>: 60, <span style="color: #2d9574;">'3minute'</span>:100, <span style="color: #2d9574;">'5minute'</span>:100,<span style="color: #2d9574;">'10minute'</span>:100,<span style="color: #2d9574;">'15minute'</span>:200,<span style="color: #2d9574;">'30minute'</span>:200,<span style="color: #2d9574;">'60minute'</span>:400,<span style="color: #2d9574;">'day'</span>:2000}
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print(interval_limit['minute'])</span>
+    <span style="color: #715ab1;">kite_limit</span> = interval_limit[interval]
+    <span style="color: #3a81c3; font-weight: bold;">while</span> <span style="color: #4e3163;">True</span>:
+        <span style="color: #3a81c3; font-weight: bold;">if</span> from_date &gt;= (to_date - dt.timedelta(kite_limit)):                     <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">if from_date is within the 60 days limit</span>
+            <span style="color: #715ab1;">df_temp</span> = fetchOHLC_by_date(ticker,interval,from_date,to_date)
+            <span style="color: #715ab1;">df</span> = df.append(df_temp)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#         </span><span style="color: #2aa1ae; background-color: #ecf3ec;">df.append(pd.DataFrame(kite.historical_data(ticker, from_date, to_date, interval)))</span>
+            <span style="color: #3a81c3; font-weight: bold;">break</span>
+        <span style="color: #3a81c3; font-weight: bold;">else</span>:                                                            <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">if from_date has more than 60 days limit</span>
+            to_date_new = from_date + dt.timedelta(kite_limit)
+            <span style="color: #715ab1;">df_temp</span> = fetchOHLC_by_date(ticker,interval,from_date,to_date)
+            <span style="color: #715ab1;">df</span> = df.append(df_temp)
+            <span style="color: #715ab1;">from_date</span> = to_date_new
+
+    <span style="color: #3a81c3; font-weight: bold;">return</span> df
+display(historical_data(ticker,from_date,to_date,interval))
+</pre>
+</div>
+
+<blockquote>
+<p>
+/tmp/ipykernel<sub>53393</sub>/823271065.py:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead. <br />
+  df.append(df<sub>temp</sub>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orga0021ef" class="outline-3">
+<h3 id="orga0021ef">pandas concat</h3>
+<div class="outline-text-3" id="text-orga0021ef">
+<p>
+<a href="https://brettromero.com/pandas-append-and-concat/">https://brettromero.com/pandas-append-and-concat/</a>
+</p>
+<pre class="example">
+df_new=pd.concat([df_new,df_temp]) # df_new.append(df_temp, sort=True)
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> yfinance <span style="color: #3a81c3; font-weight: bold;">as</span> yf
+<span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">get ohlcv data for any ticker by start date and end date</span>
+<span style="color: #715ab1;">data_1</span> = yf.download(<span style="color: #2d9574;">"MSFT"</span>, start=<span style="color: #2d9574;">"2020-04-01"</span>, end=<span style="color: #2d9574;">"2020-04-15"</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">display(data_1)</span>
+
+data_2 = yf.download(<span style="color: #2d9574;">"MSFT"</span>, start=<span style="color: #2d9574;">"2020-04-16"</span>, end=<span style="color: #2d9574;">"2020-04-30"</span>)
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">display(data_2)</span>
+
+
+data = pd.concat([data_1, data_2])
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">display(data)</span>
+</pre>
+</div>
+
+
+<pre class="example">
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgebd4ff7" class="outline-2">
+<h2 id="orgebd4ff7">Copy or shallow copy</h2>
+<div class="outline-text-2" id="text-orgebd4ff7">
+<p>
+by default pandas dataframe '=' will not create new object memory but the new object will use the old object which it is assigned to. <br />
+Inorder to manupulate the data without effecting  the original dataframe we need to copy the data object in seperate memory using copy method
+</p>
+<pre class="example">
+df = historialData['FB'].copy()
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3b87589" class="outline-2">
+<h2 id="org3b87589">Resampling</h2>
+<div class="outline-text-2" id="text-org3b87589">
+<p>
+<a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases">https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases</a>
+</p>
+
+
+<p>
+<a href="https://stackoverflow.com/questions/61605415/how-can-we-resample-ohlcv-1-minute-pandas-dataframe-into-a-5-minute-dataframe">https://stackoverflow.com/questions/61605415/how-can-we-resample-ohlcv-1-minute-pandas-dataframe-into-a-5-minute-dataframe</a>
+</p>
+
+<p>
+<a href="https://www.geeksforgeeks.org/python-pandas-dataframe-resample/">https://www.geeksforgeeks.org/python-pandas-dataframe-resample/</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">I just copied your top table here to make the df</span>
+<span style="color: #715ab1;">df</span> = pd.read_clipboard(sep=r<span style="color: #2d9574;">"[ ]{2,}"</span>)
+df = df.set_index(pd.DatetimeIndex(df[<span style="color: #2d9574;">'date'</span>]))
+
+<span style="color: #3a81c3;">print</span>(df)
+
+    date    Open    High    Low Close   Volume
+date                        
+2020-04-27 09:31:00 2020-04-27 09:31:00 10.5300 10.5300 10.4100 10.4458 1408654.0
+2020-04-27 09:32:00 2020-04-27 09:32:00 10.4450 10.4450 10.3810 10.4100 469467.0
+2020-04-27 09:33:00 2020-04-27 09:33:00 10.4000 10.4100 10.3470 10.3766 305665.0
+2020-04-27 09:34:00 2020-04-27 09:34:00 10.3742 10.4000 10.3600 10.3850 127815.0
+2020-04-27 09:35:00 2020-04-27 09:35:00 10.3850 10.4000 10.3700 10.3714 125987.0
+2020-04-27 09:36:00 2020-04-27 09:36:00 10.3700 10.4100 10.3500 10.3500 248228.0
+2020-04-27 09:37:00 2020-04-27 09:37:00 10.3500 10.3850 10.3500 10.3570 130435.0
+2020-04-27 09:38:00 2020-04-27 09:38:00 10.3600 10.3600 10.3000 10.3000 250145.0
+2020-04-27 09:39:00 2020-04-27 09:39:00 10.3000 10.3299 10.2800 10.2999 277293.0
+2020-04-27 09:40:00 2020-04-27 09:40:00 10.2950 10.2950 10.2200 10.2200 333785.0
+2020-04-27 09:41:00 2020-04-27 09:41:00 10.2280 10.2300 10.1500 10.1550 292010.0
+2020-04-27 09:42:00 2020-04-27 09:42:00 10.1597 10.2100 10.1500 10.1900 314917.0
+2020-04-27 09:43:00 2020-04-27 09:43:00 10.1890 10.2180 10.1800 10.2114 293827.0
+2020-04-27 09:44:00 2020-04-27 09:44:00 10.2200 10.2500 10.1900 10.1902 317016.0
+2020-04-27 09:45:00 2020-04-27 09:45:00 10.1950 10.2100 10.1342 10.1396 296248.0
+
+
+df_rs = df.resample(<span style="color: #2d9574;">'5T'</span>, label=<span style="color: #2d9574;">'right'</span>, closed=<span style="color: #2d9574;">'right'</span>).agg({<span style="color: #2d9574;">'Open'</span>:<span style="color: #2d9574;">'first'</span>,
+                                                                 <span style="color: #2d9574;">'High'</span>:<span style="color: #2d9574;">'max'</span>,
+                                                                 <span style="color: #2d9574;">'Low'</span>:<span style="color: #2d9574;">'min'</span>,
+                                                                 <span style="color: #2d9574;">'Close'</span>:<span style="color: #2d9574;">'last'</span>,
+                                                                 <span style="color: #2d9574;">'Volume'</span>:<span style="color: #2d9574;">'sum'</span>})
+
+<span style="color: #3a81c3;">print</span>(df_rs)
+
+    Open    High    Low Close   Volume
+date                    
+2020-04-27 09:35:00 10.530  10.53   10.3470 10.3714 2437588.0
+2020-04-27 09:40:00 10.370  10.41   10.2200 10.2200 1239886.0
+2020-04-27 09:45:00 10.228  10.25   10.1342 10.1396 1514018.0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org61e19c9" class="outline-2">
+<h2 id="org61e19c9">Aggreagtes for ohlc</h2>
+<div class="outline-text-2" id="text-org61e19c9">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">df</span> = pd.read_csv(<span style="color: #2d9574;">'CRUDEOIL_MCX.csv'</span>, names=[<span style="color: #2d9574;">'last_price'</span>,<span style="color: #2d9574;">'date'</span>],index_col=1,parse_dates=<span style="color: #4e3163;">True</span>)
+df = pd.DataFrame(df)
+data=df[<span style="color: #2d9574;">'last_price'</span>].resample(<span style="color: #2d9574;">'1min'</span>).ohlc()
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-02-11 Sat 23:26</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

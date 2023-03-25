@@ -1,0 +1,23 @@
+
+
+For Code Build : *All the AWS CodeBuild You Can Stomach in 45 Minutes* \\
+https://www.youtube.com/watch?v=yCVR-uqc4qk
+
+there is a aws-codebuild docker image so you can run codebuild locally using codebuild as docker container
+
+
+
+*Securely Passing Environment Variables - CodeCommit + CodeBuild + CodeDeploy | DevOps With AWS Ep.4* \\
+https://www.youtube.com/watch?v=dbHaCX14nKw
+
+
+How to get S3 objects from a codebuild buildspec ? (AccessDenied) \\
+https://stackoverflow.com/questions/66025922/how-to-get-s3-objects-from-a-codebuild-buildspec-accessdenied
+
+*How to run ssh ec2 command in codebuild*
+https://serverfault.com/questions/1001666/ssh-in-private-network-how-to-access-the-remote-machine-from-source-machine-wit
+
+
+*Let do simple codebuild and push docker to ecr* \\
+https://www.youtube.com/watch?v=3CcGtRidF9c
+

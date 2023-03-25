@@ -1,0 +1,277 @@
+#+TITLE: Note_vim
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+tutorial 
+https://www.youtube.com/playlist?list=PLwJS-G75vM7kFO-yUkyNphxSIdbi_1NKX
+
+Vim screencasts
+71 videos 52,740 views Last updated on 21 Oct 2018
+Greg Hurrell
+https://wincent.acom/wiki/Vim_cheatsheet
+* Vim
+Vim Tutorials Notes
+** Introduction
+In linux andy prf 1st prg is vim best text editor (default in very linux)
+
+- Free
+- NO GUI
+- eassy,fast
+** Shortcut
+http://i.gzn.jp/img/2006/03/31/vi_vim_graphical_cheat_sheet/vi-vim-cheat-sheet.gif
+* Modes :
+- Normal mode (Esc)
+ - File Cmd
+ - Edit Cmd
+ - Navigation Cmd
+- Insert mode (i)
+- Visual mode (v)
+
+* Normal Mode : 
+consist of commands  which can be classified into 
+File Cmd
+Navigation Cmd
+Edit/Manupulation Cmd
+
+** File Commands:
+| :w           | save                                       |
+| :w!          | save overwrite                             |
+| :w newname   | save a copy file name 'newname'            |
+| :wq          | save and quit                              |
+| ZZ           | save and quit                              |
+| :sav newname | save a copy and continue editing 'newname' |
+| :q           | quit                                       |
+| :q!          | quit with out save                         |
+| ZQ           | quit with out saving                       |
+** Navigation Commands :
+| h   | left                                           |
+| j   | down                                           |
+| k   | up                                             |
+| l   | down                                           |
+|     |                                                |
+| H   | move cursor to top                             |
+| M   | move cursor to middle                          |
+| L   | move cursor to bottom                          |
+| gg  | begin of file                                  |
+| G   | EOF                                            |
+|     |                                                |
+| e   | end of word                                    |
+| w   | next word                                      |
+| b   | previous word                                  |
+|     |                                                |
+| ^/$ | begin/end of line                              |
+| I/A | move begin/end of line & change to insert mode |
+|     |                                                |
+| C-e | scrol down                                     |
+| C-y | scroll up                                      |
+| C-f | pgup                                           |
+| C-b | pgdown                                         |
+| s   |                                                |
+| p   |                                                |
+| t   |                                                |
+| zz  | move text+ cursor  to mid of window            |
+| zt  | move(text+cursor) to top of window             |
+| zb  | move(text+cursor) to bottom of window          |
+|     |                                                |
+** Search 
+| *       | Find next instance of current word                    |
+| #       | Find previous instance of current word                |
+| n       | nth instant of word                                   |
+| N       | previous nth instant of word                          |
+| /word   | Find occurrence of 'word'                             |
+|         | n : Next occurence                                    |
+|         | N : previous                                          |
+|         |                                                       |
+| /word\c | Find next occurrence ignoreing case                   |
+| /\word\ | Find next occurrence of 'word' ,                      |
+|         | where 'word' is bounded by bounderay (ex space,dash.. |
+|         |                                                       |
+** Edit cmd:
+| y              | copy                                  |
+| yy             | copy line                             |
+| c              | chagne(replace)                       |
+| C              | Change the rest fo the current line   |
+| d              | cut/del                               |
+| dd             | del line                              |
+| p/P            | paste below/above line                |
+| x              | del charater after cursor             |
+| X              | del char before cursor                |
+| /"text"        | search for text                       |
+| o/O            | insert \n at above/below current line |
+| earlier 2m     | set the chagnes in text 2 min earlier |
+| u              | Undo                                  |
+| C+r            | redo                                  |
+| %s/oldN/newN/g | replace                               |
+
+** Visual Mode:
+*** Select Column	
+- Put cursor and beginning of text to select
+- Press CTRL-V to begin select of the column
+- When you reach the end of your select, type 'c'
+- Type the new text. Note that this will only replace the first instance.
+- Now hit <ESC><ESC>. All the text has been changed!
+
+* Commbinational Commands:
+
+| Edit | cmd     | Cond | cmd            | Nava | cmd        |
+|------+---------+------+----------------+------+------------|
+| d    | cut/del | a    | all            | w    | word       |
+| y    | copy    | i    | in             | s    | sentences  |
+| p    | paste   | t    | till           | p    | paragraphs |
+| c    | change  | f    | find forwords  | t    | tags       |
+|      |         | F    | find backwords |      |            |
+|      |         |      |                |      |            |
+|      |         |      |                |      |            |
+* Keystrocks:
+CMD		{ Number } { Text/Vis Cmd } { Cond cmd } { Navig cmd }
+
+| text (btw "" )    | CMD  | After         | Explaination                       |
+|-------------------+------+---------------+------------------------------------|
+|                   | 3j   |               | Mode cursor 3 lines below          |
+|                   | 10w  |               | Mode cursor 10 words forward       |
+|                   | 3dw  |               | Del 3 words forward                |
+|                   | 3dj  |               | Del 3 lines from cursor            |
+|                   |      |               |                                    |
+| " grind_node "    | diw  | "  "          | del inside word but not whitspace  |
+| " grind_node "    | caw  | ""            | cut all word include whitespace    |
+| " grind_node "    | cw   | "grid_"       | cursor is on node so del next word |
+|                   |      |               |                                    |
+| (abc,xyz,mnt)     | yi)  | (abc,xyz,mnt) | copy "abc,xyz,mnt"                 |
+| (abc,xyz,mnt)     | di)  | ()            | del in ()                          |
+| (abc,xyz,mnt)     | da)  | ""            | del all ""                         |
+| (abc,xyz,mnt)     | dt,  | (,xyz,mnt)    | del untill(before) ","             |
+| (abc,xyz,mnt)     | df,  | (xyz,mnt)     | del including ","                  |
+| abc               | ysw" | "abc"         |                                    |
+| "i am inside app" | va"  |               | visual the sentance                |
+|                   |      |               |                                    |
+
+*  Macrows
+** syntax :
+#+BEGIN_SRC sh
+g{resister}
+# do the things
+q
+eg:
+qw
+I # move to start of line
+del var space esc H # end of line
+q # stop recording
+# To run macro
+@w
+#+END_SRC
+
+** paly macro:
+	@"register name"
+** Vimrc : 
+	Vimrc is a file where all the vim setting are done manually adding packages
+	If pakages are more in order to manage the packages there are Package manager
+	vindle
+	vim-plugin
+	pathogen
+
+site for packages : 
+	vim awasome
+* Basic Packages :
+	nerd tree : 	file view
+	ctrlp:		fuzzy file finder
+	fugitive 	git tool
+	suytastic	syntax charcker/
+	auto-pair
+	super tab
+* Tmux
+	Terminal Multiplexing
+	View adn control multi consoles
+	Preconfigure Environment
+	Paralle 
+#+BEGIN_SRC sh
+tmux new-session -s "session name"
+#+END_SRC 
+
+split a pane horizontally Ctrl + b "
+split a pane vertically   Ctrl + b %
+
+switch between panes : Ctrl + b (left, right, up, down)
+kill pane : Ctrl + b x
+
+Here is a list of a few basic tmux commands:
+
+    Ctrl+b " — split pane horizontally.
+    Ctrl+b % — split pane vertically.
+    Ctrl+b arrow key — switch pane.
+    Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.
+    Ctrl+b c — (c)reate a new window.
+    Ctrl+b n — move to the (n)ext window.
+    Ctrl+b p — move to the (p)revious window.
+    z        -- zoom in/out  the pane
+    Ctrl+b x - kill the pane
+** Create and mange windows
+Create a new window     : Ctrl + b  c 
+move to previous window : Ctrl + b p
+
+Rename window: the pane : Ctrl + b ,
+** Session
+Disconnect your session : Ctrl + b + d
+reconnect to tmux : tmux attach
+Or open new session:
+tmux
+to see the tmux session 
+
+#+BEGIN_SRC sh
+# to see the tmux session 
+ps aux |grep tmux #or
+tmux list-sessions # tmux ls
+#0: 1 window (created mon Nov 11 18:55:28 2019) 
+#1: 1 window (created mon Nov 11 18:55:28 2019) (attached)
+tmux attach -t 1 # To second session
+#or
+tmux a -t 1
+#+END_SRC
+
+Rename the session : Ctrl + b $
+create a new session with name : tmux new -s "my project"
+Show list of session : Ctrl + b s
+
+** Customisation and tweek
+nano .tmux.conf # tmux is configuration file
+
+past the conf from https://pastebin.com/CDEVZTSC
+* Vimrc
+#+BEGIN_SRC sh
+  call plug#begin()
+          Plug 'scrooloose/nerdtree'
+          Plug 'scrooloose/syntastic'
+          Plug 'tpope/vim-surround'
+          Plug 'altercation/vim-colors-solarized'
+          Plug 'flazz/vim-colorschemes'
+          Plug 'ervandew/supertab'
+  call plug#end()
+  colorscheme molokai
+  "set nu
+  "autocmd vimenter * NERDTree   " auto open Nerdtree
+  let g:NERDTreeDirArrowExpandable = '▸'
+  let g:NERDTreeDirArrowCollapsible = '▾'
+
+  map <C-N> : NERDTreeToggle<CR>
+#+END_SRC
+* multi-tab (horizontal/Vertical)
+ horizontal :new
+split horizontal(down) : split <file-name>
+split vertial (from left) : vsplit <file-name>
+new window- leftsize vertial : vnew
+
+Toggle cursor between windows: C-w C-w
+move cursor to up,down,left,right : C-w + [k,j,h,l]
+moving window to up,down,left,right : C-w + [K,J,H,L]
+
+Re-size : C-w -/+  (height dec/inc)
+or 12 C-w - : decreace size by 12
+
+Re-size : C-w </> (width dec/in)
+Equlize size of widow : C-w =
+
+** Tab
+ :tabnew
+switch btw tabs : gt
+switch btw tabs reverse :gT
+move window inside multi-window to tab from C-w T
+switch btw
+* Tmux 

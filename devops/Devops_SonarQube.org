@@ -1,0 +1,512 @@
+#+TITLE: Devops_SonarQube
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* 25th Sonarqube -quality tool 
+https://www.swtestacademy.com/sonarqube-tutorial/ 
+
+
+** What is SonarQube?
+Sonar is an *open-source software quality platform* . *showcases* them in a rich *web-based dashboard* by *various static & dynamic code analysis tools*. 
+
+What is Code Quality ?
+Indicate *how quickly* developers can *add business* to *software* system is know as Code quality
+Alterative gerrit...etc
+[[https://604223-1956433-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2015/10/sonar_CI_2016-01-26_21-33-42.png][Sonarqube CI]] 
+ - Developers (Write Code and push on SCm(git,svm, ))
+ - Automatic Build(Jenkins, Bamboo or TeamCity) + Code Analysis
+   - Code (Analysis)
+     - Publish Analysis Report to SQ
+     - manage Issues : Report to Developers
+     - Sonar Qube Database 
+       - Oracle
+       - mysql
+
+Supports languages: Java, C/C++, Objective-C, C#, PHP, Flex, Groovy, JavaScript, Python, PL/SQL, COBOL, etc. (note that some of them are commercial)
+
+** What quality Rules(Bugs, Vulnerabilities,Code Smell) and How to check
+- Quality
+  - Bug
+    - An issue that represents something wrong in the code. If this has not broken yet, it will, and probably at the worst possible moment. This needs to be fixed. 
+  - Code Smell
+    - A maintainability-related issue in the code. Leaving it as-is means that at best maintainers will have a harder time than they should making changes to the code. At worst, they'll be so confused by the state of the code that they'll introduce additional errors as they make changes.
+   - Vulnerability	
+     - A security-related issue which represents a backdoor for attackers. See also Security-related rules
+
+** Installation
+*** Linux Installation
+For sonarqube -6 jdk 8 is required
+For sonarqube -7 jdk 11 is required
+ Install
+
+- Prerequirement 
+  - SonarQube to show GUI
+  - Sonar scanner,sonar runner (Code Quality)
+  - JDK (jdk-11 for sq-7, jdk-8 for sq-6 )
+
+https://www.youtube.com/watch?v=UjCVCvdI73w this is very lenghty installation go for
+https://www.youtube.com/watch?v=UjCVCvdI73w  SonarQube Fundamental Tutorial By Rajesh Kumar in 2020
+- Installation setps
+  - update yum,install wget,zip,jdk-11
+  - install jdk-11
+  - install sonarqube
+  - run /sonarqube/linux-x86-64/sonar.sh
+  - edit config sonarqube/conf/sonar.properties
+
+#+begin_src sh
+sudo yum install wget unzip -y
+sudo yum update -y # Step 1: Update the server.
+sudo yum install wget unzip -y # Step 2: Install wget & unzip
+sudo yum install java-11-openjdk-devel -y # Step 3: Install java 11
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+sudo unzip sonarqube-7.6.zip
+sudo mv sonarqube-7.6 sonarqube
+# Run sonarqube
+cd sonarqube/linux-x86-64/
+./sonar.sh status # check status
+./sonar.sh status #run sonar
+
+# Edit Configuration file
+nano sonarqube/conf/sonar.properties # conf database,post,ip,host....etc
+#13.232.191.19:9000
+# admin admin are user/passwd
+
+# sonarqube -6 jdk 8
+# sonarqube -7 jdk 11
+#Not root account must be there to start a sonarqube server
+
+#+end_src
+*** Install sonarscanner
+- Pre requirement
+  - jar file.
+  - Agent (build) ur source code 
+     - maven ,gradel,jenkins,msbuild,cmds
+- Installation setps
+  - install sonar-scanner
+  - connect sonar-scanner with sonar-server(sonarqube)
+    - config scanner sonar-scanner/conf/soar-scanner.properties
+
+# download scanner
+# https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/
+# Download link using wget
+#+begin_src sh
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+mv sonar-scanner-cli-4.6.2.2472-linux scanner 
+# scanner need to communicate to sonarqube server 
+#### for this we need to conf in scanner
+#nano sonar-scanner/conf/soar-scanner.properties 
+# but server and scanner are on same host no need nedd to config
+
+#+end_src
+*** Configure sonar-scanner 
+#+BEGIN_SRC sh
+# configure sonar scanner
+cd sonar-scanner/conf
+cat sonar-scanner.properties
+#sonar.host.url=http://localhost:9090
+
+sonar.login=data
+sonar.password=admin
+sonar.projectKey=devoproject
+#sonar.projectName= carona
+sonar.projectVersion=1.0
+sonar.source=D:/spark/sparkjava-war-example/src/main/java
+#+END_SRC
+
+*** How to run sonar for git project without maven
+1) clone git project in local host say prj_git
+2) Note we need to run the scanner on soure code
+3) get pwd of scanner  :~/scanner/bin/sonar-scanner
+4) got to prg : cd ~/prj_git
+5) # RUN sonar-scanner in source-code 
+   -[ git_prj] $cd ~/scanner/bin/sonar-scanner # this will scan the git_prg
+*** How to Intgerate sonar with mvn
+- Step1: Go to maven mvn installed
+- Step2: Open setting.xml under conf
+    /opt/maven/conf/ 
+                ├── logging
+                ├── settings.xml
+                └── toolchains.xml
+- Step3: Added (Sonar & sonar profile: server https://192.168.2.174:9000) plugin to setting.xml file
+- Step4: run following cmd
+          mvn package sonar:sonar
+https://blog.knoldus.com/integrate-maven-project-sonarqube/
+#+BEGIN_SRC xml
+  <plugin>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>3.5.0.1254</version>
+      <executions>
+        <execution>
+          <phase>verify</phase>
+          <goals>
+            <goal>sonar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+
+<profile>
+  <id>sonar</id>
+  <activation>
+    <activeByDefault>true</activeByDefault>
+  </activation>
+  <properties>
+    <sonar.host.url>https://192.168.2.174:9000</sonar.host.url>
+  </properties>
+</profile>
+#+END_SRC
+
+#+BEGIN_SRC sh
+mvn package sonar:sonar
+#+END_SRC
+
+** Install using docker compose
+#+begin_src python
+#https://gist.github.com/Warchant/0d0f0104fe7adf3b310937d2db67b512
+version: "3"
+
+services:
+  sonarqube:
+    image: sonarqube
+    expose:
+      - 9000
+    ports:
+      - "127.0.0.1:9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+
+networks:
+  sonarnet:
+
+volumes:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  postgresql:
+  postgresql_data:
+#+end_src
+
+** What is work of a devops
+- Setup sonar
+- install sonar and sonar scanner 
+- Soar scanner and env variable also configured
+- 
+** Q and Ans
+
+Q)Do you know sonar  ? 
+It is a quality
+
+Q) What you do in sonar ?
+Setup sonarq
+sonar-scanner: 
+    sonar.conf: to to add user.., 
+** TODO git java prj which need to quality anallysis  
+https://www.youtube.com/watch?v=31igoWxauEQ
+
+** [old version] Install sonarqube with mysql and sonar-scanner
+*** Install sonar-server( sonarqube):
+#+BEGIN_SRC sh
+sudo adduser --system --no-create-home --group --disabled-login sonarqube
+sudo apt-get install unzip
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.5.zip
+sudo unzip sonarqube-7.5.zip
+sudo rm sonarqube-7.5.zip
+sudo chown -R sonarqube:sonarqube /opt/sonarqube
+
+
+#+END_SRC
+*** Database setup
+#+BEGIN_SRC sh
+mysql> CREATE USER sonarqube@'localhost' IDENTIFIED BY 'Dev@1234';
+GRANT ALL ON sonarqube.* to sonarqube@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+#+END_SRC
+
+*** Configure the sonar
+#+BEGIN_SRC sh
+sudo nano sonarqube-7.5/conf/sonar.properties
+
+# SonarQube wil use to access the database to the username and password you created for MySQL:
+
+#sonar.jdbc.username=sonarqube
+#sonar.jdbc.password=Dev@1234
+
+# SonarQube to use MySQL as the database driver:
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Tell SonarQube to use MySQL as the database driver:
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+#sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+# # # Nginx will handle the communication between the SonarQube clients and your server, so you will tell SonarQube to only listen to the local address.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+nano /opt/sonarqube/sonarqube-7.5/conf/sonar.properties
+# sonar.web.javaAdditionalOpts=-server
+# sonar.web.host=127.0.0.1
+
+# you will use Systemd to configure SonarQube to run as a service so that it will start automatically upon a reboot.
+# sudo nano /etc/systemd/system/sonarqube.service
+
+
+
+#
+# start sonarqube service 
+#
+service sonarqube start
+service sonarqube status
+
+
+#+END_SRC
+
+*** install sonar scanner 
+#+BEGIN_SRC sh
+mkdir /opt/sonarscanner
+cd /opt/sonar/scanner
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+
+sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo rm sonar-scanner-cli-3.2.0.1227-linux.zip
+sudo nano sonar-scanner-3.2.0.1227-linux/conf/sonar-scanner.properties
+vi /opt/sonarscanner/sonar-scanner-3.2.0.1277-linux
+# sonar.host.url=https://sonarqube.example.com
+sudo chmod +x sonar-scanner-3.2.0.1277-linux/bin/sonar-scanner
+
+sudo ln -s /opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
+
+#+END_SRC
+** Integrate maven with sonar
+https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/
+** TODO How to Intgrate  sonar with Jenkins
+https://computingforgeeks.com/how-to-integrate-sonarqube-with-jenkins/
+Manage Jenkins 
+- Manage Plugins 
+  - Install Sonar Gerrit
+- Login SonarQube > My account > Security >  Generate Token  > Copy Token
+
+Manage Jenkins > Configure System > 
+[+] SonarQube Server    [Enable SonarQube]
+1. Step  Install Sonar Qube with user-name  
+2. Generate token in sonar qube 
+* 26th maven Q-Ans session
+- how to ignore test cases
+  - mvn install -DskipTests
+- how to create multi module project
+- how to use profile
+- what is snapshot and version
+- diff ant and mvn
+** ignore Test case
+#+BEGIN_SRC sh
+mvn archetype:generate  -DgroupId=apr -DartifactId=sunday -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+tree -L 1
+#|- sunday/
+#|     |-  src/
+#|     |-  pom.xml
+cd sunday
+mvn install # by default test is running
+mvn clean install -DskipTests
+#+END_SRC
+** how to create multi module project
+parent pom : super pom
+ - child pom : 
+
+Q) how to create multi module project 
+parent pom - superpom
+       child pom
+
+
+parent pom.xml file
+india sbi
+├── deposit/pom.xml  # child pom file
+├── credit/pom.xml   # child pom file
+├── loan/pom.xml     # child pom file
+└── pom.xml          #  parent pom file
+#+BEGIN_SRC sh
+mvn archetype:generate  -DgroupId=india -DartifactId=sbi -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+rm src 
+
+mvn archetype:generate  -DgroupId=india -DartifactId=deposit -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+
+mvn archetype:generate  -DgroupId=india -DartifactId=credit -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+mvn archetype:generate  -DgroupId=india -DartifactId=loan -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+#+END_SRC
+
+#+BEGIN_SRC xml
+<-- cat pom.xml  --># remove build and plugins 
+<packaging>pom</packaging>  
+
+<modules>
+<module>deposit</module>
+<module>credit</module>
+<module>loan</module>
+ </modules>
+
+mvn package
+#+END_SRC
+
+** profiles
+Q)why do we use profile ?
+A) - to set of configuration file
+   - Using profile
+      - you can customize build for diff enviroment.
+https://books.sonatype.com/mvnref-book/reference/profiles-sect-maven-profiles.html
+
+sunprofile
+├──dev/application.property 
+├──sit/application.property
+├──pre production/application.property
+└──production/application.property
+
+tomcat  - is consist of war file 
+jboss   - is consist of ear file
+weblogics - is cluster ( :dev1 dev2 dev3)
+
+profile consist of # jar micro-servies
+*** create a profile  
+#+BEGIN_SRC sh
+mvn archetype:generate  -DgroupId=aprprofile -DartifactId=sunprofile -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+#├── pom.xml
+#└── src
+#    ├── main
+#    │    └── java
+#    │         └── app.java
+#    └── test
+cd src/main/
+mkdir profiles
+cd profiles/
+mkdir dev sit preprod prod
+echo -e  "env=dev\nurl=https:10.9.68.7:8080/dev\nusername=dev\npasswd=dev@123" > dev/application.property
+echo -e  "env=sit\n\nurl=https:10.9.68.7:8080/dev\username=sit\npasswd=sit@123" > sit/application.property
+echo -e  "env=preprod\n\nurl=https:10.9.68.7:8080/dev\username=preprod\npasswd=preprod@123" > preprod/application.property
+echo -e  "env=prod\nurl=https:10.9.68.7:8080/\ndev\username=prod\npasswd=prod@123" > prod/application.property
+#├── pom.xml
+#└── src
+#    ├── main
+#    │   ├── java
+#    │   │   └── app.java
+#    │   └── profile
+#    │       ├── dev
+#    │       │   └── application.property
+#    │       ├── preprod
+#    │       │   └── application.property
+#    │       ├── prod
+#    │       │   └── application.property
+#    │       └── sit
+#    │           └── application.property
+#    └── test
+
+# add profile dev,sit,preprod,prod in pom.xml
+
+#+END_SRC
+*** edit pom.xml file
+#+BEGIN_SRC xml
+<profiles>
+    <profile>
+        <id>dev</id> 
+        <properties>  
+               <build.profile.id>dev</build.profile.id> 
+        </properties>  
+               <build>
+                   <resources>
+                       <resource> 
+                           <directory>src/main/profiles/dev</directory>
+                       </resource> 
+                   </resources>
+               </build>
+        <id>sit</id> 
+        <properties>  
+               <build.profile.id>sit</build.profile.id> 
+        </properties>  
+               <build>
+                   <resources>
+                       <resource> 
+                           <directory>src/main/profiles/sit</directory>
+                       </resource> 
+                   </resources>
+               </build>
+        <id>preprod</id> 
+        <properties>  
+               <build.profile.id>preprod</build.profile.id> 
+        </properties>  
+               <build>
+                   <resources>
+                       <resource> 
+                           <directory>src/main/profiles/preprod</directory>
+                       </resource> 
+                   </resources>
+               </build>
+        <id>prod</id> 
+        <properties>  
+               <build.profile.id>prod</build.profile.id> 
+        </properties>  
+               <build>
+                   <resources>
+                       <resource> 
+                           <directory>src/main/profiles/prod</directory>
+                       </resource> 
+                   </resources>
+               </build>
+   </profile>
+</profiles>
+
+#+END_SRC
+
+*** pacakge with profile
+#+BEGIN_SRC sh
+mvn package -Pdev
+mvn package -Psit
+mvn package -Ppreprod
+mvn package -Pprod
+# to see the package 
+cd sunprofile
+cd target
+ls 
+# sunprofile-1.0-SNAPSHOT.jar     JAR-File 
+
+# we deploy the .jar files to tomcat server
+
+if [-f credi.jar]then;
+service credit start
+service credit status
+service credit stop
+service credit restart
+
+if [all]
+credit.jar
+deposit.jar
+
+#+END_SRCSonar Qube 

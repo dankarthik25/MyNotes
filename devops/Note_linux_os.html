@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_linux_os</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>linux</sub><sub>os</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf00afe5">Ubuntu Installation</a>
+<ul>
+<li><a href="#orgca4ebc9">Setting Fastest Repository Mirro</a></li>
+<li><a href="#orgdf2c099">Install Drives :</a></li>
+<li><a href="#orgf7eb6c0">Ubuntu restricted pack</a></li>
+<li><a href="#orgfee17e7">Chrome, Ubuntu-restricted</a></li>
+<li><a href="#orgd1e1c30">atp-get does not remove  config file</a></li>
+</ul>
+</li>
+<li><a href="#orgeb1143b">Look</a>
+<ul>
+<li><a href="#org072f045">Install GNOME tweaks tool</a></li>
+<li><a href="#orgb05d820">gnome shell</a></li>
+<li><a href="#org1385244">Cleaner Bleach Bit</a></li>
+<li><a href="#org8195ae7">Gnome-tools,tweak</a></li>
+<li><a href="#org79b6ba8">Template</a></li>
+<li><a href="#org12303c0">Using Flatpak</a></li>
+</ul>
+</li>
+<li><a href="#org08c9dbd">Applications</a>
+<ul>
+<li><a href="#org218f925">Enable Firewall and Install Antivirus</a></li>
+<li><a href="#org771006b">Linux PDF Editor</a></li>
+<li><a href="#org04da97a">Best Terminam Emulator :</a></li>
+<li><a href="#org0f589a4">archive applications</a></li>
+<li><a href="#org1fe145a">Wine</a></li>
+<li><a href="#orgfecd21f">System Restore Point</a></li>
+<li><a href="#org2307590">Install Java (most of prg require java )</a></li>
+<li><a href="#orgf6648b9">battery percentage</a></li>
+<li><a href="#org42c0273">youtube-dl</a>
+<ul>
+<li><a href="#orgcc415fd">Download audio from YouTube</a></li>
+<li><a href="#orgf583345">Download video from YouTube</a></li>
+<li><a href="#org8a8bd58">Download Playlist and change name</a></li>
+<li><a href="#org569215f">Download Subtitle or CC for an video</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7fda6dd">How to increase speed</a>
+<ul>
+<li><a href="#org1ba083f">Preload</a></li>
+<li><a href="#orgf9dfe00">reduce overheating</a></li>
+<li><a href="#org0caaff9">Use apt-fast isnted of apt-get</a></li>
+<li><a href="#org2877d45">Choise a light weighted desktop Environment</a>
+<ul>
+<li><a href="#org91baeb5">Awesome : Awesome is less power hog desktop environment, which gives you a lot of control over the system. To install this environment, just run the following command in Terminal.</a></li>
+<li><a href="#org8f11799">Qtile Windows:</a></li>
+</ul>
+</li>
+<li><a href="#org511cde1">Enable Addtional Drives</a></li>
+<li><a href="#orgbe84552">Clean up Ubuntu</a></li>
+</ul>
+</li>
+<li><a href="#org7bec585">Programmer</a>
+<ul>
+<li><a href="#orgeede5d0">git</a></li>
+<li><a href="#org37cfce5">Emacs</a></li>
+<li><a href="#orgffe6f8f">Neovim</a></li>
+</ul>
+</li>
+<li><a href="#org988a9e6">Atom</a></li>
+<li><a href="#org30eb430">Jupyter:</a>
+<ul>
+<li><a href="#orgc0dd419">creaat new notebook</a></li>
+</ul>
+</li>
+<li><a href="#orgcb8ebae">Anacoda:</a>
+<ul>
+<li><a href="#org926e419">install</a></li>
+<li><a href="#org5be7900">install anaconda in local dir</a></li>
+</ul>
+</li>
+<li><a href="#org8626495">Shortcut Terminal :</a></li>
+<li><a href="#org7b08242">Split Terminal</a></li>
+<li><a href="#org38476fc">installation</a></li>
+<li><a href="#org8eed5c3">pip</a></li>
+<li><a href="#orgd2d1d89">Udemy-dl Setting</a></li>
+<li><a href="#org51721e4">Read Write NTFS partition drive (Not  C drive) from linux</a></li>
+<li><a href="#orgc28a014">Unable to connect exteranl mike to linux-mint</a></li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf00afe5" class="outline-2">
+<h2 id="orgf00afe5">Ubuntu Installation</h2>
+<div class="outline-text-2" id="text-orgf00afe5">
+</div>
+<div id="outline-container-orgca4ebc9" class="outline-3">
+<h3 id="orgca4ebc9">Setting Fastest Repository Mirro</h3>
+<div class="outline-text-3" id="text-orgca4ebc9">
+<p>
+Software &amp; Updates &gt; Ubuntu Software &gt; Download from &gt; other &gt; Best
+                   &gt; Canonical Partner : select
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf2c099" class="outline-3">
+<h3 id="orgdf2c099">Install Drives :</h3>
+<div class="outline-text-3" id="text-orgdf2c099">
+<p>
+Software &amp; Updates &gt; Addtional Drives (Properity :NVIDIA binary)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf7eb6c0" class="outline-3">
+<h3 id="orgf7eb6c0">Ubuntu restricted pack</h3>
+<div class="outline-text-3" id="text-orgf7eb6c0">
+<p>
+sudo apt install ubuntu-restricted-extras 
+sudo apt install libavcodec-extra
+sudo apt install libdvd-pkg
+</p>
+</div>
+</div>
+<div id="outline-container-orgfee17e7" class="outline-3">
+<h3 id="orgfee17e7">Chrome, Ubuntu-restricted</h3>
+<div class="outline-text-3" id="text-orgfee17e7">
+<p>
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install chrome-gnome-shell
+sudo apt install ubuntu-restricted-extras
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1e1c30" class="outline-3">
+<h3 id="orgd1e1c30">atp-get does not remove  config file</h3>
+<div class="outline-text-3" id="text-orgd1e1c30">
+<p>
+<a href="https://askubuntu.com/questions/147277/sudo-apt-get-remove-does-not-remove-config-files">https://askubuntu.com/questions/147277/sudo-apt-get-remove-does-not-remove-config-files</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get remove &lt;prg&gt;     # does not remove config files
+sudo apt-get purge &lt;program&gt;  # to remove config files
+#sudo apt-get remove --autoremove avidemux2.6-qt
+sudo apt-get autoremove # to remove unwanted lib
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb1143b" class="outline-2">
+<h2 id="orgeb1143b">Look</h2>
+<div class="outline-text-2" id="text-orgeb1143b">
+</div>
+<div id="outline-container-org072f045" class="outline-3">
+<h3 id="org072f045">Install GNOME tweaks tool</h3>
+<div class="outline-text-3" id="text-org072f045">
+<p>
+sudo apt install gnome-tweek-tool
+</p>
+</div>
+</div>
+<div id="outline-container-orgb05d820" class="outline-3">
+<h3 id="orgb05d820">gnome shell</h3>
+<div class="outline-text-3" id="text-orgb05d820">
+<pre class="example">
+sudo apt install chrome-gnome-shell
+</pre>
+</div>
+</div>
+<div id="outline-container-org1385244" class="outline-3">
+<h3 id="org1385244">Cleaner Bleach Bit</h3>
+</div>
+<div id="outline-container-org8195ae7" class="outline-3">
+<h3 id="org8195ae7">Gnome-tools,tweak</h3>
+<div class="outline-text-3" id="text-org8195ae7">
+<p>
+sudo apt-get install gnome-tool
+sudo apt-get install gnome-tweak-tool
+</p>
+</div>
+</div>
+<div id="outline-container-org79b6ba8" class="outline-3">
+<h3 id="org79b6ba8">Template</h3>
+<div class="outline-text-3" id="text-org79b6ba8">
+<p>
+touch ~/Templates/Empty\ Document
+</p>
+</div>
+</div>
+<div id="outline-container-org12303c0" class="outline-3">
+<h3 id="org12303c0">Using Flatpak</h3>
+<div class="outline-text-3" id="text-org12303c0">
+<p>
+(universal packaging system for Fedora)
+sudo apt install flatpak
+sudo apt install xdg-desktop-portal
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org08c9dbd" class="outline-2">
+<h2 id="org08c9dbd">Applications</h2>
+<div class="outline-text-2" id="text-org08c9dbd">
+</div>
+<div id="outline-container-org218f925" class="outline-3">
+<h3 id="org218f925">Enable Firewall and Install Antivirus</h3>
+<div class="outline-text-3" id="text-org218f925">
+<p>
+sudo ufw enable
+sudo apt dist-upgrade
+sudo apt install gufw
+</p>
+</div>
+</div>
+<div id="outline-container-org771006b" class="outline-3">
+<h3 id="org771006b">Linux PDF Editor</h3>
+<div class="outline-text-3" id="text-org771006b">
+<p>
+should be reviewed
+</p>
+</div>
+</div>
+<div id="outline-container-org04da97a" class="outline-3">
+<h3 id="org04da97a">Best Terminam Emulator :</h3>
+<div class="outline-text-3" id="text-org04da97a">
+<p>
+URXVT(can config: peral OR Tilda uses Tilda)&#x2026;etc
+TILDA, My St(suckless terminal ) ranger model : 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f589a4" class="outline-3">
+<h3 id="org0f589a4">archive applications</h3>
+<div class="outline-text-3" id="text-org0f589a4">
+<p>
+sudo apt-get install unrar zip unzip p7zip-full p7zip-rar rar
+</p>
+</div>
+</div>
+<div id="outline-container-org1fe145a" class="outline-3">
+<h3 id="org1fe145a">Wine</h3>
+<div class="outline-text-3" id="text-org1fe145a">
+<p>
+sudo apt-get install wine winetricks
+</p>
+</div>
+</div>
+<div id="outline-container-orgfecd21f" class="outline-3">
+<h3 id="orgfecd21f">System Restore Point</h3>
+<div class="outline-text-3" id="text-orgfecd21f">
+<p>
+sudo add-apt-repository -y ppa:teejee2008/ppa
+sudo apt-get update
+sudo apt-get install timeshift
+</p>
+</div>
+</div>
+<div id="outline-container-org2307590" class="outline-3">
+<h3 id="org2307590">Install Java (most of prg require java )</h3>
+<div class="outline-text-3" id="text-org2307590">
+<p>
+sudo apt-get install openjdk-8-jdk
+</p>
+</div>
+</div>
+<div id="outline-container-orgf6648b9" class="outline-3">
+<h3 id="orgf6648b9">battery percentage</h3>
+<div class="outline-text-3" id="text-orgf6648b9">
+<p>
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+touch weightloss
+sudo apt get upgrade
+sudo apt-get upgrade
+</p>
+</div>
+</div>
+<div id="outline-container-org42c0273" class="outline-3">
+<h3 id="org42c0273">youtube-dl</h3>
+<div class="outline-text-3" id="text-org42c0273">
+</div>
+<div id="outline-container-orgcc415fd" class="outline-4">
+<h4 id="orgcc415fd">Download audio from YouTube</h4>
+<div class="outline-text-4" id="text-orgcc415fd">
+<p>
+`-i`			- ignore errors
+`-c` 			- continue
+`-t`			- use video title as file name
+`&#x2013;extract-audio` 	- extract audio track
+`&#x2013;audio-format mp3` 	- convert to mp3
+&#x2013;no-overwrites
+`&#x2013;audio-quality 0` 	- the best audio quality
+`&#x2013;yes-playlist` 		- affirm that url points to a playlist
+`YT<sub>URL</sub>` 			- video url from youtube
+</p>
+
+<p>
+youtube-dl -i &#x2013;extract-audio &#x2013;audio-format mp3 &#x2013;audio-quality 0 YT<sub>URL</sub>
+</p>
+
+<p>
+youtube-dl -ict &#x2013;yes-playlist &#x2013;extract-audio &#x2013;audio-format mp3 &#x2013;audio-quality 0 YT<sub>URL</sub>
+</p>
+
+<p>
+youtube-dl &#x2013;download-archive downloaded.txt &#x2013;no-overwrites -ict &#x2013;yes-playlist &#x2013;extract-audio &#x2013;audio-format mp3 &#x2013;audio-quality 0 &#x2013;socket-timeout 5 YT<sub>URL</sub>
+</p>
+
+<p>
+while ! youtube-dl &#x2013;download-archive downloaded.txt &#x2013;no-overwrites -ct &#x2013;yes-playlist &#x2013;extract-audio &#x2013;audio-format mp3 &#x2013;audio-quality 0 &#x2013;socket-timeout 5 &lt;YT<sub>PlayList</sub><sub>URL</sub>&gt;; do echo DISCONNECTED; sleep 5; done
+```
+</p>
+</div>
+</div>
+<div id="outline-container-orgf583345" class="outline-4">
+<h4 id="orgf583345">Download video from YouTube</h4>
+<div class="outline-text-4" id="text-orgf583345">
+<p>
+<a href="https://askubuntu.com/questions/486297/how-to-select-video-quality-from-youtube-dl">https://askubuntu.com/questions/486297/how-to-select-video-quality-from-youtube-dl</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a8bd58" class="outline-4">
+<h4 id="org8a8bd58">Download Playlist and change name</h4>
+<div class="outline-text-4" id="text-org8a8bd58">
+<div class="org-src-container">
+<pre class="src src-sh">   cd Documents/ 
+youtube-dl -i -f mp4 --autonumber-start 1 --yes-playlist 'https://www.youtube.com/playlist?list=PLTgNKd4RxFTY_rhPBYyFJ-qVwMHNgebJe'
+   youtube-dl -i -f mp4 --autonumber-start 1 --yes-playlist 'https://www.youtube.com/playlist?list=PLRAV69dS1uWTSu9cVg8jjXW8jndOYYJPP'
+   'https://www.youtube.com/playlist?list='
+
+   ls -ltcr &gt;&gt; list # c : ctime: last modification of file status
+		    # t : sort by modification time
+		    # r : revierse the sort  
+   # run Py rename function
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org569215f" class="outline-4">
+<h4 id="org569215f">Download Subtitle or CC for an video</h4>
+<div class="outline-text-4" id="text-org569215f">
+<p>
+For <a href="http://www.lilsubs.com/">http://www.lilsubs.com/</a>#
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="orgc638e6a"></a><span class="todo TODO">TODO</span> New to create own macro's  for removing time part<br />
+<div class="outline-text-5" id="text-orgc638e6a">
+<p>
+if strating char is num/empty : del line
+else down
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7fda6dd" class="outline-2">
+<h2 id="org7fda6dd">How to increase speed</h2>
+<div class="outline-text-2" id="text-org7fda6dd">
+</div>
+<div id="outline-container-org1ba083f" class="outline-3">
+<h3 id="org1ba083f">Preload</h3>
+<div class="outline-text-3" id="text-org1ba083f">
+<p>
+sudo apt-get install preload
+</p>
+</div>
+</div>
+<div id="outline-container-orgf9dfe00" class="outline-3">
+<h3 id="orgf9dfe00">reduce overheating</h3>
+<div class="outline-text-3" id="text-orgf9dfe00">
+<p>
+sudo add-apt-repository ppa:linrunner/tlp
+sudo apt-get update
+sudo apt-get install tlp tlp-rdw
+sudo tlp start
+</p>
+</div>
+</div>
+<div id="outline-container-org0caaff9" class="outline-3">
+<h3 id="org0caaff9">Use apt-fast isnted of apt-get</h3>
+<div class="outline-text-3" id="text-org0caaff9">
+<p>
+sudo apt-add-repository ppa: apt-fast/stable
+sudo apt-add-repository ppa:apt-fast/stable
+sudo apt-get update
+sudo apt-get install apt-fast
+sudo apt-get remove apt-fast
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2877d45" class="outline-3">
+<h3 id="org2877d45">Choise a light weighted desktop Environment</h3>
+<div class="outline-text-3" id="text-org2877d45">
+</div>
+<div id="outline-container-org91baeb5" class="outline-4">
+<h4 id="org91baeb5">Awesome : Awesome is less power hog desktop environment, which gives you a lot of control over the system. To install this environment, just run the following command in Terminal.</h4>
+<div class="outline-text-4" id="text-org91baeb5">
+<p>
+Destro Tube  <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8f11799" class="outline-4">
+<h4 id="org8f11799">Qtile Windows:</h4>
+</div>
+</div>
+
+
+<div id="outline-container-org511cde1" class="outline-3">
+<h3 id="org511cde1">Enable Addtional Drives</h3>
+</div>
+<div id="outline-container-orgbe84552" class="outline-3">
+<h3 id="orgbe84552">Clean up Ubuntu</h3>
+<div class="outline-text-3" id="text-orgbe84552">
+<p>
+sudo apt-get clean
+sudo apt-get autoremove
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7bec585" class="outline-2">
+<h2 id="org7bec585">Programmer</h2>
+<div class="outline-text-2" id="text-org7bec585">
+</div>
+<div id="outline-container-orgeede5d0" class="outline-3">
+<h3 id="orgeede5d0">git</h3>
+<div class="outline-text-3" id="text-orgeede5d0">
+<p>
+sudo apt install git-all
+nano ~/.gitconfig
+</p>
+</div>
+</div>
+<div id="outline-container-org37cfce5" class="outline-3">
+<h3 id="org37cfce5">Emacs</h3>
+<div class="outline-text-3" id="text-org37cfce5">
+<p>
+cd emacs
+./autogen.sh
+./configure
+make -j4
+sudo make install
+emacs
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgffe6f8f" class="outline-3">
+<h3 id="orgffe6f8f">Neovim</h3>
+<div class="outline-text-3" id="text-orgffe6f8f">
+<p>
+sudo apt-get -f install neovim
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org988a9e6" class="outline-2">
+<h2 id="org988a9e6">Atom</h2>
+<div class="outline-text-2" id="text-org988a9e6">
+<p>
+script
+file icon
+pigments
+pigments-map
+</p>
+
+
+<p>
+disable : 
+autocomplete-symi
+a&#x2026;.
+</p>
+
+
+<p>
+install:
+       fautocomplete-python: 
+shortcut : C+ S + p: cmd promt
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=aiXNKHKWlmY">https://www.youtube.com/watch?v=aiXNKHKWlmY</a>
+</p>
+
+<p>
+emmet : faster html,class, id, 
+atomlive server : 
+Todo : reergymerej
+</p>
+
+<p>
+eg:
+//TODO: Run my Function
+</p>
+
+
+<p>
+atom-beautify : python,php &#x2026;..
+</p>
+
+
+<p>
+ask stack :
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=UYPgPyxwF28">https://www.youtube.com/watch?v=UYPgPyxwF28</a>
+Gitware :
+command palellet
+</p>
+
+<p>
+multi line cursor
+fuzzy file finder : command search
+</p>
+
+
+<p>
+App style sheet :  Atom menu &gt; open my stylesheet
+</p>
+
+<p>
+terminal 
+</p>
+</div>
+</div>
+<div id="outline-container-org30eb430" class="outline-2">
+<h2 id="org30eb430">Jupyter:</h2>
+<div class="outline-text-2" id="text-org30eb430">
+<p>
+run code interctively &gt; 
+ipython is use to update to Jupter
+</p>
+</div>
+
+<div id="outline-container-orgc0dd419" class="outline-3">
+<h3 id="orgc0dd419">creaat new notebook</h3>
+<div class="outline-text-3" id="text-orgc0dd419">
+<p>
+cd ../Jupter-Demo
+jupter notebook
+</p>
+
+
+<p>
+! at start of cell/file as bash and we can run bash file
+eg: 
+!pip list
+ls 
+</p>
+
+<p>
+building cmd : magic
+% cmd agr will come for save line
+</p>
+
+<p>
+eg : %lsmagic
+</p>
+
+<p>
+%%  then entire cell is consitor for arguments
+</p>
+
+<p>
+matpllotlib inline cmd
+</p>
+
+<p>
+%% HTML &gt;&gt; entire cell consider as html
+</p>
+
+<p>
+insert html, image 
+</p>
+<div class="org-src-container">
+<pre class="src src-html">%% HTML
+&lt;iframe width = "560" height ="315" src = "https://www.youtube.com/...."
+</pre>
+</div>
+
+<p>
+Expote: ipyn,html,py,
+Share :
+</p>
+
+<p>
+To view other's jupeter notebook you can view in github ipython,  
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcb8ebae" class="outline-2">
+<h2 id="orgcb8ebae">Anacoda:</h2>
+<div class="outline-text-2" id="text-orgcb8ebae">
+<p>
+py distribution,
+free and open 
+for data science, meachine larning
+</p>
+</div>
+<div id="outline-container-org926e419" class="outline-3">
+<h3 id="org926e419">install</h3>
+<div class="outline-text-3" id="text-org926e419">
+<p>
+download from anaconda site  new version
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5be7900" class="outline-3">
+<h3 id="org5be7900">install anaconda in local dir</h3>
+<div class="outline-text-3" id="text-org5be7900">
+<div class="org-src-container">
+<pre class="src src-sh">bash ~/Download/Anaconda3.xx-Linux-x86_64.sh
+ /home/dan/anaconda
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8626495" class="outline-2">
+<h2 id="org8626495">Shortcut Terminal :</h2>
+<div class="outline-text-2" id="text-org8626495">
+
+<div id="orgb821687" class="figure">
+<p><img src="http://i.gzn.jp/img/2007/08/03/linux_command_cheat_sheet/linux.png" alt="linux.png" />
+</p>
+</div>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">command</th>
+<th scope="col" class="org-left">exp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">pwd</td>
+<td class="org-left">print working directory</td>
+</tr>
+
+<tr>
+<td class="org-left">ls</td>
+<td class="org-left">list of file in folder</td>
+</tr>
+
+<tr>
+<td class="org-left">cd</td>
+<td class="org-left">change directory</td>
+</tr>
+
+<tr>
+<td class="org-left">cd ..</td>
+<td class="org-left">parent directory</td>
+</tr>
+
+<tr>
+<td class="org-left">touch</td>
+<td class="org-left">create file</td>
+</tr>
+
+<tr>
+<td class="org-left">gedit sample.txt</td>
+<td class="org-left">create or open(sample.txt)/edit in gedit</td>
+</tr>
+
+<tr>
+<td class="org-left">mv "file-path" ./</td>
+<td class="org-left">Move file at path(file-path)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">./    : To current dir</td>
+</tr>
+
+<tr>
+<td class="org-left">mkdir 'dir1'</td>
+<td class="org-left">create a dir of name 'dir1'</td>
+</tr>
+
+<tr>
+<td class="org-left">cd</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org7b08242" class="outline-2">
+<h2 id="org7b08242">Split Terminal</h2>
+<div class="outline-text-2" id="text-org7b08242">
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install screen
+screen
+# Split Horizontally : Ctr + a S
+# Split Horizontally : Ctr + a :split
+# Split Vertically : Ctr + a |
+# Split Vertically : Ctr + a :split -v
+# move cursor around tiles: Ctr + a &lt;Tab&gt;
+# move cursor around tiles: Ctr + a :focus
+
+# Open bash terminal in tiles : Ctr +a C
+# Open bash terminal in tiles : Ctr +a :screen
+
+# maxime tile : Ctr + a Q 
+#  
+
+# remove tile : Ctr + a X
+# remove tile : Ctr + a :remove
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org38476fc" class="outline-2">
+<h2 id="org38476fc">installation</h2>
+</div>
+
+<div id="outline-container-org8eed5c3" class="outline-2">
+<h2 id="org8eed5c3">pip</h2>
+<div class="outline-text-2" id="text-org8eed5c3">
+<div class="org-src-container">
+<pre class="src src-sh">  sudo sh Anaconda3-5.3.1-Linux-x86_64.sh 
+  jupyter notebook
+  python3 -m pip install --upgrade pip
+  python3 -m pip install jupyter
+  python3 -m pip sudo install jupyter
+  sudo python3 -m pip install jupyter
+  jupyter notebook
+  sudo apt-get clean
+  sudo apt-get pip
+  sudo apt-get update
+  sudo apt-get upgrade
+  sudo apt autoremove
+  sudo apt-get upgrade
+  sudo apt-ger install python-pip
+  sudo apt-get install python-pip
+  sudo apt-get install python3-pip
+  pip --version
+# 
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd2d1d89" class="outline-2">
+<h2 id="orgd2d1d89">Udemy-dl Setting</h2>
+<div class="outline-text-2" id="text-orgd2d1d89">
+<div class="org-src-container">
+<pre class="src src-sh">cd /home/jayradhe/Workspace/udemy-dl
+conda crearte --name udemy-dl
+source activate udemy-dl
+conda env create -f requirement.yaml
+###################################################################################################################33
+# Python Django tkinter     - Complete bundle advance
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/python-django-tkinter-complete-bundle-advance/learn/lecture/16463998?components=buy_button%2Cdiscount_expiration%2Cgift_this_course%2Cintroduction_asset%2Cpurchase%2Cdeal_badge%2Credeem_coupon#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+###################################################################################################################33
+# Ansible -Begineering
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/learn-ansible/learn/lecture/7040832?start=0#overview  -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+###################################################################################################################33
+# Ansible -Advan
+#############################333
+ python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/learn-ansible-advanced/learn/lecture/7687716?start=0#overview  -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+###################################################################################################################33
+# Docker
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/docker-mastery/learn/lecture/16810938#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+
+
+
+############################################33
+#  THE Web Developer Bootcamp
+##############################################
+python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/3861448#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+##########################################################333
+#    Complete React Zero to mastery
+###############################################################
+python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/14754858#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org51721e4" class="outline-2">
+<h2 id="org51721e4">Read Write NTFS partition drive (Not  C drive) from linux</h2>
+<div class="outline-text-2" id="text-org51721e4">
+<p>
+I have a external hard disk which is inside laptop so i have
+Two Harddsik
+</p>
+<ul class="org-ul">
+<li>Kingston 250 Gb
+<ul class="org-ul">
+<li>System reserve : 500Mb "NTFS"</li>
+<li>Windows        : 100Gb "NTFS"</li>
+<li>Linux          : 120Gb "ext4"</li>
+</ul></li>
+</ul>
+<p>
+WD - 1Tb 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"> # Do fdisk
+ sudo fdisk -l
+Disk /dev/sda: 223.58 GiB, 240057409536 bytes, 468862128 sectors
+Disk model: KINGSTON SA400S3
+
+Device     Boot     Start       End   Sectors   Size Id Type    # Here sda1: System Reserved, sda2: C drive, sda4: Linux
+/dev/sda1  *         2048   1026047   1024000   500M  7 HPFS/NTFS/exFAT
+/dev/sda2         1026048 202751999 201725952  96.2G  7 HPFS/NTFS/exFAT
+/dev/sda4       202752000 468860927 266108928 126.9G 83 Linux
+
+
+Disk /dev/sdb: 931.53 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: WDC WD10JPVX-75J
+
+Device     Boot Start        End    Sectors   Size Id Type    # sdb1 : External Harddisk (New Volume) 
+/dev/sdb1        2048 1953521663 1953519616 931.5G  7 HPFS/NTFS/exFAT
+
+  # Do blkid
+ sudo blkid
+/dev/sda1: LABEL="System Reserved" UUID="8492E34292E336F8" TYPE="ntfs" PARTUUID="d67b4fcf-01"
+/dev/sda2: UUID="0ABCEC6ABCEC51AD" TYPE="ntfs" PARTUUID="d67b4fcf-02"
+/dev/sda4: UUID="b75e5abd-3f5b-4448-9a96-c20c9d0f6aaf" TYPE="ext4" PTTYPE="dos" PARTUUID="d67b4fcf-04"
+/dev/sdb1: LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" PARTUUID="37330972-01"
+
+  # echo : "LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" rw,auto,nobrowse " in /etc/fstab
+ cat /etc/fstab
+
+# &lt;file system&gt;                          &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;         &lt;dump&gt;  &lt;pass&gt;
+UUID=b75e5abd-3f5b-4448-9a96-c20c9d0f6aaf /               ext4    errors=remount-ro  0       1
+/swapfile                                 none            swap    sw                 0       0
+
+LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" rw,auto,nobrowse 
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc28a014" class="outline-2">
+<h2 id="orgc28a014">Unable to connect exteranl mike to linux-mint</h2>
+<div class="outline-text-2" id="text-orgc28a014">
+<p>
+In obs i can't add external mike after doing setting i got my answer
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo nano /etc/modprobe.d/alsa-base.conf
+
+# snd-hda-intel is for boya mike obs setting
+options snd-hda-intel model=,dell-headset-multi
+</pre>
+</div>
+<p>
+External mike is showing in system&gt; setting &gt; sound(serach sound) but in obs it is not showing but showing as defalut
+but when using ubs setting it is showing usb mike connection
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

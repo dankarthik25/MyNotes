@@ -1,0 +1,304 @@
+#+TITLE: My gitconfig
+#+AUTHOR:    Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+
+* Git Configuration File 
+#+BEGIN_SRC  sh
+  git --version   # >> git version 2.3.2
+
+  # Configuration 
+  git config --global user.name "Dankarthik25"
+  git config -global user.email "dankarthik25@gmail.com"
+
+  # help
+  git help config
+  git config --help
+
+  #
+  cat ~/.gitconfig
+  #[user]
+  #        email = dankarthik25@gmail.com
+  #        name = Dankarthik25
+  #[log]
+  #  date = relative
+  #[format]
+  #  pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+#+END_SRC
+
+
+
+
+
+
+* Manage Multiple git account  in  github, gitlab, aws-codecommit
+Authenticating on multiple GitHub accounts using SSH
+https://www.youtube.com/watch?v=N2hMGEeYR7c
+
+Manage differnet ssh-key for different account and servers like (github, gitlab, aws-codecommit
+
+https://www.youtube.com/watch?v=lLgWWtOk7gk
+** Create ssh key and share to github/gitlab/aws-commit 
+#+begin_src sh
+cd ~/.ssh
+#  ssh-keygen -t rsa -b -C karthik.dahchuka@deepalgorithms.in "gitlab-deepalgo"
+
+ssh-keygen -o -t rsa -C karthik.dahchuka@deepalgorithms.in #
+
+# # #
+# More Secure (ed25519)
+# # # 
+# ssh-keygen -t ed25519 -C "karthik.dahchuka@deepalgorithms.in"  # ed25519 is more secure than rsa
+
+# save as id_rsa_gitlab-deepalgo with password :
+# Enter file in which to save the key (~/.ssh/id_rsa): id_rsa_gitlab_deepalgo
+cat id_rsa_gitlab_deepalgo.pub
+# # # # # 
+# copy code(cat id_rsa_gitlab_deepalgo.pub) and past in github or gitlab ssh key
+# # # # #
+
+# # # # # #  # #
+# Simillarly Create the ssh key for different account 
+# # # # # # # # # 
+ssh-keygen -t rsa -b 4096 -C "gitlab-dankarthik25"
+# save as id_rsa_gitlab-dan25 with password
+
+
+ls
+#id_rsa_gitlab_deepalgo.pub
+#id_rsa_gitlab_deepalgo
+
+#id_rsa_gitlab_dan25 
+#id_rsa_gitlab dan25.pub
+
+#id_rsa_gitlab_dan2505
+#id_rsa_gitlab_dan2505.pub
+#+end_src
+** Copy .pub key to github,gitlab account and save the key
+
+** Config ssh conf
+#+begin_src sh
+# path :  ~/.ssh/
+# nano config # create a empty file and past below code
+
+#id_rsa_gitlab_deepalgo.pub
+#id_rsa_gitlab_deepalgo
+
+#id_rsa_gitlab_dan25 
+#id_rsa_gitlab dan25.pub
+
+#id_rsa_gitlab_dan2505
+#id_rsa_gitlab_dan2505.pub
+
+# Work account - default config
+Host gitlab.com-deepalgo
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_gitlab_deepalgo
+
+# Personal Account I 
+Host gitlab.com-dan
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_rsa_gitlab_dan25
+
+# Personal Account - II
+Host github.com-dan25
+HostName github.com
+User git
+Identityfile ~/.ssh/id_rsa_github-dan25
+
+# Personal Account - III
+Host github.com-dan2505
+HostName github.com
+User git
+Identityfile ~/.ssh/id_rsa_gitlab-dan25
+#+end_src
+
+* Configure ssh server
+#+begin_src sh
+#id_rsa_gitlab_deepalgo.pub
+#id_rsa_gitlab_deepalgo
+
+#id_rsa_gitlab_dan25 
+#id_rsa_gitlab dan25.pub
+
+#id_rsa_github_dan25
+#id_rsa_github_dan25.pub
+
+cd ..
+ssh-add -D  # remove all previous keys 
+
+ssh-add id_rsa_gitlab_deepalgo   # add below keys 
+ssh-add id_rsa_gitlab_dan25
+ssh-add id_rsa_github_dan25
+
+# check existing kesy
+ssh-add -l
+
+# check ssh connection
+ssh -T gitlab.com-deepalgo   # >>>  Welcome to GitLab, @dankarthik!
+ssh -T gitlab.com-dan25      # >>>  Welcome to GitLab, @dankarthik25!
+ssh -T github.com-dan25
+# clone and push repo
+#NOTE: in gitclone with ssh replace <git@github.com:> with <git@github.com-codertrain>
+# If not git will use default user
+
+# Example
+git clone git@github.com-deepalgo:xxxxxxxxxxxx.git
+
+git remote add gitlab-dan25 git@gitlab.com-dan25:dankarthik25/org-theme.git
+git push gitlab-dan25 master
+
+
+git push origin/gitlab-deepalgo master
+#or
+git push gitlab-deepalgo master
+
+# check git user
+git config user.name
+
+#+end_src
+
+* Test your ssh is connect with git 
+Test if ssh is  working or not
+#+begin_src sh
+#get newly created  url : git clone git@gitlab.com:deepalgorithms1/cross-account-codepipeline-in-aws.git
+
+# check clone with ssh
+git clone git@gitlab.com-deepalgo:deepalgorithms1/cross-account-codepipeline-in-aws.git
+
+# link existing project to newly created gitlab repo
+git remove add origin/gitlab-deepalgo git@gitlab.com-deepalgo:deepalgorithms1/cross-account-codepipeline-in-aws.git
+
+git@gitlab.com-deepalog:deepalgorithms1/aws/cross-account-codepipeline-in-aws.git
+# # # ###########################
+# 
+# # # ############################
+# check original remote origin url
+git remote -v  # list all remote repo links 
+#origin git@github.com:user1/my-repo.git
+
+
+#change it to use your custom `user1-github` hostname
+git remote rm origin
+git remote add origin git@user1-github:user1/my-repo.git
+#+end_src
+
+
+* config git 
+#+begin_src
+cd ..
+mkdir work
+nano ~/work/.gitconfig
+# paste below block 
+# ########################################
+[user]
+   name =  Coder Train
+   email = codertrain@gmail.com
+
+
+
+# ###################################
+cd ~/.gitconfig
+
+[user]
+    name = Sagar Junnarkar
+    email =sagarjunnu@gmail.com
+
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
+
+
+#+end_src
+
+* git cmd 
+#+begin_src
+# get user name and email
+
+git config user.name
+git config user.email
+git config credential.username
+git config --get user.name
+git config --get user.email
+
+
+# Create user name and email
+git config --global user.name "Mona Lisa"
+git config --global user.email "monalisa@gmail.com"
+
+# list all users in git 
+git config -l
+git config --list
+
+git remote -v
+git remote add origin https://github.com/dankarthik25/mynotes
+git remote add gitlab-dan25 git@gitlab:
+git remote rm gitlab-dan25  
+#+end_src
+
+
+
+git remote list
+
+
+* gitlab tutorial
+https://youtu.be/8aV5AxJrHDg?t=2928
+** Branchig Strategies
+Github Branching Strategies
+Git branching Strategies
+Github branching Strategies
+
+
+** gitlab CI/CD pipeline
+pipeline : with in pipeline we can define stages and Jobs
+Stages: Define chronological order of jobs 
+job:
+- define actual steps  to executed (such as running(jenkins jobs) commands to complie code ) 
+Runners:
+- Open-source application that executes the instruction defined with jobs
+
+** Create CI/CD pipeline
+create a yaml in git repo : with name : =.gitlab-ci.yaml=
+Method of create yaml file :
+- from gitlab git reposiotory : =add new files/dir=
+- LeftSideBar : CI/CD section : =Editor=
+- local repo create and push      
+
+Choose from Editor will give template   
+#+begin_src 
+
+#+end_src
+** Gitlab Migrating
+Jenkins Jobs :  Gitlab Runner
+Jenkins "environment" dir : Gitlab "variables" key
+Jenkins "tools" dir :
+** Gitlab Pipeline
+Deploy artifacts from a gitlab pipeline to =Gitlab Package Registry=
+Describe Gitlab releases
+Describe Gitlab Package, Container and Infrastructure registries
+
+
+*** Package Registries 
+*** Container Registries 
+*** Infrasture Registries
+
+* Git AWS Setting
+[[https://stackoverflow.com/questions/50635130/aws-codecommit-fatal-repository-https-git-codecommit-us-east-1-not-foun][AWS CodeCommit - fatal: repository 'https://git-codecommit.us-east-1..' not found]]
+#+begin_src 
+git config --global credential.UseHttpPath true
+#+end_src
+* Git AWS Setting
+
+
+[[https://stackoverflow.com/questions/50635130/aws-codecommit-fatal-repository-https-git-codecommit-us-east-1-not-foun][AWS CodeCommit - fatal: repository 'https://git-codecommit.us-east-1..' not found]]
+#+begin_src 
+git config --global credential.UseHttpPath true
+#+end_src
+
+
+

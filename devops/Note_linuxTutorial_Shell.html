@@ -1,0 +1,1894 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux</title>
+<meta name="author" content="D Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Linux</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org09fe8db">Shabang</a></li>
+<li><a href="#orga858656">Type of Shell</a></li>
+<li><a href="#orgf9feca1">Shell Keyword</a></li>
+<li><a href="#org7d8c4f9">Run shell script</a></li>
+<li><a href="#org657542f">Variable</a></li>
+<li><a href="#orgf6d2c3c">Diff btw " and '</a></li>
+<li><a href="#orgabb3a95">Special Variable</a></li>
+<li><a href="#org9906abd">PATH variable,  basename N dirname variable</a></li>
+<li><a href="#orga1a16e3">IF statment</a></li>
+<li><a href="#org9eb333d">If Condition Statment</a></li>
+<li><a href="#org3e16952">If vs Switch</a></li>
+<li><a href="#orgb91ad2b">Switch Statment II</a></li>
+<li><a href="#orga5768fc">Switch</a></li>
+<li><a href="#orgaae3b17">for Loop</a></li>
+<li><a href="#org0373ed9">while and Shift loop</a></li>
+<li><a href="#orgc86d6c3">Argument in shell</a>
+<ul>
+<li><a href="#org07048c8">Argument Examples</a></li>
+</ul>
+</li>
+<li><a href="#orga4a428e">Function</a>
+<ul>
+<li><a href="#orga061c96">Example</a></li>
+<li><a href="#org699d564">Functoin for backup files</a></li>
+</ul>
+</li>
+<li><a href="#org833a45c">Regular expression</a></li>
+<li><a href="#orga03a668">cut and Awk</a></li>
+<li><a href="#orga162476">Sort and uniq</a></li>
+<li><a href="#org9345084">Sed and Streams (find and replace)</a></li>
+<li><a href="#org8905604">SSH (with password N with ssh-key)</a></li>
+<li><a href="#org1c49be3">I/O redirection</a></li>
+<li><a href="#orge424242">Redirect a file</a></li>
+<li><a href="#org233de8e">bel</a></li>
+<li><a href="#org9034e79">READ</a></li>
+<li><a href="#org8c61682">RANDOm</a></li>
+<li><a href="#orgcf1add2">RANDOm II</a></li>
+<li><a href="#org4452493">Example</a></li>
+<li><a href="#org65b114e">Example</a></li>
+<li><a href="#orgbf6f882">Deletig and Disabling Linux</a></li>
+<li><a href="#orgb0aa523">Parsing Command Line Option (getopts)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org09fe8db" class="outline-2">
+<h2 id="org09fe8db">Shabang</h2>
+<div class="outline-text-2" id="text-org09fe8db">
+<div class="org-src-container">
+<pre class="src src-sh">#! /bin/bash
+#! /bin/sh     # #! :shabang
+echo "print in termnal"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga858656" class="outline-2">
+<h2 id="orga858656">Type of Shell</h2>
+<div class="outline-text-2" id="text-orga858656">
+<p>
+<a href="https://www.educba.com/types-of-shells-in-linux/">https://www.educba.com/types-of-shells-in-linux/</a>
+</p>
+<ul class="org-ul">
+<li>bash (build based on bourne shell ) default shell of many linux distribution</li>
+<li>csh (C Shell )</li>
+<li>tcsh (Tab C Shell)</li>
+<li>zsh <b>Z Shell</b> (Combined feature of bash + csh + ksh)</li>
+<li><b>Fish Shell</b>  (User Friendly Shell)</li>
+<li>Ksh  <b>Korn Shell</b></li>
+</ul>
+
+
+<div id="org52ed732" class="figure">
+<p><img src="./linux-img/th-4143612218.jpeg" alt="th-4143612218.jpeg" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf9feca1" class="outline-2">
+<h2 id="orgf9feca1">Shell Keyword</h2>
+<div class="outline-text-2" id="text-orgf9feca1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Echo</td>
+<td class="org-left">if</td>
+<td class="org-left">until</td>
+<td class="org-left">trap</td>
+</tr>
+
+<tr>
+<td class="org-left">read</td>
+<td class="org-left">else</td>
+<td class="org-left">case</td>
+<td class="org-left">wait</td>
+</tr>
+
+<tr>
+<td class="org-left">set</td>
+<td class="org-left">fi</td>
+<td class="org-left">esac</td>
+<td class="org-left">eval</td>
+</tr>
+
+<tr>
+<td class="org-left">unset</td>
+<td class="org-left">while</td>
+<td class="org-left">break</td>
+<td class="org-left">exec</td>
+</tr>
+
+<tr>
+<td class="org-left">read-only</td>
+<td class="org-left">do</td>
+<td class="org-left">continue</td>
+<td class="org-left">ulmit</td>
+</tr>
+
+<tr>
+<td class="org-left">shift</td>
+<td class="org-left">Done</td>
+<td class="org-left">exit</td>
+<td class="org-left">umask</td>
+</tr>
+
+<tr>
+<td class="org-left">export</td>
+<td class="org-left">For</td>
+<td class="org-left">return</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org7d8c4f9" class="outline-2">
+<h2 id="org7d8c4f9">Run shell script</h2>
+<div class="outline-text-2" id="text-org7d8c4f9">
+<div class="org-src-container">
+<pre class="src src-sh"># need to give full permission to the shell-file
+chmod 777 name.sh
+./name.sh
+sh name.sh
+sh -x name.sh
+source name.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org657542f" class="outline-2">
+<h2 id="org657542f">Variable</h2>
+<div class="outline-text-2" id="text-org657542f">
+<div class="org-src-container">
+<pre class="src src-sh">#
+# varaiable 
+#
+
+# systax   &lt;variable-name&gt;=&lt;value&gt;
+# variable should consist of (a-z,A-Z,0-9, _ ) NO special symbol, variable should not start with number
+
+#EG:
+a=10               # declare a varibale int(or) float types
+b=15               # 
+salary=10000
+surname='script'   # declare a string type varibale
+name=sathish       # assign
+lastname="script"         
+
+echo "$a"            # 10 print the variable
+echo "$b"            # 15
+echo "$salary"       # 10000
+echo "name"          # name 
+echo "$name"         # sathish
+echo "${name}"       # sathis
+echo '$name'         # $name
+echo "Hi my name is $name"      # Hi my name is sathish
+echo "Hi my name is ${name}"    # Hi my name is sathish
+echo "${surname}ing is fun"     #script is fun
+ending
+echo "This is ${word}${ending}. "
+src=$HOME
+des=${HOME}/../../media/${USER}/easystore/mySyn_Home_rsync/
+cd $src
+echo "pwd inside src: $(pwd)"   # &gt;&gt;&gt; pwd inside src: /home/karthik
+cd $des
+echo "pwd inside des: $(pwd)"   # &gt;&gt;&gt; pwd inside des: /media/karthik/easystore/mySyn_Home_rsync
+
+#Ex : 
+#Eg :
+
+src=/opt/sathish/scripts
+dest=/temp
+# will move sbi.war file from scr to dest
+cp $src/sbi.war $dest/
+
+# Ex : write a script which will clone from git_url to dest
+#Filename : clone.sh
+git_url= https://github.com/devipsstephen/ibm.git
+dest= /opt/git_repo
+mkdir -p $dest
+cd $dest
+pwd
+git clone $git_url
+chrontab -e
+# # insert
+# */1 * * * * sh /opt/clone.sh  
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6d2c3c" class="outline-2">
+<h2 id="orgf6d2c3c">Diff btw " and '</h2>
+<div class="outline-text-2" id="text-orgf6d2c3c">
+<p>
+single quotes (') preserves the literal value of each character within the quotes. 
+Enclosing characters in double quotes (") preserves the literal value of all characters within the quotes, with the exception of $, `, \,
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">echo "${name}"       # &gt;&gt; sathis     # variable are passed ${}
+echo '$name'         # $name
+echo "echo PATH: ${PATH}"            # here PATH is local linux OS global variable so we pass insdie ${}
+echo "echo UID : $(id -un)"          # linux cmd  are executed inside string using $()
+cd $src
+echo "pwd inside src: $(pwd)"   # &gt;&gt;&gt; pwd inside src: /home/karthik
+cd $des
+echo "pwd inside des: $(pwd)"   # &gt;&gt;&gt; pwd inside des: /media/karthik/easystore/mySyn_Home_rsync
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabb3a95" class="outline-2">
+<h2 id="orgabb3a95">Special Variable</h2>
+<div class="outline-text-2" id="text-orgabb3a95">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+#
+#    UID
+# 
+
+# Display the UID and username of the user executing this script.
+# Display if the user is the root user or not.
+
+# Display the UID
+echo "Your UID is ${UID}"    # UID special preset variable 
+## &gt;&gt;&gt; Your UID is 1000
+
+# TO more about uid 
+# man bash
+# # vi key binding
+#/UID&lt;ENTER&gt;
+
+# Display the username
+#USER_NAME=$(id -un)
+id 
+#uid=1000(jayradhey) gid=1000(jayradhey) groups=1000(jayradhey),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),114(lpadmin),134(sambashare),999(docker)
+id -u     # -u  or --user &gt;&gt;&gt; 1000 
+id -un    # -u  or --name #&gt;&gt;&gt; jayradhey
+man id    # more details
+
+
+USER_NAME=`id -un`    # older style 
+echo "Your username is ${USER_NAME}"
+
+# Display if the user is the root user or not.
+if [[ "${UID}" -eq 0 ]]
+then
+  echo 'You are root.'
+else
+  echo 'You are not root.'
+fi
+
+
+#
+#          ID
+#
+# Print user and group information for  the specified USER or (for current user
+
+man id
+type -a id
+id -u
+id -u -n
+id -un
+
+# whoami
+man whoami
+whoami   #&gt;&gt;&gt;&gt;  jayradhey
+
+# [[ is bash condtion not work in csh shell may not work
+# or 
+# [  is older UNIX way
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9906abd" class="outline-2">
+<h2 id="org9906abd">PATH variable,  basename N dirname variable</h2>
+<div class="outline-text-2" id="text-org9906abd">
+<p>
+The search path for commands.  
+It is  a  colon-separated  list of directories  in  which  the  shell looks for commands
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">PATH=${PATH}:/opt/softwares/apache-maven-3.6.3/bin
+
+path_maven= /opt/softwares/apache-maven-3.6.3 
+basename /opt/softwares/apache-maven-3.6.3
+# &gt; apache-maven-3.6.3
+
+dirname /opt/softwares/apache-maven-3.6.3
+# &gt; /opt/softwares/
+
+dirname /opt/software/apache-maven-3.6.3/bin/not/here
+# &gt; /opt/softwar/apache-maven-3.6.3/bin/not
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">dirname "~/WorkSpace_Python"
+# ~
+basename "home/jayaradhe/WorkSpace_Python"
+#WorkSpace_Python
+# $pwd | xargs dirname  #&gt;&gt;&gt; ~
+
+
+echo "You executeed in this command :${0}"
+echo "You used $(dirname ${0}) as the path to $(basename ${0}) script"
+
+NoOfParameter= "${#}"
+echo "You supplied ${NoOfParameters} arguments(s) on the command line."
+
+if [[ "${NoOfParameters}" -lt 1]]
+then 
+    echo "Usage : ${0} USER_NAmE [USER_NAmE]]"
+    exit 1
+fi
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga1a16e3" class="outline-2">
+<h2 id="orga1a16e3">IF statment</h2>
+<div class="outline-text-2" id="text-orga1a16e3">
+<pre class="example">
+#
+# Decision making
+#
+
+#syntax:
+#if [condition]
+#then
+#
+#
+#else
+#
+#fi
+
+# relation operators
+# == eq 
+# &gt;= ge 
+# &lt;= le 
+# =! ne
+# &lt; gt 
+# &gt; lt 
+
+#Ex
+
+age=20
+if [$age&gt;=18] # or [ $age -ge 18]
+then
+  echo "aligible for diving license"
+else
+  echo "not aligible"
+fi
+
+
+
+#Ex : if file(calender.war) exist then backback
+
+src= /opt/calender.war
+dest=/opt/backup
+mkdir -p $dest
+
+if [-f $src]
+then
+     mv $src $dest
+     echo "file is existing"  
+else
+     cp /tmp/Calender.war $dest
+     if [$? ==0]
+	then 
+	  echo "deployment is done successfull"
+     fi
+fi
+
+
+
+
+# Ex: Tell weather deployment is sucessfull or failure 
+sh deploy.sh
+
+if[ $? ==0]
+then
+  echo "deployment is done sucessfull"
+else 
+  echo "not success"
+if
+
+# Ex : check if disk space of /dev/xvda1 is more the 3GB then clean the space
+
+thershold=3
+disc= `df-h |grep /dev/xvda1 | awk '{print 4}'| cut -c 1`
+echo "$disc"
+
+if [$disk -gt $threshold]
+then 
+   echo"clean the space"
+else
+   echo"disc space is ok"
+fi
+
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9eb333d" class="outline-2">
+<h2 id="org9eb333d">If Condition Statment</h2>
+<div class="outline-text-2" id="text-org9eb333d">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+if [[ "${1}" = 'start' ]]
+then
+  echo 'Starting.'
+elif [[ "${1}" = 'stop' ]]
+then
+  echo 'Stopping.'
+elif [[ "${1}" = 'status' ]]
+then
+  echo 'Status:'
+else
+  echo 'Supply a valid option.' &gt;&amp;2
+  exit 1
+fi
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">#! /bin/bash
+file=$1
+if [ -e $file ]
+then
+	echo -e "File $file exists"
+else
+	echo -e "File $file doesnt exists"
+fi
+# To check condition "man test"
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+echo "Please enter first number"
+read first
+echo "Please enter second number"
+read second
+
+if [ $first -eq 0 ] &amp;&amp; [ $second -eq 0 ]
+then
+	echo "Num1 and Num2 are zero"
+elif [ $first -eq $second ]
+then
+	echo "Both Values are equal"
+elif [ $first -gt $second ]
+then
+	echo "$first is greater than $second"
+else
+	echo "$first is lesser than $second"
+fi
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [ “$1” == “moo” ] 
+then
+    echo "$1 is moo" 
+fi
+# Note: you can also use a single “=” instead of a double one.
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+if [ `whoami` != 'root' ]; then
+	echo "Executing the installer script"
+else
+	echo "Root is not allowed to execute the installer script"
+fi
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3e16952" class="outline-2">
+<h2 id="org3e16952">If vs Switch</h2>
+<div class="outline-text-2" id="text-org3e16952">
+<div class="org-src-container">
+<pre class="src src-sh">!/bin/bash
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+if [[ "${1}" = 'start' ]]
+then
+  echo 'Starting.'
+elif [[ "${1}" = 'stop' ]]
+then
+  echo 'Stopping.'
+elif [[ "${1}" = 'status' ]]
+then
+  echo 'Status:'
+else
+  echo 'Supply a valid option.' &gt;&amp;2
+  exit 1
+fi
+
+This ideal format of a case statement follows.
+case "${1}" in
+  start)
+    echo 'Starting.'
+    ;;
+  stop)
+    echo 'Stopping.'
+    ;;
+  status|state|--status|--state)
+    echo 'Status:'
+    ;;
+  *)
+    echo 'Supply a valid option.' &gt;&amp;2
+    exit 1
+    ;;
+esac
+
+
+Here is a compact version of the case statement.
+
+case "${1}" in
+  start) echo 'Starting.' ;;
+  stop) echo 'Stopping.' ;;
+  status) echo 'Status:' ;;
+  *)
+    echo 'Supply a valid option.' &gt;&amp;2
+    exit 1
+    ;;
+esac
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+# This ideal format of a case statement follows.
+case "${1}" in
+  start)
+    echo 'Starting.'
+    ;;
+  stop)
+    echo 'Stopping.'
+    ;;
+  status|state|--status|--state)
+    echo 'Status:'
+    ;;
+  *)
+    echo 'Supply a valid option.' &gt;&amp;2
+    exit 1
+    ;;
+esac
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb91ad2b" class="outline-2">
+<h2 id="orgb91ad2b">Switch Statment II</h2>
+<div class="outline-text-2" id="text-orgb91ad2b">
+<div class="org-src-container">
+<pre class="src src-sh"># Here is a compact version of the case statement.
+case "${1}" in
+  start) echo 'Starting.' ;;
+  stop) echo 'Stopping.' ;;
+  status) echo 'Status:' ;;
+  *)
+    echo 'Supply a valid option.' &gt;&amp;2
+    exit 1
+    ;;
+esac
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga5768fc" class="outline-2">
+<h2 id="orga5768fc">Switch</h2>
+<div class="outline-text-2" id="text-orga5768fc">
+<div class="org-src-container">
+<pre class="src src-sh">env=moday
+case "$env" in 
+
+"monday") echo "monday";;
+"tuesday") echo "tuesday";;
+"*") echo "invalid opearation"
+esac
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">#! /bin/sh
+day= $1
+case $day in 
+"monday") 
+echo "this is monday"
+;;
+case $day in 
+"tue") 
+echo "this is tuesday"
+;;
+"*")
+echo "invalid"
+;;
+esac
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaae3b17" class="outline-2">
+<h2 id="orgaae3b17">for Loop</h2>
+<div class="outline-text-2" id="text-orgaae3b17">
+<p>
+The `for' loop executes a sequence of commands for each member in list of items.  
+If `in WORDS &#x2026;;' is not present, then `in "$@"' is assumed.  
+For each element in WORDS, NAME is set to that element, and the COMMANDS are executed.
+</p>
+
+<p>
+more information man bash #vi /Specia Parameters  or @
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># for $vari in 1 2 3 4 5 
+# do
+# #statement
+#done
+
+#! i in 1 2 3 4 5 
+for i in 1 2 3 4 5
+do 
+  echo "$i"
+  echo "$i"
+done
+
+cat name
+#sathish
+#sanjay
+#prabhakar
+#karthik
+#vijay
+#santhosh
+#prasad
+#ravi
+#raa
+#ggg
+#hh
+#kk
+
+# for i in $(cat people_data.csv); do  echo "$i"; done
+for i in `cat name`
+do
+echo "$i"
+done
+
+touch test 
+vi test 
+# welcom 
+cp test test2
+cp test test3
+
+#FileName: file.sh
+#! /bin/sh
+
+for file in /d/chola/*
+do 
+   if ["${file}" == "/d/chola/test"]
+      then
+       sed -i 's/welcome/devops/g'
+      fi
+done
+
+
+for i in `cat /d/chola/test`
+do
+  echo "$i" |sed -i 's/welcome/devops/g'
+done
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">for file in ~/.{path,bash_promt,exports,aliases,functions,extra};do
+  # do some thing
+  # do some thing
+done;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0373ed9" class="outline-2">
+<h2 id="org0373ed9">while and Shift loop</h2>
+<div class="outline-text-2" id="text-org0373ed9">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# Demonstrate the use of shift and while loops.
+
+# Display the first three parameters.
+echo "Parameter 1: ${1}"
+echo "Parameter 2: ${2}"
+echo "Parameter 3: ${3}"
+echo
+
+# Loop through all the positional parameters.
+while [[ "${#}" -gt 0 ]]
+do
+  echo "Number of parameters: ${#}"
+  echo "Parameter 1: ${1}"
+  echo "Parameter 2: ${2}"
+  echo "Parameter 3: ${3}"
+  echo
+  shift
+done
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc86d6c3" class="outline-2">
+<h2 id="orgc86d6c3">Argument in shell</h2>
+<div class="outline-text-2" id="text-orgc86d6c3">
+<div class="org-src-container">
+<pre class="src src-sh"># passing prameter in shell 
+# sh  tesh.sh 45 yes 25k shathish
+#then $0 is test.sh
+# ${0} is file name
+# ${1} is 45
+# ${2} is yes
+# ${3} is 25k
+# ${4} is shatish
+# $#   is No.Of parameter in command line or ${#}
+# $? : Exist Status of  previous cmd executed sucessfull : true / false(not exectued sucessfull)
+# "${@} : all parameter starting from 1 or ${1}${2}${3}${4}"
+</pre>
+</div>
+</div>
+<div id="outline-container-org07048c8" class="outline-3">
+<h3 id="org07048c8">Argument Examples</h3>
+<div class="outline-text-3" id="text-org07048c8">
+<div class="org-src-container">
+<pre class="src src-sh">
+echo "You executeed in this command :${0}"
+
+echo "You used $(dirname ${0}) as the path to $(basename ${0}) script"
+# dirname /home/jayradhe
+## &gt;&gt;/home
+
+# basename /home/jayrade
+## &gt;&gt; jayradae
+
+
+NoOfParameter= "${#}"
+echo "You supplied ${NoOfParameters} arguments(s) on the command line."
+
+if [[ "${NoOfParameters}" -lt 1]]
+then 
+    echo "Usage : ${0} USER_NAmE [USER_NAmE]]"
+    exit 1
+fi
+
+# Generate and display a password for each parameter
+do
+ PASSWORD=$(date +%s%N | sha256sum | head -c48)
+  echo "${USER_NAME}: ${PASSWORD}"
+done
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga4a428e" class="outline-2">
+<h2 id="orga4a428e">Function</h2>
+<div class="outline-text-2" id="text-orga4a428e">
+<div class="org-src-container">
+<pre class="src src-sh">env = $1
+
+# delete all files in tmp fodler
+delete()
+{
+rm -rf /tmp/*
+}
+
+# copy sbi.war file to username at ip:x.x.x.x  at /tmp
+
+deploy()
+{username= $1
+passwd=$2
+scp sbi.war $username@$passwd: /tmp
+}
+
+if evn == dev
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == sit     # System Integration and Testing
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == preprod
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == prod
+then 
+deploy dev 192.145.67.8
+fi 
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">log(){
+# local: The  scope variable inside func exist
+# "${@} : all parameter starting from 1 or ${1}${2}${3}${4}"
+
+local message= "${@}"
+echo "${message}" 
+}
+log 'Hello!'
+log 'This is fun'
+
+# Or
+function log{
+  echo 'You called the log function'
+}
+</pre>
+</div>
+</div>
+<div id="outline-container-orga061c96" class="outline-3">
+<h3 id="orga061c96">Example</h3>
+<div class="outline-text-3" id="text-orga061c96">
+<div class="org-src-container">
+<pre class="src src-sh">log(){
+ local VERBOSE="${1}"
+ shift
+ local message= "${@}"         
+ if [["${VERBOSE}"= 'true' ]]
+ then 
+     echo "${message}"
+ fi 
+}
+log 'true' 'Hello!'
+
+VERBOSE='true'
+log "${VERBOSE}" 'Hello!'
+log "${VERBOSE}" 'This is fun'
+
+# 
+#       READ ONLY VARIABE
+#
+log(){
+ local message= "${@}"         
+ if [["${VERBOSE}"= 'true' ]]
+ then 
+     echo "${message}"
+ fi 
+}
+
+readonly VERBOSE='true'
+log  'Hello!'
+log 'This is fun'
+
+
+#
+#    Send msg to sys logger
+#
+type -a logger
+man logger
+logger 'Hello from udemy course this is linux course'
+sudo tail /var/log/messages
+
+logger -t myscript 'Tagging on'
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org699d564" class="outline-3">
+<h3 id="org699d564">Functoin for backup files</h3>
+<div class="outline-text-3" id="text-org699d564">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# This script demonstrates the use of functions.
+
+log() {
+  # This function sends a message to syslog and to standard output if VERBOSE is true.
+
+  local MESSAGE="${@}"
+  if [[ "${VERBOSE}" = 'true' ]]
+  then
+    echo "${MESSAGE}"
+  fi
+  logger -t luser-demo10.sh "${MESSAGE}"
+}
+
+backup_file() {
+  # This function creates a backup of a file.  Returns non-zero status on error.
+
+  local FILE="${1}"
+
+  # Make sure the file exists.
+  if [[ -f "${FILE}" ]]
+  then
+    local BACKUP_FILE="/var/tmp/$(basename ${FILE}).$(date +%F-%N)"
+    log "Backing up ${FILE} to ${BACKUP_FILE}."
+
+    # The exit status of the function will be the exit sta tus of the cp command.
+    cp -p ${FILE} ${BACKUP_FILE}
+  else
+    # The file does not exist, so return a non-zero exit status.
+    return 1
+  fi
+}
+
+readonly VERBOSE='true'
+log 'Hello!'
+log 'This is fun!'
+
+backup_file /etc/passwd
+
+# Make a decision based on the exit status of the function.
+# Note this is for demonstration purposes.  You could have
+# put this functionality inside of the backup_file function.
+if [[ "${?}" -eq '0' ]]
+then
+  log 'File backup succeeded!'
+else
+  log 'File backup failed!'
+  exit 1
+fi
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org833a45c" class="outline-2">
+<h2 id="org833a45c">Regular expression</h2>
+<div class="outline-text-2" id="text-org833a45c">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-orga03a668" class="outline-2">
+<h2 id="orga03a668">cut and Awk</h2>
+<div class="outline-text-2" id="text-orga03a668">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-orga162476" class="outline-2">
+<h2 id="orga162476">Sort and uniq</h2>
+<div class="outline-text-2" id="text-orga162476">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+<div id="outline-container-org9345084" class="outline-2">
+<h2 id="org9345084">Sed and Streams (find and replace)</h2>
+<div class="outline-text-2" id="text-org9345084">
+<p>
+ Sed = Stream editor
+A stream is data that travels from :
+</p>
+<ul class="org-ul">
+<li>One process to another through a pip</li>
+<li>One file to another as a redirect</li>
+<li>One device to another.</li>
+</ul>
+
+<p>
+Standard Input = Standard Input Stream, etc
+Strems are typically textual data
+</p>
+
+<p>
+Sed perform text transformations on streams
+Example :
+</p>
+<ul class="org-ul">
+<li>Substitute some text for other text</li>
+<li>Remvoe lines</li>
+<li>Append textg after given lines</li>
+<li>Insert text before certain lines</li>
+</ul>
+
+<p>
+Sed is used programmatically,not interactively
+sed is 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">## syantax : sed's/search-pattern/replacement-string/flags'
+echo 'Dwight is the assistant regional manager.' &gt; manager.txt
+cat manager.txt
+sed 's/assistant/assistant to the/' manager.txt# s :substitute cmd
+# sed also allow regex for search and repalce
+
+# the original file is not alter or change
+ cat manager.txt
+
+# to change original file
+sed 's/assistant/assistant to the/' manager.txt
+
+
+# Case insensitive :
+echo 'I love my prabhupad' love.txt
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/i' love.txt
+echo 'This is line2' &gt;&gt; love.txt 
+
+# By default sed replace first pattern on line  but not on whole line or multi accurance in same line .
+# replace  muti-occurance we use g-flage
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/g' love.txt
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/2' love.txt # only 2nd occarance is changed
+
+# create a backup
+sed -i.bak  's/assistant/assistant to the/' manager.txt
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8905604" class="outline-2">
+<h2 id="org8905604">SSH (with password N with ssh-key)</h2>
+<div class="outline-text-2" id="text-org8905604">
+<p>
+visit : linuxTutorial.org doc 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1c49be3" class="outline-2">
+<h2 id="org1c49be3">I/O redirection</h2>
+<div class="outline-text-2" id="text-org1c49be3">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# This script demonstrates I/O redirection.
+
+# Redirect STDOUT to a file.
+FILE="/tmp/data"
+head -n1 /etc/passwd &gt; ${FILE}
+
+# Redirect STDIN to a program.
+read LINE &lt; ${FILE}
+echo "LINE contains: ${LINE}"
+
+# Redirect STDOUT to a file, overwriting the file.
+head -n3 /etc/passwd &gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDOUT to a file, appending to the file.
+echo "${RANDOM} ${RANDOM}" &gt;&gt; ${FILE}
+echo "${RANDOM} ${RANDOM}" &gt;&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDIN to a program, using FD 0.
+read LINE 0&lt; ${FILE}
+echo
+echo "LINE contains: ${LINE}"
+
+# Redirect STDOUT to a file using FD 1, overwriting the file.
+head -n3 /etc/passwd 1&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDERR to a file using FD 2.
+ERR_FILE="/tmp/data.err"
+head -n3 /etc/passwd /fakefile 2&gt; ${ERR_FILE}
+echo
+echo "Contents of ${ERR_FILE}:"
+cat ${ERR_FILE}
+
+# Redirect STDOUT and STDERR to a file.
+head -n3 /etc/passwd /fakefile &amp;&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDOUT and STDERR through a pipe.
+echo
+head -n3 /etc/passwd /fakefile |&amp; cat -n
+
+# Send output to STDERR
+echo "This is STDERR!" &gt;&amp;2
+
+# Discard STDOUT
+echo
+echo "Discarding STDOUT:"
+head -n3 /etc/passwd /fakefile &gt; /dev/null
+
+# Discard STDERR
+echo
+echo "Discarding STDERR:"
+head -n3 /etc/passwd /fakefile 2&gt; /dev/null
+
+# Discard STDOUT and STDERR
+echo
+echo "Discarding STDOUT and STDERR:"
+head -n3 /etc/passwd /fakefile &amp;&gt; /dev/null
+
+# Clean up
+rm ${FILE} ${ERR_FILE} &amp;&gt; /dev/null
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge424242" class="outline-2">
+<h2 id="orge424242">Redirect a file</h2>
+<div class="outline-text-2" id="text-orge424242">
+<p>
+Every process three File Descriptors :
+</p>
+<ul class="org-ul">
+<li>FD 0 STDIN  # Input</li>
+<li>FD 1 STDOUT # output</li>
+<li>FD 2 STDERR # error</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">id -un &gt; id
+"${UID}" &gt; uid
+
+# set password from file/variable
+echo "secret" &gt; password
+sudo pass --stdin einstein &lt; password
+
+# create a password 
+data | sha256sum | head -c10 &gt;&gt; password
+
+######################################################33
+# Redirect STDOUT to a file.
+######################################################33
+
+FILE="/tmp/data"
+head -n1 /etc/passwd &gt; ${FILE}
+
+######################################################33
+# Redirect STDIN to a program.
+######################################################33
+
+read LINE &lt; ${FILE}
+echo "LINE contains: ${LINE}"
+
+######################################################33
+# Redirect STDOUT to a file, overwriting the file.
+######################################################33
+
+head -n3 /etc/passwd &gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+echo "secret" &gt; password_file
+cat password_file
+
+
+######################################################33
+# Redirect STDOUT to a file, appending to the file
+######################################################33
+echo "${RANDOM} ${RANDOM}" &gt;&gt; ${FILE}
+echo "${RANDOM} ${RANDOM}" &gt;&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+
+READ X &lt; /etc/centos-release   # implicit and 
+READ X 0&lt; /etc/centos-release  # explicit
+READ X 0 &lt; /etc/centos-release # SYANTAX ERROR
+echo "${UDI}" &gt; uid
+echo "${UDI}" 1&gt; uid
+
+man head # print 1st 10 lines of each File to standard output, with more tha t 1file
+head  -n1 /etc/passwd /etc/hosts
+
+# If file not exis then 
+
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile  
+# output in terminal is : Has both std output and std error message
+# STDOUTPUT : Are stored in head.out
+# STDERROR : Are stored in head.err
+
+########################################################33
+# RE DIRECT : STDOUT, and print STDERROR
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.out # Error message is re-directed to head.out but printed in terminal
+
+########################################################33
+# RE DIRECT : STDERROR
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2&gt; head.err # Error message is re-directed to head.out but printed in terminal
+
+#######################################################33#
+# RE DIRECT : STDOUT and STDERROR :to seperate files
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.out 2&gt;head.err
+
+########################################################33
+# RE DIRECT : STDOUT and STDERROR :to seperate files
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &gt; head.both 2&gt;&amp;1 #re-direct FD2 at address of Fd1
+# OR  (New way )
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &amp;&gt; head.both
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &amp;&gt;&gt; head.both # append
+
+#######################################################33
+#  Append STD ERROR to STD OUT  : Doesn't flow(pass) through pipe
+######################################################33# 
+man cat 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile | cat -n # Error: can't pass err msg
+
+# inorder to pass error throw pip we need to append pass stderr to stdout
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2&gt;&amp;1 | cat -n  # Or
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile |&amp; cat -n 
+
+#######################################################33
+#  Append STD OUT to STD ERROR  : Doesn't flow(pass) through pipe
+######################################################33# 
+echo "error" |cat -n
+echo "error" &gt;&amp;2 |cat -n   #or
+echo "error" 1&gt;&amp;2 |cat -n   # same as &gt;&amp;2
+# Why we need to send data from std out to std error ?
+# To echo a msg which stdout  to std error 
+#Ex:
+echo "This is a std error" &gt;&amp;2
+
+######################################################33
+# Redirect STDIN to a program, using FD 0.
+######################################################33
+read LINE 0&lt; ${FILE}
+echo
+echo "LINE contains: ${LINE}"
+
+######################################################33
+# Redirect STDOUT to a file using FD 1, overwriting the file.
+######################################################33
+head -n3 /etc/passwd 1&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+######################################################33
+# Redirect STDERR to a file using FD 2.
+######################################################33
+ERR_FILE="/tmp/data.err"
+head -n3 /etc/passwd /fakefile 2&gt; ${ERR_FILE}
+echo
+echo "Contents of ${ERR_FILE}:"
+cat ${ERR_FILE}
+######################################################33
+# Redirect STDOUT and STDERR to a file.
+######################################################33
+head -n3 /etc/passwd /fakefile &amp;&gt; ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+######################################################33
+# Redirect STDOUT and STDERR through a pipe.
+######################################################33
+echo
+head -n3 /etc/passwd /fakefile |&amp; cat -n
+
+######################################################33
+# Send output to STDERR
+######################################################33
+echo "This is STDERR!" &gt;&amp;2
+
+######################################################33
+# Discard STDOUT
+######################################################33
+echo
+echo "Discarding STDOUT:"
+head -n3 /etc/passwd /fakefile &gt; /dev/null
+
+######################################################33
+# Discard STDERR
+######################################################33
+echo
+echo "Discarding STDERR:"
+head -n3 /etc/passwd /fakefile 2&gt; /dev/null
+
+######################################################33
+# Discard STDOUT and STDERR
+######################################################33
+echo
+echo "Discarding STDOUT and STDERR:"
+head -n3 /etc/passwd /fakefile &amp;&gt; /dev/null
+
+######################################################33
+# Clean up
+######################################################33
+rm ${FILE} ${ERR_FILE} &amp;&gt; /dev/null
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org233de8e" class="outline-2">
+<h2 id="org233de8e">bel</h2>
+<div class="outline-text-2" id="text-org233de8e">
+<div class="org-src-container">
+<pre class="src src-sh">( speaker-test -t sine -f 1000 )&amp; pid=$! ; sleep 1s ; kill -9 $pid
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9034e79" class="outline-2">
+<h2 id="org9034e79">READ</h2>
+<div class="outline-text-2" id="text-org9034e79">
+<p>
+read -p “ prompt<sub>text</sub>”
+</p>
+
+<p>
+Here we read the data along with some hint text . The hint text helps the user in what he/she has to enter . -p here stands for the prompt . The hint text also called the prompt text.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# This script creates an account on the local system.
+# You will be prompted for the account name and password.
+
+# Ask for the user name.
+read -p 'Enter the username to create: ' USER_NAME 
+
+# Ask for the real name.
+read -p 'Enter the name of the person who this account is for: ' USER_DETAILS
+
+# Ask for the password.
+# read -p 'Enter the password to use for the account: ' PASSWORD
+
+read -s -p "Enter Password: " password
+echo $password
+
+# Create the user.
+useradd -c "${USER_DETAILS}" -m ${USER_NAME}
+
+# Set the password for the user.
+# NOTE: You can also use the following command:
+#    echo "${USER_NAME}:${PASSWORD}" | chpasswd
+echo ${PASSWORD} | passwd --stdin ${USER_NAME}
+
+# Force password change on first login.
+passwd -e ${USER_NAME}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8c61682" class="outline-2">
+<h2 id="org8c61682">RANDOm</h2>
+<div class="outline-text-2" id="text-org8c61682">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# This script generates a list of random passwords.
+
+# A random number as a password.
+PASSWORD="${RANDOM}"
+echo "${PASSWORD}"
+
+# Three random numbers together.
+PASSWORD="${RANDOM}${RANDOM}${RANDOM}"
+echo "${PASSWORD}"
+
+# Use the current date/time as the basis for the password.
+PASSWORD=$(date +%s)
+echo "${PASSWORD}"
+
+# Use nanoseconds to act as randomization.
+PASSWORD=$(date +%s%N)
+echo "${PASSWORD}"
+
+# A better password.
+PASSWORD=$(date +%s%N | sha256sum | head -c32)
+echo "${PASSWORD}"
+
+# An even better password.
+PASSWORD=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c48)
+echo "${PASSWORD}"
+
+# Append a special character to the password.
+SPECIAL_CHARACTER=$(echo '!@#$%^&amp;*()_-+=' | fold -w1 | shuf | head -c1)
+echo "${PASSWORD}${SPECIAL_CHARACTER}"
+
+# shuf 
+echo "karthik" | fold -w1                # print each character in order
+echo "karthik" | fold -w1| shuf          # print each character in random order
+echo "karthik" | fold -w1| shuf |head -c1 # print one character in random
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcf1add2" class="outline-2">
+<h2 id="orgcf1add2">RANDOm II</h2>
+<div class="outline-text-2" id="text-orgcf1add2">
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# This script generates a random password for each user specified on the comand line.
+
+# Display what the user typed on the command line.
+echo "You executed this command: ${0}"
+
+# Display the path and filename of the script.
+echo "You used $(dirname ${0}) as the path to the $(basename ${0}) script."
+
+# Tell them how many arguments they passed in.
+# (Inside the script they are parameters, outside they are arguments.)
+NUMBER_OF_PARAMETERS="${#}"
+echo "You supplied ${NUMBER_OF_PARAMETERS} argument(s) on the command line."
+
+# Make sure they at least supply one argument.
+if [[ "${NUMBER_OF_PARAMETERS}" -lt 1 ]]
+then
+  echo "Usage: ${0} USER_NAME [USER_NAME]..."
+  exit 1
+fi
+
+# Generate and display a password for each parameter.
+for USER_NAME in "${@}"
+do
+  PASSWORD=$(date "+%s %N" | sha256sum | head -c48)
+  echo "${USER_NAME}: ${PASSWORD}"
+done
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4452493" class="outline-2">
+<h2 id="org4452493">Example</h2>
+<div class="outline-text-2" id="text-org4452493">
+<p>
+deployment process:
+</p>
+<ul class="org-ul">
+<li>step 1:
+<ul class="org-ul">
+<li>check file is existing or not is /opt</li>
+<li>if yes :take back up to buackup folder</li>
+<li>if no 
+<ul class="org-ul">
+<li>cp new war file to deployment folder /opt</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+or
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">if [ -f /opt/Calender.war]
+then
+# if exist
+mv
+# create file copy
+else
+   #cp
+fi
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org65b114e" class="outline-2">
+<h2 id="org65b114e">Example</h2>
+<div class="outline-text-2" id="text-org65b114e">
+<p>
+deployment :
+To developers
+To System Integration and Testing
+To Preproduction
+To production 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">#! /bin/sh
+#FILEName : deployment.sh
+env = $1
+if ['dev' = $env ] &amp;&amp;[/opt/Calender.war]
+then 
+cp /tem/*.war /opt/dev
+fi
+
+if ['sit' = $env ]
+then 
+cp /tem/*.war /opt/sit
+fi
+if ['preprod' = $env ]
+then 
+cp /tem/*.war /opt/preprod
+fi
+if ['prod' = $env ]
+then 
+cp /tem/*.war /opt/prod
+fi
+
+## sh deployment.sh sit
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbf6f882" class="outline-2">
+<h2 id="orgbf6f882">Deletig and Disabling Linux</h2>
+<div class="outline-text-2" id="text-orgbf6f882">
+<p>
+type -a userdel    # not found
+which userdel      # no userdel in 
+</p>
+<ol class="org-ol">
+<li>options : userdel cmd is outside the path of shell</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-sh">
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb0aa523" class="outline-2">
+<h2 id="orgb0aa523">Parsing Command Line Option (getopts)</h2>
+<div class="outline-text-2" id="text-orgb0aa523">
+<div class="org-src-container">
+<pre class="src src-sh"># getopts is builtin #type -a getopts
+# help getopts | less
+# Getopts is used by shell procedures to parse position parameters
+#!/bin/bash
+
+# This script generates a random password.
+# The user can set the password length with -l and add a special character with -s.
+
+# Verbose mode can be enabled with -v.
+
+usage() {
+  echo "Usage: ${0} [-vs] [-l LENGTH]" &gt;&amp;2
+  echo 'Generate a random password.' &gt;&amp;2
+  echo '  -l LENGTH  Specify the password length.' &gt;&amp;2
+  echo '  -s         Append a special character to the password.' &gt;&amp;2
+  echo '  -v         Increase verbosity.' &gt;&amp;2
+  exit 1
+}
+
+log() {
+  local MESSAGE="${@}"
+  if [[ "${VERBOSE}" = 'true' ]]
+  then
+    echo "${MESSAGE}"
+  fi
+}
+
+# Set a default password length.
+LENGTH=48
+
+while getopts vl:s OPTION
+do
+  case ${OPTION} in
+    v)
+      VERBOSE='true'
+      log 'Verbose mode on.'
+      ;;
+    l)
+      LENGTH="${OPTARG}"
+      ;;
+    s)
+      USE_SPECIAL_CHARACTER='true'
+      ;;
+    ?)
+      usage
+      ;;
+  esac
+done
+
+# Remove the options while leaving the remaining arguments.
+shift "$(( OPTIND - 1 ))"
+
+if [[ "${#}" -gt 0 ]]
+then
+  usage
+fi
+
+log 'Generating a password.'
+
+PASSWORD=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c${LENGTH})
+
+# Append a special character if requested to do so.
+if [[ "${USE_SPECIAL_CHARACTER}" = 'true' ]]
+then
+  log 'Selecting a random special character.'
+  SPECIAL_CHARACTER=$(echo '!@#$%^&amp;*()_-+=' | fold -w1 | shuf | head -c1)
+  PASSWORD="${PASSWORD}${SPECIAL_CHARACTER}"
+fi
+
+log 'Done.'
+log 'Here is the password:'
+
+# Display the password.
+echo "${PASSWORD}"
+
+exit 0
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: D Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

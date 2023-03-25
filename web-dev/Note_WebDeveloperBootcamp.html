@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_WebDeveloperBootcamp</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>WebDeveloperBootcamp</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb7773b7">Introduction to this Course</a>
+<ul>
+<li><a href="#org89deb3f">Course Content</a></li>
+<li><a href="#orgdd05693">How Internet Work</a></li>
+<li><a href="#orgfac61ff">Front End Vs Back End</a></li>
+<li><a href="#orgde5a6ac">ASDFF</a></li>
+</ul>
+</li>
+<li><a href="#org59e7567">HTmL</a>
+<ul>
+<li><a href="#orge2cc63e">Depricated</a></li>
+<li><a href="#org7f9f2b3">mozilla Developer Network (mDN) :</a></li>
+<li><a href="#orgfb39706">List  order and un-oreder list</a></li>
+<li><a href="#org40cf1f5">Div and Span :</a></li>
+<li><a href="#org1e061e5">Table and Form</a></li>
+<li><a href="#org8258841">Form</a></li>
+</ul>
+</li>
+<li><a href="#orgf458ba3">Css</a>
+<ul>
+<li><a href="#orgc8fca2f">Introduction</a></li>
+<li><a href="#org2b25d59">Selector( Class and Id)</a>
+<ul>
+<li><a href="#org55724a7">Conflit</a></li>
+<li><a href="#orgc8bd1dc">Advance Seletctor</a></li>
+</ul>
+</li>
+<li><a href="#org8c9c166">css block</a>
+<ul>
+<li><a href="#org4863270">Colour</a></li>
+<li><a href="#org856f08d">Background</a></li>
+<li><a href="#org25a00c4">Boader</a></li>
+<li><a href="#org3cb798e">Units</a></li>
+<li><a href="#org2c9561c">Text manipulation</a></li>
+<li><a href="#org7984f2a">Font Size, Bolding &amp; Style</a></li>
+<li><a href="#org768dc31">Exteranl Fonts</a></li>
+</ul>
+</li>
+<li><a href="#org5d924a5">Inheritance</a></li>
+<li><a href="#org7b8aa87">Box model</a></li>
+<li><a href="#orgfc0110e">Variable</a></li>
+<li><a href="#org97bc30b">Flexbox</a></li>
+<li><a href="#org3ab20e6">CSS Grid</a></li>
+</ul>
+</li>
+<li><a href="#orgeca50a3">Bootstrap</a></li>
+<li><a href="#orgd19a022">Javascript</a>
+<ul>
+<li><a href="#org6b74d11">JQuery</a></li>
+</ul>
+</li>
+<li><a href="#org36839e3">Backend</a>
+<ul>
+<li><a href="#org5748cda">Node Js</a></li>
+<li><a href="#org473696e">29: Databases(mongoDB)</a></li>
+<li><a href="#org975299f">39: Git and Github</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb7773b7" class="outline-2">
+<h2 id="orgb7773b7">Introduction to this Course</h2>
+<div class="outline-text-2" id="text-orgb7773b7">
+</div>
+<div id="outline-container-org89deb3f" class="outline-3">
+<h3 id="org89deb3f">Course Content</h3>
+<div class="outline-text-3" id="text-org89deb3f">
+<p>
+2: Introduction to Front End Development
+3: Introduction to HTML
+4: Intermediate HTML
+5: Introduction to CSS
+6: Intermediate CSS
+7: Bootstrap (3)
+8: Bootstrap 4!
+9: Bootstrap 4: Flexbox and Layout
+10: Introduction to JavaScript
+11: Javascript Basics: Control Flow
+12: Javascript Basics: Functions
+13: Javascript Basics: Arrays
+14: Javascript Basics: Objects
+15: DOM Manipulation
+16: Advanced DOM Manipulation
+17: Color Game Project
+18: Intro to jQuery
+19: Advanced jQuery
+20: Todo List Projects
+21: OPTIONAL Project: Patatap Clone
+22: Backend Basics
+23: The Command Line
+24: Node JS
+25: Server Side Frameworks
+26: Intermediate Express
+27: Working With API's
+28: YelpCamp: Basics
+29: Databases
+30: YelpCamp: Data Persistence
+31: RESTful Routing
+32: Data Associations
+33: YelpCamp: Comments
+34: Authentication
+35: YelpCamp: Adding Authentication
+36: YelpCamp: Cleaning Up
+37: YelpCamp: Update and Destroy
+38: YelpCamp: UI Improvements
+39: Git and Github
+40: Deploying
+41: JavaScript: The Tricky Stuff
+</p>
+</div>
+</div>
+<div id="outline-container-orgdd05693" class="outline-3">
+<h3 id="orgdd05693">How Internet Work</h3>
+<div class="outline-text-3" id="text-orgdd05693">
+<p>
+<a href="https://www.youtube.com/watch?v=ewrBalT_eBM">https://www.youtube.com/watch?v=ewrBalT_eBM</a>
+A Packet's Tale. How Does the Internet Work?
+</p>
+
+<p>
+Or 
+Every computer or servers has unique (ip address)
+</p>
+
+
+
+<ul class="org-ul">
+<li>What are website ?
+<ul class="org-ul">
+<li>Like youtube they don't exist on internet but on servers which has unique ip address</li>
+</ul></li>
+<li>How to access the video ?
+<ul class="org-ul">
+<li>acess video by using ip address</li>
+</ul></li>
+<li>How Ip address assigned  ?
+<ul class="org-ul">
+<li>ISP (Internet Service Provider)</li>
+<li>Tire 1 (like International Road)</li>
+<li>Tire 2 (State</li>
+<li>Tire 3 ( Local internet provider) which provied ip address to house</li>
+</ul></li>
+<li>Is IP address fixed  ? 
+<ul class="org-ul">
+<li>No ip address can change system to system but each device has unique mac address</li>
+</ul></li>
+<li>What is mac address ?
+<ul class="org-ul">
+<li>mac address( mixed address of device don't change like address )</li>
+</ul></li>
+<li>What is DNS(Domain Name System) ?
+<ul class="org-ul">
+<li>Like youtube stores it video in servers which has ip address but ip address can change, we need to remember ip address of youtube or google&#x2026;.etc</li>
+<li>DNS has table of name and it's ip address</li>
+<li>DNS resolves name to ip address</li>
+</ul></li>
+<li>Nedd to by DNS name ?
+<ul class="org-ul">
+<li></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfac61ff" class="outline-3">
+<h3 id="orgfac61ff">Front End Vs Back End</h3>
+<div class="outline-text-3" id="text-orgfac61ff">
+<p>
+Front End : html,css,js
+Back End  : many obtions like db(mysql,oracel,postsql,mongodb..etc),php,word press, NodeJs, Django, go &#x2026;..etc
+</p>
+</div>
+</div>
+<div id="outline-container-orgde5a6ac" class="outline-3">
+<h3 id="orgde5a6ac">ASDFF</h3>
+<div class="outline-text-3" id="text-orgde5a6ac">
+<p>
+HTmL : HyperText markup Language 
+1st used by miltary to send the data
+</p>
+
+<p>
+html : structure of web page or (bone) or nouns
+css  : style of webpage or (skin) adjective
+js   : logic(interactive) or verb
+</p>
+
+
+
+
+<p>
+e* Introduction to Front End Development
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org59e7567" class="outline-2">
+<h2 id="org59e7567">HTmL</h2>
+<div class="outline-text-2" id="text-org59e7567">
+<p>
+Use codepen of practice 
+</p>
+</div>
+<div id="outline-container-orge2cc63e" class="outline-3">
+<h3 id="orge2cc63e">Depricated</h3>
+<div class="outline-text-3" id="text-orge2cc63e">
+<p>
+bold &lt;b&gt; is depretated now we use &lt;strong&gt; 
+italic&lt;em&gt; depretatd now we use &lt;em&gt; : meaning is empasis
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7f9f2b3" class="outline-3">
+<h3 id="org7f9f2b3">mozilla Developer Network (mDN) :</h3>
+<div class="outline-text-3" id="text-org7f9f2b3">
+<p>
+Excellent Learning Resource of learning 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;body&gt;
+&lt;html&gt;
+
+</pre>
+</div>
+<p>
+3:Introduction to HTML
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- Comments--&gt;
+
+</pre>
+</div>
+
+<p>
+mDN Element Reference :  cheate sheet for element referecen :
+</p>
+
+<p>
+h1, h2,h3,h4,h5,h6 : heading 
+ 4: Intermediate HTML
+</p>
+</div>
+</div>
+<div id="outline-container-orgfb39706" class="outline-3">
+<h3 id="orgfb39706">List  order and un-oreder list</h3>
+<div class="outline-text-3" id="text-orgfb39706">
+<div class="org-src-container">
+<pre class="src src-html">&lt;ol&gt;
+  &lt;li&gt;Red&lt;/li&gt;
+  &lt;li&gt;Orange&lt;/li&gt;
+  &lt;li&gt;Yellow&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+  &lt;li&gt;Red&lt;/li&gt;
+  &lt;li&gt;Orange&lt;/li&gt;
+  &lt;li&gt;Yellow&lt;/li&gt;      
+&lt;/ul&gt;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org40cf1f5" class="outline-3">
+<h3 id="org40cf1f5">Div and Span :</h3>
+<div class="outline-text-3" id="text-org40cf1f5">
+<p>
+Div: Division Element : generic container or group contant together
+Span : generic container but
+Div : is block level container
+Span : is inline level container
+</p>
+</div>
+</div>
+<div id="outline-container-org1e061e5" class="outline-3">
+<h3 id="org1e061e5">Table and Form</h3>
+<div class="outline-text-3" id="text-org1e061e5">
+<p>
+Table   as tag od &lt;table&gt; &lt;/table&gt;
+For table row : &lt;tr&gt; &lt;/tr&gt;
+For table division or column : &lt;td&gt; &lt;/td&gt; 
+</p>
+</div>
+</div>
+<div id="outline-container-org8258841" class="outline-3">
+<h3 id="org8258841">Form</h3>
+<div class="outline-text-3" id="text-org8258841">
+<p>
+Objectives
+</p>
+<ul class="org-ul">
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf458ba3" class="outline-2">
+<h2 id="orgf458ba3">Css</h2>
+<div class="outline-text-2" id="text-orgf458ba3">
+<p>
+ 5: Introduction to CSS
+<a href="http://www.csszengarden.com/">http://www.csszengarden.com/</a>
+<a href="https://colours.neilorangepeel.com/">https://colours.neilorangepeel.com/</a>
+Introduction
+Selectors and Properties
+Coloring and  Formatting
+Font and Text  manipulating 
+Layout
+Flexbox(Responsive Box)
+Grid 
+Animation and Transitions
+Challenge
+</p>
+</div>
+
+<div id="outline-container-orgc8fca2f" class="outline-3">
+<h3 id="orgc8fca2f">Introduction</h3>
+<div class="outline-text-3" id="text-orgc8fca2f">
+<div class="org-src-container">
+<pre class="src src-html">&lt;link rel="stylesheet" type="text/css" href="../css/style.css"&gt; 
+&lt;-- # or Inbuild css (outdateted) --&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b25d59" class="outline-3">
+<h3 id="org2b25d59">Selector( Class and Id)</h3>
+<div class="outline-text-3" id="text-org2b25d59">
+<p>
+The 30 CSS Selector you must memorize 
+<a href="https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048">https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;div&gt;
+  &lt;p class="highlight"&gt;You say yes&lt;/p&gt;
+  &lt;p id = "special"&gt;I say no&lt;/p&gt; &lt;!-- Id is only one time used in html --&gt;
+&lt;/div&gt;
+
+&lt;div &gt;
+  &lt;p&gt;You say goodbye&lt;/p&gt;
+  &lt;p class="highlight"&gt;I say hello&lt;/p&gt;
+&lt;/div&gt;
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">#special{
+  background:yellow;
+}
+.highlight{
+  background :red;
+  text-decoration: line-through;
+}
+</pre>
+</div>
+</div>
+<div id="outline-container-org55724a7" class="outline-4">
+<h4 id="org55724a7">Conflit</h4>
+<div class="outline-text-4" id="text-org55724a7">
+<div class="org-src-container">
+<pre class="src src-html">&lt;h2&gt;adfadfsafd&lt;/h2&gt;
+&lt;h2 class="about-me" &gt; About me &lt;/h2&gt;
+&lt;h2 class="about-me" id="services" &gt; Service&lt;/h2&gt;
+&lt;h2 class="about-me" id="services" style="color:steelblue;"&gt; Stellblue &lt;/h2&gt;
+
+&lt;a href="http://www.google.com" id="google-link" &gt; Click here to go Google &lt;/a&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">*{margin:0;padding:0;} /*every element*/
+h2 { color: red;}
+.about-me {color : blue;} /*class */
+#services{color: green;} /*id*/
+
+li a {text-decoration:none;} /*descendant*/
+/* The next most comment selector is the descendant selector. When you need to be more specific with your selectors, you use these. For example, what if, rather than targeting all anchor tags, you only need to target the anchors which are within an unordered list? This is specifically when you'd use a descendant selector. */
+
+/*peudo selectors */
+h2:hover{color red;}
+
+li:first-child{color: steelblue}
+li:last-child{color:pink}
+li:nth-child(2){color:yellow;}
+li:only-child{color:green;}
+
+/* Links which are visited or unvisited */
+#google-link:link{color:blue;}
+#google-link:visited{color:red;}
+
+
+ul + p {
+   color: red;
+}
+/*
+This is referred to as an adjacent selector. It will select only the element that is immediately preceded by the former element. In this case, only the first paragraph after each ul will have red text. */
+</pre>
+</div>
+<p>
+select has heraiacal
+first priority is for inline styling
+second priority is for id
+3rd priority is for class
+4th priority is for general
+</p>
+</div>
+</div>
+<div id="outline-container-orgc8bd1dc" class="outline-4">
+<h4 id="orgc8bd1dc">Advance Seletctor</h4>
+<div class="outline-text-4" id="text-orgc8bd1dc">
+<div class="org-src-container">
+<pre class="src src-css">
+/*adjcent selector*/
+
+/* attributes*/
+img[src ^="../imgs/"]{broder: 10px solid black ;}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8c9c166" class="outline-3">
+<h3 id="org8c9c166">css block</h3>
+<div class="outline-text-3" id="text-org8c9c166">
+<div class="org-src-container">
+<pre class="src src-css">selector {
+   property: value;
+   property: values2;
+}
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4863270" class="outline-4">
+<h4 id="org4863270">Colour</h4>
+<div class="outline-text-4" id="text-org4863270">
+<p>
+There are three type of color
+</p>
+<ul class="org-ul">
+<li>Hexadecimal</li>
+<li>RGB</li>
+<li>RGBA</li>
+<li>Build in Color [red pink blue corn ]</li>
+</ul>
+
+<p>
+Built In Colors
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h1 {color: red;}
+h2 {color: cornflowerBlue;}
+h3 {color: darkOrchid;
+</pre>
+</div>
+
+<p>
+6: Intermediate CSS
+Hexadecimal
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h1 {color: #000000;}
+h2 {color: #4B0082;}
+h3 {color: #FF1493;}
+</pre>
+</div>
+<p>
+RGB 
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h1 {color: rgb(0,255,0);}
+h2 {color: rgb(100, 0, 100);}
+h3 {color: rgb(11, 99, 150);}
+</pre>
+</div>
+<p>
+RGBA
+a : alpha value : which is trasparency with backgroud-colur
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h1 {color: rgba(11, 99, 150, 1);}
+h2 {color: rgba(11, 99, 150, .6);}
+h3 {color: rgba(11, 99, 150, .2);}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org856f08d" class="outline-4">
+<h4 id="org856f08d">Background</h4>
+<div class="outline-text-4" id="text-org856f08d">
+</div>
+<ul class="org-ul">
+<li><a id="org74a2612"></a>Background Color<br />
+<div class="outline-text-5" id="text-org74a2612">
+<div class="org-src-container">
+<pre class="src src-css">body {
+  background: #95a5a6;
+}
+
+div{
+  background: #3498db;
+}
+
+p {
+  color: #ecf0f1;
+}
+
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org371796b"></a>Background Image<br />
+<div class="outline-text-5" id="text-org371796b">
+<div class="org-src-container">
+<pre class="src src-css">body {
+  background: url(http://3dprint.com/wp
+   -content/uploads/2014/11/-
+   Rainbow_Ocean__by_Thelma1.jpg);
+  background-repate:no-repeat;
+  background-size:cover;
+}
+
+div{
+  background: rgba(0,0,0,.7);
+}
+
+p {
+  color: #ecf0f1;
+}
+
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgaa87864"></a>Background Gradient<br />
+<div class="outline-text-5" id="text-orgaa87864">
+<div class="org-src-container">
+<pre class="src src-css">#service-image{
+    height: 400px;
+    width: 70%;
+    background: linear-gradient(to right); /*direction top right bottom left*/
+    background: linear-gradient(to right, red,,green,steelblue, blue,);
+    background: linear-gradient(to right rgba(94,255,126,1),rgba(94,255,126,0) );
+/*diagonal gradient*/
+    background: linear-gradient(to bottom right);
+/*diagonal gradient*/
+    background: linear-gradient(146deg,rgba(94,255,126,1),rgba(94,255,126,0) );
+
+/*radial-gradient*/
+   background: radial-gradient(red 20%,blue 40%,green 55%);
+/*shape*/
+
+   background: radial-gradient(circle,red 20%,blue 40%,green 55%);
+    background-size: cover;
+}
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org25a00c4" class="outline-4">
+<h4 id="org25a00c4">Boader</h4>
+<div class="outline-text-4" id="text-org25a00c4">
+<div class="org-src-container">
+<pre class="src src-css">h1 {
+  color:rgba(0,200,100,0.8);
+  border-width: 5px;
+  border-style:solid;
+  border-color : purple; 
+ or 
+
+ border: 5px solid purple;
+
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3cb798e" class="outline-4">
+<h4 id="org3cb798e">Units</h4>
+<div class="outline-text-4" id="text-org3cb798e">
+<p>
+400px
+70%
+mm
+relative : 2em
+</p>
+<div class="org-src-container">
+<pre class="src src-css">
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2c9561c" class="outline-4">
+<h4 id="org2c9561c">Text manipulation</h4>
+<div class="outline-text-4" id="text-org2c9561c">
+<p>
+Different type of text 
+</p>
+<div class="org-src-container">
+<pre class="src src-css">p{
+   text-decorator: overline ; /*none, underline, line-through, overline */
+   text-trasform: capitalize; /*lowercase, uppercase*/
+   text-align:justify  /*left right center justify*/
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7984f2a" class="outline-4">
+<h4 id="org7984f2a">Font Size, Bolding &amp; Style</h4>
+<div class="outline-text-4" id="text-org7984f2a">
+<p>
+For font <a href="https://fonts.google.com/">https://fonts.google.com/</a>
+Google font are free other may be price
+</p>
+<div class="org-src-container">
+<pre class="src src-css">/*font-family*/
+h1 {
+	font-family: Georgia; /*serif(print,Georgia,times rome) sans-Serif(arial,Calibri) monospace(corner-view)*/
+	font-size: 5.0em;/*40px */
+	font-weight: normal; /*0-800: Value of Bold*/ 
+	font-weight: 700; /*0-800: Value of Bold*/ 
+
+}
+
+.italics {
+  font-family: "Times New Roman", serif /*1st search for Time Roman if not vailable we use serif */
+  font-style: italic; /*oblique*/
+	line-height: 1.5;
+}
+body {
+	font-size: 10px;
+}
+span {
+	font-size: 2.0em;
+}
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org768dc31" class="outline-4">
+<h4 id="org768dc31">Exteranl Fonts</h4>
+<div class="outline-text-4" id="text-org768dc31">
+<p>
+google fonts 
+</p>
+
+<p>
+get the link add in header 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5d924a5" class="outline-3">
+<h3 id="org5d924a5">Inheritance</h3>
+<div class="outline-text-3" id="text-org5d924a5">
+<div class="org-src-container">
+<pre class="src src-css">h1 h2 h3{color :red;}
+h3{color:orange;}
+
+</pre>
+</div>
+<p>
+Specificity of Selector visit : mdn specificity
+</p>
+</div>
+</div>
+<div id="outline-container-org7b8aa87" class="outline-3">
+<h3 id="org7b8aa87">Box model</h3>
+<div class="outline-text-3" id="text-org7b8aa87">
+<p>
+In a doc, each element is represented as a rectangular box.
+In CSS, each of these rectangular box model.
+Each box has four edges: margin edge, border edge, padding edge, and content edge
+</p>
+
+<p>
+Each box model consist 
+</p>
+<ul class="org-ul">
+<li>box
+<ul class="org-ul">
+<li>content</li>
+<li>padding : space btw content and broder</li>
+<li>broder  : divier btw padding and margin</li>
+<li>margin  : spacing  btw broder and other content.</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-css">/*for box we use relative units on width, auto for height*/
+
+#about-us-image{
+  height: 300px;
+  width: 60%; /*60vw=60%*/
+}
+
+p{
+boder:2px solid red; /*size style=(solid,dotted,dashed,double) color*/
+/*direction top right  bottom left  */
+padding:20px /*all space  but dones not reduce content*/
+/*
+padding-top: 100px;
+padding-right: 40px;
+padding-bottom: 5px;
+padding-left: 0px;
+*/
+padding: 100px 40px 5px 0px;
+
+margin:       /*add space by decrease  the content*/
+
+display: none;/*inline, inline-block*/
+
+/*float : left right none*/
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfc0110e" class="outline-3">
+<h3 id="orgfc0110e">Variable</h3>
+<div class="outline-text-3" id="text-orgfc0110e">
+<div class="org-src-container">
+<pre class="src src-css">:root {
+  --main-bg-color: coral;
+  --main-txt-color: blue;
+  --main-padding: 15px;
+}
+
+#div1 {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+  padding: var(--main-padding);
+}
+
+#div2 {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+  padding: var(--main-padding);
+}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org97bc30b" class="outline-3">
+<h3 id="org97bc30b">Flexbox</h3>
+<div class="outline-text-3" id="text-org97bc30b">
+<ul class="org-ul">
+<li>Flexbox consist of
+<ul class="org-ul">
+<li>container</li>
+<li>flex-item</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3ab20e6" class="outline-3">
+<h3 id="org3ab20e6">CSS Grid</h3>
+<div class="outline-text-3" id="text-org3ab20e6">
+<div class="org-src-container">
+<pre class="src src-css">.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;link&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class="grid-container"&gt;
+  &lt;div class="grid-item"&gt;1&lt;/div&gt;
+  &lt;div class="grid-item"&gt;2&lt;/div&gt;
+  &lt;div class="grid-item"&gt;3&lt;/div&gt;  
+  &lt;div class="grid-item"&gt;4&lt;/div&gt;
+  &lt;div class="grid-item"&gt;5&lt;/div&gt;
+  &lt;div class="grid-item"&gt;6&lt;/div&gt;  
+  &lt;div class="grid-item"&gt;7&lt;/div&gt;
+  &lt;div class="grid-item"&gt;8&lt;/div&gt;
+  &lt;div class="grid-item"&gt;9&lt;/div&gt;  
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeca50a3" class="outline-2">
+<h2 id="orgeca50a3">Bootstrap</h2>
+<div class="outline-text-2" id="text-orgeca50a3">
+<p>
+7: Bootstrap (3)
+8: Bootstrap 4!
+9: Bootstrap 4: Flexbox and Layout
+</p>
+</div>
+</div>
+<div id="outline-container-orgd19a022" class="outline-2">
+<h2 id="orgd19a022">Javascript</h2>
+<div class="outline-text-2" id="text-orgd19a022">
+<p>
+10: Introduction to JavaScript
+11: Javascript Basics: Control Flow
+12: Javascript Basics: Functions
+13: Javascript Basics: Arrays
+14: Javascript Basics: Objects
+15: DOM Manipulation
+16: Advanced DOM Manipulation
+17: Color Game Project
+</p>
+</div>
+<div id="outline-container-org6b74d11" class="outline-3">
+<h3 id="org6b74d11">JQuery</h3>
+<div class="outline-text-3" id="text-org6b74d11">
+<p>
+18: Intro to jQuery
+ 19: Advanced jQuery
+ 20: Todo List Projects
+ 21: OPTIONAL Project: Patatap Clone
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org36839e3" class="outline-2">
+<h2 id="org36839e3">Backend</h2>
+<div class="outline-text-2" id="text-org36839e3">
+<p>
+22: Backend Basics
+23: The Command Line
+</p>
+</div>
+<div id="outline-container-org5748cda" class="outline-3">
+<h3 id="org5748cda">Node Js</h3>
+<div class="outline-text-3" id="text-org5748cda">
+<p>
+24: Node JS
+25: Server Side Frameworks
+26: Intermediate Express
+27: Working With API's
+28: YelpCamp: Basics
+</p>
+</div>
+</div>
+<div id="outline-container-org473696e" class="outline-3">
+<h3 id="org473696e">29: Databases(mongoDB)</h3>
+<div class="outline-text-3" id="text-org473696e">
+<p>
+  30: YelpCamp: Data Persistence
+SEmantic UI
+ 31: RESTful Routing
+ 32: Data Associations
+ 33: YelpCamp: Comments
+ 34: Authentication
+ 35: YelpCamp: Adding Authentication
+ 36: YelpCamp: Cleaning Up
+ 37: YelpCamp: Update and Destroy
+ 38: YelpCamp: UI Improvements
+</p>
+</div>
+</div>
+<div id="outline-container-org975299f" class="outline-3">
+<h3 id="org975299f">39: Git and Github</h3>
+<div class="outline-text-3" id="text-org975299f">
+<p>
+40: Deploying
+41: JavaScript: The Tricky Stuff
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:42</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

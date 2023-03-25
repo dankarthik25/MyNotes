@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>links</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">links</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8faa504">Convert markdown to pdf</a></li>
+<li><a href="#org97d46ae">Template info</a></li>
+<li><a href="#org4d4af09">Convert markdown to github css style</a></li>
+<li><a href="#orge52b922">convert org to markdown</a></li>
+<li><a href="#org27d0c25">Create a website from markdown stored in google drive</a></li>
+<li><a href="#org303ee21">Django Markdown Tutorial - A Simple Blog Example | Django/Python</a></li>
+<li><a href="#org4523e54">VSCode Python Data Science Setup, Part 11: Markdown to (html, pdf ) extensions</a></li>
+<li><a href="#org3c989c3">#####################################################################</a></li>
+<li><a href="#org5c3fcbd">host web-site using [static html file] in google-drive  link</a></li>
+<li><a href="#org5e5da80">Django Markdown Tutorial - A Simple Blog Example | Django/Python</a></li>
+<li><a href="#orgd7b640c">Using pandoc to convert Markdown to HTML</a></li>
+<li><a href="#org2c45313">Test codeblock for org2html</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8faa504" class="outline-2">
+<h2 id="org8faa504">Convert markdown to pdf</h2>
+<div class="outline-text-2" id="text-org8faa504">
+<p>
+<a href="https://github.com/Wandmalfarbe/pandoc-latex-template">https://github.com/Wandmalfarbe/pandoc-latex-template</a>
+</p>
+
+<p>
+clean pandoc LaTeX template to convert your markdown files to PDF or LaTeX. It is designed for lecture notes and exercises with a focus on computer science. The template is compatible with pandoc 2.
+</p>
+
+
+
+
+<p>
+<a href="https://github.com/prosegrinder/pandoc-templates">https://github.com/prosegrinder/pandoc-templates</a>
+An opinionated set of Pandoc templates and scripts for converting markdown to DOCX manuscripts 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org97d46ae" class="outline-2">
+<h2 id="org97d46ae">Template info</h2>
+<div class="outline-text-2" id="text-org97d46ae">
+<p>
+<a href="https://pandoc.org/MANUAL.html#templates">https://pandoc.org/MANUAL.html#templates</a>
+Templates
+</p>
+
+<p>
+When the -s/&#x2013;standalone option is used, pandoc uses a template to add header and footer material that is needed for a self-standing document. To see the default template that is used, just type
+</p>
+
+<p>
+pandoc -D <b>FORMAT</b>
+</p>
+
+<p>
+where FORMAT is the name of the output format. A custom template can be specified using the &#x2013;template option. You can also override the system default templates for a given output format FORMAT by putting a file templates/default.*FORMAT* in the user data directory (see &#x2013;data-dir, above). Exceptions:
+</p>
+
+<p>
+For odt output, customize the default.opendocument template.
+For pdf output, customize the default.latex template (or the default.context template, if you use -t context, or the default.ms template, if you use -t ms, or the default.html template, if you use -t html).
+docx and pptx have no template (however, you can use &#x2013;reference-doc to customize the output).
+</p>
+
+<p>
+Templates contain variables, which allow for the inclusion of arbitrary information at any point in the file. They may be set at the command line using the -V/&#x2013;variable option. If a variable is not set, pandoc will look for the key in the document’s metadata, which can be set using either YAML metadata blocks or with the -M/&#x2013;metadata option. In addition, some variables are given default values by pandoc. See Variables below for a list of variables used in pandoc’s default templates.
+</p>
+
+<p>
+If you use custom templates, you may need to revise them as pandoc changes. We recommend tracking the changes in the default templates, and modifying your custom templates accordingly. An easy way to do this is to fork the pandoc-templates repository and merge in changes after each pandoc release.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4d4af09" class="outline-2">
+<h2 id="org4d4af09">Convert markdown to github css style</h2>
+<div class="outline-text-2" id="text-org4d4af09">
+<p>
+<a href="https://gist.github.com/dashed/6714393">https://gist.github.com/dashed/6714393</a>
+<a href="https://gist.github.com/dashed/6714393#file-github-pandoc-css">https://gist.github.com/dashed/6714393#file-github-pandoc-css</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orge52b922" class="outline-2">
+<h2 id="orge52b922">convert org to markdown</h2>
+<div class="outline-text-2" id="text-orge52b922">
+<p>
+<a href="https://github.com/larstvei/ox-gfm">https://github.com/larstvei/ox-gfm</a>
+</p>
+
+<p>
+Github Flavored Markdown exporter for Org Mode
+You can install ox-gfm using elpa. It's available on melpa:
+</p>
+
+<p>
+M-x package-install ox-gfm 
+</p>
+
+
+<p>
+<a href="https://orgmode.org/worg/org-8.0.html#sec-6-1">https://orgmode.org/worg/org-8.0.html#sec-6-1</a>
+</p>
+
+<p>
+ox-backend-*. For example:
+</p>
+
+<p>
+org-html-* for HTML and live in ox-html.el
+org-latex-* for LaTeX and live in ox-latex.el
+</p>
+</div>
+</div>
+
+<div id="outline-container-org27d0c25" class="outline-2">
+<h2 id="org27d0c25">Create a website from markdown stored in google drive</h2>
+<div class="outline-text-2" id="text-org27d0c25">
+<p>
+<a href="https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs">https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org303ee21" class="outline-2">
+<h2 id="org303ee21">Django Markdown Tutorial - A Simple Blog Example | Django/Python</h2>
+<div class="outline-text-2" id="text-org303ee21">
+<p>
+<a href="https://www.youtube.com/watch?v=t61nTi0lIlk">https://www.youtube.com/watch?v=t61nTi0lIlk</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4523e54" class="outline-2">
+<h2 id="org4523e54">VSCode Python Data Science Setup, Part 11: Markdown to (html, pdf ) extensions</h2>
+<div class="outline-text-2" id="text-org4523e54">
+<p>
+<a href="https://www.youtube.com/watch?v=galkO3t_1Og">https://www.youtube.com/watch?v=galkO3t_1Og</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3c989c3" class="outline-2">
+<h2 id="org3c989c3">#####################################################################</h2>
+</div>
+<div id="outline-container-org5c3fcbd" class="outline-2">
+<h2 id="org5c3fcbd">host web-site using [static html file] in google-drive  <a href="https://www.youtube.com/watch?v=m3TXRxqiGvw">link</a></h2>
+<div class="outline-text-2" id="text-org5c3fcbd">
+<p>
+The web-site hosted will we public can't be private 
+<a href="https://www.youtube.com/watch?v=m3TXRxqiGvw">https://www.youtube.com/watch?v=m3TXRxqiGvw</a>
+<a href="https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs">https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org5e5da80" class="outline-2">
+<h2 id="org5e5da80">Django Markdown Tutorial - A Simple Blog Example | Django/Python</h2>
+<div class="outline-text-2" id="text-org5e5da80">
+<p>
+<a href="https://www.youtube.com/watch?v=t61nTi0lIlk">https://www.youtube.com/watch?v=t61nTi0lIlk</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd7b640c" class="outline-2">
+<h2 id="orgd7b640c">Using pandoc to convert Markdown to HTML</h2>
+<div class="outline-text-2" id="text-orgd7b640c">
+<p>
+<a href="https://www.youtube.com/watch?v=sZBmoiFTJVY">https://www.youtube.com/watch?v=sZBmoiFTJVY</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org2c45313" class="outline-2">
+<h2 id="org2c45313">Test codeblock for org2html</h2>
+<div class="outline-text-2" id="text-org2c45313">
+<p>
+python code 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">tuple_1 = ('History', 'Math', 'Physics', 'CompSci')
+tuple_2 = tuple_1
+
+print(tuble_1)
+print(tuble_2)
+
+tuple_1[0] = 'Art'                    # Error because tubles are immutable
+</pre>
+</div>
+
+<p>
+shell scripts
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cd test/file
+aws cloudformation deploy --template-file pipelinecf.yaml --stack-name pipeline-build --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+</pre>
+</div>
+
+<p>
+json file 
+</p>
+<div class="org-src-container">
+<pre class="src src-json">{
+    "Version": "2012-10-17",
+    "Statement": [
+	{
+	    "Effect": "Allow",
+	    "Principal": {
+		"Service": "codepipeline.amazonaws.com"
+	    },
+	    "Action": "sts:AssumeRole"
+	}
+    ]
+}
+</pre>
+</div>
+
+<p>
+yml
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml">version: '3.1'  # if no version is specified then v1 is assumed. Recommend v2 minimum
+
+services:  # containers. same as docker run
+  &lt;servicename&gt;: # a friendly name. this is also DNS name inside network
+    image: # Optional if you use build:
+    build:
+	context : . # current directory
+	dockerfile: #Name of Dockerfile
+    command: # Optional, replace the default CMD specified by the image
+    environment: # Optional, same as -e in docker run
+    secrets:
+    volumes: # Optional, same as -v in docker run
+    depends_on: # need to run other servers before running this servier
+
+  servicename2:
+
+volumes: # Optional, same as docker volume create
+networks: # Optional, same as docker network create
+secrets:
+</pre>
+</div>
+
+
+
+<p>
+cpp
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp">#include&lt;iostream&gt;
+using namespace std;
+int main(){
+    int i =5;
+    cout&lt;&lt;i&lt;&lt; "Data type" &lt;&lt;i&lt;&lt;"Hello World !"&lt;&lt;endl;
+    return 0;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-cpp">int main()
+{
+  // Normal Const 
+
+  const int MAX_AGE =90;
+  int const MAX_AGE =90;
+
+
+  // Normal Pointer pointing a cont var 
+
+  int* a = new int;     // create a normal pointer 
+  *a  = 2;              // ASSINING VALUE 
+  a = (int*) &amp;MAX_AGE;  // poin A cosnt value 
+  cout &lt;&lt; a&lt;&lt;endl;
+
+  // Pointer pointing to a constant value
+  const int * a  = new int;
+  int const * a  = new int;      //Both give same result as const is left side of  * 
+  *a =2;                        //Error we can't  modify contant(value) of pointer
+  a = (int*) &amp;MAX_AGE;
+  cout &lt;&lt; a&lt;&lt;endl;
+
+  // Pointer pointing to a constant address
+
+  int * const a = new int;
+  *a = 2;
+  a = (int*) &amp;MAX_AGE;   // Error : we created pointer to point constant address 
+  cout &lt;&lt; a &lt;&lt; endl;
+
+
+  // Pointer pointing to a constant address and constant value
+  const int* const a  = new int;
+  int const * const a = new int;
+  *a = 2;                // Error : we created pointer pointing to value
+  a = (int*) &amp;MAX_AGE;   // Error : we created pointer to point constant address 
+  cout &lt;&lt; a &lt;&lt; endl;
+
+  std::cin.get();
+}
+</pre>
+</div>
+
+
+<p>
+html
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to DeepAlgorithms!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the test ECS web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+
+<p>
+css
+</p>
+<div class="org-src-container">
+<pre class="src src-css">/*
+ * I add this to html files generated with pandoc.
+ * source link : https://gist.github.com/killercup/5917178
+ * From the command line you now need to use --css=pandoc.css or -c pandoc.css not --css pandoc.css
+ * pandoc -c pandoc.css -s in.md -o out.html  
+ */
+
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  color: #444;
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 1em;
+  margin: auto;
+  max-width: 42em;
+  background: #fefefe;
+}
+
+a {
+  color: #0645ad;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #0b0080;
+}
+
+a:hover {
+  color: #06e;
+}
+
+a:active {
+  color: #faa700;
+}
+
+a:focus {
+  outline: thin dotted;
+}
+
+*::-moz-selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #000;
+}
+
+*::selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #000;
+}
+
+a::-moz-selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #0645ad;
+}
+
+a::selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #0645ad;
+}
+
+p {
+  margin: 1em 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #111;
+  line-height: 125%;
+  margin-top: 2em;
+  font-weight: normal;
+}
+
+h4, h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.9em;
+}
+
+blockquote {
+  color: #666666;
+  margin: 0;
+  padding-left: 3em;
+  border-left: 0.5em #EEE solid;
+}
+
+hr {
+  display: block;
+  height: 2px;
+  border: 0;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #eee;
+  margin: 1em 0;
+  padding: 0;
+}
+
+pre, code, kbd, samp {
+  color: #000;
+  font-family: monospace, monospace;
+  _font-family: 'courier new', monospace;
+  font-size: 0.98em;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 2em;
+}
+
+li p:last-child {
+  margin-bottom: 0;
+}
+
+ul ul, ol ol {
+  margin: .3em 0;
+}
+
+dl {
+  margin-bottom: 1em;
+}
+
+dt {
+  font-weight: bold;
+  margin-bottom: .8em;
+}
+
+dd {
+  margin: 0 0 .8em 2em;
+}
+
+dd:last-child {
+  margin-bottom: 0;
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+figure {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+figure img {
+  border: none;
+  margin: 0 auto;
+}
+
+figcaption {
+  font-size: 0.8em;
+  font-style: italic;
+  margin: 0 0 .8em;
+}
+
+table {
+  margin-bottom: 2em;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table th {
+  padding: .2em 1em;
+  background-color: #eee;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+
+table td {
+  padding: .2em 1em;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.author {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+@media only screen and (min-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    max-width: 100%;
+  }
+
+  a, a:visited {
+    text-decoration: underline;
+  }
+
+  hr {
+    height: 1px;
+    border: 0;
+    border-bottom: 1px solid black;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+
+  pre, blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  tr, img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page :left {
+    margin: 15mm 20mm 15mm 10mm;
+}
+
+  @page :right {
+    margin: 15mm 10mm 15mm 20mm;
+}
+
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
+</pre>
+</div>
+
+
+
+<blockquote>
+<p>
+test quote
+quote2
+quote3
+</p>
+</blockquote>
+
+<pre class="example" id="org241f221">
+test example
+test2
+test3
+</pre>
+
+
+<p class="verse">
+sdfadsfasfd<br />
+</p>
+
+
+
+<p>
+Test <b>sfafd</b> <i>asfda</i> <span class="underline">asdf</span> <code>safdfaff</code> <del>asdfs</del>  
+</p>
+
+<p>
+css has code text
+in simple<sub>inline</sub>
+</p>
+<div class="org-src-container">
+<pre class="src src-css">pre, code  {
+      font-family:  "Source Pro",  Monaco,  "Courier New",  monospace;
+      padding-left:  0.3em;
+      padding-right:  0.3em;
+}
+.outline-text-2 code,  pre  {
+      background-color:  #EEE;
+}
+*, *:before, *:after  {
+      -moz-box-sizing:  border-box;
+      -webkit-box-sizing:  border-box;
+      box-sizing:  border-box;
+}
+</pre>
+</div>
+
+<p>
+gray css  code block 
+</p>
+<div class="org-src-container">
+<pre class="src src-css">p &gt; code, li &gt; code {
+    background-color: #eee;
+    padding: 0.25em;
+}
+code {
+    font-family: "Inconsolata", "monospace";
+    font-size: 16px;
+}
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #33333f;
+}
+
+</pre>
+</div>
+
+
+<p>
+quote color
+</p>
+<div class="org-src-container">
+<pre class="src src-css">blockquote {
+    background-color: #C5ECAB;
+    border-left: 5px solid #6FEF05;
+    font-style: italic;
+    line-height: 24px;
+    margin: 0px 0px 24px 0px;
+    margin-left: 24px;
+    padding: 6px 20px;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    color: #404040;
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+    font-weight: normal;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">blockquote {
+    background-color: #ddffdd;
+    border-left: 5px solid #4caf50;
+    background-color: #ffeb3b;
+    border-left: 5px solid #ffc107;
+    background-color: #ffffcc;
+    border-left: 5px solid #ffeb3b;
+    background-color: #ffdddd;
+    border-left: 5px solid #f44336;
+    font-style: italic;
+    line-height: 24px;
+    margin: 0px 0px 24px 0px;
+    margin-left: 24px;
+    padding: 6px 20px;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    color: #404040;
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+    font-weight: normal;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

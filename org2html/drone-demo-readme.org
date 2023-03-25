@@ -1,0 +1,150 @@
+#+TITLE:     Drone-AI Demo
+#+AUTHOR:    DeepAlgorithms
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil p:t
+
+# +OPTIONS: toc:nil
+# +OPTIONS: Timestamp: nil toc:nil date:nil author:nil
+# +SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+
+#+EXPORT_FILE_NAME: drone-demo-readme.html
+
+
+
+
+# org2html-readtheorg.html
+# In =afa= is showing text inside a box without any colour change whih make old style
+# The right-side margin is taking lot of space 
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/org2html/org-theme-collection/simple_whiteblue.css"/>
+# Css file doesn't have any side-bars, and main-page doesn't have any margin  which save space
+# TODO: quote_block is not showing as an block in html need to do some work
+# TODO: example block is just block no styling is done 
+# in text-highlighting =dsfas= is changing colour to blue need to change to backgroud
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/org2html/org-theme-collection/comfy_inline.css"/>
+# For begin_src src block if language is not defined then it will not create a seperate block in html
+# TODO : remove centrailized main block with removing margins
+# GETCODE: for displaying the code type either sh,html,css,python,c++
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/gray.css"/>
+# No space wasted in right-side
+# But left-sidebar is not resposive
+# TODO : either remove left-sidebar or make it interactive
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/simple_inline.css"/>
+# Little Dull theme
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/org2html/org-theme-collection/latexcss.css"/>
+# No-sidebar and center with margin in left and right 
+# Centrailized most space is wasted
+
+* Install Python in Windows
+** Check if Python and pip is already installed
+
+- To check if your device is pre-installed with Python or not,
+- Go to the Command line(search for cmd in the Run dialog( Win + R))
+  
+Now run the following command:
+
+#+begin_src sh
+python --version
+pip –V
+#+end_src
+If Python is already installed, it will generate a message with the Python version available.
+
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-version-check-windows.jpg]]
+
+Installing Python on Windows takes a series of few easy steps.
+
+Step 1 − Select Version of Python to Install
+Step 2 − Download Python Executable Installer
+Step 3 − Run Executable Installer
+** Select Version of Python to Install
+- Python has various versions available with differences between the syntax and working of different versions of the language.
+- We need to choose the version which we want to use or need.
+- There are different versions of Python 2 and Python 3 available.
+- In the official site  [[https://www.python.org/downloads/][python:download]] we can choose the latest version =python 3.10.5=
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-latest.png]]
+
+** Download Python Executable Installer
+In =python 3.10.5= there are various available executable installers shall be visible with different operating system specifications.
+Choose the installer which suits your system operating system and download the instlaller
+In [[https://www.python.org/downloads/release/python-3105/][python 3.10.5]]  below =Files= Setion
+- Select =Windows installer(64-bit)= recommend or =Windows installer (32-bit)=
+- various available executable installers shall be visible with different operating system specifications. .
+#+STARTUP: inlineimage
+[[file:./DroneAi-Doc/python-windows-exe.png]]
+** Run Executable Installer
+- We downloaded the Python 3.9.1 Windows 64 bit installer.
+- Run the installer. 
+
+*** Getting Started : Install Python 
+#+STARTUP: inlineimage
+[[file:./DroneAi-Doc/python-windows-installation-01.jpg]]
+Make sure to select both the checkboxes at the bottom
+  - [+] Install launcher for all users
+  - [+] Add Python 3.8 to PATH  then
+  - click =Install Now=
+The installation process starts.    
+*** Installing Libraries
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-windows-installation-02.jpg]]
+*** Installing pip and other features
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-windows-installation-03.jpg]]
+*** Finshing Installation
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-windows-installation-04.jpg]]
+** Verify Python and Pip is installed on Windows
+
+To ensure if Python is succesfully installed on your system. Follow the given steps
+- Open the command prompt and Type =python= and press enter.
+- The version of the python which you have installed will be displayed if the python is successfully installed on your windows. 
+To check if your device is pre-installed with Python or not, just go to the Command line(search for cmd in the Run dialog( + R).
+Now run the following command:
+
+#+begin_src sh
+python --version
+pip –V
+#+end_src
+We have successfully installed python and pip on our Windows system.
+
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/python-version-check-windows.jpg]] 
+
+* Install Python libraries and packages using pip
+Run =cmd= in the project directory =drone-ai= as show in below image
+
+
+#+STARTUP: inlineimage
+[[file:./DroneAi-doc/run-cmd-win10.gif]] 
+
+
+Run the following command in =cmd=
+
+Below command  will install the dependency required to run the project 
+#+begin_src sh
+pip install -r req.txt
+#+end_src
+
+* Show the Demo
+Run the code
+#+begin_src 
+python show_demo.py
+#+end_src
+* Trigger if Liquor Site is detected
+#+begin_src 
+python upload_result_s3bucket.py
+#+end_src
+
+To see the result visit http://drone-web-app.s3-website-us-east-1.amazonaws.com/
+
+Where it will show all the liquor site detected 

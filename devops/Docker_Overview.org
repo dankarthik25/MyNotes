@@ -1,0 +1,673 @@
+#  This file is the notese of Coreshef- Linux Tutorial
+
+#+TITLE: Docker Overview
+#+AUTHOR:    D Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+** docker image  CMDS
+#+BEGIN_SRC sh
+docker image --help
+#Usage:  docker image COMMAND
+#Manage images
+#Commands:
+#  build       Build an image from a Dockerfile
+#  history     Show the history of an image
+#  import      Import the contents from a tarball to create a filesystem image
+#  inspect     Display detailed information on one or more images
+#  load        Load an image from a tar archive or STDIN
+#  ls          List images
+#  prune       Remove unused images
+#  pull        Pull an image or a repository from a registry
+#  push        Push an image or a repository to a registry
+#  rm          Remove one or more images
+#  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+#  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+
+docker images           # list of images in your docker
+docker image ls         # list of images in your docker
+docker search centos    # check if image is present in local repo (host os)
+docker pull centos      # download image from dockerhub to local repo
+docker rmi centos:7     # remove centos:7 from local repo
+docker image tag nginx bretfisher/nginx:latest
+docker image prune 
+docker history nginx:latest
+docker image inspect nginx # meta data
+##########
+# push image to docker hub
+############
+#docker login --username=<your_docker_user_name> # login docker hub
+#docker commit <container-id/name> <user>/<image>  #create a img form running container       
+#docker push <docker-user>/<image-name> # push image to docker hub
+#docker push dankarthik/testing-node
+#docker logout
+
+docker image ls # 
+# REPOSITORY  TAG     IMAGE ID       CREATED      SIZE
+# mysql       latest  8e8c6f8dc9df   4 days ago   546MB
+# tomcat      9       29ba6a893a43   4 days ago   647MB
+# alpine      latest  a187dde48cd2   4 weeks ago  5.6MB
+# nginx       latest  6678c7c2e56c   6 weeks ago  127MB
+# httpd       latest  c5a012f9cf45   7 weeks ago  165MB
+# centos      latest  470671670cac   3 months ago 237MB
+
+docker history nginx:latest 
+#IMAGE        CREATED       CREATED BY                                      SIZE      COMMENT
+#822b7ec2aaf2 3 weeks ago   /bin/sh -c #(nop)  CMD ["nginx" "-g" "daemon…   0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  STOPSIGNAL SIGQUIT           0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  EXPOSE 80                    0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  ENTRYPOINT ["/docker-entr…   0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop) COPY file:09a214a3e07c919a…   4.61kB    
+#<missing>    3 weeks ago   /bin/sh -c #(nop) COPY file:0fd5fca330dcd6a7…   1.04kB    
+#<missing>    3 weeks ago   /bin/sh -c #(nop) COPY file:0b866ff3fc1ef5b0…   1.96kB    
+#<missing>    3 weeks ago   /bin/sh -c #(nop) COPY file:65504f71f5855ca0…   1.2kB     
+#<missing>    3 weeks ago   /bin/sh -c set -x     && addgroup --system -…   63.9MB    
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  ENV PKG_RELEASE=1~buster     0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  ENV NJS_VERSION=0.6.1        0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  ENV NGINX_VERSION=1.21.1     0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  LABEL maintainer=NGINX Do…   0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B        
+#<missing>    3 weeks ago   /bin/sh -c #(nop) ADD file:4ff85d9f6aa246746…   69.3MB
+
+
+#digests
+docker image inspect --format "{{.RepoDigests}}" registry.gitlab.com/digival/digiauth/digiauthservice:latest
+#[register.gitlab.com/digival/digiauth/digiauthservice@sha256:ec2bdeac324bf8f847b626c28b9866af9aada099f6682cb443c81ec77c6f481e]
+
+
+#+end_src
+** docker container cmd's
+#+BEGIN_SRC sh
+docker container --help
+#Usage:  docker container COMMAND
+#Manage containers
+#Commands:
+#  attach      Attach local standard input, output, and error streams to a running container
+#  commit      Create a new image from a container's changes
+#  cp          Copy files/folders between a container and the local filesystem
+#  create      Create a new container
+#  diff        Inspect changes to files or directories on a container's filesystem
+#  exec        Run a command in a running container
+#  export      Export a container's filesystem as a tar archive
+#  inspect     Display detailed information on one or more containers
+#  kill        Kill one or more running containers
+#  logs        Fetch the logs of a container
+#  ls          List containers
+#  pause       Pause all processes within one or more containers
+#  port        List port mappings or a specific mapping for the container
+#  prune       Remove all stopped containers
+#  rename      Rename a container
+#  restart     Restart one or more containers
+#  rm          Remove one or more containers
+#  run         Run a command in a new container
+#  start       Start one or more stopped containers
+#  stats       Display a live stream of container(s) resource usage statistics
+#  stop        Stop one or more running containers
+#  top         Display the running processes of a container
+#  unpause     Unpause all processes within one or more containers
+#  update      Update configuration of one or more containers
+#  wait        Block until one or more containers stop, then print their exit codes
+
+
+
+docker run --name  <c-name> <i-name>   # docker container run <c-name> <i-name>             #
+docker exec <c-name> <i-name> /bin/bash  # docker container exec <c-name> <i-name>           #
+docker run -itd --name mytomcat -p 8080:8081 tomcat
+docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql
+
+#-i : interactive 
+#-t : tty
+#-d : detach 
+#-p : port forwording
+#-e : enviorment variable
+#-v : volume/bind-mounts
+#--name : name of container 
+#--network : network-name that need to attach to c-name 
+
+docker ps                      # docker container ls                                #
+docker run <c-name> <i-name>   # docker container run <c-name> <i-name>             #
+docker exec <c-name> <i-name> /bin/bash  # docker container exec <c-name> <i-name>           #
+docker ps -a                   # docker container ls -a                             #
+docker stop <c-id/name>        # docker container stop <c-id/name>                  #
+docker kill <c-id/name>        # docker container kill <c-id/name>                  #
+docker rm <c-id/name>          # docker container rm   <c-id/name>                  #
+docker rm <c-id/names> --force            # stop,kill and destroy the running container 
+docker logs <c-id/name>        # docker container logs <c-id/name>                 #
+docker port <c-id/name>        # docker container ports <c-id/name>
+docker top <c-id/name>         # docker container top <c-id/name>
+
+docker rm <c-name/id> --force  # stop the running container and then kill,remove(destroy) the container
+## remove  unused images,container
+docker container prune 
+docker system prune -a                           #
+
+#######
+# run shell inside container
+######
+docker run -itd --name sathish-centos centos # 
+docker exec -it d2bf3ff05b9b /bin/bash   # enter inside the container
+# port forwording
+docker run -itd --name tomcat-dev -p 8081:8080 tomcat:9 # run localhost:8001
+
+################
+# container status
+#################
+docker container top <c-id/name> 
+docker container stats <c-id/name> 
+docker container stats # performance status all containers
+docker container inspect mysql | grep "Volumes"        # give volume dir
+docker container inspect mysql | grep "Mounts"        # give volume dir
+docker container logs <c-id/name>
+
+#docker inspect myubuntu |grep LogPath
+#docker inspect --format='{{.LogPath}}' myubuntu
+#+end_src
+** docker container Status cmdb
+#+begin_src sh
+docker ps 
+#CONTAINER ID   IMAGE      COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+#496f38050935   tomcat:9   "catalina.sh run"        About an hour ago   Up About an hour   0.0.0.0:8081->8080/tcp, :::8081->8080/tcp   mytomcat
+#443ac5a8ebed   mysql      "docker-entrypoint.s…"   8 hours ago         Up 8 hours         3306/tcp, 33060/tcp                         mysql
+#67313e181e84   ubuntu     "bash"                   8 hours ago         Up 8 hours                                                     myubuntu3
+#cf2d8cac2451   ubuntu     "bash"                   8 hours ago         Up 8 hours                                                     myubuntu2
+#5777e3899030   ubuntu     "bash"                   8 hours ago         Up 8 hours                                                     myubuntu1
+
+docker container stats # performance status all containers
+#CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O     PIDS
+#67313e181e84   myubuntu3   0.00%     1.633MiB / 7.561GiB   0.02%     3.21kB / 0B   0B / 0B       1
+#cf2d8cac2451   myubuntu2   0.00%     1.809MiB / 7.561GiB   0.02%     3.21kB / 0B   0B / 0B       1
+#5777e3899030   myubuntu1   0.00%     4.441MiB / 7.561GiB   0.06%     7.03kB / 0B   3.96MB / 0B   1
+
+docker top mytomcat
+#UID     PID     PPID    C    STIME    TTY      TIME       CMD
+#root    11906   11883   1    11:16    pts/0    00:00:05   /usr/local/openjdk-
+# docker container prune # remove all stopped containers
+# docker container stats <c-id/name> # to run 1 or more stopped container
+
+docker container stat myubuntu 
+#CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O     PIDS
+#5eef4fc49b1b   myubuntu   0.00%     4.625MiB / 7.561GiB   0.06%     7.23kB / 0B   4.51MB / 0B   1
+
+# docker container port <c-id/name>                 # give port No
+docker port mytomcat 
+# 8080/tcp -> 0.0.0.0:8081
+# 8080/tcp -> :::8081
+
+
+docker container inspect mysql | grep "Volumes"        # give volume dir
+#            "VolumesFrom": null,
+#            "Volumes": {
+
+
+docker logs mytomcat 
+#Using CATALINA_BASE:   /usr/local/tomcat
+#Using CATALINA_HOME:   /usr/local/tomcat
+#Using CATALINA_TMPDIR: /usr/local/tomcat/temp
+#Using JRE_HOME:        /usr/local/openjdk-11
+#Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+#3Using CATALINA_OPTS:   
+#NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+#24-Aug-2021 05:46:02.398 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.52
+#24-Aug-2021 05:46:02.402 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jul 31 2021 04:12:17 UTC
+#24-Aug-2021 05:46:02.402 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.52.0
+#24-Aug-2021 05:46:02.402 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+#24-Aug-2021 05:46:02.402 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.4.0-72-gener
+
+#+END_SRC
+** docker volume cmd
+#+BEGIN_SRC sh
+docker volume --help
+#Usage:  docker volume COMMAND
+#Manage volumes
+#Commands:
+#  create      Create a volume
+#  inspect     Display detailed information on one or more volumes
+#  ls          List volumes
+#  prune       Remove all unused local volumes
+#  rm          Remove one or more volumes
+
+
+docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql
+
+docker container inspect mysql | grep "Volume"        # give volume dir
+docker container inspect mysql | grep "Mounts"        # give volume dir
+docker volume ls  #
+
+#Note : Volume are not rm (removed) when container is removed. They need to remove manually
+docker volume rm <vol-ids>
+
+docker volume ls
+docker volume create --help
+docker volume inspect <vol-id/name>
+docker volume rm <vol-id>         # remove given vol-id  
+docker volume prune               # remove all unsued volumes
+ 
+
+###################3333
+# Bind monts: Maps container dir  to host dir
+#  - Basically just two locations pointing to same files
+#  - Con't use in Dockerfile, must be at  container runtime
+#  - Syntax :
+#     - ....run -v /Users/bret/stuff:/path/container (mac/linux)
+#     - ....run -v //C/Users/breff:path/container (window)
+
+#################3
+# Bind Mounts
+# docker run -itd -v <local-path(host OS)> : <container-path> <image-name> # Bind mounts
+# Docker Volume
+
+docker run -itd -v /opt/devops: /opt/sathish centos 
+docker run -itd -v /opt/devops: /opt/sathish centos # Bind mounts
+
+docker conatainer run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1 # 
+
+
+#+end_src
+** docker import/export cmd 
+#+BEGIN_SRC 
+docker export --output="zip-name.tar" <container-id/name>
+docker import <path>
+#+end_src
+** Docker Build Cmd
+#+begin_src
+docker build . # current working dir 
+docker build <build-img-name> .
+docker build -t <repo-name>/<build-img-name>:2.0 .  # name in repo is vieux/apache:2.0
+docker build -t vieux/apache:2.0 .  # name in repo is vieux/apache:2.0
+docker build -t <my-img2> -f <Dockerfile2> . # .: current working dir
+
+#+end_src
+
+** Docker Link cmd
+#+begin_src 
+docker run -itd --name mydb -e MYSQL_ROOT_PASSWORD=DEVOPS@12345 mysql:5.7
+docker run -itd wordpress  --link mydb:mysql -p 83:80 wordpress
+#+end_src
+** Compose cmds
+Use to build and run  mulit containers which are inter-linked to each other
+It is not a product tool
+
+#+begin_src 
+# cd <path> where docker-compose.yml is present
+docker-compose build
+docker-compose up
+docker compose down # NOTE: it stops all containers and remove volumes also 
+
+docker-compose ps
+docker-compose top
+docker-compose up -d
+docker-compose down -v --rmi local # remove volume (docker by default keep volume ) to remove volume -v
+#+end_src
+
+** Swarm cmds
+*** Docker Swarm cmd
+#+begin_src sh
+#docker swarm --help
+#Usage:  docker swarm COMMAND
+#Manage Swarm
+#Commands:
+#  ca          Display and rotate the root CA
+#  init        Initialize a swarm
+#  join        Join a swarm as a node and/or manager
+#  join-token  Manage join tokens
+#  leave       Leave the swarm
+#  unlock      Unlock swarm
+#  unlock-key  Manage the unlock key
+#  update      Update the swarm
+
+# $Inside Docker-Manager Host
+
+# create swarm cluster
+docker swarm init --advertise-addr 18.220.116.100  # generate TOKEN
+###############################################################33
+# docker swarm join --token SWMTKN-1-51n0oal47mvwoyh8l3d2bn8naogqp8xs62wyvh2x6od6f89e8p-efi7qazxaie80f2mepov21d34 18.220.116.100:2377
+#####################################################################
+docker swarm join-token worker    # add a worker to this swarm
+#docker swarm join --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx 172.17.0.2:2377
+docker swarm join-token manager   #add a manager to this swarm
+#docker swarm join --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2  172.17.0.2:2377
+docker swarm leave # leave the swam cluster
+docker swarm leave --force
+# Note : for manger it ask for force leave
+
+#+end_src
+ 
+*** Services cmds
+Docker services :
+- if same image/container are need form cluster
+  - Eg: if web-server is conatainerized and we need to increase servers at port 8000 at outside then with service we can internally connect all containers but externally we can access at 8000 port  
+                  
+use to control any existing Docker services like (Container,Compose,Swarm,)
+
+#+begin_src sh
+docker service --help
+#Usage:  docker service COMMAND
+#Manage services
+#Commands:
+#  create      Create a new service
+#  inspect     Display detailed information on one or more services
+#  logs        Fetch the logs of a service or task
+#  ls          List services
+#  ps          List the tasks of one or more services
+#  rm          Remove one or more services
+#  rollback    Revert changes to a service's configuration
+#  scale       Scale one or multiple replicated services
+#  update      Update a service
+
+
+docker service ls                 # Inside node (list of container) are show 
+docker service ps                 # TODO
+docker service scale <c-id/name>
+docker service stop <c-id/name>
+docker service logs <c-id/name>
+docker service rm <name>
+docker service create <c-name> <img-name>
+
+docker service create 	# Create a new service
+docker service inspect 	# Display detailed information on one or more services
+docker service logs 	# Fetch the logs of a service or task
+docker service ls 	# List services
+docker service ps 	# List the tasks of one or more services
+docker service rm 	# Remove one or more services
+docker service rollback 	# Revert changes to a service’s configuration
+docker service scale 	# Scale one or multiple replicated services
+docker service update 	# Update a service
+#+end_src
+
+#+begin_src sh
+docker service create --name redis redis:3.0.6
+docker service create --replicas 5 -p 80:80 --name myredis redis:3.0.6
+docker service create --mode global --name redis2 redis:3.0.6
+docker service ls
+# ID            NAME    MODE        REPLICAS  IMAGE
+# dmu1ept4cxcf  redis   replicated  1/1       redis:3.0.6
+# a8q9dasaafud  redis2  global      1/1       redis:3.0.6
+
+docker service ps redis
+
+# ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS
+# 0qihejybwf1x   redis.1   redis:3.0.5  manager1  Running        Running 8 seconds
+# bk658fpbex0d   redis.2   redis:3.0.5  worker2   Running        Running 9 seconds
+# 5ls5s5fldaqg   redis.3   redis:3.0.5  worker1   Running        Running 9 seconds
+# 8ryt076polmc   redis.4   redis:3.0.5  worker1   Running        Running 9 seconds
+# 1x0v8yomsncd   redis.5   redis:3.0.5  manager1  Running        Running 8 seconds
+# 71v7je3el7rr   redis.6   redis:3.0.5  worker2   Running        Running 9 seconds
+# 4l3zm9b7tfr7   redis.7   redis:3.0.5  worker2   Running        Running 9 seconds
+# 9tfpyixiy2i7   redis.8   redis:3.0.5  worker1   Running        Running 9 seconds
+# 3w1wu13yupln   redis.9   redis:3.0.5  manager1  Running        Running 8 seconds
+# 8eaxrb2fqpbn   redis.10  redis:3.0.5  manager1  Running        Running 8 seconds
+
+
+docker service scale redis=7
+docker service update --replicas=50 redis
+docker service ls --filter name=redis
+
+# ID            NAME      MODE        REPLICAS  IMAGE
+# 3pr5mlvu3fh9  redis     replicated  15/50     redis:3.0.5
+
+#+end_src
+*** Node cmd
+#+begin_src sh
+docker node --help
+#Usage:  docker node COMMAND
+#Manage Swarm nodes
+#Commands:
+#  demote      Demote one or more nodes from manager in the swarm
+#  inspect     Display detailed information on one or more nodes
+#  ls          List nodes in the swarm
+#  promote     Promote one or more nodes to manager in the swarm
+#  ps          List tasks running on one or more nodes, defaults to current node
+#  rm          Remove one or more nodes from the swarm
+#  update      Update a node
+
+docker node ls # List nodes in the swarm
+docker node ps <host-name ># List service/container running on one or more nodes, defaults to current node
+docker rm <node-id> # remove node form cluster
+docker swarm leave --force # remove leader from swarm 
+
+
+# docker node update --avalibility drain/active <hostaname>
+docker node update --avalibility drain worker1
+docker node update --avalibility active worker
+#+end_src
+
+#+begin_src sh 
+docker node ls # List nodes in the swarm
+# ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+# 1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready   Active
+# 38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active
+# e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
+
+docker node ps swarm-manager1
+# NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+# redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+# redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+# redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+# redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+# redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+
+
+docker service ps redis
+# NAME                                    IMAGE        NODE      DESIRED STATE  CURRENT STATE           ERROR
+# redis.1.7q92v0nr1hcgts2amcjyqg3pq       redis:3.0.6  manager1  Running        Running 4 minutes
+# redis.2.b4hovzed7id8irg1to42egue8       redis:3.0.6  worker2   Running        Running About a minute
+#  \_ redis.2.7h2l8h3q3wqy5f66hlv9ddmi6   redis:3.0.6  worker1   Shutdown       Shutdown 2 minutes ago
+# redis.3.9bg7cezvedmkgg6c8yzvbhwsd       redis:3.0.6  worker2   Running        Running 4 minutes
+
+#+end_src
+** Docker Stack cmd 
+        
+#+begin_src sh 
+docker stack deploy -c <compose-file-path> <stack-name> # c:compose
+
+#Usage:  docker stack [OPTIONS] COMMAND
+#Options:
+#Commands:
+#  deploy      Deploy a new stack or update an existing stack
+#  ls          List stacks
+#  ps          List the tasks in the stack
+#  rm          Remove one or more stacks
+#  services    List the services in the stack
+
+docker stack deploy -c voting_app.yml vote_app
+docker stack ls
+docker stack ps voteapp
+docker stack services voteapp
+
+# Update of stack:
+  #Q)  if new-update in voting app is done then How to update stack
+     #A) git compose-file(.yml) and delpoy again without stop or removing stack
+vim voting_app.yml
+docker  stack deploy -c voting_app.yml voteapp
+#+end_src
+** Networking cmd's
+#+begin_src sh
+docker network create --help
+docker service create --name mysql --network mydrupal -p 80:80 drupal
+
+docker network ls  # show network
+# NETWORK ID          NAME                DRIVER              SCOPE
+# e4412c25e3f8        bridge              bridge              local
+# fc3fb3bc492f        dude                bridge              local
+# bde494d3eca8        my_app_net          bridge              local
+# b5c2bb5208eb        none                null                local
+# 85464f22d4d4        host                host                local  # host network is special network,it gain performance by skipping virtual networks but sacrifices security of container model
+# driver : 4 types bridge,host,null,overlay,maclan
+
+
+docker network create --driver  [driver-type] <network-name>     #  create a network
+docker network inspect [network-id/name]           # docker network inspect bridge
+docker network inspect bridge | grep 'Containers' # List of containers in bridge
+docker network connect  [container-id]            # attach a network to container
+docker network disconnect  [containter-id]         # detach a network from network
+
+# To see the containers attached to networks
+docker network inspect bridge
+#+end_src
+** Docker secret cmd's
+   - they look like files in hard-drive  container but are actually in-memory RAM-FS (File System)
+     path =/run/secrets/<secret_name/secret_alias>=
+ - Can we use secrets in compose ?
+   -Ans : Yes but they are not secure as they store in file-based secrets.
+
+#+begin_src  sh
+#$ docker secret
+# Commands:
+#   create      Create a secret from a file or STDIN as content
+#   inspect     Display detailed information on one or more secrets
+#   ls          List secrets
+#   rm          Remove one or more secrets
+
+
+cat psql_user.txt psql_password.txt # create file psql_user, psql_password which contain id and password 
+#dan_psql
+#myDd_passwrd
+docker secret create psd_user psql_user.txt
+# Storing password as file in hardrive of host '.' when using remote api each node will store password as file which can be readed if hacked any node
+
+
+
+# Using terminal to stdin for enter secrets
+echo "dan_psql" | dokcer secret create psql_user -
+echo "myDd_passwrd" | dokcer secret create psql_password -
+# Disadvantages : 
+# If we see history of bash in root user/host we can get secrets
+
+
+docker secrete ls
+docker secrete inspect psql_user # Don't show user_id
+
+# Pass secrets to db
+docker service create --name psql --secret psql_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secret/psql postgres
+
+# to see password 
+docker exec -it psql /bin/bash
+# $cat /run/secret/psql_user(or)password # show user name and password
+
+# To remove secret
+docker service update --secret-rm  # then it will re-deploy container
+#+end_src
+
+* DockerFile
+
+* Docker Yaml file 
+* Examples 
+** Docker Compose Example with volume  
+#+begin_src 
+version: '3.4'
+services:
+    redis:
+        image: redis:alpine
+        networks:
+            - frontend
+    db:
+        image: postgres:9.6
+          volumes:
+            - db-data:/var/lib/postgresql/data
+        networks:
+            - backend
+        environment:
+            - POSTGRES_HOST_AUTH_METHOD=trust
+        deploy:
+    vote:
+        image: bretfisher/examplevotingapp_vote
+        ports:
+            - '5000:80'
+        networks:
+            - frontend
+        deploy:
+            mode: global
+    result:
+        image: bretfisher/examplevotingapp_result
+        ports:
+            - '5001:80'
+        networks:
+            - backend
+    worker:
+        image: bretfisher/examplevotingapp_worker:java
+        networks:
+            - frontend
+            - backend
+        deploy:
+            mode: global
+networks:
+    frontend:
+    backend:
+volumes:
+    db-data:
+#+end_src
+** Docker Compose File
+#+begin_src sh
+version: '3.1'  # if no version is specified then v1 is assumed. Recommend v2 minimum
+
+services:  # containers. same as docker run
+  ubuntu:
+# servicename: # a friendly name. this is also DNS name inside network
+    image: bretfisher/jekyll-serve # Optional if you use build:
+    context:.
+    dockerfile:nginx     
+    command: # Optional, replace the default CMD specified by the image
+    environment: # Optional, same as -e in docker run
+    volumes: # Optional, same as -v in docker run
+      - ./site # '.' Current Wor dir
+    port :
+    - '80:4000'
+
+  servicename2:
+
+volumes: # Optional, same as docker volume create
+   - ./html: /usr/local/apache2/htdocs
+networks: # Optional, same as docker network create
+
+#+end_src
+** TODO Docker File
+# More information on Dockerfile INSTRUCTIONS https://docs.docker.com/engine/reference/builder/
+** Networking Example2
+#+begin_src sh
+docker network create --driver overlay mydrupal
+docekr network ls
+docker service create --name psql --network mydrupal -e POSTGRESS_PASSWORD=mypass postgres
+docker service ls
+psql replicated ps psql
+docker container ls
+docker service create --name drupal --network mydrupal -p 80:80 drupal
+docker service ls
+
+docker ls # linux re-run 
+docker service ps drupal # see -where drupal service is running : let be node2
+
+docker network create my_app_net
+docker container run -itd --name new_nginx --network my_app_net nginx
+docker container run -itd --name my_nginX --network my_app_net nginx
+docker network inspect my_app_network
+
+docker container ls
+# CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES
+# 498f7bfea262        nginx               "nginx -g 'daemon of…"   15 seconds ago       Up 12 seconds       80/tcp                 my_engineX
+# 3928fe27faa0        httpd               "httpd-foreground"       About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp   webserver
+docker network connect 498f7bf 3928fe27
+docker network inspect 
+docker network disconnect 498f7bf 3928fe27
+#+end_src
+** Networking Example
+#+begin_src
+docker network create --driver bridge alpine-net
+docker network ls
+
+# NETWORK ID          NAME                DRIVER              SCOPE
+# e9261a8c9a19        alpine-net          bridge              local
+# 17e324f45964        bridge              bridge              local
+# 6ed54d316334        host                host                local
+# 7092879f2cc8        none                null                local
+docker container attach alpine4
+
+docker network create -d overlay nginx-net
+#+end_src
+
+

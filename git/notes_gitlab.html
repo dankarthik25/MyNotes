@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GitLab</title>
+<meta name="author" content="D Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">GitLab</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbf64b50">Price comparision</a></li>
+<li><a href="#orgd2a16fb">Srum Master (Jira )</a></li>
+<li><a href="#org7f90b02">Moving to Gitlab (self host/ gitlab-host)</a></li>
+<li><a href="#org543fe24">Gitlab</a>
+<ul>
+<li><a href="#org2d361e7">Gitlab Terminology</a>
+<ul>
+<li><a href="#org339b908">Gitlab Group :</a></li>
+<li><a href="#org048af67">Gitlab Project :</a></li>
+<li><a href="#orgead6a00">Issuse :</a></li>
+</ul>
+</li>
+<li><a href="#orgae65a9c"><span class="todo TODO">TODO</span> Branching Strategies</a></li>
+<li><a href="#org320479e">Host html in gitlab</a></li>
+<li><a href="#org449d74e">Group Member access Permission</a></li>
+</ul>
+</li>
+<li><a href="#org74eebb9">Remote access</a></li>
+<li><a href="#orgf8ca322">FAQ</a>
+<ul>
+<li><a href="#orgcd1a485">Create static html and host in gitlab</a>
+<ul>
+<li><a href="#org50f12c8">Install Gitlab Runner in local OS for gitlab project or group</a></li>
+<li><a href="#org1e2bce4">Create static html page using gitlab</a></li>
+</ul>
+</li>
+<li><a href="#org48e6b31">how-to-change-the-project-owner-in-gitlab</a></li>
+</ul>
+</li>
+<li><a href="#orgf963325">NEXT [#A] GitLab Project Management: How to use Issue, Labels, and Boards</a></li>
+<li><a href="#org60667f5">Gitlab Issuse</a></li>
+<li><a href="#orgab56b43">Gitlab Member Permissions : ower, maintainer, developer, reporter, guest</a></li>
+<li><a href="#orgdd0cdd1">Gitlab Lables :</a>
+<ul>
+<li><a href="#org5ce02d7">Lable : priortiy label</a></li>
+</ul>
+</li>
+<li><a href="#org0a9d809"></a></li>
+<li><a href="#org50dbe1d">Git</a></li>
+<li><a href="#orgcb01e67">Git Issuse Board</a></li>
+<li><a href="#orgcd689a2">Git Milestone</a></li>
+<li><a href="#org72ffa75"><span class="todo TODO">TODO</span> Gitlab jira intergration</a></li>
+<li><a href="#org40c2d65"><span class="todo TODO">TODO</span> Gitlab Issuse &lt;board&gt; kanban</a></li>
+<li><a href="#org60dea4d">Git Issuse and Milestone</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=8aV5AxJrHDg">Learn GitLab in 3 Hours | GitLab Complete Tutorial For Beginners</a> : Need to take snapshot on merge request and pull request
+</p>
+
+<div id="outline-container-orgbf64b50" class="outline-2">
+<h2 id="orgbf64b50">Price comparision</h2>
+<div class="outline-text-2" id="text-orgbf64b50">
+<p>
+IMP : NO.OF COLLABORATOR : <code>UNLIMITED</code> source : <a href="https://about.gitlab.com/blog/2019/01/07/github-offering-free-private-repos-for-up-to-three-collaborators/">https://about.gitlab.com/blog/2019/01/07/github-offering-free-private-repos-for-up-to-three-collaborators/</a>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Free functionality</th>
+<th scope="col" class="org-left">GitLab</th>
+<th scope="col" class="org-left">GitHub</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Private repositories</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Number of collaborators</td>
+<td class="org-left"><code>Unlimited</code></td>
+<td class="org-left">3</td>
+</tr>
+
+<tr>
+<td class="org-left">Wiki</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No (public or paid only)</td>
+</tr>
+
+<tr>
+<td class="org-left">Pages</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes-need to check</td>
+</tr>
+
+<tr>
+<td class="org-left">Capacity</td>
+<td class="org-left">10GB</td>
+<td class="org-left">1GB</td>
+</tr>
+
+<tr>
+<td class="org-left">Indicates who is paying</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Free CI</td>
+<td class="org-left">2,000 min.</td>
+<td class="org-left">Maybe a free tier for Actions on Azure</td>
+</tr>
+
+<tr>
+<td class="org-left">Entire DevOps lifecycle</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">Location of the repo</td>
+<td class="org-left">Anywhere</td>
+<td class="org-left">Not in groups/orgs</td>
+</tr>
+
+<tr>
+<td class="org-left">API concurrent rate limit</td>
+<td class="org-left">36000</td>
+<td class="org-left">5000</td>
+</tr>
+</tbody>
+</table>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">feature</th>
+<th scope="col" class="org-left">Free</th>
+<th scope="col" class="org-left">Premium</th>
+<th scope="col" class="org-left">Ultimate</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">gitlab OR</th>
+<th scope="col" class="org-left">$19 per user/month</th>
+<th scope="col" class="org-left">$ 99 per user/month</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">self-host</th>
+<th scope="col" class="org-left">annual: $228</th>
+<th scope="col" class="org-left">annually: $1188</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">CI/CD minutes per month</td>
+<td class="org-left">400 minutes</td>
+<td class="org-left">10,000 minutes</td>
+<td class="org-left">50,000 minutes</td>
+</tr>
+
+<tr>
+<td class="org-left">Storage</td>
+<td class="org-left">5GB</td>
+<td class="org-left">50GB</td>
+<td class="org-left">250GB</td>
+</tr>
+
+<tr>
+<td class="org-left">Transfer per month</td>
+<td class="org-left">10GB</td>
+<td class="org-left">100GB</td>
+<td class="org-left">500GB</td>
+</tr>
+
+<tr>
+<td class="org-left">CI/CD mints per month</td>
+<td class="org-left">400mints</td>
+<td class="org-left">10K mints</td>
+<td class="org-left">50K mints</td>
+</tr>
+
+<tr>
+<td class="org-left">Support</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Enterprise agile planning</code></td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Open Source - MIT License</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Bring your own GitLab CI runners</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Includes free static websites</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Faster code reviews</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Advanced CI/CD</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Release controls</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">Self-managed reliability</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Other Price
+CI/CD Minutes : $10 per 10,000 minutes
+Storage       : $60 per 10GB &amp; 20Gb (transfer per month )
+Enterprise agile planning : <a href="https://www.youtube.com/watch?v=cVC8bcV8zsQ">Youtube-link:GitLab Agile Project Management Demo</a>
+</p>
+
+<ul class="org-ul">
+<li>Can i add more user to my Subscription ?
+<ul class="org-ul">
+<li>Yes. You have a few options. You can add users to your subscription any time during the subscription period. You can log in to your account via the GitLab Customers Portal and add more seats or contact sales for a quote.</li>
+<li>In either case, the cost will be prorated from the date of quote/purchase through the end of the subscription period. You may also pay for the additional licenses per our true-up model.</li>
+<li></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd2a16fb" class="outline-2">
+<h2 id="orgd2a16fb">Srum Master (Jira )</h2>
+</div>
+<div id="outline-container-org7f90b02" class="outline-2">
+<h2 id="org7f90b02">Moving to Gitlab (self host/ gitlab-host)</h2>
+</div>
+<div id="outline-container-org543fe24" class="outline-2">
+<h2 id="org543fe24">Gitlab</h2>
+<div class="outline-text-2" id="text-org543fe24">
+</div>
+<div id="outline-container-org2d361e7" class="outline-3">
+<h3 id="org2d361e7">Gitlab Terminology</h3>
+<div class="outline-text-3" id="text-org2d361e7">
+</div>
+<div id="outline-container-org339b908" class="outline-4">
+<h4 id="org339b908">Gitlab Group :</h4>
+<div class="outline-text-4" id="text-org339b908">
+<ul class="org-ul">
+<li>Description:
+<ul class="org-ul">
+<li>allow you to o manage settings across multiple project</li>
+<li>logically categorize multiple users or projects</li>
+<li>cross projecg view (merge request)</li>
+</ul></li>
+<li>Activity</li>
+<li>Labels <code>LABLES IMP FOR PROJGET MANAGEMENT</code></li>
+<li>Members :
+<ul class="org-ul">
+<li>add/remove members</li>
+<li>access permission : owner, maintainer, developer, repoter, guest
+<ul class="org-ul">
+<li><code>NOTE: owner, mainter, developer have permission to read, write,create, delete the project but not write</code></li>
+<li><code>NOTE: repoter and guset have permission to read but not write</code></li>
+</ul></li>
+</ul></li>
+<li>Issuse :
+<ul class="org-ul">
+<li>List</li>
+<li>Board : <code>Kanban</code></li>
+<li>Milestone</li>
+</ul></li>
+<li>Merge Request</li>
+<li>CI/CD : <code>Runner</code> : set runner for group</li>
+<li>Setting :
+<ul class="org-ul">
+<li>General: <code>Transfer group</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org048af67" class="outline-4">
+<h4 id="org048af67">Gitlab Project :</h4>
+<div class="outline-text-4" id="text-org048af67">
+<ul class="org-ul">
+<li>description:
+<ul class="org-ul">
+<li>git reposiotory</li>
+<li>Build CI/CD</li>
+<li>ISSUSE tracking</li>
+<li>Collaboration Tools</li>
+<li><code>NOTE: YOUR SOFTWARE DEVELOPMENT WORKFLOW BEGINS WITH ISSUSE</code></li>
+</ul></li>
+<li>Project Info :
+<ul class="org-ul">
+<li>Activity</li>
+<li>Label</li>
+<li>Member</li>
+</ul></li>
+<li>git Reposiotory
+<ul class="org-ul">
+<li>Files</li>
+<li>Commits</li>
+<li>Branches</li>
+<li>Tags</li>
+<li>Contributors</li>
+<li>Graph</li>
+<li>Compare</li>
+</ul></li>
+<li>Issuse :
+<ul class="org-ul">
+<li>List</li>
+<li>Board : <code>Kanban</code></li>
+<li>Milestone   <code>gantt chart</code></li>
+</ul></li>
+<li>CI/CD :
+<ul class="org-ul">
+<li>Pipeline</li>
+<li>Editor</li>
+<li>Jobs</li>
+<li>Schedule</li>
+</ul></li>
+<li>Merge request :</li>
+<li>Wiki</li>
+<li>Setting
+<ul class="org-ul">
+<li>General</li>
+<li>Pages</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgead6a00" class="outline-4">
+<h4 id="orgead6a00">Issuse :</h4>
+<div class="outline-text-4" id="text-orgead6a00">
+<ul class="org-ul">
+<li>Description:
+<ul class="org-ul">
+<li>way to track work (git project)</li>
+<li>report bugs</li>
+<li>request <b>new features</b> (there are many feature )</li>
+<li>questions and more</li>
+</ul></li>
+<li>List</li>
+<li>Board</li>
+<li>Milestone</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgae65a9c" class="outline-3">
+<h3 id="orgae65a9c"><span class="todo TODO">TODO</span> Branching Strategies</h3>
+<div class="outline-text-3" id="text-orgae65a9c">
+<ul class="org-ul">
+<li>git flow</li>
+<li>github</li>
+<li>gitlab</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org320479e" class="outline-3">
+<h3 id="org320479e">Host html in gitlab</h3>
+</div>
+
+<div id="outline-container-org449d74e" class="outline-3">
+<h3 id="org449d74e">Group Member access Permission</h3>
+<div class="outline-text-3" id="text-org449d74e">
+<p>
+<b>owner Access</b> - add/remove members , add/remove permission to members, create pages, wiki pages read/write
+<b>maintainer Access</b>   - createe pages, wiki pages, read/write, create projects and group , cann't delete any project/group
+<b>developer Access</b> - read/write
+<b>reporter  Access</b> - read
+<b>Guest Access</b> - read 
+<a href="https://docs.gitlab.com/ee/user/permissions.html">https://docs.gitlab.com/ee/user/permissions.html</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org74eebb9" class="outline-2">
+<h2 id="org74eebb9">Remote access</h2>
+<div class="outline-text-2" id="text-org74eebb9">
+<ul class="org-ul">
+<li>Personal Access Token</li>
+<li>SSH configuration</li>
+
+<li><b>gitlab/User Setting</b> : 
+<ul class="org-ul">
+<li>Personal Access Token</li>
+<li>SSH Key</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf8ca322" class="outline-2">
+<h2 id="orgf8ca322">FAQ</h2>
+<div class="outline-text-2" id="text-orgf8ca322">
+</div>
+<div id="outline-container-orgcd1a485" class="outline-3">
+<h3 id="orgcd1a485">Create static html and host in gitlab</h3>
+<div class="outline-text-3" id="text-orgcd1a485">
+</div>
+<div id="outline-container-org50f12c8" class="outline-4">
+<h4 id="org50f12c8">Install Gitlab Runner in local OS for gitlab project or group</h4>
+<div class="outline-text-4" id="text-org50f12c8">
+<p>
+<a href="https://docs.gitlab.com/runner/install/">https://docs.gitlab.com/runner/install/</a>
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=G8ZONHOTAQk">youtube link:</a>
+</p>
+
+
+<p>
+Note: in project or github repo go Setting/ CI/CD/ Runner
+install Runner 
+</p>
+
+<ul class="org-ul">
+<li>Click Follow the to set up a runner. or</li>
+<li>Click :</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh"># Download the binary for your system
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+# Give it permission to execute
+sudo chmod +x /usr/local/bin/gitlab-runner
+
+# Create a GitLab Runner user
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+# Install and run as a service
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+
+# Command to register runner
+# NOTE : GITLAB will generate the token 
+sudo gitlab-runner register --url https://gitlab.com/ --registration-token GR1348941AxBu37cTfuz9eH48gyD9 
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e2bce4" class="outline-4">
+<h4 id="org1e2bce4">Create static html page using gitlab</h4>
+<div class="outline-text-4" id="text-org1e2bce4">
+<p>
+<a href="https://www.youtube.com/watch?v=kvZ9teaA5zI">https://www.youtube.com/watch?v=kvZ9teaA5zI</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org48e6b31" class="outline-3">
+<h3 id="org48e6b31">how-to-change-the-project-owner-in-gitlab</h3>
+<div class="outline-text-3" id="text-org48e6b31">
+<p>
+<a href="https://stackoverflow.com/questions/21579693/how-to-change-the-project-owner-in-gitlab">https://stackoverflow.com/questions/21579693/how-to-change-the-project-owner-in-gitlab</a>
+</p>
+
+<p>
+Because one user cannot "own" another namespace (not even admins), the only option to set up a scenario where two users own the same namespace is with a group. Perform the following steps to accomplish this.
+</p>
+
+<ul class="org-ul">
+<li>Create a new group.</li>
+<li>Add the user that you want to transfer your project to as an owner member of that group.</li>
+<li>Transfer your project to that group (a namespace you manage because you are an owner).</li>
+<li>Login as the other user, then transfer the group project to the "other user" namespace.</li>
+</ul>
+
+<p>
+At this point you will be left as a master in the project. You can now remove yourself from the project entirely if desired.
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgf963325" class="outline-2">
+<h2 id="orgf963325">NEXT [#A] GitLab Project Management: How to use Issue, Labels, and Boards</h2>
+<div class="outline-text-2" id="text-orgf963325">
+<p>
+<a href="https://www.youtube.com/watch?v=J2u7OqBA_aQ">https://www.youtube.com/watch?v=J2u7OqBA_aQ</a>
+GitLab Project Management: How to use Issue, Labels, and Boards
+</p>
+</div>
+</div>
+
+<div id="outline-container-org60667f5" class="outline-2">
+<h2 id="org60667f5">Gitlab Issuse</h2>
+<div class="outline-text-2" id="text-org60667f5">
+<p>
+<a href="https://www.youtube.com/watch?v=YshvUGgF_3o">https://www.youtube.com/watch?v=YshvUGgF_3o</a>
+</p>
+
+<p>
+issuse template
+<a href="https://www.youtube.com/watch?v=ObNWS3trqIY">https://www.youtube.com/watch?v=ObNWS3trqIY</a>
+<a href="https://www.youtube.com/watch?v=UPsCXqxxJUA">https://www.youtube.com/watch?v=UPsCXqxxJUA</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgab56b43" class="outline-2">
+<h2 id="orgab56b43">Gitlab Member Permissions : ower, maintainer, developer, reporter, guest</h2>
+<div class="outline-text-2" id="text-orgab56b43">
+<ul class="org-ul">
+<li>access permission : owner, maintainer, developer, repoter, guest</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdd0cdd1" class="outline-2">
+<h2 id="orgdd0cdd1">Gitlab Lables :</h2>
+<div class="outline-text-2" id="text-orgdd0cdd1">
+<p>
+<a href="https://docs.gitlab.com/ee/user/project/labels.html">https://docs.gitlab.com/ee/user/project/labels.html</a>
+</p>
+
+<p>
+Create a lable : <a href="https://www.youtube.com/watch?v=YshvUGgF_3o">Newbostan:Git Tutorial - 23 - GitHub Issues and Labels</a>
+</p>
+
+<p>
+<a href="https://gitlab.com/gitlab-org/quality/triage-reports/-/labels?page=7">https://gitlab.com/gitlab-org/quality/triage-reports/-/labels?page=7</a>
+Use scoped labels in GitLab 11.10 for custom fields and custom workflows
+</p>
+
+
+<p>
+<a href="https://www.youtube.com/watch?v=4BCBby6du3c">Use scoped labels in GitLab 11.10 for custom fields and custom workflows</a>
+This(Scope label) is only avaible for premium tire 
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=35V2FJX4sAs">https://www.youtube.com/watch?v=35V2FJX4sAs</a>
+Demo - Service Desk 
+</p>
+</div>
+
+<div id="outline-container-org5ce02d7" class="outline-3">
+<h3 id="org5ce02d7">Lable : priortiy label</h3>
+<div class="outline-text-3" id="text-org5ce02d7">
+<ul class="org-ul">
+<li>Lable issue with priority</li>
+<li>Standard Planing Board</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0a9d809" class="outline-2">
+<h2 id="org0a9d809"></h2>
+</div>
+<div id="outline-container-org50dbe1d" class="outline-2">
+<h2 id="org50dbe1d">Git</h2>
+</div>
+<div id="outline-container-orgcb01e67" class="outline-2">
+<h2 id="orgcb01e67">Git Issuse Board</h2>
+</div>
+
+<div id="outline-container-orgcd689a2" class="outline-2">
+<h2 id="orgcd689a2">Git Milestone</h2>
+<div class="outline-text-2" id="text-orgcd689a2">
+<p>
+<a href="https://www.youtube.com/watch?v=ZBjCmOYNb5Q">https://www.youtube.com/watch?v=ZBjCmOYNb5Q</a>
+Gitlab Project Management: Sprints, User Stories, and Tasks
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=tv4UM1ruQRs">https://www.youtube.com/watch?v=tv4UM1ruQRs</a>
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=enMumwvLAug">https://www.youtube.com/watch?v=enMumwvLAug</a>
+Introduction to GitLab Workflow
+</p>
+</div>
+</div>
+<div id="outline-container-org72ffa75" class="outline-2">
+<h2 id="org72ffa75"><span class="todo TODO">TODO</span> Gitlab jira intergration</h2>
+<div class="outline-text-2" id="text-org72ffa75">
+<p>
+<a href="https://www.youtube.com/watch?v=p56zrZtrhQE">https://www.youtube.com/watch?v=p56zrZtrhQE</a>
+</p>
+
+<p>
+GitLab-Jira Integration - Jira Automation Triggers
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=DhAGIg04uaQ">https://www.youtube.com/watch?v=DhAGIg04uaQ</a>
+</p>
+
+<p>
+GitLab-Jira Integration - Jira Deployments
+<a href="https://www.youtube.com/watch?v=i_Gzxp8A2l4">https://www.youtube.com/watch?v=i_Gzxp8A2l4</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org40c2d65" class="outline-2">
+<h2 id="org40c2d65"><span class="todo TODO">TODO</span> Gitlab Issuse &lt;board&gt; kanban</h2>
+<div class="outline-text-2" id="text-org40c2d65">
+<p>
+<a href="https://www.youtube.com/watch?v=CiolDtBIOA0">https://www.youtube.com/watch?v=CiolDtBIOA0</a>
+ GitLab issue boards demo
+</p>
+</div>
+</div>
+
+<div id="outline-container-org60dea4d" class="outline-2">
+<h2 id="org60dea4d">Git Issuse and Milestone</h2>
+<div class="outline-text-2" id="text-org60dea4d">
+<p>
+<a href="https://www.youtube.com/watch?v=tv4UM1ruQRs">https://www.youtube.com/watch?v=tv4UM1ruQRs</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: D Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

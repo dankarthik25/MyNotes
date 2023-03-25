@@ -1,0 +1,1334 @@
+#+TITLE: Note_Ansible
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Ansible
+** Why Ansible:
+For Sys Administator usually do lot of repetative task
+- Provisioning  : Sizing or Creating new host or VM 
+- Configuration management : Fine Configuration 
+- Continous Delivery       :
+- Application Deployment   : Deploy build files(jar,war,ear) to sit,uat,preroduction,
+- Security Compliance :
+*** Advantages:
+Ansible provies
+- Simple
+- Powerful
+- Agentless
+- Lite Weight
+*** What is Ansible tool:
+Ansible is a configuration tool to depoly code and install in muiltiple servers at a time.
+
+** SSH-Key connection between master and all slave 
+*** Prerequirement-I : Create a common user with root privillage and ssh-key base authentication
+
+- Step to connect using SSH-Key:  
+ - Create common user for all users (master and slave))
+ - Give root privilege to common-user for both master and slave
+ - Enable ssh-key based authentication( and restart sshd server)
+#+BEGIN_SRC sh
+#!/bin/bash
+USER_NAME='ansible'    # $1
+PASSWORD='karthik@123'   #$USER_NAME
+
+##################################################################################
+#   Create a common user 
+##################################################################################
+useradd ${USER_NAME}
+echo ${PASSWORD} | passwd --stdin ${USER_NAME}
+passwd -e ${USER_NAME}
+
+if [[ "${?}" -ne 0 ]]   # # if [ "#?" !=0]
+then
+  echo "Password create sucessfull"
+else
+      exit 1
+fi
+#check if user is created or not 
+# cat/etc/passwd
+##################################################################################
+# Give root privilege
+##################################################################################
+if grep -q "${USER_NAME}" "/etc/sudoers"    #[[ "${?}" -ne 0 ]]
+then
+  echo "Alread exiting "
+else
+  echo "Need to add to sudoers"
+  echo -e "## Allow ${USER_NAME} to run any commands anywhere\n${USER_NAME}\tALL=(ALL)\tNOPASSWD: ALL" >> /etc/sudoers
+  # sed -i 's/root    ALL=(ALL)       ALL/root    ALL=(ALL)       ALL \n${USER_NAME}\tALL=(ALL)/g' /etc/sudoers
+fi
+grep "$USER_NAME" "/etc/sudoers"
+##################################################################################
+# Enable ssh-key based authentication
+##################################################################################
+sed -i 's/^PasswordAuthentication no/#PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+grep 'PasswordAuthentication' /etc/ssh/sshd_config
+service sshd restart
+#+END_SRC
+
+*** Prerequirement-II: Generate ssh-key in master and share it with all slave  
+
+ - Create ssh-key in master 
+#+BEGIN_SRC sh
+ssh-keygen   #check key "id_ras.pub" ls -latr /home/ansible/.ssh
+ssh-copy-id devops@slave_ip
+#+END_SRC
+
+ - check ssh without password
+#+BEGIN_SRC sh
+ssh <user-name>@ip
+# show-key : cat /home/<user-name>/devops/.ssh/authorizzed_keys
+exit() # to exist 
+#NOTE: we can connect from master to slave but not from slave to master
+#+END_SRC
+
+** Using Virtual machine
+** Installation
+
+#+BEGIN_SRC sh
+wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm
+yum repolist
+#yum install epel-release
+yum update
+yum install git python openssl ansible -y
+ansible --version
+
+#+END_SRC
+** Introduction
+*** Inventory: list of servers or host grouped together
+PROS: 
+Agent-less (No installation in slave host)
+
+#+BEGIN_SRC sh
+# Sample inventory files
+web ansible_host=server1.company.com
+db ansible_host=server2.company.com
+mail ansible_host=server3.company.com
+web2 ansible_host=server4.company.com
+
+# #Inventory Parameters   # https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+# ansible_connection - ssh/winrm/localhost
+# ansible_port -  22/5986
+# ansible_user - root/administrator/ec2-user/ubuntu
+# ansible_ssh_pass - Password
+# ansible_ssh_private_key_file
+
+#
+web ansible_host=server1.company.com ansible_connection=ssh
+db ansible_host=server2.company.com ansible_ssh_pass=osboxes.org
+mail ansible_host=server3.company.com ansible_ssh_pass=osboxes.org
+web2 ansible_host=server4.company.com ansible_connection=ssh
+
+#
+#Ex:
+
+localhost ansible_connection=localhost
+
+[brt]
+#ubuntu ansible_ssh_host=2.3.249.200
+ubuntu ansible_host=ec2-13-235-0-126.ap-south-1.compute.amazonaws.com
+[brt:vars]
+ansible_ssh_private_key_file=~/WorkSpace_DigivalSolution/Workspace_elk/elk-keypair.pem
+ansible_ssh_user=ubuntu
+ansible_connection=ssh
+
+
+[my host]
+my-dev      ansible_ssh_host=54.79.31.51    ansible_ssh_private_key_file=/Users/dev/.ssh/dev.pem    ansible_ssh_user=ec2-user
+
+#+END_SRC
+*** Example
+#+BEGIN_SRC sh
+# /etc/ansible/host           # contain all information slave host in yaml file
+
+#eg: Ansible has inventory files where host info are stored and used.
+# inventory = /etc/ansible/host
+#vi /etc/ansible/hosts   # System given examples
+
+#[web]
+# 192.147.58.9
+#[app]
+# 192.147.59.7
+#[dbserevr]
+# 192.34.5.6
+# using host file we create cluster in order to run cmd on cluster we 
+
+# Enable /etc/ansible/host by un-commenting <inventory> in ansible.cfg file
+#vi /etc/ansible/ansible.cfg
+#inventory = /etc/ansible/hosts
+
+#+END_SRC
+** Ad-hoc commands
+You could execute a quick one-liner cmd in ansible with-out writing playbook
+#+BEGIN_SRC sh
+ansible [groupname] -a "command"      # a : attributes
+
+# Ex:
+ansible test -a "ls -l /opt"
+ansible test -a "cat /etc/passwd"
+ansible servername -a "touch /opt/test123" -s
+ansible servername -a "ls -l /opt"
+ansible all -a "yum remove httpd -y" -s
+ansible test -s -a "useradd batch31"
+ansible all -a "ls -l /opt"
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+ansible-doc -l | wc
+ansible-doc -s module-name
+#+END_SRC
+
+*** modules : Adhoc cmd are converted in module for simple and easy use
+There different types of module  [[https://docs.ansible.com/ansible/latest/user_guide/modules_intro.html][Introduction to module]]
+
+Modules (also referred to as “task plugins” or “library plugins”) are discrete units of code that can be used from the command line or in a playbook task. Ansible executes each module, usually on the remote target node, and collects return values.
+#+BEGIN_SRC sh
+# 
+ansible [pattern] -m [module-name] -a "[module-option]"
+# pattern : group or cluster in inventory file
+
+# -a      : attributes of module
+# -m      : module
+# $ansible-doc -l |wc
+#$ ansible-doc yum
+#$ ansible-doc yum 
+# Example: # state=latest or present, absent(remove install)
+# ansible 
+ansible web -m yum -a "name=httpd state=latest"# ################################
+#                yml file
+# ##############################
+- name: install latest version of Apache
+  yum:
+    name: httpd
+    state: latest
+
+#############################################
+#$ ansible-doc service   
+# Example: state : started, stopped,restarted
+ansible web -m service -a "name=httpd state=started" --become # install apache server
+
+#                yml file
+- name: start service hhtpd
+  service:
+    name: httpd
+    state: started
+##################################
+
+ansible web -a "service httpd status" --become 
+ansible web -m yum -a "name=httpd state=stopped" --become
+#
+ansible web -m yum -a "name=httpd state=absent"# uninstall httpd(apache)
+
+# #############################################
+#  Create users
+# #############################################
+# Encrpt password :https://www.radb.net/crypt_calculator 
+ansible all -m user -a"name=test password=cFl0NSByhlhXc" --become
+ansible all -a"cat /etc/passwd" --become # check user is created
+
+# #########################################
+#  Custom inventory file
+##########################################
+#path of inventory file path: /opt/hosts
+ansible -i /opt/hosts app -a "ls -latr /opt"
+ansible -i /opt/hosts app -a "ping"
+ansible -i /opt/host -m yum -a "name=git state=latest"#
+ansible -i /opt/host -m yum -a "name=tomcat state=latest"#
+#+END_SRC
+**** Example
+#+BEGIN_SRC sh
+ansible webserver -m yum -a "name=git state=latest"
+
+ansible all -m yum -a "name=httpd state=latest"
+
+ansible test -m ping
+
+ansible all -m copy -a "src=/opt/docker-compose.yaml dest=/opt" -s
+
+ansible appserver -m yum -s -a "name=httpd state=present"
+
+ansible all -m yum -s -a "name=httpd state=absent"
+
+ansible all -m yum -s -a "name=git state=latest"
+
+ansible test -m user -s -a "name=batch31"
+
+ansible test -m user -s -a "name=batch31 state=absent"
+
+ansible all -m service -s -a "name=httpd state=started"
+#+END_SRC
+*** Playbook(.yaml)
+module: to run single tast or one time task
+
+To run multiple task , run repeted task
+
+https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/
+
+to get yaml formate example:
+yml consist of ( hosts,variable,tasks) and task is array 
+
+variable: optional 
+task contain : module and attributes informations
+
+#+BEGIN_SRC sh
+ansible-doc git
+#+END_SRC
+
+**** Command type playbook
+#+BEGIN_SRC sh
+#cat sample.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install python
+    yum:
+      name: python
+      state: latest
+##########################################
+ansible-playbook sample.yml --syntax-check
+ansible-playbook sample.yml --list-hosts
+ansible-playbook sample.yml # to run yml file
+
+
+#cat useradd.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: creating user
+    yum:
+      name: statish
+      state: /pL2AYR6csdTI
+ansible-playbook useradd.yml --syntax-check
+ansible-playbook useradd.yml 
+ansible app -a "cat /etc/passwrd" --become
+##########################################
+#cat httpd_installNrun.yml
+##################################
+---
+- hosts: app
+  become: true
+  tasks:
+  - name: install httpd
+     yum:
+       name: httpd
+       state: latest
+  - name:start service
+     service:
+        name: httpd
+        state: started
+ansible-playbook httpd_installNrun.yml --syntax-check
+ansible-playbook httpd_installNrun.yml
+##########################################
+#cat create_file.yml
+##################################
+---
+- hosts: app
+  tasks:
+  - name: create file
+     file:
+      path: /opt/vbs
+       state: touch
+ansible-playbook create_file.yml --syntax-check
+ansible-playbook create_file.yml
+
+#+END_SRC
+
+** modules
+- modules
+  - System (User, Group, Hostname, Iptables, Lvg, Lvol, make, mount,ping, Timezone, Systemd, Service)
+  - Commands (Command, Expect , RAW, Script, Shell)
+  - Files (Acl, Archive, File, Find, Lineinfile, Replace, Stat, Template, Unarchive)
+  - Database(mongodb,mssql,mysql, Postgresql, Proxysql, vertica)
+  - Cloud (Amazon, Atomic, Azure, Centrylink,Cloudscale,Cloudstack,Digital Ocean, Docker,Google, Linode, Openstack, Rackspace, Smartos, Softlayer, Vmware)
+  - Windows (In windows environment)
+  - git ()
+  - .....
+  - 
+  - shell
+  - command
+  - script
+#+BEGIN_SRC sh
+-
+ name: Play 1
+ hosts: localhost
+ tasks:
+ - name: Execute command ‘date’
+   command: date
+
+ - name: Display resolv.conf contents
+   command: cat /etc/resolv.conf
+
+ - name: Display resolv.conf contents
+   command: cat resolv.conf chdir=/etc
+
+ - name: Display resolv.conf contents
+   command: mkdir /folder creates=/folder
+
+ - name: Copy file from source to destination
+   copy: src=/source_file dest=/destination
+
+ - name: Run a script on remote server
+   script: /some/local/script.sh -arg1 -arg2
+# Services : Started,Stopped,Resatared
+ - name: Start the database service
+   service: name=postgresql state=started
+
+ - name: Start the httpd service
+   service: name=httpd state=started
+
+ - name: Start the nginx service
+   service:
+     name: nginx
+     state: started
+ - name: Start the database service
+   service:
+     name: postgresql
+     state: started
+# Lineinfile
+# Search for a line in a file and replace it or add it if it doesn’t exist.
+- lineinfile:
+    path: /etc/resolv.conf
+    line: 'nameserver 10.1.250.10'
+# Ping
+  - name: Ping test
+    ping:
+   
+#+END_SRC
+** Playbook for file-module 
+Basic yml to be remember during interviews
+https://www.softwaretestinghelp.com/ansible-playbooks-ansible-vaults/
+
+#+BEGIN_SRC sh
+# $ansible-doc file # go to example
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/some_directory
+    state: directory
+    mode: '0755'
+
+
+- name: Remove file (delete file)
+  file:
+    path: /etc/foo.txt
+    state: absent
+
+- name: Recursively remove directory
+  file:
+    path: /etc/foo
+    state: absent
+
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: '0644'
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+cd /opt
+#vi dry.yml
+---
+- hosts: web
+  become: true
+  task:
+  - name: create dir
+    file:
+      path: /opt/test_dir
+      state: directory
+      mode: '0755'
+  - name: change permission and ownership
+    file:
+      path: /opt/test_dir
+      owner: ansible
+      group: ansible
+      mode: '0777'
+  - name: create touch
+    file:
+      path: /opt/test.txt
+      state: touch
+      mode: '0755'
+  - name: create multiple touch
+    file:
+      path: "{{item}}"
+      state: touch
+      mode: '0755'
+    with_item:
+      - "/opt/satishP"
+      - "/opt/satishT"
+      - "/opt/rajit"
+      - "/opt/karthik"
+
+  - name: Remove file (delete file)
+    file:
+      path: /opt/test.txt
+      state: absent
+  - name: Recursively remove directory
+    file:
+      path: /opt/etc/foo
+      state: absent
+    
+...
+#+END_SRC
+** Palybook service (state: reloaded, restarted, started, stopped)
+#+BEGIN_SRC sh
+ - name: start serveice
+   service:
+      name: httpd
+      state: started # reloaded, restarted, started, stopped
+
+#+END_SRC
+** Palybook copy-module
+#+BEGIN_SRC sh
+#$ansible-doc copy
+- name: Copy file with owner and permissions
+  copy:
+    src: /srv/myfiles/foo.conf
+    dest: /etc/foo.conf
+- name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+    validate: /usr/sbin/visudo -csf %s
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+cd /opt
+#vi copy_pb.yml
+---
+- hosts: web
+  task:
+  - name: copy file
+    copy:
+      src: /opt/sbi.war
+      dest: /tmp/sbi.war
+...
+# #########################333
+#   Using SRC
+# #########################3
+- hosts: web
+  become:true
+  vars:
+    dst_path: /opt
+    src_path: /opt/icici.war
+  task:
+  - name: copy file
+    copy:
+      src: "{{src_path}}"
+      dest: "{{dst_path}}"
+...
+#+END_SRC
+** Varaible
+#+BEGIN_SRC sh
+-
+ name: Add DNS server to resolv.conf
+ hosts: localhost
+ vars:
+   dns_server: 10.1.250.10
+ tasks:
+ - lineinfile:
+     path: /etc/resolv.conf
+     line: 'nameserver {{dns_server }}’
+#+END_SRC
+
+#+BEGIN_SRC sh
+- 
+  name: Set Firewall Configurations
+  hosts: web
+  var:
+    http_port: 8081
+    snmp_port: 161-162
+    inter_ip_range: 192.0.2.0
+  tasks:
+  - firewalld:
+      service: https
+      permanent: true
+      state: enabled
+
+  - firewalld:
+      port: ‘{{ http_port }}’/tcp
+      permanent: true
+      state: disabled
+  - firewalld:
+      port: ‘{{snmp_port}}’/udp
+      permanent: true
+      state: disabled
+  - firewalld: 
+      source: ‘{{ inter_ip_range}}’/24
+      Zone: internal
+      state: enabled
+#+END_SRC
+** Looping
+#+BEGIN_SRC sh
+-
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: name= ‘{{ item }}’
+    loop:
+      - joe
+      - george
+      - ravi
+      - mani
+      - kiran
+      - jazlan
+      - emaan
+      - mazin
+      - izaan
+      - mike
+      - menaal
+      - shoeb
+      - rani
+#+END_SRC
+
+#+BEGIN_SRC sh
+- 
+  name: Create users
+  hosts: localhost
+  tasks:
+  - user: 
+      name= ‘{{item.name}}’  
+      state= present
+      uid= '{{ item.uid}}’
+
+    loop:
+     - name: joe
+       uid: 1010
+     - name: george
+       uid: 1010 
+     - name :ravi
+       uid: 1012
+     - name:mani
+       uid: 1013
+     - name:kiran
+       uid: 1014
+     - name:jazlan
+       uid: 1015
+     - name:emaan
+       uid: 1016
+     - name:mazin
+       uid: 1017
+     - name:izaan 
+     - name:kiran
+       uid: 1018
+     - name:mike 
+#+END_SRC
+*** With_item
+#+BEGIN_SRC sh
+- name: Create users 
+  hosts: localhost 
+  task: 
+  - user: name='{{ item }}'
+    state: present 
+    with_item: 
+    - joe 
+    - george 
+    - ravi 
+    - mani
+#+END_SRC
+** Condtions
+#+BEGIN_SRC sh
+---
+- name: Install NGINX
+  hosts: all
+  tasks:
+  - name: Install NGINX on Debian
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == “Debian” and
+            ansible_distribution_version == “16.04”
+ - name: Install NGINX on Redhat
+     yum:
+       name: nginx
+       state: present
+     when: ansible_os_family == “RedHat” or
+           ansible_os_family == "SUSE"
+#+END_SRC
+** With_file
+#+BEGIN_SRC sh
+- name: Create users 
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_file: 
+    - "/etc/hosts"
+    - "/etc/resolve.conf"
+    - "/etc/ntp.conf"
+#+END_SRC
+*** With url
+#+BEGIN_SRC sh
+- name: get multiple urls
+  hosts: localhost 
+  task: 
+  - debug: var=item
+    with_url: 
+    - "https://site1.com/get-servers"
+    - "https://site2.com/get-servers"
+    - "https://site3.com/get-servers"
+    - "https://site4.com/get-servers"
+#+END_SRC
+*** With mongodb:
+#+BEGIN_SRC sh
+- name: get multiple mongodbs
+  hosts: localhost 
+  task: 
+  - debug: msg "DB={{item.database}} PID={{item.pid}}"
+    with_url: 
+    - database: dev
+      connection_string : "mongodb://dev.mongo/"
+    - database: dev
+      connection_string : "mongodb://prod.mongo/"
+
+#+END_SRC
+*** With_*
+#+BEGIN_QUOTE
+with_items
+with_file
+with_url
+with_mongodb
+with_dict
+with_etcd
+with_env
+with_filetree
+With_ini
+With_inventory_hostnames
+With_k8s
+With_manifold
+With_nested
+With_nios
+With_openshift
+With_password
+With_pipe
+With_rabbitmq
+With_redis
+With_sequence
+With_skydive
+With_subelements
+With_template
+With_together
+With_varnames
+#+END_QUOTE
+** Condtionals in Loop
+** Condtionals & Register
+** Roles
+Ansible: assigne a role to server or host : like (mysql, gameserver: nginx,)
+The same work can be done by palybook why we use role ?
+
+This are task which are comman used by all dev, or with in organiziatoin.,,,etc
+** Find Roles
+ansible-galaxy :web UI
+$ansible-galaxy search mysql
+** Use Roles
+#+BEGIN_SRC sh
+ansible-glaxy install geerlingguy.msql
+#+END_SRC
+** List Roles
+#+BEGIN_SRC sh
+ansible-galaxy init mysql # 
+# How to use mysql in my playbook 
+# move role to comman dir where ansible can find the location (/etc/ansible/roles)
+
+
+
+#+END_SRC
+** Playbook Java installation:
+** varibale
+ SOURCE: https://gist.github.com/andershedstrom/7c7d0bb5b9450c54a907
+#+BEGIN_SRC sh
+---
+- hosts: web
+  become: true
+  vars:
+   download_url: http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+   dst_path: /opt/software
+  tasks:
+  - name: Create a directory if it does not exist
+      file:
+        path: "{{dst_path}}"
+        state: directory
+        mode: '0777'
+
+  - name: Download JDK tar file
+    command: "wget --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{download_url}} "
+    args:
+      chdir: "{{dst_path}}"
+  - name: Extract tar file
+    command: "tar -xvzf jdk-8u131-linux-x64.tar.gz;rm -rf jdk-8u131-linux-x64.tar.gz"
+  - name: Set JAVA PATH
+      shell: echo "# JAVA ENVIRONmENT VARIABLES" >> ~/.bash_profile; echo "export JAVA_HOME=/opt/softwares/jdk1.8.0_131">> ~/.bash_profile; echo "export PATH=\$PATH:/opt/softwares/jdk1.8.0_131/bin">> ~/.bash_profile
+
+  - name: restart bash and check version
+      shell:   - name: Set JAVA PATH
+      shell: source ~/.bash_profile; java -version
+#+END_SRC
+
+** Patter 
+#+BEGIN_SRC sh
+- 
+ name: Play1
+ hosts : localhost, # Host*, *.company.com # Host1,Host2,Host3,
+ tasks:
+ - name: Copy file with owner and permissions
+   copy:
+     src: /srv/myfiles/foo.conf
+     dest: /etc/foo.conf
+ - name: Copy a new "sudoers" file into place, after passing validation with visudo
+  copy:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+
+#+END_SRC
+** Dynamic Inventory:
+#+BEGIN_SRC sh
+ansible-playbook -i inventory.txt palybook.yml #static inventory
+ansible-playbook -i inventory.py playbook.yml # dynamic inventory
+#+END_SRC
+** Custom modules:
+https://docs.ansible.com/ansible/2.3/dev_guide/developing_modules_general.html
+** Jinja Template : 
+Insted of copy we use Jinja template which move the only contant of file
+#+BEGIN_SRC sh
+---
+- hosts: azure
+  become: true
+  vars:
+    src_path: /opt/devops.j2
+    dst_path: /var/www/html/index.html
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+  - name: start serveice
+    service:
+       name: httpd
+       state: started
+  - name: copy module
+    template:
+     src: "{{ src_path }}"
+     dest: "{{ dst_path }}"
+    notify:
+    - restart apache
+  handlers:
+    - name: restart apache
+      service:
+       name: httpd
+       state: restarted
+#+END_SRC
+
+#+BEGIN_SRC html
+  <html>
+  <header><title>This is title</title></header>
+  <body>
+  Hello CARONA world CUP 2020 fwefwefgwe
+  gwrgrgrgrgrgrgrg
+  rgr
+  greg
+  reg
+  rger
+  grg
+  </body>
+  </html>
+
+#+END_SRC
+** Satish Anna Lectures
+#+BEGIN_SRC sh
+--- 
+- 
+  become: true
+  hosts: azure
+  tasks: 
+    - 
+      name: "install httpd"
+      yum: 
+        name: httpd
+        state: latest
+    - 
+      name: "start serveice"
+      service: 
+        name: httpd
+        state: started
+    - 
+      file: 
+        mode: "0777"
+        path: /var/www
+        state: directory
+      name: "Create a directory if it does not exist"
+    - 
+      copy: 
+        dest: /var/www/html/index.html
+        src: /opt/scripts/index.html
+      name: "copy module"
+    - 
+      name: "restart serveice"
+      service: 
+        name: httpd
+        state: resarted
+# ansible-playbook ansible_pb1.yml --syntax-check
+#+END_SRC
+
+#+BEGIN_SRC sh
+  - name: copy module
+    copy:
+     src: /opt/index.html
+     dest: /var/www/html/index.html
+    notify:
+    - restart apache
+  handlers:
+    - name: restart apache
+      service:
+       name: httpd
+       state: restarted
+#+END_SRC
+* (Advance)
+** Role
+
+** Asynchronous Actions
+*** Why Asynchronous
+Time when we need to execute a long task that excceds the ssh-time out
+Insted of extending we  make a check on it later time
+
+To run mulitpule processes at once and check on it later
+
+To run  one or more process and not check it staus
+#+BEGIN_SRC sh
+- name: Deploy Web Application
+  hosts: web
+  tasks:
+  - command: /opt/monitor_webapp.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: webapp_result
+               # poll: 0 , Not waiting check and go to other task
+
+
+  - command: /opt/monitor_database.py
+    async: 360 # How long to run ? 
+    poll: 60   # How frequently to check default 10 sec?
+    register: database_result
+               # poll: 0 , Not waiting check and go to other task
+
+  - name: Check status of tasks
+    async_status: jid={{webapp_result.ansible_job_id}}
+    register: job_result.finished
+    retries: 30
+
+# Not all module support async
+#+END_SRC
+** Strategy
+How playbook is executed in ansible
+#+BEGIN_SRC sh
+-
+ name: Deploy Web Applications
+ strategy: free
+# Batch 
+# serial:3(linear for 1st 3 server) later are free strategy
+ hosts: server1
+ tasks:
+  - name: Install dependencies
+     ########################
+  - name: Install mySQL databases
+     ########################
+  - name: Start mysql service
+     ########################
+  - name: Install Python Flask dependencies
+     ########################
+  - name: Run web-server 
+     ########################
+#+END_SRC
+** Forks
+How many server can it talk to at a time ?
+If we have 100 servers ? will servers run at atime ?
+How many servers will ansible take at atime ?
+
+Ansible uses parallel process called frok  communicate with host 
+default ansible talk 5 servers at atime.
+** Error Handling
+In strategy topic we see linear, free, batch
+
+If one server there is error <like  mysql server> then ansible take error out of list and continue the playbook
+
+If we want to stop execution if there is an error in execution use *any_errors_fatal*
+*** ignore_errors: 
+consider we want to send a mail at end of task telling <Web Server Deployed>
+How ever stmp server is not stable so we don't want to give error because of it and stop, FOR this kind of thinks we want to ignore the error
+#+BEGIN_SRC sh
+- mail:
+    to: devops@corp.com
+    subject: Server Deployed!
+    body: Web Server Deployed
+  ignore_errors: yes
+#+END_SRC
+*** failed_when:
+We want to check the *Error log* and see if there is an error in it or not then we want to fail the if error as occured
+#+BEGIN_SRC sh
+- command: cat /var/log/server.log
+  register: command_output
+  failed_when: " 'ERROR' in command_output.stdout"
+#+END_SRC
+
+** Jinja 2 Templating(Filters)
+What is Templating : process of dynamic content :
+#+BEGIN_SRC yml
+- 
+ name: Test Template Playbook
+ hosts: localhost
+ vars:
+   my_name: karthik
+ tasks:
+  - debug:
+       msg: "my name is {{my_name}}"
+
+#+END_SRC
+
+*** String manipualtion
+#+BEGIN_QUOTE
+The name is {{my_name}}=> The name is karthik
+The name is {{my_name | upper}}=> The name is KARTHIK
+The name is {{my_name | lower}}=> The name is karthik
+The name is {{my_name | title}}=> The name is Karthik
+The name is {{my_name | repalce("karthik","Sai Teja")}}=> The name is Sai Teja
+The name is {{my_name | default("James")}} {{my_name}}=> The name is James Karthik
+#+END_QUOTE
+*** List and Set based filter
+#+BEGIN_SRC yml
+{{ [1,2,3] | min }}                >> 1
+{{ [1,2,3] | max }}                >> 3
+{{ [1,2,3,2] |unique }}                >> 1,2,3
+{{ [1,2,3,4] |union([4,5])}}                >> 1,2,3,4,5
+{{ [1,2,3,4] | interset([4,5]}}                >> 4
+{{ 100 | random }}                >> Random number
+{{ ["The", "name", "is","Bond"] | join (" ")}}                >> The name is Bond
+#+END_SRC
+*** File based Filter
+#+BEGIN_SRC yml
+{{ "/etc/hosts" | basename}}            >> hosts
+{{"c"\windows\hosts" | win_basedname }}            >> hosts
+{{ "c:\windows\hosts" | win_splitdrive }}            >> ["C:","\windows\hosts"]
+{{ "c:\windows\hosts" | win_splitdrive| first }}            >> "C:"
+{{ "c:\windows\hosts" | win_splitdrive| last }}            >> "\windows\hosts"
+
+#+END_SRC
+*** more Info about Jinja2 Filters 
+GOogle Search: jinja2 List of Builtin Filters
+** Lookups
+If we store hosts and password in csv file we can read the password we can use lookup plugin
+#+BEGIN_SRC sh
+#$ cat credentials.csv
+#Hostname, Password
+#Target1, PasswOrd1
+#Target2, PasswOrd2
+
+
+{{lockup('csvfile', 'target1 file=/tmp/credentials.csv delimiter=,')}} >> PasswOrd1
+#+END_SRC
+
+There are other type of Lookups like INI,DNS,mongodb
+Source : Web : Ansible Documentation > Playbooks:Special Topic > Lookups 
+** Vault
+We are storing password in host or inventory file 
+Ansible vault help to encript the host or inventory file
+#+BEGIN_SRC sh
+# To encrypth inventory file
+ansible-vault encrypt inventory.txt
+# $ask for password
+
+
+# run encrypted inventory file
+ansible-playbook test.yml -i inventory.txt -ask-vault-pass
+
+# pass file(vault_pass) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass
+
+# pass script(vault_pass.py) containing password
+ansible-playbook test.yml -i inventory.txt -valt-password-file ~./vault_pass.py
+
+# view contant of encrpyted file 
+ansible-vault view inventory.txt
+
+# To create an encrypted file 
+ansible-vault create inventory.txt
+
+#+END_SRC
+
+** Dynamic Inventory
+host.py need to accept --list and --host
+Note --host is used if no _meta key is present 
+
+https://www.youtube.com/watch?v=9nn21eHBkXg
+copy in aws-ec2 with ansible 
+https://github.com/ansible/ansible/tree/stable-2.9/contrib/inventory/ec2.py
+https://github.com/ansible/ansible/blob/stable-2.9/contrib/inventory/ec2.ini
+
+#
+Run ansible using ansible ec2 plugin in local os with pem key to connect aws ec2 instances
+
+Step by Step - Ansible AWS dynamic inventory Demo | Ansible Dynamic Inventory EC2 Plugin | Easy Way
+https://www.youtube.com/watch?v=C5mazUJ1dsg
+
+
+
+
+Create dynamic invetory py with real time boto3 lib https://www.youtube.com/watch?v=daME4v9BkeY
+
+
+python example :
+Dynamic inve without any boto3 
+https://github.com/r3ap3rpy/ansibler/blob/master/custom_inventory.py
+https://gist.github.com/tuxfight3r/8aec44824c4258c960b2 # --list and --host as argprase but host is not impleted 
+
+https://www.youtube.com/watch?v=daME4v9BkeY
+Ansible Tutorials | Creation of Dynamic inventory script for AWS
+host json formate python code is used to generate and test it with =ansible -i host.py --list=
+
+
+
+https://medium.com/geekculture/a-complete-overview-of-ansible-dynamic-inventory-a9ded104df4c
+Using yaml insted of host.py file we use yaml file 
+
+#+begin_src 
+ansible -i aws_dy.py app --list
+#+end_src
+
+https://github.com/surfer190/fixes/blob/master/docs/ansible/ansible-dynamic-inventory.md
+
+https://adamj.eu/tech/2016/12/04/writing-a-custom-ansible-dynamic-inventory-script/
+
+dynamic inventory for ansible install in aws-ec2 instance 
+https://www.golinuxcloud.com/ansible-inventory-files/
+
+
+https://www.youtube.com/watch?v=ZpAMGn-ZNkQ&list=PL2qzCKTbjutIyQAe3GglWISLnLTQLGm7e&index=23
+
+
+#+BEGIN_SRC python
+#!/usr/bin/env python
+
+import json
+
+def get_inventory_data():
+    return {
+        'databases': {
+            'hosts': [ip_address],
+            'vars': {
+               "ansible_ssh_pass":"PasswOrd",
+               "ansible_ssh_host":"192.168.1.1"
+            }
+        }
+        'web': {
+            'hosts': ["web_servers"],
+             'vars' : {
+               "ansible_ssh_pass":"PasswOrd2",
+               "ansible_ssh_host":"192.168.1.2"  
+                }
+            }
+        }
+    
+if __name__ == '__main__':
+    inventory_data = get_inventory_data()
+    print(json.dumps(inventory_data))
+
+#+END_SRC
+** Custom modules
+** Plugins
+
+** Example
+#+BEGIN_SRC sh
+---
+- name: Play 1
+  hosts: test
+  become: yes
+  tasks:
+      - name: Installing the git package
+      - yum: name=git state=present
+
+2))
+---
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: copying the files from server to client
+      - copy: src=/etc/passwd dest=/opt
+
+3))
+----
+---
+- hosts: all
+  become: yes
+  tasks:
+      - name: Installing multiple packages
+      - yum: state=present name={{ item }}
+   with_items:
+- git
+- wget
+- httpd
+- tar
+- vim
+4))
+
+---
+- hosts: all
+become: yes
+tasks:
+- name: Installing jenkins
+yum:
+name: /opt/jenkins-2.129-1.1.noarch.rpm
+state: present
+- service:
+name=jenkins state=started
+
+5))
+----
+---
+- hosts: all
+become: yes
+tasks:
+- name: Sample playbooks
+yum: name=httpd state=present
+- name: starting httpd services
+service: name=httpd state=started
+
+
+
+
+- hosts: appserver
+
+remote_user: ansible1
+
+become: true
+
+tasks:
+- name: Install Apache Webserver
+yum: pkg=httpd state=latest
+- name: restart apache
+service: name=httpd state=restarted
+
+#+END_SRC
+
+
+* ansible vault for github 
+#+begin_src 
+# if you are using gitlab private repositories 
+git clone https://gitlab.com/dankarthik2505/sample.git 
+#$enter password 
+
+# To use ansible vault 
+
+--- 
+#ansible-vault.yml
+
+---
+-name ansible playbook to test ansible vault
+ hosts: all 
+ become: true 
+ vars_files: 
+  - vault-pass.yml 
+ tasks: 
+ - name: clone a repo 
+   git: 
+     repo: https://dankarthik2505:{{password }}gitlab.com/dankarthik2505/sample.git
+     dest: /opt/git-repo
+
+cat vault-pass.yml # Note gitlab password is encripted in vault-pass.yml file it need phrase key to open the file 
+
+#|1|tYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3Y=
+
+$ansible-playbook -i hosts ansible-vault.yml --ask-vault-pass   # ask for encript key to open yml 
+$ENTERT THE PASSWORD    # to automate the file 
+
+cat pass.yml # store ansible-vault key here 
+#myansiblevault_password 
+
+$ansible-playbook -i hosts ansible-vault.yml --vault-password-file pass.yml
+#+end_src
+
+#+begin_src 
+# ###########################
+# create a vault
+# ###########################
+nano ~/.vault_key 
+# INSERT: 5ltHN9ehn22Tsy9y2J
+chmod 600 ~/.vault_key
+nano touch some-text.txt
+# hi this is a some randomw text
+# ###########################
+# Check if ansible-vault install
+# ###########################
+which ansible-vault
+
+# ###########################
+# Encript 
+# ###########################
+ansible-vault encrypt some-text.txt
+#New Vault password : 
+#Confirm New Vault password :
+
+# ###########################
+# Confirm if vault is suscefull or not 
+# ###########################
+cat some-text.txt
+|1|tYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3Y=
+
+# ###########################
+# Decrypt the file 
+# ########################ansible-vault decrypt --vault-password-file ~/.vault_key some-text.txt
+
+# ######################
+# pass vault_key as a file 
+# ########################
+ansible-vault encrypt --vault-password-file ~/.vault_key some-text.txt
+#Encryption sucessfull 
+
+# #######################
+# check encryption is successfull 
+# ############################
+
+#ZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDAtp0lSq/a/NdnxZJquUHo3N1EJLDMYDnN +5ltHN9ehn22Tsy9y2J1g8EF47u94avfc+zBc338+5Tu/qz+1G3YYLe6blVvCRcl6KexuxlTtEIPcg=|a5XxBv70jjCuiFsZpDUQc3HHYNY= ecdsa-sha2-nistp256 AAAA=
+
+
+# #########################################
+# edit the encrypted file without decrypt
+# #####################################
+ansible-vault edit --vault-password-file ~/.vault_key some-text.txt
+# above cmd will open default editor vi/nano to edit file without decrypting the file 
+
+# #########################################
+# view the encrypted file without decrypt
+# #####################################
+ansible-vault view  --vault-password-file ~/.vault_key some-text.txt
+# above cmd will cat decrypted  edit file without decrypting the file
+
+#+end_src
+
+encrypt files 
+
+https://www.youtube.com/watch?v=PRpEbFZi7nI
+How to run Ansible playbook from Jenkins pipeline job | Ansible Jenkins Integration| DevOps Tutorial
+
+Run ansible vault with play book in jenikins pipeline

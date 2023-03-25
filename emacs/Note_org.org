@@ -1,0 +1,244 @@
+#+TITLE: Test Title
+#+SUBTITLE: Author 
+#+DATE: 
+#+AUTHOR: Karthik
+#+OPTIONS: Timestamp: nil toc:nil date:nil author:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+source: https://orgmode.org/worg/org-tutorials/org4beginners.html
+** Org-MODE
+For more info visit https://orgmode.org/org.html
+** Introduction
+Origally meant for orgranize  create todo list, schedule, do** TODO Data Abstractingc,latex,ppt,
+People use emacs only because of org mode
+
+Most important is we can Emacs Configuration file by Org-moDifference in Reference variable and pointer variable
+References are generally implemented using pointers. A reference is same object, just with a different name and reference must refer to an object. Since references can’t be NULL, they are safer to use.
+
+A pointer can be re-assigned while reference cannot, and must be assigned at initialization only.
+Pointer can be assigned NULL directly, whereas reference cannot.
+Pointers can iterate over an array, we can use ++ to go to the next item that a pointer is pointing to.
+A pointer is a variable that holds a memory address. A reference has the same memory address as the item it references.
+A pointer to a class/struct uses ‘->'(arrow operator) to access it’s members whereas a reference uses a ‘.'(dot operator)
+A pointer needs to be dereferenced with * to access the memory location it points to, whereas a reference can be used directly.de 
+
+We can export to html,pdf,latex,ppt....etc
+
+This tutorial we will Configure .emacs file
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+We can write many lang like c,c++,python,shell,lisp,emac-lisp
+
+What great about emacs-lisp is when we launch emacs all " emacs-lisp code" in ORG File is extrated in other file and this file is executed by Init file (.emacs)
+
+To create call all function in  Init file we use a function called org-babel
+
+#+BEGIN_SRC emacs-lisp
+   (org-babel-load-file (expand-file-name "~/.emacs.d/myconfig.org"))
+#+END_SRC
+
+       | cmd   | ORG function                    |
+       | <s    | Create the block to insert code |
+       | C-c ' | open window to insert code      |
+       |       |                                 |
+       |       |                                 |
+
+
+
+  M-x org-mode          To view in org mode
+
+
+
+
+Press tab in heading  
+** TODO Expanding and Collapse org mode tree
+   <Tab>    
+   S-<Tab>         To expand adn collapse all 
+** TODO Word Processing
+For *bold* , /italics/ , _underscore_ , =code=, ~verbatin~ , +adsfad+,
+** Export the file to other formates
+
+C-c C-e           - export to file/select text to html,latex,pdf
+
+** Comment
+# Subject of comment "Later to be edited"
+*** COMMENT comparison notes should be taken between vim vs emacs 
+Short cut      " C-c ;"
+** Lists
+- entry
+ - subentry 1
+ - subentry2
+-entry 2
+- my 1st change
+ -sublist
+ -sublist2 
+** Header (M + RET)                                                   :Ecams:
+** TO CREATE A SUB BULLITE (M+ RET M+ ->)
+** TO MOVE THE BULLITES PRESS ( M + UP)
+** TO CHANGE SUB BULLIES TO BULLITES  (M + -> OR M + <-)
+** TODO items
+** TODO TO MARK ITEM AS TODO : 
+   S + (Righ arrow/ left arrow )     toggle normal, TODO,DONE
+   C-c C-t                           toggle norma, TODO,DONE 
+** DONE to change item as DO : S + ->   
+** CREATE CHECK BOX [1/3] : OR U CAN USE % FOR PERCENTAGE         :CHECKBOX:
+  - [X] FLOWERS : TO TICK MARK THE ITEM C-C C-C  & TO UNTICK MARK SAME
+  - [ ] FRUITS
+  - [ ] PAY BILL
+** AGENDA VIEW
+
+IN ORG MODE PROVIDE THE AGENDA VIEW TO MANGE AND VIEW TODO LIST & DEADLINES
+COMMAND : C-C[  : ENABLE AGENDA VIEW
+TO VIEW : 
+M-X ORG    - AGENDA  VIEW
+M-x org-agenda-view
+M-x org-agenda-year-view(y)
+
+C-C A      – AGENDA
+C-C [      – ADD DOCUMENT TO THE LIST OF AGENDA FILES
+C-C ]      – REMOVE DOCUMENT FROM THE LIST OF AGENDA FILES
+C-C .      – ADD DATE
+C-U C-C .  – ADD TIME AND DATE
+C-G        – STOP DOING WHAT YOU ARE TRYING TO DO, ESCAPE
+
+
+IF SCREEN SPLIT THEN DO C-C 0
+
+** DATE AND TIME (NO TIME ZONE)
+SCHEDULED: <2021-10-16 Sat>
+C-C .          – ADD DATE<2018-08-07 Tue>
+S-<UP/DOWN>    - CHANGE + OR -   
+C-U C-C . – ADD TIME AND DATE
+** Scheduling  Deadline for a task and Agenda 
+SCHEDULED: <2021-10-16 Sat>
+
+C-c C-s : Schedule or M-x org-schedule
+C-c C-d : Calender is show and date is selected
+C-u C-c . : inset current date and time
+
+Agenda
+C-c a
+
+Follow mode with Shift F
+To view next -week shcedule : F
+To view previous =-week schedule: B
+** Repeating task
+https://www.youtube.com/watch?v=nbC-gL5wcf4&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=5
++1w
++1d
++4w
+(w=week, d=day, m=month, y=year)
+** Advance GENDA
+https://www.youtube.com/watch?v=u00pglDfgX4&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=8
+
+** Custamised agenda view
+https://www.youtube.com/watch?v=PJ3qHIl-eOM&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=8
+** LINKS 
+- http://google.com
+- [[http://google.com][Google]] 
+
+[[http://google.com][Google]]  
+# [  [http://google.com]  [Google] "]"   end with bracked will create the abovd link
+** To edit the link 
+C-c C-l
+** Build table
+
+| Table | contenat          |
+|-------+-------------------|
+| asdf  | dsfsdfsdfeasdfasd |
+| sfsdf | dfsdfasdf         |
+| dEDd  | adfdsff           |
+| ED    | DDE               |
+| df    | fsdl              |
+| asdf' | adfa              |
+|       |                   |
+
+what happen if expot it ?
+** View image in org
+Add the following code to my init.el file:
+#+BEGIN_SRC 
+(setq org-image-actual-width nil)
+#+END_SRC
+
+
+https://orgmode.org/manual/Images.html
+
+Then insert this code in my document, where I want the image to appear:
+#+BEGIN_SRC 
+#+ATTR_ORG: :width 300
+[[./my_image.jpg]]
+# [C-c C-x C-v] to toggle image
+#+END_SRC
+
+
+On executing org-toggle-inline-images the image appears in the buffer, 300px wide, as expected.
+
+
+#+ATTR_ORG: : width 10
+[[~/mynotes/MTechCard.jpg]]
+** Write Source Code, Quotes, Examples :
+*** Source Code (<s ,<se, <ss )
+Babble is a subtool used to insert code (c,c++,py,shell,lisp,elisp...etc)
+Eg:
+shortcut : " <s TAB  "
+#+BEGIN_SRC sh :export 
+echo "Hello world" # C-c C-c to run the code in the brackests
+#+END_SRC
+
+Note : org-bable package is required to run the code in org-mod
+*** To run the code in Block (C-c C-c)
+m nn
+move the cursor to the +begin line and press C-c C-c 
+*** Quote (<q)
+short cut : " 
+<q TAB "
+
+#+BEGIN_QUOTE
+Do me the favor, do me the biggest favor, matter of fact do yourself the biggest favor and integrate those into your workflow.
+#+END_QUOTE
+*** Example (<e)
+#+BEGIN_EXAMPLE
+ASFDASDFDSAFSFDSDFASDF
+ASDADFSFAD Sasdfasdf
+#+END_EXAMPLE
+
+short cut:  "  <e  TAB  "
+
+** SEQ_TODO: TODO(t) WAIT(w) | DONE(d)
+https://www.youtube.com/watch?v=15w3I6MwCfs&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=2
+
+C-c C-t set todo
+with colour  visit https://emacs.stackexchange.com/questions/4104/how-to-put-todo-faces-in-the-file
+
+OrgMode E03S01: Automatic logging of status changes
+7,115 views
+Jun 19, 2016
+
+https://www.youtube.com/watch?v=R4QSTDco_w8&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=11
+** set tags
+https://www.youtube.com/watch?v=GcUVvlClo9k&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=7
+* ----------------------------------------------------------------
+** SET TAGS FOR THE TASKS C-c C-c                                    :ECAMS:
+** BTech 1stYear 				       :Education:BTech:2008:
+** Grossery List 						       :Home:
+** Java Coching 					   :Education:Tution:
+In tags we can search in current exiting by pressing tab
+
+** Orgmode E03S02: Splitting your system up to several files
+https://www.youtube.com/watch?v=ECWtf6mAi9k&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=12
+* Replace jupyter with orgmode 
+https://rgoswami.me/posts/jupyter-orgmode/
+* Convert org to html with parameter
+https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+
+https://lucidmanager.org/productivity/create-websites-with-org-mode-and-hugo/
+
+https://niklasfasching.github.io/go-org/#headline-2
+
+
+https://www.mail-archive.com/emacs-orgmode@gnu.org/msg18072.html
+
+

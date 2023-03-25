@@ -1,0 +1,85 @@
+#+TITLE: Note_terraform
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* What is Terraform
+** Intro
+- automate and manage ur infrastructure
+- automate your platform
+- automate your service that run on the platform
+- open source
+- uses declarative
+  - No need to define each and every step rather that
+  - Define WHAT end goal/result you want
+
+
+- Q)What is Terraform used for ?
+  - Tool for infrastructure provisioning:
+
+
+- Prepare infrastructure(Provisioning Infrastructure) : DevOps
+  - Create VPC
+  - Create AWS User permission
+  - spin up servers
+  - install doceker
+          
+- deploy application: Developer
+
+- Q)Difference btw Terraform and Ansible
+  - Both are Infrastructure as code
+  - Both automate : provioning, configuring, and managing the infrastructure
+
+| Ansbile                     | Terraform                               |   |
+| Mainly a configuration tool | Mainly infrastructure provisioning tool |   |
+| 1. configure infrastructure |                                         |   |
+| 2. deploy apps              |                                         |   |
+| 3. install/update software  |                                         |   |
+| More mature                 | Relatively new                          |   |
+|                             | more advance in orchestration           |   |
+|                             |                                         |   |
+Terraform Architecture & Commands
+
+Example Configuration File
+
+
+
+Terraform is a infrastructure as code
+
+any service in aws,gcp,azure,openstack
+
+in aws we are using cloud formation
+for azure we are using arm template
+
+But from terraform we can create/maintain clouding services like :
+- aws, azure, gcp,docekr,ansible,git,kuberneteics
+
+
+** Install Terraform
+google search : hashcrop
+
+wget $url
+unzip file.zip
+sh terraform version
+./terraform version
+
+#+begin_src 
+#cat main.tf
+provider "cloudname"{   # cloudname = "aws,azure"
+    region = ""
+    access_key = ""
+    secret_key = ""
+
+}
+
+provider "aws"{
+    region = "ap-south-1"
+    access_key = ""
+    secret_key = ""
+
+}
+# ./terraform init # 1st downlaod plugins based on provider
+
+# If you want to use any resources in cloud "aws"
+resource "aws_vpc" "myvpc"{
+      cidr = "10.0.0./16"
+}
+#+end_src

@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-09 Thu 23:24 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mysql</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Mike Dane" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">mysql</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org67ce302">Introduction (0:00)</a></li>
+<li><a href="#org84233b0">What is a Database? (2:36)</a>
+<ul>
+<li><a href="#orgc2d9f15">What is Database (DB) ?</a></li>
+<li><a href="#org5fc0334">Datebases can be stored in different ways</a></li>
+<li><a href="#orgb970c48">Advantage of Database</a></li>
+<li><a href="#org23d9c76">Database Management System</a></li>
+<li><a href="#org65566a4">CRUD : Create Read Update Delete</a></li>
+<li><a href="#org2d45957">Type of Databases</a></li>
+<li><a href="#org700d84b">Relational Databases Management System (RDMS)</a></li>
+<li><a href="#org0c158f0">Non- Relational Databases (no-SQL/not just SQL )</a></li>
+<li><a href="#org5be7d63">Non-Relation Database Management System (NRDBMS)</a></li>
+<li><a href="#org15fb069">Database Queries</a></li>
+<li><a href="#org3e26158">Wrap Up</a></li>
+</ul>
+</li>
+<li><a href="#org5cc3d9d">Tables &amp; Keys (23:10)</a></li>
+<li><a href="#org7c71594">SQL Basics  (43:31)</a>
+<ul>
+<li><a href="#orga7d897b">Structured Qured Language (SQL)</a></li>
+<li><a href="#orgf72090d">Queries</a></li>
+</ul>
+</li>
+<li><a href="#orgf47704d">Installation</a>
+<ul>
+<li><a href="#org6cb40cc">MySQL Windows Installation  (52:26)</a></li>
+<li><a href="#org65b96d4">MySQL Mac Installation  (1:01:59)</a></li>
+<li><a href="#orgd5e1aed">Linux Installation</a></li>
+</ul>
+</li>
+<li><a href="#orgd336141">Creating Tables (1:15:49)</a>
+<ul>
+<li><a href="#org81d3ea1">DataType in sql</a></li>
+<li><a href="#org5f4d949">Create a table</a></li>
+<li><a href="#org839d5bd">Show table</a></li>
+</ul>
+</li>
+<li><a href="#orgcdaadf9">Inserting Data (1:31:05)</a></li>
+<li><a href="#orgfac2a8e">Constraints (1:38:17)</a></li>
+<li><a href="#org17640ed">Update &amp; Delete (1:48:11)</a>
+<ul>
+<li><a href="#org5a8cb80">Update</a></li>
+<li><a href="#org82ff497">Delete</a></li>
+</ul>
+</li>
+<li><a href="#org020c1e5">Basic Queries (1:56:11)</a></li>
+<li><a href="#org8bdb0c5">Company Database Intro (2:08:37)</a></li>
+<li><a href="#orgefc2886">Creating Company Database  (2:14:05)</a>
+<ul>
+<li><a href="#orgf875785">Create Tables</a></li>
+<li><a href="#org87678ea">Insert</a></li>
+</ul>
+</li>
+<li><a href="#org038ace7">More Basic Queries  (2:30:27 )</a></li>
+<li><a href="#org19b8baf">Functions (2:26:24)</a></li>
+<li><a href="#org6e468cd">Wildcards (2:45:13)</a></li>
+<li><a href="#orgb74664a">Union  (2:53:53)</a></li>
+<li><a href="#org586312e">Joins  (3:01:36)</a></li>
+<li><a href="#org5aa1271">Nested Querie  (3:11:49)</a></li>
+<li><a href="#orgcf6cf6f">On Delete entry when they have foreign in them  (3:21:52)</a></li>
+<li><a href="#org52dfae1">Triggers  (3:30:05)</a></li>
+<li><a href="#org584820c">ER Diagrams Intro  (3:42:12)</a></li>
+<li><a href="#org6f3fde7">Designing an ER Diagram (3:55:53)</a>
+<ul>
+<li><a href="#org1dae600">Company Data Storage Requirements</a></li>
+</ul>
+</li>
+<li><a href="#org24635b0">Converting ER Diagrams to Schemas and  ER Diagram Mapping (4:08:34)</a></li>
+<li><a href="#org794a64e">TO DO EER Diagram</a></li>
+<li><a href="#org9d87260">ToDo Link database with class in python</a></li>
+<li><a href="#org158c0db">Same SQL Note on sqllite, postgresql, sqlalchemy</a></li>
+</ul>
+</div>
+</div>
+<p>
+Mysql : <a href="https://www.youtube.com/watch?v=HXV3zeQKqGY">https://www.youtube.com/watch?v=HXV3zeQKqGY</a>
+</p>
+<ul class="org-ul">
+<li>freeCodeCamp.org</li>
+<li>Mike Dane</li>
+</ul>
+
+<div id="outline-container-org67ce302" class="outline-2">
+<h2 id="org67ce302">Introduction (0:00)</h2>
+</div>
+<div id="outline-container-org84233b0" class="outline-2">
+<h2 id="org84233b0">What is a Database? (2:36)</h2>
+<div class="outline-text-2" id="text-org84233b0">
+</div>
+<div id="outline-container-orgc2d9f15" class="outline-3">
+<h3 id="orgc2d9f15">What is Database (DB) ?</h3>
+<div class="outline-text-3" id="text-orgc2d9f15">
+<p>
+Orgainsed way of storing the data 
+</p>
+<ul class="org-ul">
+<li>Any collection of related information
+<ul class="org-ul">
+<li>Phone Book</li>
+<li>Shopping List</li>
+<li>Todo List</li>
+<li>Your 5 best friends</li>
+<li>Facebook User Base</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5fc0334" class="outline-3">
+<h3 id="org5fc0334">Datebases can be stored in different ways</h3>
+<div class="outline-text-3" id="text-org5fc0334">
+<ul class="org-ul">
+<li>On paper</li>
+<li>In your mind</li>
+<li>On a computer</li>
+<li>powerpoint</li>
+<li>Comments Section</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb970c48" class="outline-3">
+<h3 id="orgb970c48">Advantage of Database</h3>
+<div class="outline-text-3" id="text-orgb970c48">
+<ul class="org-ul">
+<li>Keeps track of Products, Reviews, Purchase Order, CreditCards, User, Media, etc</li>
+<li>Trillions of pieces of information need to be stored and readily avaiable</li>
+<li>Information is extremely valuable and critical to functioning</li>
+<li>Security is essential, stores peoples personal information
+<ul class="org-ul">
+<li>Credit card, , Address, phone</li>
+</ul></li>
+<li>Information is stored on a computer</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org23d9c76" class="outline-3">
+<h3 id="org23d9c76">Database Management System</h3>
+<div class="outline-text-3" id="text-org23d9c76">
+<ul class="org-ul">
+<li>A special software program  that help users create and maintain a database
+<ul class="org-ul">
+<li>Makes it easy to manage large amount of information</li>
+<li>Handles Security</li>
+<li>Backups</li>
+<li>Importing/exporting data</li>
+<li>Concurrency</li>
+<li>Interacts with sofware application
+<ul class="org-ul">
+<li>Programming Language</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org65566a4" class="outline-3">
+<h3 id="org65566a4">CRUD : Create Read Update Delete</h3>
+</div>
+<div id="outline-container-org2d45957" class="outline-3">
+<h3 id="org2d45957">Type of Databases</h3>
+<div class="outline-text-3" id="text-org2d45957">
+<ul class="org-ul">
+<li>Relational Databases (SQL)
+<ul class="org-ul">
+<li>Organize data into one or more tables
+<ul class="org-ul">
+<li>Each table has columns and rows</li>
+<li>A unique key identifiers each row</li>
+</ul></li>
+</ul></li>
+
+<li>Non- Relation (noSQL/not just SQL)
+<ul class="org-ul">
+<li>Key-value stores</li>
+<li>Documents (JSON, XML,etc)</li>
+<li>Graphs,</li>
+<li>Flexible Tables</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org700d84b" class="outline-3">
+<h3 id="org700d84b">Relational Databases Management System (RDMS)</h3>
+<div class="outline-text-3" id="text-org700d84b">
+<ul class="org-ul">
+<li>Help users create and maintain a relation database
+<ul class="org-ul">
+<li>mySQL, Oracle, postgreSQL, mariaDB, etc.</li>
+</ul></li>
+<li>Structured Query Language (SQL)
+<ul class="org-ul">
+<li>Standardized language for interacting with RDMS</li>
+<li>Used to perform <code>CRUD</code> operatoins, as well other administrative task (user management, security , backup, etc)</li>
+<li>SQL code used on one RDMS is not always portable to another without modification.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0c158f0" class="outline-3">
+<h3 id="org0c158f0">Non- Relational Databases (no-SQL/not just SQL )</h3>
+<div class="outline-text-3" id="text-org0c158f0">
+
+<div id="org5b1c66a" class="figure">
+<p><img src="./images/Screenshot2022-08-21T21-21-23.png" alt="Screenshot2022-08-21T21-21-23.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5be7d63" class="outline-3">
+<h3 id="org5be7d63">Non-Relation Database Management System (NRDBMS)</h3>
+<div class="outline-text-3" id="text-org5be7d63">
+<ul class="org-ul">
+<li>Help users create and maintain a relation database
+<ul class="org-ul">
+<li>mongoDB, dynamoDB, apache cassandra, firebase, etc.</li>
+</ul></li>
+<li>Implementation Specific
+<ul class="org-ul">
+<li>Any non-relational database falls under this category, so there's no set language standard.</li>
+<li>Monst NRDBMS will implement their own language for performing <code>CRUD</code> and administrative operations on the database.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org15fb069" class="outline-3">
+<h3 id="org15fb069">Database Queries</h3>
+<div class="outline-text-3" id="text-org15fb069">
+<ul class="org-ul">
+<li>Database Queries are requests made to the database management system for specific information</li>
+<li>As the database's structe become more and more complex, it becomes more difficult to get the specific pieces of information we want.</li>
+<li>A google seach is a query</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3e26158" class="outline-3">
+<h3 id="org3e26158">Wrap Up</h3>
+<div class="outline-text-3" id="text-org3e26158">
+<ul class="org-ul">
+<li>Database is any collection of related information</li>
+<li>Computer are great for storing database</li>
+<li>Database Management System (DBMS) make it easy to create, maintain and secure a database.</li>
+<li>DBMS allow you to  perform the CRUD operation and other administrative tasks</li>
+<li>Two types of Databases, Relational &amp; Non-Relational</li>
+<li>Relational dataases use SQL and store data in tables with rows and columns</li>
+<li>Non- Relational data stor data using other data structure</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org5cc3d9d" class="outline-2">
+<h2 id="org5cc3d9d">Tables &amp; Keys (23:10)</h2>
+<div class="outline-text-2" id="text-org5cc3d9d">
+<ul class="org-ul">
+<li>Relational db OR Table consist of row and columns with header</li>
+<li>has atleast one unique key</li>
+<li><p>
+table are linke by a <code>foregin key</code> in main table
+</p>
+
+<div id="org42643ea" class="figure">
+<p><img src="./images/company-database.png" alt="company-database.png" />
+</p>
+</div></li>
+
+<li><code>Composit key or composit key</code>
+<ul class="org-ul">
+<li>eg: Branch Supplier : the primary key is combination of both <code>branch_id</code> and <code>supplier_name</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7c71594" class="outline-2">
+<h2 id="org7c71594">SQL Basics  (43:31)</h2>
+<div class="outline-text-2" id="text-org7c71594">
+</div>
+<div id="outline-container-orga7d897b" class="outline-3">
+<h3 id="orga7d897b">Structured Qured Language (SQL)</h3>
+<div class="outline-text-3" id="text-orga7d897b">
+<ul class="org-ul">
+<li>SQL is a language used for interacting with Relational Database Management Systems (RDMS)
+<ul class="org-ul">
+<li>You can use SQL to get the RDBMS to do things for you
+<ul class="org-ul">
+<li>Create, retrive, update &amp; delete data</li>
+<li>Create &amp; Manage databases</li>
+<li>Design &amp; create databases tables</li>
+<li>Perform administration tasks (security, user management, import/export, etc)</li>
+</ul></li>
+</ul></li>
+<li>SQL implementations vary between systems
+<ul class="org-ul">
+<li>Not all RDMS follow the SQL strandard to a 'T'</li>
+<li>The concpets are the same but the implementatin may vary</li>
+</ul></li>
+
+<li>SQL is actually a hybrid language, it's basically 4 types of languages in one
+<ul class="org-ul">
+<li><b>Data Query Language (DQL)</b>
+<ul class="org-ul">
+<li>Used to query the database for information.</li>
+<li>Get information that is already stored there</li>
+</ul></li>
+<li><b>Data Definition Language(DDL)</b>
+<ul class="org-ul">
+<li>Used for defining database schemas.</li>
+</ul></li>
+<li><b>Data Control Language (DCL)</b>
+<ul class="org-ul">
+<li>Used for contorlling access to the data in database.</li>
+<li>Used &amp; permission magnement</li>
+</ul></li>
+<li><b>Data Manipualtion Lanaguage (DML)</b>
+<ul class="org-ul">
+<li>Used for inserting, updating and deleting data from the database</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf72090d" class="outline-3">
+<h3 id="orgf72090d">Queries</h3>
+<div class="outline-text-3" id="text-orgf72090d">
+<ul class="org-ul">
+<li>A quer is a set of instructions given to the RDBMS (written is SQL ) that tell the RDMS what information you want in to retrive for you
+<ul class="org-ul">
+<li>TONS of data in a DB</li>
+<li>Often hidden in a complex schemas</li>
+<li><p>
+Goal is to only get teh data
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.<span style="color: #3a81c3; font-weight: bold;">name</span> , employee.age
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> employee.salary &gt; 3000 ;
+</pre>
+</div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf47704d" class="outline-2">
+<h2 id="orgf47704d">Installation</h2>
+<div class="outline-text-2" id="text-orgf47704d">
+</div>
+<div id="outline-container-org6cb40cc" class="outline-3">
+<h3 id="org6cb40cc">MySQL Windows Installation  (52:26)</h3>
+<div class="outline-text-3" id="text-org6cb40cc">
+<p>
+mysql and
+pop-sql to visuallize the 
+install mysql community edition
+</p>
+
+<ul class="org-ul">
+<li>Download mySQL Community Server - <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a>
+<ul class="org-ul">
+<li>Be sure to go to the windows installer page</li>
+</ul></li>
+<li>Run installer</li>
+<li>Choose ‘Custom Installation’ and install the server and the shell</li>
+<li>Create a root password</li>
+<li>Go into start menu, open MySQL Shell and login</li>
+<li><p>
+Create a database
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">CREATE</span> DATABASE giraffe_db;
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org65b96d4" class="outline-3">
+<h3 id="org65b96d4">MySQL Mac Installation  (1:01:59)</h3>
+<div class="outline-text-3" id="text-org65b96d4">
+<ul class="org-ul">
+<li>Download mySQL Community Server - <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></li>
+<li>Run installer</li>
+<li>Write down temporary password</li>
+<li>Open ‘MySQL’ in System Preferences and start the server</li>
+<li><p>
+Configure Termianl command line to recognize ‘mysql’ command
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">echo</span> &#8216;export <span style="color: #715ab1;">PATH</span>=/usr/local/mysql/bin:$<span style="color: #715ab1;">PATH</span>&#8217; &gt;&gt; ~/.bash_profile
+<span style="color: #3a81c3;">.</span> ~/.bash_profile
+</pre>
+</div></li>
+<li>Login with root user <code>mysql -u root -p</code>
+<ul class="org-ul">
+<li>Enter temporary password from step 3 when prompted
+Change temporary password</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">ALTER</span> <span style="color: #3a81c3;">USER</span> <span style="color: #2d9574;">'root'</span>@<span style="color: #2d9574;">'localhost'</span> IDENTIFIED <span style="color: #3a81c3; font-weight: bold;">BY</span> <span style="color: #2d9574;">'new_password'</span>;
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+Test to make sure new password worked
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3; font-weight: bold;">exit</span>
+mysql -u root -p <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">- Enter new password when prompted</span>
+</pre>
+</div></li>
+<li><p>
+Create a database
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">CREATE</span> DATABASE giraffe_db;
+</pre>
+</div></li>
+</ul>
+
+
+
+
+<p>
+Done!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd5e1aed" class="outline-3">
+<h3 id="orgd5e1aed">Linux Installation</h3>
+</div>
+</div>
+<div id="outline-container-orgd336141" class="outline-2">
+<h2 id="orgd336141">Creating Tables (1:15:49)</h2>
+<div class="outline-text-2" id="text-orgd336141">
+</div>
+<div id="outline-container-org81d3ea1" class="outline-3">
+<h3 id="org81d3ea1">DataType in sql</h3>
+<div class="outline-text-3" id="text-org81d3ea1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #ba2f59; font-weight: bold;">INT</span>                           <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Whole Numbers</span>
+<span style="color: #ba2f59; font-weight: bold;">DECIMAL</span>(<span style="color: #3a81c3; font-weight: bold;">M</span>,N)                  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Decimal Numbers - Exact Value</span>
+                              <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">M : total no of digits in Number</span>
+                              <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">N : total no of decimal places in Number</span>
+
+<span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(l)                    <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">String of text of length l</span>
+<span style="color: #ba2f59; font-weight: bold;">BLOB</span>                          <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Binary Large Object, Stores large data</span>
+                              <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">images, files </span>
+<span style="color: #ba2f59; font-weight: bold;">DATE</span>                          <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">'YYYY-MM-DD'</span>
+<span style="color: #ba2f59; font-weight: bold;">TIMESTAMP</span>                     <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">'YYYY-MM-DD HH:MM:SS' - used for recording events</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f4d949" class="outline-3">
+<h3 id="org5f4d949">Create a table</h3>
+<div class="outline-text-3" id="text-org5f4d949">
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Creating tables</span>
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">student</span> (
+  student_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>,
+  <span style="color: #3a81c3; font-weight: bold;">name</span> <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  major <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40)
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">PRIMARY KEY(student_id)</span>
+);
+
+<span style="color: #3a81c3; font-weight: bold;">DESCRIBE</span> student; <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">show table </span>
+<span style="color: #3a81c3; font-weight: bold;">DROP</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">student</span>; <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">delete table student </span>
+<span style="color: #3a81c3; font-weight: bold;">ALTER</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">student</span> <span style="color: #3a81c3; font-weight: bold;">ADD</span> gpa <span style="color: #ba2f59; font-weight: bold;">DECIMAL</span>;
+<span style="color: #3a81c3; font-weight: bold;">ALTER</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">student</span> <span style="color: #3a81c3; font-weight: bold;">DROP</span> <span style="color: #3a81c3; font-weight: bold;">COLUMN</span> gpa;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org839d5bd" class="outline-3">
+<h3 id="org839d5bd">Show table</h3>
+<div class="outline-text-3" id="text-org839d5bd">
+<p>
+source : <a href="https://database.guide/4-ways-to-list-all-tables-in-a-mysql-database/">https://database.guide/4-ways-to-list-all-tables-in-a-mysql-database/</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sqls">SHOW TABLES;
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Tables<sub>in</sub><sub>music</sub></td>
+</tr>
+</tbody>
+</table>
+<p>
+<del>-----------------</del>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Albums</td>
+</tr>
+
+<tr>
+<td class="org-left">Artists</td>
+</tr>
+
+<tr>
+<td class="org-left">Genres</td>
+</tr>
+
+<tr>
+<td class="org-left">valbumsartists</td>
+</tr>
+
+<tr>
+<td class="org-left">valbumsgenres</td>
+</tr>
+
+<tr>
+<td class="org-left">vallalbums</td>
+</tr>
+
+<tr>
+<td class="org-left">vallartists</td>
+</tr>
+
+<tr>
+<td class="org-left">vallgenres</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="example">
+SHOW FULL TABLES;
+</pre>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Tables<sub>in</sub><sub>music</sub></td>
+<td class="org-left">Table<sub>type</sub></td>
+</tr>
+</tbody>
+</table>
+<p>
+<del>-----------------</del>-------&#x2013;&#x2014;+
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Albums</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+
+<tr>
+<td class="org-left">Artists</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+
+<tr>
+<td class="org-left">Genres</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+
+<tr>
+<td class="org-left">valbumsartists</td>
+<td class="org-left">VIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">valbumsgenres</td>
+<td class="org-left">VIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">vallalbums</td>
+<td class="org-left">VIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">vallartists</td>
+<td class="org-left">VIEW</td>
+</tr>
+
+<tr>
+<td class="org-left">vallgenres</td>
+<td class="org-left">VIEW</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="example">
+SHOW FULL TABLES
+WHERE Table_type = 'BASE TABLE';
+</pre>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Tables<sub>in</sub><sub>music</sub></td>
+<td class="org-left">Table<sub>type</sub></td>
+</tr>
+</tbody>
+</table>
+<p>
+<del>-----------------</del>-------&#x2013;&#x2014;+
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Albums</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+
+<tr>
+<td class="org-left">Artists</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+
+<tr>
+<td class="org-left">Genres</td>
+<td class="org-left">BASE TABLE</td>
+</tr>
+</tbody>
+</table>
+
+
+<pre class="example">
+SHOW TABLES
+LIKE 'a%';
+</pre>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Tables<sub>in</sub><sub>music</sub> (a%)</td>
+</tr>
+</tbody>
+</table>
+<p>
+<del>----------------------</del>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Albums</td>
+</tr>
+
+<tr>
+<td class="org-left">Artists</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcdaadf9" class="outline-2">
+<h2 id="orgcdaadf9">Inserting Data (1:31:05)</h2>
+<div class="outline-text-2" id="text-orgcdaadf9">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> student <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(1, <span style="color: #2d9574;">'Jack'</span>, <span style="color: #2d9574;">'Biology'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> student <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(2, <span style="color: #2d9574;">'Kate'</span>, <span style="color: #2d9574;">'Sociology'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> student(student_id, <span style="color: #3a81c3; font-weight: bold;">name</span>) <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Claire'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> student <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(4, <span style="color: #2d9574;">'Jack'</span>, <span style="color: #2d9574;">'Biology'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> student <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(5, <span style="color: #2d9574;">'Mike'</span>, <span style="color: #2d9574;">'Computer Science'</span>);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfac2a8e" class="outline-2">
+<h2 id="orgfac2a8e">Constraints (1:38:17)</h2>
+<div class="outline-text-2" id="text-orgfac2a8e">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">student</span> (
+  student_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span> AUTO_INCREMENT,
+  <span style="color: #3a81c3; font-weight: bold;">name</span> <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40) <span style="color: #3a81c3; font-weight: bold;">NOT</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>,
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">name VARCHAR(40) UNIQUE,</span>
+  major <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40) <span style="color: #3a81c3; font-weight: bold;">DEFAULT</span> <span style="color: #2d9574;">'undecided'</span>,
+);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org17640ed" class="outline-2">
+<h2 id="org17640ed">Update &amp; Delete (1:48:11)</h2>
+<div class="outline-text-2" id="text-org17640ed">
+</div>
+<div id="outline-container-org5a8cb80" class="outline-3">
+<h3 id="org5a8cb80">Update</h3>
+<div class="outline-text-3" id="text-org5a8cb80">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">UPDATE</span> student
+<span style="color: #3a81c3; font-weight: bold;">SET</span> major = <span style="color: #2d9574;">'Undecided'</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> student
+<span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">name</span> = <span style="color: #2d9574;">'Johnny'</span>
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> student_id = 4;
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> student
+<span style="color: #3a81c3; font-weight: bold;">SET</span> major = <span style="color: #2d9574;">'Biological Sciences'</span>
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> major = <span style="color: #2d9574;">'Biology'</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> student
+<span style="color: #3a81c3; font-weight: bold;">SET</span> major = <span style="color: #2d9574;">'Biosociology'</span>
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> major = <span style="color: #2d9574;">'Biology'</span> <span style="color: #3a81c3; font-weight: bold;">OR</span> major = <span style="color: #2d9574;">'sociology'</span>
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> student
+<span style="color: #3a81c3; font-weight: bold;">SET</span> major = <span style="color: #2d9574;">'Undecided'</span>, <span style="color: #3a81c3; font-weight: bold;">name</span> = <span style="color: #2d9574;">'Tom'</span>
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> student_id = 4;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org82ff497" class="outline-3">
+<h3 id="org82ff497">Delete</h3>
+<div class="outline-text-3" id="text-org82ff497">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">FROM</span> student;
+
+<span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> student_id = 4;
+
+<span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> major = <span style="color: #2d9574;">'Sociology'</span> <span style="color: #3a81c3; font-weight: bold;">AND</span> <span style="color: #3a81c3; font-weight: bold;">name</span> = <span style="color: #2d9574;">'Kate'</span>;
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org020c1e5" class="outline-2">
+<h2 id="org020c1e5">Basic Queries (1:56:11)</h2>
+<div class="outline-text-2" id="text-org020c1e5">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> student.<span style="color: #3a81c3; font-weight: bold;">name</span>, student.major
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> student.<span style="color: #3a81c3; font-weight: bold;">name</span>, student.major
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> <span style="color: #3a81c3; font-weight: bold;">name</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> student.<span style="color: #3a81c3; font-weight: bold;">name</span>, student.major
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> <span style="color: #3a81c3; font-weight: bold;">name</span> <span style="color: #3a81c3; font-weight: bold;">DESC</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> student.<span style="color: #3a81c3; font-weight: bold;">name</span>, student.major
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> major <span style="color: #3a81c3; font-weight: bold;">name</span>  <span style="color: #3a81c3; font-weight: bold;">ASC</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Limit n : show only the top n result </span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> student.<span style="color: #3a81c3; font-weight: bold;">name</span>, student.major
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> major <span style="color: #3a81c3; font-weight: bold;">name</span>  <span style="color: #3a81c3; font-weight: bold;">ASC</span>;
+<span style="color: #3a81c3; font-weight: bold;">LIMIT</span> 2;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">WHERE</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Condtions in where are</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">[ &lt;, &gt;, &lt;=, &gt;=, =,&lt;&gt;(NOT Equal), AND, OR]</span>
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> <span style="color: #3a81c3; font-weight: bold;">name</span> = <span style="color: #2d9574;">'Jack'</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> student_id &gt; 2;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">show all student whoes id is &lt; 2 and don't include Jack </span>
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> student_id &lt;= 2 <span style="color: #3a81c3; font-weight: bold;">AND</span> <span style="color: #3a81c3; font-weight: bold;">name</span> &lt;&gt; <span style="color: #2d9574;">'Jack'</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> major = <span style="color: #2d9574;">'Biology'</span> <span style="color: #3a81c3; font-weight: bold;">AND</span> student_id &gt; 1;
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">IN</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> student
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> major <span style="color: #3a81c3; font-weight: bold;">IN</span> (<span style="color: #2d9574;">'Biology'</span>, <span style="color: #2d9574;">'Chemistry'</span>) <span style="color: #3a81c3; font-weight: bold;">AND</span> student_id &gt;2;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8bdb0c5" class="outline-2">
+<h2 id="org8bdb0c5">Company Database Intro (2:08:37)</h2>
+<div class="outline-text-2" id="text-org8bdb0c5">
+
+<div id="orgffb2ba0" class="figure">
+<p><img src="./images/company-database.png" alt="company-database.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgefc2886" class="outline-2">
+<h2 id="orgefc2886">Creating Company Database  (2:14:05)</h2>
+<div class="outline-text-2" id="text-orgefc2886">
+</div>
+<div id="outline-container-orgf875785" class="outline-3">
+<h3 id="orgf875785">Create Tables</h3>
+<div class="outline-text-3" id="text-orgf875785">
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">employee</span> (
+  emp_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>,
+  first_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  last_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  birth_day <span style="color: #ba2f59; font-weight: bold;">DATE</span>,
+  sex <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(1),
+  salary <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  super_id <span style="color: #ba2f59; font-weight: bold;">INT</span>, <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">super_id is foreign key but superviser table is not  created at so </span>
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">branch_id is foregin key but branch table is not created at</span>
+);
+
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">branch</span> (
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>,
+  branch_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  mgr_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  mgr_start_date <span style="color: #ba2f59; font-weight: bold;">DATE</span>,
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(mgr_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> employee(emp_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>
+);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">set branch_id as foreign key in main table employee </span>
+<span style="color: #3a81c3; font-weight: bold;">ALTER</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">employee</span>
+<span style="color: #3a81c3; font-weight: bold;">ADD</span> <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id)
+<span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> branch(branch_id)
+<span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">set super_id as foreign key in main table employee </span>
+<span style="color: #3a81c3; font-weight: bold;">ALTER</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">employee</span>
+<span style="color: #3a81c3; font-weight: bold;">ADD</span> <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(super_id)
+<span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> employee(emp_id)
+<span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>;
+
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">client</span> (
+  client_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>,
+  client_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> branch(branch_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>
+);
+
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">works_with</span> (
+  emp_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  client_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  total_sales <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(emp_id, client_id),
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(emp_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> employee(emp_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">CASCADE</span>,
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(client_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> client(client_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">CASCADE</span>
+);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This table has composit key require more than 1  field as primary </span>
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">branch_supplier</span> (
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  supplier_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  supply_type <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id, supplier_name),
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> branch(branch_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">CASCADE</span>
+);
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org87678ea" class="outline-3">
+<h3 id="org87678ea">Insert</h3>
+<div class="outline-text-3" id="text-org87678ea">
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #2aa1ae; background-color: #ecf3ec;">----------------------------------------------------------</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Corporate</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(100, <span style="color: #2d9574;">'David'</span>, <span style="color: #2d9574;">'Wallace'</span>, <span style="color: #2d9574;">'1967-11-17'</span>, <span style="color: #2d9574;">'M'</span>, 250000, <span style="color: #3a81c3; font-weight: bold;">NULL</span>, <span style="color: #3a81c3; font-weight: bold;">NULL</span>); <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">here branch_id, super_id is not created at </span>
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(1, <span style="color: #2d9574;">'Corporate'</span>, 100, <span style="color: #2d9574;">'2006-02-09'</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> employee
+<span style="color: #3a81c3; font-weight: bold;">SET</span> branch_id = 1
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> emp_id = 100;
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(101, <span style="color: #2d9574;">'Jan'</span>, <span style="color: #2d9574;">'Levinson'</span>, <span style="color: #2d9574;">'1961-05-11'</span>, <span style="color: #2d9574;">'F'</span>, 110000, 100, 1);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Scranton</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(102, <span style="color: #2d9574;">'Michael'</span>, <span style="color: #2d9574;">'Scott'</span>, <span style="color: #2d9574;">'1964-03-15'</span>, <span style="color: #2d9574;">'M'</span>, 75000, 100, <span style="color: #3a81c3; font-weight: bold;">NULL</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(2, <span style="color: #2d9574;">'Scranton'</span>, 102, <span style="color: #2d9574;">'1992-04-06'</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> employee
+<span style="color: #3a81c3; font-weight: bold;">SET</span> branch_id = 2
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> emp_id = 102;
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(103, <span style="color: #2d9574;">'Angela'</span>, <span style="color: #2d9574;">'Martin'</span>, <span style="color: #2d9574;">'1971-06-25'</span>, <span style="color: #2d9574;">'F'</span>, 63000, 102, 2);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(104, <span style="color: #2d9574;">'Kelly'</span>, <span style="color: #2d9574;">'Kapoor'</span>, <span style="color: #2d9574;">'1980-02-05'</span>, <span style="color: #2d9574;">'F'</span>, 55000, 102, 2);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(105, <span style="color: #2d9574;">'Stanley'</span>, <span style="color: #2d9574;">'Hudson'</span>, <span style="color: #2d9574;">'1958-02-19'</span>, <span style="color: #2d9574;">'M'</span>, 69000, 102, 2);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Stamford</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(106, <span style="color: #2d9574;">'Josh'</span>, <span style="color: #2d9574;">'Porter'</span>, <span style="color: #2d9574;">'1969-09-05'</span>, <span style="color: #2d9574;">'M'</span>, 78000, 100, <span style="color: #3a81c3; font-weight: bold;">NULL</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Stamford'</span>, 106, <span style="color: #2d9574;">'1998-02-13'</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">UPDATE</span> employee
+<span style="color: #3a81c3; font-weight: bold;">SET</span> branch_id = 3
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> emp_id = 106;
+
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(107, <span style="color: #2d9574;">'Andy'</span>, <span style="color: #2d9574;">'Bernard'</span>, <span style="color: #2d9574;">'1973-07-22'</span>, <span style="color: #2d9574;">'M'</span>, 65000, 106, 3);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(108, <span style="color: #2d9574;">'Jim'</span>, <span style="color: #2d9574;">'Halpert'</span>, <span style="color: #2d9574;">'1978-10-01'</span>, <span style="color: #2d9574;">'M'</span>, 71000, 106, 3);
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">BRANCH SUPPLIER</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(2, <span style="color: #2d9574;">'Hammer Mill'</span>, <span style="color: #2d9574;">'Paper'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(2, <span style="color: #2d9574;">'Uni-ball'</span>, <span style="color: #2d9574;">'Writing Utensils'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Patriot Paper'</span>, <span style="color: #2d9574;">'Paper'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(2, <span style="color: #2d9574;">'J.T. Forms &amp; Labels'</span>, <span style="color: #2d9574;">'Custom Forms'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Uni-ball'</span>, <span style="color: #2d9574;">'Writing Utensils'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Hammer Mill'</span>, <span style="color: #2d9574;">'Paper'</span>);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch_supplier <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(3, <span style="color: #2d9574;">'Stamford Lables'</span>, <span style="color: #2d9574;">'Custom Forms'</span>);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">CLIENT</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(400, <span style="color: #2d9574;">'Dunmore Highschool'</span>, 2);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(401, <span style="color: #2d9574;">'Lackawana Country'</span>, 2);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(402, <span style="color: #2d9574;">'FedEx'</span>, 3);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(403, <span style="color: #2d9574;">'John Daly Law, LLC'</span>, 3);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(404, <span style="color: #2d9574;">'Scranton Whitepages'</span>, 2);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(405, <span style="color: #2d9574;">'Times Newspaper'</span>, 3);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> client <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(406, <span style="color: #2d9574;">'FedEx'</span>, 2);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">WORKS_WITH</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(105, 400, 55000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(102, 401, 267000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(108, 402, 22500);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(107, 403, 5000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(108, 403, 12000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(105, 404, 33000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(107, 405, 26000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(102, 406, 15000);
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> works_with <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(105, 406, 130000);
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org038ace7" class="outline-2">
+<h2 id="org038ace7">More Basic Queries  (2:30:27 )</h2>
+<div class="outline-text-2" id="text-org038ace7">
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all clients</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> clients;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees ordered by salary</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">from</span> employee
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> salary <span style="color: #3a81c3; font-weight: bold;">ASC</span>/<span style="color: #3a81c3; font-weight: bold;">DESC</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees ordered by sex then name</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">from</span> employee
+<span style="color: #3a81c3; font-weight: bold;">ORDER</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> sex, <span style="color: #3a81c3; font-weight: bold;">name</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the first 5 employees in the table</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">from</span> employee
+<span style="color: #3a81c3; font-weight: bold;">LIMIT</span> 5;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the first and last names of all employees</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> first_name, employee.last_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the forename and surnames names of all employees</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> first_name <span style="color: #3a81c3; font-weight: bold;">AS</span> forename, employee.last_name <span style="color: #3a81c3; font-weight: bold;">AS</span> surname
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find out all the different genders</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> DISCINCT sex
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find out all the different branch in company </span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> DISCINCT branch_id
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all male employees</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> sex = <span style="color: #2d9574;">'M'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees at branch 2</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> branch_id = 2;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employee's id's and names who were born after 1969</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> emp_id, first_name, last_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> birth_day &gt;= 1970-01-01;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all female employees at branch 2</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> branch_id = 2 <span style="color: #3a81c3; font-weight: bold;">AND</span> sex = <span style="color: #2d9574;">'F'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees who are female &amp; born after 1969 or who make over 80000</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> (birth_day &gt;= <span style="color: #2d9574;">'1970-01-01'</span> <span style="color: #3a81c3; font-weight: bold;">AND</span> sex = <span style="color: #2d9574;">'F'</span>) <span style="color: #3a81c3; font-weight: bold;">OR</span> salary &gt; 80000;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees born between 1970 and 1975</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> birth_day <span style="color: #3a81c3; font-weight: bold;">BETWEEN</span> <span style="color: #2d9574;">'1970-01-01'</span> <span style="color: #3a81c3; font-weight: bold;">AND</span> <span style="color: #2d9574;">'1975-01-01'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all employees named Jim, Michael, Johnny or David</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> first_name <span style="color: #3a81c3; font-weight: bold;">IN</span> (<span style="color: #2d9574;">'Jim'</span>, <span style="color: #2d9574;">'Michael'</span>, <span style="color: #2d9574;">'Johnny'</span>, <span style="color: #2d9574;">'David'</span>);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org19b8baf" class="outline-2">
+<h2 id="org19b8baf">Functions (2:26:24)</h2>
+<div class="outline-text-2" id="text-org19b8baf">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the number of employees</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">COUNT</span>(emp_id)
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">How many employees has super visor </span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">COUNT</span>(super_id)
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the average of all employee's salaries</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">AVG</span>(salary)
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the sum of all employee's salaries</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">SUM</span>(salary)
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find out how many males and females there are</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">COUNT</span>(sex), sex
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">GROUP</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> sex
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the total sales of each salesman</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">SUM</span>(total_sales), emp_id
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> works_with
+<span style="color: #3a81c3; font-weight: bold;">GROUP</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> client_id;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the total amount of money spent by each client</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">SUM</span>(total_sales), client_id
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> works_with
+<span style="color: #3a81c3; font-weight: bold;">GROUP</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> client_id;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6e468cd" class="outline-2">
+<h2 id="org6e468cd">Wildcards (2:45:13)</h2>
+<div class="outline-text-2" id="text-org6e468cd">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">{ % : any no.of characters }</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">{ _ : any single character}</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find any client's who are an LLC</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> client_name <span style="color: #3a81c3; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'%LLC'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find any branch suppliers who are in the label business</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> branch_supplier
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> supplier_name <span style="color: #3a81c3; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'% Label%'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find any employee born on the 10th day of the month</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> birth_day <span style="color: #3a81c3; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'_____10%'</span>;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find any clients who are schools</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> *
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> client_name <span style="color: #3a81c3; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'%Highschool%'</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb74664a" class="outline-2">
+<h2 id="orgb74664a">Union  (2:53:53)</h2>
+<div class="outline-text-2" id="text-orgb74664a">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find a list of employee and branch names</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.first_name <span style="color: #3a81c3; font-weight: bold;">AS</span> Employee_Branch_Names
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">UNION</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> branch.branch_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> branch;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find a list of all clients &amp; branch suppliers' names</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> client.client_name <span style="color: #3a81c3; font-weight: bold;">AS</span> Non-Employee_Entities, client.branch_id <span style="color: #3a81c3; font-weight: bold;">AS</span> Branch_ID
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+<span style="color: #3a81c3; font-weight: bold;">UNION</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> branch_supplier.supplier_name, branch_supplier.branch_id
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> branch_supplier;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org586312e" class="outline-2">
+<h2 id="org586312e">Joins  (3:01:36)</h2>
+<div class="outline-text-2" id="text-org586312e">
+<p>
+There are different type of join
+</p>
+<ul class="org-ul">
+<li>Inter Join</li>
+<li>Left Join</li>
+<li>Right Join</li>
+<li>Full Outer Join</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Add the extra branch</span>
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> branch <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(4, "Buffalo", <span style="color: #3a81c3; font-weight: bold;">NULL</span>, <span style="color: #3a81c3; font-weight: bold;">NULL</span>);
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.emp_id, employee.first_name, branch.branch_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">JOIN</span> branch    <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">LEFT JOIN, RIGHT JOIN</span>
+<span style="color: #3a81c3; font-weight: bold;">ON</span> employee.emp_id = branch.mgr_id;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5aa1271" class="outline-2">
+<h2 id="org5aa1271">Nested Querie  (3:11:49)</h2>
+<div class="outline-text-2" id="text-org5aa1271">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find names of all employees who have sold over 50,000</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.first_name, employee.last_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> employee.emp_id <span style="color: #3a81c3; font-weight: bold;">IN</span> (<span style="color: #3a81c3; font-weight: bold;">SELECT</span> works_with.emp_id
+                          <span style="color: #3a81c3; font-weight: bold;">FROM</span> works_with
+                          <span style="color: #3a81c3; font-weight: bold;">WHERE</span> works_with.total_sales &gt; 50000);
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all clients who are handles by the branch that Michael Scott manages</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Assume you know Michael's ID</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> client.client_id, client.client_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> client.branch_id = (<span style="color: #3a81c3; font-weight: bold;">SELECT</span> branch.branch_id
+                          <span style="color: #3a81c3; font-weight: bold;">FROM</span> branch
+                          <span style="color: #3a81c3; font-weight: bold;">WHERE</span> branch.mgr_id = 102);
+
+ <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find all clients who are handles by the branch that Michael Scott manages</span>
+ <span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Assume you DONT'T know Michael's ID</span>
+ <span style="color: #3a81c3; font-weight: bold;">SELECT</span> client.client_id, client.client_name
+ <span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+ <span style="color: #3a81c3; font-weight: bold;">WHERE</span> client.branch_id = (<span style="color: #3a81c3; font-weight: bold;">SELECT</span> branch.branch_id
+                           <span style="color: #3a81c3; font-weight: bold;">FROM</span> branch
+                           <span style="color: #3a81c3; font-weight: bold;">WHERE</span> branch.mgr_id = (<span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.emp_id
+                                                  <span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+                                                  <span style="color: #3a81c3; font-weight: bold;">WHERE</span> employee.first_name = <span style="color: #2d9574;">'Michael'</span> <span style="color: #3a81c3; font-weight: bold;">AND</span> employee.last_name =<span style="color: #2d9574;">'Scott'</span>
+                                                  <span style="color: #3a81c3; font-weight: bold;">LIMIT</span> 1));
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the names of employees who work with clients handled by the scranton branch</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> employee.first_name, employee.last_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> employee.emp_id <span style="color: #3a81c3; font-weight: bold;">IN</span> (
+                         <span style="color: #3a81c3; font-weight: bold;">SELECT</span> works_with.emp_id
+                         <span style="color: #3a81c3; font-weight: bold;">FROM</span> works_with
+                         )
+<span style="color: #3a81c3; font-weight: bold;">AND</span> employee.branch_id = 2;
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find the names of all clients who have spent more than 100,000 dollars</span>
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> client.client_name
+<span style="color: #3a81c3; font-weight: bold;">FROM</span> client
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> client.client_id <span style="color: #3a81c3; font-weight: bold;">IN</span> (
+                          <span style="color: #3a81c3; font-weight: bold;">SELECT</span> client_id
+                          <span style="color: #3a81c3; font-weight: bold;">FROM</span> (
+                                <span style="color: #3a81c3; font-weight: bold;">SELECT</span> <span style="color: #3a81c3;">SUM</span>(works_with.total_sales) <span style="color: #3a81c3; font-weight: bold;">AS</span> totals, client_id
+                                <span style="color: #3a81c3; font-weight: bold;">FROM</span> works_with
+                                <span style="color: #3a81c3; font-weight: bold;">GROUP</span> <span style="color: #3a81c3; font-weight: bold;">BY</span> client_id) <span style="color: #3a81c3; font-weight: bold;">AS</span> total_client_sales
+                          <span style="color: #3a81c3; font-weight: bold;">WHERE</span> totals &gt; 100000
+);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcf6cf6f" class="outline-2">
+<h2 id="orgcf6cf6f">On Delete entry when they have foreign in them  (3:21:52)</h2>
+<div class="outline-text-2" id="text-orgcf6cf6f">
+<p>
+Let consider employee <code>Michael Scott</code> with emp<sub>id</sub> = 102
+</p>
+
+<p>
+We want to delete the employee but this employee is linked to <code>branch</code> table where he is managaer of branch <code>Scranton</code>
+</p>
+
+<p>
+Type of Delete entry with Foreign Key
+</p>
+<ul class="org-ul">
+<li>ON Delete set Null</li>
+<li>ON Delete set CASCASDE</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">branch</span> (
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span> <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>,
+  branch_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  mgr_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  mgr_start_date <span style="color: #ba2f59; font-weight: bold;">DATE</span>,
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(mgr_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> employee(emp_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">SET</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span>
+);
+
+<span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">FROM</span> employee
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> emp_id=102;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> * <span style="color: #3a81c3; font-weight: bold;">FROM</span> branch; # you can see mag_id columns <span style="color: #3a81c3; font-weight: bold;">where</span> it <span style="color: #3a81c3; font-weight: bold;">is</span> 102 <span style="color: #3a81c3; font-weight: bold;">is</span> replaced <span style="color: #3a81c3; font-weight: bold;">by</span> <span style="color: #3a81c3; font-weight: bold;">NULL</span> 
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> * <span style="color: #3a81c3; font-weight: bold;">FROM</span> employee;
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">On delete Cascade</span>
+
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">branch_supplier</span> (
+  branch_id <span style="color: #ba2f59; font-weight: bold;">INT</span>,
+  supplier_name <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  supply_type <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(40),
+  <span style="color: #3a81c3; font-weight: bold;">PRIMARY</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id, supplier_name),
+  <span style="color: #3a81c3; font-weight: bold;">FOREIGN</span> <span style="color: #3a81c3; font-weight: bold;">KEY</span>(branch_id) <span style="color: #3a81c3; font-weight: bold;">REFERENCES</span> branch(branch_id) <span style="color: #3a81c3; font-weight: bold;">ON</span> <span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">CASCADE</span>
+);
+
+<span style="color: #3a81c3; font-weight: bold;">DELETE</span> <span style="color: #3a81c3; font-weight: bold;">FROM</span> branch
+<span style="color: #3a81c3; font-weight: bold;">WHERE</span> branch_id =2;
+
+<span style="color: #3a81c3; font-weight: bold;">SELECT</span> * <span style="color: #3a81c3; font-weight: bold;">from</span> branch_suppliers; 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org52dfae1" class="outline-2">
+<h2 id="org52dfae1">Triggers  (3:30:05)</h2>
+<div class="outline-text-2" id="text-org52dfae1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #ecf3ec;">-- </span><span style="color: #2aa1ae; background-color: #ecf3ec;">CREATE</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--     </span><span style="color: #2aa1ae; background-color: #ecf3ec;">TRIGGER `event_name` BEFORE/AFTER INSERT/UPDATE/DELETE</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--     </span><span style="color: #2aa1ae; background-color: #ecf3ec;">ON `database`.`table`</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--     </span><span style="color: #2aa1ae; background-color: #ecf3ec;">FOR EACH ROW BEGIN</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--              </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-- trigger body</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--              </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-- this code is applied to every</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--              </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-- inserted/updated/deleted row</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">--     </span><span style="color: #2aa1ae; background-color: #ecf3ec;">END;</span>
+
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span> <span style="color: #3a81c3; font-weight: bold;">TABLE</span> <span style="color: #6c3163; font-weight: bold;">trigger_test</span> (
+     message <span style="color: #ba2f59; font-weight: bold;">VARCHAR</span>(100)
+);
+
+
+
+
+DELIMITER $$
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span>
+    <span style="color: #3a81c3; font-weight: bold;">TRIGGER</span> my_trigger <span style="color: #3a81c3; font-weight: bold;">BEFORE</span> <span style="color: #3a81c3; font-weight: bold;">INSERT</span>
+    <span style="color: #3a81c3; font-weight: bold;">ON</span> employee
+    <span style="color: #3a81c3; font-weight: bold;">FOR</span> <span style="color: #3a81c3; font-weight: bold;">EACH</span> <span style="color: #ba2f59; font-weight: bold;">ROW</span> <span style="color: #3a81c3; font-weight: bold;">BEGIN</span>
+        <span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> trigger_test <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(<span style="color: #2d9574;">'added new employee'</span>);
+    <span style="color: #3a81c3; font-weight: bold;">END</span>$$
+DELIMITER ;
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee
+<span style="color: #3a81c3; font-weight: bold;">VALUES</span>(109, <span style="color: #2d9574;">'Oscar'</span>, <span style="color: #2d9574;">'Martinez'</span>, <span style="color: #2d9574;">'1968-02-19'</span>, <span style="color: #2d9574;">'M'</span>, 69000, 106, 3);
+
+
+DELIMITER $$
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span>
+    <span style="color: #3a81c3; font-weight: bold;">TRIGGER</span> my_trigger <span style="color: #3a81c3; font-weight: bold;">BEFORE</span> <span style="color: #3a81c3; font-weight: bold;">INSERT</span>
+    <span style="color: #3a81c3; font-weight: bold;">ON</span> employee
+    <span style="color: #3a81c3; font-weight: bold;">FOR</span> <span style="color: #3a81c3; font-weight: bold;">EACH</span> <span style="color: #ba2f59; font-weight: bold;">ROW</span> <span style="color: #3a81c3; font-weight: bold;">BEGIN</span>
+        <span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> trigger_test <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(<span style="color: #3a81c3; font-weight: bold;">NEW</span>.first_name);
+    <span style="color: #3a81c3; font-weight: bold;">END</span>$$
+DELIMITER ;
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee
+<span style="color: #3a81c3; font-weight: bold;">VALUES</span>(110, <span style="color: #2d9574;">'Kevin'</span>, <span style="color: #2d9574;">'Malone'</span>, <span style="color: #2d9574;">'1978-02-19'</span>, <span style="color: #2d9574;">'M'</span>, 69000, 106, 3);
+
+DELIMITER $$
+<span style="color: #3a81c3; font-weight: bold;">CREATE</span>
+    <span style="color: #3a81c3; font-weight: bold;">TRIGGER</span> my_trigger <span style="color: #3a81c3; font-weight: bold;">BEFORE</span> <span style="color: #3a81c3; font-weight: bold;">INSERT</span>
+    <span style="color: #3a81c3; font-weight: bold;">ON</span> employee
+    <span style="color: #3a81c3; font-weight: bold;">FOR</span> <span style="color: #3a81c3; font-weight: bold;">EACH</span> <span style="color: #ba2f59; font-weight: bold;">ROW</span> <span style="color: #3a81c3; font-weight: bold;">BEGIN</span>
+         IF <span style="color: #3a81c3; font-weight: bold;">NEW</span>.sex = <span style="color: #2d9574;">'M'</span> <span style="color: #3a81c3; font-weight: bold;">THEN</span>
+               <span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> trigger_test <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(<span style="color: #2d9574;">'added male employee'</span>);
+         ELSEIF <span style="color: #3a81c3; font-weight: bold;">NEW</span>.sex = <span style="color: #2d9574;">'F'</span> <span style="color: #3a81c3; font-weight: bold;">THEN</span>
+               <span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> trigger_test <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(<span style="color: #2d9574;">'added female'</span>);
+         <span style="color: #3a81c3; font-weight: bold;">ELSE</span>
+               <span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> trigger_test <span style="color: #3a81c3; font-weight: bold;">VALUES</span>(<span style="color: #2d9574;">'added other employee'</span>);
+         <span style="color: #3a81c3; font-weight: bold;">END</span> IF;
+    <span style="color: #3a81c3; font-weight: bold;">END</span>$$
+DELIMITER ;
+<span style="color: #3a81c3; font-weight: bold;">INSERT</span> <span style="color: #3a81c3; font-weight: bold;">INTO</span> employee
+<span style="color: #3a81c3; font-weight: bold;">VALUES</span>(111, <span style="color: #2d9574;">'Pam'</span>, <span style="color: #2d9574;">'Beesly'</span>, <span style="color: #2d9574;">'1988-02-19'</span>, <span style="color: #2d9574;">'F'</span>, 69000, 106, 3);
+
+
+<span style="color: #3a81c3; font-weight: bold;">DROP</span> <span style="color: #3a81c3; font-weight: bold;">TRIGGER</span> <span style="color: #6c3163; font-weight: bold;">my_trigger</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org584820c" class="outline-2">
+<h2 id="org584820c">ER Diagrams Intro  (3:42:12)</h2>
+<div class="outline-text-2" id="text-org584820c">
+<p>
+<b>Entity</b> : An object we want to model &amp; store information about
+</p>
+
+<p>
+<img src="./images/Screenshot2022-08-22T06-31-06.png" alt="Screenshot2022-08-22T06-31-06.png" />
+<b>Attributes</b>- Specific pieces of information about an entity
+</p>
+
+
+<div id="org7694ce6" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-32-48.png" alt="Screenshot2022-08-22T06-32-48.png" />
+</p>
+</div>
+
+
+<p>
+<b>Primary Key</b> : An attribute's that uniquely identify an entity in the database table
+</p>
+
+<div id="orgf7f4d34" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-33-03.png" alt="Screenshot2022-08-22T06-33-03.png" />
+</p>
+</div>
+
+
+<p>
+<b>Composite Attribute</b>: An attribute that can be broken up into sub-attributes 
+</p>
+
+<div id="org6d511e8" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-33-22.png" alt="Screenshot2022-08-22T06-33-22.png" />
+</p>
+</div>
+
+
+<p>
+<b>Multi-valued Attribute</b> - An attributes that can have more than one value 
+</p>
+
+<div id="org09ff831" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-35-00.png" alt="Screenshot2022-08-22T06-35-00.png" />
+</p>
+</div>
+
+<p>
+<b>Derived Attribute</b> : AN attribute that can be derived from the other attributes
+</p>
+
+<div id="orge0f6bdf" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-35-17.png" alt="Screenshot2022-08-22T06-35-17.png" />
+</p>
+</div>
+
+<p>
+<b>Multiple Entities</b>: You can define more than one entity in the diagram
+</p>
+
+<div id="org40a19ce" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-35-44.png" alt="Screenshot2022-08-22T06-35-44.png" />
+</p>
+</div>
+
+<p>
+<b>Relationships</b> : defines a relationship between two entities
+</p>
+
+<p>
+<b>Total Participation</b>: All members must participate in the relationship
+</p>
+
+<p>
+<img src="./images/Screenshot2022-08-22T06-35-59.png" alt="Screenshot2022-08-22T06-35-59.png" />
+<b>Overview</b>: 
+</p>
+
+<div id="orgff97889" class="figure">
+<p><img src="./images/erd-template.png" alt="erd-template.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f3fde7" class="outline-2">
+<h2 id="org6f3fde7">Designing an ER Diagram (3:55:53)</h2>
+<div class="outline-text-2" id="text-org6f3fde7">
+</div>
+<div id="outline-container-org1dae600" class="outline-3">
+<h3 id="org1dae600">Company Data Storage Requirements</h3>
+<div class="outline-text-3" id="text-org1dae600">
+<p>
+The company is organized into branches. Each branch has a unique number, a name, and a particular employee who manages it.
+</p>
+
+<p>
+The company makes it’s money by selling to clients. Each client has a name and a unique number to identify it.
+</p>
+
+<p>
+The foundation of the company is it’s employees. Each employee has a name, birthday, sex, salary and a unique number.
+</p>
+
+<p>
+An employee can work for one branch at a time, and each branch will be managed by one of the employees that work there. We’ll also want to keep track of when the current manager started as manager.
+</p>
+
+<p>
+An employee can act as a supervisor for other employees at the branch, an employee may also act as the supervisor for employees at other branches. An employee can have at most one supervisor.
+</p>
+
+<p>
+A branch may handle a number of clients, with each client having a name and a unique number to identify it. A single client may only be handled by one branch at a time.
+</p>
+
+<p>
+Employees can work with clients controlled by their branch to sell them stuff. If nescessary multiple employees can work with the same client. We’ll want to keep track of how many dollars worth of stuff each employee sells to each client they work with.
+</p>
+
+<p>
+Many branches will need to work with suppliers to buy inventory. For each supplier we’ll keep track of their name and the type of product they’re selling the branch. A single supplier may supply products to multiple branches.
+</p>
+
+
+<div id="org1396ff7" class="figure">
+<p><img src="./images/erd-template.png" alt="erd-template.png" />
+</p>
+</div>
+
+<div id="orgb692467" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-37-24.png" alt="Screenshot2022-08-22T06-37-24.png" />
+</p>
+</div>
+
+<div id="orgf8ffb95" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-37-00.png" alt="Screenshot2022-08-22T06-37-00.png" />
+</p>
+</div>
+
+<div id="org3c6d209" class="figure">
+<p><img src="./images/Screenshot2022-08-22T06-39-04.png" alt="Screenshot2022-08-22T06-39-04.png" />
+</p>
+</div>
+
+<div id="org8cd9d24" class="figure">
+<p><img src="./images/Screenshot2022-08-22T07-10-55.png" alt="Screenshot2022-08-22T07-10-55.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org24635b0" class="outline-2">
+<h2 id="org24635b0">Converting ER Diagrams to Schemas and  ER Diagram Mapping (4:08:34)</h2>
+<div class="outline-text-2" id="text-org24635b0">
+
+<div id="org7400ec8" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-09-45.png" alt="Screenshots_2022-08-22T08-09-45.png" />
+</p>
+</div>
+
+<div id="org035a61c" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-09-57.png" alt="Screenshots_2022-08-22T08-09-57.png" />
+</p>
+</div>
+
+<div id="org8fa7573" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-10-25.png" alt="Screenshots_2022-08-22T08-10-25.png" />
+</p>
+</div>
+
+<div id="orgd4a3def" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-10-55.png" alt="Screenshots_2022-08-22T08-10-55.png" />
+</p>
+</div>
+
+<div id="orgfa01ef3" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-11-51.png" alt="Screenshots_2022-08-22T08-11-51.png" />
+</p>
+</div>
+
+<div id="org43629b5" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-12-30.png" alt="Screenshots_2022-08-22T08-12-30.png" />
+</p>
+</div>
+
+<div id="orgb6f5ed9" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-12-38.png" alt="Screenshots_2022-08-22T08-12-38.png" />
+</p>
+</div>
+
+<div id="orga80fa45" class="figure">
+<p><img src="./images/Screenshots_2022-08-22T08-13-15.png" alt="Screenshots_2022-08-22T08-13-15.png" />
+</p>
+</div>
+
+
+
+<div id="org85057ae" class="figure">
+<p><img src="./images/company-relations.png" alt="company-relations.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org794a64e" class="outline-2">
+<h2 id="org794a64e">TO DO EER Diagram</h2>
+<div class="outline-text-2" id="text-org794a64e">
+
+<div id="org6028641" class="figure">
+<p><img src="./images/eer-db_test.PNG" alt="eer-db_test.PNG" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9d87260" class="outline-2">
+<h2 id="org9d87260">ToDo Link database with class in python</h2>
+</div>
+<div id="outline-container-org158c0db" class="outline-2">
+<h2 id="org158c0db">Same SQL Note on sqllite, postgresql, sqlalchemy</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Mike Dane</p>
+<p class="date">Created: 2023-02-09 Thu 23:24</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

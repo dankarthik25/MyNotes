@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Test Title</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="<path to css>"
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Test Title
+<br />
+<span class="subtitle">Author</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org07a4c3c">Explain about Title, Subtitle, Description, Date, Author, Option, Setupfile, toc, Numbering ..etc</a></li>
+<li><a href="#orgf35b6d6">[Youtube:DistroTube] Build html using setupfile or css file</a></li>
+<li><a href="#org8d8a14e">Org Themes collection</a></li>
+<li><a href="#org99ec30a">[Youtube:System Crafters] Publish Site (Create local env folder, run httpd, style-codeblock)</a></li>
+<li><a href="#org3c878e6">Insert image in org-mode</a></li>
+<li><a href="#org62e1947">Structure of CSS file for ORG-MODE</a></li>
+<li><a href="#orga8132b9">HTML Structure for ORG-MODE</a></li>
+<li><a href="#orgfb97f59">Publish to site by org-jekyll</a></li>
+</ul>
+</div>
+</div>
+<p>
+#+DESCRIPTION : 
+</p>
+<p>
+If you have theme.css file download or (url)  you can customize your html theme
+</p>
+
+<div id="outline-container-org07a4c3c" class="outline-2">
+<h2 id="org07a4c3c">Explain about Title, Subtitle, Description, Date, Author, Option, Setupfile, toc, Numbering ..etc</h2>
+<div class="outline-text-2" id="text-org07a4c3c">
+<p>
+<a href="https://youtu.be/K6S-AKm5snc">[Youtube] DistroTube : Create Beautiful Websites Using Emacs Org Mode</a>
+Explain about Title, Describtion, Export using <code>setup file</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf35b6d6" class="outline-2">
+<h2 id="orgf35b6d6">[Youtube:DistroTube] Build html using setupfile or css file</h2>
+<div class="outline-text-2" id="text-orgf35b6d6">
+<p>
+<code>Coverted in above section</code>
+[Youtube] DistroTube : Create Beautiful Websites Using Emacs Org Mode]]
+Explain about Title, Describtion, Export using <code>setup file</code>
+</p>
+<pre class="example">
+C-c C-e 
+</pre>
+</div>
+</div>
+<div id="outline-container-org8d8a14e" class="outline-2">
+<h2 id="org8d8a14e">Org Themes collection</h2>
+<div class="outline-text-2" id="text-org8d8a14e">
+<p>
+Sample of Org Theme : <a href="https://gongzhitaao.org/orgcss/">https://gongzhitaao.org/orgcss/</a>
+</p>
+
+<p>
+You can get the css file of <a href="https://olmon.gitlab.io/org-themes/">different theme</a> file and embaded in your theme 
+</p>
+
+<p>
+Different themes in org2html mode
+bigblow
+<a href="https://olmon.gitlab.io/org-themes/comfy_inline/comfy_inline.html">comfy inline</a>
+darksun
+<a href="https://olmon.gitlab.io/org-themes/gray/gray.html#org9d343ad">gray</a>
+<a href="https://olmon.gitlab.io/org-themes/imagine_light/imagine_light.html">imagine light</a>
+<a href="https://olmon.gitlab.io/org-themes/latexcss/latexcss.html">latexcss</a>
+<a href="https://olmon.gitlab.io/org-themes/plain/plain.html">plain</a>
+<a href="https://olmon.gitlab.io/org-themes/readtheorg_inline/readtheorg_inline.html">readtheorg inline</a> : Similar to ansible online Doc : <a href="https://docs.ansible.com/ansible/latest/dev_guide/index.html">https://docs.ansible.com/ansible/latest/dev_guide/index.html</a>
+rethink inline
+retro dark
+simple gray
+<a href="https://olmon.gitlab.io/org-themes/simple_inline/simple_inline.html">simple inline</a> : Similar to readtheorg inline but toc is in right-side window
+simple white
+<a href="https://olmon.gitlab.io/org-themes/simple_whiteblue/simple_whiteblue.html">simple whiteblue</a>
+solarized dark
+solarized light
+stylish white
+white clean
+<a href="https://gitlab.com/OlMon/org-themes/-/blob/master/public/comfy_inline/comfy_inline.html">https://gitlab.com/OlMon/org-themes/-/blob/master/public/comfy_inline/comfy_inline.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org99ec30a" class="outline-2">
+<h2 id="org99ec30a">[Youtube:System Crafters] Publish Site (Create local env folder, run httpd, style-codeblock)</h2>
+<div class="outline-text-2" id="text-org99ec30a">
+<p>
+Build Your Website with Org Mode
+<a href="https://www.youtube.com/watch?v=AfkrzFodoNw">https://www.youtube.com/watch?v=AfkrzFodoNw</a>
+create a virtual environment for emacs and
+</p>
+<ul class="org-ul">
+<li>install htmlizer,</li>
+<li>simple-httpd</li>
+<li>simple.css or (setup file )</li>
+<li>create build.sh and run the script for testing</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3c878e6" class="outline-2">
+<h2 id="org3c878e6">Insert image in org-mode</h2>
+<div class="outline-text-2" id="text-org3c878e6">
+<p>
+images 
+<a href="highres.jpg"><img src="thumb.jpg" alt="thumb.jpg" /></a>
+or
+</p>
+
+<div id="org43c1c17" class="figure">
+<p><img src="./img/a.jpg" alt="cat/spider image" title="Action!" align="right" />
+</p>
+<p><span class="figure-number">Figure 1: </span>A black cat stalking a spider</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org62e1947" class="outline-2">
+<h2 id="org62e1947">Structure of CSS file for ORG-MODE</h2>
+<div class="outline-text-2" id="text-org62e1947">
+<p>
+css file structure should be in form : <a href="https://orgmode.org/manual/CSS-support.html">https://orgmode.org/manual/CSS-support.html</a>
+</p>
+<blockquote>
+<p>
+p.author	author information, including email
+p.date	        publishing date
+p.creator	creator info, about org mode version
+.title	        document title
+.subtitle	document subtitle
+.todo	        TODO keywords, all not-done states
+.done	        the DONE keywords, all states that count as done
+.WAITING	each TODO keyword also uses a class named after itself
+.timestamp	timestamp
+.timestamp-kwd	keyword associated with a timestamp, like ‘SCHEDULED’
+.timestamp-wrapper	span around keyword plus timestamp
+.tag	        tag in a headline
+.<sub>HOME</sub>         each tag uses itself as a class, “@” replaced by “_”
+.target	        target for links
+.linenr	        the line number in a code example
+.code-highlighted	for highlighting referenced code lines
+div.outline-N	div for outline level N (headline plus text)
+div.outline-text-N	extra div for text at outline level N
+.section-number-N	section number in headlines, different for each level
+.figure-number	label like “Figure 1:”
+.table-number	label like “Table 1:”
+.listing-number	label like “Listing 1:”
+div.figure	how to format an in-lined image
+pre.src	        formatted source code
+pre.example	normal example
+p.verse	        verse paragraph
+div.footnotes	footnote section headline
+p.footnote	footnote definition paragraph, containing a footnote
+.footref	a footnote reference number (always a &lt;sup&gt;)
+.footnum	footnote number in footnote definition (always &lt;sup&gt;)
+.org-svg	default class for a linked ‘.svg’ image
+</p>
+</blockquote>
+
+
+
+
+<p>
+and export to you desired theme
+</p>
+</div>
+</div>
+<div id="outline-container-orga8132b9" class="outline-2">
+<h2 id="orga8132b9">HTML Structure for ORG-MODE</h2>
+<div class="outline-text-2" id="text-orga8132b9">
+<p>
+org2HTML -Export options
+<a href="https://orgmode.org/manual/HTML-Export.html">https://orgmode.org/manual/HTML-Export.html</a>
+</p>
+
+<blockquote>
+<p>
+‘HTML<sub>CONTAINER</sub>’ : Specify the HTML container, such as ‘div’, for wrapping sections and elements (org-html-container-element).
+</p>
+</blockquote>
+
+
+
+
+<p>
+For how to create a org2html with css file here is link 
+<a href="https://gongzhitaao.org/orgcss/">https://gongzhitaao.org/orgcss/</a>
+This article serves as a complete demonstration for my org.css, a simple and clean stylesheet for org-exported HTML file. You may switch between the default style provided by Emacs Org mode, i.e., styles specified in the variable org-html-style-default and my customized stylesheet using the button at the top left corner.
+</p>
+
+
+
+<p>
+<a href="https://olmon.gitlab.io/org-themes/">https://olmon.gitlab.io/org-themes/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgfb97f59" class="outline-2">
+<h2 id="orgfb97f59">Publish to site by org-jekyll</h2>
+<div class="outline-text-2" id="text-orgfb97f59">
+<p>
+<a href="http://juanreyero.com/open/org-jekyll/">http://juanreyero.com/open/org-jekyll/</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2023-03-16 Thu 11:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

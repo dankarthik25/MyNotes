@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_vim</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>vim</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgee24530">Vim</a>
+<ul>
+<li><a href="#orga0f0477">Introduction</a></li>
+<li><a href="#org7bb735e">Shortcut</a></li>
+</ul>
+</li>
+<li><a href="#org89b52e1">Modes :</a></li>
+<li><a href="#orga83d4bb">Normal Mode :</a>
+<ul>
+<li><a href="#org252f6c3">File Commands:</a></li>
+<li><a href="#orgd792fe3">Navigation Commands :</a></li>
+<li><a href="#orga4dc537">Search</a></li>
+<li><a href="#org1a6206b">Edit cmd:</a></li>
+<li><a href="#org66ac33e">Visual Mode:</a>
+<ul>
+<li><a href="#org2214aff">Select Column</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org475b73f">Commbinational Commands:</a></li>
+<li><a href="#org1921d03">Keystrocks:</a></li>
+<li><a href="#org1198ce2">Macrows</a>
+<ul>
+<li><a href="#org72ae4cb">syntax :</a></li>
+<li><a href="#org7eec894">paly macro:</a></li>
+<li><a href="#org665a21e">Vimrc :</a></li>
+</ul>
+</li>
+<li><a href="#org09af753">Basic Packages :</a></li>
+<li><a href="#orga816a3e">Tmux</a>
+<ul>
+<li><a href="#org798418b">Create and mange windows</a></li>
+<li><a href="#org5aa6375">Session</a></li>
+<li><a href="#orgd2e8839">Customisation and tweek</a></li>
+</ul>
+</li>
+<li><a href="#orgd67ba8e">Vimrc</a></li>
+<li><a href="#org5836070">multi-tab (horizontal/Vertical)</a>
+<ul>
+<li><a href="#org42651f8">Tab</a></li>
+</ul>
+</li>
+<li><a href="#orgea7eebd">Tmux</a></li>
+</ul>
+</div>
+</div>
+<p>
+tutorial 
+<a href="https://www.youtube.com/playlist?list=PLwJS-G75vM7kFO-yUkyNphxSIdbi_1NKX">https://www.youtube.com/playlist?list=PLwJS-G75vM7kFO-yUkyNphxSIdbi_1NKX</a>
+</p>
+
+<p>
+Vim screencasts
+71 videos 52,740 views Last updated on 21 Oct 2018
+Greg Hurrell
+<a href="https://wincent.acom/wiki/Vim_cheatsheet">https://wincent.acom/wiki/Vim_cheatsheet</a>
+</p>
+<div id="outline-container-orgee24530" class="outline-2">
+<h2 id="orgee24530">Vim</h2>
+<div class="outline-text-2" id="text-orgee24530">
+<p>
+Vim Tutorials Notes
+</p>
+</div>
+<div id="outline-container-orga0f0477" class="outline-3">
+<h3 id="orga0f0477">Introduction</h3>
+<div class="outline-text-3" id="text-orga0f0477">
+<p>
+In linux andy prf 1st prg is vim best text editor (default in very linux)
+</p>
+
+<ul class="org-ul">
+<li>Free</li>
+<li>NO GUI</li>
+<li>eassy,fast</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7bb735e" class="outline-3">
+<h3 id="org7bb735e">Shortcut</h3>
+<div class="outline-text-3" id="text-org7bb735e">
+
+<div id="orgdc5f4b7" class="figure">
+<p><img src="http://i.gzn.jp/img/2006/03/31/vi_vim_graphical_cheat_sheet/vi-vim-cheat-sheet.gif" alt="vi-vim-cheat-sheet.gif" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org89b52e1" class="outline-2">
+<h2 id="org89b52e1">Modes :</h2>
+<div class="outline-text-2" id="text-org89b52e1">
+<ul class="org-ul">
+<li>Normal mode (Esc)
+<ul class="org-ul">
+<li>File Cmd</li>
+<li>Edit Cmd</li>
+<li>Navigation Cmd</li>
+</ul></li>
+<li>Insert mode (i)</li>
+<li>Visual mode (v)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga83d4bb" class="outline-2">
+<h2 id="orga83d4bb">Normal Mode :</h2>
+<div class="outline-text-2" id="text-orga83d4bb">
+<p>
+consist of commands  which can be classified into 
+File Cmd
+Navigation Cmd
+Edit/Manupulation Cmd
+</p>
+</div>
+
+<div id="outline-container-org252f6c3" class="outline-3">
+<h3 id="org252f6c3">File Commands:</h3>
+<div class="outline-text-3" id="text-org252f6c3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">:w</td>
+<td class="org-left">save</td>
+</tr>
+
+<tr>
+<td class="org-left">:w!</td>
+<td class="org-left">save overwrite</td>
+</tr>
+
+<tr>
+<td class="org-left">:w newname</td>
+<td class="org-left">save a copy file name 'newname'</td>
+</tr>
+
+<tr>
+<td class="org-left">:wq</td>
+<td class="org-left">save and quit</td>
+</tr>
+
+<tr>
+<td class="org-left">ZZ</td>
+<td class="org-left">save and quit</td>
+</tr>
+
+<tr>
+<td class="org-left">:sav newname</td>
+<td class="org-left">save a copy and continue editing 'newname'</td>
+</tr>
+
+<tr>
+<td class="org-left">:q</td>
+<td class="org-left">quit</td>
+</tr>
+
+<tr>
+<td class="org-left">:q!</td>
+<td class="org-left">quit with out save</td>
+</tr>
+
+<tr>
+<td class="org-left">ZQ</td>
+<td class="org-left">quit with out saving</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgd792fe3" class="outline-3">
+<h3 id="orgd792fe3">Navigation Commands :</h3>
+<div class="outline-text-3" id="text-orgd792fe3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">h</td>
+<td class="org-left">left</td>
+</tr>
+
+<tr>
+<td class="org-left">j</td>
+<td class="org-left">down</td>
+</tr>
+
+<tr>
+<td class="org-left">k</td>
+<td class="org-left">up</td>
+</tr>
+
+<tr>
+<td class="org-left">l</td>
+<td class="org-left">down</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">H</td>
+<td class="org-left">move cursor to top</td>
+</tr>
+
+<tr>
+<td class="org-left">M</td>
+<td class="org-left">move cursor to middle</td>
+</tr>
+
+<tr>
+<td class="org-left">L</td>
+<td class="org-left">move cursor to bottom</td>
+</tr>
+
+<tr>
+<td class="org-left">gg</td>
+<td class="org-left">begin of file</td>
+</tr>
+
+<tr>
+<td class="org-left">G</td>
+<td class="org-left">EOF</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-left">end of word</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left">next word</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-left">previous word</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">^/$</td>
+<td class="org-left">begin/end of line</td>
+</tr>
+
+<tr>
+<td class="org-left">I/A</td>
+<td class="org-left">move begin/end of line &amp; change to insert mode</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">scrol down</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">scroll up</td>
+</tr>
+
+<tr>
+<td class="org-left">C-f</td>
+<td class="org-left">pgup</td>
+</tr>
+
+<tr>
+<td class="org-left">C-b</td>
+<td class="org-left">pgdown</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">zz</td>
+<td class="org-left">move text+ cursor  to mid of window</td>
+</tr>
+
+<tr>
+<td class="org-left">zt</td>
+<td class="org-left">move(text+cursor) to top of window</td>
+</tr>
+
+<tr>
+<td class="org-left">zb</td>
+<td class="org-left">move(text+cursor) to bottom of window</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orga4dc537" class="outline-3">
+<h3 id="orga4dc537">Search</h3>
+<div class="outline-text-3" id="text-orga4dc537">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">*</td>
+<td class="org-left">Find next instance of current word</td>
+</tr>
+
+<tr>
+<td class="org-left">#</td>
+<td class="org-left">Find previous instance of current word</td>
+</tr>
+
+<tr>
+<td class="org-left">n</td>
+<td class="org-left">nth instant of word</td>
+</tr>
+
+<tr>
+<td class="org-left">N</td>
+<td class="org-left">previous nth instant of word</td>
+</tr>
+
+<tr>
+<td class="org-left">/word</td>
+<td class="org-left">Find occurrence of 'word'</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">n : Next occurence</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">N : previous</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">/word\c</td>
+<td class="org-left">Find next occurrence ignoreing case</td>
+</tr>
+
+<tr>
+<td class="org-left">/\word\</td>
+<td class="org-left">Find next occurrence of 'word' ,</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">where 'word' is bounded by bounderay (ex space,dash..</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org1a6206b" class="outline-3">
+<h3 id="org1a6206b">Edit cmd:</h3>
+<div class="outline-text-3" id="text-org1a6206b">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">y</td>
+<td class="org-left">copy</td>
+</tr>
+
+<tr>
+<td class="org-left">yy</td>
+<td class="org-left">copy line</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">chagne(replace)</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">Change the rest fo the current line</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">cut/del</td>
+</tr>
+
+<tr>
+<td class="org-left">dd</td>
+<td class="org-left">del line</td>
+</tr>
+
+<tr>
+<td class="org-left">p/P</td>
+<td class="org-left">paste below/above line</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">del charater after cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">X</td>
+<td class="org-left">del char before cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">/"text"</td>
+<td class="org-left">search for text</td>
+</tr>
+
+<tr>
+<td class="org-left">o/O</td>
+<td class="org-left">insert \n at above/below current line</td>
+</tr>
+
+<tr>
+<td class="org-left">earlier 2m</td>
+<td class="org-left">set the chagnes in text 2 min earlier</td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-left">Undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C+r</td>
+<td class="org-left">redo</td>
+</tr>
+
+<tr>
+<td class="org-left">%s/oldN/newN/g</td>
+<td class="org-left">replace</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org66ac33e" class="outline-3">
+<h3 id="org66ac33e">Visual Mode:</h3>
+<div class="outline-text-3" id="text-org66ac33e">
+</div>
+<div id="outline-container-org2214aff" class="outline-4">
+<h4 id="org2214aff">Select Column</h4>
+<div class="outline-text-4" id="text-org2214aff">
+<ul class="org-ul">
+<li>Put cursor and beginning of text to select</li>
+<li>Press CTRL-V to begin select of the column</li>
+<li>When you reach the end of your select, type 'c'</li>
+<li>Type the new text. Note that this will only replace the first instance.</li>
+<li>Now hit &lt;ESC&gt;&lt;ESC&gt;. All the text has been changed!</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org475b73f" class="outline-2">
+<h2 id="org475b73f">Commbinational Commands:</h2>
+<div class="outline-text-2" id="text-org475b73f">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Edit</th>
+<th scope="col" class="org-left">cmd</th>
+<th scope="col" class="org-left">Cond</th>
+<th scope="col" class="org-left">cmd</th>
+<th scope="col" class="org-left">Nava</th>
+<th scope="col" class="org-left">cmd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">cut/del</td>
+<td class="org-left">a</td>
+<td class="org-left">all</td>
+<td class="org-left">w</td>
+<td class="org-left">word</td>
+</tr>
+
+<tr>
+<td class="org-left">y</td>
+<td class="org-left">copy</td>
+<td class="org-left">i</td>
+<td class="org-left">in</td>
+<td class="org-left">s</td>
+<td class="org-left">sentences</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">paste</td>
+<td class="org-left">t</td>
+<td class="org-left">till</td>
+<td class="org-left">p</td>
+<td class="org-left">paragraphs</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">change</td>
+<td class="org-left">f</td>
+<td class="org-left">find forwords</td>
+<td class="org-left">t</td>
+<td class="org-left">tags</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">F</td>
+<td class="org-left">find backwords</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org1921d03" class="outline-2">
+<h2 id="org1921d03">Keystrocks:</h2>
+<div class="outline-text-2" id="text-org1921d03">
+<p>
+CMD		{ Number } { Text/Vis Cmd } { Cond cmd } { Navig cmd }
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">text (btw "" )</th>
+<th scope="col" class="org-left">CMD</th>
+<th scope="col" class="org-left">After</th>
+<th scope="col" class="org-left">Explaination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">3j</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Mode cursor 3 lines below</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">10w</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Mode cursor 10 words forward</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">3dw</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Del 3 words forward</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">3dj</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Del 3 lines from cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">" grind<sub>node</sub> "</td>
+<td class="org-left">diw</td>
+<td class="org-left">"  "</td>
+<td class="org-left">del inside word but not whitspace</td>
+</tr>
+
+<tr>
+<td class="org-left">" grind<sub>node</sub> "</td>
+<td class="org-left">caw</td>
+<td class="org-left">""</td>
+<td class="org-left">cut all word include whitespace</td>
+</tr>
+
+<tr>
+<td class="org-left">" grind<sub>node</sub> "</td>
+<td class="org-left">cw</td>
+<td class="org-left">"grid_"</td>
+<td class="org-left">cursor is on node so del next word</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">yi)</td>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">copy "abc,xyz,mnt"</td>
+</tr>
+
+<tr>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">di)</td>
+<td class="org-left">()</td>
+<td class="org-left">del in ()</td>
+</tr>
+
+<tr>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">da)</td>
+<td class="org-left">""</td>
+<td class="org-left">del all ""</td>
+</tr>
+
+<tr>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">dt,</td>
+<td class="org-left">(,xyz,mnt)</td>
+<td class="org-left">del untill(before) ","</td>
+</tr>
+
+<tr>
+<td class="org-left">(abc,xyz,mnt)</td>
+<td class="org-left">df,</td>
+<td class="org-left">(xyz,mnt)</td>
+<td class="org-left">del including ","</td>
+</tr>
+
+<tr>
+<td class="org-left">abc</td>
+<td class="org-left">ysw"</td>
+<td class="org-left">"abc"</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">"i am inside app"</td>
+<td class="org-left">va"</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">visual the sentance</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org1198ce2" class="outline-2">
+<h2 id="org1198ce2">Macrows</h2>
+<div class="outline-text-2" id="text-org1198ce2">
+</div>
+<div id="outline-container-org72ae4cb" class="outline-3">
+<h3 id="org72ae4cb">syntax :</h3>
+<div class="outline-text-3" id="text-org72ae4cb">
+<div class="org-src-container">
+<pre class="src src-sh">g{resister}
+# do the things
+q
+eg:
+qw
+I # move to start of line
+del var space esc H # end of line
+q # stop recording
+# To run macro
+@w
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7eec894" class="outline-3">
+<h3 id="org7eec894">paly macro:</h3>
+<div class="outline-text-3" id="text-org7eec894">
+<p>
+@"register name"
+</p>
+</div>
+</div>
+<div id="outline-container-org665a21e" class="outline-3">
+<h3 id="org665a21e">Vimrc :</h3>
+<div class="outline-text-3" id="text-org665a21e">
+<p>
+Vimrc is a file where all the vim setting are done manually adding packages
+If pakages are more in order to manage the packages there are Package manager
+vindle
+vim-plugin
+pathogen
+</p>
+
+<p>
+site for packages : 
+	vim awasome
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org09af753" class="outline-2">
+<h2 id="org09af753">Basic Packages :</h2>
+<div class="outline-text-2" id="text-org09af753">
+<p>
+nerd tree : 	file view
+ctrlp:		fuzzy file finder
+fugitive 	git tool
+suytastic	syntax charcker/
+auto-pair
+super tab
+</p>
+</div>
+</div>
+<div id="outline-container-orga816a3e" class="outline-2">
+<h2 id="orga816a3e">Tmux</h2>
+<div class="outline-text-2" id="text-orga816a3e">
+<p>
+Terminal Multiplexing
+View adn control multi consoles
+Preconfigure Environment
+Paralle 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">tmux new-session -s "session name"
+</pre>
+</div>
+
+<p>
+split a pane horizontally Ctrl + b "
+split a pane vertically   Ctrl + b %
+</p>
+
+<p>
+switch between panes : Ctrl + b (left, right, up, down)
+kill pane : Ctrl + b x
+</p>
+
+<p>
+Here is a list of a few basic tmux commands:
+</p>
+
+<p>
+Ctrl+b " — split pane horizontally.
+Ctrl+b % — split pane vertically.
+Ctrl+b arrow key — switch pane.
+Hold Ctrl+b, don’t release it and hold one of the arrow keys — resize pane.
+Ctrl+b c — (c)reate a new window.
+Ctrl+b n — move to the (n)ext window.
+Ctrl+b p — move to the (p)revious window.
+z        &#x2013; zoom in/out  the pane
+Ctrl+b x - kill the pane
+</p>
+</div>
+<div id="outline-container-org798418b" class="outline-3">
+<h3 id="org798418b">Create and mange windows</h3>
+<div class="outline-text-3" id="text-org798418b">
+<p>
+Create a new window     : Ctrl + b  c 
+move to previous window : Ctrl + b p
+</p>
+
+<p>
+Rename window: the pane : Ctrl + b ,
+</p>
+</div>
+</div>
+<div id="outline-container-org5aa6375" class="outline-3">
+<h3 id="org5aa6375">Session</h3>
+<div class="outline-text-3" id="text-org5aa6375">
+<p>
+Disconnect your session : Ctrl + b + d
+reconnect to tmux : tmux attach
+Or open new session:
+tmux
+to see the tmux session 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># to see the tmux session 
+ps aux |grep tmux #or
+tmux list-sessions # tmux ls
+#0: 1 window (created mon Nov 11 18:55:28 2019) 
+#1: 1 window (created mon Nov 11 18:55:28 2019) (attached)
+tmux attach -t 1 # To second session
+#or
+tmux a -t 1
+</pre>
+</div>
+
+<p>
+Rename the session : Ctrl + b $
+create a new session with name : tmux new -s "my project"
+Show list of session : Ctrl + b s
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd2e8839" class="outline-3">
+<h3 id="orgd2e8839">Customisation and tweek</h3>
+<div class="outline-text-3" id="text-orgd2e8839">
+<p>
+nano .tmux.conf # tmux is configuration file
+</p>
+
+<p>
+past the conf from <a href="https://pastebin.com/CDEVZTSC">https://pastebin.com/CDEVZTSC</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd67ba8e" class="outline-2">
+<h2 id="orgd67ba8e">Vimrc</h2>
+<div class="outline-text-2" id="text-orgd67ba8e">
+<div class="org-src-container">
+<pre class="src src-sh">call plug#begin()
+	Plug 'scrooloose/nerdtree'
+	Plug 'scrooloose/syntastic'
+	Plug 'tpope/vim-surround'
+	Plug 'altercation/vim-colors-solarized'
+	Plug 'flazz/vim-colorschemes'
+	Plug 'ervandew/supertab'
+call plug#end()
+colorscheme molokai
+"set nu
+"autocmd vimenter * NERDTree   " auto open Nerdtree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+map &lt;C-N&gt; : NERDTreeToggle&lt;CR&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5836070" class="outline-2">
+<h2 id="org5836070">multi-tab (horizontal/Vertical)</h2>
+<div class="outline-text-2" id="text-org5836070">
+<p>
+ horizontal :new
+split horizontal(down) : split &lt;file-name&gt;
+split vertial (from left) : vsplit &lt;file-name&gt;
+new window- leftsize vertial : vnew
+</p>
+
+<p>
+Toggle cursor between windows: C-w C-w
+move cursor to up,down,left,right : C-w + [k,j,h,l]
+moving window to up,down,left,right : C-w + [K,J,H,L]
+</p>
+
+<p>
+Re-size : C-w -/+  (height dec/inc)
+or 12 C-w - : decreace size by 12
+</p>
+
+<p>
+Re-size : C-w &lt;/&gt; (width dec/in)
+Equlize size of widow : C-w =
+</p>
+</div>
+
+<div id="outline-container-org42651f8" class="outline-3">
+<h3 id="org42651f8">Tab</h3>
+<div class="outline-text-3" id="text-org42651f8">
+<p>
+ :tabnew
+switch btw tabs : gt
+switch btw tabs reverse :gT
+move window inside multi-window to tab from C-w T
+switch btw
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea7eebd" class="outline-2">
+<h2 id="orgea7eebd">Tmux</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:42</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

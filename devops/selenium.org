@@ -1,0 +1,10 @@
+#+TITLE: selenium
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+https://www.youtube.com/c/LucidProgramming/featured
+
+https://www.youtube.com/playlist?list=PL5tcWHG-UPH1aSWALagYP2r3RMmuslcrr
+https://github.com/vprusso/youtube_tutorials
+
+
+https://www.programcreek.com/python/?project_name=vprusso%2Fyoutube_tutorials

@@ -1,0 +1,3 @@
+#+TITLE: How_2_create_config
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup

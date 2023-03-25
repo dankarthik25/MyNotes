@@ -1,0 +1,3293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-17 Fri 12:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lambda</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="DeepAlgorithms" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Lambda</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb41b83b">Amazon Web Services : AWS Services</a></li>
+<li><a href="#org0fc129c">History : Cloud , Cloud Services AWS Origin</a></li>
+<li><a href="#orgb1770e8">Create AWS Account :</a></li>
+<li><a href="#org09bcabe">Create EC2 instance</a>
+<ul>
+<li><a href="#org2ac50e6">ssh with Tmux : manage your ec2 isntance using TMUX</a></li>
+</ul>
+</li>
+<li><a href="#org223e8c2">S3 Scalabel Storage Class</a>
+<ul>
+<li><a href="#orgb81800c">Create S3 Bucket</a></li>
+<li><a href="#org95802cb">Upload file in S3 Bucet</a></li>
+<li><a href="#orgedf1632">Make "file" Public Access of S3 bucket</a>
+<ul>
+<li><a href="#org3dd96d9">S3 Config</a></li>
+<li><a href="#orgccf980f">file Config</a></li>
+</ul>
+</li>
+<li><a href="#orgc1d98c3">Enable Version Control</a></li>
+<li><a href="#orgf2d3ba9">Create Folder</a></li>
+<li><a href="#orgf13b9b7">Pemission (Access Control List)</a></li>
+<li><a href="#org1ee5bc6">Management LifeCycle and Storage Class :</a></li>
+</ul>
+</li>
+<li><a href="#org9acd850">IAM [Identity and Access Mangaer]</a>
+<ul>
+<li><a href="#org3050309">Intro:</a>
+<ul>
+<li><a href="#orgbf1b25e">User and Group  in Linux</a></li>
+<li><a href="#org8b16e64">Why IAM: Polices/Permissions ?</a></li>
+</ul>
+</li>
+<li><a href="#orga3998dd">Add Users</a></li>
+<li><a href="#org1d5239c">MFA : Multi Factor Acess :</a></li>
+<li><a href="#org3aa0f16">Change AMI-User : access-key</a></li>
+<li><a href="#orgc3f0525">AWS-CLI config for IAM-User</a></li>
+<li><a href="#orgc3f7d0f">IAM Groups</a>
+<ul>
+<li><a href="#orge63e24c">Add new users to existing group</a></li>
+</ul>
+</li>
+<li><a href="#orga38a9a0">IAM Polices</a>
+<ul>
+<li><a href="#orgc632bb4">IAM Polices - Json Structure</a></li>
+</ul>
+</li>
+<li><a href="#orgf1810b3">IAM Polices [Exersice]</a></li>
+<li><a href="#orgd821718">Create alias IAM user-id</a></li>
+<li><a href="#org0eb4c59">AWS CLI</a></li>
+<li><a href="#org23aeac7">Cloud Shell</a></li>
+<li><a href="#orgbd23b0a">IAM Role :</a></li>
+<li><a href="#org07d02bb">IAM Security Tools</a></li>
+<li><a href="#org6dc9068">Summary and Best Practices</a></li>
+</ul>
+</li>
+<li><a href="#org57306cb">ECR : Elastic Container Registry</a>
+<ul>
+<li><a href="#orgb00f0b7">Intro</a></li>
+<li><a href="#orgee7355a">Step to isntall and use ECR Repo</a></li>
+<li><a href="#orgf8a1d26">1. Create Private Repo</a></li>
+<li><a href="#orgc259a3b">2. Config AWS-cli and docker-cli</a></li>
+<li><a href="#org3158f7a">3. Create,Push docker-img in ECR</a></li>
+<li><a href="#orge095550">Example: Create docker file and upload in  ECR repository</a></li>
+</ul>
+</li>
+<li><a href="#org1d97c92">ECS: Elastic Container Service</a>
+<ul>
+<li><a href="#orgc26a7fa">What is Fargate : #Serverless #</a></li>
+<li><a href="#org7e63afd">Create Cluster using Fargate</a>
+<ul>
+<li><a href="#orgf69635e">Get ECR img url</a></li>
+<li><a href="#org8f86c74">Create ECS Cluster :  { Cluster Type + Cluster }</a></li>
+<li><a href="#orgda8633a">Create Task Defination {Cluster Type + Size(cpu,ram),ecr<sub>img</sub> link, port mapping }</a></li>
+<li><a href="#org727c3eb">Create a Service  and Lauch Cluster {Cluster Type, Task defination, No.of task,VPC,Ip, Load Balancer, Auto Scaling}</a></li>
+</ul>
+</li>
+<li><a href="#orgb97606e">--------------------------------------------</a></li>
+<li><a href="#org61d2d89">IAM Roles for ECS Task</a></li>
+<li><a href="#org87fe4f3">How do we share db(data)  How do we have data Volume in ECS</a></li>
+<li><a href="#org3c3513b">ECS Services &amp; Tasks</a></li>
+<li><a href="#orge11058e">Load Balancing for Fargate :</a></li>
+<li><a href="#org58ca064">ECS Task invoked by Event Bridge</a></li>
+<li><a href="#orgc0a74f1">ECS Hands on</a></li>
+<li><a href="#org0515223">ECS Scaling - Service CPU Usage Example</a></li>
+<li><a href="#org3f4e005">ECS Rolling Updates</a></li>
+<li><a href="#org23e6a14">ECR Overview</a></li>
+<li><a href="#org0f40fbb">EKS Overview</a></li>
+</ul>
+</li>
+<li><a href="#orgbdf1956">Load Balancer :</a>
+<ul>
+<li><a href="#org8659c81">Intro</a></li>
+<li><a href="#org37273b2">Application Load Balancer vs Network Load Balancer</a></li>
+</ul>
+</li>
+<li><a href="#org0b71e48">How to create load balancer(NLB) :</a>
+<ul>
+<li><a href="#orgbc712c7">Create ec2 {3 to 4 with server name a,b,c} servers in aws</a></li>
+<li><a href="#org5906089">CREATE A TARGET GROUP : {Register EC2 instance in Target Group}</a></li>
+<li><a href="#org219bbcf">Create a NLB</a></li>
+<li><a href="#org12fafe5">Get dns for NLB</a></li>
+<li><a href="#org6596825">Trouble NLB :</a></li>
+</ul>
+</li>
+<li><a href="#orgec53bdd">Create ALB</a></li>
+<li><a href="#org468b178">Auto Scaling</a>
+<ul>
+<li><a href="#orgfaac082">Intro</a></li>
+<li><a href="#org5980002">Steps</a></li>
+<li><a href="#orged675ab">Create Lauch Template</a></li>
+<li><a href="#org99f41f0">Create AutoScaling Group</a></li>
+<li><a href="#orgbb91da8">Automate Scaling Policies</a></li>
+</ul>
+</li>
+<li><a href="#orgd3c49ac">vpc : Virtual Private Cloud</a>
+<ul>
+<li><a href="#org3643dcd">Intro</a>
+<ul>
+<li><a href="#org3368da5">AWS Structure</a></li>
+<li><a href="#orgd3534a0">What is a public IP address?</a></li>
+<li><a href="#orga79bcf0">What is a private IP address?</a></li>
+<li><a href="#orgf9d7f3a">What are differnet Ip in VPC :</a></li>
+<li><a href="#orgdb3e57e">Public and private IP address ranges</a></li>
+<li><a href="#orgdeffd47">What is different Btw Private IP and Public IP :</a></li>
+<li><a href="#org001d6c3">CIDR (In aws min size:0:0:0:0/28 (16 IP) and max 0:0:0:0/16 (65536) )</a></li>
+<li><a href="#org8d2da19">VPC- Subnet reserver 5 IP add(first 4 &amp; last 1) in each subnet</a></li>
+<li><a href="#orge117359">revise</a></li>
+</ul>
+</li>
+<li><a href="#org03ff970">Create VPC Public with IWG, 3-Subnet in Different Zone(High Availability) ,3-EC2 instance</a>
+<ul>
+<li><a href="#org766e73d">Steps</a></li>
+<li><a href="#org1471952">1.Create VPC</a></li>
+<li><a href="#org8a762b9">2.Create IGW</a></li>
+<li><a href="#org77bdf59">3.Create 3- Subnets</a></li>
+<li><a href="#org8a69ca9">4.Create Routing table</a></li>
+<li><a href="#org84ade78">Create and connect ec2 to 3-subnets we define</a></li>
+</ul>
+</li>
+<li><a href="#org9c16d4b">Create VPC Peering</a>
+<ul>
+<li><a href="#orgc982fef">Steps</a></li>
+<li><a href="#orge8d257b">1. Create TWo- VPC Cloud</a></li>
+<li><a href="#org9b95888">2. Create VPC Peering</a></li>
+<li><a href="#org64c3daa">3. Routing connect Both RoutingTable to vpc-peering</a></li>
+<li><a href="#orgffaa39a">4. Check ping from both ec2-servers</a></li>
+</ul>
+</li>
+<li><a href="#orge456d87">Create Private Subnet with NAT Gateway</a>
+<ul>
+<li><a href="#org8645e91">Private Subnet Into</a></li>
+<li><a href="#org831a090">Create NAT Gateway</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org82e1cba">EBS Elastic Block Storage</a>
+<ul>
+<li><a href="#org2560b26">Add EBS</a></li>
+<li><a href="#org51f1012">Attach Volume to EC2 instance</a></li>
+<li><a href="#org5bf5290">Check if volume is created</a></li>
+<li><a href="#orgb3d829a">Snapshot in EBS</a></li>
+<li><a href="#orgd9e003c">Created Snapshot Lifecycle Policy</a></li>
+</ul>
+</li>
+<li><a href="#org08a538e">Create AMI of Instance</a></li>
+<li><a href="#org12fc381">CodeCommit</a></li>
+<li><a href="#orgf2ab901">Serverless in AWS</a></li>
+<li><a href="#orgea7c35e">Lamdb</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org9c916e6">Status of ec2 instance : save changes in aws log</a></li>
+</ul>
+</li>
+<li><a href="#orgec1c139">Execute command remotely on EC2 via lambda function</a></li>
+<li><a href="#org2bf7870">Serverless CRON Job</a></li>
+<li><a href="#org1e02d5f">Lambda Limits</a></li>
+<li><a href="#orgf189305">Lambda@Edge</a>
+<ul>
+<li><a href="#orga91158e">Use Cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc16d859">SES : Simple Message Servie</a></li>
+<li><a href="#orga5354ba">SNS</a></li>
+<li><a href="#org2302ed8">Route 53</a></li>
+<li><a href="#orgcbd11cd">Certificate Management</a></li>
+<li><a href="#org049a0f9">Cloud Monitoring</a></li>
+<li><a href="#orgf1e11d1">Mongodb</a></li>
+<li><a href="#orgb01ff35"></a></li>
+<li><a href="#org2de4832">ELK</a></li>
+<li><a href="#org651c4fa">Demo | Three-tier web app in AWS with VPC, ALB, EC2 &amp; RDS</a></li>
+<li><a href="#orgefdb914">Jenkins</a></li>
+</ul>
+</div>
+</div>
+<p>
+C-c C-x Cv
+</p>
+<div id="outline-container-orgb41b83b" class="outline-2">
+<h2 id="orgb41b83b">Amazon Web Services : AWS Services</h2>
+</div>
+<div id="outline-container-org0fc129c" class="outline-2">
+<h2 id="org0fc129c">History : Cloud , Cloud Services AWS Origin</h2>
+</div>
+<div id="outline-container-orgb1770e8" class="outline-2">
+<h2 id="orgb1770e8">Create AWS Account :</h2>
+<div class="outline-text-2" id="text-orgb1770e8">
+<ul class="org-ul">
+<li>Create a Fake gmail</li>
+<li>Mobile, credit/debit card</li>
+<li>Sign-in
+Free tire :</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org09bcabe" class="outline-2">
+<h2 id="org09bcabe">Create EC2 instance</h2>
+<div class="outline-text-2" id="text-org09bcabe">
+</div>
+<div id="outline-container-org2ac50e6" class="outline-3">
+<h3 id="org2ac50e6">ssh with Tmux : manage your ec2 isntance using TMUX</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org223e8c2" class="outline-2">
+<h2 id="org223e8c2">S3 Scalabel Storage Class</h2>
+<div class="outline-text-2" id="text-org223e8c2">
+<p>
+S3  is a cloud storage device where we can uplaod/download, store files/dataare
+global we can access in around
+We can upload the data upto : 5TB
+We can uplaod a file size max is 5GB
+</p>
+
+<p>
+S3 is global: means we can access s3 storage globally
+</p>
+
+<p>
+Bucket :
+S3 consits of Buckets and Buckets consits of files and folders.
+We store the file/data in Bucket
+Bucket are containers used to store the data
+Bucket Name should be unique and DOESN'T CONTAIN SPACES or UPPER LETTERS
+</p>
+</div>
+
+
+<div id="outline-container-orgb81800c" class="outline-3">
+<h3 id="orgb81800c">Create S3 Bucket</h3>
+<div class="outline-text-3" id="text-orgb81800c">
+<p>
+AWS S3 Dashboard &gt; Bucket &gt; Create Bucket
+</p>
+<ul class="org-ul">
+<li>Bucket name : _ <b>1stBucket</b> _</li>
+<li>AWS Region : <span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline">_</span></span></span></span></span></span></span></span></span></li>
+<li>Block Public Access :
+<ul class="org-ul">
+<li>[+] Block ALL public access
+<ul class="org-ul">
+<li>[+] Block pubic access to bucket and objects granted through new access control list</li>
+<li>[+] Block public access to buckets and objects granted through any acess control list</li>
+<li>[+] Block public access to buckets and objects granted though new public buckets or access policy</li>
+<li>[+] Block public and cross-account access to buckets and objects through any public bucket or access points polices</li>
+</ul></li>
+</ul></li>
+
+<li class="trans"><code>[-]</code> Version Control Buckets                   
+<b>Create Bucket</b></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org95802cb" class="outline-3">
+<h3 id="org95802cb">Upload file in S3 Bucet</h3>
+<div class="outline-text-3" id="text-org95802cb">
+<p>
+AWS S3 Dashboard  &gt; Bucket &gt;  Select Bucket: 1stBucket 
+</p>
+<ul class="org-ul">
+<li>1stBucket
+<ul class="org-ul">
+<li><b>Object</b> in {Object| Properties | Permission| Metrics|Managent| AccessPoint}
+<ul class="org-ul">
+<li>Upload</li>
+</ul></li>
+</ul></li>
+<li><b>Upload</b></li>
+</ul>
+
+<p>
+To Get <b>file url link</b>   
+AWS S3 Dashboard  &gt; Bucket &gt;  Select Bucket: 1stBucket
+</p>
+<ul class="org-ul">
+<li>Select the file
+<ul class="org-ul">
+<li>give info and also url</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgedf1632" class="outline-3">
+<h3 id="orgedf1632">Make "file" Public Access of S3 bucket</h3>
+<div class="outline-text-3" id="text-orgedf1632">
+</div>
+<div id="outline-container-org3dd96d9" class="outline-4">
+<h4 id="org3dd96d9">S3 Config</h4>
+<div class="outline-text-4" id="text-org3dd96d9">
+<p>
+AWS &gt; Search S3 &gt; { Select Bucket}: 1stBucket&gt;  Permission
+</p>
+
+<ul class="org-ul">
+<li>Block public access <b>EDIT</b>
+<ul class="org-ul">
+<li>Uncheck <b>Block all public access</b></li>
+</ul></li>
+<li><b>Save Change</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgccf980f" class="outline-4">
+<h4 id="orgccf980f">file Config</h4>
+<div class="outline-text-4" id="text-orgccf980f">
+<p>
+1stBucket &gt; Object &gt; "file-name" &gt; Action &gt; <b>Make Public</b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc1d98c3" class="outline-3">
+<h3 id="orgc1d98c3">Enable Version Control</h3>
+<div class="outline-text-3" id="text-orgc1d98c3">
+<p>
+AWS S3 Dashboard &gt; Select Bucket:  <b>1stBucket</b> &gt; Properties
+</p>
+<ul class="org-ul">
+<li>Bucket Versioning : <b>Edit</b> &gt; Enable</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf2d3ba9" class="outline-3">
+<h3 id="orgf2d3ba9">Create Folder</h3>
+</div>
+<div id="outline-container-orgf13b9b7" class="outline-3">
+<h3 id="orgf13b9b7">Pemission (Access Control List)</h3>
+<div class="outline-text-3" id="text-orgf13b9b7">
+<p>
+In AWS S3 we can contorl the access of files/folders
+Means
+</p>
+<ul class="org-ul">
+<li>which users/group can access the this files ?
+<ul class="org-ul">
+<li>What are permission we are assinging like read/write</li>
+</ul></li>
+</ul>
+<p>
+Object Owner (your account)      : read, write
+Authenticated AWS user/group     : READ,WRITE
+Everyone(pubic access link)      : read     
+</p>
+
+
+
+<p>
+AWS &gt; Search S3 &gt; { Select Bucket} &gt; <b>1stBucket</b> &gt; <b>{file<sub>name</sub>/folder name }</b> &gt; Permission &gt; ACL
+</p>
+
+<p>
+owner: 
+everyone
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1ee5bc6" class="outline-3">
+<h3 id="org1ee5bc6">Management LifeCycle and Storage Class :</h3>
+<div class="outline-text-3" id="text-org1ee5bc6">
+<p>
+Lifecycle Rules :
+</p>
+<ul class="org-ul">
+<li>set of actions/rules defined on  AWS S3</li>
+<li>We can set rules
+<ul class="org-ul">
+<li>archiving,</li>
+<li>Transistion to other storage class ,</li>
+<li>delete them after specific time.</li>
+</ul></li>
+</ul>
+
+<p>
+AWS &gt; Search S3 &gt; { Select Bucket} &gt; <b>1stBucket</b>  &gt; Management  &gt; <b>Create Lifecycle</b>
+</p>
+
+<p>
+<b>Create Lifecycle Rule</b>:
+</p>
+<ul class="org-ul">
+<li>Name : _ <b>ScopeOf1stBucket</b> _</li>
+<li>Choose a rule scope:
+-[+] [check] Limit the scope : This rule uses one or more filter
+-[ ] [uncheck] This rule applies to all objects in buckets</li>
+
+<li>Lifecycle rule action 
+<ul class="org-ul">
+<li><b>[+] Transition current version of object btw storage</b></li>
+<li class="off"><code>[&#xa0;]</code> Transition previous version of</li>
+</ul></li>
+<li><p>
+Transition current version of object btw storgae class
+</p>
+
+<p>
+Storage Class transition
+</p>
+<ul class="org-ul">
+<li>Standard-IA (min 30days)         : in frequently access data,</li>
+<li>Intelligent-Tiering(min 30days)  : changing/unknow access pattern</li>
+<li>One Zone -IA(min 30days)         : infrequently access, non-critical data</li>
+<li>Glacier(min 90 days)             : long-term data archiving, retrival time: min to hours</li>
+<li>Deep Glacier Archive: retrival time : long-term data archiving ,12 hours</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org9acd850" class="outline-2">
+<h2 id="org9acd850">IAM [Identity and Access Mangaer]</h2>
+<div class="outline-text-2" id="text-org9acd850">
+</div>
+<div id="outline-container-org3050309" class="outline-3">
+<h3 id="org3050309">Intro:</h3>
+<div class="outline-text-3" id="text-org3050309">
+</div>
+<div id="outline-container-orgbf1b25e" class="outline-4">
+<h4 id="orgbf1b25e">User and Group  in Linux</h4>
+<div class="outline-text-4" id="text-orgbf1b25e">
+<p>
+<b>Root account</b> created by default  : should n't be shared or used
+<b>User account</b> : people/roles within your organisatoin
+<b>Groups</b> : only contain user, not other groups
+</p>
+
+<p>
+<b>Note</b>: A users can join has many as Groups as possible
+</p>
+<ul class="org-ul">
+<li>Example 
+<ul class="org-ul">
+<li>Group : Develpers
+<ul class="org-ul">
+<li>Alice</li>
+<li>Bod</li>
+<li><b>Charles</b></li>
+</ul></li>
+<li>Group : Operator
+<ul class="org-ul">
+<li><b>David</b></li>
+<li>Edward</li>
+</ul></li>
+<li>Group : Audit Team
+<ul class="org-ul">
+<li>Charles</li>
+<li>David</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+Q) Why do we create users and groups ?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8b16e64" class="outline-4">
+<h4 id="org8b16e64">Why IAM: Polices/Permissions ?</h4>
+<div class="outline-text-4" id="text-org8b16e64">
+<p>
+Q) Why do we create users and groups ? or Why do we need for permission ?
+Ans
+</p>
+<ul class="org-ul">
+<li>AWS Cloud does not give full permission to all users.</li>
+<li>IAM <b>POLICES</b> to set the  <b>permission</b> to users and groups</li>
+</ul>
+
+<p>
+AWS Follow <b>least privilage principe</b> :
+</p>
+<ul class="org-ul">
+<li>Don't give more permissions than a user needs. (Because AWS as so many serves which cost lot money )</li>
+</ul>
+
+<p>
+Users or Groups are assigned <b>POLICES</b> 
+These polices defined the <b>permissions</b> of the <b>users</b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga3998dd" class="outline-3">
+<h3 id="orga3998dd">Add Users</h3>
+<div class="outline-text-3" id="text-orga3998dd">
+<p>
+In AWS web-console &gt; serach iam &gt; Side-bar &lt;Users&gt; : Add user 
+</p>
+<ul class="org-ul">
+<li>Create users :
+<ol class="org-ol">
+<li>Set User details  
+<ul class="org-ul">
+<li>User name : <span class="underline">Jessy_______________________</span></li>
+<li>Access type :
+<ul class="org-ul">
+<li>[+]Programmatic access: acess using ssh {we can use for aws-cli,terraform}</li>
+<li>[+]AWS Management Console acess: acess using web-ui
+<ul class="org-ul">
+<li>Console password:</li>
+</ul></li>
+</ul></li>
+<li>Console Password    
+<ul class="org-ul">
+<li>[+] Autogenerated password</li>
+<li class="off"><code>[&#xa0;]</code> Custom password  : <span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline">_</span></span></span></span></span></span></span></span></li>
+</ul></li>
+<li>Require password reset :
+<ul class="org-ul">
+<li class="trans"><code>[-]</code> User must create new password and next login</li>
+</ul></li>
+</ul></li>
+<li>Set permissions
+<ul class="org-ul">
+<li>Adding user to group {created/existing}
+<ul class="org-ul">
+<li><b>Create a GROUP</b>: admin</li>
+</ul></li>
+<li>Copy permissions form existing users</li>
+<li>Attach existing policies directly</li>
+</ul></li>
+<li>Add Tags
+<ul class="org-ul">
+<li>Idea is that with tags we can catogorise users or groups.</li>
+<li>User information such as email, or job titles</li>
+<li>Used the tag to orgainize, Tracking, Control Access
+<ul class="org-ul">
+<li><b>key:value</b> pairs</li>
+<li>Department: Electrical</li>
+<li>Location:  kanpur</li>
+<li>Spectialzation: control system, power system, Neural Networks</li>
+</ul></li>
+</ul></li>
+<li>Review 
+<b>CREATE USER</b></li>
+<li><p>
+Download the <b>&lt;user-password.csv&gt;</b> file
+</p>
+<div class="org-src-container">
+<pre class="src src-csv">User name,Password,Access key ID,Secret access key,Console login link
+  CEO,,xxx, AKIA3K3WQJCB66Z2UMMI,1Sl6E6uNH0kkjwR4x4N/PD8jEymqhZQpElI8J6D8,https://779248224387.signin.aws.amazon.com/console 
+</pre>
+</div></li>
+</ol></li>
+</ul>
+
+<p>
+Here IAM : Accout Id (12digits) :779248224387     
+</p>
+
+<p>
+<b>We have Created User in AWS</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org1d5239c" class="outline-3">
+<h3 id="org1d5239c">MFA : Multi Factor Acess :</h3>
+<div class="outline-text-3" id="text-org1d5239c">
+<p>
+Double Layer Access  using password and OPT { In mobile installing Google App : Microsft Authenticator App}
+</p>
+
+<p>
+IAM Dashboard &gt;  User &gt;  {Select Users-Name : jessy} 
+</p>
+
+<ul class="org-ul">
+<li>jessy User
+<ul class="org-ul">
+<li>in {Permission, Group, Tag, Security Credientials,Acces Advisor}</li>
+</ul></li>
+</ul>
+<p>
+SELECT Security Credientials
+</p>
+<ul class="org-ul">
+<li>Assigne MFA device :
+<ul class="org-ul">
+<li>[+] Virtual MFA device:             Authenticator app install in mobile or computer</li>
+<li class="off"><code>[&#xa0;]</code> U2F security key :              u2f device</li>
+<li class="off"><code>[&#xa0;]</code> Other hardware MFA device:      Gemalto token</li>
+</ul></li>
+</ul>
+<p>
+In Mobile &gt; Google App : Authenticator App
+</p>
+</div>
+</div>
+<div id="outline-container-org3aa0f16" class="outline-3">
+<h3 id="org3aa0f16">Change AMI-User : access-key</h3>
+<div class="outline-text-3" id="text-org3aa0f16">
+<p>
+IAM Dashboard &gt; User &gt; {Select User:jessy} &gt; Security Credential &gt; Access Key
+</p>
+<ul class="org-ul">
+<li><b>Create access key</b></li>
+<li><b>Download New Access key</b></li>
+<li><b>Note:</b> Access is is generated only once we can only downlaod access key ones when it is created.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc3f0525" class="outline-3">
+<h3 id="orgc3f0525">AWS-CLI config for IAM-User</h3>
+<div class="outline-text-3" id="text-orgc3f0525">
+<p>
+In order to connect aws to jenkins,teraform, local-server we use access key, Secrect access key form <b>user-password.csv</b>
+</p>
+
+<p>
+Q) In teraform how you are connecting console ? with awscli
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">yum install awscli
+aws configure <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Enter acess key and Scret Access Key</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">AWS Acces Key ID :AKIA3K3WQJCB66Z2UMMI</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">AWS Secret Access Key:1Sl6E6uNH0kkjwR4x4N/PD8jEymqhZQpElI8J6D8</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default region name [None]</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default output format [None]:</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">##### </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Check if you are connected or not ?</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">How to list s3 buckets in aws-cli</span>
+aws s3api list-buckets
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc3f7d0f" class="outline-3">
+<h3 id="orgc3f7d0f">IAM Groups</h3>
+<div class="outline-text-3" id="text-orgc3f7d0f">
+<p>
+IAM Dashboard &gt; User groups  &gt; Create Groups
+Create User Groups
+</p>
+<ul class="org-ul">
+<li>Name :</li>
+<li>Add Users to groups (optional) : add existing users to group</li>
+<li>Add polices to groups(optional)</li>
+</ul>
+<p>
+<b>Create Group</b>
+</p>
+</div>
+<div id="outline-container-orge63e24c" class="outline-4">
+<h4 id="orge63e24c">Add new users to existing group</h4>
+<div class="outline-text-4" id="text-orge63e24c">
+<p>
+AMI Dashboard &gt; User &gt; Create User &gt;
+Create User
+</p>
+<ul class="org-ul">
+<li>Set User details</li>
+<li>Set permission
+<ul class="org-ul">
+<li><b>Add user to group</b>
+<ul class="org-ul">
+<li><b>Create a group</b></li>
+<li>Add user to existing user</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga38a9a0" class="outline-3">
+<h3 id="orga38a9a0">IAM Polices</h3>
+<div class="outline-text-3" id="text-orga38a9a0">
+<p>
+IAM Dashboard &gt; Polices &gt; Create Policy
+</p>
+
+<p>
+Create Policy
+</p>
+<ul class="org-ul">
+<li>Visual Editor
+<ul class="org-ul">
+<li>use browser AWS-Console GUI support for creating policy
+<ul class="org-ul">
+<li>Serivice</li>
+<li>Actions</li>
+<li>Resources</li>
+</ul></li>
+</ul></li>
+<li>JSON File</li>
+</ul>
+<ul class="org-ul">
+<li>Tag</li>
+<li>Review</li>
+</ul>
+<p>
+<b>Create Policy</b>      
+</p>
+</div>
+
+<div id="outline-container-orgc632bb4" class="outline-4">
+<h4 id="orgc632bb4">IAM Polices - Json Structure</h4>
+<div class="outline-text-4" id="text-orgc632bb4">
+<ul class="org-ul">
+<li>inheritance with group</li>
+<li>IAM Polices Structure 
+<ul class="org-ul">
+<li>Consists of :
+<ul class="org-ul">
+<li><b>Version</b>: policy language version, always include '2012-10-17'</li>
+<li><b>Id</b>: an identity for the policy (optional)</li>
+<li><b>Statement</b>: one or more individual statement (required)</li>
+</ul></li>
+<li>Each statement consists of
+<ul class="org-ul">
+<li><b>Sid</b> : <b>Statement Id</b> (Identifier )</li>
+<li><b>Effect</b>: Whether the statement allows or denies access (Allow, Deny )</li>
+<li>Principe: account/user/role to which this policy applied to</li>
+<li><b>Action</b> : list of actions this policy allows or denies</li>
+<li><b>Resource</b>: list of resource to which the actions applied to</li>
+<li>Condition : Conditions for when this policy is in effect(optional)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+    <span style="color: #3a81c3; font-weight: bold;">"Version"</span>: <span style="color: #2d9574;">"2012-10-17"</span>,
+    <span style="color: #3a81c3; font-weight: bold;">"Statement"</span>: [ 
+        {
+            <span style="color: #3a81c3; font-weight: bold;">"Sid"</span>: <span style="color: #2d9574;">"MyReadOnlyBucketPolicyV1"</span>,
+            <span style="color: #3a81c3; font-weight: bold;">"Effect"</span>: <span style="color: #2d9574;">"Allow"</span>,
+            <span style="color: #3a81c3; font-weight: bold;">"Action"</span>: [
+              <span style="color: #2d9574;">"s3:ListBucket"</span>,
+                <span style="color: #2d9574;">"s3:GetObject*"</span>
+            ],
+            <span style="color: #3a81c3; font-weight: bold;">"Resource"</span>: [
+                <span style="color: #2d9574;">"arn:aws:s3:::s3-bucket-ro"</span>,
+                <span style="color: #2d9574;">"arn:aws:s3:::s3-bucket-ro/*"</span>
+            ]
+        }
+    ]
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf1810b3" class="outline-3">
+<h3 id="orgf1810b3">IAM Polices [Exersice]</h3>
+<div class="outline-text-3" id="text-orgf1810b3">
+<p>
+See Udemy : 14 IAM Polices Hands On  video
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd821718" class="outline-3">
+<h3 id="orgd821718">Create alias IAM user-id</h3>
+<div class="outline-text-3" id="text-orgd821718">
+<ul class="org-ul">
+<li>Give aliase url name instead of <b>iam-id</b>
+<ul class="org-ul">
+<li>IAM Dashboard &gt; Sig-in URL for IAM (Edit)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0eb4c59" class="outline-3">
+<h3 id="org0eb4c59">AWS CLI</h3>
+<div class="outline-text-3" id="text-org0eb4c59">
+<p>
+Install aws cli in windows/linux
+</p>
+<pre class="example">
+aws config
+aws iam list-users
+</pre>
+</div>
+</div>
+<div id="outline-container-org23aeac7" class="outline-3">
+<h3 id="org23aeac7">Cloud Shell</h3>
+</div>
+<div id="outline-container-orgbd23b0a" class="outline-3">
+<h3 id="orgbd23b0a">IAM Role :</h3>
+<div class="outline-text-3" id="text-orgbd23b0a">
+<p>
+Some AWS service will need to perform actions on your behalf
+To do so, we will assign permission to AWS services with IAM Roles
+</p>
+
+<p>
+Common roles:
+</p>
+<ul class="org-ul">
+<li>EC2 Instance Role</li>
+<li>Lambda Function Role</li>
+<li>Role for CloudFormation</li>
+
+<li>Example : EC2 instance IAM role
+IAM &gt; role &gt; creaete role &gt;
+choose a use case:
+<ul class="org-ul">
+<li>ec2 instance : &gt; attach a policy &gt;  attach tag &gt; review &gt;
+<ul class="org-ul">
+<li>Role Name : Demo-ec2-role</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org07d02bb" class="outline-3">
+<h3 id="org07d02bb">IAM Security Tools</h3>
+<div class="outline-text-3" id="text-org07d02bb">
+<p>
+IAM Credentials Report (account-level)
+</p>
+<ul class="org-ul">
+<li>list all your account's user and</li>
+<li>status of their various credential</li>
+</ul>
+
+<p>
+IAM &gt; Credentials Report &gt; Downlaod Report &gt; csv-file
+</p>
+
+<p>
+IAM Access Advisor (user-level)
+</p>
+
+<ul class="org-ul">
+<li>show the service permissions granted to a user</li>
+<li>show service that were last accesed</li>
+<li>Revise the policy that are</li>
+</ul>
+
+<p>
+Ex : IAM &gt; User &gt; Select User: stephan &gt; access advisor
+</p>
+
+<ul class="org-ul">
+<li>Audit permission of your account/IAM User with IAM Credential Report/Access Advisor</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6dc9068" class="outline-3">
+<h3 id="org6dc9068">Summary and Best Practices</h3>
+<div class="outline-text-3" id="text-org6dc9068">
+<p>
+Users: mapped to a physical user, has a password for AWS Console
+Group: Contains users only
+Poices: JSON document that outline permission for users and groups
+Roles: for EC2 instance or AWS-services
+Security : MFA + Password Policy
+Access Keys: access AWS using the cli or sdk
+Audit : IAM Credential Report &amp; IAM Access Advisor
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org57306cb" class="outline-2">
+<h2 id="org57306cb">ECR : Elastic Container Registry</h2>
+<div class="outline-text-2" id="text-org57306cb">
+</div>
+<div id="outline-container-orgb00f0b7" class="outline-3">
+<h3 id="orgb00f0b7">Intro</h3>
+<div class="outline-text-3" id="text-orgb00f0b7">
+<ul class="org-ul">
+<li>It is use to store docker repository in AWS</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgee7355a" class="outline-3">
+<h3 id="orgee7355a">Step to isntall and use ECR Repo</h3>
+<div class="outline-text-3" id="text-orgee7355a">
+<ol class="org-ol">
+<li>create a private repo       : For storing docker images</li>
+<li>configure local AWS-CLI and docker    : For No-password based authentication</li>
+<li>Creaate Docker File and  Docker build Image and push to ECR repo</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf8a1d26" class="outline-3">
+<h3 id="orgf8a1d26">1. Create Private Repo</h3>
+<div class="outline-text-3" id="text-orgf8a1d26">
+<p>
+AWS &gt; Serach ECR &gt; Create ECR 
+</p>
+
+<ul class="org-ul">
+<li>Create ECR :
+<ul class="org-ul">
+<li>[+] Private</li>
+<li class="off"><code>[&#xa0;]</code> Public</li>
+<li>Repository Name : <span class="underline">_</span> <b>test<sub>ecr</sub><sub>repo</sub></b> <span class="underline">__</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Create repo</b>
+</p>
+
+<p>
+To get the <b>push CMD</b> in ECR 
+ECR &gt; Repositories &gt; {Select : Repo} &gt; Push commands 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">docker build -t &lt;ECR-REPO-NAME&gt; .</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">docker tag &lt;ECR-REPO-NAME&gt;:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/&lt;ECR-REPO-NAME&gt;:latest</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">docker build -t &lt;DOCKER-NAME&gt;:1.1 .</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">docker tag &lt;DOCKER-NAME&gt;:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/&lt;ECR-REPO-NAME&gt;:latest</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/&lt;ECR-REPO-NAME&gt;:latest</span>
+
+docker build -t test_ecr_repo .
+docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+</pre>
+</div>
+
+<p>
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc259a3b" class="outline-3">
+<h3 id="orgc259a3b">2. Config AWS-cli and docker-cli</h3>
+<div class="outline-text-3" id="text-orgc259a3b">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Connect local machine to AWS Console</span>
+aws configure
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">AWS Acces Key ID :AKIA3K3WQJCB66Z2UMMI</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">AWS Secret Access Key:1Sl6E6uNH0kkjwR4x4N/PD8jEymqhZQpElI8J6D8</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default region name [None]</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Default output format [None]:</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Docker auto login OR Docker link AWS ECR repo</span>
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3158f7a" class="outline-3">
+<h3 id="org3158f7a">3. Create,Push docker-img in ECR</h3>
+<div class="outline-text-3" id="text-org3158f7a">
+<pre class="example">
+cat Dockerfile
+#FROM TOMCAT:8
+#WORKDIR /opt
+#COPY *.war .
+#EXPOSE 8080
+
+docker build -t mywar:1.1 .
+docker tag mywar:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+#docker build -t test_ecr_repo .
+#docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+docker images
+# Push to ecr repo
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+</pre>
+
+<p>
+ECR Dashboard &gt; Repo &gt; Select Repo :
+</p>
+<ul class="org-ul">
+<li>Image URL :</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge095550" class="outline-3">
+<h3 id="orge095550">Example: Create docker file and upload in  ECR repository</h3>
+<div class="outline-text-3" id="text-orge095550">
+<pre class="example">
+cd project_war/
+git push origin master
+mvn package # in create target/ *.war files
+cd target/
+touch Dockerfile
+cat Dockerfile
+#FROM TOMCAT:8
+#WORKDIR /opt
+#COPY *.war .
+#EXPOSE 8080
+
+docker build -t mywar:1.1 .
+docker tag mywar:1.1 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+# docker images
+
+
+# mywar 1:1
+
+
+#
+# Push to ecr repo
+#
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 779248224387.dkr.ecr.us-east-2.amazonaws.com
+docker 
+
+docker build -t test_ecr_repo .
+docker tag test_ecr_repo:latest 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+
+
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+
+
+docker push 779248224387.dkr.ecr.us-east-2.amazonaws.com/test_ecr_repo:latest
+</pre>
+
+
+<p>
+next step is to create cluster
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1d97c92" class="outline-2">
+<h2 id="org1d97c92">ECS: Elastic Container Service</h2>
+<div class="outline-text-2" id="text-org1d97c92">
+<p>
+Amazon Elastic Container Service
+ECS object
+</p>
+<ul class="org-ul">
+<li>Cluster :
+<ul class="org-ul">
+<li>Task definition
+<ul class="org-ul">
+<li>Container definition : added docker image url</li>
+</ul></li>
+<li>Service</li>
+</ul></li>
+</ul>
+
+<p>
+EC2 backend of ECS
+</p>
+</div>
+
+
+<div id="outline-container-orgc26a7fa" class="outline-3">
+<h3 id="orgc26a7fa">What is Fargate : #Serverless #</h3>
+<div class="outline-text-3" id="text-orgc26a7fa">
+<p>
+Launch Docker Containers on AWS
+You don't provision the infrastructure (no EC2 instance to mange) - simpler
+Serveless offering
+AWS just runs containers for you based on CPU/RAM you need
+</p>
+
+<p>
+Farget is a type of ECS
+Farget lauch Task
+To access Fargate Task we need ENI (Elastic Network Interface)
+For each Task there will have a ENI
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7e63afd" class="outline-3">
+<h3 id="org7e63afd">Create Cluster using Fargate</h3>
+<div class="outline-text-3" id="text-org7e63afd">
+<ul class="org-ul">
+<li>Steps in Creating Cluster using Fargate
+<ol class="org-ol">
+<li>Create ECS Cluster :  { Cluster Type + Cluster }</li>
+<li>├── Create Task Defination  {Cluster Type + Size(cpu,ram),ecr<sub>img</sub> link, port mapping }</li>
+<li>├────── Create a Service and Lauch Cluster {Cluster Type, Task defination, No.of task,VPC,Ip, Load Balancer, Auto Scaling}</li>
+<li>└───────────Container Defination : <span class="underline">_ <b>ECR img url</b> __</span></li>
+</ol></li>
+</ul>
+
+<p>
+After creating cluster we need to create service for that we need to create a <b>task Defination</b>     
+</p>
+</div>
+<div id="outline-container-orgf69635e" class="outline-4">
+<h4 id="orgf69635e">Get ECR img url</h4>
+<div class="outline-text-4" id="text-orgf69635e">
+<ol class="org-ol">
+<li>AWS &gt; Search ECR &gt; Select ECR: {repo-name}</li>
+<li>Choose docker img with version either latest or preference and click on it</li>
+<li>get {docker img url}</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8f86c74" class="outline-4">
+<h4 id="org8f86c74">Create ECS Cluster :  { Cluster Type + Cluster }</h4>
+<div class="outline-text-4" id="text-org8f86c74">
+<ul class="org-ul">
+<li>AWS &gt; Search ECS &gt; Create ECS</li>
+<li><b>Select Cluster Template</b>
+<ul class="org-ul">
+<li>[+]Network Only Fargate (VPC,Subnets)</li>
+<li>[ ]EC2 Linux + Network (Cluster, VPC, Subnets, Auto Scaling with AMI)</li>
+<li>[ ]EC2 Windows+Networking(Cluster, VPC, Subnets, Auto Scaling with AMI)</li>
+</ul></li>
+<li><b>Create ECS</b>  
+<ul class="org-ul">
+<li>Cluster name : dev-cluster</li>
+</ul></li>
+<li>Create Cluster</li>
+</ul>
+
+<p>
+Simillary we can create {qa-cluster, sit-cluster, uat-cluster}
+</p>
+</div>
+</div>
+<div id="outline-container-orgda8633a" class="outline-4">
+<h4 id="orgda8633a">Create Task Defination {Cluster Type + Size(cpu,ram),ecr<sub>img</sub> link, port mapping }</h4>
+<div class="outline-text-4" id="text-orgda8633a">
+<p>
+ECS DASHBOARD  &gt; <b>Task Defination</b> &gt; Create New Task
+</p>
+
+<ul class="org-ul">
+<li><b>Select launch type compatibility</b>
+<ul class="org-ul">
+<li>[+] Fargate</li>
+<li class="off"><code>[&#xa0;]</code> EC2</li>
+<li class="off"><code>[&#xa0;]</code> External</li>
+</ul></li>
+<li><b>Configure task and Container</b>
+<ul class="org-ul">
+<li>Task Name : <span class="underline"><span class="underline">*mydev<sub>task</sub>*____</span></span></li>
+<li>Task size :
+<ul class="org-ul">
+<li>Task Memory (GB) :  <span class="underline">_ <b>0.5GB</b> _</span></li>
+<li>Task CPU (vCPU) :  <span class="underline">_<sub>*</sub>0.25vCPU* _</span></li>
+</ul></li>
+<li>ADD Container:
+<ul class="org-ul">
+<li>Container name* : <span class="underline">_ <b>myhttpd</b> _</span></li>
+<li>Image* : <span class="underline">_ <b>ECR url</b> _</span></li>
+<li>Port mappings: _ <b>80</b> _</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+<b>CREATED TASK DEFINATION</b>
+<b>Note:</b> Task Definition is version control
+</p>
+<ul class="org-ul">
+<li>Revised Task Defination can be update in Task Defination</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org727c3eb" class="outline-4">
+<h4 id="org727c3eb">Create a Service  and Lauch Cluster {Cluster Type, Task defination, No.of task,VPC,Ip, Load Balancer, Auto Scaling}</h4>
+<div class="outline-text-4" id="text-org727c3eb">
+<p>
+AWS &gt; Search Cluster &gt; Select {dev-cluster} &gt; Service&gt; Create Service
+</p>
+<ul class="org-ul">
+<li><b>Configure Service</b>
+<ul class="org-ul">
+<li>Lauch Type :
+<ul class="org-ul">
+<li>[+] fargate</li>
+<li class="off"><code>[&#xa0;]</code> EC2</li>
+<li class="off"><code>[&#xa0;]</code> EXTERNAL</li>
+</ul></li>
+<li>Task define : <span class="underline">_ <b>mydev<sub>task</sub></b> _</span></li>
+<li>Cluster : <span class="underline">_ <b>dev-cluster</b> _</span></li>
+<li>Service name :__ <b>myservice</b> __</li>
+<li>No.of task :__ <b>1</b> __</li>
+<li>Min/Max Health % : <span class="underline">_ <b>100,200</b> _</span></li>
+<li>Deployment type : <span class="underline">_ <b>Rolling update</b> _</span></li>
+<li>Cluster VPC :__ <b>ALL</b> __</li>
+<li>Subnets : <span class="underline">_ <b>ALL</b> _</span></li>
+<li>Auto-assign public IP : <span class="underline">_ <b>ENABLE</b> _</span></li>
+<li>LOAD BALANCER :__ <b>NO</b> __</li>
+<li>AUTO SCALING: <span class="underline">_ <b>NO</b> _</span></li>
+</ul></li>
+<li><b>Configure Network</b></li>
+<li><b>Set Auto Scaling (optional)</b></li>
+<li><b>Review</b></li>
+</ul>
+<p>
+<b>CREATE A SERVICE</b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb97606e" class="outline-3">
+<h3 id="orgb97606e">--------------------------------------------</h3>
+</div>
+<div id="outline-container-org61d2d89" class="outline-3">
+<h3 id="org61d2d89">IAM Roles for ECS Task</h3>
+<div class="outline-text-3" id="text-org61d2d89">
+<p>
+ECS Agent : every EC2 node in ECS cluster will have ECS Agent
+</p>
+
+<p>
+ECS Agent : ECS Service, ECR Service, CloudWatch Logs
+</p>
+<ul class="org-ul">
+<li>Makes API calls to ECS service</li>
+<li>Send container logs to CloudWatch Logs</li>
+<li>Pull Docker image from ECR</li>
+<li>Ref sensitive data in Secrets Manager or SSM Paramenter Store</li>
+</ul>
+
+<p>
+ECS TASK Role:
+Allow each task to have a specific role
+Use different roles for the differnt ECS Service you runs
+Task Role is defined in the task definition
+</p>
+</div>
+</div>
+
+<div id="outline-container-org87fe4f3" class="outline-3">
+<h3 id="org87fe4f3">How do we share db(data)  How do we have data Volume in ECS</h3>
+<div class="outline-text-3" id="text-org87fe4f3">
+<p>
+EC2 + EFS NFS(File System)
+</p>
+
+
+<p>
+Work for both EC2 Tasks and Fargate tasks
+Ability to mount EFS volume onto tasks
+Tasks launched in any AZ will be able to share the same data in the EFS Volume.
+</p>
+
+<p>
+Fargate + EFS = serverless + data storage without managing servers
+Use case: persistent mulit-AZ shared storage for your containers
+</p>
+</div>
+</div>
+<div id="outline-container-org3c3513b" class="outline-3">
+<h3 id="org3c3513b">ECS Services &amp; Tasks</h3>
+<div class="outline-text-3" id="text-org3c3513b">
+<p>
+Application Load Balancer :
+</p>
+</div>
+</div>
+<div id="outline-container-orge11058e" class="outline-3">
+<h3 id="orge11058e">Load Balancing for Fargate :</h3>
+<div class="outline-text-3" id="text-orge11058e">
+<p>
+Each task has a unique IP:
+You must allow on the ENI's security group <span class="underline">the task port</span> form the ALB secrity group
+</p>
+</div>
+</div>
+
+<div id="outline-container-org58ca064" class="outline-3">
+<h3 id="org58ca064">ECS Task invoked by Event Bridge</h3>
+<div class="outline-text-3" id="text-org58ca064">
+<p>
+Tutorial : <a href="https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26099498#announcements">https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26099498#announcements</a>
+</p>
+
+<p>
+Video.No: 197 consist of S3, A
+</p>
+
+
+<p>
+Client send or upload to S3 Bucket
+S3 will trigger EVENT to AmazonEventBridge.
+AmazonEventbridge:
+ -Rule : Run ECS Task
+</p>
+<ul class="org-ul">
+<li>(It would create new Fargate task ) for us</li>
+<li>The new task
+<ul class="org-ul">
+<li>Get object for S3 Bucket</li>
+<li>Save result in Amazon Dynamo DB</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc0a74f1" class="outline-3">
+<h3 id="orgc0a74f1">ECS Hands on</h3>
+</div>
+<div id="outline-container-org0515223" class="outline-3">
+<h3 id="org0515223">ECS Scaling - Service CPU Usage Example</h3>
+<div class="outline-text-3" id="text-org0515223">
+<p>
+Auto scaling :
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3f4e005" class="outline-3">
+<h3 id="org3f4e005">ECS Rolling Updates</h3>
+<div class="outline-text-3" id="text-org3f4e005">
+<p>
+Whne
+</p>
+</div>
+</div>
+<div id="outline-container-org23e6a14" class="outline-3">
+<h3 id="org23e6a14">ECR Overview</h3>
+</div>
+<div id="outline-container-org0f40fbb" class="outline-3">
+<h3 id="org0f40fbb">EKS Overview</h3>
+</div>
+</div>
+<div id="outline-container-orgbdf1956" class="outline-2">
+<h2 id="orgbdf1956">Load Balancer :</h2>
+<div class="outline-text-2" id="text-orgbdf1956">
+</div>
+<div id="outline-container-org8659c81" class="outline-3">
+<h3 id="org8659c81">Intro</h3>
+<div class="outline-text-3" id="text-org8659c81">
+<p>
+Problem of Individual SERVER is if server is down the entire web-site will be down
+So have more than one server and are connected to Load Balancer
+We will create a dns attached to Load Balancer
+</p>
+
+<p>
+Load Balancer : Job is to assign load to servers and maintain load 
+Advanatage  :
+1.server is having high-availability 
+2.even if one server is down we can we can manage
+3 As we assigning dns to load balancer we are able to hide the servers.
+</p>
+
+<p>
+There are there types of Load Balancer
+</p>
+
+<ul class="org-ul">
+<li>LOAD BALANCER 
+<ul class="org-ul">
+<li>ALB : Application Load Balancer</li>
+<li>NLB : Network Load Balancer</li>
+<li>Gateway Load Balancer</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org37273b2" class="outline-3">
+<h3 id="org37273b2">Application Load Balancer vs Network Load Balancer</h3>
+<div class="outline-text-3" id="text-org37273b2">
+<p>
+ALB : Application Load Balancer
+</p>
+<ul class="org-ul">
+<li>In OSI model (7th Layer)</li>
+<li>handle http and https</li>
+</ul>
+
+<p>
+In NLB:
+</p>
+<ul class="org-ul">
+<li>In OSI model (4th Layer)</li>
+<li>it can handle millions of responce</li>
+<li>tcp, TLS and UDP</li>
+<li>IP Stat</li>
+</ul>
+
+<div id="orge4537bf" class="figure">
+<p><img src="./Images/ISO-MODEL.jpeg" alt="ISO-MODEL.jpeg" /> 
+</p>
+</div>
+
+<p>
+<a href="https://www.youtube.com/watch?v=WqJDac1H81I">https://www.youtube.com/watch?v=WqJDac1H81I</a>
+</p>
+
+<p>
+The Differene between ALB and NLB is
+ALB: operates at layer 7 Application Layer (http,https) mean
+</p>
+<ul class="org-ul">
+<li>ALB it able to inspect appliction level (http,https)
+<ul class="org-ul">
+<li>it means it can differenciat between different urls
+<ul class="org-ul">
+<li>It can route /bar and /foo to different ec2-instance
+<ul class="org-ul">
+<li>It load balance the ec2-instance based on (url,http,https)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+NLB: operate at layer 4 : Transportation  (tcp,udp)
+</p>
+<ul class="org-ul">
+<li>NLB it able to inspect appliction level (tcp,udp)
+<ul class="org-ul">
+<li>it means it can differenciat between different urls
+<ul class="org-ul">
+<li>It load balance the ec2-instance based on Network-Traffic (tcp,udp) and balance the load</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div id="org0233a27" class="figure">
+<p><img src="./Images/ALB_vs_NLB.png" alt="ALB_vs_NLB.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0b71e48" class="outline-2">
+<h2 id="org0b71e48">How to create load balancer(NLB) :</h2>
+<div class="outline-text-2" id="text-org0b71e48">
+<p>
+Steps
+</p>
+<ol class="org-ol">
+<li>Create ec2 servers which are need to be NLB</li>
+<li>Create a target group  : Register EC2 instance in Target Group</li>
+<li>Create a Load Balancer :</li>
+</ol>
+
+
+<div id="org87abb34" class="figure">
+<p><img src="./Images/NLB.png" alt="NLB.png" />   
+</p>
+</div>
+</div>
+<div id="outline-container-orgbc712c7" class="outline-3">
+<h3 id="orgbc712c7">Create ec2 {3 to 4 with server name a,b,c} servers in aws</h3>
+<div class="outline-text-3" id="text-orgbc712c7">
+<ul class="org-ul">
+<li>Choose AMI</li>
+<li>Choose Instance Type</li>
+<li>Configure Instance
+<ul class="org-ul">
+<li><p>
+User data: # run below code when vm runs 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+yum install httpd -y
+systemctl enable httpd
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"&lt;h1&gt; This is server A{A,B,C}&lt;/h1&gt;"</span> &gt; /var/www/html/index.html
+systemctl start httpd
+</pre>
+</div></li>
+</ul></li>
+</ul>
+<ul class="org-ul">
+<li>Configure Security Group :
+Custom TCP : &lt;Protocol :TCP,Port Range: 80, Source: Anywhere &gt;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5906089" class="outline-3">
+<h3 id="org5906089">CREATE A TARGET GROUP : {Register EC2 instance in Target Group}</h3>
+<div class="outline-text-3" id="text-org5906089">
+<p>
+AWS EC2 Dashboard &gt; Load Balancer &gt; Target Group} &gt; Create Target Group
+</p>
+<ul class="org-ul">
+<li>Create Target Group
+<ul class="org-ul">
+<li>Choose a target type : <b><span class="underline">Instance</span></b> {Instance, Ip addresses, Lambda function}</li>
+<li>Target group name : <span class="underline"><span class="underline">MyNLB<sub>targetGroupName</sub></span></span></li>
+<li>Protocol : TCP</li>
+<li>Port: 80</li>
+<li>VPC : {Choose VPC}</li>
+</ul></li>
+<li>Register targets (Add EC2 instance)  
+<ul class="org-ul">
+<li>MyNLB<sub>targetGroupName</sub> : <span class="underline">_ <b>Choose { running &lt; ec2 instance &gt; }</b> _</span></li>
+</ul></li>
+<li>Click <b>create target group</b></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org219bbcf" class="outline-3">
+<h3 id="org219bbcf">Create a NLB</h3>
+<div class="outline-text-3" id="text-org219bbcf">
+<ul class="org-ul">
+<li><p>
+AWS EC2 Dashboard &gt;  {Load Balancer &gt; Load Balancer}
+</p>
+<ul class="org-ul">
+<li>Choose Load Balancer Type : {ALB (http,https), NLB{Network},Gateway Load Balancer}</li>
+</ul>
+<ul class="org-ul">
+<li>Scheme :
+<ul class="org-ul">
+<li>Internet-facing [check]</li>
+<li>Internal [un-check]</li>
+</ul></li>
+<li>IP address type :
+<ul class="org-ul">
+<li>[+]IPv4</li>
+<li>[ ]Ip6</li>
+</ul></li>
+<li>Network mapping :
+<ul class="org-ul">
+<li>Mapping
+<ul class="org-ul">
+<li>Subnets : _ <b>ALL</b> _</li>
+</ul></li>
+<li>Assigned by AWS {or Elastic Ip }</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+Listener:
+</p>
+<ul class="org-ul">
+<li>Protocol :TCP</li>
+<li>Port : 80</li>
+<li>Choose Target Group :  <span class="underline"><span class="underline">MyNLB<sub>targetGroupName</sub></span></span></li>
+</ul>
+<p>
+CLICK <b>Create NLB</b>
+AWS  will create DNS name and attach NLB.
+</p>
+</div>
+</div>
+<div id="outline-container-org12fafe5" class="outline-3">
+<h3 id="org12fafe5">Get dns for NLB</h3>
+<div class="outline-text-3" id="text-org12fafe5">
+<p>
+GOTO
+AWS EC2 Dashboard &gt; {Load Balancer &gt; Load Balancer} &gt; Select Load Balancer
+</p>
+<ul class="org-ul">
+<li>get DNS Below</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6596825" class="outline-3">
+<h3 id="org6596825">Trouble NLB :</h3>
+<div class="outline-text-3" id="text-org6596825">
+<p>
+Know Traget Group should healthy Before connect to Load Balancers
+If your target group is not healty
+</p>
+<ul class="org-ul">
+<li>Check your docker-file or docker compose/stack file make sure the healtcheck is enable and it is working properly</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgec53bdd" class="outline-2">
+<h2 id="orgec53bdd">Create ALB</h2>
+<div class="outline-text-2" id="text-orgec53bdd">
+<p>
+<a href="https://www.youtube.com/watch?v=WqJDac1H81I">https://www.youtube.com/watch?v=WqJDac1H81I</a>
+</p>
+
+<p>
+ALB setting for ssl certification, dns-name 
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-28<sub>20</sub>-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org468b178" class="outline-2">
+<h2 id="org468b178">Auto Scaling</h2>
+<div class="outline-text-2" id="text-org468b178">
+</div>
+<div id="outline-container-orgfaac082" class="outline-3">
+<h3 id="orgfaac082">Intro</h3>
+<div class="outline-text-3" id="text-orgfaac082">
+<p>
+During high-traffic period like 25th Dec or New-Year server are experiencing high-traffic
+Simillary Amazon  "BUMPER DIWALI OFFER" during this time we all seriver are having high-traffic.
+</p>
+
+<p>
+So by Auto Scaling we can auto-scale the server if load &gt;80% approximately
+</p>
+
+<p>
+There are two types of Auto Scalling
+</p>
+<ul class="org-ul">
+<li>Horizontal  : ec2 (load &gt;80%) -&gt; ec2 (another ec2 instance is launched)</li>
+<li>Vertical    : ec2 (load &gt;80%) -&gt; increase memory</li>
+</ul>
+
+<p>
+There are two type of Policy
+</p>
+<ul class="org-ul">
+<li>[+]Scaling policy/Dynamic Scaling policy
+<ul class="org-ul">
+<li>[+]Target Tracking Scaling policy</li>
+<li>[ ]Step Scaling policy</li>
+<li>[ ]Simple Scaling policy</li>
+</ul></li>
+<li>[ ]Predictive Policy</li>
+<li>[ ]Schedule policy</li>
+</ul>
+
+<p>
+In Scaling policy : we track the servers and auto load
+In Schedule policy : we schedule policy like festivals, sunday, peak-working time
+</p>
+
+<p>
+Advanatage :
+High availability
+You can increase/decrease servers based on cpu load.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5980002" class="outline-3">
+<h3 id="org5980002">Steps</h3>
+<div class="outline-text-3" id="text-org5980002">
+<p>
+Auto Scaling
+</p>
+<ol class="org-ol">
+<li>Create Lauch Template:
+<ul class="org-ul">
+<li>[+]Lauch Template : Version control is availabe (Instaces &gt; Lauch Template)</li>
+<li>[ ]Lauch Configration : NO - Version(Auto Scaling &gt; Lauch Configration)</li>
+</ul></li>
+<li>Create Auto Scaling Group</li>
+<li>Scaling policy
+<ul class="org-ul">
+<li>Traget Tracking</li>
+</ul></li>
+<li>Schedule policy
+<ul class="org-ul">
+<li>Crontab based</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orged675ab" class="outline-3">
+<h3 id="orged675ab">Create Lauch Template</h3>
+<div class="outline-text-3" id="text-orged675ab">
+<p>
+AWS EC2 Dashboard  &gt;  (Instance &gt; Lauch Template) &gt; Create Lauch Template
+</p>
+
+<p>
+Create Lauch Template
+</p>
+<ul class="org-ul">
+<li>Name : <span class="underline">_ <b>my<sub>own</sub></b> _</span></li>
+<li>Version describe : <span class="underline">_ <b>It's of web-server auto scaling</b> _</span></li>
+<li>Choose AMI : <span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline">__</span></span></span></span></span></span></span></span></li>
+<li>Instance : <span class="underline">_ <b>t2.small</b> _</span></li>
+<li>Keypair : <span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline">__</span></span></span></span></span></span></span></span></li>
+<li>Networking Setting: <span class="underline">__</span> VPC <span class="underline"><span class="underline">_</span></span></li>
+<li>Security Group: <span class="underline"><span class="underline"><span class="underline"><span class="underline"><span class="underline">__</span></span></span></span></span></li>
+<li><b>Create Lauch Template</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org99f41f0" class="outline-3">
+<h3 id="org99f41f0">Create AutoScaling Group</h3>
+<div class="outline-text-3" id="text-org99f41f0">
+<p>
+AWS EC2 Dashboard &gt; ( Auto Scaling  &gt; Auto Scaling Group) &gt; Select AutoScalinggroup: myASG &gt;
+</p>
+
+<p>
+Choose  <b>Auto ScalingGroup</b> form {Details,Activity, Automatic scaling, Instance, Source Management, Monitoring, Instance refresh}
+</p>
+
+<p>
+Create AutoScalingGroup
+</p>
+<ul class="org-ul">
+<li>Name : myASG</li>
+<li>Lauch template :  my<sub>own</sub>  # Name of Lauch Template create above</li>
+<li>Instace Purchase Options :
+<ul class="org-ul">
+<li>[+] Adhere to launch template</li>
+<li class="off"><code>[&#xa0;]</code> Combine purchase options and instance</li>
+</ul></li>
+<li>VPC : _ <b>ALL</b> _</li>
+<li>SUBNET : _ <b>ALL</b> __  # <b>NOTE</b>: auto scalling happens in any palce SUBNET</li>
+<li>Group Size :
+<ul class="org-ul">
+<li>Desire Capacity: 2</li>
+<li>Min Capacity: 1</li>
+<li>Max Capacity : 4</li>
+</ul></li>
+<li>Scaling polices
+<ul class="org-ul">
+<li>[+] Target tracking scaling policy (<b>imp</b>)</li>
+</ul></li>
+</ul>
+<p>
+<b>Create Auto Scaling Group</b>    
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbb91da8" class="outline-3">
+<h3 id="orgbb91da8">Automate Scaling Policies</h3>
+<div class="outline-text-3" id="text-orgbb91da8">
+<p>
+EC2 Dashboard &gt; Auto Scaling: Select AutoScaling Group : myASG(Click)
+</p>
+
+<ul class="org-ul">
+<li>Auto Scaling Group: (myASG)
+<ul class="org-ul">
+<li><p>
+Automatic scaling
+</p>
+<hr />
+<ul class="org-ul">
+<li><p>
+[+] <b>Dynamic scaliing policies</b>
+</p>
+
+<ul class="org-ul">
+<li>Policy type:
+<ul class="org-ul">
+<li>[+] <b>Traget Tracking scaling</b></li>
+<li class="off"><code>[&#xa0;]</code> Step scaling</li>
+<li class="off"><code>[&#xa0;]</code> Simple scaling</li>
+</ul></li>
+<li>Scaling Policy name :</li>
+<li>Metric type :
+<ul class="org-ul">
+<li>[+] Avg(CPU %)</li>
+</ul></li>
+<li>Target value : <span class="underline">_ <b>50</b> _</span></li>
+<li>Instance need
+<span class="underline"><span class="underline">300_</span></span> sec warm up before including in meter</li>
+</ul>
+
+<p>
+<b>Create Scaling Policy</b>  
+</p></li>
+</ul>
+<hr />
+<ul class="org-ul">
+<li>[+] Scheduled action
+<ul class="org-ul">
+<li>Create Schedule action
+<ul class="org-ul">
+<li>Name : <span class="underline">__</span></li>
+<li>Desire Capacity :</li>
+<li>Min Capacity:</li>
+<li>Max Capacity:</li>
+<li>Recurrence : <span class="underline">_ * * * * * _</span> (crontab)</li>
+<li>Timezone :</li>
+<li>Specific start time
+<ul class="org-ul">
+<li>Start time : 2021/08/09 10:00 Etc/UTC</li>
+<li>End time   : 2021/08/09 23:00 Etc/UTC</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Predictive scaling policies</li>
+<li><p>
+Scheduled action    
+</p>
+
+<p>
+adapting
+</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd3c49ac" class="outline-2">
+<h2 id="orgd3c49ac">vpc : Virtual Private Cloud</h2>
+<div class="outline-text-2" id="text-orgd3c49ac">
+<p>
+Draws your own aws VPC diagram in draw.io <a href="https://www.youtube.com/watch?v=cLnuMtuTB2M">https://www.youtube.com/watch?v=cLnuMtuTB2M</a> 
+</p>
+</div>
+<div id="outline-container-org3643dcd" class="outline-3">
+<h3 id="org3643dcd">Intro</h3>
+<div class="outline-text-3" id="text-org3643dcd">
+</div>
+<div id="outline-container-org3368da5" class="outline-4">
+<h4 id="org3368da5">AWS Structure</h4>
+<div class="outline-text-4" id="text-org3368da5">
+<p>
+VPC Virtual Private Cloud
+Consist of
+</p>
+<ul class="org-ul">
+<li>Internet gateway (IGW)</li>
+<li>Subnet(Public, Private)</li>
+<li>routing
+<ul class="org-ul">
+<li>creaete route</li>
+<li>add subnets</li>
+</ul></li>
+<li>Attach EC2 instance to VPC Subnet</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd3534a0" class="outline-4">
+<h4 id="orgd3534a0">What is a public IP address?</h4>
+<div class="outline-text-4" id="text-orgd3534a0">
+<p>
+A public IP address is an IP address that can be accessed directly over the internet and is assigned to your network router by your internet service provider (ISP).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga79bcf0" class="outline-4">
+<h4 id="orga79bcf0">What is a private IP address?</h4>
+<div class="outline-text-4" id="text-orga79bcf0">
+<p>
+A private IP address is the address your network router assigns to your device. Each device within the same network is assigned a unique private IP address (sometimes called a private network address) — this is how devices on the same internal network talk to each other.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf9d7f3a" class="outline-4">
+<h4 id="orgf9d7f3a">What are differnet Ip in VPC :</h4>
+<div class="outline-text-4" id="text-orgf9d7f3a">
+<p>
+Two diff Ip
+</p>
+<ul class="org-ul">
+<li>Pubic Ip:</li>
+<li>Private Ip:</li>
+</ul>
+<p>
+Ex : school ID/ RollNo. and SSC-ID
+Here school ID can be same if two person are from different school but SSC-ID is will be not same and it is globally accepted.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdb3e57e" class="outline-4">
+<h4 id="orgdb3e57e">Public and private IP address ranges</h4>
+<div class="outline-text-4" id="text-orgdb3e57e">
+<p>
+Your private IP address exists within specific private IP address ranges reserved by the Internet Assigned Numbers Authority (IANA) and should never appear on the internet. There are millions of private networks across the globe, all of which include devices assigned private IP addresses within these ranges:
+    Class A: 10.0.0.0        — 10.255.255.255
+    Class B: 172.16.0.0      — 172.31.255.255
+    Class C: 192.168.0.0     — 192.168.255.255
+Example of private Ip
+172.20.0.1
+192.168.1.8
+</p>
+</div>
+</div>
+<div id="outline-container-orgdeffd47" class="outline-4">
+<h4 id="orgdeffd47">What is different Btw Private IP and Public IP :</h4>
+</div>
+<div id="outline-container-org001d6c3" class="outline-4">
+<h4 id="org001d6c3">CIDR (In aws min size:0:0:0:0/28 (16 IP) and max 0:0:0:0/16 (65536) )</h4>
+<div class="outline-text-4" id="text-org001d6c3">
+<p>
+CIDR : Classless inter-domain routing (CIDR)
+</p>
+<ul class="org-ul">
+<li>Is a method for allocating IP addresses and IP routing.</li>
+<li>A collection of Internet Protocol (IP) standards is used to create unique identifiers for networks and individual devices.</li>
+</ul>
+
+<p>
+IP4&lt;Format&gt;: 0-255.0-255.0-255.0-255 : 8bits, 8bits, 8bits,8bits = 32bits=&gt;2<sup>32</sup>=4.2X10<sup>9</sup>= 0.42Billion possible  Ip are available
+</p>
+
+<p>
+By CIDR NOTAION to calcualte the available Ip
+Example :
+</p>
+<ul class="org-ul">
+<li>10.0.0.0/16 :
+<ul class="org-ul">
+<li>Means 1st 16 bits are fixed so possible ip are
+<ul class="org-ul">
+<li>10.0.0-255.0-255 : 256*256 = 65,536 Ip or 16bit Ip are possible</li>
+</ul></li>
+</ul></li>
+<li>10.0.0.0/24:
+<ul class="org-ul">
+<li>Means 1st 24 bits are fixed so available Ip
+<ul class="org-ul">
+<li>10.0.0.0-255 : 256 Ip or  are possible</li>
+</ul></li>
+</ul></li>
+<li>10.0.0.0/8:
+<ul class="org-ul">
+<li>Means 1st 8 bits are fixed so available Ip
+<ul class="org-ul">
+<li>10.0-255.0-255.0-255 : 256*256*256 Ip are possible</li>
+</ul></li>
+</ul></li>
+<li>0.0.0.0/0 :
+<ul class="org-ul">
+<li>Means 0 bits are fixed so avialable Ip
+<ul class="org-ul">
+<li>0-255.0-255.0-255.0-255 : all Ip are available</li>
+</ul></li>
+</ul></li>
+<li>10.0.0.32
+<ul class="org-ul">
+<li>Means 1st 32 bits are fixed means there is only one ip:</li>
+</ul></li>
+</ul>
+
+<p>
+Example :
+</p>
+<ul class="org-ul">
+<li>10.0.0.0/16 : 16 bit Ip or 65,536 are possible</li>
+<li>10.0.0.0/24:   8 bit Ip  or 256 Ip are possible</li>
+<li>10.0.0.0/8:   24 bit Ip or 2<sup>24</sup> Ip are possible</li>
+<li>0.0.0.0/0:    32 bit Ip or 2<sup>32</sup> Ip are possible   NOTE: aws allow  CIDR&gt;16,24 and (0.0.0.0/0:    32 bit Ip or 2<sup>32</sup> Ip are possible) is not allowed</li>
+<li>10.0.0.0/32:   0 bit Ip or 2<sup>0</sup>=1 Ip are possible</li>
+<li><p>
+10.0.0.0/26:   6 bit Ip or 2<sup>6</sup>=64 Ip are possible
+</p>
+
+<p>
+In aws if we take 10.0.0.0/24: in 256 ip
+5 ip are already taken
+</p></li>
+</ul>
+
+<p>
+We can calcualte Ip range in CIDR from internet
+<a href="http://jodies.de/ipcalc?host=10.0.0.0&amp;mask1=8&amp;mask2">http://jodies.de/ipcalc?host=10.0.0.0&amp;mask1=8&amp;mask2</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d2da19" class="outline-4">
+<h4 id="org8d2da19">VPC- Subnet reserver 5 IP add(first 4 &amp; last 1) in each subnet</h4>
+<div class="outline-text-4" id="text-org8d2da19">
+<p>
+if CIDR block is 10.0.0.0/24, then reserved IP addre:
+10.0.0.0 - Network Address
+10.0.0.1 - resrved by AWS for VPC router
+10.0.0.2 - reserved by aws for mapping to AWS-providing-DNS
+10.0.0.3 -
+10.0.0..255 Newtwork broadcast address (aws don't support broadcast so assign ip)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge117359" class="outline-4">
+<h4 id="orge117359">revise</h4>
+<div class="outline-text-4" id="text-orge117359">
+<p>
+Sub net : it is a part of network
+</p>
+
+<p>
+Class A
+Class B
+Class C - /16
+Class D - /24
+</p>
+
+<p>
+EX:
+10.1.0.0/24    24=8*3                10.1.0.X  (X:0-251)
+10.1.0.0/16    16=8*2                10.1.X.X  (X:0-251) 4 : ARE RESERVERD
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org03ff970" class="outline-3">
+<h3 id="org03ff970">Create VPC Public with IWG, 3-Subnet in Different Zone(High Availability) ,3-EC2 instance</h3>
+<div class="outline-text-3" id="text-org03ff970">
+</div>
+<div id="outline-container-org766e73d" class="outline-4">
+<h4 id="org766e73d">Steps</h4>
+<div class="outline-text-4" id="text-org766e73d">
+</div>
+<ul class="org-ul">
+<li><a id="org4642ab6"></a>Calculate and Assign IP(CIDR) for vpc and subnets<br />
+<div class="outline-text-5" id="text-org4642ab6">
+<ol class="org-ol">
+<li>Create VPC 10.0.0.0/16 : 2<sup>16</sup> = 65536      NOTE: aws allow 16,24 and (0.0.0.0/0:    32 bit Ip or 2<sup>32</sup> Ip are possible) is not allowed 
+<ul class="org-ul">
+<li>Enable public DNS</li>
+</ul></li>
+<li>Create a Subnets(3 Subnets+ EC2 instance in each subnet)
+<ul class="org-ul">
+<li>10.0.1.0/24 : 2<sup>8</sup> = 256</li>
+<li>10.0.2.0/24 : 2<sup>8</sup> = 256</li>
+<li>10.0.3.0/24 : 2<sup>8</sup> = 256</li>
+</ul></li>
+<li>Create a route and add routing policy
+<ul class="org-ul">
+<li>all subnets</li>
+</ul></li>
+<li>Create IGW (Internet Gateway)</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org1471952" class="outline-4">
+<h4 id="org1471952">1.Create VPC</h4>
+<div class="outline-text-4" id="text-org1471952">
+<p>
+VPC Dashboard &gt; Your VPCs &gt; Create VPCs
+</p>
+<ul class="org-ul">
+<li><b>Create VPCs</b>
+<ul class="org-ul">
+<li>Name :  <span class="underline">_</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+<li>IPv4 :  <span class="underline">_</span> <b>10.0.0.0/16</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Creat VPC</b>
+</p>
+
+<p>
+Attach DSN to vpcs
+VPC Dashboard &gt; Your VPCs &gt; {Select VPC : myown-vpc} &gt; Action &gt; Edit DNS Hostnames
+</p>
+<ul class="org-ul">
+<li>[ENABLE] DNS hostnames</li>
+</ul>
+<p>
+<b>Save Changes</b>  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a762b9" class="outline-4">
+<h4 id="org8a762b9">2.Create IGW</h4>
+<div class="outline-text-4" id="text-org8a762b9">
+<p>
+VPC Dashboard &gt; Internet Gateway &gt; Create Gateway
+</p>
+<ul class="org-ul">
+<li>Create Internet Gateway
+<ul class="org-ul">
+<li>Name : <span class="underline">_</span> <b>myown-igw</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Create IGW</b>
+</p>
+
+<p>
+VPC is not attached we need to attach to IGW
+VPC Dashboard &gt; Internet Gateway &gt; {Select: myown-igw} &gt; Attach to VPC
+</p>
+
+<ul class="org-ul">
+<li><b>Attach to VPC</b>
+<ul class="org-ul">
+<li>Available VPCs : <span class="underline">__</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+
+<p>
+<b>Attach Internet gatewa</b>
+</p>
+
+<p>
+Now we have successfully attach IGW to VPC.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org77bdf59" class="outline-4">
+<h4 id="org77bdf59">3.Create 3- Subnets</h4>
+<div class="outline-text-4" id="text-org77bdf59">
+<p>
+VPC Dashboard &gt; Subnets &gt; Create Subnet
+</p>
+<ul class="org-ul">
+<li>Create Subnet
+<ul class="org-ul">
+<li>Subnet Name  : <span class="underline">_</span> <b>myown-sub-01</b> <span class="underline">_</span></li>
+<li>Availability Zone : <span class="underline">_</span> <b>Mumbai/ap-south-1a</b> <span class="underline">_</span></li>
+<li>IPv4 :  <span class="underline">_</span> <b>10.0.1.0/24</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Create Subnet</b>
+</p>
+
+<ul class="org-ul">
+<li>Create Subnet
+<ul class="org-ul">
+<li>Subnet Name  : <span class="underline">_</span> <b>myown-sub-02</b> <span class="underline">_</span></li>
+<li>Availability Zone : <span class="underline">_</span> <b>Mumbai/ap-south-1b</b> <span class="underline">_</span></li>
+<li>IPv4 :  <span class="underline">_</span> <b>10.0.2.0/24</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Create Subnet</b>
+</p>
+
+<ul class="org-ul">
+<li>Create Subnet
+<ul class="org-ul">
+<li>Subnet Name  : <span class="underline">_</span> <b>myown-sub-03</b> <span class="underline">_</span></li>
+<li>Availability Zone : <span class="underline">_</span> <b>Mumbai/ap-south-1c</b> <span class="underline">_</span></li>
+<li>IPv4 :  <span class="underline">_</span> <b>10.0.3.0/24</b> <span class="underline">_</span></li>
+</ul></li>
+</ul>
+<p>
+<b>Create Subnet</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a69ca9" class="outline-4">
+<h4 id="org8a69ca9">4.Create Routing table</h4>
+<div class="outline-text-4" id="text-org8a69ca9">
+<p>
+VPC Dashboard &gt; Route Table &gt; Create Route Table
+</p>
+
+<p>
+<b>Create Route table</b>
+</p>
+<ul class="org-ul">
+<li>Name : <span class="underline">_</span> <b>myown-route-table</b> <span class="underline">_</span></li>
+<li>VPC  : <span class="underline">_</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+</ul>
+<p>
+<b>Create Route Table</b>
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="org29df029"></a>Assign Subnet to route table<br />
+<div class="outline-text-5" id="text-org29df029">
+<p>
+VPC Dashboard &gt; Route Table &gt; Select <b>myown-route-table</b>
+</p>
+
+<p>
+<b>myown-route-table</b>
+</p>
+<ul class="org-ul">
+<li><b>Subnet associatiions</b>
+<ul class="org-ul">
+<li>[+] myown-sub-01</li>
+<li>[+] myown-sub-02</li>
+<li>[+] myown-sub-03</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orgfff6a40"></a>Route or Connect route table to internet<br />
+<div class="outline-text-5" id="text-orgfff6a40">
+<p>
+VPC Dashboard &gt; Route Table &gt; Select <b>myown-route-table</b>
+<b>myown-route-table</b>
+</p>
+<ul class="org-ul">
+<li><b>route</b>
+<ul class="org-ul">
+<li>Add route
+<ul class="org-ul">
+<li>Ip : 0.0.0.0/0</li>
+<li>Target : Internet Gateway (myown-igw)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+<b>Save Change</b>
+</p>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org84ade78" class="outline-4">
+<h4 id="org84ade78">Create and connect ec2 to 3-subnets we define</h4>
+<div class="outline-text-4" id="text-org84ade78">
+<p>
+AWS Dashboard &gt; Lauch Instance &gt;
+</p>
+<ul class="org-ul">
+<li>Choose AMI : Redhat</li>
+<li>Choose Instance : t2.micro</li>
+<li>Configure Instance :
+<ul class="org-ul">
+<li>Network : <span class="underline">_</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+<li>Subnet : <span class="underline">_</span> <b>myown-sub-01</b> <span class="underline">_</span></li>
+<li>Auto-assign Public IP : Enable</li>
+<li>Enable termination protection : [+] Protect against accident termination</li>
+</ul></li>
+</ul>
+<hr />
+<p>
+AWS Dashboard &gt; Lauch Instance &gt;
+</p>
+<ul class="org-ul">
+<li>Choose AMI : Redhat</li>
+<li>Choose Instance : t2.micro</li>
+<li>Configure Instance :
+<ul class="org-ul">
+<li>Network : <span class="underline">_</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+<li>Subnet : <span class="underline">_</span> <b>myown-sub-02</b> <span class="underline">_</span></li>
+<li>Auto-assign Public IP : Enable</li>
+<li>Enable termination protection : [+] Protect against accident termination</li>
+</ul></li>
+</ul>
+<hr />
+<p>
+AWS Dashboard &gt; Lauch Instance &gt;
+</p>
+<ul class="org-ul">
+<li>Choose AMI : Redhat</li>
+<li>Choose Instance : t2.micro</li>
+<li>Configure Instance :
+<ul class="org-ul">
+<li>Network : <span class="underline">_</span> <b>myown-vpc</b> <span class="underline">_</span></li>
+<li>Subnet : <span class="underline">_</span> <b>myown-sub-03</b> <span class="underline">_</span></li>
+<li>Auto-assign Public IP : Enable</li>
+<li>Enable termination protection : [+] Protect against accident termination</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9c16d4b" class="outline-3">
+<h3 id="org9c16d4b">Create VPC Peering</h3>
+<div class="outline-text-3" id="text-org9c16d4b">
+</div>
+<div id="outline-container-orgc982fef" class="outline-4">
+<h4 id="orgc982fef">Steps</h4>
+<div class="outline-text-4" id="text-orgc982fef">
+<ol class="org-ol">
+<li>Create Two VPC[1-IGW,1-SUBNET,1-EC2,1-Routingtable]</li>
+<li>Create VPC Peering</li>
+<li>Routing connect Both RoutingTable to vpc-peering</li>
+<li>Check connect using ping</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge8d257b" class="outline-4">
+<h4 id="orge8d257b">1. Create TWo- VPC Cloud</h4>
+<div class="outline-text-4" id="text-orge8d257b">
+<p>
+Two VPC where each VPC consist of
+VPC : 10.1.0.0/16
+IGW :
+Subnet : 
+Route Table :
+<code>========================================</code>
+VPC : 10.2.0.0/16
+IGW :
+Subnet:
+RouteTable :
+</p>
+<hr />
+<ul class="org-ul">
+<li><p>
+VPC &gt; Your VPCs &gt; <b>Create VPC</b> :
+</p>
+<ul class="org-ul">
+<li>Name : myvpc<sub>01</sub></li>
+<li>IPv4 : 10.1.0.0/16</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>01</sub>}.Action.{Edit DNS Hostname} : Enable</li>
+</ul></li>
+<li><p>
+VPC &gt; IGWs &gt; <b>Create internet gateway</b> 
+</p>
+<ul class="org-ul">
+<li>Name : myvpc<sub>01</sub>-igw</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>01</sub>-igw}.Action.{Attacah to VPC} :  <span class="underline">_</span> <b>myvpc-01</b> <span class="underline">_</span></li>
+</ul></li>
+<li>VPC &gt; Subnets &gt; <b>Create subnets</b>
+<ul class="org-ul">
+<li>VPC ID : myvpc<sub>01</sub></li>
+<li>Subnets setting
+<ul class="org-ul">
+<li>subnet name : myvpc01-sub01</li>
+<li>Availability Zone: N.Virginia</li>
+<li>CIDR : 10.1.0.0/24</li>
+</ul></li>
+</ul></li>
+<li><p>
+VPC &gt; Rout Table &gt; <b>Create Route table</b>
+</p>
+<ul class="org-ul">
+<li>Name :myvpc<sub>01</sub>-rt</li>
+<li>VPC  : myvpc-01</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>01</sub>-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH</li>
+<li>CONGIG{myvpc<sub>01</sub>-rt}.Routes :
+<ul class="org-ul">
+<li>ADD ROUTE :
+<ul class="org-ul">
+<li>Destination | Target :
+10.1.0.0/16 | local</li>
+<li>0.0.0.0/0   | IGW {myvpc01-igw}</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<ul class="org-ul">
+<li><p>
+VPC &gt; Your VPCs &gt; <b>Create VPC</b> :
+</p>
+<ul class="org-ul">
+<li>Name : myvpc<sub>02</sub></li>
+<li>IPv4 : 10.2.0.0/16</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>01</sub>}.Action.{Edit DNS Hostname} : Enable</li>
+</ul></li>
+<li><p>
+VPC &gt; IGWs &gt; <b>Create internet gateway</b> 
+</p>
+<ul class="org-ul">
+<li>Name : myvpc<sub>02</sub>-igw</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>01</sub>-igw}.Action.{Attacah to VPC} :  <span class="underline">_</span> <b>myvpc-02</b> <span class="underline">_</span></li>
+</ul></li>
+<li>VPC &gt; Subnets &gt; <b>Create subnets</b>
+<ul class="org-ul">
+<li>VPC ID : myvpc<sub>02</sub></li>
+<li>Subnets setting
+<ul class="org-ul">
+<li>subnet name : myvpc02-sub01</li>
+<li>Availability Zone: N.Virginia</li>
+<li>CIDR : 10.1.0.0/24</li>
+</ul></li>
+</ul></li>
+<li><p>
+VPC &gt; Rout Table &gt; <b>Create Route table</b>
+</p>
+<ul class="org-ul">
+<li>Name :myvpc<sub>02</sub>-rt</li>
+<li>VPC  : myvpc-02</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>02</sub>-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH</li>
+<li>CONGIG{myvpc<sub>02</sub>-rt}.Routes :
+<ul class="org-ul">
+<li>ADD ROUTE :
+<ul class="org-ul">
+<li>Destination | Target :
+10.1.0.0/16 | local</li>
+<li>0.0.0.0/0   | IGW {myvpc02-igw}</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<ul class="org-ul">
+<li>EC2 &gt; Lauch Instance &gt; Instance : name : ec2-vpc01
+<ul class="org-ul">
+<li>Choose AMI :</li>
+<li>Choose Instance</li>
+<li>Configure Instance
+<ul class="org-ul">
+<li>VPC : myvpc<sub>01</sub></li>
+<li>SUBNET : myvpc01-sub01</li>
+<li>Auto-assign IP : Enable</li>
+</ul></li>
+<li>Add Storage</li>
+<li>Add Tags</li>
+<li>Configure Security Group
+<ul class="org-ul">
+<li>Type : all traffic</li>
+<li>Source : any where  : 0:0:0:0/0</li>
+</ul></li>
+<li>Review</li>
+<li>get public ip</li>
+</ul></li>
+
+<li>EC2 &gt; Lauch Instance &gt; Instance : name : ec2-vpc02
+<ul class="org-ul">
+<li>Choose AMI :</li>
+<li>Choose Instance</li>
+<li>Configure Instance
+<ul class="org-ul">
+<li>VPC : myvpc<sub>02</sub></li>
+<li>SUBNET : myvpc02-sub01</li>
+<li>Auto-assign IP : Enable</li>
+</ul></li>
+<li>Add Storage</li>
+<li>Add Tags</li>
+<li>Configure Security Group
+<ul class="org-ul">
+<li>Type : all traffic</li>
+<li>Source : any where  : 0:0:0:0/0</li>
+</ul></li>
+<li>Review</li>
+<li>get public ip</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9b95888" class="outline-4">
+<h4 id="org9b95888">2. Create VPC Peering</h4>
+<div class="outline-text-4" id="text-org9b95888">
+<p>
+Requestor :
+source : 10.1.0.0/16
+</p>
+
+<p>
+Acceptor :
+10.2.0.0/16
+</p>
+
+<p>
+VPC &gt; Peering Connections &gt; Create Peering
+</p>
+<ul class="org-ul">
+<li>Name : vpc01-02</li>
+<li>requestor : vpc01</li>
+<li>Select another VPC to peer with
+<ul class="org-ul">
+<li>[+] My account</li>
+<li class="off"><code>[&#xa0;]</code> Another account</li>
+</ul></li>
+<li>Region
+<ul class="org-ul">
+<li>[+] This Region</li>
+<li class="off"><code>[&#xa0;]</code> Another Region</li>
+</ul></li>
+<li>VPC ID
+<ul class="org-ul">
+<li>acceptor : vpc02</li>
+</ul></li>
+</ul>
+<p>
+<b>CREATED VPC PEERING CONNECTION</b>
+</p>
+<ul class="org-ul">
+<li>CONFIG{vpc01-02}.Action.{<b>Accept request</b>,Reject Request}
+<ul class="org-ul">
+<li><b>Accept Request</b></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org64c3daa" class="outline-4">
+<h4 id="org64c3daa">3. Routing connect Both RoutingTable to vpc-peering</h4>
+<div class="outline-text-4" id="text-org64c3daa">
+<ul class="org-ul">
+<li><p>
+VPC &gt; Rout Table &gt; Select{myvpc<sub>01</sub>-rt}
+</p>
+<ul class="org-ul">
+<li>VPC  : myvpc-01</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>02</sub>-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH</li>
+<li>CONGIG{myvpc<sub>02</sub>-rt}.Routes :
+<ul class="org-ul">
+<li>Destination : 10.2.0.0/16- Target: vpc01-vpc02</li>
+</ul></li>
+</ul></li>
+
+<li><p>
+VPC &gt; Rout Table &gt; Select{myvpc<sub>02</sub>-rt}
+</p>
+<ul class="org-ul">
+<li>VPC  : myvpc-02</li>
+</ul>
+<ul class="org-ul">
+<li>CONFIG{myvpc<sub>02</sub>-rt}.Subnet associatiions : SELECT SUBNETS AND ATTACH</li>
+<li>CONGIG{myvpc<sub>02</sub>-rt}.Routes :
+<ul class="org-ul">
+<li>Destination : 10.1.0.0/0</li>
+<li>Target: vpc01-vpc02</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgffaa39a" class="outline-4">
+<h4 id="orgffaa39a">4. Check ping from both ec2-servers</h4>
+<div class="outline-text-4" id="text-orgffaa39a">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">From ec2 -vpc01</span>
+ping ip{ec2-vpc02}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge456d87" class="outline-3">
+<h3 id="orge456d87">Create Private Subnet with NAT Gateway</h3>
+<div class="outline-text-3" id="text-orge456d87">
+<p>
+In Private we don't allow Internet
+But for internet we use NAT gateway(which is connected to Public Subnet) NAT and
+We assing EIP: Elastic Ip for NAT Gateway
+</p>
+</div>
+
+<div id="outline-container-org8645e91" class="outline-4">
+<h4 id="org8645e91">Private Subnet Into</h4>
+<div class="outline-text-4" id="text-org8645e91">
+<p>
+Condtions: Subnet CIDR should be private:
+</p>
+<ul class="org-ul">
+<li>Class A,B,C either</li>
+<li>10.0.0.0,172.16.0.0,192,168.0.0</li>
+</ul>
+
+<p>
+Eg: Public Subnet:
+10.0.0.0/16  -&gt; local
+0.0.0.0/0    -&gt; IGW 
+Eg:
+3.4.5.6     - &gt; IGW
+</p>
+
+<p>
+In public subnet : routetable will connect any ip-adderss (0.0.0.0/0) to IGW 
+</p>
+
+<p>
+But in private subnet :
+subnet is not  will be not connection to IGW  only local
+</p>
+
+<p>
+<b>Note</b> : If you create a ec2 instance in private subnet then we cann't ssh from local meachine
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh i <span style="color: #2d9574;">"myvpc01.pem"</span> ec2-user@10.0.4.151
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">ssh: connection to host 10.0.4.151 port 22: Connection time out  </span>
+</pre>
+</div>
+<p>
+Because : ec2 ip cann't be connect for Out off range CIDR
+</p>
+</div>
+</div>
+<div id="outline-container-org831a090" class="outline-4">
+<h4 id="org831a090">Create NAT Gateway</h4>
+<div class="outline-text-4" id="text-org831a090">
+<ul class="org-ul">
+<li><p>
+VPC &gt; NAT gateway &gt; Create NAT gateway
+</p>
+<ul class="org-ul">
+<li>Name : <span class="underline">_</span> <b>myNAT-Gateway</b> __</li>
+<li>Subnet : <span class="underline">_</span> <b>myPublicSubnet</b> __</li>
+<li>Connectivity type :
+<ul class="org-ul">
+<li>[+] Public</li>
+<li class="off"><code>[&#xa0;]</code> Private</li>
+</ul></li>
+<li>Elastic Ip : [Allocate]</li>
+</ul>
+<p>
+<b>CREATE NAT Gateway</b>
+</p></li>
+
+<li>CONFIG{myNAT-Gateway}.Routes
+<ul class="org-ul">
+<li>Destination : Target</li>
+<li>0.0.0.0/0   : NAT Gatway</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org82e1cba" class="outline-2">
+<h2 id="org82e1cba">EBS Elastic Block Storage</h2>
+<div class="outline-text-2" id="text-org82e1cba">
+<p>
+In EC2 instance : Add Storage : 8Gb(default) but we can change
+</p>
+</div>
+
+<div id="outline-container-org2560b26" class="outline-3">
+<h3 id="org2560b26">Add EBS</h3>
+<div class="outline-text-3" id="text-org2560b26">
+<p>
+EC2 Dashboard &gt; Create Volume  &gt;
+Volume Type :___ <b>General Purpose SSD (gp2)</b> <span class="underline">_</span>
+</p>
+<ul class="org-ul">
+<li>{General Purpose SSD (gp2),
+General Purpose SSD (gp3),
+Povisioned IOP SSD(io1),
+Provisioned IOP SSD (io2) ,
+Magnetic}</li>
+</ul>
+<p>
+Size (GiB) : 5GB
+IOPS  : Inputs Outputs Per Seconds :  
+IOPS : 100/3000
+Availability Zone : <span class="underline">_ <b>us-east-2a</b> _</span>
+Snapshot ID :
+<b>CREATE VOLUE</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org51f1012" class="outline-3">
+<h3 id="org51f1012">Attach Volume to EC2 instance</h3>
+<div class="outline-text-3" id="text-org51f1012">
+<p>
+EC2 Dashboard &gt; EBS &gt; SELECT {Volume} &gt;
+CONFIG.{Selected Volume}.Actions Volume
+</p>
+<ul class="org-ul">
+<li>Volume : vol-02636cefc86a58a84 in us-east-2c
+Instance : <span class="underline">_<sub>CHOOSE</sub> INSTANCE____</span>
+Device : /dev/sdf</li>
+</ul>
+<p>
+<b>Successfully Created Volume and attached to instance</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5bf5290" class="outline-3">
+<h3 id="org5bf5290">Check if volume is created</h3>
+<div class="outline-text-3" id="text-org5bf5290">
+<pre class="example">
+# Step 1:
+lsblk
+
+# Step 2:
+fdisk /dev/xvdf
+# n - new partitions
+# p - print
+# w - save or write
+
+# Step3:
+mkfs.ext4 /dev/xvdf1
+mkdir /devops
+mount /dev/xvdf1 /devops
+
+</pre>
+
+<p>
+Volume Type
+</p>
+<ul class="org-ul">
+<li>General Purpose SSD (gp2) : 100Gb, 300/3000(min 100, max 3000)
+General Purpose SSD (gp3) :                (3000 ,16000)
+Povisioned IOP SSD(io1):  100, 64000
+Provisioned IOP SSD (io2) : 100 256000
+Magnetic</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb3d829a" class="outline-3">
+<h3 id="orgb3d829a">Snapshot in EBS</h3>
+<div class="outline-text-3" id="text-orgb3d829a">
+<p>
+Snapshot is Incremental Backup
+EBS &gt; Select EBS &gt; Action &gt; Create Snapshot
+Description : take backup
+<b>Created Snapshot</b>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd9e003c" class="outline-3">
+<h3 id="orgd9e003c">Created Snapshot Lifecycle Policy</h3>
+<div class="outline-text-3" id="text-orgd9e003c">
+<p>
+CONFIG{select-volume}.Create Snapshot Lifecycle Policy
+</p>
+<ul class="org-ul">
+<li>Lifecycle Policy
+<ul class="org-ul">
+<li>[+] EBS Snapshot Policy</li>
+<li class="off"><code>[&#xa0;]</code> EBS-backend AMI Policy</li>
+<li class="off"><code>[&#xa0;]</code> Cross-accout copy event policy</li>
+</ul></li>
+<li>Target Resource types:
+<ul class="org-ul">
+<li>[+] Volume</li>
+<li class="off"><code>[&#xa0;]</code> Instance</li>
+</ul></li>
+
+<li>Target resource tags :
+<ul class="org-ul">
+<li>key : name</li>
+<li>value : dev-volume</li>
+</ul></li>
+<li>Description
+<ul class="org-ul">
+<li>Policy describtion
+<ul class="org-ul">
+<li><span class="underline">_</span> <b>every day 8AM</b> __</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+<b>Created Snapshot Lifecycle Policy</b>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org08a538e" class="outline-2">
+<h2 id="org08a538e">Create AMI of Instance</h2>
+<div class="outline-text-2" id="text-org08a538e">
+<p>
+select Instance &gt; Action &gt; Image and Template &gt; Create Image
+No Reboot : [Enable]
+</p>
+
+<p>
+By default when we create AMI it will create snapshot of all volume attached
+</p>
+
+<p>
+By this AMI we can lauch a new instance or copy it other aws-user in different region
+</p>
+</div>
+</div>
+
+<div id="outline-container-org12fc381" class="outline-2">
+<h2 id="org12fc381">CodeCommit</h2>
+</div>
+<div id="outline-container-orgf2ab901" class="outline-2">
+<h2 id="orgf2ab901">Serverless in AWS</h2>
+<div class="outline-text-2" id="text-orgf2ab901">
+<p>
+AWS Lambda
+Dynamo DB
+AWS Cognito
+AWS API Gateway
+Amazon S3
+AWS SNS &amp; SQS
+AWS Kinesis Data Firehose
+Aurora Serverless
+Step Function
+Fargate
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea7c35e" class="outline-2">
+<h2 id="orgea7c35e">Lamdb</h2>
+<div class="outline-text-2" id="text-orgea7c35e">
+<p>
+Playlist :
+<a href="https://www.youtube.com/playlist?list=PL5KTLzN85O4KO0qEeUVvwTTcHFsdE6Dhx">https://www.youtube.com/playlist?list=PL5KTLzN85O4KO0qEeUVvwTTcHFsdE6Dhx</a>
+<a href="https://github.com/srcecde/aws-tutorial-code/tree/master/lambda">https://github.com/srcecde/aws-tutorial-code/tree/master/lambda</a>
+</p>
+
+
+<p>
+Channel : Scre Cde
+</p>
+
+<p>
+This notes for : <a href="https://www.youtube.com/watch?v=97q30JjEq9Y">https://www.youtube.com/watch?v=97q30JjEq9Y</a>
+</p>
+
+<p>
+Feature of AWS Lambda
+What is AWS Lambda 
+Where AWS Lambda is used
+How AWS lAMBDA works
+Use Case- Backing up data.
+No worries about the server :
+</p>
+<ul class="org-ul">
+<li>write code to lamdda</li>
+</ul>
+
+<p>
+Automatic Scaling :
+</p>
+<ul class="org-ul">
+<li>automatic scaling
+<ul class="org-ul">
+<li>code run parellel</li>
+<li>process each trigger individual scaling preciessly</li>
+<li>It scales the app  running the code response to each trigger that it recives</li>
+</ul></li>
+</ul>
+<p>
+Billing :
+</p>
+<ul class="org-ul">
+<li>Only pay the amount of time you run code means you will not charge for servers. The only  payment is the amount of time you run the code</li>
+</ul>
+
+<p>
+Lambda Overview[Udemy]
+</p>
+</div>
+<div id="outline-container-org9c916e6" class="outline-4">
+<h4 id="org9c916e6">Status of ec2 instance : save changes in aws log</h4>
+<div class="outline-text-4" id="text-org9c916e6">
+</div>
+<ul class="org-ul">
+<li><a id="org79bab83"></a>Create a iam role : ec2read(EC2ReadOnlyAcess), aws-log-write(LambdaBasicExecution Role)<br /></li>
+<li><a id="org60a812b"></a>Create 2-3 ec2 instance<br /></li>
+<li><a id="org7a729d2"></a>go to lamda and create new function with role<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-orgec1c139" class="outline-3">
+<h3 id="orgec1c139">Execute command remotely on EC2 via lambda function</h3>
+<div class="outline-text-3" id="text-orgec1c139">
+<p>
+<a href="https://assistanz.com/steps-to-configure-e-mail-notification-for-ec2-instance/">https://assistanz.com/steps-to-configure-e-mail-notification-for-ec2-instance/</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2bf7870" class="outline-3">
+<h3 id="org2bf7870">Serverless CRON Job</h3>
+<div class="outline-text-3" id="text-org2bf7870">
+<p>
+CloudWatch Events EventBridge &gt; Trigger Every 1 hour &gt; AWS Lambda Function perform a task
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e02d5f" class="outline-3">
+<h3 id="org1e02d5f">Lambda Limits</h3>
+<div class="outline-text-3" id="text-org1e02d5f">
+<p>
+Execution:
+</p>
+<ul class="org-ul">
+<li>Memory alloatin:128 MB -10GB (64MB increament)</li>
+<li>Maximum execution time: 900 sec (15 mints)</li>
+<li>Environment varialbe (4KB)</li>
+<li>Disk capacity in the "function container" (in /tmp) :512 MB</li>
+<li>Concurrency execution: 1000 (can be increased)</li>
+</ul>
+
+<p>
+Deployment:
+</p>
+<ul class="org-ul">
+<li>Lambda function deployment size (compressed.zip) : 50MB</li>
+<li>Size of uncompressed deployment (code + dependencies) : 250 MB</li>
+<li>Can use the /tmp directory to laod other files at startup</li>
+<li>Size of environment varibale : 4KB</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf189305" class="outline-3">
+<h3 id="orgf189305">Lambda@Edge</h3>
+<div class="outline-text-3" id="text-orgf189305">
+<p>
+You have deployed a CDN using CloudFront
+What if you wanted to run a global AWS Lambda alongside
+Or how to implement request filtering before reaching your application
+</p>
+
+<p>
+For this, you can use Lambda@Edge.
+deploy Lambda function alongside your CloudFront CDN
+</p>
+
+
+<ul class="org-ul">
+<li>Build more responsive application</li>
+<li>You don't manage servers, Lambda is deployed globally</li>
+<li>Customize the CDN content</li>
+<li>Pay only for what you use</li>
+</ul>
+
+<p>
+Lambda@Edge
+</p>
+<ul class="org-ul">
+<li>You can use Lambda to change CloudFront requests and responces
+<ul class="org-ul">
+<li>After CloudFront receives a request from a viewer (viewer request)
+user -&#x2014;viewer request  &#x2013;&gt; CloudFront -&#x2014;Origin Request -&#x2014;&gt; &lt;-&#x2014; Origin Response &#x2013;&#x2014; Origin</li>
+<li>Before CloudFront forward the request to the origin (origin request)</li>
+<li>After CloudFront receives the response from origin(origin response)</li>
+<li>Before CloudFront forwards the response to the viewer (origin  response)</li>
+<li>Before CloudFront forwards the response to the viewer (viewer response)</li>
+</ul></li>
+
+<li>You can also generate responses to viewer without ever sending the request to the origin.</li>
+</ul>
+</div>
+<div id="outline-container-orga91158e" class="outline-4">
+<h4 id="orga91158e">Use Cases</h4>
+<div class="outline-text-4" id="text-orga91158e">
+<p>
+Website Security and Privacy
+Dynamic Web Application at the Edge
+Search Engine Optimization(SEO)
+Intelligent Route Across Origin and Data Centers
+Bot Mitigation at the Edge
+Real-time Image Transformation
+A/B Testing
+User Authentication and Authorition
+User Prioritization
+User Tracking and Analytics
+</p>
+
+<p>
+Global Application :
+Amazon S3 Bucket -&gt; User visits website -Dynamic API requests &gt; CloudFront  &lt;---&#x2013;&#x2014;&gt; Lambda@Edge function (running globally )  &lt;-&#x2014;Query data -&#x2014;&gt; Amazon Dynamo DB
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc16d859" class="outline-2">
+<h2 id="orgc16d859">SES : Simple Message Servie</h2>
+<div class="outline-text-2" id="text-orgc16d859">
+<p>
+buy : email : kathik@digivalsolution.com  
+default: 1000 mails
+but we 50,000 mails
+</p>
+</div>
+</div>
+<div id="outline-container-orga5354ba" class="outline-2">
+<h2 id="orga5354ba">SNS</h2>
+<div class="outline-text-2" id="text-orga5354ba">
+<p>
+noreply@digivalsolution.com
+info@digivalsolution.com
+</p>
+</div>
+</div>
+<div id="outline-container-org2302ed8" class="outline-2">
+<h2 id="org2302ed8">Route 53</h2>
+<div class="outline-text-2" id="text-org2302ed8">
+<p>
+Need to buy a dns name: 
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-28<sub>20</sub>-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+</p>
+</div>
+</div>
+<div id="outline-container-orgcbd11cd" class="outline-2">
+<h2 id="orgcbd11cd">Certificate Management</h2>
+<div class="outline-text-2" id="text-orgcbd11cd">
+<p>
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-28<sub>20</sub>-31-05-KT-Aws-ssl-route53-by-Aubbacker.mp4
+</p>
+</div>
+</div>
+<div id="outline-container-org049a0f9" class="outline-2">
+<h2 id="org049a0f9">Cloud Monitoring</h2>
+</div>
+<div id="outline-container-orgf1e11d1" class="outline-2">
+<h2 id="orgf1e11d1">Mongodb</h2>
+<div class="outline-text-2" id="text-orgf1e11d1">
+<p>
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-29<sub>09</sub>-51-47-KT-Mongo-DB.mp4
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-29<sub>10</sub>-52-00-KT-Mongo-DB-2.mp4
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb01ff35" class="outline-2">
+<h2 id="orgb01ff35"></h2>
+</div>
+<div id="outline-container-org2de4832" class="outline-2">
+<h2 id="org2de4832">ELK</h2>
+<div class="outline-text-2" id="text-org2de4832">
+<p>
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-29<sub>19</sub>-53-15-Doubt-on-build-parameter-and-docker-gitlab-repository.mp4
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-30<sub>20</sub>-32-17-KT-Kibana.mp4
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-30<sub>20</sub>-33-32-KT-Kibana-II.mp4
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-10-08<sub>22</sub>-07-59-PERSONAL-KIBANA-REINSTALL-IN-EC2.mp4
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-10-08<sub>23</sub>-12-15-KIBANA-Config-s3-restore.mp4
+</p>
+</div>
+</div>
+
+<div id="outline-container-org651c4fa" class="outline-2">
+<h2 id="org651c4fa">Demo | Three-tier web app in AWS with VPC, ALB, EC2 &amp; RDS</h2>
+<div class="outline-text-2" id="text-org651c4fa">
+<p>
+<a href="https://www.youtube.com/watch?v=sCBTeMd0Jj4">https://www.youtube.com/watch?v=sCBTeMd0Jj4</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgefdb914" class="outline-2">
+<h2 id="orgefdb914">Jenkins</h2>
+<div class="outline-text-2" id="text-orgefdb914">
+<p>
+Create pipeline: using dsl
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-29<sub>19</sub>-16-34-build-Jenkins-Jobs-deploy-EC2-instance.mp4
+</p>
+
+<p>
+dsl for build with parameter
+/media/jayradhey/myVolume/Video<sub>Tutorials</sub>/mytube-Tutorials/Digival-Video/2021-09-29<sub>19</sub>-53-15-Doubt-on-build-parameter-and-docker-gitlab-repository.mp4
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2023-02-17 Fri 12:09</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

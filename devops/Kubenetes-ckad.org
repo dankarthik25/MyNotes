@@ -1,0 +1,37 @@
+#+TITLE: Kubenetes-ckad
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+kubernets architecture
+create pod 
+Configuration
+- config maps
+- security context
+- resource requirement
+- secrets
+- serviceaccounts
+
+Multi Contianer pods
+- ambassador
+  adapter
+  sidecar
+
+Observability (Monitoring and loging system)
+Readiness and liveness Probes
+Container Logging
+Monitor and Debug Application
+
+pod design
+- labels, selectors and annoations
+  rolling updates and roll backs in deploy
+  jobs and cron jobs
+
+  
+service and networking
+- understand services
+- network policies
+    
+state persistence
+volumes
+volume clams
+
+

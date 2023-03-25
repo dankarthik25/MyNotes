@@ -1,0 +1,4360 @@
+#+TITLE: My Python Notes
+#+AUTHOR:    Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+ 
+
+* Python Introudctio
+** History:
+Created by Guido Rossum in 1980 is very easy to learn
+Python is 
+interpreted logic ,
+object-oriented, 
+high-level programming language 
+** Who uses python
+youtubbe,dropbox,raspberry netfilx,nsa,nasa,bittorrent
+** Features :
+- Simple and Easy to learn
+- High Level Language
+- Portable: windows,linux,ios
+- Support differetn Programming Paradigm (procedure-oriented / object-oriented)
+- Extensible
+* TODO Installation
+** TODO Pip Installation
+#+BEGIN_SRC python
+  # pip package manger for py 
+  # pip2 is use for py2
+  # pip3 is use for py3
+  # install package by pip
+  # remove package by pip
+#+END_SRC
+
+** Conda 
+#+BEGIN_SRC sh
+conda install 
+conda remove <>
+conda env list
+conda create --name <virtual_env_name> <py modules>
+# To activate environment
+source activate my_project_env
+source deactive my_project_env
+conda remove --name opencv-env --all
+conda env create -f enironment.yaml
+#+END_SRC
+** TODO Virtural Environment
+Consider math with is global module install in python 
+
+If install new package math3.0 then it will mess up old project using math 2.0
+
+What Virtural Environment does it will make a
+It will allow us to install all our dependencies in local folder(own hub) not effect gobal module (os)
+
+#+BEGIN_SRC sh
+# installing virtualen
+sudo pip install virtualev
+
+# creating a virtual environment
+virtualev projectName
+
+# activate the virtual environement
+cd projectName
+source /source/bin/activate
+
+# which python  we are running (where is the source file of python)
+which pip
+
+# installing package beautifuls
+pip list 
+pip install beautifulsoup pytz
+pip install numpy panda
+
+# unactivate 
+deactivate  
+
+#pip to install all of the packages in this file using the -r flag:
+pip install -r requirements.txt
+
+# virtual env for  with python version 2.6
+virtualenv  -p /usr/bin/python2.6 py26_env
+source/bin/activate
+which python
+
+
+#+END_SRC
+
+
+Consider you are using math 2.0  module in one project and 
+later on  new features are added in math 3.0 which need in new projects
+** Conda virtual env
+#+BEGIN_SRC sh
+python
+conda env list
+conda create --name <virtual_env_name> <py modules>
+# To activate environment
+source activate my_project_env
+source deactive my_project_env
+conda remove --name opencv-env --all
+conda env create -f enironment.yaml
+
+# EX:
+conda create --name my_app python 2.7 flask sqlalchemy
+activate my_app
+pip list
+which python
+activate   # source activate 
+decativate # source deactivate
+
+
+conda env list
+
+conda remove --name my_app
+
+# CONDA Virtual Enviroment set :  ENVIROMENT VARIBLE for different project
+
+
+#+END_SRC
+ 
+** TODO Requirement file 
+** Jupyter
+
+#+begin_src sh
+! pip list # to run shell cmd also know as line magics
+
+%lsmagiic   # line magic
+
+%pwd
+
+%ls -la
+
+%matplotlib inline
+
+%%HTML
+You can be add youtube videos to your jupyter notebook
+
+
+%%SVG
+
+%%timeit
+time for execute block
+
+
+#+end_src
+* Operators in python:
+** 1) Arthimetic operator
+  | +  | addition                       |
+  | -  | substration                    |
+  | *  | mulitplication                 |
+  | /  | division(floating point value) |
+  | // | quoficient (float value)       |
+  | %  | remainder                      |
+  | ** | power                          |
+  |    |                                |
+
+#+BEGIN_SRC python
+############################
+#   Arthimetic Operator
+###########################
+a= 12
+b=3
+a+b   	# >>> 15
++a-b   	# >>> 9
+a*b   	# >>> 36
+a**b  	# >>> (12)^3 =1728
+a/b   	# >>> 4.0 floating point
+a//b  	# >>> 4 int
+a%b   	# >>> 0
+a+b/3-4*12 	#>>> -35.0
+# Order of exprssion
+3 * 2 +1
+3 *(2 +1)
+
+# increment
+
+num =1
+num = num +1
+# Or
+num +=1
+num *=10
+
+print(abs(-3))
+print(round(3.75))   #  4
+print(round(3.75),1) # 3.8
+
+num_1 =3
+num_2 =2
+print(num_1 <= num_2)
+
+# Convert string to numbert
+
+num_1 =  '100'
+num_2 = '200'
+print(num_1 + num_2)  # 100200
+num_1 = int(num_1)
+num_2 = int(num_2)
+
+
+ 
+ #+END_SRC
+** 2) Assignment  operator :
+  | =  | assignment   |
+  | is | data binding |
+  | += |              |
+  | -= |              |
+  | *= |              |
+  | /= |              |
+  |    |              |
+** 3) Comparison  operator  
+  |    |                    |
+  |----+--------------------|
+  | >  | less               |
+  | <  | greater            |
+  | >= | greater than equal |
+  | <= | less than equal    |
+  | == | Equal              |
+  | != | Not Equal          |
+  |    |                    |
+** 4) Logical  operator
+  Logiacl Operator wil give output TRUE OR FALSE
+
+  | and |   |
+  | or  |   |
+  | not |   |
+** 5) Bitwise  operator
+  | or         |    |
+  | and        | &  |
+  | xor        | ^  |
+  | RIGHTSHIFT | >> |
+  | Leftshift  | << |
+  |            |    |
+#+BEGIN_SRC python
+ 3>>2    # 011 rightshift by 2  000  >   0 
+ 3<<2    # 011 leftshift  by 2  110  > 12
+10 & 11
+#10
+8 &11
+# 8
+8 |11
+#11
+8 ^ 11
+#3
+3& 11
+#3
+
+ #+END_SRC
+** 6) Identity  operator:checks if var is equal 
+  | is     |
+  | is not |
+#+BEGIN_SRC python
+x=5
+x is 5
+x is not 5
+ #+END_SRC
+** 7) Membership  operator : checks if a element belongs to (set, list,tubles,string,dict)
+ | in     |
+ | not in |
+#+BEGIN_SRC python
+x= [1,2,3,4,5]
+3 in x
+#+END_SRC
+* Data types
+** Intro
+Data types :
+- Immutalbe (Note : Can't changes the value')
+  - Number 
+             - Integers eg 1,4,5,
+             - Float    eg 3.5,3.1246,
+             - Complex  eg 3+2j, 4+5j
+  - Strings
+  - Tuples   : can't  modify
+    #+BEGIN_SRC python
+      tuple_1 = ('History', 'Math', 'Physics', 'CompSci')
+      tuple_2 = tuple_1
+
+      print(tuble_1)
+      print(tuble_2)
+
+      tuple_1[0] = 'Art'                    # Error because tubles are immutable
+    #+END_SRC
+- Mutalbe
+ - List         : []
+ - Dictonary    : 
+ - Set: values  : UNORDERD and N0-DUBLICATESS
+   #+BEGIN_SRC python
+   cs_course = {}
+   #+END_SRC
+*** immutable vs mutable
+#+BEGIN_SRC python
+  list_1 = ['History', 'Math', 'Physics', 'CompSci']
+
+  list_2 = list_1
+
+  print(tuple_1)
+  print(tuple_2)            #  >>> Both are same 
+
+
+  list_1[0]= 'Art'
+
+  print(list_1)
+  print(list_2)            #  >>> Change and list_1 change in Change in list_2
+
+  # Immutalbe means : both are same mutable obj
+
+
+#+END_SRC
+** Number
+** Integers eg 1,4,5,
+** Float    eg 3.5,3.1246,
+** Complex  eg 3+2j, 4+5j
+** String
+*** defination
+    | define by quote |                |
+    |-----------------+----------------|
+    |                 | "sdfsdfdff"    |
+    |                 | 'asdfsdf'      |
+    |                 | """asdfd"""    |
+    |                 | '''sdfasdfs''' |
+    |                 |                |
+**** Quotes 
+#+BEGIN_SRC python
+####################################################
+
+# Text contain " (double quote) or '(single quote)
+
+####################################################
+
+print ("Using double quote")    # >>> Using double quote
+print('Using single quote')     # >>> Using double quote
+
+# To use " & ' in printing text we can use alternatively
+
+print (" It's working ")        # >>> It's working
+print ('He says " It is working "') # >>> He says "It is working"
+
+
+# Using both " and ' in same statement
+
+print('He says " It\'s is working "')       # >>> He says " It's is working"
+print("He says \" It's is working \" ")     # >>> He says " It's is working"
+
+# Or we can use triple quote
+
+print("""He says " It's is working" """)     # >>> He says " It's is working"
+print('''He says " It's is working" ''')     # >>> He says " It's is working"
+#+END_SRC
+*** Operations
+    |-----------------+-----------------------|
+    | Operations      |                       |
+    |-----------------+-----------------------|
+    | Concatenation   | str1+str2             |
+    | Repetition      | str1*3                |
+    | Slicing         | str1[2:7]             |
+    | Indexing        | str1[-1]              |
+*** Method
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | Method                | str1 = Edureka                                     | Result                             |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | find                  | str1.find('ureka')                                 | 2                                  |
+    | repalce               | str1.repalce("Ed","E")                             | 'Eureka'                           |
+    | count                 | str1.count('e',beg=0,end=6)                        | 2                                  |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | upper Case            | str1.upper()                                       | "EDUREKA                           |
+    | lower Case            | str1.lower()                                       | "edureka"                          |
+    | Captialize            | ' hello users: '.title()                           | ' Hello Users: '                   |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | len                   | str1.len()                                         | 7                                  |
+    | max                   | str1.max()                                         | u             (higher alpha order) |
+    | min                   | str1.min()                                         | a                                  |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | lstrip                | ' hello users: '.lstrip()                          | 'hello users: '                    |
+    | rstrip                | ' hello users: '.rstrip()                          | ' hello users:'                    |
+    | strip                 | ' hello users: '.strip()                           | "hello users:"                     |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | center aline(justify) | 'hello user'.center(15,'*')                        | **Hello users**                    |
+    | left aline            | 'hello user'.ljust(15,'*')                         | Hello users****                    |
+    | right aline(justify)  | 'hello user'.right(15,'*')                         | ****Hello users                    |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | split(str2list)       | l1 =  str1.split('.')                              | l1 = ["E","d","u","r","e","k","a"] |
+    | join(list)            | ','.join(l1)                                       | 'E,d,u,r,e,k,a'                    |
+    |                       | '-'.join(l1)                                       | 'E-d-u-r-e-k-a'                    |
+    |-----------------------+----------------------------------------------------+------------------------------------|
+    | isalpha()             | str1.isaplha()                                     | True                               |
+    | isalnum()             | if atleast 1char is num and 1char in alpha         | True                               |
+    | isalpha()             | if all char are alpha not dig,space,special symbol | True                               |
+    | isdigit()             | if all char are dig                                | True                               |
+    | islower()             | if char are lower                                  | True                               |
+    | isupper()             | if char are upper                                  | True                               |
+    | isnumeric()           |                                                    | True                               |
+    | isspace()             |                                                    |                                    |
+    | istitle()             |                                                    |                                    |
+    |                       |                                                    |                                    |
+*** String Encoding Function:
+There are two functions decode(),encode() functions to include this functions we need to =base64 module= which has all function required for converting raw binary data to str vic versa
+**** defination
+#+BEGIN_SRC python
+decode(encoding='UTF-8',errors='strict')
+encode(encoding='UTF-8',errors='strict')
+#+END_SRC
+
+**** Eg
+#+BEGIN_SRC python
+import base64
+str = 'This is string example'
+str = base64.b64(Str.encode('utf-8'))
+print("Ecoded String:",stre)                    # it is a binary formate
+str = base64.b64(Str).decode('utf-8')
+print("Decode String: ",strd)
+#+END_SRC
+** String Formating
+*** TODO Place Holder(f string or Replace files)
+*** Replacement Field(Place Holders)
+**** String
+Formating Vs Replacement Field(Paleholders{})
+#+BEGIN_SRC python
+person = {'name': 'Jenn', 'age':23}
+
+sentence = 'My name is '+person['name'] + 'and I am '+str(person['age'])+ 'year old.'
+print(sentence)                               # above is NOT READABLE, EASY WRITABLE
+
+# # Using Placeholder
+sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
+print(sentence)
+#+END_SRC
+**** Passing(assing place holders) inorder, numbers refeance, list, dic members, class attribues
+#+BEGIN_SRC python
+person = {'name': 'Jenn', 'age':23}
+
+# Dict passing inorder
+sentence = 'My name is {} and I am {} year old.'.format(person ['name'], person['age'])
+print(sentence)
+
+# Dict  passing by numbers{0},{1}...etc
+sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person, person)
+print(sentence)
+
+# passing by dic only values
+person = {'name': 'Jenn', 'age':23}
+sentence = 'My name is {0[name]} and I am {1[age]} year old.'.format(person)
+print(sentence)
+
+
+# place holders having keywords (basically used in dic)
+sentence = 'My name is {name} and I am {age} year old.'.format(name ='Jack', age = '30')
+print(sentence)
+
+
+# passing in dic key and values
+person = {'name': 'Jenn', 'age':23}
+sentence = 'My name is {name} and I am {age} year old.'.format(**person)
+print(sentence)
+
+#List passing in list members
+l1 = ['Jenn',23]
+sentence = 'My name is {0[0]} and I am {0[1]} year old.'.format(person)
+print(l1)
+
+# passing class attributes
+
+class Person():
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person('Jack','33')
+sentence = 'My name is {0.name} and I am {0.age} year old.'.formate(p1)
+print(sentence)
+#+END_SRC
+**** Numbers (Padding, Decimals(precession), Comma)
+#+BEGIN_SRC python
+# # Padding
+
+for i in range (1,11):
+  sentence = 'This value is {:03}'.format(i)
+  print(sentence)              # The value is 001
+
+
+# # decimals(pression)
+
+pi = 3.1415965
+
+sendence = 'Pi is equal to {:.3f}'.formate(pi)
+print(pi)                        # 3.142
+
+
+# # comma seperator
+
+sentence = '1 MB is equal to {:,.2f} bytes.'fomate(1000**2)
+print(sentence)
+
+# 1MB is equal to 1,000,000.00 bytes
+
+#+END_SRC
+**** Date String format
+#+begin_src python
+# # Date fomate link https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+import date time
+my_date = datetime.date(2016,9,24,12,45) 
+
+
+sentence ='{:%B %d, %Y}'.format(my_date)
+print(sentence)  # >> September 24, 2016
+
+sentence ='{0:%B %d, %Y} fell on a {0:%A} and was the {0:%j} day of the years.'.fomat(my_date)
+print(sentence) # >> September 24, 2016 fell on a Saturday and was the 268 day of the years
+#+end_src
+**** Example1
+#+BEGIN_SRC python
+tag = 'h1'
+text = 'This is a headerline'
+sentence = '<{0}> <{1} </{0}'.format(tag,text)
+
+print(sentence)             # >>> <h1>This is a headerline</h1>
+#+END_SRC
+
+**** Example 2
+#+BEGIN_SRC python
+age =24
+print("My age is {0} years".format(age)) 								# >>> My age is 24 years
+ 
+print("I am {0} years, {1} mounts, {2} days old".format(28,4,19))		# >>> I am 28 years, 4 mounts, 19 days old
+
+print("""
+ January     :{2} days
+ February    :{0} days
+ March       :{1} days
+ April       :{1} days
+ May         :{2} days
+ June        :{1} days
+ July        :{2} days
+ August      :{2} days
+ September   :{1} days
+ October     :{2} days
+ November    :{1} days
+ December    :{2} days""".format(28, 30, 31))
+#+END_SRC
+*** R String
+R string : is a raw string: the escape sequence are negleted   
+#+BEGIN_SRC python
+print(r'\tTab')                          # >>> \tTab      
+#+END_SRC
+*** F String {py3.6}
+make string formate simple as possible
+#+BEGIN_SRC python
+greeting = 'Hello'
+name = 'karthik
+message = f'{greeting},  {name.upper()}.Welcome! '
+
+print(dir(name))
+print(help (str))
+#+END_SRC
+
+*** Print
+convert convert the expressions you pass into a string and writes the result to standard output device(stdout in sys(sys.stdout and sys.stdin))
+**** String Formating
+| Foramt Symbol | Conversion             |
+|---------------+------------------------|
+| %c            | char                   |
+| %s            | string                 |
+| %i            | signed decimal int     |
+| %d            | signed decimal int     |
+| %u            | unsigned decimal int   |
+| %o            | octal int              |
+| %x            | hexa decimal int       |
+| %e            | exponential            |
+| %f            | floating point real no |
+| %g            | shorter %f and %e      |
+
+
+#+BEGIN_SRC python
+#############################3#
+#   String Formating
+###############################
+
+age = 24
+print("My age is " + str(age) + "year")				# >>> My age is 24 year
+print("My age is %d years using string formationg " %age) 	# >>> My age is 24 years
+
+for i in range(1, 12):
+    print("No. %2d square is %4d and cubed is %4d" %(i, i ** 2, i ** 3))		# >>> %d %2d, %4d  rightspace before var respectively #
+#+END_SRC
+**** Right Spacing & Precision 
+***** Right Spacing Eg 0
+
+#+BEGIN_SRC python
+
+print("Pi value is appox %11f" %(22/7))       	# 11 = 03+1+1+06 	>>> Pi value is appox    3.142857
+print("Pi value is appox %10f" %(22/7))       	# 10 = 02+1+1+06 	>>> Pi value is appox   3.142857
+print("Pi value is appox %9f" %(22/7))       		# 09 = 01+1+1+06 	>>> Pi value is appox  3.142857
+print("Pi value is appox %8f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("Pi value is appox %7f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("Pi value is appox %6f" %(22/7))		# 09 = 00+1+1+06 	>>> Pi value is appox 3.142857
+print("		Conclusion :By Default Precission is 6digits")
+#+END_SRC
+***** Righ Spacing Eg 1
+#+BEGIN_SRC python
+for i in range(1, 12):
+    print("No. %2d square is %4d and cubed is %4d" %(i, i ** 2, i ** 3))		# >>> %d %2d, %4d  rightspace before var respectively 
+#+END_SRC
+
+***** Right Spacing Eg2
+#+BEGIN_SRC python
+###########################################################
+
+# %12.50f >> If 12> 50 ==>size = 12  (RightSpace.s + Number.s + Point.s +  DecimalNAumber(precision).s
+
+#############################################################
+#                                                      S = RS+N+P+DN
+print("\n")
+print("Pi value is appox %12f" %(22/7))    		# 12 = 04+1+1+06	>>> Pi value is appox     3.142857
+print("\n")
+
+print("		Precision is varied %12.[01-10]f and result is below ")
+print("Pi value is appox %12.1f" %(22/7))    		# 12 = 09+1+1+01 	>>> Pi value is appox          3.1
+print("Pi value is appox %12.2f" %(22/7))    		# 12 = 08+1+1+02 	>>> Pi value is appox         3.14
+print("Pi value is appox %12.3f" %(22/7))    		# 12 = 07+1+1+03 	>>> Pi value is appox        3.143
+print("Pi value is appox %12.4f" %(22/7))    		# 12 = 06+1+1+04 	>>> Pi value is appox       3.1429
+print("Pi value is appox %12.5f" %(22/7))    		# 12 = 05+1+1+05 	>>> Pi value is appox      3.14286
+print("Pi value is appox %12.6f" %(22/7))    		# 12 = 04+1+1+06 	>>> Pi value is appox     3.142857
+print("Pi value is appox %12.7f" %(22/7))    		# 12 = 03+1+1+07 	>>> Pi value is appox    3.1428571
+print("Pi value is appox %12.8f" %(22/7))    		# 12 = 02+1+1+08 	>>> Pi value is appox   3.14285714
+print("Pi value is appox %12.9f" %(22/7))    		# 12 = 01+1+1+09 	>>> Pi value is appox  3.142857143
+print("Pi value is appox %12.10f" %(22/7))    		# 12 = 00+1+1+10 	>>> Pi value is appox 3.1428571429
+print("		Conclusion :%12f used for left indexing by 12 spaces only if size No. is less than 12")
+
+#+END_SRC
+
+***** Precision
+#+BEGIN_SRC python
+
+print("		Precission >  Left Indexing then  ")
+
+
+print("Pi value is appox %12.11f" %(22/7))    		# 13 = 00+1+1+11 	>>> Pi value is appox 3.14285714286
+print("Pi value is appox %12.12f" %(22/7))    		# 14 = 00+1+1+12 	>>> Pi value is appox 3.142857142857
+print("Pi value is appox %12.13f" %(22/7))    		# 15 = 00+1+1+13 	>>> Pi value is appox 3.1428571428571
+print("Pi value is appox %12.14f" %(22/7))    		# 16 = 00+1+1+14 	>>> Pi value is appox 3.14285714285714
+print("Pi value is appox %12.15f" %(22/7))    		# 17 = 00+1+1+15 	>>> Pi value is appox 3.142857142857143
+print("Pi value is appox %12.16f" %(22/7))    		# 18 = 00+1+1+16 	>>> Pi value is appox 3.1428571428571428
+print("Pi value is appox %12.17f" %(22/7))    		# 19 = 00+1+1+17 	>>> Pi value is appox 3.14285714285714279
+print("Pi value is appox %12.18f" %(22/7))    		# 20 = 00+1+1+18 	>>> Pi value is appox 3.142857142857142794
+print("Pi value is appox %12.19f" %(22/7))    		# 21 = 00+1+1+19 	>>> Pi value is appox 3.1428571428571427937
+print("Pi value is appox %12.20f" %(22/7))    		# 22 = 00+1+1+20 	>>> Pi value is appox 3.14285714285714279370
+
+print("Pi value is appox %12.30f" %(22/7))    		# 23 = 00+1+1+30 	>>> Pi value is appox 3.142857142857142793701541449991
+print("Pi value is appox %12.40f" %(22/7))    		# 24 = 00+1+1+40 	>>> Pi value is appox 3.1428571428571427937015414499910548329353
+print("Pi value is appox %12.50f" %(22/7))    		# 25 = 00+1+1+50 	>>> Pi value is appox 3.14285714285714279370154144999105483293533325195312
+print("		Conclusion :If precision > Right space then no right shift is done")
+#+END_SRC
+*** EVAL : evaluate the string 
+#+BEGIN_SRC python
+a = '3+4+6'
+print(eval(a))
+eval ('my_list = [12,12,13,54]')
+print(my_list)
+#+END_SRC
+** Tubles 
+*** defination
+#+BEGIN_SRC python
+tuble1 = ("Neel","raj","sandeep")
+#+END_SRC
+*** Operations
+      |---------------+-------------------------+---------------|
+      | Operations    | tup1=('a') tup2=('b')   | Result        |
+      |---------------+-------------------------+---------------|
+      | Concatenation | tup1+tup2               | ('a','b')     |
+      | Repetition    | tup1*3                  | ('a','a','a') |
+      | Slicing       | t= ('a','b','c'),t[1:2] | ('b','c')     |
+      | Indexing      | t[0]                    | 'a'           |
+      |               |                         |               |
+
+** List
+*** Syntax
+#+BEGIN_SRC python
+# List iniciallization
+list_1 = []			    # empty list
+list_2 = list()			    # empty list
+mylist = ["a", "b","c","d"]
+mylist = ['Edureka',2.345,'Python']   # different data type
+
+#+END_SRC
+*** Operations
+
+#+BEGIN_SRC python
+
+  # Indexing 
+  my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+             0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+           -10,-9,-8,-7,-6,-5,-4,-3,-2,-1
+
+
+  print my_list[0]
+  print my_list[-10]
+#+END_SRC
+*** Slicing
+#+BEGIN_SRC python
+
+# #  Slicing
+# list[start: end:step] and end is not included 
+my_list
+
+print my_list[3:8]            # [3, 4, 5, 6, 7]
+print my_list[-7:-2]          # [3, 4, 5, 6, 7]
+
+print my_list[1:-2]           # [1, ,2, 3, 4, 5, 6, 7]
+
+# End is not include 
+
+print my_list[1:9]
+print my_list[1:]
+
+# step : to skip 
+print my_list[::2]           # [0, 2, 4, 6, 8]
+
+# Reverse list
+
+print my_list[::-1]          # [9, 8, 7, 6, 5, 4, 3, 2, 1] 
+
+#+END_SRC
+
+Try  slicing url into : top level domain, url without http://
+#+BEGIN_SRC python
+  url = http://corems.com
+
+  # # Get top level domain
+
+  print sample_url[-4:]               # >>> .com
+
+  # # Print url without http:// 
+
+  print sample_url[7: ]              # >>> corems
+
+
+#+END_SRC
+
+*** Sorted vs list.sorted
+#+BEGIN_SRC python
+  l1= [9, 1, 3, 2, 4, 5, 6, 7, 8]
+
+  s_l1 = sorted(l1)
+
+  print("Sorted Varible: \t", s_li)           # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  print("Original Variable: \t",li)           # [9, 1, 3, 2, 4, 5, 6, 7, 8]
+
+  # list.sort
+
+  li.sort()
+  print("Original Variable: \t",li)           # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  li.sort(reverse = True)
+  print("Original Variable: \t",li)           # [9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+  # sorted
+
+  tup =  (9, 1, 3, 2, 4, 5, 6, 7, 8)
+  s_tup = sorted(tup)
+  printe ('Tuple \t', s_tup)           # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  l1 = [-6, -5, -4, 1, 2, 3]
+  s_li = sorted(li, key = abs)
+  print(s_li)                          # [1, 2, 3, -4, -5, -6]
+
+  di ={'name': 'Corey', 'job': 'programming', 'age':'None', 'os': 'Mac'}
+
+  s_di = sorted(di)
+  print('Dict \t', s_di)              # ['age','job', 'name', 'os']
+
+
+  class Employee():
+      def __init__(self, name, age, salary):
+          self.name = name
+          self.age= age
+          self.salary= salary
+
+      def __repr__(self):
+          return '{}, {}, ${}'.formate(self.name, self.age, self.salary)
+
+  e1 = Employee('Carl',37,700)
+  e2 = Employee('Sarah',29,800)
+  e3 = Employee('John',43,900)
+
+  e_list = [e1, e2, e3]
+
+  s_employees = sorted(e_list, key = lamda e:e.name)
+
+  print(s_employees)              # [('Carl,37,$700'), (John,43,$400), (Sarah, 29, $800)]
+#+END_SRC
+*** Operations
+ - adaddfasf
+     lis1 = ['1','b',2.5]
+     lis2 = ['a','d',4.6]
+     lis_str = ['a', 'b', 'c', 'd']
+
+      |---------------+---------------------------+----------------------------------------|
+      | Operations    |                           | Result                                 |
+      |---------------+---------------------------+----------------------------------------|
+      | Concatenation | lis1 +lis2                | ['1','b',2.5, 'a','d',4.6]             |
+      | Repetition    | lis1*3                    | ['1','b',2.5, '1','b',2.5,'1','b',2.5] |
+      | Slicing       | lis1[0:4:2]               | ['1',2.5,]                             |
+      | Indexing      | lis1[0]                   | '1'                                    |
+      | delet         | del list1[0]              | ['b',2.5]                              |
+      |               | del list1                 | []                                     |
+      | Membership in | 2.5 in list1              | True                                   |
+      |---------------+---------------------------+----------------------------------------|
+      | Method        |                           |                                        |
+      |---------------+---------------------------+----------------------------------------|
+      | append        | list1.append('e')         | ['1','b',2.5,'e']                      |
+      | extend        | list1.extend(['c','d'])   | ['1','b',2.5,'c','d']                  |
+      | insert        | list1 .instert(1,'p')     | ['1','p','b',2.5 ]                     |
+      | remove        | lis1.remove('1')          | ['1','b,2.5,'a','d',4.6]               |
+      | pop()         | list1.pop()               | ['1','b']                              |
+      | len           | len(list1)                | 3                                      |
+      | count         | how many times obj occure |                                        |
+      | sort          |                           |                                        |
+      | list2str      | ' - '.joint(lis_str)      | 'a - b - c - d'                        |
+      |               |                           |                                        |
+**** list2str
+#+BEGIN_SRC python
+course = ['History', 'Math', 'Physics', 'CompSci']
+course_str = " - ".join(courses)        # >>>  'History - Math - Physics - CompSci'
+my_list = course_str.split(" - ")       # >>>  ['History', 'Math', 'Physics', 'CompSci']
+#+END_SRC
+
+** Tubles
+*** Defination
+#+BEGIN_SRC python
+imelda = "More Mayhem", "Imelda May", 2011, ( (1, "Pulling the Rug"), (2, "Psycho"), (3, "Mayhem"), (4, "Kentish Town Waltz"))
+
+print(imelda)
+
+title, artist, year, tracks = imelda
+#  Unpacking the Tuple
+imelda
+#+END_SRC
+*** Operations
+ - adaddfasf
+     tup1 = ('1','b',2.5)
+     tup2 = ('a','d',4.6)
+     tup_str = ('a', 'b', 'c', 'd')
+
+      |---------------+----------------------+----------------------------------------|
+      | Operations    |                      | Result                                 |
+      |---------------+----------------------+----------------------------------------|
+      | Concatenation | tup1 +tup2           | ('1','b',2.5, 'a','d',4.6)             |
+      | Repetition    | tup1*3               | ('1','b',2.5, '1','b',2.5,'1','b',2.5) |
+      | Slicing       | tup1[0:4:2]          | ('1',2.5)                              |
+      | Indexing      | tup1[0]              | '1'                                    |
+      | Delete        | del tup1             |                                        |
+      | Membership in | 2.5 in list1         | True                                   |
+      |---------------+----------------------+----------------------------------------|
+      | Method        |                      |                                        |
+      |---------------+----------------------+----------------------------------------|
+      | tub2str       | ' - '.joint(tup_str) | 'a - b - c - d'                        |
+      | len           | len(tup1)            | 3                                      |
+      | count         | ele(occures) in tup  |                                        |
+      |               |                      |                                        |
+** Dictionary
+*** Defination
+#+BEGIN_SRC python
+fruit = {"orange": "a sweet, orange, citrus fruit",
+	 "apple" : "good for making cider",
+	 "lemon" : "a sour, yellow citrus fruit",
+	 "grape" : "a small, sweet fruit growing in bunches",
+	 "lime"  : "a sour, green citrus fruit"}
+# ====================================
+
+#+END_SRC
+*** Adding New entity
+#+BEGIN_SRC python
+#  Adding a new key to existing Dic
+fruit["pear"] = "an odd shaped apple"
+#
+# Updating or Replacing existing key
+fruit["lime"] = "great with tequila"
+print(fruit)
+#+END_SRC
+*** Deleting a key , Dic
+#+BEGIN_SRC python
+# =====================================
+# #   Deleting a key,value from Dic
+# del fruit["lemon"]
+# =====================================
+# # Deleting a Dic
+# del fruit
+# =====================================
+# # 	Emptying the Dictionary
+# fruit.clear()
+# print(fruit)
+# ====================================
+#+END_SRC
+*** Dict is UnOrder
+#+BEGIN_SRC python
+while True:
+	dict_key = input("Please enter a fruit: ")
+	if dict_key == "quit":
+		break
+	description = fruit.get(dict_key, "We don't have a" + dict_key)
+	print(description)
+	# if dict_key in fruit:
+	# 	description = fruit.get(dict_key)
+	# 	print(description)
+	# else:
+	# 	print("we don't have a " + dict_key)
+  # =========================================
+  #  Every time we run we will get different order
+
+for item in fruit :
+	print( item + "is"+ fruit[item])
+for key, value in fruit.items():
+   print(key,value) 
+#+END_SRC
+*** Ordered 
+#+BEGIN_SRC python
+  ordered_keys = list(fruit.keys())
+  ordered_keys.sort()
+
+  ordered_keys = sorted(list(fruit.keys()))
+  for f in ordered_keys:
+       print(f + " - " + fruit[f])
+
+  # for f in sorted(fruit.keys()):
+  # for f in fruit:
+  #     print(f  + " - " + fruit[f])
+  # for val in fruit.values():
+  #     print(val)
+  #
+  # print('-' * 40)
+  #
+  # for key in fruit:
+  #     print(fruit[key])
+#+END_SRC 
+*** Operations
+myDict = {1:"apple",2:"ball"}
+      |------------+------------------------+----------------------------|
+      | Operations |                        | Result                     |
+      |------------+------------------------+----------------------------|
+      | accessing  | myDict[1]              | 'apple'                    |
+      | len()      | len(myDict)            | 2                          |
+      | key()      | key(myDict)            | [1,2]                      |
+      | values()   | values(myDict)         | ['apple','ball']           |
+*** Methods
+      |--------------+------------------------+----------------------------|
+      | Methods      |                        |                            |
+      |--------------+------------------------+----------------------------|
+      | items        | myDict.items()         | [(1,'apple'),(2,'ball')]   |
+      | print "asdf" | myDict.get(4,"asdf")   | $: asdf                    |
+      | get          | myDict.get(1)          | 'apple'                    |
+      | update       | myDict.update({3:'c'}) | {1:'apple',2:'ball',3:"c"} |
+      | pop          | myDict.pop(2)          | {1:'apple'}                |
+      |              |                        |                            |
+*** Loop in dictionary
+#+begin_src python 
+for key in a_dict:
+    print(key, '->', a_dict[key])
+
+
+a_dict = {'color': 'blue', 'fruit': 'apple', 'pet': 'dog'}
+d_items = a_dict.items()
+d_items  # Here d_items is a view of items
+
+for item in a_dict.items():
+     print(item)
+
+# ('color', 'blue')
+#('fruit', 'apple')
+#('pet', 'dog')
+
+for key, value in a_dict.items():
+     print(key, '->', value)
+
+#color -> blue
+#ruit -> apple
+#pet -> dog
+#+end_src
+** Set
+In  [[SET Objects][https://docs.python.org/2/library/sets.html]]
+
+*** defination
+#+BEGIN_SRC python
+myset = {1,2,3,4}
+#+END_SRC
+*** Syntax
+#+BEGIN_SRC python
+farm_animals = {"sheep", "cow", "hen"}
+print(farm_animals)
+
+ for animal in farm_animals:
+     print(animal)
+
+#+END_SRC
+*** Adding elements 
+#+BEGIN_SRC python
+wild_animals = set(["lion", "tiger", "panther", "elephant", "hare"])
+
+farm_animals.add("horse")
+wild_animals.add("horse")
+print(farm_animals)
+print(wild_animals)
+empty_set = set()
+empty_set_2 = {}
+empty_set.add("a")
+ empty_set_2.add("a")
+
+even = set(range(0, 40, 2))
+print(even)
+squares_tuple = (4, 6, 9, 16, 25)
+squares = set(squares_tuple)
+print(squares)
+even = set(range(0, 40, 2))
+print(even)
+print(len(even))
+#+END_SRC
+
+*** Union,Intersection,difference,symmetric differ
+#+BEGIN_SRC python
+print(even.union(squares))
+print(len(even.union(squares)))
+
+print(squares.union(even))
+
+print("-" * 40)
+
+print(even.intersection(squares))
+print(even & squares)
+print(squares.intersection(even))
+print(squares & even)
+
+even = set(range(0, 40, 2))
+print(sorted(even))
+squares_tuple = (4, 6, 9, 16, 25)
+squares = set(squares_tuple)
+print(sorted(squares))
+
+print("even minus squares")
+print(sorted(even.difference(squares)))
+print(sorted(even - squares))
+
+print("squares minus even")
+print(squares.difference(even))
+print(squares - even)
+
+
+print("symmetric even minus squares")
+print(sorted(even.symmetric_difference(squares)))
+
+print("symmetric squares minus even")
+print(squares.symmetric_difference(even))
+#+END_SRC
+*** Sort
+#+BEGIN_SRC python
+print(sorted(even))
+print(squares)
+even.difference_update(squares)
+print(sorted(even))
+#+END_SRC
+*** remove or discard elements
+#+BEGIN_SRC python
+# squares.discard(4)
+# squares.remove(16)
+# squares.discard(8)   # no error, does nothing
+# print(squares)
+
+# #   square.remove(8) 		>> error is occured and it error is used for condition
+# try:
+#     squares.remove(8)
+# except KeyError:
+#     print("The item 8 is not a member of the set")
+#+END_SRC
+*** subset/superset
+#+BEGIN_SRC python
+# even = set(range(0, 40, 2))
+# print(even)
+# squares_tuple = (4, 6, 16)
+# squares = set(squares_tuple)
+# print(squares)
+#
+# if squares.issubset(even):
+#     print("squares is a subset of even")
+#
+# if even.issuperset(squares):
+#     print("even is a superset of squares")
+
+even = frozenset(range(0, 100, 2))
+
+print(even)
+# even.add(3)
+#+END_SRC
+*** Methods
+myS1 = {1,2,3}
+myS2 = {1,'B','C'}
+  |-----------------------------+---------------------------------+---------------+---+--------+----------------+-------|
+  | Methods                     |                                 |               |   |        |                |       |
+  |-----------------------------+---------------------------------+---------------+---+--------+----------------+-------|
+  | Union                       | (myS1 UNION myS2)               | {1,2,'B','C'} |   |        |                |       |
+  |                             | myS1.union(myS2)                | {1,2,'B','C'} |   |        |                |       |
+  | Intersection                | myS1 & myS2                     | {1,'C'}       |   |        |                |       |
+  |                             | myS1.intersection(myS2)         | {1,'C'}       |   |        |                |       |
+  | difference                  | myS1 - myS2                     | {2}           |   |        |                |       |
+  |                             | myS1.difference(myS2)           | {2}           |   |        |                |       |
+  | symmetric_difference        | myS1.symmetric_difference(myS2) |               |   | remove | myS1.remove(1) | {2,3} |
+  | discard(no exception rised) | myS1.discarde(3)                |               |   |        |                |       |
+  | issubset                    |                                 |               |   |        |                |       |
+  | issuperset                  |                                 |               |   |        |                |       |
+  |                             |                                 |               |   |        |                |       |
+** Sort 
+#+begin_src python
+li = [9,1,8,2,5,4,6,3,7]
+s_li = sorted (li, reverse=True)
+
+print('Sorted Variable: \t', s_li)
+li.sort(reverse=True)
+print('Orignial Variable:\t',li)
+
+# Tuple 
+tup = (9,1,8,1,7,3,6,4,5)
+s_tup = sorted (tup)
+
+print ('Tuple\t' , s_tup)
+
+
+# Dictionary 
+di  = {'name' : 'Corey', 'job': 'programming', 'age': None , 'os': 'Mint'}
+s_di = sort(di)
+pritn('Dict\t', s_di)
+
+# sort number based on absolute value 
+li = [-6,-5,-4,1,2,3]
+print(li,key=abs)
+
+
+# Sort class
+class Employee():
+   def __init__(self, name, age, salary):
+           self.name = name
+           self.age = age
+           self.salary= salary
+   def __repr__(self):
+          return '({},{},${})'.formate(selft.name, self.age, self.salary)
+e1 = Employee('Carl',37, 70000)
+e2 = Employee('Sarah',29, 8000)
+e3 = Employee('John',43, 9000)
+
+employees = [e1,e2,e3]
+
+# s_employees = soreted(employee) # gives error
+
+def e_sort(emp):
+   return emp.name
+#   return emp.age
+#   return emp.salary
+
+s_employees = sorted(employees, key=e_sort)
+s_employees = sorted(employees, key=e_sort, reverse= True)
+
+
+# Usingg lambda there is no need of e_sort function
+
+s_employees = sorted(employees, key=lamdba e: e.name, reverse= True)
+s_employees = 
+print(s_employees)
+
+
+# Sorting using operator and attrgetter
+
+from operator import attrgetter
+
+e1 = Employee('Carl', 37, 70000)
+e2 = Employee('Sarah', 29, 8000)
+e3 =  Employee('John', 43,9000)
+
+employees = [e1,e2,e3]
+
+
+s_employees = soreted(employees, key= attrgetter('age'))
+print(s_employees)
+#+end_src
+** Type Conversions
+*** tub2list
+#+BEGIN_SRC python
+tup1 = ()
+#+END_SRC
+*** list2Str
+#+begin_src python
+# Converting a list to str
+
+mylist = ["a", "b","c","d"]
+newString = ""
+#
+for c in mylist:
+		newString = c + "."
+print(newString)
+# OR 
+newString1 = ".".join(mylist)
+print(newString1)
+#+end_src
+
+*** tubles2set
+#+BEGIN_SRC python
+##### details visit #set-objects
+
+# even = set(range(0, 40, 2))
+# print(even)
+# squares_tuple = (4, 6, 9, 16, 25)
+# squares = set(squares_tuple)
+# print(squares)
+#+END_SRC
+*** Conversion tubles2dic
+#+BEGIN_SRC python
+fruit_keys = fruit.keys()
+print(fruit_keys)
+
+fruit_list = fruit.items() 			# Convert dic to list containing tuples ( key, value )
+# [('lime', 'a sour, green citrus fruit'), ('apple', 'good for making cider') .....etc ]
+
+fruit_tup = tuple(fruit.items()) 	# Convert dic to tuples containing tuples (key, value)
+# (  ('lime', 'a sour, green citrus fruit'), ('apple', 'good for making cider') .....etc )
+
+fruit_dic2 = dict( fruit_tup)		# Convert tuple to dic
+#+END_SRC
+*** String2int
+#+BEGIN_SRC python
+a = '123'
+b = int(a)
+#+END_SRC
+*** str2float
+#+BEGIN_SRC python
+a= '123.456'
+b = float(a)        # 123
+c= int(a) # ValueErro: invalid literal for int() with base 10
+d = int(float(a))    # 123
+#+END_SRC
+
+*** str2list,set,tuple
+#+BEGIN_SRC python
+a = 'hello'
+list(a)      # ['h', 'e','l','l','o']
+set(a)       # {'h', 'e','l','l','o'}
+tuple(a)     # ('h', 'e','l','l','o')
+#+END_SRC
+* Data Binding
+#+BEGIN_SRC python
+# List iniciallization
+
+list_1 = []			# empty list
+list_2 = list()		# empty list
+
+###############################
+	# Data Binding
+###############################
+
+even1  = [2, 4, 6, 8]
+even2 = even1		# >>> even2 is even1		>>> True
+
+print(even2 is even1)
+even2.sort(reverse=True)
+print(even)
+# Changes done in even2 will change even1 vic versa, this is called Data Binding
+
+
+
+
+x1= [1,2,3,4,5,6,90,1,54,78,6,34]
+print(x1)
+x1.sort() # .sort doestnot create a new list (obj) but change the existing list
+print(x1)
+
+#+END_SRC
+
+* Flow Control
+*** if elif else 
+**** syntax
+#+BEGIN_SRC python
+  if condition1:
+      statement
+      statement
+  elif condition2:
+      statement
+      statement
+  else:
+      statement
+      statement
+
+#+END_SRC
+**** Eg 1
+#+BEGIN_SRC python
+  name  = input("Please enter your name ")
+  age = int(input("How old are you {0}".format(name)))
+ 
+  print(age)
+
+  if (age<16):
+      print("You are not eligible to vote Come back after {0} years".format(18-age))
+  elif (16<=age<66):
+      print("You are eligible to vote")
+  else :
+      print("Enter age in whole no")
+#+END_SRC
+**** Eg 2
+#+BEGIN_SRC python
+if True:
+	print("if allow True")
+
+x = 12
+if x:
+	print("if allow int ")
+else:
+	print("if not allow int")
+
+
+x = 12.65
+if x:
+	print("if allow float ")
+else:
+	print("if not allow float")
+
+x = "it is string"
+if x:
+	print("if allow string ")
+else:
+	print("if not allow string")
+
+if False:
+	print("if allow False")
+else:
+	print("if not allow False")
+
+x = None
+if x:
+	print("if allow None ")
+else:
+	print("if not allow None")
+
+print(not False)
+print(not True)
+#+END_SRC
+*** Loop
+**** while
+***** Eg 01
+#+BEGIN_SRC python
+valid_ip = ["north", "south", "east", "west"]
+give_ip =""
+while give_ip is not valid_ip:
+	give_ip = input("Enter the Direction: ")
+      # execute statement
+
+
+
+
+#+END_SRC
+**** for
+***** Eg
+#+BEGIN_SRC python
+str = ['i','am','a','programmer', 'in','python']
+for i in str:
+	print(i,end=" ")	# >>> i am a programmer in python
+	if i=="a":
+		continue		# >>> i am programmer in python
+		# break			# >>> i am
+	print("\n")
+	print(i,end=" ")
+
+nums = [1,2,3,4,5]
+
+for num in nums :
+   if num ==3:
+      print('Found!')
+      continue
+   print(num)
+
+# output : 1,2, Found!,4,5
+
+
+for letter in 'abc':
+    print(num, letter)
+
+for i in range(10):  # range(1,11)
+    print(i)
+
+#+END_SRC
+
+**** for loop by iterating by sequencec index
+#+BEGIN_SRC python
+str = "123456789"
+
+# for char in str:
+# 	print(char)
+
+# iter_my = iter(str)
+#
+# print(iter_my)
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+# print(next(iter_my))
+
+
+# or we can use for
+
+for char in iter(str):
+	print(char)
+#+END_SRC
+*** Flow control :
+**** continue
+**** break
+* Loop
+#+begin_src python
+courses = ['History','Math', 'Physics', 'ComSci']
+
+for index, course in enumerate(course, start =1) :
+    print(index,course)
+
+student = {'name':'John', 'age' :25, 'courses': ['Math', 'CompSci']}
+ 
+for key, value in student.items():
+    print (key, value) 
+
+
+#+end_src
+* Comprehension
+
+** If-else Comprehension 
+#+BEGIN_SRC python
+# without Comprehension
+if 'summary' in mykeys:
+    temp_dic.update({'summary':item['summary']})
+else:
+    temp_dic.update({'summary':''})
+
+# with Comprehension
+temp_dic.update({'summary':item['summary']}) if 'summary' in mykeys else temp_dic.update({'summary':''})
+#+END_SRC
+
+** List Comprehension
+#+BEGIN_SRC python
+my_list = [1,2,3,4,5,6,7,8,9,10]
+
+# using for loop
+
+my_list =[]
+for n in nums:
+  my_list.append(n*n)
+
+print(my_list)
+#+END_SRC
+
+lambda 
+#+BEGIN_SRC python
+# using list comprahession
+my_list = [n for n in nums]
+print(my_list)
+
+my_list[n*n for n in nums]
+print(my_list)
+
+# using map + lambda
+
+my_list = map(lambda n: n*n, nums)
+
+print(my_list)
+#+END_SRC
+
+#+BEGIN_SRC python
+# Using for  even list 
+my_list =[]
+for n in nums:
+  if n%2==0:
+     my_list.append(n)
+print(my_list)
+
+#+END_SRC
+
+#+BEGIN_SRC python
+# Using Compression
+
+my_list[n*n for n in nums if n%2==0]
+print(my_list)
+
+# Filter + lambda 
+my_list = filter(lambda  n: n%2 ==0, nums)
+print(my_list)
+#+END_SRC
+
+#+BEGIN_SRC python
+ # I want a (letter, num) pai for each letter in "abcd" and number in "0123"
+  my_list =[]
+  for letter in "abcd":
+      for num in range(4):
+          my_list.append((letter, num))
+  print my_list
+
+#+END_SRC
+
+#+BEGIN_SRC python
+  # Using list comprssion
+  my_list = [(letter, num) for letter in "abcd" for num in rang(4)]
+  print my_list
+  # for matwork, andriod, vir job, jav,   ,js
+#+END_SRC
+** List Comprehension for dynamical create List of  integer 
+#+BEGIN_SRC python
+my_list = [ int(x) for x in input("Enter the integers seperated by spcae").split(" ")]
+#+END_SRC
+
+** Dictitionary Comprehension
+#+begin_src python
+nums = [1,2,3,4,5,6,7,8,910]
+
+# Dictionary Comprehension
+names = ['Bruce', 'Clark', 'Peter', 'Logan', 'Wade']
+heros = ['Batman','Superman', 'Spiderman', 'Wolverine', 'Deadpool']
+print zip (name, heros)
+# [(Bruce, Batman), ('Clark','Superman'), ('Peter', 'Spiderman'), ('Logan', 'Wolverine'), ('Wade,'Deadpool')]
+
+# with out list comprehension
+my_dict = {}
+for name, hero in zip(name, heros):
+   my_dict [name] = hero
+print my_dict
+
+my_dict = {name : hero for name, hero in zip(name,heros) if name != 'peter'}
+print my_dict
+
+
+#
+#+end_src
+** Set Comprehension 
+nums = [1,2,3,4,5,6,7,8,9,10]
+#+begin_src python
+# Set Comprehension 
+nums = [1,1,2,1,3,4,3,4,55,6,7,9,9]
+my_set = set()
+for n in nums:
+    my_set.add(n)
+print(my_set)
+
+my_set = {n for n in nums} 
+#+end_src
+** Generator Expression 
+#+begin_src python
+nums = [1,2,3,4,5,6,7,8,9,10]
+
+def gen_func(nums):
+   for n in nums
+        yield n*n
+
+my_gen = my_gen_func(nums)
+
+for i in my_gen:
+   print i
+
+for i in my_gen:
+   print i
+
+# Generator using list Comprehension
+
+my_nums = (x*x for x in [1,2,3,4,5])
+
+for my_num in my_nums :
+    print(my_num)
+
+
+#+end_src
+* Keyboard Input:
+python3 has build-in function =input()= to read input data from standard input(sys.stdin)
+
+python2 has  =raw_input= is deprecated
+Why ?
+ raw_input is used to receive only  string input, and reading digit is not possible to remove this raw_input is deprecated 
+#+BEGIN_SRC python
+name = input("Give Input to python ")
+print("Given input is : "+ name)
+#+END_SRC
+* Function
+Predefine
+Use define
+*** Syntax
+#+BEGIN_SRC python
+  # Function Defination
+  def func_name (arg1,arg2,.......):   # arg1,agr2...  are formal arg
+      statements
+      return[expression]
+
+  # Function Call
+  func_name(x,y,.......)              # x,y...... are actual arg
+#+END_SRC
+*** Pass by Reference
+Call by reference : sends the address(ref) of =actual arg= to =formal arg=
+Python uses pass by reference 
+we can check by finding if of actual arg and formal arg are same
+*** Pass by Value
+Python does not uses pass by value
+Call by value : send the value of =actual arg= to =formal arg= 
+*** argument
+**** required arg
+Python check no of formal arg = no of actual arg if not it will send a error 
+**** keywoard agr
+actual agr need not be send to order but it can be called by unorded by using actual arg assigned to formal arg
+#+BEGIN_SRC python
+  def printinfo (name,age):
+      print("Name: ", name)
+      print("Age: ", age)
+      return
+
+  printinfo("xyz", 20) 
+  printinfo( age=50, name="miki")    # keyword arg
+#+END_SRC
+**** ,default argument
+A default age is an arg that assume a default value if a value is not provided in function call for that argument
+#+BEGIN_SRC python
+  def printinfo( name, age=35):
+      print("Name: ", name)
+      print("Age: ",age)
+      return
+
+  printinfo("xyz")                # default agr
+  printinfo(name = 'miki',age =50)
+#+END_SRC
+
+**** Variable Length arguments:
+You may need to proecess a function for more arg than you specified while defining the function 
+
+These arg are called variable-length-arguments and are not named in the function definition,unlike required and default arguments
+#+BEGIN_SRC python
+  def fun_name([formal_arg], *var_args_tuples):
+                  statements
+                  statements
+                  return variable
+#+END_SRC
+
+Note : asterisk (\*) is placed before var name that hold value of all non-keyword variable arg. This tuple remains empty if no additional arg are speciied during the function called
+***** Example
+#+BEGIN_SRC python
+  def printinfo( arg1,*vartuple):
+      print("Output is: ")
+      print(arg1)
+      for var in vartuple:
+          print(var)
+      return
+
+  printinfo(10)
+  printinfo(70,60,50)
+#+END_SRC
+
+**** Lamda (Anonymous) Functions:
+create small function
+not create by std manner by using def keyword
+can take any number of arg but return 1 value
+can't contain commands or multiple expressions
+has there own local namespace contain variabels (parameter list) and gloval namespace
+ can't acess other var  
+
+ #+BEGIN_SRC python 
+   sum = lambda arg1, arg2:   arg1+arg2
+
+   print(sum(10,20)) 
+ #+END_SRC
+
+**** Return
+**** args and kwargs
+*args and **kwargs In Python : https://www.youtube.com/watch?v=0lu2SY3menU
+#+BEGIN_SRC python
+  def student_info(*args, **kwargs):
+      print(args)
+      print(kwargs)
+
+
+  student_info( "Math", "Art", name = 'John', age =22)
+
+  # ("Math", "Art")
+  # {name 'John', 'age': 22}
+
+
+  course = ["Math", "Art"]
+  info = {name 'John', 'age': 22}
+
+  student_info(course, info)
+  # ( ["Math", "Art"], {name 'John', 'age': 22} )
+  # {}
+
+
+  student_info(*course, **info)
+  # ("Math", "Art")
+  # {name 'John', 'age': 22}
+
+
+#+END_SRC
+
+lamda
+filter
+* Namespace & Scope
+*** Scope
+LEGB : Local, Enclose, Global, Built-in 
+18 video of chore schafer
+- Local   :defined with in a function
+- Enclose :defined with in a enclose {} or <Tab>
+- Global  : top of module or using a global key
+- Built-in: pre-assigned 
+
+py check in local then enclosed, global and last built-in
+
+- LOCAL SCOPE
+
+#+BEGIN_SRC python
+  x = 'global x'
+
+  def test():
+      y= 'local y'
+      print(y)     
+      print(x)  # x is global variable
+
+  test()  # y is local varialble in test
+
+#+END_SRC
+
+- Global  varable
+#+BEGIN_SRC python
+  x = "global x "
+
+  def test():
+      global z
+
+      y ="local y"
+      
+      print(x)    # x is global 
+      print(y)    # y is local
+      print(z)    # z is global
+
+  test()
+  print(x)
+  print(z)
+
+#+END_SRC
+
+Built-in : name pre-assigned in py ex: min,
+
+#+BEGIN_SRC python
+  import builtins
+
+  print(dir(builtins))
+
+
+  def min():
+      pass
+
+  m= min([ 5, 5, 4, 5])  # error : min take 0 argments (min is over riden )
+  print(m)
+
+
+
+#+END_SRC
+
+
+Encloseing <Tab> in define nested function
+
+#+BEGIN_SRC python
+  def outer():
+      x= 'outer x'
+      y = 'outer y'
+
+      def inner():
+          x="inner x"
+          # nonlocal x        
+          print(x)           # >>> inner x
+          print(y)           # >>> outer y
+
+      inner()
+      print(x)
+
+  outer()
+#+END_SRC
+
+
+Scope of a variable determines the portion of prg where you can access a particual identifier or region in which var is construct/ deleted
+
+There are two basic scope of a varialbe 
+Local : can access only inside a block,function in which it is delacred  
+Global: can access thorughout the prg by all function
+
+| local( )  | return all names  that are accessed locally from that function              |
+| global( ) | return all names that  are accessed globally and locally from that function |
+
+#+BEGIN_SRC python
+  total = 0    # global variable
+
+
+  def sum(arg1, arg2):
+      total = arg1 + arg2           # local var
+      print('inside the local function total :',total)
+      return total
+
+  sum (10,20)
+  print("outside the function  total : ", total)    
+#+END_SRC
+*** Namespace
+ Namespace is like a dictionary (which stores key and value) stores variable and there corresponding objects(values)
+ In python as two namespace
+**** Local namespace:
+             each function, block has it own namespace where it own variables,function,methods, objects
+             
+**** Global namespace :
+             variables(obj ) which can be acessed to all the functions and other variables
+
+**** Local Vs GlobalIf 
+local variable and global variable as same name local variable is given priority.
+
+If a variable is defined inside a function,block it is local varialbe
+If a variable is defined outside a function it is global variable
+Note : To use the global variable in local namespace we have to 1st use globle statement 
+#+BEGIN_SRC python
+
+  count = 2000
+  # if we don't sepecify global the count is treated as local
+  # if local count is not defined then it will give a error
+  def Addcount():
+      # global count
+      count = count +1
+
+  priint(count)
+  Addcount()
+  print(count)
+#+END_SRC
+* Modules (librays)
+Grouping related method,attribues, class into a module
+
+- Easier to understand and Write
+- Module  allows to logically organize your code
+- Module in py  is objects  with arbitrarily named attributes that you can bind and reference
+- Simply a module is a file =.py file= consistign of py code
+- Module can define functions,classes and varibale
+- Module can also include runnable code
+** Os module
+*** Intoduction Shortcut method:
+#+BEGIN_SRC python
+import os 
+print(os.__file__)             # /usr/lib/python2.7/os.pyc
+
+#+END_SRC
+ all the method are linux based cmd
+
+| method                      | Describtion                                               |
+|-----------------------------+-----------------------------------------------------------|
+| os.getcwd()                 | '/User/coreyshafer/Desktop/'                              |
+| os.listdir(path)            | return list names of files in current dir                 |
+| os.chdir(path)              | change dir to path                                        |
+| os.makedir(path)            | create dir and it sub dir (mkdir can't)                   |
+| os.mkdir(path[, mode])      | create a directory                                        |
+| os.rmdir(path)              | remove dir path                                           |
+| os.removedirs(path)         | remove dir ectory and it sub directory                    |
+| os.remdir(path)             | re directory                                              |
+| os.rename (src,dst)         | rename file or dir src to dst                             |
+| os.chroot(path)             | change root dir to current working path                   |
+|-----------------------------+-----------------------------------------------------------|
+|-----------------------------+-----------------------------------------------------------|
+| os.status(file)             |                                                           |
+| os.open(file,flags[,model]) | open file, set flags and mode                             |
+| os.read(fd,n)               |                                                           |
+| os.closed(fd)               | clsoe the file descriptor                                 |
+| os.chflags(path,flags)      | set flags of path to numeric flags                        |
+| os.chmod(path,mode)         | Change mode of path to numeric mode                       |
+| os.chown(path,uid,gid)      | Change owner and group id of path to numerial uid and gid |
+| os.symlink(src,dst)         | Create a symbolic link(short cut) point to src name dst   |
+| os.remove(path)             | remove the file for the path                              |
+| os.write                    |                                                           |
+|-----------------------------+-----------------------------------------------------------|
+|                             |                                                           |
+
+#+BEGIN_SRC python
+os.stat('103041478_electricity_bill_11_payment.pdf')
+# >>> os.stat_result(st_mode=33279, st_ino=14816496, st_dev=2049, st_nlink=1, st_uid=1000, st_gid=1000, st_size=108238, st_atime=1545121417, st_mtime=1542892011, st_ctime=1543569248)
+
+ os.stat('103041478_electricity_bill_11_payment.pdf').st_size
+# >>> 108238
+
+mod_time = os.stat('103041478_electricity_bill_11_payment.pdf').st_mtime
+# 1542892011.625957 time stamp formate  for human readable formate
+
+from datetime import datetime
+print(datetime.fromtimestamp(mod_time))
+# 2018-11-22 18:36:51.625957
+
+#+END_SRC
+
+**** File Objects 
+***** Cheat Sheet
+| method                             | Describtion                       |
+| os.read                            | open file in editor               |
+| os.write                           | write a file                      |
+| os.rename(test001.txt, test02.txt) | Rename test001.txt to test002.txt |
+| os.remove(test001.txt)             | Delete test001.txt                |
+|                                    |                                   |
+***** read,write, rename, remove,
+***** change dir, make dir , del dir
+***** Example writing/reading a file using 'os.open'
+#+BEGIN_SRC python
+import os,sys
+
+fd = os.open ("f1.txt", os.O_RDWR|os.O_CREAT)
+
+# Writing one string
+line = "this is test"
+b = str.encode(line)
+ret = os.write(fd,b) # consist of no of bytes writen in f1.txt
+
+print("the no of bytes written: ", ret)
+os.close(fd)
+
+print("Closed the file successfully!")
+input()
+
+fd = os.open("f1.txt",os.O_RDWR)
+ret = os.read(fd,12)
+
+print(ret.decode())
+os.close(fd)
+print("Closed the file successfully!")
+
+#+END_SRC
+
+***** Rename and Del file
+#+BEGIN_SRC python
+os.rename(current_file.txt, new_file_name.txt)
+os.remove(current_file_name.txt)
+#+END_SRC
+***** Directory mange
+#+BEGIN_SRC python
+os.mkdir("newdir") # make a dir
+os.chdir(dir_path) # change current dir
+# find at which dir you are present
+os.getcwd()
+# del dir
+os.rmdir("test")
+#+END_SRC
+**** File Objet Ex2
+Whether you use destop or web applications File Objest are basics used
+
+built-in open cmd :
+         Noraml is not re-commanded
+         
+#+BEGIN_SRC python
+  f= open('text.txt','r')  # In general dir :'path' is given  , defalut: current dir, python searchpath
+
+  print(f.name)
+  print(f.mode)
+
+  f.close()
+
+  # f.close()  is complusory defined
+  # If file is n't close then it may memory leak
+
+  # So content-text manger is used insted of open()
+
+  with open('text.txt','r') as f:
+      pass
+
+  # Advantages
+     # Automatically close file
+     # auto close if there is exception
+
+  # EX
+  print(f.closed)          # >> True
+  # return True if file is closed
+
+  # print(f.read()) # VALUE ERROR: i/O operator of closed file
+
+#+END_SRC
+***** os.open
+os.open (file, flags, mode)
+os.read,os.close
+
+#+BEGIN_SRC python
+os.open(file, flage[, mode])
+#+END_SRC
+
+| flag          | Describtion                      | mode |
+|---------------+----------------------------------+------|
+| os.O_RDONLY   | open for reading only            | 'r'  |
+| os.O_WRONLY   | open for writing only            | 'w'  |
+| os.O_RDWR     | open for reading and wring       | 'r+' |
+| os.O_NONBLOCK | do not block on open             |      |
+| os.O_APPEND   | append on each write             | 'a'  |
+| os.O_CREAT    | create file if it does not exist |      |
+
+*** Ex of Dir managements
+#+BEGIN_SRC python
+import os
+form datetime import datetime
+print(dir(os))        # show all attribues and method in module
+
+
+# Get current working Dir [os.getcwd()]   [pwd in linux]
+print(os.getcwd())              # /home/dan
+
+# Change Dir
+os.chdir('/home/dan/Desktop')   # /home/dan/Desktop
+print(os.getcwd())
+
+# List of file and folders in current dir
+print(os.listdir())
+
+
+# Make a dir
+os.mkdir('Os-Demo-1')
+
+# os.mkdir('Os-Demo-1/Sub-DEMO') # ERROR: CANNOT CREATE DIR INSIDE
+os.makedirs('Os-Demo-1/Sub-DEMO')    # advange os makedirs is it can create dir inside dirs
+
+# Delete a dir(folders)
+os.rmdir('Os-Demo-1')
+os.remodedirs('Os-Demo-1')
+
+# Rename a dir
+os.rename('old.txt', 'new.txt')
+
+
+# Status of demo
+
+print(os.stat('demo.txt'))
+
+# >>> os.stat_result(st_mode=16877, st_ino=8524201, st_dev=2049, st_nlink=2, st_uid=1000, st_gid=1000, st_size=4096, st_atime=1543198458, st_mtime=1543082778, st_ctime=1543082778)
+
+# Size of file
+print('Size of file: demo.txt is :' + os.status('demo.txt').st_size)
+# >> 4096
+
+# Last Modified Time 
+print(os.stat('demo.txt').st_mtime)
+#>>> 1543082778 (this is in timestamp formate )
+
+# Modified time stamps
+mod_time = os.stat('demo.txt').st_mtime
+print(datetime.fromtimestap(mod_time))
+# >>> 2018-11-24 23:36:18.194036
+
+# See entire directory (child director)
+#+END_SRC
+*** Os walk [tree of all file/sub-dir]
+#+BEGIN_SRC python
+import os
+
+path = '/home/dan/Desktop'
+
+for dirpath in os.walk(path):
+  # dirpath  = ('seach_path', [list of dir in search_path],[list of files in search_path])
+  drp = dirpath[0]
+  dirnames = dirpath[1]
+  filenames = dirpath[2]
+  print('path :',drp[len(path):])
+  print('dir:'+ '\n  ' +  '\n  '.join(dirnames))
+  print('files:'+ '\n   ' + '\n '.join(filenames))
+  print()
+
+#+END_SRC
+*** Os path [JOIN AND SPLIT PATH]
+#+BEGIN_SRC python
+ # Joining , Spiliting,
+print(os.environ.get('HOME')) #>> /User/jayradhe
+
+file_path = os.path.join(os.environ.get('HOME'), 'text.txt')
+
+print(file_path)
+
+os.path.basename('/temp/test.txt'))
+# test.txt
+os.path.dirname('/temp/test.txt'))
+# /temp
+os.path.split('/temp/test.txt'))
+# ('/temp', 'test.txt')
+os.path.exists('/temp/test.txt'))
+os.path.isdir('/temp/test.txt'))
+# False
+os.path.isfile('/temp/test.txt'))
+# False
+os.path.splittext('/temp/test.txt'))
+# ('/temp/test','.txt')
+
+#+END_SRC
+*** Os Flags
+#+BEGIN_SRC python
+  os.environ.get('HOME')                                      # >>>'/home/dan'
+  path1 = os.environ.get('HOME') + '/' + 'test.txt'           # >>>'/home/dan/test.txt'
+  path2 = os.path.join(os.environ.get('HOME'),'text.txt')     #>>> '/home/dan/text.txt'
+
+  temp = '/home/dan/text.txt'
+
+  os.path.basename(temp)      # >>>'text.txt'
+  os.path.dirname(temp)       # >>>'/home/dan'
+  os.path.split(temp)         # >>>('/home/dan', 'text.txt')
+  os.path.exists(temp)        # >>>False
+  os.path.isdir(temp)         # >>>False
+  os.path.isfile(temp)        # >>> False
+  os.path.splitext(temp)      # >>> ('/home/dan/text', '.txt')
+#+END_SRC
+** Datetime module
+*** Introduction
+There are two types of model 
+- navie datetime
+- aware datetime
+
+In navie datetime consist of 
+ - date      [year, month, day, weekday]
+ - time      [hh,mm,ss,msec]
+ - date&time [year, month, day, weekday],[hh,mm,ss,msec]
+
+In aware datetime in addtion to navie consist of timezone
+  - timezone +/- 00:00
+
+In general datetime module does n't consist of database of timezone
+so we use other package like pytz, dateulti.tz 
+
+*** Date
+#+BEGIN_SRC python
+# navie datetime, aware datetime
+import datetime
+d = datetime.date(2016,7,24)  # YYYY,MM,DD
+print(d)      # >>>2016-07-24
+
+tday = datetime.date.today()
+print(tday)     # 2018-11-28
+
+import datetime
+
+
+tday = datetime.date.today()
+print(tday.year)                # 2018
+print(tday.month)               # 11
+print(tday.day)                 # 26
+print(tday)                     # 2018-11-20
+
+print(tday.weekday())           # 0 # weekday MONDAY :0, SUNDAY :6
+print(tday.isoweekday())        # 1 # iso weekday MONDAY:1 SUNDAY:7
+
+
+
+
+#+END_SRC
+
+*** Time
+#+BEGIN_SRC python
+import datetime
+
+t = datetime.time(9, 30, 45, 100000)  #  hh,mm,ss,micro ss
+print(t)                  #  09:30:45.100000
+print(t.hour)               # 9
+print(t.min)                # 00:00:00
+print(t.minute)             # 30
+
+print(t.min)                # 00:00:00
+print(t.minute)             # 30
+
+#+END_SRC
+*** timedelda
+https://pynatixbve.com/python-timedelta/
+
+https://www.includehelp.com/python/timedelta-total_seconds-method-with-example.aspx
+#+begin_src pythons
+import datetime
+datetime.timedelta(weeks=0, days=0, hours=0,  minutes=0, seconds=0, milliseconds=0, microseconds=0 )
+#Returns : Date
+
+###############
+#  tdelta
+#################
+tday = datetime.datetime.now()
+tdelta = dt.timedelta(days=7)
+
+# print(tday +tdelta)                 # 2018-12-03
+# print(tday - tdelta)                # 2018-11-19
+bday = datetime.datetime(2022,8,25,0,0,0)
+till_day = bday-tday
+print(f'bday \t\t= {bday}')
+print(f'till_day \t={till_day} and has remaing days {till_day.days}')                     # -93 days, 0:00:00
+
+
+
+print("Calculate time")
+total_seconds = till_day.total_seconds()
+remain_seconds = int(total_seconds % 60)
+remain_minutes = int(((total_seconds -remain_seconds)% 3600) // 60)
+remain_hours =  total_seconds//3600
+remain_days = int(remain_hours//24)
+remain_hours = int(remain_hours - remain_days*24)
+print(f"\t remaining time = {remain_days} days {remain_hours}:{remain_minutes}:{remain_seconds}")
+print(f"\t total minutes \t= {(remain_days*24 + remain_hours)*60 + remain_minutes}")
+print(f"\t total hours \t= {(remain_days*24 + remain_hours) }")
+print(f"\t total second \t= {till_day.total_seconds()}")     # -8035200.0
+
+#+end_src
+*** datetime  tz-naive or with default Timezone
+#+BEGIN_SRC python
+dt_today = datetime.datetime.today()        # current local time NO-TIMEZOME
+dt_now = datetime.datetime.now()            # give TIMEZONE : default: NONE
+dt_utcnow = datetime.datetime.utcnow()      # UTC info: NONE
+
+print(dt_today)             # 2018-11-26 21:20:31.829934
+print(dt_now)               # 2018-11-26 21:20:49.192463
+print(dt_utcnow)            # 2018-11-26 15:51:51.149416
+
+#+END_SRC
+*** From datetime to only time
+#+begin_src 
+from datetime import datetime
+
+strg = "2017-07-20-10-30"
+
+dt = datetime.strptime(strg, '%Y-%m-%d-%H-%M')
+tme = dt.time()
+print(tme)  # 10:30:00
+
+#+end_src
+** datetime tz-aware
+*** pytz module for Timezone
+
+by default python set timezone :default +00:00 or utc time 
+indian time zone ='Asia/Kolkata'=
+#+BEGIN_SRC python
+import pytz
+import datetime
+import pytz
+
+print("\n".join(pytz.all_timezones))
+dt_today = datetime.datetime.today()
+
+#
+yy = dt_today.year
+mm = dt_today.month
+dd = dt_today.day
+hh = dt_today.hour
+mn = dt_today.minute
+sec = dt_today.second
+msec = dt_today.microsecond
+# WRONG :
+dt = datetime.datetime(yy,mm,dd,hh,mn,sec,msec,tzinfo=pytz.UTC)
+# # we are in timezone india(koltala) we can't assign timzone to default
+print('datetime.today:\t',dt)               # 2018-11-27 12:30:45+00:00
+
+
+dt_now = datetime.datetime.now(tz=pytz.UTC)
+print('datetime.now:\t',dt_now)           # 2018-11-26 20:32:32.911316+00:00
+
+dt_utcnow = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
+print('utcnow:\t \t',dt_utcnow)        # 2018-11-26 20:33:24.122555+00:00
+
+dt_dtz = datetime.datetime.now(tz=pytz.UTC)
+print ("time zone defalut :\t", dt_dtz)
+dt_UsMountain_tz = dt_dtz.astimezone(pytz.timezone('US/Mountain'))
+print("time zone US/Moun : \t", dt_UsMountain_tz)                                 # 2018-11-26 13:36:10.214904-07:00
+#+END_SRC
+
+*** List of Timezone
+#+BEGIN_SRC python
+## List of all timezones
+for tz in pytz.all_timezones:
+  print(tz)
+#+END_SRC
+
+*** set timezone with datatime.timezone
+https://queirozf.com/entries/python-datetime-with-timezones-examples-and-reference
+*** Convert timezone or remove timezone
+*** Change one timezone to other timezone(using astimezone)
+#+begin_src python
+# temp_date.tz_convert(None)
+import datetime as dt
+import pytz
+# Naive Date Time 
+dt_naive = dt.datetime(2022,9,19,9,30,0)
+# print(dt_naive)                                    # 2022-09-19 09:30:00
+New_York_tz = pytz.timezone('America/New_York') 
+dt_New_York_tz = New_York_tz.localize(dt_naive)
+print(dt_New_York_tz)                                # 2022-09-19 09:30:00-04:00
+
+# India Stand Time  + 5:30 
+ist= 'Asia/Calcutta'
+India_timezone = pytz.timezone('Asia/Calcutta')
+# timezone = pytz.timezone('Asia/Calcutta')
+India_time_tz = new_york_time_tz.astimezone(India_timezone)
+# India_time_tz = India_timezone.localize(new_york_time_tz)
+print(India_time_tz)                                 # 2022-09-19 19:00:00+05:30 
+print(India_time_tz.tz_localize(None))               # To get utc time and remove timezone
+print(India_time_tz.tz_convert(None))                # To get local indian time 
+#+end_src
+
+#+begin_src python
+from datetime import datetime
+import pytz
+
+naive= datetime.now()
+## Adding a timezone
+timezone = pytz.timezone("Asia/Kolkata")
+aware1 = naive.astimezone(timezone)
+## After adding the timezone info, 
+## the object it becomes aware
+timezone = pytz.timezone("Asia/Tokyo")
+aware2 = aware1.astimezone(timezone)
+print("naive\t=",naive)
+print("aware1\t=",aware1)
+print("aware2\t=",aware2)
+
+#+end_src
+
+#+begin_src result
+naive	= 2022-09-02 08:34:45.727176
+aware1	= 2022-09-02 08:34:45.727176+05:30
+aware2	= 2022-09-02 12:04:45.727176+09:00
+#+end_src
+
+#+begin_src 
+
+df = df.tz_convert(None)
+#+end_src
+*** Naive to timezone (tz -naive dt) to (tz-aware dt) or (naive dt to datetime withtimezone)
+#+BEGIN_SRC python
+# given naive datetime to timezone
+
+dt_naive = datetime.datetime.now()
+# print(dt_naive)                                         # 2018-11-27 02:10:09:10.0000
+UsMountain_tz = pytz.timezone('US/Mountain') 
+# print(UsMountain_tz)                                    # US/Mountain
+dt_UsMountain_tz = UsMountain_tz.localize(dt_naive)
+print("time zone US/Moun : \t",dt_UsMountain_tz)                                # 2018-11-27 02:10:19.941388-07:00
+#+END_SRC
+
+*** String 2 Datetime or Datetime 2 String
+Python strftime cheatsheet  https://strftime.org/ \\
+https://www.programiz.com/python-programming/datetime/strftime
+
+| Code | Example | Description |
+|------+---------+-------------|
+|%a |Sun |Weekday as locale’s abbreviated name.|
+|%A |Sunday |Weekday as locale’s full name.|
+|%w |0 |Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.|
+|%d |08 |Day of the month as a zero-padded decimal number.|
+|%-d |8 |Day of the month as a decimal number. (Platform specific)|
+|%b |Sep |Month as locale’s abbreviated name.|
+|%B |September |Month as locale’s full name.|
+|%m |09 |Month as a zero-padded decimal number.|
+|%-m |9 |Month as a decimal number. (Platform specific)|
+|%y |13 |Year without century as a zero-padded decimal number.|
+|%Y |2013 |Year with century as a decimal number.|
+|%H |07 |Hour (24-hour clock) as a zero-padded decimal number.|
+|%-H |7 |Hour (24-hour clock) as a decimal number. (Platform specific)|
+|%I |07 |Hour (12-hour clock) as a zero-padded decimal number.|
+|%-I |7 |Hour (12-hour clock) as a decimal number. (Platform specific)|
+|%p |AM |Locale’s equivalent of either AM or PM.|
+|%M |06 |Minute as a zero-padded decimal number.|
+|%-M |6 |Minute as a decimal number. (Platform specific)|
+|%S |05 |Second as a zero-padded decimal number.|
+|%-S |5 |Second as a decimal number. (Platform specific)|
+|%f |000000 |Microsecond as a decimal number, zero-padded on the left.|
+|%z |+0000 |UTC offset in the form ±HHMM[SS[.ffffff]] (empty string if the object is naive).|
+|%Z |UTC |Time zone name (empty string if the object is naive).|
+|%j |251 |Day of the year as a zero-padded decimal number.|
+|%-j |251 |Day of the year as a decimal number. (Platform specific)|
+|%U |36 |Week number of the year (Sunday as the first day of the week) as a zero padded decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.|
+|%W |35 |Week number of the year (Monday as the first day of the week) as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.|
+|%c |Sun Sep 8 07:06:05 2013 |Locale’s appropriate date and time representation.|
+|%x |09/08/13 |Locale’s appropriate date representation.|
+|%X |07:06:05 |Locale’s appropriate time representation.|
+|%% |% |A literal '%' character.|
+
+#+begin_src python
+import datetime
+import pytz
+
+dt_mtn = datetime.datetime.now(tz=pytz.time('US/Mountain'))
+print(dt_mtn.isoformat()))
+print(dt_mtn.strftime('%B %d, %Y'))  # August 15, 2021
+
+
+
+# CONVERT STRING TO DATETIME 
+dt_str  = 'August 15, 2021'
+
+dt= datetime.datetime.strptime(dt_str,'%B %d, %Y')
+print(dt)
+
+# strftime - Datetime to String 
+# strptime - String to Datetime
+#+end_src
+*** Ex Datetime and 
+#+BEGIN_SRC python
+  import os
+  from datetime import datetime
+  # # Change Dir
+  os.chdir('/home/dan/Desktop')   # /home/dan/Desktop
+  print(os.getcwd())
+
+
+  # Status of demo
+  os.stats('game')
+
+  # >>> os.stat_result(st_mode=16877, st_ino=8524201, st_dev=2049, st_nlink=2, st_uid=1000, st_gid=1000, st_size=4096, st_atime=1543198458, st_mtime=1543082778, st_ctime=1543082778)
+
+  # Size of file
+  print('Size of file: game is :' + os.status('game').st_size)
+  # >> 4096
+
+  # Last Modified Time 
+  print(os.stat('game').st_mtime)
+  #>>> 1543082778 (this is in timestamp formate )
+
+  # Modified time stamps
+  mod_time = os.stat('game').st_mtime
+  print(datetime.fromtimestap(mod_time))
+  # >>> 2018-11-24 23:36:18.194036
+
+  # See entire directory (child director)
+#+END_SRC
+
+** File Module or File Object 
+*** File acess modes 
+| read only       | 'r'  |
+| read and write  | 'r+  |
+| write only      | 'w'  |
+| write and read  | 'w+' |
+| append only     | 'a'  |
+| append and read | 'a+' |
+|                 |      |
+
+#+BEGIN_SRC python
+f = open('test.txt','r')
+print(f.name)
+print(f.mode)
+f.close 
+
+
+
+f = open('newfile.txt', 'w')
+f.write('Hello\n')
+f.writelines(['Hello','World\n'])
+
+f.close
+#+END_SRC
+*** Contant manager
+#+BEGIN_SRC python
+with open ('text.txt','r') as f:
+   f_contents = f.read()              # read entire file
+   print(f_contents)
+# Disadvantages:    # if file size is more then memory is more > slower
+# Advantages :      # To read a small size file
+# what if  we need to read large  we n't  wanted to load in memory 
+   f_contents = f.readlines()   # list of lines ['line1 \n', 'line2 \n'..........etc]
+   print(f_contents)
+
+   f_id_line = f.readline()
+   print(f_f_id_line, end='')                #  >>> line1 
+
+   f_id_line = f.readline()
+   print(f_f_id_line, end='')                #  >>> line2
+# ####################
+# Using for loop to read line
+# ####################
+   for line in f:
+     print(line, end='')
+      # effiecient for read line
+# #############
+# More control read 10 char
+# ###################
+size_to_read = 10
+f_content = f.read(size_to_read)
+print(f_content, end ='*')     # read 10 char for index seperate by *
+
+while len(f_contents ) >0:
+  print(f_contents, end='*')
+  print("\n index or current possion:\n "f.tell())      # current possion
+  f_content = f.read(size_to_read)
+#   print(f_tell()) # 
+  f.seek(0)   # to change the position to starting of file 
+  f_content = f.read(size_to_read)
+  print(f_content, end ='*')     # read 10 char for index seperate by *
+  f_content = f.read(size_to_read)
+  f.seek(0)
+  f_content = f.read(size_to_read)
+  print(f_content, end ='*')     # read 10 char for index seperate by *
+#+END_SRC
+
+*** Write mode or Overwrite mode with Contant Manager
+#+BEGIN_SRC python
+with open('test2.txt', 'w') as f:
+     pass
+#    f.write("Test")
+
+with open('test3.txt', 'w') as f:
+    f.write('Test First line')   # str 'Test' is write in file
+    f.seek(0)
+    f.write('Second line')
+# Disadvange:
+    # If text3.txt is already existed then it will start write at the EOF
+
+    # If use to movke to begin of flie : f.seek(0)
+
+
+# # Copy a file
+
+with open('test.txt', 'r') as rf:
+    with open('test_copy.txt', 'w') as wf:
+        for line in rf:
+            wf.write(line)
+
+
+# # Copy a Image
+
+with open('test.txt', 'r') as rf:
+    # ERROR UnicodeDecoder: utf-8 can't decode bytes at Addre in position 0
+
+# For Image we use binary mode
+with open('test.jpg', 'rb') as rf:
+    with open('test_copy.jpg', 'wb') as wf:
+        for line in rf:
+            wf.write(line)
+
+# More control : in chunk_size
+with open('bronx.jpg','rb') as rf:
+    with open('bronx_copy,jpg', 'wb') as wf:
+        chunk_size = 1024
+        rf_chunk = rf.read(chunk_size)
+        while len(rf_chunk):
+            wf.write(rf_chunk)
+            rf_chunk = rf.read(chunk_size)
+#+END_SRC
+
+*** Append Mode with Contant Manager
+srource: https://stackoverflow.com/questions/59308996/how-to-fix-python-overwriting-file-in-append-mode
+I'm making a register (e.g. a school one) program in python using tkinter and i'm trying to add a new person to the register every time the person clicks submit but all that is happening is that it is overwriting the previous name meaning that the file that it is being saved to only have one name.\\
+Does anyone have any suggestions on how to fix this?\\
+Some clarity: register_info and listees_info are the name of the register and the name of the latest person that is being saved to the file.\\
+This is the part of my code: \\
+#+begin_src python
+def create_register():
+    register_info = registername.get()
+    listees_info = listees.get()
+    list_of_registers=os.listdir()
+    if register_info in list_of_registers:
+        file=open(register_info,"w")
+        file.close()
+        Label(create, text = "Register Created", fg = "green" ,font = ("calibri", 8)).pack()
+    with open(register_info,"a") as file_info:
+        file_info.write(register_info+"\n")
+        file_info.write(listees_info+"\n")
+        file_info.close()
+#+end_src
+**** Solution:
+The =w= mode you pass to open (in your line that reads =file=open(register_info,"w")=) tells python you want to open the file for writing. By design, this gets rid of anything else in the file and places the cursor at the beginning. It sounds like you want to open the file and append information to the end, without overwriting anything.\\
+To do this, you should use the a mode for append. This opens the file for writing and places the cursor at the end of the file.\\
+So, you need to say =open(register_info, "a")=. \\
+I also suggest switching to a context manager which ensures the file is closed if any unexpected behavior happens. You would do this like:
+#+begin_src python
+with open(register_info, "a") as file:
+    # Any code that needs to use "file" here
+#+end_src
+More information about file opening modes (taken from another answer of mine):
+#+begin_quote
+=r=: Opens the file in read-only mode. Starts reading from the beginning of the file and is the default mode for the open() function.\\
+=rb=: Opens the file as read-only in binary format. Places the cursor at the start of the file.\\
+=r+=: Opens a file for reading and writing. Places the cursor at the beginning of the file. \\
+=w=: Opens in write-only mode. Places the cursor at the beginning of the file. This will overwrite any existing file with the same name. It will create a new file if one with the same name doesn't exist.\\
+=wb=: Same behavior as w, except the file is opened in binary mode. \\
+=w+=: Opens a file for writing and reading. Replaces all content and creates the file if it doesn't exist. This mode is used when you need to write to an empty-file and potentially read from it later in your code (before closing). \\
+=wb+=: Same behavior as w+ except the file is in binary mode. \\
+=a=: Opens a file for appending new information to it. The cursor is placed at the end of the file. A new file is created if one with the same name doesn't exist. \\
+=ab=: Same behavior as a except the file is in binary mode. \\
+=a+=: Opens a file for both appending and reading. The cursor is placed at the beginning of the file. \\
+=ab+=: Same as a+ except the file is in binary mode.\\
+#+end_quote
+*** Rename mulitple files
+#+BEGIN_SRC python
+# Consister a dir as unorder videos which are to sorted by index in name
+
+# dir(path)
+"""
+>>>
+Earth - Our Solor System - #4
+Jupiter - Our Solar System -#6
+Mar - Our Solor System - #5
+Mecury - Our Solor System - #2
+Neptune - Our Solor System - #8
+Pluto - Our Solor System - #10
+Saturn - Our Solor System - #7
+The Sun - Our Solor System - #1
+Urans - Our Solor System - #9
+Venus- Our Solor System - #3
+"""
+
+import os
+
+path ='/home/dan/Downloads'
+
+os.chdir(path)
+
+for file in os.listdir():
+    f_name,f_ext = os.path.split(file)
+    # print(file_name,f_ext)
+
+    f_title, f_course, f_num = f_name.split('-')
+    # print(f_title, f_course, f_num) = f_name.split('-')
+
+    f_title = f_title.strip()
+    f_course = f_course.strip()
+    f_num = f_num.strip.()[1:].zfill(2) # zero padding by 2 and remove #
+    
+
+    #  print('{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext))
+    new_name = '{}-{}-{}{}'.format(f_num, f_course, f_title,f_ext)
+    os.rename(f, new_name)
+#+END_SRC
+** Read CSV module- read, parse, write
+CSV file: a plane txt and use delimiters like ',' '\n' 
+First line : Consist of field like 'first_name', 'last_name','email'
+
+**** Ex: Read a csv file (as list)
+first_name, last_name, email
+John, Doe, john-doe@guseemail.com
+mary,smith,smith-mary@gmail.com.....
+
+#+BEGIN_SRC python
+import csv
+
+# read csv file
+
+with open('names.csv', 'r') as csv_file:
+   csv_reader= csv.read(csv_file)
+
+   print(csv_reader) # >>> object
+
+for line in csv_reader:
+   print(line)
+   # >>> ['first_name', 'last_name','email']
+   # >>> ['John', 'Doe', 'john-doe@guseemail.com']
+   # >>> ['mary','smith','smith-mary@gmail.com']
+   print(line[2])
+   # >>> ['email']
+   # >>> [ 'john-doe@guseemail.com']
+   # >>> ['smith-mary@gmail.com']
+
+  #    to remove ['email']
+with open('names.csv', 'r') as csv_file:
+  csv_reader= csv.read(csv_file)
+  next(csv_reader)  # Remove the first line
+  for line  in csv_reader:
+     print(line[2])      
+
+# ##################3
+# CSV WRITE WITH DIFFEERENT DELEMITTER 
+#####################333
+
+with open('names.csv', 'r') as csv_file:
+  csv_reader= csv.read(csv_file)
+  with open('new_names.csv', 'w') as new_file:
+     csv_writer = csv.writer(new_file,delimiter= '\t'  # '-'
+     for line  in csv_reader:
+        csv_writer.writerow(line)
+
+
+
+# #####################3
+# READ csv WITH different delimiter
+# #################33
+
+
+import csv 
+with open ('new_name.csv','r') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter='\t')
+    for line in csv_reader:
+       print(line)
+
+
+#+END_SRC
+
+**** Ex: Read and Write a csv file (as dict)
+#+BEGIN_SRC python
+import csv
+
+with open('name.csv', 'r') as csv_file:
+  csv_reader = csv.DictReader(csv_file)
+  for line in csv_reader:
+     print(line['email'])
+
+
+# To select unique card or no
+with open('name.csv', 'r') as csv_file:
+  csv_reader = csv.DictReader(csv_file)
+  with open('name_copy.csv','w') as dictwirte_file:
+     field_name = ['first_name','last_name', 'email']
+     csv_writer = csv.DictWriter(new_file, fieldnames = field_name, dellimiter ='\t' )
+     csv_write.writeheader()
+
+for line in csv_reader:
+   del line['email']
+   # remove email
+   csv_writer.writerow(line)
+
+
+#+END_SRC
+
+**** Example 
+#+begin_src python 
+import csv
+
+html_output = ''
+
+name =[]
+
+with open('patrons.csv') as data_file:
+   csv_data = csv.reader(data_file)
+   next(csv_data) # remove headerline
+   next(csv_data) # remove contribution flag, description
+   print(csv_data) # it is object
+#  print(list(csv_data))
+   for line in csv_data:
+       if line [0] == 'No Reward':
+          break
+       print(line)
+       name.append (f"{line[0]} {line[1]}")
+
+for name in names:
+    print(name)
+
+html_output += f'<p>There are currently {len(name) public  Contributors. Thank You!}</p>'
+
+print (html_output)
+
+html_output += '\n<ul>'
+for name in names:
+  html_output +=f'\n\t<li> {name} </li>'   
+      
+html_output += '\n<\ul>'
+
+print(html_output) 
+#+end_src
+
+**** Example with dict reader
+
+#+begin_src python
+import csv
+
+html_output = ''
+
+name =[]
+
+with open('patrons.csv') as data_file:
+   csv_data = csv.DictReader(data_file)
+   next(csv_data) # remove No Reward line  
+   for line in csv_data:
+       if line [FirstName] == 'No Reward':
+          break
+       print(line)
+       name.append (f"{line[FristName]} {line[LastName]}")
+
+for name in names:
+    print(name)
+
+html_output += f'<p>There are currently {len(name) public  Contributors. Thank You!}</p>'
+
+print (html_output)
+
+html_output += '\n<ul>'
+for name in names:
+  html_output +=f'\n\t<li> {name} </li>'   
+      
+html_output += '\n<\ul>'
+
+print(html_output)
+#+end_src
+
+** Time Module
+*** time
+**** defination
+tick is unit of time : instance of time expressed in seconds since 12.00am, Jan 1, 1970
+ #+BEGIN_SRC python
+ import time
+tick = time.time 
+ #+END_SRC
+*** Time Tuple
+| Index | Field           | Values                                |
+|-------+-----------------+---------------------------------------|
+|     0 | 4-digit year    | 2008                                  |
+|     1 | Month           | 1 to 12                               |
+|     2 | Day             | 1 to 31                               |
+|     3 | Hour            | 0 to 23                               |
+|     4 | Minute          | 0 to 59                               |
+|     5 | second          | 0 to 61(60/61 are leap-sec)           |
+|     6 | Day of Week     | 0 to 6 (0 is Monday)                  |
+|     7 | Day of year     | 1 to 366 (Julian day)                 |
+|     8 | Daylight saving | -1, 0, 1 (-1: library determines DST) |
+|       |                 |                                       |
+
+#+BEGIN_SRC python
+print(time.localtime())
+#+END_SRC  
+
+#+BEGIN_SRC python
+time.struct_time(tm_year=2016, tm_mon=9, tm_mday=27, tm_hour=0,tm_min=34,tm_sec=57,tm_wday=1,tm_year=271,tm_isdst=0)
+#+END_SRC
+*** Getting Current Time
+*** Getting Formatted Time
+*** Getting Calendar for a Month
+*** Time Module
+*** Calender Module
+*** Other Module & Functions
+** pprint
+#+begin_src python
+import datetime
+import pprint
+data = {'user_type': 'individual', 'email': 'dankarthik25@gmail.com', 'user_name': 'Karthik Danchuka', 'user_shortname': 'Karthik', 'broker': 'ZERODHA', 'exchanges': ['MF', 'BCD', 'NFO', 'BFO', 'CDS', 'BSE', 'NSE'], 'products': ['CNC', 'NRML', 'MIS', 'BO', 'CO'], 'order_types': ['MARKET', 'LIMIT', 'SL', 'SL-M'], 'avatar_url': None, 'user_id': 'SLT899', 'api_key': 's47dosfc0f1kisi4', 'access_token': 'asRJexUFotIsqgL3LL5bRG2i9pxDg93s', 'public_token': 'LPgnl4rJfCBe1Kxmbq3dF6f8j3YtQ3Ek', 'refresh_token': '', 'enctoken': '1DjbLLy6i1/tnP5tKUBfhqreyyJkcb0IEAZdTSqzhVNVrVrGMIOdRHzu4DlyiRoukX/3/WLz8un/WIBL/S+zXj/FK6nrtFR/EGzPfw07Ud2280fDmOjWTyX80RS+4Zk=', 'login_time': datetime.datetime(2022, 8, 29, 12, 7, 26), 'meta': {'demat_consent': 'consent'}}
+pprint.pprint(data)
+#+end_src
+
+#+begin_src result
+{'access_token': 'asRJexUFotIsqgL3LL5bRG2i9pxDg93s',
+ 'api_key': 's47dosfc0f1kisi4',
+ 'avatar_url': None,
+ 'broker': 'ZERODHA',
+ 'email': 'dankarthik25@gmail.com',
+ 'enctoken': '1DjbLLy6i1/tnP5tKUBfhqreyyJkcb0IEAZdTSqzhVNVrVrGMIOdRHzu4DlyiRoukX/3/WLz8un/WIBL/S+zXj/FK6nrtFR/EGzPfw07Ud2280fDmOjWTyX80RS+4Zk=',
+ 'exchanges': ['MF', 'BCD', 'NFO', 'BFO', 'CDS', 'BSE', 'NSE'],
+ 'login_time': datetime.datetime(2022, 8, 29, 12, 7, 26),
+ 'meta': {'demat_consent': 'consent'},
+ 'order_types': ['MARKET', 'LIMIT', 'SL', 'SL-M'],
+ 'products': ['CNC', 'NRML', 'MIS', 'BO', 'CO'],
+ 'public_token': 'LPgnl4rJfCBe1Kxmbq3dF6f8j3YtQ3Ek',
+ 'refresh_token': '',
+ 'user_id': 'SLT899',
+ 'user_name': 'Karthik Danchuka',
+ 'user_shortname': 'Karthik',
+ 'user_type': 'individual'}
+#+end_src
+** Json Module
+#+begin_src python
+# Import required libraries
+import json
+
+# Initialize JSON data
+json_data = '[ {"studentid": 1, "name": "ABC", \
+"subjects": ["Python", "Data Structures"]}, \
+				{"studentid": 2, "name": "PQR",\
+				"subjects": ["Java", "Operating System"]} ]'
+
+# Create Python object from JSON string data
+obj = json.loads(json_data)
+
+# Pretty Print JSON
+json_formatted_str = json.dumps(obj, indent=4)
+print(json_formatted_str)
+
+#+end_src
+
+** Regular expression 
+
+*** Cheat Sheet:
+Special seq of char that helps you match or find other stings or set of strings or set of string used specialized sysntax held in a pattern
+
+moudle re provides full support for perl-like regualr expression in python
+
+raises the expception re.error if error occurs while compiling or using regular expression
+
+Raw string as r'expression'
+
+
+| Basic Patterns | matchs                                   |
+|----------------+------------------------------------------|
+| . (period)     | any char except '\n'                     |
+| \d             | Digit [0-9]                              |
+| \D             | Not a Digit(0-9)                         |
+|                |                                          |
+| \w             | Word Character (letters(a-z A-Z,0-9,'_') |
+| \W             | Not word charcter                        |
+|                |                                          |
+| \s             | Whitespace (space, \n, tab )             |
+| \S             | Non-whitespcae(except space, \t, tab)    |
+|----------------+------------------------------------------|
+| ANCHORS        |                                          |
+|----------------+------------------------------------------|
+| ^              | matches start of string                  |
+| $              | matches end of string                    |
+| \b             | Word Boundary btw word and non-word      |
+| \B             | Not a Word Boundary                      |
+| \t \n\r        | tab newline return                       |
+|                |                                          |
+
+| a,X,9          | ordinary char just match themselves exactly              |
+
+*** Quantifiers
+| symbols | Function                          |
+|---------+-----------------------------------|
+| *       | 0 or more                         |
+| +       | 1 or more                         |
+| ?       | 0 or One                          |
+| {3}     | Exact Number                      |
+| {3,4}   | Range of Number{minimum, maximum} |
+
+| [ch]at       | search for ...cat... or .. hat... |
+| '[0-9]'      | search nubmer                     |
+| '[a-z]'      | seach lower char                  |
+| '[A-Z]'      | seach upper char                  |
+| '[a-z][A-Z]' | search all lower and upper char   |
+|              |                                   |
+*** Example 
+#+begin_src python 
+import re
+
+text_2_search = """
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+Ha HaHa
+
+MetaCharacters (Need to be escape)
+. ^ $ * + { } [ ] \ | ()
+
+
+coremys.com'
+
+321-555-4321
+123.555.1234
+123*555*1234
+800-555-4321
+900-555-4321
+Mr. Schafer
+Mr Smith
+Ms Davis
+
+Mrs. Robinson
+Mr. T
+
+
+cat
+batman
+path
+bat
+match
+
+"""
+
+emails = """
+CoreyMSchafer@gmail.com
+corey.schafer@university.edu
+corey-321-schafer@my-work.net
+
+"""
+sentence = 'Start a sentence and then bring it to end'
+urls = """
+https://www.google.com
+https://coreyms.com
+https://youtube.com
+https://www.nasa.gov """
+
+print(r'\tTab')
+
+pattern = re.compile(r'abc')  # matches for abc but not ABCd
+# IT is case sensitive
+pattern = re.compile(r'.')      # matches any character {a-z A-Z 0-9 _ }
+pattern = re.compile(r'\.')     # matches any '.' present in string
+pattern =  re.compiler(r'coreyms\.com')    # matches any string 'coreym.com'
+pattern = re.compile(r'\d')
+pattern  = re.compile(r'\D') 
+pattern = re.compile(r'\w')
+pattern = re.compile(r'\W')
+pattern = re.compile(r'\s')
+pattern = re.compile(r'\S')
+
+# Word Boundary
+pattern = re.compile(r'\bHa')  # match two Ha HaHa starting 'Ha' as at starting
+
+pattern = re.compile(r'\BHa') # match last Ha because it has no word boundary
+
+pattern = re.compile(r'^abc') # match word/char starting with 
+pattern = re.compile(r'xyz$') # match word/char ending with 
+
+pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d')
+pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
+pattern = re.compile(r'\d{3}[-.]\d{3}[-.]\d{4}') 
+pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
+pattern = re.compile(r'[89]00-.\d{3}.\d{4}')
+
+pattern = re.compile(r'[a-zA-Z]') # match char with a-z and A-Z
+pattern = re.compile(r'[^a-zA-Z]')  # match char which is not a-z and A-Z
+
+pattern = re.compile(r'[^b]at')  # match which doesnot include bat 
+
+# quantifiers
+pattern = re.compile(r' Mr\.?') # matches Mr. Schafer or Mr Smith  
+
+pattern = re.compile(r' Mr\.?\s[A-Z]') # matches Mr. S or Mr S
+pattern = re.compile(r' Mr\.?\s[A-Z]\w+') # matches all word but not Mr T 
+pattern = re.compile(r' Mr\.?\s[A-Z]\w*') # matches all word and  Mr T
+
+
+# Groups ()
+pattern = re.compile(r' M(r|s|rs)\.?\s[A-Z]\w+') # matches all word with Mr Ms Mrs 
+pattern = re.compile(r' (Mr|Ms|Mrs)\.?\s[A-Z]\w+') # matches all word with Mr Ms Mrs 
+
+# emails
+pattern = re.compile(r'[a-zA-Z]+ @ [a-zA-Z]+\.com')
+pattern = re.compile(r'[a-zA-Z0-9.-_]+ @ [a-zA-Z]+\.(com|edu|in|net)')
+pattern = re.compile(r'[a-zA-Z0-9.-_]+ @ [a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+')
+
+# urls
+
+pattern = re.compiler (r'https?://(www\.)?\w+\.\w+')
+pattern = re.compiler (r'https?://(www\.)?(\w+)(\.\w+)')
+
+sub_urls = pattern.sub(r'\2\3', urls)
+print(sub_urls)
+
+ # Note we can seperate domain name 
+for match in matches :
+  print(match.group(0)) #1,2,3
+
+# 
+
+matches = pattern.finditer(text_2_search)
+matches = pattern.findall(text_2_search)
+matches = pattern.match(sentence)
+matches = pattern.search(sentence) # only 1st match 
+
+# flages
+
+pattern = recompile(r'start', re.IGNORE)
+
+
+for match in matches:
+   print(match)
+
+
+#+end_src
+** Random module
+*** Introdution
+Shoulded to be used for crypthography use sectrets module instead
+
+Cread a random value btw (0 1)
+#+BEGIN_SRC python
+import random
+
+value = random.random()         # 0.2426467353658334
+value = random.uniform(1, 10)   # 6.223664645274
+dice = random.randint(1, 6)    # 1,2,6,2,3,5,4
+coin = random.randint(0, 1)
+
+print(value)
+
+greeting = ['Hello', 'Hi', 'Hey', 'Howdy', 'Hola']
+
+value = random.choice(greetins)
+print( value + " Corey")
+
+# Multiple choiess
+
+colors = ['Red', 'Black','Green']
+
+results = random.choices(colors, k=10) # how many time we pick a value
+print(results)
+# >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
+
+results = random.choices(colors,, weight = [18, 18, 2] k=10) # total w = 38, red is 18/38 chance, black is 18/38, green = 2/38
+print(results)
+# >>> ['Red', 'Green', 'Red', ' Black', ' Red', ......]( size is 10)
+
+
+# Random generate a list of num of size 63 and range from [1 63]
+
+deck = list(range(1, 53))
+print(desk)
+# >>> [1, 2, 3, 4, ..........53 ]
+
+random.shuffle(deck)
+print(deck)
+# >>> [41 ,39, 29, 38,47, 50,6,20.....]
+
+
+# To select unique card or no
+
+random.sample(deck)
+print(deck, k =5)
+# >>> [41 ,39, 29, 38,47]
+
+
+
+# Grenerate fake  fist_names,last_name, street_name, fake_cites, states
+
+f_n = ['John', 'Jane', 'Corey', 'Travis'] #frist name 
+l_n = ['Smith', 'Doe', 'Jenkins', 'Robinson'] # last name
+s_n = ['Main', 'High', 'Pearl', 'Maple' ]   # street name
+c_n = ['Metropolics', 'Eerie','King', 'Landing'] # fake cite 
+states = [ 'AL','AK','AR','Pearl','Oak','Cedar','Elm']
+for num in range(100):
+    first = random.choice(f_n)
+    last = random.choice(l_n)
+
+    phone = f'{random.randint(100,999)}-555-{random.randint(1000,9999)}'
+    # 548-555-6572
+
+    s_num = random.randint(100,999)
+    street = random.choice(s_n)
+    city = random.choice(c_n)
+    state = random.choice(states)
+    zip_code = random.randint(10000,99999)
+    address = f'{street_name}{street} St., {city}{state}{zip_code}'
+
+    email = first.lower() + last.lower() + '@gmail.com'
+    print(f'{first}{last} \n {phone} \n {address} \n {email} \n')
+
+#+END_SRC
+* File Management
+*** Open/ Closing a File
+Open/Closing a file is done by file-oriented API(Application Program Interface)
+
+Can represent standard input/output stream, in-memory buffers, sockets,pipes, etc.
+
+File object are two categories :
+-binary file
+-text files
+
+**** open/close file :
+***** Syntax
+#+BEGIN_SRC python
+# To OPEN a file
+file_obj = open(file_name, [access_mode],[buffering])
+
+# To CLOSE a file
+file_obj.close()
+#+END_SRC
+
+****** buffering mode:
+Buffer is tempory memory allocat to communicate between process and prog or device
+
+|         0 | No buffering take place (slow)                          |
+|         1 | Line buffer will be performed                           |One line at a time increase speed
+|        >1 | buffer will be performed with the indicated buffer size |
+| Neg value | operating sys will set the size of buffer (default)     |
+|           |                                                         |
+
+****** access mode 
+r,rb,rb+,w,wb,w+,a,ab,a+,ab+  
+read ,binary,write (create or rewrite ),append(editing )
+
+****** closing file
+
+closing file is imp if not it will corrupt the file
+
+***** Example
+#+BEGIN_SRC python
+fo = open('foo.txt','w')
+fo.wirte("Welcome")
+fo.write("to Tutorials Points \n")
+
+
+# Close open file
+fo.close()
+#+END_SRC
+**** TODO File  Object attributes:
+
+| ATTRIBUTES     | Description                                          |
+|----------------+------------------------------------------------------|
+| file.colsed    | return true if file is closed                        |
+| file.mode      | return access mode                                   |
+| file.name      | return name of file                                  |
+| file.softspace | returns false if space explicity required with print |
+|                | returns true  other wise not support in py3          |
+
+#+BEGIN_SRC python
+fo = open("foo.txt",'wb')
+print("Name of the file: ", fo.name)
+print("Closed or not: ", fo.closed)
+print("Opening mode : ",fo.mode)
+fo.close()
+print("Closed or not :",fo.closed)
+#+END_SRC
+
+
+
+jabber
+
+
+
+In python3.  =with= is used 
+
+with is
+if file is not used with is used to close the file
+ used if a error occure in file which an execptions and
+
+file=city_file  (no space )
+*** flush parameter
+Flush is introduced in py3.**
+   print as a flush arg true/ flase  , 
+       flase : data is not flush
+
+When py write on file the external devies screen is slow so data is writen in buffer and content is display in background. cpu will not be idel and sys is faster
+
+
+ if flush == true flush is cleaned  implices data is writen immediately 
+
+ to able to control when the writen immedialty  or not will able prg'es to write code effectively
+
+
+strip("del") 
+
+ 
+
+Modes :
+not specified : r
++ both 
+*** Read and write binary files
+
+process bin data img or store variabels and load in laters
+
+big indian and little indian writing 
+
+when computer manufacre has to make a decision how to store data
+big  store most signifited bit is store
+and vice verse by littel
+ibm uses big
+intel uses little
+
+ we have to store the variable 
+
+*** pickle 
+to write binary file 
+when store py3 
+5 types of 
+pi
+
+*** String Encoding Function 
+There two functions
+decode (encoding="UTF-8",errors='strict')
+encode (encoding="UTF-8",errors= 'strict')
+ 
+To use this function we have to import base64 module in prg
+for converting 
+
+* Import 
+*** Introduction
+
+You can use any py source file as module by executing an import statement in some other python sourcec file
+#+BEGIN_SRC python 
+  import module1, module2, module3,.......moduleN
+#+END_SRC
+
+when the interpreter encounters an important statment
+  It will import (include,insert) the module if the module is present in =search path=
+
+**** Search path :
+Search path is a list of dir that the interpreter searches before importing module
+
+*** Import your own obj and functions
+
+save the you own obj & function in same dir 
+
+and add  " import file_name"  in other  py prg
+
+https://docs.python.org/3/reference/import.html
+*** from Import 
+when you use  =import module1= the 
+It will import all the objects , functions,variables to the namespace 
+Then it will unnessaryly overloades Namespace of prg
+But if you want to import only a specific part from module we use =from module_name import=
+
+#+BEGIN_SRC python
+  from mod_name import name1,name2, name3.....nameN
+#+END_SRC
+
+**** Eg
+model defination
+
+#+BEGIN_SRC python
+ #  ~/fib.py
+
+  def fibo(n):
+      result = []
+      a,b = 0,1
+      while b <n:
+          result.append(b)
+          a,b= b,a+b
+      return result
+
+  def hello():
+      print("Hello World")
+      return
+#+END_SRC
+
+Using model
+#+BEGIN_SRC python
+from fib import fibo
+print(fibo(10))
+#+END_SRC
+*** Executing module as script
+In a file sys the module is stored by a file name =module name= (string) 
+If inside the module the global variable(=__name__= ) has  =module name= is avalable as the value then code will be executed 
+
+#+BEGIN_SRC python
+  # given module is executable is it has following statement
+  if __name__ == "__main__"":
+  main()
+#+END_SRC 
+ If execute then module it will execute if  global variable =__name__= has =__main__=
+
+#+BEGIN_SRC python
+     ~/fib.py
+
+    def fibo(n):
+        result = []
+        a,b = 0,1
+        while b <n:
+            result.append(b)
+            a,b= b,a+b
+        return result
+
+    def hello():
+        print("Hello World")
+        return
+
+    if __name__ == "__main__":      # py able to understand if file is used as import or has executable script  
+        print(fibo(100))
+
+# if fib.py is directly run the __name__ is (__main__)
+
+# if fib.py is imported into other py script then value of __name__ is not equal to __main__
+
+# So a module can be used as executalbe script by __name__
+    
+#+END_SRC
+*** Loading Module 
+ When you import a module, the python interpreter searches for module in following sequences:
+- Current dir
+- If =module= isn't found,python searchs each dir in shell variabel =PYTHONPATH=
+- If =module= isn't found, python checks default path (installation dir) =(linux : /usr/local/lib/python)=
+- module search path is stored in system module(=sys=) as =sys.path varialbe= contains all the default path,PYTHONPATH,installation default path
+ - =sys.path= variable contains the current dir,PYTHONPATH, and the isntallation dependent default.
+*** Reload() a module
+When module is improted into a script  (The code is excuted  once sequenc order top-level priority)
+- To re-execute the top-level code, we use =relaod()=  function
+- =relaod()= function imports previously imported module again
+#+BEGIN_SRC python
+  import imp
+  imp.relaod(module1)
+#+END_SRC
+* Package 
+Package is hierarihical file directory structure that defines a single python application environment that consist of modules and sub packages ,sub sub packages ....
+each dir or folder  consist of one or more modules, each modules has one or more functions,classes
+
+** Create a package
+To build a package : 
+For developers or coders if we create different modules we have to import each and every modules
+In order to customize we create a package
+
+In folders we have 2-3 module and each module we have 2-3 functions
+
+write a file called =__init__.py= which iniciallize a package 
+In this =__init__.py= we have to specifity which function, classes  are to be only used for developers are iniciallized to a package.
+
+#+BEGIN_SRC python
+# ~/mypackage$ ls
+sum.py             # contain add(x,y) 
+mult.py            # contain mulitply(x,y)
+fact.py            # contain factorial (n),sq(n)  
+__init__.py
+#+END_SRC
+
+To make a pacakage we have to write a =__init__.py= 
+So when we init the pacake we can use it function in module 
+#+BEGIN_SRC python
+  #! /usr/bin/python
+  #Filepath:  ~/mypackage/__init__.py
+
+  from .fact  import factorial, sq
+  from .sum import add
+  from .mult import multiply
+#+END_SRC
+
+To use the package in other prorgam we have  use =import mypackage= (file name of package) in prg 
+#+BEGIN_SRC python
+#! /usr/bin/python
+# mypackage should be same dir where prg is run
+import mypackage
+fact=mypackage.factorial(5)
+sum=mypackage.add(10,20)
+s=mypackage.sq(10)
+
+#+END_SRC
+
+** Import package from parent directory
+https://www.geeksforgeeks.org/python-import-from-parent-directory/
+*** using sys.path.append method 
+#+begin_src python
+import sys
+ 
+# setting path
+sys.path.append('../parentdirectory')  # relative path 
+ 
+# importing
+from parentdirectory.geeks import geek_method
+ 
+# using
+geek_method()
+#+end_src
+*** os.path.abspath method
+#+begin_src python
+import path
+import sys
+
+# directory reach
+directory = path.path(__file__).abspath()
+
+# setting path
+sys.path.append(directory.parent.parent)
+
+# importing
+from parentdirectory.geeks import geek_method
+
+# using
+geek_method()
+
+#+end_src
+
+
+* Exceptions Handling
+*** What is Exception
+- Exceptions are runtime error 
+- Exception is an event that disrupt the normal flow of a program during its execution
+- When a python script enconters a situation that it can't cope  with , it rise an exception
+- Exception is a python object that represents an error 
+- When a python script raises an exception,it must either handle the exception immediately; otherwise it would terminate  the program
+
+*** How to handle Exception ?
+- If you have some suspicious code that may rise an exception, you can defend your program by placing the suspicious code in a =try:= block
+- In  =try:= block include a except: statements to handle the problem.
+**** syntax
+#+BEGIN_SRC python
+    try:
+    #    your operations here
+        statements
+        statements
+        .................
+    except:
+    # If there is any exception statements execute block
+        statements
+        statements
+    else:
+     # If there is no exception statements execute block
+        statements
+        statements
+#+END_SRC
+
+**** Try- except-else statement
+-Try-except statement  catches all the exception that occur.
+-Using this kind of try-except statement is not considered a good prog practice
+-It catches all exceptions but does not make prog'er identify the root cause of problem that may occur
+
+**** Exampels
+#+BEGIN_SRC python
+try:
+    fh = open("testfile","r")
+    fh.write("This is my test file!")
+except IOError:
+# error in Input/Output
+    print("Error : can't find file or read data")
+else:
+    print("Written content in the file successfully")
+
+#+END_SRC
+
+#+begin_src python
+try : 
+    f = open('notfound.txt')
+    if f.name == 'notfound.txt':
+        raise MyNotFoundException # Rise Exception Manually 
+except FileNoteFoundError as e : 
+    print(e)
+
+except MyNoteFoundException as nf:
+    print('Error')
+
+else: 
+    print(f.read())
+    f.close()
+
+finally:
+    print("Executine FInally ...")
+#+end_src
+
+#+begin_src python
+import sqlite3
+conn = sqlite3.connect('systeminfo.db')
+cur = conn.cursor()
+
+genre = 'test'
+try:
+    cur.execute('''INSERT OR IGNORE INTO Genre (name) VALUES ( ? )''', ( genre, ) )
+    cur.execute('SELECT id FROM Artist WHERE name = ? ', (genre, ))
+    genre_id = cur.fetchone()
+    if genre_id is None:
+        print('Select did not find any artist for {} genre'.format(genre))
+    else:
+        print('Select resulted in Artist ID {}'.format(genre_id[0]))
+except Exception as e:
+    # print(e)
+    print('Exception: {}'.format(e))
+    raise Exception(e)
+
+conn.commit()
+conn.close()
+#+end_src
+
+*** Try -except with multiple expressions
+#+BEGIN_SRC python
+  try:
+      # You do your operations here
+      statements
+      statements
+      statements
+  except ( Exception1, Exception2,.......Exception3  ):
+      # if code has any exceptions from given list (Exception1,........N) execute this block
+      statements
+      statements
+  else:
+      # if there is no exception execute this block
+      statements
+      statements
+#+END_SRC
+
+Example:
+#+BEGIN_SRC python
+  try:
+      x = int(input ("enter number"))
+      y = int(int("enter another number"))
+      z = x/y
+      print(z)
+  except ( ValueError, ZeroDivisionError, KeyboardInterrupt):
+      #  ValueError : input is n't numeric , y =0, interrupt by C-c
+      print ("Error occured")
+#+END_SRC
+
+*** Finally
+finally vs except 
+finally block is execute in any case if exception occure or not it will execute the block
+Note : If you use finally you can't use except and else in try block 
+#+BEGIN_SRC python
+  try:
+  #    your operations here
+      statements
+      statements
+      .................
+  finally:
+  # Execute this block 
+      statements
+      statements
+#+END_SRC
+
+*** Example for Using Finial inside Exception
+Example :
+#+BEGIN_SRC python
+  try:
+      fh = open("testfile", "w")
+      try:
+          fh.write("This is my test")
+      finally:
+          print("Going to close the file")
+          fh.close()
+  except IOError:
+      print ("Error: can't fint file or read data")
+#+END_SRC
+
+*** Argument of Exception
+- An exception can have an argument, which is value  that give additional information about the problem
+- The content of an argument vary by exception
+- You can capture an exception's argument by supplying a variable in except clause
+- To handle a single exception, you can have a variable follow the name of the exception in the except statement
+- To trap mulitple exception, you can have a variable follow the tuple of the exception
+
+#+BEGIN_SRC python
+  try:
+      # You do your operations here
+      statments
+      statments
+  except EXCEPTION_TYPE as ARGUMENT:
+      # you can print value of ARGUMENT here
+#+END_SRC
+
+Here EXCEPTION_TYPE and ARGUMENT varies from code
+
+#+BEGIN_SRC python
+  def square(var):
+      try:
+          print(int(var)**2)
+          return
+      except ValueError as Argument:
+          print("The argument does not contain numbers \n")
+
+  square("10")
+  square("abc")
+#+END_SRC
+
+*** Raising an Exception
+You can raise exception in serveral ways by using the raise statement.
+#+BEGIN_SRC python
+  raise [ExceptionType  [, args [, traceback] ]  ]
+#+END_SRC
+
+ExceptionType : type of exception
+Args          : value for exception arg. optional arg
+Trackback     : trackes back to object that has exception
+
+In General:
+-Exception can be a string, a class, an object
+-Most of exception that python core raises are classes with arg that is isntance of the class
+
+ #+BEGIN_SRC python
+    try:
+        marks = int(input ("input marks"))
+        if marks<0 or marks >100 :
+            raise Exception(marks)
+        print("marks within value range ",e)
+    except Exception as e:
+        print("error Invalid marks input",e)
+ #+END_SRC
+
+#+begin_src python
+    try:
+        cur.execute("""SELECT * FROM EQ_index WHERE symbol=?""",(symbol,))
+        token = cur.fetchall()
+#         print(token)
+        if (len(token) ==0) or (len(token) >1)  :
+            raise Exception
+        else :
+#             print(token[0][0])
+            return token[0][0]
+    except Exception as e :
+        print(f'TradingSymbol = ** {symbol} ** is not present in Zerodha Instrument NSE Equity List') 
+    dbase.commit()    
+    dbase.close()
+
+#+end_src 
+*** Standard Exception
+| Exception Name     | Description                                                                 |
+|--------------------+-----------------------------------------------------------------------------|
+| Exception          | Base class for for all exceptions                                           |
+| Stopiteration      | raised when next() of iter does not point a obj                             |
+| SystemExit         | raised by sys.exit() function                                               |
+| StandardError      | Base calss for all built-in exception except stop iteration and system exit |
+| ArithmeticError    | Base class for all error that occur for numeric calculation                 |
+| OverflowError      | raised when a calculation exceed man limit for a numeric type               |
+| FloatingPointError | Raised when a floationg point cal fails                                     |
+| ZeroDivisionError  | Raised when divis or modulo by zero                                         |
+| AssertionError     | Raised in case of failure of assert statement                               |
+| AttributeError     | Raised in case of failure of attribute ref or assignment                    |
+| ImportError        | Raised when an import statement fails                                       |
+|                    |                                                                             |
+*** User Defined Exception
+Python allows to create user-defined exceptions by derving classes from the standard built-in-exceptions.
+**** syntax 
+#+BEGIN_SRC python
+  class NetworkError(RuntimeError):
+      def __init__ (selft,arg):
+          self.arg = arg
+#+END_SRC
+
+Here a class is sub classed from Runtime Error
+It is useful when you need to display more specific information when an exception is caught.
+
+**** Raise Exception
+#+BEGIN_SRC python
+  try:
+      raise NetworkError("Bad hostname")
+  except NetworkError,e:
+      print e.args
+#+END_SRC
+*** Assertion Error
+
+Assertion is used to test the prog or to  check that can turn on or off  when you are done with your testing of program
+An assertion is similar to a =raise-if= statement
+Assertion is carried by assert statment (conditon)
+Assertion at starting of a function to check for valid input, and
+After a function call to check for valid output.
+**** syntax
+#+BEGIN_SRC python
+  assert expression(condition)[,  Arguments ]
+#+END_SRC
+If the expression is false, python raises an assertionError exception.
+
+Example:
+#+BEGIN_SRC python
+  def kelvin2Farhrenheit ( temp ):
+      try:
+          assert(temp>=0),temp # if false then assression error will be raised
+          return (temp-273)*1.8+32
+      except Assertion Error : # arg is temp
+          print("Temperatur is less the Absolute Zero", temp)
+
+
+  print(kelvin2Farhrenheit(273),"deg far")
+  print(int(kelvin2Farhrenheit(505.78)),"deg far")
+  print(kelvin2Farhrenheit(-5),"deg far") # error is temp> 10 
+#+END_SRC
+* DuckTyping
+#+begin_src python
+class Duck:
+   def quack(self):
+     print('Quack, quack')
+   def fly(self):
+     print('Flap , flap')
+
+#def quack_and_fly(thing):
+#   # Not Duck-Typed(Non-pythonic)
+#   if isinstance(thing, Duck):
+#      thing.quack()
+#      thing.fly()
+#   else:
+#      print('This has to be a Duck!')
+#   print()
+
+def quack_and_fly(thing)
+  thing.quack()
+  thing.quack()
+################################################
+  #LBYL :Look Before You Leave(Non-Pythonic)
+# We are asking permisson and run code
+  if hasattr(thing, 'quack'):
+     if callable(thing.quac):
+        thing.quack()
+  if hasattr(thing, 'fly'):
+     if callable(thing.fly):
+        thing.fly()
+###########################################
+# EAFP : it Eassier to Ask Forgiveness and Ask Permission
+  try:
+    thing.quack()
+    thing.quack()
+    thing.bark()
+  except AttributeError as e:
+    print()
+ 
+d = Duck()
+quack_and_fly(d)
+
+p = Person()
+quack_and_fly(p)
+
+#+end_src
+
+** Example2
+#+begin_src python
+person = {'name':'Jess' , 'age': 23}
+person = {'name':'Jess' , 'age': 23, 'job':'Programmer'}
+###################################################################33
+# LBYL
+if 'name' in person and 'age' in person 'job' in person:
+  print("I'm {name}, I'm {age} year old and I am a {job}".format(**person))
+else :
+   print('Missing some keys)
+############################################################################
+# EAFP (Pythonic)
+try:
+   print("I'm {name}. I'm {age} years old and I am a {job}".format(**person)
+except KeyError as e:
+   print("Missing {} key".format(e))
+
+
+##
+# Example
+#####
+
+my_list = [1,2,3,4,5,6]
+
+# Non-Pythonic
+if len(my_list) >6:
+  pritn(my_list[5])
+else:
+  print('That index does not exist')
+
+# Pythonic
+try:
+  print(my_list[5])
+except IndexError:
+  print('That index does not exist')
+#+end_src
+
+** Why we use EAFP
+Example :
+EAFP : is good for race condition
+
+#+begin_src python
+import os
+
+my_file = '/tmp/test.txt'
+
+# Race Conditon
+if os.access(my_file,os.R_OK):
+  with open(my_file) as f: # if file is deleted after condition
+     print(f.read())
+else:
+   print('File can not be accessed')
+
+# No Race-Conditon
+try:
+  f = open(my_file)
+except IOError as e:
+  print('File can not be accessed')
+else:
+  with f:
+    print(f.read())
+
+#+end_src
+* Nametuple
+#+begin_src python
+from collections import namedtuple
+
+color = (55,155,255)
+Color = namedtuple ('Color', ['red','green','blue'])
+
+gray = Color(127,127,127)
+gold = Color(255,215,0)
+orange =Color(255,165,0)
+tomato = Color(255,99,71)
+
+print gray[0]
+print gray.red
+print gold.red
+
+
+
+
+#+end_src
+* TODO Map, Filter & Reduce
+Youtube : Map, Filter & Reduce | Python Tutorials For Absolute Beginners In Hindi #48
+https://www.youtube.com/watch?v=zimHDlOpGXo
+* OOP [Objective Oriented Programming]
+*** Introductions
+
+Class:  A user-defined prototpye that defines a set of attributes that characterise any obj of a class
+
+Object : A unique instance of a data structure that's defined by its class .
+
+Class varialbe   : A variable that is shared by all instances of a class
+Data member      : holds data associated with a class and its objects
+Instance Variable: defined inside a method and belongs to current instance of class.
+
+Instance            : An individual object of a certain class
+Method              : A special kind of function that is defined in a class definition.
+Function overlaoding: assignment of more than one behavior to a particular function.
+
+Overlaoding(Function/operator): 
+			
+Inheritance : The transfer of the characterisics of a class to other classes that are derivied from it.
+
+Operation overlaoding: The assignment of more than one function to a particualr operator.
+
+*** Creating Class
+=class= keyword is used to create a new class 
+The sysntax =class= follwed by =Name of class(ClassName)= and =:=
+The syntax is given below
+**** syntax
+#+BEGIN_SRC python
+  class ClassName:
+      """ Class documentation string optional """
+      class_suite            # contain definition of data attributes, functions, methods
+#+END_SRC
+Class has a documentation string, which is used to accessed via =ClassName.__doc__=
+=class_suite= conisist of all the compoent statements like class members, data attributes, and functions.
+=__init__( )= method is class acts as constructor
+
+*** Creating Object 
+To create a instance of class, call the class using the class name and pass in whatever arguments in =__init__= method accepts
+#+BEGIN_SRC python
+  obj_name = ClassName(arg1, arg2....)
+#+END_SRC
+
+*** Example:
+
+#+BEGIN_SRC python
+  class Employee:
+      'Common base class for all employees'
+      empCount = 0  # class varialbe
+
+      def __init__(self, name, salary):
+          self.name = name
+          self.salary = salary
+          Employee.empcount += 2
+
+      def displayCount(): # methods
+          print("Total number of Employees %d" % Employee.empCount)
+
+      def displayEmployee(self):
+          print("Name : ", self.name, ", Salary : ", self.salary)
+
+  emp1 = Employee("Zara", 2000)
+  emp2 = Employee("Manni", 5000)
+  emp1.displayEmployee()     # acessing the attributes
+  emp1.displayEmployee()    
+  print("Total Employee %d" % Employee.emCount)
+  Employee.dispalyCount()
+#+END_SRC
+
+- Here =Employee= class is defined
+- __init__ is constructor in py and desine to accept two arg =name, salary= and every constructor should have arg =slef=
+- =class variable= is also defined =empCount= 
+- =class varialbe= is variable that are shared my all objects
+- =class method= are also defined like =displayCount=, =dispalyEmployee=
+
+- =emp1,emp2= object are created by Employee class
+
+*** Accessing Attributes
+Class contain data members, class varialbes, methods so class has different attributes
+This attributes are available to its objects
+
+But access to attributes are indepentend or individual
+
+To access the obj attributes  we use =dot= operator with object.
+#+BEGIN_SRC python
+  # To accessing attributes are done by "." or dot operator
+  emp1.displayEmployee()
+  emp1.displayEmployee()
+  # There are some class method which are common(share) to all obj eg : count  
+  print("Total Employee %d" % Employee.emCount)
+  Employee.dispalyCount()
+#+END_SRC
+
+*** Build-in-Function for operating of class memb(attribute)
+
+getattr(obj,name[,default]) : to access the attribute of obj
+hasattr(obj,name[,default]) : to check if an attribute or not
+setattr(obj,name[,default]) : to set an attribute would be create if does not exist
+delattr(obj,name[,default]) : to del an attribute for given obj
+
+*** Build-in-Class Attributes:(attri for class as whole than indivudual obj)
+
+| Build-in-attributes |                                                                            |
+|---------------------+----------------------------------------------------------------------------|
+| __dict__            | Dict contaiong the namespace of the class                                  |
+| __doc__             | Documentation str or None if n't defined                                   |
+| __name__            | Name of Class class                                                        |
+| __module__          | module name in which class is defined (attri __main__) is interactive mode |
+| __bases__           | if has inheritance it can be used  a base case class or                    |
+|                     |                                                                            |
+*** Example:
+#+BEGIN_SRC python
+  class Employee:
+      'Common base class for all employees'
+      empCount = 0  # class varialbe
+
+      def __init__(self, name, salary):
+          self.name = name
+          self.salary = salary
+          Employee.empcount += 2
+
+      def displayCount(): # methods
+          print("Total number of Employees %d" % Employee.empCount)
+
+      def displayEmployee(self):
+          print("Name : ", self.name, ", Salary : ", self.salary)
+
+  emp1 = Employee("Zara", 2000)
+  emp2 = Employee("Manni", 5000)
+
+  print("Employee.__doc__ :",    Employee.__doc__)
+  print("Employee.__name__ :",   Employee.__name__ )
+  print("Employee.__module__ :", Employee.__module__)
+  print("Employee.__base__ :",   Employee.__base__ )
+  print("Employee.__dict__ :",   Employee.__dict__ )
+#+END_SRC
+
+* Inheritance 
+Create a class by deriving it from an existing class by listing the parent class in parantheses after the new class name
+
+Child class inherits the attributes of its parents class, and you can use those attributes as if they were defined in child class
+
+Child class can override data members and methods from parents
+
+Derived classes are declareld much like their parent class
+
+#+BEGIN_SRC python
+  class SubClassName (ParentClass1[, ParentClass2....]):
+      "This is subclass document string"
+      pass
+      # class_suite
+#+END_SRC
+
+| issubclass(sub, sup)   | boolean function return true if given sub is subclass of sup class |
+| isinstance(obj, class) | boolean function return true if obj is an instance of calss     |
+
+** Eg
+#+BEGIN_SRC python
+  class Parent:
+      parentAttr = 100
+      def __init__(self):
+          print("Call parent constructor")
+      def setAttr(self, attr):
+          Parent.parentAttr = atrr
+      def getAttr(self):
+          print("Parent attribute : ", Parent.parentAttr)
+
+  class child(Parent):
+      def __init__(self):
+          super().__init__()
+          print("Calling child method")
+      def childMethod(self):
+          print("Call child method")
+      def parentMethod(self):
+          print("overriden parent method")
+
+  c = Child()             # call __init__ of parent then child
+                          # call parent constructor then child constructor
+
+  c.childMethod()         # call child method
+  c.parentMethod()        # call overriden parent method
+  c.setAttr(200)
+  c.gerAttr()
+#+END_SRC
+
+* Overloading Vs Overriding
+Overloading : When functions has multipule defination in a same class, each defination provide diff functoins
+
+Overriding: You always override you parent class methods in case you may wants a special or different functionality in your subclass
+
+*** Base Overiding methods
+
+| __init__(self[, agrs ]) | Constructor                       |
+| __del__(self)           | Destructor,del an obj             |
+| __repr__(self)          | Evaluatable string representation |
+| __str__(self)           | Print str representation          |
+| __cmp__(self,x)         | Obj comparison                    |
+|                         |                                   |
+
+** Operator Overloding 
+| Operator | magic method                         |
+|----------+--------------------------------------|
+| +        | object.__add__(self,other)           |
+| -        | object.__sub__(self,other)           |
+| *        | object.__mul__(self,other)           |
+| //       | object.__floordiv__(slef,other)      |
+| /        | object.__div__(self,other)           |
+| %        | object.__mod__(self,other)           |
+| **       | object.__pow__(self,other[, modulo]) |
+| <        | object.__lt__(self,other)            |
+| <=       | object.__le__(self,other)            |
+| ==       | object.__eq__(self,other)            |
+| !=       | object.__ne__(self,other)            |
+| >=       | object.__ge__(slef,other)            |
+|          |                                      |
+|          |                                      |
+  
+*** Example
+#+BEGIN_SRC python
+  class Length:
+      def __init__(self,c,m):
+          self.c = c
+          self.m = m
+
+      def __str__(self):
+          return('Length (%d cm, %d mm)' %(self.c, self.m))
+
+      def __add__(self, other):
+          return (Length(self.c + other.c, self.m + other.m))
+
+  l1 = Length(2,6)
+  l2 = Length(5,3)
+  print(l1+l2)
+
+#+END_SRC
+
+* Data Hiding (Data Encapulatoin)
+CPP,JAVA has (visibility mode or acess specifiers private(data in-visible),protected, public, public
+
+Python does not have private,protected,public but simillar functions can be used 
+
+Attribute with '__' prefix : Not directly visible to outside
+Python protect those members by changing to : obj._ClassName__attrName
+
+** EG:
+#+BEGIN_SRC python
+  class Counter:
+      def __init__(self,x):
+          self._c=x       # _ prefix this mem should not be used direclty
+          self.__cc=10    # __ prefix this mem can't access direclty
+
+  c1 = Counter (5)
+  print(c1._c)
+  #pritn(c1.__c)                          #  direclty can't access
+  print(c1._Counter__cc)                  #  can access by "_CLASSNAmE__private variable"
+#+END_SRC
+
+* Garbage Collector
+Python del unnessary obj automatically to free memory space called Garbage Collector
+
+Python garbage collector runs during program execution and is triggered when an obj ref difference count reach zero
+
+obj refrence count increase when it is assigned a new name or palced in a container(list,tuble,dictionary)
+
+obj refrence count decreses when it's delete with del , its reference reassigned or it refrene goes out if scope
+
+
+* TODO Generators [033_Generator: Coreymschafer]
+* TODO Decorateors [034,035_Decorators: Dynamics]
+1st class fuction :
+closers:
+
+** 1st class Functions 
+#+begin_src python
+def outer_function ():
+   message = 'Hi'
+   def inner_function():
+       print(message)
+#   return inner_function()
+   return inner_function()
+
+
+# outer_fuction()
+my_func = outer_function()
+
+my_func()
+my_func()
+my_func()
+
+
+def outer_function (msg):
+   message = msg
+   def inner_function():
+       print(message)
+   return inner_function()
+
+hi_func = outer_function('Hi')
+bye_func = outer_function('Bye')
+
+
+hi_func()
+bye_func()
+#+end_src
+** Decoreators
+#+begin_src python
+
+# Decoreator
+
+def decorator_function(original_func):
+   def wrapper_function():
+       return original_func()
+   return wrapper_function
+
+
+def dispaly():
+  print('display function ran')
+
+decorated_display = decorator_function(dispaly)
+
+decoreated_display()
+
+#+end_src
+* Logging
+https://www.youtube.com/c/Coreyms/search?query=log
+
+#+begin_src python
+import logging 
+
+# Logging Types 
+
+# - DEBUG : Detailed information, typically of intrest only when dignosing problems
+# - INFO : Confirmation that things are working as expected.
+
+# # # # # # # 
+# NOTE : below warning , error and critical will print the msg in console 
+# # # # # # # 
+
+# - WARNING: An indication that something unexpected happened, or indicative of some problem in the near future (eg. 'disk space low'). The software is still working as expected.
+
+# - ERRRO : Due to a more serious problem, the software has not been able to perform some function. 
+
+# - CRITICAL : A serious error, indication that the program itself may be unable to continue running.
+ 
+
+
+# # # 
+# Logging to a file  `test.log`
+# # #
+# logging.basicConfig(filename='test.log', level=logging.DEBUG)
+
+# with format 
+ logging.basicConfig(filename='test.log', level=logging.DEBUG, format = '%(asctime)s:%(levelname)s:%(message)s')
+
+
+def divide(x,y):
+    
+def add(x,y)
+
+def multiply(x,y)
+
+x = 20,
+y = 10
+
+add_result = add(num_1, num_2)
+logging.debug('Add: {} + {} = {}'.format(num_1, num_2, add_result))
+
+sub_reult = sub(num_1, num_2)
+logging.debug('Sub:{} -{} = {}'.fomat(num_1, num_2, sub_result))
+
+mul_result = multiply (num_1, num_2)
+logging.debug('Mul:{}*{} = {}'.fomat(num_1, num_2)
+#+end_src
+
+** TODO Advance Logging
+* Python API Development - Comprehensive Course for Beginners
+https://www.youtube.com/watch?v=0sOvCWFmrtA
+
+* ------------- other sources----------
+* Developer
+#+begin_src python
+pip --help
+pip help install
+pip search Pympler
+pip install Pympler
+pip list
+pip list -o # give package which are outdate
+pip freeze > requirements.txt
+
+# install package using requirements
+pip install -r requirements.txt  # r: requirment file
+
+pip list --outdated
+# how to isntall 
+pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
+
+
+
+#+end_src
+* Python interviews
+** begininners
+write code on whiteboard or paper
+basic control flow: for, while, ifelse
+discuss how to use python 
+web scrapping
+own py projects
+solve common interview problems : buzz, fibonacius,python interview questions
+data types: string,list.tubles, dict,set,
+list comprehension:
+dict
+for key,val in my_dic.iteritems
+
+set
+know how to use generators: functions  
+** TODO yield
+xrange
+
+basics of oop 
+* GENERAL interview
+github
+database
+command-line (terminal)
+unit testing (continous intergration / delivery )
+
+Continous intergration  :
+Jenkins
+Travis CI
+Learning muliple programming langagure
+python,c ,java,c++,c#,r,js,php,go,swift
+
+
+quote
+
+ones you understand a programming (code)  the languages are just syntax
+
+and you can pickup syntax lot faster than concepts
+
+Learning how to solve problems(concept) will take years to learn
+
+
+
+* Online Learning Resoures:
+Udacity          : Cources by google, facebook, mongobd, clouder, at&t
+mitOpenCourseware:
+
+You can search ur faourte university courses
+
+Stanford:
+Google Developers:
+
+Derek Banas: Sofware design patterns, 
+Computerphile:
+
+Eli ComputerGuy    : main  system adim, networking
+LearnCode.academy  : web dev
+LEvelUp Tuts       : web dev
+DevTips            : web design
+realcsstricks      : real word progple
+php academy        : 
+sentdex : python
+
+
+Confernec : PyCon2015,
+
+Khanaacademy: 
+
+###  math skill's 
+
+Nodeschool.io : terminal app + terminal cmd
+
+codeacademy   : web dev skill ( online  writring code)
+              : # API TUTORIALS 
+treehouse     : payed
+lynda         : payed
+
+twitter: follow (guido  van Rossum, Raymondh, david Beazley)
+
+Codepen       :
+
+redit         :
+hacker News   :
+
+Free Books:
+github: vhf/free-prgramming-books 
+
+
+    
+
+
+
+
+
+ 
+
+
+* Question
+** assigment in python 
+'=' is python : refrence of obj on RHS to LHS
+#+BEGIN_SRC python
+lhs_obj = rhs_obj 
+# lsh_obj  is now name for reference to object on rhs_obj
+#+END_SRC
+
+
+** assignment in list(immutable)
+#+BEGIN_SRC python
+  a= [7,5,11]
+  b = a
+  print(a,b)   # ([7, 5, 11], [7, 5, 11])
+  a= [11,2,3] 
+  print(a,b)   # ([11, 2, 3], [7, 5, 11])
+
+
+  a = [7,5,11]
+  b = a
+  print(a,b)          # ([7, 5, 11], [7, 5, 11])
+  a[0] = 8
+  print(a,b)          #([8, 5, 11], [8, 5, 11])
+
+
+  list_1 = ['History', 'Math', 'Physics', 'CompSci']
+  list2 = list_1
+  print(list_1,list2)
+  # (['History', 'Math', 'Physics', 'CompSci'], ['History', 'Math', 'Physics', 'CompSci'])
+   list_1[0]= 'Art'
+   print(list_1,list2)
+  # (['Art', 'Math', 'Physics', 'CompSci'], ['Art', 'Math', 'Physics', 'CompSci'])
+#+END_SRC
+
+
+
+
+
+
+

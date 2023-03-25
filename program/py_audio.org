@@ -1,0 +1,8 @@
+#+TITLE: py_audio
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+https://pythonbasics.org/python-play-sound/
+
+
+# book tatkal using python and selenium 
+https://github.com/maddalakum/Python-Tatkal/blob/master/tatkal.py

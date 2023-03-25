@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>flask Notes</title>
+<meta name="author" content="DeepAlgorithms" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">flask Notes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc40c5d8">Flask Introduction</a></li>
+<li><a href="#orga7abac0">Create Virtual Env</a></li>
+<li><a href="#org39830d5">Run Flask app</a></li>
+<li><a href="#org3b78b41">Create about page</a></li>
+<li><a href="#org64d4942">Create a templates</a></li>
+<li><a href="#org6725818">Create Forms and  Validate User Input</a></li>
+<li><a href="#org7a35755">Create a Database db using sqlAlchemy</a>
+<ul>
+<li><a href="#orgf394920">Create sqllite database</a></li>
+<li><a href="#org4ce9783">Link sqllite in flask-app</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+source Corey Schafer flask playslit : <a href="https://www.youtube.com/watch?v=MwZwr5Tvyxo&amp;list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH">https://www.youtube.com/watch?v=MwZwr5Tvyxo&amp;list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH</a>
+</p>
+
+
+
+
+<div id="outline-container-orgc40c5d8" class="outline-2">
+<h2 id="orgc40c5d8">Flask Introduction</h2>
+<div class="outline-text-2" id="text-orgc40c5d8">
+<p>
+Intro 
+</p>
+</div>
+</div>
+<div id="outline-container-orga7abac0" class="outline-2">
+<h2 id="orga7abac0">Create Virtual Env</h2>
+<div class="outline-text-2" id="text-orga7abac0">
+<div class="org-src-container">
+<pre class="src src-sh">cd myflask-app
+
+conda create --name flask-webapp
+conda activate flask-webapp
+conda install flask
+
+touch flaskblog.py
+# The contant of flaskblog.py is below  
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"># https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py
+
+# myflask-app/flaskblog.py
+
+
+from flask import Flask
+app = Flask(__name__)
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return "&lt;h1&gt;Home Page&lt;/h1&gt;"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org39830d5" class="outline-2">
+<h2 id="org39830d5">Run Flask app</h2>
+<div class="outline-text-2" id="text-org39830d5">
+<p>
+We can run flask in two ways
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">export FLASK_APP=main.py
+export FLASK_DEBUG=1
+
+# To run the app using flask
+flask run
+
+# Run using python
+python flaskblog.py # or
+flask run 
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b78b41" class="outline-2">
+<h2 id="org3b78b41">Create about page</h2>
+<div class="outline-text-2" id="text-org3b78b41">
+<p>
+see if <code>about</code> page is created by routing to about page  <code>localhost:5000/about</code>
+If about page is created
+</p>
+<ul class="org-ul">
+<li>Then it will redirect to about page</li>
+<li>if not it will send <code>ERROR 404</code> <code>Page Not Found</code></li>
+</ul>
+
+<p>
+Create about page 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"># https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py
+
+# myflask-app/flaskblog.py
+
+
+from flask import Flask
+app = Flask(__name__)
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return "&lt;h1&gt;Home Page&lt;/h1&gt;"
+
+
+@app.route("/about")
+def about():
+    return "&lt;h1&gt;About Page&lt;/h1&gt;"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org64d4942" class="outline-2">
+<h2 id="org64d4942">Create a templates</h2>
+<div class="outline-text-2" id="text-org64d4942">
+<p>
+Instead of returning html tag in <code>return "&lt;h1&gt; Home Page &lt;/h1&gt;"</code> we can use template dir which stores tempalate file like <code>layout, home, footer, about, posts...etc</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cd myflask-app
+mkdir templates static
+touch static/main.css
+cd templates
+touch about.tml home.html layout.html
+</pre>
+</div>
+
+<p>
+The flask app with template
+</p>
+<ul class="org-ul">
+<li>To render from tempate we use <code>import render_tempalate</code></li>
+<li>To convert relative path and add to absolute path we use <code>url_for</code> eg : add css and js from the <b>static dir</b></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"># myflask-app/flaskblog.py
+from flask import Flask, render_template, url_for
+app = Flask(__name__)
+
+posts = [
+    {
+	'author': 'Corey Schafer',
+	'title': 'Blog Post 1',
+	'content': 'First post content',
+	'date_posted': 'April 20, 2018'
+    },
+    {
+	'author': 'Jane Doe',
+	'title': 'Blog Post 2',
+	'content': 'Second post content',
+	'date_posted': 'April 21, 2018'
+    }
+]
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+
+@app.route("/about")
+def about():
+    return render_template('about.html', title='About')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</pre>
+</div>
+
+<p>
+The css file is give below
+</p>
+<div class="org-src-container">
+<pre class="src src-css">/* myflask-app/static/main.css */
+/* https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/02-Templates/static/main.css */
+
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+</pre>
+</div>
+
+<p>
+We will create a <code>layout</code> for our blog  with css file in <code>myflask-app/static/main.css</code> 
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- layout.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;!-- add css and js files --&gt;
+    &lt;link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}"&gt;
+    {% if title %}
+	&lt;title&gt;Flask Blog - {{ title }}&lt;/title&gt;
+    {% else %}
+	&lt;title&gt;Flask Blog&lt;/title&gt;
+    {% endif %}
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div  class="container"&gt;
+	  {% block content %}
+	  {% endblock %}
+   &lt;/div&gt;
+&lt;!-- jQuery, JavaScript, Bootstrap JS files --&gt;   
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>
+home page template
+python flask uses template using <code>jinja2 template</code>
+</p>
+<ul class="org-ul">
+<li>for <code>inserting or including file</code> or <code>loop</code>, <code>condition</code>  we use <code>{}</code> tags</li>
+<li>for python variable we use <code>{{dict.key}}</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- home.html --&gt;
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+	&lt;article class="media content-section"&gt;
+	  &lt;div class="media-body"&gt;
+	    &lt;div class="article-metadata"&gt;
+	      &lt;a class="mr-2" href="#"&gt;{{ post.author }}&lt;/a&gt;
+	      &lt;small class="text-muted"&gt;{{ post.date_posted }}&lt;/small&gt;
+	    &lt;/div&gt;
+	    &lt;h2&gt;&lt;a class="article-title" href="#"&gt;{{ post.title }}&lt;/a&gt;&lt;/h2&gt;
+	    &lt;p class="article-content"&gt;{{ post.content }}&lt;/p&gt;
+	  &lt;/div&gt;
+	&lt;/article&gt;
+    {% endfor %}
+{% endblock content %}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- about.html --&gt;
+{% extends "layout.html" %}
+{% block content %}
+    &lt;h1&gt;About Page&lt;/h1&gt;
+{% endblock content %}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6725818" class="outline-2">
+<h2 id="org6725818">Create Forms and  Validate User Input</h2>
+<div class="outline-text-2" id="text-org6725818">
+<p>
+Create a registeration page to create account and  login and logout
+</p>
+<ul class="org-ul">
+<li>Make sure name, email are valid</li>
+<li>password should be valid either 6 char</li>
+</ul>
+
+<p>
+For users details account creation and validation we are using lib <code>flask-wtf</code>
+install <code>pip install flask-wtf</code>
+</p>
+
+
+<p>
+Create a seperate code-file <code>form.py</code>
+</p>
+
+<p>
+we use validators to validate the field-value
+</p>
+<ul class="org-ul">
+<li><b>Name:</b>     <code>StringField</code> : Lenght min :2 and max :20</li>
+<li><b>email:</b>    <code>StringField</code> : Email()[make sure it is valid email]</li>
+<li><b>password:</b> <code>PasswordField</code> :</li>
+<li><b>confirm-password:</b> <code>EqualTo()</code> : [Make sure it is same password enter]</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"># file: myflask-app/forms.py
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo
+
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email',validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+</pre>
+</div>
+
+
+<p>
+Now we need to set a <code>secret key</code> for our Application
+</p>
+<ul class="org-ul">
+<li>Secret Key is used to protect form 
+<ul class="org-ul">
+<li>Modifying Cookies</li>
+<li>Cross-site request</li>
+<li>Forgery Attacts</li>
+</ul></li>
+
+<li><p>
+Generate a secret key
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">python
+&gt;&gt;&gt; import secrets
+&gt;&gt;&gt; secrets.token_hex(16)
+'5791628bb0b13ce0c676dfde280ba245'
+</pre>
+</div></li>
+</ul>
+
+
+<p>
+Import <code>class (form , login)</code> from <code>form.py</code> &gt;&gt; <code>from forms import RegistrationForm, LoginForm</code>
+</p>
+<ul class="org-ul">
+<li>And add route <code>register, login</code> and create template <code>register.html, login.html</code></li>
+<li>If registration is not valid user need to notify in register.html page
+<ul class="org-ul">
+<li>add <code>flask-message</code> in <code>register.html</code>  if users didn't give valid message</li>
+</ul></li>
+<li>After registeration is <b>successful</b> need to notify the user using <code>flash-message</code> <code>flash(f'Account created for {form.username.data}!', 'success')</code> in <code>flaskblog.py</code> after registeration and re-route to <code>home page</code></li>
+<li>Add <code>flask-message</code> to html layout <code>layout.html</code>
+<ul class="org-ul">
+<li><code>flash-message(flash("Register is created","Successful"))</code> has to input <code>message and category</code> which is stored as  <code>messages</code>
+<ul class="org-ul">
+<li>this flash data is used in jinja2 template in layout.html or register.html or login.html which will be discussed below</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"># myflask-app/flaskblog.py
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import RegistrationForm, LoginForm
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+
+posts = [
+    {
+	'author': 'Corey Schafer',
+	'title': 'Blog Post 1',
+	'content': 'First post content',
+	'date_posted': 'April 20, 2018'
+    },
+    {
+	'author': 'Jane Doe',
+	'title': 'Blog Post 2',
+	'content': 'Second post content',
+	'date_posted': 'April 21, 2018'
+    }
+]
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+
+@app.route("/about")
+def about():
+    return render_template('about.html', title='About')
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+	flash(f'Account created for {form.username.data}!', 'success')
+	return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+# This is for testing or development
+	if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+	    flash('You have been logged in!', 'success')
+	    return redirect(url_for('home'))
+	else:
+	    flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+Add flash-message(<code>flash() in flaskblog.py</code>) if there is a message then print <code>get_flashed_message()</code> to html template in <code>layout.html</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- layout.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+
+    &lt;link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}"&gt;
+
+    {% if title %}
+	&lt;title&gt;Flask Blog - {{ title }}&lt;/title&gt;
+    {% else %}
+	&lt;title&gt;Flask Blog&lt;/title&gt;
+    {% endif %}
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main role="main" class="container"&gt;
+	&lt;div class="col-md-8"&gt;
+&lt;!-- Flask message block Strat--&gt;
+	  {% with messages = get_flashed_messages(with_categories=true) %}
+	    {% if messages %}
+	      {% for category, message in messages %}
+		&lt;div class="alert alert-{{ category }}"&gt;
+		  {{ message }}
+		&lt;/div&gt;
+	      {% endfor %}
+	    {% endif %}
+	  {% endwith %}
+&lt;!-- Flask message block End--&gt;
+
+&lt;!-- Content Block Strat --&gt;
+	  {% block content %}
+	  {% endblock %}
+&lt;!-- Content Block End --&gt;
+      &lt;/div&gt;
+  &lt;/main&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>If registration is not valid user need to notify in register.html page
+<ul class="org-ul">
+<li>add <code>flask-message</code> in <code>register.html</code>  if users didn't give valid input in user-name, email, password print the error using <code>flash message</code></li>
+</ul></li>
+</ul>
+
+<p>
+Below code is without flash Error message (if No Valid Input is given) in Registration template <code>register.html</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- register.html --&gt;
+{% extends "layout.html" %}
+{% block content %}
+    &lt;div class="content-section"&gt;
+	&lt;form method="POST" action=""&gt;
+	    {{ form.hidden_tag() }}
+	    &lt;fieldset class="form-group"&gt;
+		&lt;legend class="border-bottom mb-4"&gt;Join Today&lt;/legend&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.username.label(class="form-control-label") }}
+		    {{ form.username(class="form-control form-control-lg") }}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.email.label(class="form-control-label") }}
+		    {{ form.email(class="form-control form-control-lg") }}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.password.label(class="form-control-label") }}
+		    {{ form.password(class="form-control form-control-lg") }}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.confirm_password.label(class="form-control-label") }}
+		    {{ form.confirm_password(class="form-control form-control-lg") }}
+		    {% endif %}
+	    &lt;/fieldset&gt;
+	    &lt;div class="form-group"&gt;
+		{{ form.submit(class="btn btn-outline-info") }}
+	    &lt;/div&gt;
+	&lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class="border-top pt-3"&gt;
+	&lt;small class="text-muted"&gt;
+	    Already Have An Account? &lt;a class="ml-2" href="{{ url_for('login') }}"&gt;Sign In&lt;/a&gt;
+	&lt;/small&gt;
+    &lt;/div&gt;
+{% endblock content %}
+
+</pre>
+</div>
+
+<p>
+Below code is if error message then print the flash message     
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;!-- register.html --&gt;
+{% extends "layout.html" %}
+{% block content %}
+    &lt;div class="content-section"&gt;
+	&lt;form method="POST" action=""&gt;
+	    {{ form.hidden_tag() }}
+	    &lt;fieldset class="form-group"&gt;
+		&lt;legend class="border-bottom mb-4"&gt;Join Today&lt;/legend&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.username.label(class="form-control-label") }}
+
+		    {% if form.username.errors %}
+			{{ form.username(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.username.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.username(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.email.label(class="form-control-label") }}
+		    {% if form.email.errors %}
+			{{ form.email(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.email.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.email(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.password.label(class="form-control-label") }}
+		    {% if form.password.errors %}
+			{{ form.password(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.password.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.password(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.confirm_password.label(class="form-control-label") }}
+		    {% if form.confirm_password.errors %}
+			{{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.confirm_password.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.confirm_password(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+	    &lt;/fieldset&gt;
+	    &lt;div class="form-group"&gt;
+		{{ form.submit(class="btn btn-outline-info") }}
+	    &lt;/div&gt;
+	&lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class="border-top pt-3"&gt;
+	&lt;small class="text-muted"&gt;
+	    Already Have An Account? &lt;a class="ml-2" href="{{ url_for('login') }}"&gt;Sign In&lt;/a&gt;
+	&lt;/small&gt;
+    &lt;/div&gt;
+{% endblock content %}
+
+</pre>
+</div>
+
+<p>
+Simillary like register.html we need to create login.html
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">{% extends "layout.html" %}
+{% block content %}
+    &lt;div class="content-section"&gt;
+	&lt;form method="POST" action=""&gt;
+	    {{ form.hidden_tag() }}
+	    &lt;fieldset class="form-group"&gt;
+		&lt;legend class="border-bottom mb-4"&gt;Log In&lt;/legend&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.email.label(class="form-control-label") }}
+		    {% if form.email.errors %}
+			{{ form.email(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.email.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.email(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+		&lt;div class="form-group"&gt;
+		    {{ form.password.label(class="form-control-label") }}
+		    {% if form.password.errors %}
+			{{ form.password(class="form-control form-control-lg is-invalid") }}
+			&lt;div class="invalid-feedback"&gt;
+			    {% for error in form.password.errors %}
+				&lt;span&gt;{{ error }}&lt;/span&gt;
+			    {% endfor %}
+			&lt;/div&gt;
+		    {% else %}
+			{{ form.password(class="form-control form-control-lg") }}
+		    {% endif %}
+		&lt;/div&gt;
+		&lt;div class="form-check"&gt;
+		    {{ form.remember(class="form-check-input") }}
+		    {{ form.remember.label(class="form-check-label") }}
+		&lt;/div&gt;
+	    &lt;/fieldset&gt;
+	    &lt;div class="form-group"&gt;
+		{{ form.submit(class="btn btn-outline-info") }}
+	    &lt;/div&gt;
+	    &lt;small class="text-muted ml-2"&gt;
+		&lt;a href="#"&gt;Forgot Password?&lt;/a&gt;
+	    &lt;/small&gt;
+	&lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class="border-top pt-3"&gt;
+	&lt;small class="text-muted"&gt;
+	    Need An Account? &lt;a class="ml-2" href="{{ url_for('register') }}"&gt;Sign Up Now&lt;/a&gt;
+	&lt;/small&gt;
+    &lt;/div&gt;
+{% endblock content %}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7a35755" class="outline-2">
+<h2 id="org7a35755">Create a Database db using sqlAlchemy</h2>
+<div class="outline-text-2" id="text-org7a35755">
+<p>
+sqlalchemy is intermeditae which is used to connect different types of database
+</p>
+<ul class="org-ul">
+<li>With sqlalchemy we can access db as class</li>
+</ul>
+
+<p>
+Suppose you want to
+</p>
+<ul class="org-ul">
+<li>sqllite for dev enviroment</li>
+<li>mysql for testing</li>
+<li><p>
+psql for production
+</p>
+
+<p>
+Then by using sqlalchemy we just need to change the database without changing the code.
+</p>
+
+<p>
+Install sqlalchemy using <code>pip install flask-sqlalchemy</code>
+</p>
+<ul class="org-ul">
+<li>to link <code>from flask_sqlalchemy import SQLAlchemy</code></li>
+<li>There is sqlalchemy but flask-sqlalchemy has some flask sql link</li>
+</ul></li>
+</ul>
+
+<p>
+Let use sqllite database
+</p>
+</div>
+<div id="outline-container-orgf394920" class="outline-3">
+<h3 id="orgf394920">Create sqllite database</h3>
+<div class="outline-text-3" id="text-orgf394920">
+<pre class="example">
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org4ce9783" class="outline-3">
+<h3 id="org4ce9783">Link sqllite in flask-app</h3>
+<div class="outline-text-3" id="text-org4ce9783">
+<p>
+Add below line in flaskblog.py to add db in flaskblog.py
+</p>
+<ul class="org-ul">
+<li><code>app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'</code></li>
+<li><code>db = SQLAlchemy(app)</code> for db creation if NOT created.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2023-03-16 Thu 11:42</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

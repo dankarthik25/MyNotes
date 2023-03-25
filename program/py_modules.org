@@ -1,0 +1,122 @@
+#+TITLE: My Python Notes
+#+AUTHOR:    Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+ 
+
+The module are explained here seperately
+* Subprocess
+
+https://www.youtube.com/watch?v=yOBBq3dl0to \\
+https://www.youtube.com/watch?v=2Fp1N6dof0Y \\
+
+
+
+https://stackoverflow.com/questions/4256107/running-bash-commands-in-python
+To somewhat expand on the earlier answers here, there are a number of details which are commonly overlooked.
+- Prefer =subprocess.run()= over =subprocess.check_call()= and friends over =subprocess.call()= over =subprocess.Popen()= over =os.system()= =over os.popen()=
+- Understand and probably use =text=True=, aka =universal_newlines=True=.
+- Understand the meaning of =shell=True= or =shell=False= and how it changes quoting and the availability of shell conveniences.
+- Understand differences between =sh= and Bash
+- Understand how a subprocess is separate from its parent, and generally cannot change the parent.
+- Avoid running the Python interpreter as a subprocess of Python.
+
+Prefer subprocess.run() or subprocess.check_call()
+
+
+
+ subprocess.run(args, *, stdin=None, input=None, stdout=None, stderr=None, \\
+$\;\;\;\;\;\;\;$  capture_output=False, shell=False,\\ 
+$\;\;\;\;\;\;\;$  cwd=None, timeout=None, check=False, encoding=None, errors=None, text=None, \\
+$\;\;\;\;\;\;\;$ env=None, universal_newlines=None, **other_popen_kwargs) \\
+soruce : https://docs.python.org/3/library/subprocess.html
+
+Input argumetns:
+args : bash_cmd or shell cmd
+
+stdin=None
+input=None
+stdout=None
+stderr=None
+capture_output=False, if True  then stdout and stderr will be captured
+shell=False         , if True then give args is shell cmd and we can run them even in windows or mac system    
+env=None
+universal_newlines=None
+check=False,         if True raise Error or terminate execution of =subprocess.run= fails
+
+The =return value= from =run()=, representing a process that has finished.
+#+begin_src python
+class subprocess.CompletedProcess
+
+   return args:
+       # The arguments used to launch the process. This may be a list or a string.
+   return returncode:
+       # Exit status of the child process. Typically, an exit status of 0 indicates that it ran successfully.
+       # A negative value -N indicates that the child was terminated by signal N (POSIX only).
+   return stdout:
+       # Captured stdout from the child process. A bytes sequence,
+       # or a string if run() was called with an encoding, errors, or text=True.
+       # None if stdout was not captured.
+       # If you ran the process with stderr=subprocess.STDOUT,
+       #stdout and stderr will be combined in this attribute, and stderr will be None.
+   return stderr:
+        # Captured stderr from the child process.
+        # A bytes sequence, or a string if run() was called with an encoding, errors,
+        # or text=True. None if stderr was not captured
+   check_returncode():
+        # If returncode is non-zero, raise a CalledProcessError.
+#+end_src
+
+
+
+
+Example
+
+#+begin_src python
+# filename = test.py
+#! /usr/bin/env python3 # run in bash $ ./filename.py
+import subprocess
+subprocess.run ("echo Hello") # give error
+subprocess.run ("echo Hello",shell=True) # >> Hello
+res = subprocess.run ("echo Hello $USER ~",shell=True) # Hello karthik /home/karthik
+
+print(*dir(res) , sep="\n") # output stdout, stderr, returncode
+
+# # # # # # # # # # # 
+# capture_output=True, function return stdout, and stderr as output in binary format
+# # # # # # # #  # # # #
+
+res = subprocess.run ("echo Hello $USER\!",shell=True, capture_output=True)
+print(res.stdout)           # >>> b'Hello, karthik!
+print(res.stderr)           # >>> b''             # No error
+print(res.stdout.decode())  # >>> Hello, karthik!
+print(res.stderr.decode())  # >>>                 # No error 
+
+print(res.returncode)  # >>> 0 executed run successfully 
+
+# # # # # # # # # # # 
+# capture_output in Text format
+# # # # # # # #  # # # #
+
+
+res = subprocess.run ("echo Hello $USER\!",shell=True, capture_output=True, text=True)
+print(res.stdout)  # >>> Hello, karthik!
+print(res.stderr)  # >>>              # No error 
+print(res.returncode)  # 0 executed run successfully 
+
+
+# Store the std out and std error in a file
+
+with open('output.txt','w') as f:
+   p1=subprocess.run("ls -la", stdout=f, text=True) # This will save output in output.txt
+
+# set stderr to NOT SHOW ANY ERROR IN EXEC with `stderr=subprocess.DEVNULL`
+
+with open('output.txt','w') as f:
+   p1=subprocess.run("ls -la", stdout=f, text=True) # This will save output in output.txt
+
+
+#+end_src

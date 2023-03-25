@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-08-25 Thu 03:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>jekyll</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Karthik" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">jekyll</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6a40a0f">Intro</a></li>
+<li><a href="#org8202c48">Install jekyll and bundler germs</a></li>
+<li><a href="#orga5f306d">Create a new Jekyll site at ./myblog</a></li>
+<li><a href="#org9abcc08">Front matter</a></li>
+<li><a href="#org93bf26d">Create your 1st post in _posts</a></li>
+<li><a href="#orgd635ccf">Draft</a></li>
+<li><a href="#orgbc4f7ce">Pages</a></li>
+<li><a href="#org6dc122e">Permalinks: Permanetent links</a></li>
+<li><a href="#org79eda27">Front Matter Default</a></li>
+<li><a href="#org54d2e9a">Install theme in jeklly</a></li>
+<li><a href="#org7f78049">Layout</a></li>
+<li><a href="#orgaa59bd1">Variable in jekyll</a></li>
+<li><a href="#org9045916">Include</a></li>
+<li><a href="#orgb00a53b">Looping</a></li>
+<li><a href="#orgf21e066">Conditions</a></li>
+<li><a href="#orga867052">Data Files</a></li>
+<li><a href="#orgcab186e">Create a complex website</a></li>
+<li><a href="#org8fbc546">Create a theme for jekyll</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB">https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB</a>
+</p>
+<div id="outline-container-org6a40a0f" class="outline-2">
+<h2 id="org6a40a0f">Intro</h2>
+<div class="outline-text-2" id="text-org6a40a0f">
+<ul class="org-ul">
+<li>Jeklly is a markdown based blog or website creation without using html or css or js</li>
+<li>Jeklly theme is github theme and it is dynamic (auto-size adjusted) means it can be used in mobile, tablet , pc &#x2026; contant will auto adjusted</li>
+<li>Big Community</li>
+</ul>
+<pre class="example">
+# https://phoenixnap.com/kb/install-ruby-ubuntu
+sudo apt update
+sudo apt install ruby-full
+ruby --version
+sudo apt install gem
+
+# install g++ 
+sudo apt install g++
+sudo apt-get install build-essential 
+</pre>
+</div>
+</div>
+<div id="outline-container-org8202c48" class="outline-2">
+<h2 id="org8202c48">Install jekyll and bundler germs</h2>
+<div class="outline-text-2" id="text-org8202c48">
+<pre class="example">
+# Prerequisites 
+# - Ruby version 2.5.0 or higher   # ruby -v 
+# - RubyGems                       # gem -v
+# - GCC and Make
+
+gem install jekyll bundler
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga5f306d" class="outline-2">
+<h2 id="orga5f306d">Create a new Jekyll site at ./myblog</h2>
+<div class="outline-text-2" id="text-orga5f306d">
+<pre class="example">
+jekyll new myblog
+cd myblog
+blundle exec jekyll serve # Browse to http://localhost:4000
+# you can use only jekyll serve after build 
+#jekyll serve
+
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org9abcc08" class="outline-2">
+<h2 id="org9abcc08">Front matter</h2>
+<div class="outline-text-2" id="text-org9abcc08">
+<pre class="example">
+cat myblog/_post/2022-07-30-welcome-to-jekyll.markdown
+</pre>
+
+<p>
+The metadata present before body in markdown is know as Front-Matter
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">post</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">:  </span><span style="color: #2d9574;">"Welcome to Jekyll!"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">:   </span><span style="color: #2d9574;">2022-07-30 21:19:45 +0530</span>
+<span style="color: #715ab1;">categories</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">jekyll update</span>
+<span style="color: #715ab1;">author</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">Mike</span>
+<span style="color: #a094a2;">---</span>
+You&#8217;ll find this post in your <span style="color: #a094a2;">`</span><span style="color: #4e3163;">_posts</span><span style="color: #a094a2;">`</span> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <span style="color: #a094a2;">`</span><span style="color: #4e3163;">jekyll serve</span><span style="color: #a094a2;">`</span>, which launches a web server and auto-regenerates your site when a file is updated.
+
+Jekyll requires blog post files to be named according to the following format:
+
+<span style="color: #a094a2;">`</span><span style="color: #4e3163;">YEAR-MONTH-DAY-title.MARKUP</span><span style="color: #a094a2;">`</span>
+
+Where <span style="color: #a094a2;">`</span><span style="color: #4e3163;">YEAR</span><span style="color: #a094a2;">`</span> is a four-digit number, <span style="color: #a094a2;">`</span><span style="color: #4e3163;">MONTH</span><span style="color: #a094a2;">`</span> and <span style="color: #a094a2;">`</span><span style="color: #4e3163;">DAY</span><span style="color: #a094a2;">`</span> are both two-digit numbers, and <span style="color: #a094a2;">`</span><span style="color: #4e3163;">MARKUP</span><span style="color: #a094a2;">`</span> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+Jekyll also offers powerful support for code snippets:
+
+</pre>
+</div>
+
+<p>
+You can create own front-matter and use them in your <code>jeklly layout</code> or <code>custome html</code> ..etc
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93bf26d" class="outline-2">
+<h2 id="org93bf26d">Create your 1st post in _posts</h2>
+<div class="outline-text-2" id="text-org93bf26d">
+<p>
+Name of post must contain <code>Date</code> before filename
+</p>
+
+<p>
+create a markdown file in myblog/<sub>posts</sub> name it <code>2017-09-24-my-frist-post</code>
+</p>
+
+<p>
+The <code>Front Matter</code> for post is
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"post"</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"This is the new title"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">2017-09-24 15:58:59 +0530</span>
+<span style="color: #a094a2;">---</span>
+Some Conten
+</pre>
+</div>
+
+
+<blockquote>
+<p>
+you can organize post in a dir by creating a directory inside <code>_posts</code> jekyll will able to identity the file 
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgd635ccf" class="outline-2">
+<h2 id="orgd635ccf">Draft</h2>
+<div class="outline-text-2" id="text-orgd635ccf">
+<p>
+Dir <code>cd myblog/_draft</code> is used to store unfinished post
+</p>
+<ul class="org-ul">
+<li>generally <code>_draft</code> are not displaced in localhost <code>localserver</code></li>
+<li><p>
+to dispaly the drafts
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">jekyll serve --draft
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgbc4f7ce" class="outline-2">
+<h2 id="orgbc4f7ce">Pages</h2>
+<div class="outline-text-2" id="text-orgbc4f7ce">
+<p>
+web page like : about, contat, donation,
+</p>
+
+<p>
+Create donation page
+</p>
+
+<pre class="example">
+cd myblog
+touch donate.md
+cat donate.md
+</pre>
+
+<pre class="example">
+---
+layout: "page"
+---
+Donate to our site 
+</pre>
+
+<p>
+To view page : <code>localhost:4000/donate</code>
+</p>
+
+<p>
+You can organize page by grouing them in directory <code>myblog/page-dir</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6dc122e" class="outline-2">
+<h2 id="org6dc122e">Permalinks: Permanetent links</h2>
+<div class="outline-text-2" id="text-org6dc122e">
+<p>
+the url of post changes if the date changes so we can use permalinks which doesn't changes with date
+</p>
+
+<p>
+<code>permalink: "my-new-url-test/test2"</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"post"</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"This is the new title"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">2017-09-24 15:58:59 +0530</span>
+<span style="color: #715ab1;">permalink</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"my-new-url-test/test2"</span>
+<span style="color: #a094a2;">---</span>
+Some Conten
+</pre>
+</div>
+
+
+<p>
+or we can use categories
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"post"</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"This is the new title"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">2017-09-24 15:58:59 +0530</span>
+<span style="color: #715ab1;">categories</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">jekyll new-cat</span>
+<span style="color: #715ab1;">permalink</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">/:categories/:day/:year/:month/:title.html </span>
+<span style="color: #a094a2;">---</span>
+Some Conten
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org79eda27" class="outline-2">
+<h2 id="org79eda27">Front Matter Default</h2>
+<div class="outline-text-2" id="text-org79eda27">
+<p>
+If you want  author in every blog post then we can configure in post or we can configure in yaml file <code>config.yml</code> 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"post"</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"This is the new title"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">2017-09-24 15:58:59 +0530</span>
+<span style="color: #715ab1;">author</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"Deepalgorithms"</span>
+<span style="color: #a094a2;">---</span>
+Some Conten
+</pre>
+</div>
+
+<p>
+config.yml 
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">cat config.yml </span>
+<span style="color: #715ab1;">defaults</span>:
+  <span style="color: #715ab1;">-</span>
+<span style="color: #715ab1;">    scope</span>: 
+      <span style="color: #715ab1;">path</span>: <span style="color: #2d9574;">""</span>
+    <span style="color: #715ab1;">values</span>:
+      <span style="color: #715ab1;">layout</span>: <span style="color: #2d9574;">"post"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org54d2e9a" class="outline-2">
+<h2 id="org54d2e9a">Install theme in jeklly</h2>
+<div class="outline-text-2" id="text-org54d2e9a">
+<p>
+Jeklly come with <code>minima</code> theme
+</p>
+
+<p>
+There are many theme in jeklly you can select from <a href="https://rubygems.org/search?query=jekyll-theme">https://rubygems.org/search?query=jekyll-theme</a>
+</p>
+
+<p>
+You can see the preview by going to  Links: homepage &gt; github &gt; preview
+</p>
+
+<p>
+You can install theme in Gemfile
+</p>
+
+<div class="org-src-container">
+<pre class="src src-gem">gem "minima", "~&gt; 2.5"
+gem "jekyll-theme-hacker"
+</pre>
+</div>
+
+
+<pre class="example">
+# close the serve  and install theme
+bundle install  # this will install theme
+bundle exec jekyll serve # restart server 
+</pre>
+
+<p>
+Config theme in <code>config.yml</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f78049" class="outline-2">
+<h2 id="org7f78049">Layout</h2>
+<div class="outline-text-2" id="text-org7f78049">
+<p>
+Layout is basic selection of html and css used to create a site 
+There are two layouts
+</p>
+<ul class="org-ul">
+<li>post</li>
+<li><p>
+page
+</p>
+
+<p>
+You can create your own layout by
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">cd</span> myblog
+mkdir _layout  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">html</span>
+touch _layout/post.html
+</pre>
+</div>
+
+<p>
+You can create your own post like
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> This is post </span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">hr</span>&gt;
+
+{{ content }}
+
+</pre>
+</div></li>
+</ul>
+
+<p>
+You can create custome page layout by myblog/<sub>layout</sub>/page.html
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> This is page  </span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">hr</span>&gt;
+
+{{ content }}
+
+</pre>
+</div>
+
+
+<p>
+You can define custome layout  myblog/<sub>layout</sub>/giraffe.html
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> This is page  </span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">hr</span>&gt;
+
+{{ content }}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa59bd1" class="outline-2">
+<h2 id="orgaa59bd1">Variable in jekyll</h2>
+<div class="outline-text-2" id="text-orgaa59bd1">
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #a094a2;">---</span>
+<span style="color: #715ab1;">layout</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"post"</span>
+<span style="color: #715ab1;">title</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"This is the new title"</span>
+<span style="color: #715ab1;">date</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">2017-09-24 15:58:59 +0530</span>
+<span style="color: #715ab1;">author</span><span style="color: #a094a2;">: </span><span style="color: #2d9574;">"Deepalgorithms"</span>
+<span style="color: #a094a2;">---</span>
+
+Some Content
+
+afadfadf
+
+<span style="color: #a094a2;">&lt;</span><span style="color: #ba2f59; font-weight: bold;">h1</span><span style="color: #a094a2;">&gt;</span> This is post <span style="color: #a094a2;">&lt;/</span><span style="color: #ba2f59; font-weight: bold;">h1</span><span style="color: #a094a2;">&gt;</span>
+<span style="color: #a094a2;">&lt;</span><span style="color: #ba2f59; font-weight: bold;">h2</span><span style="color: #a094a2;">&gt;</span> {{ post.title }} <span style="color: #a094a2;">&lt;/</span><span style="color: #ba2f59; font-weight: bold;">h2</span><span style="color: #a094a2;">&gt;</span>
+<span style="color: #a094a2;">&lt;</span><span style="color: #ba2f59; font-weight: bold;">h3</span><span style="color: #a094a2;">&gt;</span> {{ layout.author }} <span style="color: #a094a2;">&lt;/</span><span style="color: #ba2f59; font-weight: bold;">h3</span><span style="color: #a094a2;">&gt;</span>
+
+
+</pre>
+</div>
+
+<p>
+For more variables visit <a href="https://jekyllrb.com/docs/variables/">https://jekyllrb.com/docs/variables/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org9045916" class="outline-2">
+<h2 id="org9045916">Include</h2>
+<div class="outline-text-2" id="text-org9045916">
+<p>
+header and footer
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">cd</span> myblog
+mkdir _include
+<span style="color: #3a81c3;">cd</span> myblog/_include
+touch header.html
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html"># cat header.html
+
+&lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> {{site.title }} </span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">hr</span>&gt;
+
+</pre>
+</div>
+
+<p>
+To include in page
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+  &lt;<span style="color: #6c3163; font-weight: bold;">meata</span> <span style="color: #715ab1;">charset</span>=<span style="color: #2d9574;">"UTF-8"</span>
+  &lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> {{ site.title}} </span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+  {% include header.html%}
+  {{ content }} 
+&lt;/<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb00a53b" class="outline-2">
+<h2 id="orgb00a53b">Looping</h2>
+<div class="outline-text-2" id="text-orgb00a53b">
+<p>
+show all post in home page
+</p>
+
+<p>
+<code>cat home.html</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">{% for post in site.posts %}
+  &lt;<span style="color: #6c3163; font-weight: bold;">li</span>&gt; &lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"{{ post.url }}"</span> &gt; {{post.title}} &lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt; &lt;/<span style="color: #6c3163; font-weight: bold;">li</span>&gt;f
+  {{ post.title}} &lt;<span style="color: #6c3163; font-weight: bold;">br</span>&gt;
+
+{% endfor %}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf21e066" class="outline-2">
+<h2 id="orgf21e066">Conditions</h2>
+<div class="outline-text-2" id="text-orgf21e066">
+<div class="org-src-container">
+<pre class="src src-html">
+{% if page.title == "My Frist Post" and "Last Post" %}
+  This is the first post
+{% elsfi page.title == "My Second Post" or "Last Send Post" %}
+  This is the second post
+{% else %}
+   This is another post 
+{% endif %}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga867052" class="outline-2">
+<h2 id="orga867052">Data Files</h2>
+<div class="outline-text-2" id="text-orga867052">
+<p>
+access json yaml csv and dispaly on website
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create data file yaml</span>
+touch people.yml
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">peopel.yaml</span>
+
+- <span style="color: #715ab1;">name</span> : <span style="color: #2d9574;">"Mike"</span>
+  <span style="color: #715ab1;">occupation</span>: <span style="color: #2d9574;">"Giraffe Academy"</span>
+
+- <span style="color: #715ab1;">name</span> : <span style="color: #2d9574;">"Steve"</span>
+  <span style="color: #715ab1;">occupation</span>: <span style="color: #2d9574;">"Firefighter"</span>
+
+- <span style="color: #715ab1;">name</span> : <span style="color: #2d9574;">"Rob"</span>
+  <span style="color: #715ab1;">occupation</span>: <span style="color: #2d9574;">"Programmer"</span>
+
+</pre>
+</div>
+
+
+<p>
+inside home.html
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">
+{% for person in site.data.people %}
+  {{person.name}}, {{ person.occupation }} &lt;<span style="color: #6c3163; font-weight: bold;">br</span>&gt; 
+
+{% endfor %}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgcab186e" class="outline-2">
+<h2 id="orgcab186e">Create a complex website</h2>
+<div class="outline-text-2" id="text-orgcab186e">
+<p>
+<a href="https://www.youtube.com/watch?v=FiJuoFg_Ipc">https://www.youtube.com/watch?v=FiJuoFg_Ipc</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8fbc546" class="outline-2">
+<h2 id="org8fbc546">Create a theme for jekyll</h2>
+<div class="outline-text-2" id="text-org8fbc546">
+<p>
+<a href="https://www.youtube.com/watch?v=UuHrgv6p2Mg">https://www.youtube.com/watch?v=UuHrgv6p2Mg</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2022-08-25 Thu 03:48</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

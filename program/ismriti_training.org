@@ -1,0 +1,42 @@
+#+TITLE: ismriti_training
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Student Registration
+** Registration in website
+** Amount payment , verifiation
+** CollegeID- card collection, verification for student /professinals
+** Passport Photo for ID- creation
+* Before Arrival of Students 
+** Creating Id- Card
+getting vendor-details for plastic card printing
+bar-code, QR-code and mobile based  bar-code scanning attendance system
+** Creating Certificate
+** Creating IoT Kit
+** Accomodation/Food
+*** Getting permission for iitk  office from room-arrangement
+*** Getting details of students : NO.of students, NO.of (male/Female) Accomdation, Arrival/Departure Dates
+*** Getting Accomodation details (Hostel/Dormatory's)
+*** Getting bed,id-card,wifi, number-lock,food,LAN, notebook, wifi, Greeting Card
+*** Send excle sheet of {name, module, departure, emergency contact, alocated-room No, Food(y/n)} to hostel security
+** Webserver
+*** send mails to student giving  user & password in ismriti 
+*** send post regarding accomodation(location of stay), Time of class 
+*** Upload vidoes in server 
+*** Setting Webserver in IIT-Kanpur 
+*** marking (FB campaing, Linkedin, Internalshals, Google ads,....etc)
+* After Arrival of Students
+** For Non-Hostel send  id-card, wifi,notebook, Greeting Card
+** Class Room :
+*** Clean Class Room before class-room start
+*** Water Dispensory 4 Bottel + 4 Glasses befor class 
+*** Check mic and speaker, projector before before class 
+** maintaining server(Form)
+*** Uploading videos
+
+** Buying Kit
+*** Tell before 7 days completion of programm
+** Upgrading model
+*** Tell before 7 days completion of program
+** Giving Certificate 
+* Scope
+** Work on Next Online course

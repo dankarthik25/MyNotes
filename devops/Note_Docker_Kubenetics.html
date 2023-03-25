@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_Docker_Kubenetics</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>Docker</sub><sub>Kubenetics</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9dce71b">Swarm</a>
+<ul>
+<li><a href="#org3e0f478">Intro and Creating a 3-Node Swarm Cluster</a>
+<ul>
+<li><a href="#org849280a">Docker Swarm &lt; Start &gt;</a></li>
+<li><a href="#org24f9596">Swarm mode Build-In Orchestration[62]</a></li>
+<li><a href="#org1cd4d97">Create Your First Service and Scale it locally</a></li>
+<li><a href="#orgb1ad6c0">Create 3-Node Swarn Cluster [66]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org25dac2a">Swarm Basic Feature and How to Use them in Workflow</a>
+<ul>
+<li><a href="#orgc9a64b2">Scaling Out with Overlay Networking [67]</a></li>
+<li><a href="#org6fc93c2">Scaling Out with Routing mesh[68]</a>
+<ul>
+<li><a href="#orga93502a">Swarm Routing mesh(Global Traffic Routing)</a></li>
+</ul>
+</li>
+<li><a href="#org1f3545c">Assignment Ans : Create a multi-server multi-node web app[69-70]</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9dce71b" class="outline-2">
+<h2 id="org9dce71b">Swarm</h2>
+<div class="outline-text-2" id="text-org9dce71b">
+</div>
+<div id="outline-container-org3e0f478" class="outline-3">
+<h3 id="org3e0f478">Intro and Creating a 3-Node Swarm Cluster</h3>
+<div class="outline-text-3" id="text-org3e0f478">
+</div>
+<div id="outline-container-org849280a" class="outline-4">
+<h4 id="org849280a">Docker Swarm &lt; Start &gt;</h4>
+</div>
+<div id="outline-container-org24f9596" class="outline-4">
+<h4 id="org24f9596">Swarm mode Build-In Orchestration[62]</h4>
+<div class="outline-text-4" id="text-org24f9596">
+<p>
+Why Orchestration
+</p>
+<ul class="org-ul">
+<li>How do we automate container lifecycle ?</li>
+<li>How can we easily scale out/in/up/down ?</li>
+<li>How can we ensure our container and  re-created if they fail ?</li>
+<li>How can we replace container without downtime (blue/green deploy) ?</li>
+<li>How can we control /track where container get started ?</li>
+<li>How can we ensure only trusted servers run out containers ?</li>
+<li>How can we store secrets, key, passwords and get them to the right container(and only that container) ?</li>
+
+<li>Swarm mode : Buil-In Orches
+<ul class="org-ul">
+<li>Swarm mode is a clustering solution build inside Docker</li>
+<li>Not related to Swarm "classic" for  pre-1.12</li>
+<li>Added in 1.12 (Summer 2016) via SwarmKit tool kit</li>
+<li>Enhanced in 1.13 (January 2017)  via  Stacks and Secrets</li>
+<li>Not enable by default, new commonds once enable
+<ul class="org-ul">
+<li>docker swarm</li>
+<li>docker node</li>
+<li>docker service</li>
+<li>docker stack</li>
+<li>docker secret</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1cd4d97" class="outline-4">
+<h4 id="org1cd4d97">Create Your First Service and Scale it locally</h4>
+<div class="outline-text-4" id="text-org1cd4d97">
+<div class="org-src-container">
+<pre class="src src-sh">docker info | grep "Swarm"  # Check if swarm is active or not
+# Swarm: inactive
+
+docker swarm init  # Initialized swarn
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Swarm init background work
+<ul class="org-ul">
+<li>Lot of PKI and security automation
+<ul class="org-ul">
+<li>Root Signing Certificate created for  our Swarm</li>
+<li>Certificate is issused for first management node</li>
+<li>Join token are created</li>
+</ul></li>
+<li>Raft database created to store root CA, configs and secrets
+<ul class="org-ul">
+<li>Encypted by default on disk (1.13+)</li>
+<li>No need for another key/value system to hold orchestration/secretes</li>
+<li>Repilcates logs amongs managers via  mutual TLS in  "control plane"</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb1ad6c0" class="outline-4">
+<h4 id="orgb1ad6c0">Create 3-Node Swarn Cluster [66]</h4>
+<div class="outline-text-4" id="text-orgb1ad6c0">
+<p>
+Option
+</p>
+<ul class="org-ul">
+<li><b>Play-with-docker.com</b>
+<ul class="org-ul">
+<li>Only need a brower, but resets after 4 hours</li>
+</ul></li>
+<li><b>Docker-machine + Virtual Box</b>
+<ul class="org-ul">
+<li>Free and runs locally, but requires a machines with 8 GB memory</li>
+</ul></li>
+<li><b>Digital Ocean + Docker install</b> [ <b>default</b> ]
+<ul class="org-ul">
+<li>most like a production setup, but costs $5-10/node/month while learning</li>
+<li>Use my referral code in section resource to get $10 free</li>
+</ul></li>
+<li><b>Roll you own</b>
+<ul class="org-ul">
+<li>Docker-machine can provision machine for Amaon, Azure, DO,Google,etc.</li>
+<li>Install docker anywhere with get.docker.com</li>
+</ul></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">docker-machine node1  # create a node1 
+
+docker-machine ssh node1 # to move inside the machine
+docker-machine env node1 # 
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org25dac2a" class="outline-2">
+<h2 id="org25dac2a">Swarm Basic Feature and How to Use them in Workflow</h2>
+<div class="outline-text-2" id="text-org25dac2a">
+</div>
+<div id="outline-container-orgc9a64b2" class="outline-3">
+<h3 id="orgc9a64b2">Scaling Out with Overlay Networking [67]</h3>
+<div class="outline-text-3" id="text-orgc9a64b2">
+<p>
+Overlay choose &#x2013;driver overlay when creating network
+For container-to-container traffic inside a single Swarm
+Optinal IPSec(AES) encryption on network creation
+Each service can be connected to multiple networks
+</p>
+<ul class="org-ul">
+<li>Eg: Front-end , back-end</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">docker network create --driver overlay mydrupal
+docekr network ls
+docker service create --name psql --network mydrupal -e POSTGRESS_PASSWORD=mypass postgres
+docker service ls
+psql replicated ps psql
+docker container ls
+
+
+docker service create --name drupal --network mydrupal -p 80:80 drupal
+docker service ls
+
+watch docker ls # linux re-run 
+docker service ps drupal # see -where drupal service is running : let be node2
+
+# How to make talk to each other 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6fc93c2" class="outline-3">
+<h3 id="org6fc93c2">Scaling Out with Routing mesh[68]</h3>
+<div class="outline-text-3" id="text-org6fc93c2">
+</div>
+<div id="outline-container-orga93502a" class="outline-4">
+<h4 id="orga93502a">Swarm Routing mesh(Global Traffic Routing)</h4>
+<div class="outline-text-4" id="text-orga93502a">
+<p>
+Routes ingress (incoming) packets for service to proper task
+Spans all nodes in swarm
+Uses IPVS from Linux Kernel
+Load balances Swarm Services across their Tasks
+Two ways this works:
+Container-to-Container in a Overlay network (Use VIP)
+External traffic incoming to published ports (all nodes listen)
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker service create --name serach --replicas -p 9200:9200 elasticsearch:2 # elasticserach is a serach database for web api
+
+docker service ps serach
+
+curl localhost:9200
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1f3545c" class="outline-3">
+<h3 id="org1f3545c">Assignment Ans : Create a multi-server multi-node web app[69-70]</h3>
+<div class="outline-text-3" id="text-org1f3545c">
+<div class="org-src-container">
+<pre class="src src-sh">docker node ls
+docker ps -a
+docker services ls
+
+docker network craete -d overlay backend # only one network we can crate
+docker network craete -d overlay frontend
+</pre>
+</div>
+
+<p>
+yml file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#- vote
+#   - dockersamples/examplevotingapp_vote:before
+#   - web front end for users to vote dog/cat
+#   - ideally published on TCP 80. Container listen on 80
+#   - on frontend network
+#   - 2+ replicas of this contianer
+docker service create --name vote -p 80:80 --network frontend
+--replica 2 dockersamples/examplevotingapp_vote:bofore
+#-redis
+#  - redis:3.2
+#  - key/value storge for incoming votes
+#  - no public ports
+#  - on frontend network
+#  - 2 replicas
+docker services create --name redis --network frontend --replica 2 redis:3.2
+#- worker
+#  - dockersamples/examplevotingapp_worker
+#  - backend processor of redis oand storing results in postgres 
+#  - no public ports
+#  - on frontend and backend networks
+#  - 1 replica
+docker service create --name worker --network frontend --network backend dockersamples/examples/examplevotingapp_worke
+#- db
+#   - postgres: 9.4
+#   - one name volue needed, pointing to /var/lib/postgresql/date
+#   - on bakcend network
+#   - 1 replica
+docker service create --name db --network backend --mount type=volume, source=db-data, target=/var/lib/postgresql/data |
+#- result
+#   - dockersamples/examplevotingapp_result:before
+#   - web app that shows results
+#   - runs on high port since just for admins (lets image)
+#   - so run on a high port of your choosing (I choose 5001), container liseten on 80
+#  - on backend network
+#   - 1 replica
+docker servie create --name result --network backend -p 5001:80
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

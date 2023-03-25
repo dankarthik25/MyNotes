@@ -1,0 +1,714 @@
+#+TITLE:     CloudFormation-Udemy
+#+AUTHOR:    DeepAlgorithms
+#+OPTIONS: num:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+
+source : https://www.youtube.com/watch?v=vM7X9AO7r6c&list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3
+
+
+
+* Manage aws-cli mulitipule  profiles
+#+begin_src sh
+cat ~/.aws/credentials # list of profiles in aws
+
+aws ec2 describe-instances --profile myprofile  # list the isntance in my
+
+# SET DEFALUT PROFILE
+
+export AWS_DEFAULT_PROFILE=myprofile
+
+aws codepipeline list-pipelines
+aws codepipeline get-pipeline --name poc-dk-nginx-pipeline >pipeline.json
+aws codepipeline list-pipelines --region us-east-1 --profile dan2505
+aws codepipeline get-pipeline --name test-cloudformation-cicd --region us-east-1 --profile dan2505  > vpc-cf.json
+
+aws codepipeline create-pipeline --profile dan2505 --cli-input-json file://new-pipe.json
+
+aws codepipeline update-pipeline --profile dan2505 --cli-input-json file://new-pipe.json
+
+aws codepipeline get-pipeline --region eu-west-1 --name Cross-Account-CloudFormation-CICD --profile dan2505 > failed-cross-pipeline.json
+
+aws codepipeline update-pipeline --region eu-west-1  --profile dan2505 --cli-input-json file://failed-cross-pipeline.json
+
+
+aws codepipeline update-pipeline --cli-input-json file://failed-cross-pipeline.json --profile dan2505
+
+
+CA-CF-getCodeCommit-CICD-2
+
+aws codepipeline get-pipeline --region eu-west-1 --name CA-CF-getCodeCommit-CICD-2 --profile dan2505 > failed-cross-pipeline.json
+
+aws codepipeline update-pipeline --cli-input-json file://failed-cross-pipeline.json --profile dan2505
+#+end_src
+aws ec2 describe-instances --profile myprofile \\
+https://www.youtube.com/watch?v=oXBknlO-9rg&list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&index=4
+IAAS
+cloud formation can be either json or yml formate
+Structure of aws cloud formation json file
+
+#+begin_src  yaml
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+Parameters:
+Metadata:
+Resources:
+Mappings:
+Conditions:
+Outputs:
+Resources:
+
+#+end_src
+run cloudformation using aws-cli
+
+#+begin_src sh 
+aws cloudformation validate-template --template-body file://template.json
+aws cloudformation create-stack --stack-name exampleStack --template-body file://template.json
+aws cloudformation delete-stack --stack-name examplestack
+aws cloudformation creatre-stack --stack-name vpc --template-body file://./infra/vpc.yml
+aws cloudformation creatre-stack --stack-name iam --template-body file://./infra/iam.yml --capabilities CAPABILITY_IAM
+
+# create loadbalancer
+aws cloudformation create-stack --stack-name app-cluster --template-body file://infra/app-cluster.yml
+
+# deploy docker image form ecr repo to ecs{Fargate}
+# container defination
+# service defination
+# task defination
+#
+aws cloudformation create-stack --stack-name api --template-body file://infra/app.yml
+aws cloudformation delete-stack --stack-name api
+aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+
+aws sts assume-role \
+--role-arn arn:aws:iam::123456789012:role/Developer \
+--role-session-name Mary-Major \
+–-tags Key=displayName,Value="Mary Major" Key=emailAddress,Value="mary_major@example.com" \
+--external-id Example987
+#+end_src
+
+
+
+* cross account pipeline for cloudformation deployment
+https://www.youtube.com/watch?v=IbCg548TLbc
+
+- Goal : There are two account *devops-account* and *dev-account*
+   *dev-account* consist of codecommit resources  which are need to run in other account
+   *devops-account* consist of codepipeline resource
+   Lets consider
+   dev-account : 877078200476
+   devops-account : 133602912138
+           
+
+  - [ *devops-account* ]
+    Create a customer managed AWS Key Management Service (AWS KMS) key that grants key usage permissions to the following:
+    - devops-account's CodePipeline service role
+    - dev-account
+
+  - [ *devops-account* ]
+   Create an Amazon Simple Storage Service (Amazon S3) bucket with a bucket policy that grants dev-account access to the bucket.
+  
+  - [ *dev-account* ]
+   Create a cross-account AWS Identity and Access Management (IAM) role that allows the following:
+    - CloudFormation API actions
+    - Access to the Amazon S3 bucket in devops-account
+    - Decryption with the customer managed AWS KMS key in devops-account
+
+  - [ *devops-account* ]
+   Add the AssumeRole permission to devops-account's CodePipeline service role to allow it to assume the cross-account role in dev-account.
+
+  - [ *dev-account* ]
+   Create a service role for the CloudFormation stack that includes the required permissions for the services deployed by the stack.
+
+  - [ *devops-account* ]
+   Update the CodePipeline configuration in devops-account to include the resources associated with dev-account           
+
+- Resolution
+** ( *devops-account* ) Create a customer managed AWS KMS key that grants usage permissions to devops-account's CodePipeline service role and dev-account
+    - In devops-account, open the AWS KMS console.
+    - In the navigation pane, choose Customer managed keys.
+    - Choose Create key. Then, choose Symmetric.
+      Note: In the Advanced options section, leave the origin as KMS.
+    - For Alias, enter a name for your key.
+    - (Optional) Add tags based on your use case. Then, choose Next.
+    - On the Define key administrative permissions page, for Key administrators, choose your AWS Identity and Access Management (IAM) user. Also, any other users or groups that you want to serve as administrators for the key. Then, choose Next.
+    - On the Define key usage permissions page, for This account, add the IAM identities that you want to have access to the key. For example: The CodePipeline service role..
+    - In the Other AWS accounts section, choose Add another AWS account. Then, enter the Amazon Resource Name (ARN) of the IAM role in dev-account.
+    - Choose Next. Then, choose Finish.
+    - In the Customer managed keys section, choose the key that you just created. Then, copy the key's ARN.
+      Important: You must have the AWS KMS key's ARN when you update your pipeline and configure your IAM policies.
+** ( *devops-account* ) Create an Amazon S3 bucket with a bucket policy that grants dev-account access to the bucket
+- In devops-account, open the Amazon S3 console.
+  - Choose an existing Amazon S3 bucket or create a new S3 bucket to use as the ArtifactStore for CodePipeline.
+      Note: Artifacts can include a stack template file, a template configuration file, or both. CodePipeline uses these artifacts to work with CloudFormation stacks and change sets. In your template configuration file, you must specify template parameter values, a stack policy, and tags.
+- On the Amazon S3 details page for your bucket, choose Permissions.
+- Choose Bucket Policy.
+- In the bucket policy editor, enter the following policy:
+     Important: Replace codepipeline-source-artifact with the SourceArtifact bucket name for CodePipeline. Replace ACCOUNT_B_NO with dev-account's account number.
+  #+begin_src 
+{
+  "ID": "POLICY1553183091390",
+  "VERSION": "2012-10-17",
+  "STATEMENT": [{
+      "SID": "",
+      "ACTION": [
+        "S3:GET*",
+        "S3:PUT*"
+      ],
+      "EFFECT": "ALLOW",
+      "RESOURCE": "ARN:AWS:S3:::CODEPIPELINE-SOURCE-ARTIFACT/*",
+      "PRINCIPAL": {
+        "AWS": [
+          "ARN:AWS:IAM::ACCOUNT_B_NO:ROOT"
+        ]
+      }
+    },
+    {
+      "SID": "",
+      "ACTION": [
+        "S3:LISTBUCKET"
+      ],
+      "EFFECT": "ALLOW",
+      "RESOURCE": "ARN:AWS:S3:::CODEPIPELINE-SOURCE-ARTIFACT",
+      "PRINCIPAL": {
+        "AWS": [
+          "ARN:AWS:IAM::ACCOUNT_B_NO:ROOT"
+        ]
+      }
+    }
+  ]
+}
+#+END_SRC
+ - CHOOSE SAVE.
+    
+**  ( *dev-account* ) CREATE A CROSS-ACCOUNT IAM ROLE
+
+CREATE AN IAM POLICY THAT ALLOWS THE FOLLOWING:
+- THE PIPELINE IN devops-account TO ASSUME THE CROSS-ACCOUNT IAM ROLE IN dev-account
+- CLOUDFORMATION API ACTIONS
+- AMAZON S3 API ACTIONS RELATED TO THE SOURCEARTIFACT
+  
++ In dev-account, open the IAM console.
++ In the navigation pane, choose Policies. Then, choose Create policy.
++ Choose the JSON tab. Then, enter the following policy into the JSON editor:
+  Important: Replace codepipeline-source-artifact with your pipeline's Artifact store's bucket name.
+  #+begin_src 
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*",
+        "iam:PassRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:Put*",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::codepipeline-source-artifact/*"
+      ]
+    }
+  ]
+}
+#+end_src
++ Choose Review policy.
++ For Name, enter a name for the policy.
++ Choose Create policy.
+*** Create a second IAM policy that allows AWS KMS API actions
+
+- In dev-account, open the IAM console.
+- In the navigation pane, choose Policies. Then, choose Create policy.
+- Choose the JSON tab. Then, enter the following policy into the JSON editor:
+  Important: Replace arn:aws:kms:REGION:ACCOUNT_A_NO:key/key-id with your AWS KMS key's ARN that you copied earlier.
+  #+begin_src 
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt"
+    ],
+    "Resource": [
+      "arn:aws:kms:REGION:ACCOUNT_A_NO:key/key-id"
+    ]
+  }]
+}
+#+end_src
+- Choose Review policy.
+- For Name, enter a name for the policy.
+- Choose Create policy.
+
+*** Create the cross-account IAM role using the policies that you created
+
+- In dev-account, open the IAM console.
+- In the navigation pane, choose Roles.
+- Choose Create role.
+- Choose Another AWS account.
+- For Account ID, enter devops-account's account ID.
+- Choose Next: Permissions. Then, complete the steps to create the IAM role.
+- Attach the cross-account role policy and KMS key policy to the role that you created. For instructions, see Adding and removing IAM identity permissions.
+  
+*** ( *devops-account* ) Add the AssumeRole permission to devops-account's CodePipeline service role to allow it to assume the cross-account role in dev-account
+- In devops-account, open the IAM console.
+- In the navigation pane, choose Roles.
+- Choose the IAM service role that you're using for CodePipeline.
+- Choose Add inline policy.
+- Choose the JSON tab. Then, enter the following policy into the JSON editor:
+  Important: Replace ACCOUNT_B_NO with dev-account's account number.
+  #+begin_src 
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "sts:AssumeRole",
+    "Resource": [
+      "arn:aws:iam::ACCOUNT_B_NO:role/*"
+    ]
+  }
+}
+#+end_src
+- Choose Review policy, and then create the policy.
+*** ( *dev-account* ) Create a service role for the CloudFormation stack that includes the required permissions for the services deployed by the stack
+Note: This service role is configured directly on the CloudFormation stack in dev-account. The role must include the permissions for the services deployed by the stack.
+
+- In dev-account, open the IAM console.
+
+- In the navigation pane, choose Roles.
+
+- Create a role for AWS CloudFormation to use when launching services on your behalf.
+
+- Apply permissions to your role based on your use case.
+
+Important: Make sure that your trust policy is for AWS CloudFormation, and that your role has permissions to access services deployed by the stack.
+[ *devops-account* ] Update the CodePipeline configuration to include the resources associated with dev-account
+
+Note: If you receive errors when running AWS Command Line Interface (AWS CLI) commands, make sure that you’re using the most recent AWS CLI version.
+
+You can't use the CodePipeline console to create or edit a pipeline that uses resources associated with another account. However, you can use the console to create the general structure of the pipeline. Then, you can use the AWS CLI to edit the pipeline and add the resources associated with the other account. Or, you can update a current pipeline with the resources for the new pipeline. For more information, see Create a pipeline in CodePipeline.
+
+- Get the pipeline JSON structure by running the following AWS CLI command:
+   #+begin_src
+aws codepipeline list-pipelines
+aws codepipeline get-pipeline --name poc-dk-nginx-pipeline >pipeline.json
+#+end_src
+- In your local pipeline.json file, confirm that the encryptionKey ID under artifactStore contains the ID with the AWS KMS key's ARN.
+   Note: For more information on pipeline structure, see create-pipeline in the AWS CLI Command Reference.
+- In the pipeline.json file, update the AWS CloudFormation action configuration.
+   Note: The RoleArn inside the action configuration JSON structure for your pipeline is the role for the CloudFormation stack (CFN_STACK_ROLE). The roleArn outside the action configuration JSON structure is the cross-account role that the pipeline assumes to operate a CloudFormation stack (CROSS_ACCOUNT_ROLE).
+- Verify that the role is updated for both of the following:
+   The RoleArn inside the action configuration JSON structure for your pipeline.
+   The roleArn outside the action configuration JSON structure for your pipeline.
+   Note: In the following code example, RoleArn is the role passed to AWS CloudFormation to launch the stack. CodePipeline uses roleArn to operate an AWS CloudFormation stack.
+   #+begin_src 
+{
+  "name": "Prod_Deploy",
+  "actions": [{
+    "inputArtifacts": [{
+      "name": "MyApp"
+    }],
+    "name": "test-cfn-x",
+    "actionTypeId": {
+      "category": "Deploy",
+      "owner": "AWS",
+      "version": "1",
+      "provider": "CloudFormation"
+    },
+    "outputArtifacts": [],
+    "configuration": {
+      "ActionMode": "CHANGE_SET_REPLACE",
+      "ChangeSetName": "test",
+      "RoleArn": "ARN_FOR_CFN_STACK_ROLE",
+      "Capabilities": "CAPABILITY_IAM",
+      "StackName": "test-cfn-sam",
+      "TemplatePath": "MyApp::template.yaml"
+    },
+    "roleArn": "ARN_FOR_CROSS_ACCOUNT_ROLE",
+    "runOrder": 1
+  }]
+}
+   #+end_src
+- Remove the metadata configuration from the pipeline.json file. For example:
+   #+begin_src 
+"metadata": {
+  "pipelineArn": "arn:aws:codepipeline:REGION:ACC:my_test",
+  "updated": 1551216777.183,
+  "created": 1551207202.964
+}
+   #+end_src
+   Important: To align with proper JSON formatting, remove the comma before the metadata section.
+- (Optional) To create a pipeline and update the JSON structure, run the following command to update the pipeline with the new configuration file:
+   #+begin_src 
+aws codepipeline update-pipeline --cli-input-json file://pipeline.json
+#+end_src   
+- (Optional) To use a current pipeline and update the JSON structure, run the following command to create a new pipeline:
+
+
+** AD
+Account A: 836475480064  TSCTESTING
+Account B:  749613781581 AWSReservedSSO_Admin_7db
+
+- [Account A] Create Role  *cross-account-role-A*
+  - Role Name : *cross-account-role-A*
+      - Trust Relationship
+        #+begin_src 
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "codepipeline.amazonaws.com" 
+        },
+        "Action": "sts:AssumeRole",
+        }
+    ]
+}
+      #+end_src
+    - Permission
+      - AmazonS3FullAccess
+      - AWSCodeCommitFullAccess
+  - get the *Role ARN*: arn:as:iam::836475480064:role/cross-account-role-A     
+- [Account A] Create CMK's (KMS) : 
+  - symmetic
+  - KMS
+  - *alias: crosskey*
+  - *key administrative permission*
+  - [AWS Identitiy and IAM user or group who want to give permission] [/] [User]
+  - *key usage permissions*
+    - choose : *cross-account* that we create above 
+
+  - Attach the above role *cross-account-role-A*
+  - Other *AWS accounts*
+    - Give Account ANR : arn:aws:iam:: *749613781581* : root
+  - get cmk-kms ARN : *arn:aws:kms:us-east-2:836475480064:key/9cfa5357-8011-47f9-9565-28982e63100*    
+- [Account A] Create S3 buckets:
+  - Name: *source-artifact-india* ,
+  - access:  block all public acess
+  - add policy to s3 bucket
+    #+begin_src 
+{
+  "Id": "Policy1553183091390",
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Sid": "",
+      "Action": [
+        "s3:Get*",
+        "s3:Put*"
+      ],
+       "Effect": "Allow",
+      "Resource": "arn:aws:s3:::codepipeline-source-artifact/*",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::ACCOUNT_B_NO:root"
+        ]
+      }
+    },
+    {
+      "Sid": "",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::codepipeline-source-artifact",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::ACCOUNT_B_NO:root"
+        ]
+      }
+    }
+  ]
+}
+#+end_src
+- [Account B] Create Policy :  *cross-account-s3-access* : Allow access to S3 (read and write) to codepipeline
+  - Name: cross-account-s3-access
+  - json file repalce *source-artifact-inida* with your [Account A] S3 Bucket
+    #+begin_src 
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*",
+        "iam:PassRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:Put*",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::codepipeline-source-artifact/*"
+      ]
+    }
+  ]
+}
+#+end_src
+- [Account B] Create Policy :  *cross-account-kms-key-access* Allow KMS to run from other [Account A]
+  - Name : *cross-account-kms-key-access*
+  - json file *replace* *Resource kms-key with [Account A] ARN*
+      #+begin_src 
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt"
+    ],
+    "Resource": [
+      "arn:aws:kms:REGION:ACCOUNT_A_NO:key/key-id"
+    ]
+  }]
+}
+#+end_src  
+- [Account B] Create Role : *cross-account-role-B* Allow to access S3[from Account A] and Key[from Account B] 
+  - Trusted Entity : *Another  AWS account*  
+    - Accound ID: 87647580064
+  - Seletec Policy
+    - cross-account-s3-access  
+    - cross-account-kms-key-access create above
+- [Account B] Create Role: *cross-account-role-CF-role* Allow to run Cloudformation
+  - Attach Policy : AdministratorsAccess
+* Create Pipeline 
+- [Account A] Create a pipeline with role: *cross-account-role-A*
+  - Name: cross-account-pipeline
+  - Existing Service: *cross-account-role-A*  
+  - Artifact store:
+    - Custome:  *source-artifiacts-india*
+  - Source stage : CodeCommit
+    - Repo :     
+   
+          
+  
+  
+
+    
+  
+
+  
+
+
+* bash scripts
+find . -name *.c | xargs grep "writeText"
+
+aws cloudformation deploy --template-file /path_to_template/template.json --stack-name my-new-stack --parameter-overrides Key1=Value1 Key2=Value2 --tags Key1=Value1 Key2=Value2
+
+* CI/CD pipeline : (Cloudformation) s3 creation using aws-commit + aws-deploy (Cloudl Formation) 
+https://www.youtube.com/watch?v=oXBknlO-9rg&list=PLLh98oBzdb7bAuR9Nv-iGzTAxo0e1CRq3&index=4
+
+
+
+* sdfg
+
+
+
+Account A :                     dankarthik2505@gmail.condition
+Account-ID :                    918175365727
+codecommit ARN :                arn:aws:codecommit:us-east-1:918175365727:test-cf
+- repo :                        test-cf
+- branch :                      master
+KMS CMK key ARN                 arn:aws:kms:eu-west-1:918175365727:key/7bc79cce-3b1a-4a61-862e-747990aa1173
+S3 ARN                          arn:aws:s3:::artifact-source
+cross-account-role-A ARN        arn:aws:iam::918175365727:role/cross-account-role-A
+
+Account B :                    @deepalgorithms.in
+Account-ID :                   548593215839
+cross-account-role-B  ARN      arn:aws:iam::548593215839:role/cross-account-role-B
+cross-CF-role  ARN             arn:aws:iam::548593215839:role/CloudformationExecutionRole
+
+Stack Name : 
+
+
+
+* get source-code in another account
+pipeline structure :
+https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html
+permission json
+
+https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html
+
+https://docs.aws.amazon.com/codecommit/latest/userguide/security-iam-awsmanpol.html
+AWS managed policy: AWSCodeCommitFullAccess
+
+#+begin_src json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole",
+                "cloudformation:*",
+                "codecommit:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::artifact-source/*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:Put*"
+            ],
+            "Resource": "arn:aws:s3:::artifact-source/*"
+        }
+    ]
+}
+#+end_src
+
+
+
+
+* Pass role
+
+Cross-Account-RoleA POLIICES
+
+AWSCodeCommitFullAccess		
+AmazonS3FullAccess
+AWSCodeDeployFullAccess
+AmazonECSTaskExecutionRolePolicy
+AWSCodeBuildAdminAccess
+CrossAccount-Role-A-STS-Policy
+
+Error calling startBuild: User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657207152885 is not authorized to perform: codebuild:StartBuild on resource: arn:aws:codebuild:us-east-1:548593215839:project/poc-548593215839-BuildProject because no identity-based policy allows the codebuild:StartBuild action (Service: AWSCodeBuild; Status Code: 400; Error Code: AccessDeniedException; Request ID: 6de88b05-0e0d-48e8-bfd6-8ccf621d65a6; Proxy: null)
+
+# [SOLVED]: BY adding AWSCodeBuildAdminAccess policy in Cross-Account-Role-A
+
+
+User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657207827303 is not authorized to perform: codedeploy:GetApplication on resource: arn:aws:codedeploy:us-east-1:548593215839:application:AppECS-poc-Cluster-poc-ECS-Service because no identity-based policy allows the codedeploy:GetApplication action
+
+User: arn:aws:sts::548593215839:assumed-role/CrossAccount-role-A-ECS/1657208881769 is not authorized to perform: ecs:RegisterTaskDefinition on resource: * because no identity-based policy allows the ecs:RegisterTaskDefinition action
+
+# [FAILED]: BY adding AWSCodeDeployFullAccess policy in Cross-Account-Role-A
+
+# In ECS-Cluster Defination to run task-defination we use
+#   arn:aws:iam::548593215839:role/poc-ExecutionRole
+
+Policy:
+
+AmazonECSTaskExecutionRolePolicy
+
+Trust Relationship:
+
+#+begin_src 
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "ecs-tasks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+#+end_src
+
+** TODO Need policy allow ecs:RegisterTaskDefinition to Run using CrossAccount-role-A-ECS
+
+
+* AWS CodeDeploy Blue / Green Deployment to Amazon ECS
+
+https://www.youtube.com/watch?v=ekh2uW1VU6U
+Create a CodeDeploy Task for ECS Bluegreen usign appspec.yaml file in s3 bucket
+
+* Event Bridge for pipeline to codedeploy
+https://www.youtube.com/watch?v=joxRfHu26zc
+
+#+begin_src json
+{
+  "source": ["aws.codebuild"],
+  "detail-type": ["CodeBuild Build State Change"],
+ "Resource": ["arn:aws:codebuild:us-east-1:548593215839:project/poc-548593215839-BuildProject"],
+  "detail": {
+    "build-status": ["SUCCEEDED"]
+  }
+}
+#+end_src
+
+
+
+Service role ARN
+arn:aws:iam::548593215839:role/BlueGreenService-CodeDeployRoleForECS
+
+#+begin_src 
+aws apprunner start-deployment --cli-input-json file://input.json
+#+end_src
+
+#+begin_src 
+{
+    "ServiceArn": "arn:aws:apprunner:us-east-1:123456789012:service/python-app/8fe1e10304f84fd2b0df550fe98a71fa"
+}
+#+end_src
+
+https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment.html
+#+begin_src 
+aws deploy create-deployment \
+    --application-name WordPress_App \
+    --deployment-config-name CodeDeployDefault.OneAtATime \
+    --deployment-group-name WordPress_DG \
+    --description "My demo deployment" \
+    --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip
+#+end_src
+
+
+#+begin_src json
+{
+    "applicationName": "AppECS-poc-Cluster-poc-ECS-Service",
+    "deploymentGroupName": "DgpECS-poc-Cluster-poc-ECS-Service",
+    "revision": {
+        "revisionType": "S3",
+        "s3Location": {
+            "bucket": "cross-account-role-a-mybucket",
+            "key": "appspec.yaml",
+            "bundleType": "YAML"
+        }
+    }
+}
+#+end_src
+
+
+#+begin_src 
+aws deploy create-deployment \
+    --cli-input-json file://create-deployment.json \
+    --region us-east-1
+
+aws deploy create-deployment --cli-input-json file://create-deployment.json --region us-east-1
+#+end_src
+
+#+begin_src 
+import boto3
+
+client = boto3.client('codedeploy')
+
+response = client.continue_deployment(
+    deploymentId='string',
+    deploymentWaitType='READY_WAIT'|'TERMINATION_WAIT'
+)
+
+#+end_src

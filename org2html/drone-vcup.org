@@ -1,0 +1,39 @@
+#+TITLE:     What is a vCPU and How Do You Calculate vCPU to CPU?
+#+Author:    DeepAlgorithms
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil p:t
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/org2html/org-theme-collection/comfy_inline.css"/>
+* What is vCPU ?
+- Also know as virtual centralized processing unit.
+- As for a definition, a vCPU represents a portion or share of the underlying, physical CPU that is assigned to a particular virtual machine (VM).
+** Physical Core:
+A physical core, also referred to as processing units, within the CPU. A single physical core may correspond to one or more logical cores.
+** Logical Core:
+A logical core makes it possible for a single physical core to perform two or more actions simultaneously.
+* How Does a vCPU Work?
+- Virtual servers and their resource allocation are controlled by what is known as a hypervisor.
+- The hypervisor uses a portion of the physical CPU computing resources and allocates it to a vCPU which is assigned to a specific VM.  
+- Some IT experts consider the concept behind vCPUs as a share of the time spent on the processor’s core.
+- System administrators can use hypervisors to setup different resource allocations where specific VMs are configured with specific vCPU capabilities.
+* How Do You Calculate vCPU?
+* How many vCPU are in a CPU?
+* What are cores?*
+- We’ll go into detail on the mathematics and you’ll have a clear idea of how to calculate the number of vCPUs that you require for your cloud servers.
+  
+A lot of this will depend on your specific requirements and the manufacturer.
+- *The Math Behind Calculating vCPU*
+  In the past, there was a rule of thumb that there were eight vCPUs per core. Today, vCPU count is largely determined by the manufacturer. It’s calculated by taking the number of processing threads that a chipset offers per core and multiplying the number of occupied sockets. Here’s how it looks:
+  =(Threads x Cores) x Physical CPU = Number vCPU=
+
+
+** Example :
+- *First, we need to select a virtual server and CPU.*
+- For this example, we’ll select Intel Xeon E-2288G as the underlying CPU.
+  Key stats for the Intel Xeon E-2288G include 8 cores / 16 threads with a 3.7GHz base clock and 5.0GHz turbo boost.
+  There is 16MB of onboard cache.
+  =(16 Threads x 8 Cores) x 1 CPU = 128 vCPU=
+[[https://www.datacenters.com/news/what-is-a-vcpu-and-how-do-you-calculate-vcpu-to-cpu][Source: link]]
+
+* AWS vCPU Cloud Cost
+  #+STARTUP: inlineimage
+[[file:./2022-07-20-T17-14-25.png]]

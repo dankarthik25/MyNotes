@@ -1,0 +1,3654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-12 Sun 14:57 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Docker</title>
+<meta name="author" content="D Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/home/karthik/mynotes/org2html/org-theme-collection/jquery-stickytableheaders.js"></script>
+<script type="text/javascript"  src="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Docker</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6b29552">Intro</a>
+<ul>
+<li><a href="#orgbcad9bf">Before Docker</a></li>
+<li><a href="#org43d12a0">what is docker :</a></li>
+<li><a href="#org481b0bb">What are Container :</a>
+<ul>
+<li><a href="#orgb8ca890"><b>Advantages Container</b>:</a></li>
+<li><a href="#org366e535"><b>Disadvanges of Containers</b>:</a></li>
+</ul>
+</li>
+<li><a href="#org2d625d6">Container Vs VM</a></li>
+</ul>
+</li>
+<li><a href="#orgbdb6c9d">Install Docker</a>
+<ul>
+<li><a href="#orgf2413aa">Linux Installation</a></li>
+<li><a href="#orgd48754b">Installation in centos</a></li>
+<li><a href="#org611935c">In windows docker run  a tiny Hyper-V</a></li>
+</ul>
+</li>
+<li><a href="#org0ced890">docker image</a>
+<ul>
+<li><a href="#org71805fb">Intro</a>
+<ul>
+<li><a href="#orgab0cf9b">What is an Image</a></li>
+<li><a href="#org928d11b">Image and Their Layers Discover and Image</a></li>
+</ul>
+</li>
+<li><a href="#orgf2240f6">Docker Image cmd's</a></li>
+<li><a href="#orge6146c0">Create Custom Images or Build Docker file</a></li>
+<li><a href="#orgb262675">Push image to dockerhub</a></li>
+<li><a href="#org51eb1c7">image Digests</a></li>
+<li><a href="#org26e7d49">Assignment Build Your Docker Own Image</a></li>
+</ul>
+</li>
+<li><a href="#org78f176c"><span class="todo TODO">TODO</span> Docker File</a>
+<ul>
+<li><a href="#orgdf126a4">Instruction in Docker file</a></li>
+<li><a href="#orgd83a164">Example of Docker file</a>
+<ul>
+<li><a href="#orgb710881">Instruction in Dockerfile example</a></li>
+<li><a href="#orgce4de41">Example Dockerfile of installing Nginx in node:4.4</a></li>
+<li><a href="#org3f4a2f2">Example Scratch Docker File</a></li>
+<li><a href="#orgf8bfc16">Example Dockerfile install jenkins inside centos:7 using</a></li>
+<li><a href="#org12ebe34">Example Docker File</a></li>
+<li><a href="#orge6df536">Example Dockerfile install Jenkins using war file in centos:7</a></li>
+<li><a href="#org5fd310e"><span class="todo TODO">TODO</span> Example with healthcheck</a></li>
+<li><a href="#orgc1ceab4"><span class="todo TODO">TODO</span> Docker File [Cmd And Entripoint]</a></li>
+<li><a href="#orgffbf5b8">Combination of Cmd and Entypoint</a></li>
+</ul>
+</li>
+<li><a href="#org5493ee3">Build  Docker file</a></li>
+</ul>
+</li>
+<li><a href="#orgc4776e6">docker container</a>
+<ul>
+<li><a href="#org7614ee7">container run, exec, ps/ls,stop, rm create and run mysql, apache (httpd) nginx</a></li>
+<li><a href="#org1ca8722"><span class="todo TODO">TODO</span> conatainer info : ps/ls,top, stats, inspect, logs</a></li>
+<li><a href="#org2bc6bd6">Port Forwording</a></li>
+</ul>
+</li>
+<li><a href="#orgdb80bf9">docker volume &amp; bind mounts</a>
+<ul>
+<li><a href="#orgb55cde9">Why Volume? Container Lifetime, Persistent Data</a></li>
+<li><a href="#org0804d44">Persistent Data : Data Volume :</a>
+<ul>
+<li><a href="#org5a77db7">Removing container will not remove volume</a></li>
+<li><a href="#orgf421b27">Name Volume and using same volume in other container</a></li>
+</ul>
+</li>
+<li><a href="#orgdb16d97">Persistent Data : Bind Mounting</a></li>
+<li><a href="#org9a53967">Assignment: Database Upgrade using Docker Volume</a></li>
+<li><a href="#orga80aa78">Assignment: Database Upgrade using Docker Bind mount</a></li>
+<li><a href="#orgbdae299">Bind mount  Volume type</a></li>
+<li><a href="#org85275e3">Update the database to new version</a></li>
+<li><a href="#orgbbaaaa8">Docker Volume cmd's</a></li>
+</ul>
+</li>
+<li><a href="#orgca77fac">Docker Link</a></li>
+<li><a href="#org2238da3">Docker Compose :</a>
+<ul>
+<li><a href="#orgb1ebe6a">Docker Compose and Docker Compose.yml file</a></li>
+<li><a href="#org2ebbdbc">Syntax</a></li>
+<li><a href="#org277e8e2">Example</a>
+<ul>
+<li><a href="#org84194fb">wordpress and mysql</a></li>
+<li><a href="#org4b6e892">nginx and httpd(apache) docker-compose file</a></li>
+<li><a href="#org911c137">jekyll with bindmount current dir docker-compose file</a></li>
+<li><a href="#org9b742f9">Assignment Create compose-file for drupal and postgress</a></li>
+<li><a href="#orge4fb6d2">Assignment Create custome drupal Dockerfile and use it in  Compose-file</a></li>
+</ul>
+</li>
+<li><a href="#org73d3da8">docker compose cmd</a></li>
+</ul>
+</li>
+<li><a href="#org494ec67"><span class="todo TODO">TODO</span> Docker Network</a>
+<ul>
+<li><a href="#org0ea00ea">Intro</a></li>
+<li><a href="#orgc3a79ac">Docker Network cmd's</a></li>
+<li><a href="#org766186f">Example I</a></li>
+<li><a href="#orgefe0812">Example-II</a></li>
+<li><a href="#org13c0c03">Example-III</a></li>
+<li><a href="#org46ad87e">Example with Multiple Node Connecting overlay Network</a></li>
+<li><a href="#org7adf172">Example -IV</a></li>
+<li><a href="#org60645ac">Example - V</a></li>
+</ul>
+</li>
+<li><a href="#org51e6e3c">Docker Swarm</a>
+<ul>
+<li><a href="#orgac9ae80">Intro</a></li>
+<li><a href="#orgae759a8">docker swarm</a></li>
+<li><a href="#orgb6df019">Docker node</a></li>
+<li><a href="#org298ed35">Docker service</a></li>
+<li><a href="#orgb1bdc58"><span class="todo TODO">TODO</span> Docker  Service Update</a></li>
+</ul>
+</li>
+<li><a href="#orgaa1718c">Docker DNS RoundRobin</a>
+<ul>
+<li><a href="#org2df399c">Conclusion</a></li>
+<li><a href="#orgf3c5c71"><span class="todo TODO">TODO</span> Assignment :DNS RoundRobin Test</a></li>
+</ul>
+</li>
+<li><a href="#org851a8b1">Docker Stack</a>
+<ul>
+<li><a href="#org14e737b">Intro</a></li>
+<li><a href="#org2f80ca3">Difference btw compose and stack file</a></li>
+<li><a href="#org1d31298">Docker stack componets overview</a></li>
+<li><a href="#orgca4af75">Examples</a>
+<ul>
+<li><a href="#org827b673">wordpress and mysql</a></li>
+<li><a href="#org1dde7d2">Jenkins</a></li>
+<li><a href="#orgaa7c856">jenkins with nginx and stack master and slave</a></li>
+<li><a href="#orgf10bd82">update<sub>config</sub></a></li>
+</ul>
+</li>
+<li><a href="#org6c106ee">docker stack cmd</a></li>
+</ul>
+</li>
+<li><a href="#org8a9fad7">Docker Secrets</a>
+<ul>
+<li><a href="#orge44100f">Intro</a></li>
+<li><a href="#orge45733e">secret cmd</a></li>
+<li><a href="#org21d029d">Example  Stack with Secret</a>
+<ul>
+<li><a href="#org768ec45">stack compose file for postgress db  with secret  passed though file</a></li>
+<li><a href="#orge34c235">stack compose file for drupal and postgress db with secret passed externally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgbae59fb">Full App Lifecycle with compose file</a></li>
+<li><a href="#org400283b">Docker Trouble Shoot</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6b29552" class="outline-2">
+<h2 id="org6b29552">Intro</h2>
+<div class="outline-text-2" id="text-org6b29552">
+</div>
+<div id="outline-container-orgbcad9bf" class="outline-3">
+<h3 id="orgbcad9bf">Before Docker</h3>
+<div class="outline-text-3" id="text-orgbcad9bf">
+<p>
+Onframe servers to PC: PC(mac,) in 90's <br />
+Baremetal to Virtual : Virtuallization VM-Ware, Vagrant ,VirtualBox&#x2026;etc <br />
+Datacenters to Cloud : 2010 <br />
+Host to Containers Docker (Serveless) : 2013 <br />
+Containers to Kuberentes: 2015 Google  <br />
+WASM and WASI 2022  <br />
+</p>
+<ul class="org-ul">
+<li>On 2019 Docker founder Solomon Hykes said</li>
+<li>"If WASM+WASI existed in 2008, we wouldn't have needed to created Docker," Hykes wrote in a tweet in March. "That's how important it is. Webassembly on the server is the future of computing."</li>
+</ul>
+<p>
+<a href="https://www.youtube.com/watch?v=OGcm3rHg630">https://www.youtube.com/watch?v=OGcm3rHg630</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org43d12a0" class="outline-3">
+<h3 id="org43d12a0">what is docker :</h3>
+<div class="outline-text-3" id="text-org43d12a0">
+<ul class="org-ul">
+<li>tool designed to make easy (create and deploy) app using container</li>
+<li>light weight alternative to VM (no Hypervisor and Guest OS required)</li>
+<li>No pre-allocation of ram</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org481b0bb" class="outline-3">
+<h3 id="org481b0bb">What are Container :</h3>
+<div class="outline-text-3" id="text-org481b0bb">
+<p>
+They aren't VM, they are <b>just process</b> (Limited what resource they can access) exit when stop which run on Host OS.They don't have kernel 
+Virtual machine rarelly use all resource  (cpus,ram) which are fixed and cann't be changed.
+Container are isolation in sofware level(not depenendt on OS).Where as VM are isolation in hardware level(isolated from host operating system)
+</p>
+</div>
+<div id="outline-container-orgb8ca890" class="outline-4">
+<h4 id="orgb8ca890"><b>Advantages Container</b>:</h4>
+<div class="outline-text-4" id="text-orgb8ca890">
+<p>
+The host OS kernel run various apps separatly in containers where each container runs isolated tasks.
+A app <b>cannot harm the host</b> OS or  <b>conflict with other apps</b> running in separate containers.
+</p>
+</div>
+</div>
+<div id="outline-container-org366e535" class="outline-4">
+<h4 id="org366e535"><b>Disadvanges of Containers</b>:</h4>
+<div class="outline-text-4" id="text-org366e535">
+<p>
+Containers still <b>do not offer same security</b> and <b>stability</b> that VMs can. Since they share the host’s kernel, they cannot be as isolated as a virtual machine. Consequently, containers are process-level isolated, and one container can affect others by compromising the stability of the kernel.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2d625d6" class="outline-3">
+<h3 id="org2d625d6">Container Vs VM</h3>
+<div class="outline-text-3" id="text-org2d625d6">
+<p>
+<img src="./Docker-images/containers-vs-virtual-machines.jpg" alt="containers-vs-virtual-machines.jpg" />
+Container aren't mini-vm's
+They are just processes
+Limited to what resources they can access
+exit when process stop
+They does not have kernal but run in host OS kernal
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker run -itd --name mypsql_old -v my_psql:/var/lib/postgressql/data postgres:9.6.1 <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Volume type</span>
+docker top mypsql_old
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">UID       PID    PPID   C  STIME   TTY    TIME       CMD</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80258  80235  1  02:46   pts/0  00:00:00   postgres</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80355  80258  0  02:46   ?      00:00:00   postgres: checkpointer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80356  80258  0  02:46   ?      00:00:00   postgres: writer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80357  80258  0  02:46   ?      00:00:00   postgres: wal writer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80358  80258  0  02:46   ?      00:00:00   postgres: autovacuum launcher process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80359  80258  0  02:46   ?      00:00:00   postgres: stats collector pro</span>
+ps aux | grep <span style="color: #deb887;">'postgres'</span> 
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80258  0.2  0.2 234724 20456 pts/0    Ss+  02:46   0:00 postgres</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80355  0.0  0.0 234724  4144 ?        Ss   02:46   0:00 postgres: checkpointer process   </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80356  0.0  0.0 234724  4144 ?        Ss   02:46   0:00 postgres: writer process   </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80357  0.0  0.0 234724  4144 ?        Ss   02:46   0:00 postgres: wal writer process   </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80358  0.0  0.0 235148  6656 ?        Ss   02:46   0:00 postgres: autovacuum launcher process   </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash   80359  0.0  0.0  89724  4392 ?        Ss   02:46   0:00 postgres: stats collector process   </span>
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdb6c9d" class="outline-2">
+<h2 id="orgbdb6c9d">Install Docker</h2>
+<div class="outline-text-2" id="text-orgbdb6c9d">
+<p>
+install using digital-ocean or docker 
+Install docker
+</p>
+</div>
+<div id="outline-container-orgf2413aa" class="outline-3">
+<h3 id="orgf2413aa">Linux Installation</h3>
+<div class="outline-text-3" id="text-orgf2413aa">
+<p>
+Older versions of Docker were called docker, docker.io, or docker-engine. If these are installed, uninstall them:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Uninstall old version</span>
+sudo apt-get remove docker docker-engine docker.io containerd run
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Dependency</span>
+sudo apt-get update
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Add Doker's Official GPG Key:</span>
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Add Docker repo to Linux mint</span>
+sudo add-apt-repository <span style="color: #deb887;">"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(</span><span style="color: #ffd700;">. /etc/os-release; echo "$UBUNTU_CODENAME"</span><span style="color: #deb887;">) stable"</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Install Docker Engine and Docker Compose</span>
+sudo apt-get update
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Install Docker CE and Docker Compose</span>
+sudo apt-get -y  install docker-ce docker-compose
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Run docker command ans non-privillgeage</span>
+sudo usermod -aG docker $<span style="color: #ebcb8b;">USER</span>
+</pre>
+</div>
+<p>
+When you add user to user gorup : 
+For security some linux like redhat will not work docker or we need use sudo or add 
+</p>
+
+<p>
+cmd
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker container run <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">or</span>
+docker run <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">older version</span>
+
+docker version
+docker info 
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker sytanx </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">(old) : docker &lt;command&gt;  (options)</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">(new) : docker &lt;command&gt; &lt;sub-command&gt; (options)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd48754b" class="outline-3">
+<h3 id="orgd48754b">Installation in centos</h3>
+<div class="outline-text-3" id="text-orgd48754b">
+<div class="org-src-container">
+<pre class="src src-sh">yum install docker -y
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Download image from docker hub</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">satish: images thetheis</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">create a account dockerhub</span>
+
+service docker status
+service docker start
+service docker status
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">list of images in your docker </span>
+docker images
+docker search centos
+docker pull centos
+
+docker run -it --name sathish-centos centos <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">creatre and run in background</span>
+
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to show the running container</span>
+<span style="color: #4f5b67;">#</span>
+docker ps <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">or docker container ls</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">d2bf3ff05b9b        nginx               "nginx -g 'daemon of&#8230;"   19 seconds ago       Up 17 seconds       80/tcp                 my_nginX</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker ps -a # to show the running and stoped containers</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Enter inside container</span>
+docker exec -it d2bf3ff05b9b /bin/bash   <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Enter inside the container</span>
+
+docker stop d2bf3ff05b9b <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">stop container</span>
+docker rm d2bf3ff05b9b <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to remove the container</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org611935c" class="outline-3">
+<h3 id="org611935c">In windows docker run  a tiny Hyper-V</h3>
+</div>
+</div>
+
+<div id="outline-container-org0ced890" class="outline-2">
+<h2 id="org0ced890">docker image</h2>
+<div class="outline-text-2" id="text-org0ced890">
+</div>
+<div id="outline-container-org71805fb" class="outline-3">
+<h3 id="org71805fb">Intro</h3>
+<div class="outline-text-3" id="text-org71805fb">
+</div>
+<div id="outline-container-orgab0cf9b" class="outline-4">
+<h4 id="orgab0cf9b">What is an Image</h4>
+<div class="outline-text-4" id="text-orgab0cf9b">
+<ul class="org-ul">
+<li>Not a complete OS, No kernel , kernel-module(kernel drivers)</li>
+<li>Img can be Small as one file (your app binary) like a golang static binary
+<ul class="org-ul">
+<li>Img can be bigger like ubuntu distro with apt and Apache,PHP and more installed</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org928d11b" class="outline-4">
+<h4 id="org928d11b">Image and Their Layers Discover and Image</h4>
+<div class="outline-text-4" id="text-org928d11b">
+<p>
+Conclusion : 
+Images are made up of : file system and meta data
+Each layer is uniquelu identified an only stored once on a host
+This saves storage space on host and transfer time on push/pull
+Container is just a single read/write layer on top of image
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf2240f6" class="outline-3">
+<h3 id="orgf2240f6">Docker Image cmd's</h3>
+<div class="outline-text-3" id="text-orgf2240f6">
+<pre class="example">
+docker image --help
+#Usage:  docker image COMMAND
+#Manage images
+#Commands:
+#  build       Build an image from a Dockerfile
+#  history     Show the history of an image
+#  import      Import the contents from a tarball to create a filesystem image
+#  inspect     Display detailed information on one or more images
+#  load        Load an image from a tar archive or STDIN
+#  ls          List images
+#  prune       Remove unused images
+#  pull        Pull an image or a repository from a registry
+#  push        Push an image or a repository to a registry
+#  rm          Remove one or more images
+#  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+#  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+docker image ls # docker images
+# REPOSITORY  TAG     IMAGE ID       CREATED      SIZE
+# mysql       latest  8e8c6f8dc9df   4 days ago   546MB
+# tomcat      9       29ba6a893a43   4 days ago   647MB
+# alpine      latest  a187dde48cd2   4 weeks ago  5.6MB
+# nginx       latest  6678c7c2e56c   6 weeks ago  127MB
+# httpd       latest  c5a012f9cf45   7 weeks ago  165MB
+# centos      latest  470671670cac   3 months ago 237MB
+docker search centos    # check if image is present in local repo (host os)
+docker pull centos      # download image from dockerhub to local repo
+docker rmi centos:7     # remove centos:7 from local repo
+
+docker image tag --help
+docker image tag nginx dankarthik25/nginx2:1.0.1 #docker images
+#REPOSITORY            TAG       IMAGE ID       CREATED       SIZE
+#nginx                 latest    12766a6745ee   2 weeks ago   142MB
+#dankarthik25/nginx2   1.0.1     12766a6745ee   2 weeks ago   142MB
+
+
+docker rmi centos:7 # delete image
+docker image prune
+
+docker history nginx:latest
+docker history nginx
+#IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+#12766a6745ee   2 weeks ago   /bin/sh -c #(nop)  CMD ["nginx" "-g" "daemon…   0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  STOPSIGNAL SIGQUIT           0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  EXPOSE 80                    0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  ENTRYPOINT ["/docker-entr…   0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop) COPY file:09a214a3e07c919a…   4.61kB    
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop) COPY file:0fd5fca330dcd6a7…   1.04kB    
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop) COPY file:0b866ff3fc1ef5b0…   1.96kB    
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop) COPY file:65504f71f5855ca0…   1.2kB     
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c set -x     &amp;&amp; addgroup --system -…   61.1MB    
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  ENV PKG_RELEASE=1~bullseye   0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  ENV NJS_VERSION=0.7.2        0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  ENV NGINX_VERSION=1.21.6     0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  LABEL maintainer=NGINX Do…   0B        
+#3&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B        
+#&lt;missing&gt;      2 weeks ago   /bin/sh -c #(nop) ADD file:966d3669b40f5fbae…   80.4MB    
+
+docker image inspect nginx # json format meta data
+[
+    {
+	"Id": "sha256:12766a6745eea133de9fdcd03ff720fa971fdaf21113d4bc72b417c123b15619",
+	"RepoTags": [
+	    "dankarthik25/nginx2:1.0.1",
+	    "dankarthik25/nginx:1.0.1",
+	    "nginx:latest"
+	],
+	"RepoDigests": [
+	    "nginx@sha256:2275af0f20d71b293916f1958f8497f987b8d8fd8113df54635f2a5915002bf1"
+	],
+
+#docker commit &lt;container-id/name&gt; &lt;user&gt;/&lt;image&gt;:&lt;version&gt;  #create a img form running container       
+docker run -itd --name mynginx -p 80:80 nginx
+#CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                               NAMES
+#df189da34832   nginx     "/docker-entrypoint.…"   22 seconds ago   Up 21 seconds   0.0.0.0:80-&gt;80/tcp, :::80-&gt;80/tcp   mynginx
+
+docker exec -it mynginx sed -i 's/nginx/Karthik-nginx/g' /usr/share/nginx/html/index.html
+curl localhost:80 | grep 'nginx'
+&lt;title&gt;Welcome to Karthik-nginx!&lt;/title&gt;
+&lt;h1&gt;Welcome to Karthik-nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the Karthik-nginx web server is successfully installed and
+&lt;a href="http://Karthik-nginx.org/"&gt;Karthik-nginx.org&lt;/a&gt;.&lt;br/&gt;
+&lt;a href="http://Karthik-nginx.com/"&gt;Karthik-nginx.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thank you for using Karthik-nginx.&lt;/em&gt;&lt;/p&gt;
+
+docker commit mynginx  karthik-nginx
+docker images
+#REPOSITORY                   TAG       IMAGE ID       CREATED          SIZE
+#karthik-nginx                latest    6616cd59a58b   8 seconds ago    142MB
+#nginx                        latest    12766a6745ee   2 weeks ago      142MB
+
+
+docker images # to see if image is created or not 
+
+
+##########
+# push image to docker hub
+############
+#docker login --username=&lt;your_docker_user_name&gt; # login docker hub
+#docker commit &lt;container-id/name&gt; &lt;user&gt;/&lt;image&gt;  #create a img form running container       
+#docker push &lt;docker-user&gt;/&lt;image-name&gt; # push image to docker hub
+#docker push dankarthik/testing-node
+#docker logout
+
+</pre>
+</div>
+</div>
+<div id="outline-container-orge6146c0" class="outline-3">
+<h3 id="orge6146c0">Create Custom Images or Build Docker file</h3>
+<div class="outline-text-3" id="text-orge6146c0">
+<pre class="example">
+cat Dockerfile 
+#FROM nginx:latest
+#WORKDIR /usr/share/nginx/html
+#COPY index.html index.html
+# #No need to specity  EXPOSE or CMD because they're base-image
+
+#  ####################
+#  Create image from dockerfile
+#  ####################
+docker build -t mynginx:latest .
+
+#  ####################
+#  Build with file name 
+#  ####################
+
+#├── Dockerfile
+#├── Dockerfile2
+#└── index.html
+
+docker build -t hw-nginx:latest . -f Dockerfile2
+docker build -f /path/to/a/Dockerfile .
+docker build -t shykes/myapp .
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb262675" class="outline-3">
+<h3 id="orgb262675">Push image to dockerhub</h3>
+<div class="outline-text-3" id="text-orgb262675">
+<div class="org-src-container">
+<pre class="src src-sh">cat Dockerfile
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">FROM nginx:latest</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">WORKDIR /usr/share/nginx/html</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">COPY index.html index.html </span>
+
+docker image build -t ngin-with-html .
+docker container run -p80:80 --rm nginx-with-html
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker image tag &lt;c-name/id&gt;:&lt;version&gt; &lt;user-name&gt;/&lt;custom-img&gt;:&lt;version&gt;</span>
+docker image tag nginx-with-html:latest dankarthik25/nginx-with-html:latest
+docker commit nginx-with-html:latesh dankarthik/nginx-with-html:latest
+docker image ls
+docker push dankarthik25/nginx-with-html
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">-----------------------------------------------------------------</span>
+docker build -t testnode .
+docker container run --rm -p 80:3000 testnode 
+
+docker tag testnode bretfisher/testing-node
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker login --username=&lt;your_docker_user_name&gt; # login docker hub</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker commit &lt;container-id/name&gt; &lt;user&gt;/&lt;image&gt;  #create a img form running container       </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker push &lt;docker-user&gt;/&lt;image-name&gt; # push image to docker hub</span>
+docker push bretfisher/testing-node
+
+docker image rm bretfisher/testing-node
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org51eb1c7" class="outline-3">
+<h3 id="org51eb1c7">image Digests</h3>
+<div class="outline-text-3" id="text-org51eb1c7">
+<p>
+digest is to check the sha code whihc is used to check if the docker image which is deployed is the actuall one which we have created in jenkins by checking the digiests code 
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">docker image inspect --format <span style="color: #deb887;">"{{.RepoDigests}}"</span> registry.gitlab.com/digival/digiauth/digiauthservice:latest
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">[register.gitlab.com/digival/digiauth/digiauthservice@sha256:ec2bdeac324bf8f847b626c28b9866af9aada099f6682cb443c81ec77c6f481e]</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org26e7d49" class="outline-3">
+<h3 id="org26e7d49">Assignment Build Your Docker Own Image</h3>
+<div class="outline-text-3" id="text-org26e7d49">
+<ul class="org-ul">
+<li>Build Your Own App
+<ul class="org-ul">
+<li>Dockerfiles are part process workflow and part</li>
+<li>Take existing Node.js(Node 6) app and Dockerize</li>
+<li>make Dockerfile, Build it , Test, Push, Run</li>
+<li>Details in dockerfile-assignment-1/Dockerfile</li>
+<li>Expected result is web site at <a href="http:localhost">http:localhost</a></li>
+<li>Tag and push to your Docker Hub</li>
+<li>Remove your image from local cache, run it again from Hub</li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cd /home/jayradhe/Workspace/Devops/udemy-docker-mastery-master/dockerfile-assignment-1</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cat Dockefile</span>
+FROM node:6-alpine
+EXPOSE 3000
+RUN apk add --update tini <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to use alphine package mangaer : isntall tini: 'apk add --update tini'</span>
+RUN mkdir -p /usr/src/app <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Create dir /usr/src/app from</span>
+WORKDIR /usr/src/app  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Node uses "package manager" , need to copy package.json file</span>
+COPY package.json package.json
+RUN npm install &amp;&amp; npm cache clean <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">run 'npm install' to install dependencies of file</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to keep it clean and small, run 'npm cache clean'</span>
+COPY .. <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">need to copy in all files from current directory</span>
+CMD [ <span style="color: #deb887;">"tini"</span>,<span style="color: #deb887;">"--"</span>, <span style="color: #deb887;">"./bin/www"</span> ] <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Need to start container with command 'tini' --node ./bin/www</span>
+
+docker build -t testnode .
+docker container run --rm -p 80:3000 testnode
+docker tag testnode bretfisher/testing-node
+docker push bretfisher/testing-node
+docker image rm bretfisher/testing-node
+docker container run  --rm -p 80:3000 bretfisher/testing-node
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org78f176c" class="outline-2">
+<h2 id="org78f176c"><span class="todo TODO">TODO</span> Docker File</h2>
+<div class="outline-text-2" id="text-org78f176c">
+<p>
+Docker file is look like shell but it is not
+Docker file consist of Instruction 
+</p>
+</div>
+<div id="outline-container-orgdf126a4" class="outline-3">
+<h3 id="orgdf126a4">Instruction in Docker file</h3>
+<div class="outline-text-3" id="text-orgdf126a4">
+<p>
+For info visit <a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a>
+</p>
+<ul class="org-ul">
+<li><b>FROM</b>  instruction specifies the base/Parent Image from which you are building image
+<ul class="org-ul">
+<li><code>FROM debian:jessie</code></li>
+<li><code>FROM centos:7</code></li>
+</ul></li>
+<li><b>MAINTAINER</b> (deprecated) instruction set Author field of the docker images
+<ul class="org-ul">
+<li><code>MAINTAINER "karthik"</code></li>
+</ul></li>
+<li><b>LABEL</b> instruction adds metadata to an image
+<ul class="org-ul">
+<li>LABEL is a key-value pair.</li>
+<li>image can have more than one label</li>
+<li><code>LABEL CEO ="apple"</code></li>
+<li><code>LABEL DRT ="stephen"</code></li>
+</ul></li>
+<li><b>ENV</b>   instruction add Environment variable to container
+<ul class="org-ul">
+<li><code>ENV JAVA_HOME /opt/java-1.8.0/java</code></li>
+<li><code>ENV PATH /opt/java-1.8.0/java/bin</code></li>
+</ul></li>
+<li><b>RUN</b>   instruction builds your application with make.
+<ul class="org-ul">
+<li><code>RUN apt-get update &amp;&amp; apt-get install -y &lt;some-package&gt; &amp;&amp; rm -rf /var/lib/apt/lists/*</code></li>
+</ul></li>
+<li><b>EXPOSE</b> instruction informs Docker that the container listens on the specified network ports at runtime
+<ul class="org-ul">
+<li><code>EXPOSE 80/udp 443</code></li>
+<li><code>EXPOSE 80/tcp</code></li>
+</ul></li>
+<li><b>WROKDIR</b> instuction to change to workdir
+<ul class="org-ul">
+<li><code>WORKDIR /opt/java-1.8.0</code></li>
+</ul></li>
+<li>----------------------------------------------------------------------------------&#x2013;&#x2014;</li>
+<li><b>COPY</b>  instruction copies new files or directories from &lt;src&gt; and adds them to the filesystem of the container at the path &lt;dest&gt;
+<ul class="org-ul">
+<li><code>COPY test.txt /mydir/</code>  copy test.txt to mydir</li>
+<li><code>COPY Note* /mydir/</code></li>
+<li><code>COPY image-dir/ /mydir/</code>   cpy image-dir dir to my dir dirctory</li>
+<li><code>COPY test.txt relativeDir/</code></li>
+<li><code>COPY test.txt /absoluteDir/</code></li>
+</ul></li>
+<li><b>ADD</b>   instruction copies new files, directories or remote file URLs from &lt;src&gt; and adds them to the filesystem of the image at the path &lt;dest&gt;
+<ul class="org-ul">
+<li><code>ADD src_url /mydir/</code></li>
+<li><code>ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war /tmp</code></li>
+</ul></li>
+<li>----------------------------------------------------------------------------------&#x2013;&#x2014;</li>
+<li><b>CMD</b>   instruction specifies what command to run when container is created or runing latest-CMD when 1st time container is created.</li>
+<li><b>ENTRYPOINT</b> instruction allows you to configure a container that will run as an executable.
+<ul class="org-ul">
+<li>cmd docker run &lt;image&gt; will be appended after all elements in an exec form ENTRYPOINT, and will override all elements specified using CMD</li>
+<li>there is comination of using cmd and entrypoint</li>
+</ul></li>
+<li>----------------------------------------------------------------------------------&#x2013;&#x2014;</li>
+<li><b>HEALTHCHECK</b> instruction tells Docker how to test a container to check that it is still working. This can detect cases such as a web server that is stuck in an infinite loop and unable to handle new connections, even though the server process is still running.
+<ul class="org-ul">
+<li>HEALTHCHECK  <b>two forms</b>:
+<ul class="org-ul">
+<li>HEALTHCHECK [OPTIONS] CMD command (check container health by running a command inside the container)</li>
+<li>HEALTHCHECK NONE (disable any healthcheck inherited from the base image)</li>
+</ul></li>
+<li>HEALTHCHECK <b>status</b> {starting,healthy, unhealthy}
+<ul class="org-ul">
+<li>When a container has a healthcheck specified, it has a health status in addition to its normal status.
+<ul class="org-ul">
+<li>This status is initially <code>starting</code>.</li>
+<li>Whenever a health check passes, it becomes <code>healthy</code> (whatever state it was previously in).</li>
+<li>After a certain number of consecutive failures, it becomes <code>unhealthy</code>.</li>
+</ul></li>
+</ul></li>
+<li>HEALTHCHECK <b>options</b></li>
+<li>The options that can appear before CMD are:
+&#x2013;interval=DURATION (default: 30s) # health check is run for every interval as specified here 
+&#x2013;timeout=DURATION (default: 30s)  # if previous/cuurent health check takes longer than timeout-Duration  then the check is considered to have <code>failed</code>.
+&#x2013;retries=N (default: 3)      #  retries consecutive failures of the health check for the container to be considered <code>unhealthy</code>
+&#x2013;start-period=DURATION (default: 0s) # During container run it may take time to load so it may show unhealthy to avoid it we specify start-period</li>
+<li>HEALTHCHECK <b>exit status</b> indicates the health status of the container.
+<ul class="org-ul">
+<li>0: success - the container is healthy and ready for use</li>
+<li>1: unhealthy - the container is not working correctly</li>
+<li>2: reserved - do not use this exit code</li>
+</ul></li>
+
+<li>HEALTCHECK <b>Example inside Dockerfile</b>
+<ul class="org-ul">
+<li><code>HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:80/ || exit 1</code></li>
+</ul></li>
+</ul></li>
+<li>----------------------------------------------------------------------------------&#x2013;&#x2014;</li>
+<li><b>ARG</b> is the only instruction that may precede <b>FROM</b></li>
+<li><b>ARG</b> instruction defines a variable that users can pass at build-time to the builder with the docker build cmd</li>
+<li><b>VOLUME</b>  instruction creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers</li>
+<li><b>USER</b> instruction sets the user name (or UID) and optionally the user group (or GID) to use when running the image and for any RUN, CMD and ENTRYPOINT instructions</li>
+<li><b>ONBUILD</b> instruction adds to the image a trigger instruction to be executed at a later time, when the image is used as the base for another build. The trigger will be executed in the context of the downstream build, as if it had been inserted immediately after the FROM instruction in the downstream Dockerfile</li>
+<li><b>STOPSIGNAL</b> instruction sets the system call signal that will be sent to the container to exit. This signal can be a valid unsigned number that matches a position in the kernel’s syscall table, for instance 9, or a signal name in the format SIGNAME, for instance SIGKILL.</li>
+<li><b>SHELL</b> instruction allows the default shell used for the shell form of commands to be overridden.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd83a164" class="outline-3">
+<h3 id="orgd83a164">Example of Docker file</h3>
+<div class="outline-text-3" id="text-orgd83a164">
+</div>
+<div id="outline-container-orgb710881" class="outline-4">
+<h4 id="orgb710881">Instruction in Dockerfile example</h4>
+<div class="outline-text-4" id="text-orgb710881">
+<div class="org-src-container">
+<pre class="src src-sh">ARG  <span style="color: #ebcb8b;">CODE_VERSION</span>=latest
+FROM node:${<span style="color: #ebcb8b;">CODE_VERSION</span>}
+
+MAINTAINER karthik
+
+LABEL <span style="color: #deb887;">"com.example.vendor"</span>=<span style="color: #deb887;">"ACME Incorporated"</span>
+LABEL com.example.label-with-value=<span style="color: #deb887;">"foo"</span>
+LABEL <span style="color: #ebcb8b;">version</span>=<span style="color: #deb887;">"1.0"</span>
+LABEL <span style="color: #ebcb8b;">description</span>=<span style="color: #deb887;">"This text illustrates that labe-value can span multiple lines."</span>
+LABEL CEO =<span style="color: #deb887;">"apple"</span>
+
+
+
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">COPY [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">COPY [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</span>
+COPY test.txt relativeDir/
+COPY test.txt /absoluteDir/
+COPY --chown=55:mygroup files* /somedir/
+COPY --chown=bin files* /somedir/
+COPY --chown=1 files* /somedir/
+COPY --chown=10:11 files* /somedir/
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ADD [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ADD [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</span>
+ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war /tmp
+
+RUN /bin/bash -c <span style="color: #deb887;">'source $HOME/.bashrc; echo $HOME'</span>
+
+RUN [<span style="color: #deb887;">"/bin/bash"</span>, <span style="color: #deb887;">"-c"</span>, <span style="color: #deb887;">"echo hello"</span>]
+RUN [<span style="color: #deb887;">"c:\\windows\\system32\\tasklist.exe"</span>]
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 <span style="color: #deb887;">\</span>
+    &amp;&amp; <span style="color: #f08080;">echo</span> <span style="color: #deb887;">"deb nginx.org/packages/mainline/debian/ jessie nginx"</span> &gt;&gt; /etc/apt/sources.list <span style="color: #deb887;">\</span>
+    &amp;&amp; apt-get update <span style="color: #deb887;">\</span>
+    &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y <span style="color: #deb887;">\</span>
+                    ca-certificates <span style="color: #deb887;">\</span>
+                    <span style="color: #ebcb8b;">nginx</span>=${<span style="color: #ebcb8b;">NGINX_VERSION</span>} <span style="color: #deb887;">\</span>
+                    nginx-module-xslt <span style="color: #deb887;">\</span>
+                    nginx-module-geoip <span style="color: #deb887;">\</span>
+                    nginx-module-image-filter <span style="color: #deb887;">\</span>
+                    nginx-module-perl <span style="color: #deb887;">\</span>
+                    nginx-module-njs <span style="color: #deb887;">\</span>
+                    gettext-base <span style="color: #deb887;">\</span>
+                    curl <span style="color: #deb887;">\</span>
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+
+CMD echo <span style="color: #deb887;">"This is a test."</span> | wc -
+CMD [<span style="color: #deb887;">"/usr/bin/wc"</span>,<span style="color: #deb887;">"--help"</span>]
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cmd :</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">1. msg will be executed while container is executed</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">2. To over-ride the cmd</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3. To over-ride msg: </span>
+    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">eg: docker run -it sat-dev echo "hi sathish"</span>
+CMD [<span style="color: #deb887;">"git"</span>, <span style="color: #deb887;">"version"</span>]    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">show result run container in non-detached  mode</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker run -it &lt;image-name&gt;</span>
+CMD [<span style="color: #deb887;">"data"</span>] <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Over-ride the  last cmd and execute last cmd</span>
+
+EXPOSE 80/tcp
+EXPOSE 80/udp
+EXPOSE 80 443
+
+ENV <span style="color: #ebcb8b;">MY_NAME</span>=<span style="color: #deb887;">"John Doe"</span>
+ENV <span style="color: #ebcb8b;">MY_DOG</span>=Rex<span style="color: #deb887;">\ </span>The<span style="color: #deb887;">\ </span>Dog
+ENV <span style="color: #ebcb8b;">MY_CAT</span>=fluffy
+
+
+ENTRYPOINT [<span style="color: #deb887;">"executable"</span>, <span style="color: #deb887;">"param1"</span>, <span style="color: #deb887;">"param2"</span>]
+ENTRYPOINT command param1 param2
+ENTRYPOINT [<span style="color: #deb887;">"top"</span>, <span style="color: #deb887;">"-b"</span>]
+CMD [<span style="color: #deb887;">"-c"</span>]
+ENTRYPOINT [<span style="color: #deb887;">"/usr/sbin/apache2ctl"</span>, <span style="color: #deb887;">"-D"</span>, <span style="color: #deb887;">"FOREGROUND"</span>]
+
+HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ || <span style="color: #89AAEB;">exit</span> 1
+
+
+USER &lt;user&gt;[:&lt;group&gt;]
+USER &lt;UID&gt;[:&lt;GID&gt;]
+
+STOPSIGNAL signal
+
+VOLUME [<span style="color: #deb887;">"/var/www"</span>, <span style="color: #deb887;">"/var/log/apache2"</span>, <span style="color: #deb887;">"/etc/apache2"</span>]
+
+SHELL [<span style="color: #deb887;">"powershell"</span>, <span style="color: #deb887;">"-command"</span>]
+SHELL [<span style="color: #deb887;">"cmd"</span>, <span style="color: #deb887;">"/S"</span>, <span style="color: #deb887;">"/C"</span>]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce4de41" class="outline-4">
+<h4 id="orgce4de41">Example Dockerfile of installing Nginx in node:4.4</h4>
+<div class="outline-text-4" id="text-orgce4de41">
+<pre class="example">
+FROM node:4.4
+
+MAINTAINER paas  
+
+ENV NGINX_VERSION 1.11.6-1~jessie
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+    &amp;&amp; echo "deb nginx.org/packages/mainline/debian/ jessie nginx" &gt;&gt; /etc/apt/sources.list \
+    &amp;&amp; apt-get update \
+    &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y \
+		    ca-certificates \
+		    nginx=${NGINX_VERSION} \
+		    nginx-module-xslt \
+		    nginx-module-geoip \
+		    nginx-module-image-filter \
+		    nginx-module-perl \
+		    nginx-module-njs \
+		    gettext-base \
+		    curl \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# Forward request logs to Docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    &amp;&amp; ln -sf /dev/stderr /var/log/nginx/error.log
+
+RUN npm install &amp;&amp; npm cache clean 
+# The meaning of &amp;&amp; if npm is installed then cache clean npm 
+
+RUN npm install ; npm cache clean 
+# Even if can't install npm cache clean npm 
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3f4a2f2" class="outline-4">
+<h4 id="org3f4a2f2">Example Scratch Docker File</h4>
+<div class="outline-text-4" id="text-org3f4a2f2">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Docker-formate not shell script</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">1</span>
+FROM debian:jessie 
+FROM centos
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">2</span>
+MAINTAINER <span style="color: #deb887;">"sathish"</span> 
+
+LABEL CEO =<span style="color: #deb887;">"apple"</span>
+LABEL DRT =<span style="color: #deb887;">"stephen"</span>
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3</span>
+RUN echo hello <span style="color: #deb887;">\</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">comment</span>
+world
+
+<span style="color: #4f5b67;">################################</span>
+RUN echo <span style="color: #deb887;">"\</span>
+<span style="color: #deb887;">     hello\</span>
+<span style="color: #deb887;">     world"</span>
+
+RUN [ <span style="color: #deb887;">"echo"</span>, <span style="color: #deb887;">"$HOME"</span> ]
+
+RUN apt-get update <span style="color: #deb887;">\</span>
+    &amp;&amp; apt-get install -y &lt;some-package&gt; <span style="color: #deb887;">\</span>
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+
+RUN mkdir /opt/demo
+RUN mkdir /opt/demo &amp;&amp; <span style="color: #deb887;">\</span>
+  touch /opt/devops &amp;&amp; <span style="color: #deb887;">\</span>
+  yum install git -y <span style="color: #deb887;">\</span>
+  yum update ;
+
+RUN mkdir /opt/demo &amp;&amp; touch /opt/devops &amp;&amp; yum install git -y    yum update ;
+RUN rm -rf /var/lib/apt/lists/* <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Remove the cachy after installation</span>
+
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">When you  RUN "update" command </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Then  a layer containing the lists, which will ALWAYS be pulled by anyone using your image, even though the next command removes those files (so they're not accessible). Ultimately those extra files are just a waste of space and time.</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">source : https://stackoverflow.com/questions/61990329/dockerfile-benefits-of-repeated-apt-cache-cleans</span>
+
+RUN <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">INSTALL packages or unzip....etc</span>
+  <span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">&amp;&amp;    make all cmd into one layer</span>
+  <span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">&amp;&amp;      </span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">4</span>
+WORDIR /opt  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">change dir</span>
+RUN mkdir aws
+ADD www.tomcat.tar /opt
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">6</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">COPY SRC DEST</span>
+COPY /opt/sample.war /tmp
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">7</span>
+ADD 
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">1) Copy a file from local linux to container</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">2) it download from internet </span>
+ADD www.tomcat.tar /opt <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">download tocat.tar to /opt</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">8</span>
+ENV    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">SET ENVIROmENT Varible </span>
+
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">SET ENVIROmENT VARIABLE IN DOCKER FILE</span>
+<span style="color: #4f5b67;">#</span>
+ENV JAVA_HOME /opt/java-1.8.0/java
+ENV PATH /opt/java-1.8.0/java/bin
+RUN export JAVA_HOME
+RUN export PATH
+
+ENV NGINX_VERSIN 1.11.10-1~jessie
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">NEW features in docker file</span>
+VOLUME /opt
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">9) </span>
+EXPOSE 8080  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Enable port </span>
+EXPOSE 80/tcp
+EXPOSE 80/udp
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">10</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">CMD        </span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">11 ENTRYPOINT</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">NEW features in docker file </span>
+USER ANSIBLE 
+VOLUME /opt
+
+<span style="color: #4f5b67;"># </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;"># set environment in linux</span>
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">export JAVA_HOME=/usr/lib/jvm/default-java</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">export M2_HOME=/opt/maven</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">export MAVEN_HOME=/opt/maven</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">export PATH=${M2_HOME}/bin:${PATH} </span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf8bfc16" class="outline-4">
+<h4 id="orgf8bfc16">Example Dockerfile install jenkins inside centos:7 using</h4>
+<div class="outline-text-4" id="text-orgf8bfc16">
+<div class="org-src-container">
+<pre class="src src-sh">FROM centos:7
+LABEL <span style="color: #ebcb8b;">name</span>=<span style="color: #deb887;">"sathish-devopstrainer"</span>
+
+RUN yum -y update &amp;&amp; <span style="color: #deb887;">\</span>
+    yum install java-1.8.0-openjdk -y;
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java
+ENV PATH ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java/bin:$<span style="color: #ebcb8b;">PATH</span>
+
+RUN export JAVA_HOME
+RUN export PATH
+
+WORKDIR /opt
+EXPOSE 8081
+ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war .
+RUN java -jar jenkins.war
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">SHELL in Dockerfile Instruction is used to set the default shell.</span>
+SHELL [<span style="color: #deb887;">"/bin/bash"</span>, <span style="color: #deb887;">"-c"</span>, <span style="color: #deb887;">"echo hello"</span>]
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ENTRYPOINT ["java", "-jar", "jenkins.war"]</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cat /root/.jenkins/secrets/initalAdminPassword</span>
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;">#    </span><span style="color: #4f5b67;">Install tomcat  </span>
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ADD http://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.33/bin/apache-tomcat-9.0.33.tar.gz .</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">RUN tar -xvf apache-tomcat-9.0.33.tar.gz</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">RUN sh /opt/apache-tomcat-9.0.33/bin/startup.sh</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org12ebe34" class="outline-4">
+<h4 id="org12ebe34">Example Docker File</h4>
+<div class="outline-text-4" id="text-org12ebe34">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">FROM # which image should be take</span>
+FROM ubuntu
+
+MAINTAINER <span style="color: #deb887;">"sathish-devops"</span>
+LABEL CEO =<span style="color: #deb887;">"apple"</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">RUN # run linux cmd</span>
+RUN apt-get update
+RUN apt-get install git -y
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">RUN yum install java-1.8.0-openjdk -y</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">COPY # copy from  local to container</span>
+COPY /opt/sofware/jenkins.war /tmp
+
+ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war /tmp
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">ADD  </span>
+   <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">1.To copy local to container, and </span>
+   <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2.copy from remote( internet url) to container</span>
+ENV  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">https://examples.javacodegeeks.com/devops/docker/docker-environment-variables-example/</span>
+ENV <span style="color: #ebcb8b;">example_env_var</span>=xyz
+ENV <span style="color: #ebcb8b;">example_env_var_2</span>=abc
+EXPOSE 8080 <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">port should be enabled</span>
+WORKDIR /opt/dev <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">change dirctory</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cmd :</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">1. msg will be executed while container is executed</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">2. To over-ride the cmd</span>
+  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3. To over-ride msg: </span>
+    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">eg: docker run -it sat-dev echo "hi sathish"</span>
+
+CMD [<span style="color: #deb887;">"git"</span>, <span style="color: #deb887;">"version"</span>]    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">show result run container in non-detached  mode</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker run -it &lt;image-name&gt;</span>
+CMD [<span style="color: #deb887;">"data"</span>] <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Over-ride the  last cmd and execute last cmd</span>
+
+
+ENTRYPOINT
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge6df536" class="outline-4">
+<h4 id="orge6df536">Example Dockerfile install Jenkins using war file in centos:7</h4>
+<div class="outline-text-4" id="text-orge6df536">
+<div class="org-src-container">
+<pre class="src src-sh">FROM centos:7
+RUN yum install java-1.8.0-openjdk -y
+ADD https://updates.jenkins-ci.org/download/war/2.229/jenkins.war /tmp
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker build -t sat-dev .
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5fd310e" class="outline-4">
+<h4 id="org5fd310e"><span class="todo TODO">TODO</span> Example with healthcheck</h4>
+</div>
+<div id="outline-container-orgc1ceab4" class="outline-4">
+<h4 id="orgc1ceab4"><span class="todo TODO">TODO</span> Docker File [Cmd And Entripoint]</h4>
+<div class="outline-text-4" id="text-orgc1ceab4">
+<ul class="org-ul">
+<li>Difference
+<ul class="org-ul">
+<li>Examin</li>
+<li>Override</li>
+<li>default</li>
+</ul></li>
+<li><p>
+Cmd 
+</p>
+<ul class="org-ul">
+<li>1
+<ul class="org-ul">
+<li>To execute a msg while running inside container
+<ul class="org-ul">
+<li>CmD 'echo hai' or CMD ["ECHO" "Hai"]</li>
+<li>Ex: RUN mkdir /opt/satish</li>
+<li>CmD 'echo floder created'</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>
+-2 cmd can be OVERRIDE while entrpoint can't be override but appended
+-3 passs ${1} parameter to shell scripts inside docker-file 
+</p>
+
+<p>
+To execute a msg while running inside container
+</p></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">docker run -it sathish-own echo directory created
+docker run -it sathish-own echo sathish folder is created
+</pre>
+</div>
+
+<p>
+-2 cmd can be OVERRIDE while entrpoint can't be override but appended
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">FileName : dockerfile</span>
+FROM centos
+RUN mkdir /opt/azuredevops
+CMD [<span style="color: #deb887;">"echo"</span>, <span style="color: #deb887;">"floder created"</span>]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker run -it sathish-owm
+docker run -it sathish-own  echo directory created
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">directory created  # cmd is override </span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">FileName : dockerfile</span>
+FROM centos
+RUN mkdir /opt/azuredevops
+ENTRYPOINT [<span style="color: #deb887;">"echo"</span>, <span style="color: #deb887;">"floder created"</span>]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker run -it sathish-owm
+docker run -it sathish-own  echo sathish is created <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">we see it is not over-ride but appended</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">floder created echo sathish is created</span>
+</pre>
+</div>
+
+<p>
+-3 passs ${1} parameter to shell scripts inside docker-file 
+-4 To run default process   
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cat deployment.sh</span>
+<span style="color: #ebcb8b;">env</span>= $<span style="color: #ebcb8b;">1</span>
+<span style="color: #f08080;">echo</span> <span style="color: #deb887;">"$1 is working in IBM"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">FROM centos
+WORKDIR /opt
+copy deployment.sh .
+ENTRYPOINT [<span style="color: #deb887;">"sh"</span>,<span style="color: #deb887;">"deployment.sh"</span>]
+CMD [<span style="color: #deb887;">"sathish"</span>]   <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Sathish is paramenter to ENTRYPOINT</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker build -t sathish-own -f dockerfile_1 .
+docker run -it sathish-owm  karthik
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">sathish is working in IBM</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">karthik is working in IBM  # sathish has been overwriten </span>
+</pre>
+</div>
+
+<p>
+Example 2:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cat dockerfile2</span>
+FROM centos:7
+LABEL <span style="color: #ebcb8b;">name</span>=<span style="color: #deb887;">"sathish-devopstrainer"</span>
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.e17_7.x86_64/jre/bbin/java
+RUN yum -y update &amp;&amp;<span style="color: #deb887;">\</span>
+    yum install java-1.8.0-openjdk -y;
+RUN export JAVA_HOME
+CMD [<span style="color: #deb887;">"java"</span>,<span style="color: #deb887;">"-version"</span>]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker build -t sathish-own -f dockerfile2 .
+docker run -it sathish-owm 
+</pre>
+</div>
+
+
+<p>
+Example : 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">wget jenkins.war_url  #download jenkins.war file</span>
+ <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cat dockerfile2</span>
+FROM centos:7
+LABEL <span style="color: #ebcb8b;">name</span>=<span style="color: #deb887;">"sathish-devopstrainer"</span>
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.e17_7.x86_64/jre/bbin/java
+RUN yum -y update &amp;&amp;<span style="color: #deb887;">\</span>
+    yum install java-1.8.0-openjdk -y;
+RUN export JAVA_HOME
+COPY jenkins.war
+
+CMD [<span style="color: #deb887;">"java"</span>,<span style="color: #deb887;">"-version"</span>]
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgffbf5b8" class="outline-4">
+<h4 id="orgffbf5b8">Combination of Cmd and Entypoint</h4>
+<div class="outline-text-4" id="text-orgffbf5b8">
+</div>
+<ul class="org-ul">
+<li><a id="org885fc4f"></a>Example hello and hi :<br />
+<div class="outline-text-5" id="text-org885fc4f">
+<div class="org-src-container">
+<pre class="src src-sh">FROM centos
+ENTRYPOINT [<span style="color: #deb887;">"echo"</span> ]
+CMD [ <span style="color: #deb887;">"hello"</span>]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker run -it myown
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">hello </span>
+docker run -it myown hi 
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">hi</span>
+</pre>
+</div>
+
+<p>
+Values can be override we can use combination of entrypoint(Not Overriden contain command ) and cmd(Overriden contain Value or arguments)
+</p>
+</div>
+</li>
+
+<li><a id="org989e613"></a>Example : Real time we can use sleep and wait commond.<br />
+<div class="outline-text-5" id="text-org989e613">
+<p>
+<a href="https://dev.to/gayanhewa/docker-cmd-vs-entrypoint-240l">https://dev.to/gayanhewa/docker-cmd-vs-entrypoint-240l</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cat dockerfile
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">FROM centos</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">CMD ["sleep","10"]</span>
+
+docker build -t myown .
+docker build -t myown
+docker build -t myown echo 20
+docker build -t myown 10
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat dockerfile
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">FROM centos</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">RUN top</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ENTRYPOINT ["sleep"]</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">CMD ["10"]</span>
+
+docker build -t myown .
+docker build -t myown
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">10 seconds sys is sleep</span>
+docker build -t myown 20
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">20 seconds sys is sleep</span>
+
+
+</pre>
+</div>
+
+<p>
+-3 Change default process
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker ps -a    <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">by default the command is bash</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">COMMAND</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/bash</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/bash</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/bash</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat dockerfile
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">FROM centos</span>
+CMD [<span style="color: #deb887;">"/bin/sh"</span>]
+
+docker build -t myown .
+docker build -t myown
+docker ps -a    <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">by default the command is bash</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">COMMAND</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/sh</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/bash</span>
+<span style="color: #4f5b67;">#          </span><span style="color: #4f5b67;">/bin/bash</span>
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5493ee3" class="outline-3">
+<h3 id="org5493ee3">Build  Docker file</h3>
+<div class="outline-text-3" id="text-org5493ee3">
+<p>
+Run a docker file
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;">#   </span><span style="color: #4f5b67;">Build the docker image by docker-file</span>
+<span style="color: #4f5b67;">#</span>
+docker build .
+docker build -f /path/to/a/Dockerfile .
+docker build -t shykes/myapp .
+docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
+
+docker build -t docker_image_name:version .  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-t: tag #-f : docker file path</span>
+docker build -t sathish:latest . -f dockerfile-dev  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">. : current dir</span>
+
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">start container </span>
+<span style="color: #4f5b67;">#</span>
+docker run -itd sathish
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">inside the container</span>
+
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Override Entrypoint from cli </span>
+
+docker run ubuntu-sleep --entrypoint sleep2.0 ubuntu-sleeper 10 
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4776e6" class="outline-2">
+<h2 id="orgc4776e6">docker container</h2>
+<div class="outline-text-2" id="text-orgc4776e6">
+</div>
+<div id="outline-container-org7614ee7" class="outline-3">
+<h3 id="org7614ee7">container run, exec, ps/ls,stop, rm create and run mysql, apache (httpd) nginx</h3>
+<div class="outline-text-3" id="text-org7614ee7">
+<div class="org-src-container">
+<pre class="src src-sh">docker container run -itd -p 3306:3306  --name mysqldb2 -e <span style="color: #ebcb8b;">MYSQL_RANDOM_ROOT_PASSWORD</span>=yes mysql
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-t : Allocate a pseduo tty (simulate a real terminal like ssh does)</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-i : interactive  (keep stdin open even if not attached) keep session open to receive terminal input</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-d : detached (run container in background)</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">p : port configuration</span>
+docker container logs mysqldb2 | grep -w <span style="color: #deb887;">'GENERATED ROOT PASSWORD'</span> <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">TO Get the password</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">search : "GENERATED ROOT PASSWORD"</span>
+
+docker container run -d -p 8080:80 --name webserver httpd
+docker container run -d -p 8081:80 --name my_engineX  nginx <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">curl localhost:8081</span>
+docker ps 
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                   NAMES</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">8010387c87af   nginx     "/docker-entrypoint.&#8230;"   26 seconds ago   Up 26 seconds   0.0.0.0:8081-&gt;80/tcp, :::8081-&gt;80/tcp   my_nginx</span>
+docker exec -it  my_nginx /bin/bash 
+cat /usr/share/nginx/html/index.html
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker exec -it  my_nginx cat /usr/share/nginx/html/index.html</span>
+
+dokcer exec -it 015ffdcb /bin/bash
+docker container exec -it my_nginx ping new_nginx
+docker container exec -it new_nginx ping ny_nginx
+
+docker container ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker ps</span>
+curl localhost
+curl localhost:8080
+
+docker container stop 1e15b b9958d d282cc2a09
+docker stop b9958d d282cc2a09
+
+docker rm b9958d d282cc2a09 --force <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to stop and delete </span>
+docker rm $(<span style="color: #ffd700;">docker ps -a -q</span>) <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove  all stopped containers</span>
+docker rm $(<span style="color: #ffd700;">docker ps -a -q</span>) --force <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove all stopped, running containers</span>
+docker ps
+
+docker container exec -it mysql bash
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ca8722" class="outline-3">
+<h3 id="org1ca8722"><span class="todo TODO">TODO</span> conatainer info : ps/ls,top, stats, inspect, logs</h3>
+<div class="outline-text-3" id="text-org1ca8722">
+<div class="org-src-container">
+<pre class="src src-sh">docker container ls  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker ps</span>
+docker ps
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">5289647926e3        tomcat:9            "catalina.sh run"   10 seconds ago      Up 5 seconds        0.0.0.0:8081-&gt;8080/tcp   tomcat-dev</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">------------------------------------------------------------------------</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker container top &lt;container-name&gt;      # process list in one container</span>
+docker top mypsql_old
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">UID       PID    PPID   C  STIME   TTY    TIME       CMD</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80258  80235  1  02:46   pts/0  00:00:00   postgres</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80355  80258  0  02:46   ?      00:00:00   postgres: checkpointer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80356  80258  0  02:46   ?      00:00:00   postgres: writer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80357  80258  0  02:46   ?      00:00:00   postgres: wal writer process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80358  80258  0  02:46   ?      00:00:00   postgres: autovacuum launcher process</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">logstash  80359  80258  0  02:46   ?      00:00:00   postgres: stats collector pro</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">----------------------------------------------------------------------------</span>
+docker container inspect &lt;container-name&gt;  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">details of one container config</span>
+
+docker inspect mynginx  |grep IPAddress
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"SecondaryIPAddresses": null,</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"IPAddress": "172.17.0.2",</span>
+<span style="color: #4f5b67;">#                    </span><span style="color: #4f5b67;">"IPAddress": "172.17.0.2",</span>
+
+docker inspect mynginx  |grep Port
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"PortBindings": {</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"PublishAllPorts": false,</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"ExposedPorts": {</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"Ports": {</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-----------------------------------------------</span>
+docker container logs &lt;container-name&gt;
+docker container logs mysqldb2
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:28+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:28+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:28+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.26-1debian10 started.</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:28+00:00 [Note] [Entrypoint]: Initializing database files</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:28.850113Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.26) initializing of server in progress as process 43</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:28.859257Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:30.866184Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:34.768449Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1 is enabled for channel mysql_main</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:34.768933Z 0 [Warning] [MY-013746] [Server] A deprecated TLS version TLSv1.1 is enabled for channel mysql_main</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24T18:49:34.885379Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:42+00:00 [Note] [Entrypoint]: Database files initialized</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2021-09-24 18:49:42+00:00 [Note] [Entrypoint]: Starting temporary server</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">mysqld will log errors to /var/lib/mysql/ec689de00092.err</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">mysqld is running as pid 94</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">-----------------------------------------------------------------------------------------------------------</span>
+docker container stats  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">performance stats for all containers</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O    BLOCK I/O        PIDS</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ec689de00092   mysqldb2   0.60%     380.3MiB / 7.561GiB   4.91%     7kB / 0B   38.6MB / 244MB   37</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2bc6bd6" class="outline-3">
+<h3 id="org2bc6bd6">Port Forwording</h3>
+<div class="outline-text-3" id="text-org2bc6bd6">
+<div class="org-src-container">
+<pre class="src src-sh">docker run -itd --name mynginx -p 80:80 nginx
+docker ps
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2e03639c016d   nginx     "/docker-entrypoint.&#8230;"   20 minutes ago   Up 20 minutes   0.0.0.0:80-&gt;80/tcp, :::80-&gt;80/tcp   mynginx</span>
+
+ps -aux  | grep docker-
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">root 4734  0.0  0.0 622788  3908 ? Sl 12:01 0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 80 -container-ip 172.17.0.2 -container-port 80</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">root 4742  0.0  0.0 622788  3904 ? Sl 12:01 0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 80 -container-ip 172.17.0.2 -container-port 80</span>
+
+docker inspect mynginx  |grep IPAddress
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"SecondaryIPAddresses": null,</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"IPAddress": "172.17.0.2",</span>
+<span style="color: #4f5b67;">#                    </span><span style="color: #4f5b67;">"IPAddress": "172.17.0.2",</span>
+
+docker inspect mynginx  |grep Port
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"PortBindings": {</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"PublishAllPorts": false,</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"ExposedPorts": {</span>
+<span style="color: #4f5b67;">#            </span><span style="color: #4f5b67;">"Ports": {</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+<span style="color: #4f5b67;">#                        </span><span style="color: #4f5b67;">"HostPort": "80"</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">+Note: nginx is running on 172.17.0.2:80</span>
+
+docker rm $(<span style="color: #ffd700;">docker ps -a -q</span>) <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove  all stopped containers</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdb80bf9" class="outline-2">
+<h2 id="orgdb80bf9">docker volume &amp; bind mounts</h2>
+<div class="outline-text-2" id="text-orgdb80bf9">
+</div>
+<div id="outline-container-orgb55cde9" class="outline-3">
+<h3 id="orgb55cde9">Why Volume? Container Lifetime, Persistent Data</h3>
+<div class="outline-text-3" id="text-orgb55cde9">
+<p>
+Overview
+</p>
+<ul class="org-ul">
+<li>Define Problem of persistent Data</li>
+<li>Learning and using Data Volumes</li>
+<li>Learning and using Bind mounts</li>
+<li>Assignment</li>
+</ul>
+
+<p>
+Concept with containers:
+</p>
+<ul class="org-ul">
+<li>Key concept with containers:
+<ul class="org-ul">
+<li>Containers are usually immutalbe(unchange and disposal), ephemeral</li>
+<li>Idea is we can through container and create new one</li>
+</ul></li>
+<li>"immutable infrastructure" : only re-deploy containers never change
+<ul class="org-ul">
+<li>We not talk of limitation but a desing goal or (best practies)</li>
+<li>We don't change if container is runining</li>
+<li>If config chagnges then we re-deployed</li>
+<li>Trade-off: What happens if new data or unique data is created how to seperate data and binary, lib ?</li>
+</ul></li>
+<li>This is the ideal scenario, but what about database or unique data ?</li>
+<li>Docker gives us features to ensure these "separation of concerns"</li>
+<li>This unique data is called persistant data</li>
+
+<li>Docker has two solution : Docker Volume and Bind mounts
+<ul class="org-ul">
+<li>Docker Volumes: make special location outside of container Union File System</li>
+<li>Bind monts: (sharing or mount) or link container path  to host path</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0804d44" class="outline-3">
+<h3 id="org0804d44">Persistent Data : Data Volume :</h3>
+<div class="outline-text-3" id="text-org0804d44">
+<p>
+search for mysql docker hub
+go to docker file we see VOLUME /var/lib/mysql
+</p>
+
+<p>
+Means : Any file in /var/lib/mysql : will outlive in container after container is removed.
+</p>
+
+
+<pre class="example">
+docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql
+docker container ls
+docker container inspect mysqldb2  | grep -A 1 Volume
+#            "VolumeDriver": "",
+#            "VolumesFrom": null,
+#            "CapAdd": null,
+
+#            "Volumes": {
+#                "/var/lib/mysql": {}
+# --------------------------------------------------------------------
+docker container inspect mysql | grep "Mounts" # give volume dir-y
+# "Mounts": [
+#            {
+#                "Type": "volume",
+#                "Name": "d5146d92a28c673c1f8936363a230733b0f4fb262238f73462487c2bf1b56913",
+#                "Source": "/var/lib/docker/volumes/d5146d92a28c673c1f8936363a230733b0f4fb262238f73462487c2bf1b56913/_data",
+#                "Destination": "/var/lib/mysql",
+docker container inspect mysqldb2  | grep  \"Source\"
+#                "Source": "/var/lib/docker/volumes/d5146d92a28c673c1f8936363a230733b0f4fb262238f73462487c2bf1b56913/_data",
+
+
+docker volume ls
+# DRIVER              VOLUME NAME
+#DRIVER    VOLUME NAME
+#local     815c70d2cfe6e1912e0c720f9a2be108e1f11d5102e08f7a9835a99b49aa40e1
+#local     8004fe5f046c50c50a9e18a4a08b4ad0c36cf3739e1462976d50137b101b1e46
+#local     a988eed2b162f0d81bb0a9bbcafe653ba3f55b1edc406b88cf20281a939e6a72
+#local     b37f00018141c2fb6cbd22dc8b8c5bde6d4f0d5e0dc2f302adf36fa9f14e783f
+#local     d5146d92a28c673c1f8936363a230733b0f4fb262238f73462487c2bf1b56913
+#local     docker_certificates
+#local     e86ca460a39c70c618fbb81abb30974115c9870856d8c1e00ee5f21b970991a8
+#local     my_psql
+#local     step
+
+</pre>
+</div>
+
+<div id="outline-container-org5a77db7" class="outline-4">
+<h4 id="org5a77db7">Removing container will not remove volume</h4>
+<div class="outline-text-4" id="text-org5a77db7">
+<div class="org-src-container">
+<pre class="src src-sh">docker container run -d --name mysql -e <span style="color: #ebcb8b;">MYSQL_ALLOW_EMPTY_PASSWORD</span>=True mysql
+docker container run -d --name mysql2 -e <span style="color: #ebcb8b;">MYSQL_ALLOW_EMPTY_PASSWORD</span>=True mysql
+docker volume ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                 NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3cc73e458f42        mysql               "docker-entrypoint.s&#8230;"   19 seconds ago      Up 10 seconds       3306/tcp, 33060/tcp   mysql</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">4211d14111da        mysql               "docker-entrypoint.s&#8230;"   18 minutes ago      Up 17 minutes       3306/tcp, 33060/tcp   mysql2</span>
+
+docker container stop mysql
+docker container stop mysql2
+
+docker container ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">check container are running</span>
+docker container ls -a <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">check if container are present in hidden or stoped</span>
+docker volume ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">check if volume are present or not</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">DRIVER              VOLUME NAME</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               3f0a30709078decf4a17738137f6ab03e36ad04f6ff48e560cc9658ac758363d</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               caa37875bf146c52eb7069e5450adc2fd9ff761b16b41a4e49854aed93f9cfad</span>
+
+docker container rm mysql mysql2
+docker volume ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">check if volume is present even after container is removed</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">DRIVER              VOLUME NAME</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               3f0a30709078decf4a17738137f6ab03e36ad04f6ff48e560cc9658ac758363d</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               caa37875bf146c52eb7069e5450adc2fd9ff761b16b41a4e49854aed93f9cfad</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Note: So we can say that removing container will not remove the  volume </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Note: volume are removed manually </span>
+docker volume rm 3f0a307 caa378
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">OR: To remove unused local volumes</span>
+docker volume prune
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Question) Is there a way to same volume for two or more container  </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Ans) We use name value</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf421b27" class="outline-4">
+<h4 id="orgf421b27">Name Volume and using same volume in other container</h4>
+<div class="outline-text-4" id="text-orgf421b27">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Name Volume</span>
+docker container run -d --name mysql -e <span style="color: #ebcb8b;">MYSQL_ALLOW_EMPTY_PASSWORD</span>=True -v mysql-db:/var/lib/mysql mysql <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">NAME VOLUME: mysql-db at  dir /var/lib</span>
+docker container rm -f mysql
+docker volume ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">DRIVER              VOLUME NAME</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               mysql-db      # name volume</span>
+
+docker container run -d --name mysql3 -e <span style="color: #ebcb8b;">MYSQL_ALLOW_EMPTY_PASSWORD</span>=True -v mysql-db:/var/lib/mysql mysql <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">new volume is not created, but re-using same database.</span>
+docker volume ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">DRIVER              VOLUME NAME</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">local               mysql-db      # name volume</span>
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Create volume in run time</span>
+docker volume create --help
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdb16d97" class="outline-3">
+<h3 id="orgdb16d97">Persistent Data : Bind Mounting</h3>
+<div class="outline-text-3" id="text-orgdb16d97">
+<ul class="org-ul">
+<li>Bind Mount
+<ul class="org-ul">
+<li>Maps a host file/directory to a container file/directory
+<ul class="org-ul">
+<li>Basically just two locations pointing to same files</li>
+</ul></li>
+<li>Again skips UFS, and host files overwite any  in container</li>
+<li>Con't use in Dockerfile, must be at  container runtime</li>
+<li>Syntax :
+<ul class="org-ul">
+<li>&#x2026;.run -v /Users/bret/stuff:/path/container (mac/linux)</li>
+<li>&#x2026;.run -v //C/Users/breff:path/container (window)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cd dockerfile-sample-2</span>
+docker container run -d --name nginx -p 80:80 -v /$(<span style="color: #ffd700;">pwd</span>):/usr/share/nginx/html nginx
+
+docker container exec -it nginx bash <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">nginx with no-bind mounts</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">$#cd /usr/share/nginx/html</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">ls -al</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">exit</span>
+
+<span style="color: #f08080;">cd</span> dockerfile-sample-2
+<span style="color: #f08080;">echo</span> <span style="color: #deb887;">"is it me you're looking for "</span>&gt; testme.txt
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">RUN localhost:8080</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9a53967" class="outline-3">
+<h3 id="org9a53967">Assignment: Database Upgrade using Docker Volume</h3>
+<div class="outline-text-3" id="text-org9a53967">
+<p>
+You are running postgress mysql version 9.x.x and you want to upgrade to 9.6.1 or doing security fix with-out deleteing data
+</p>
+
+<p>
+Q) How to do in container ?
+Ans)
+</p>
+
+<p>
+Database upgrade with containers
+</p>
+<ul class="org-ul">
+<li>Create a postgres container with  named volume psql-data using version 9.6.1</li>
+<li>Use Docker Hub to learn VOLUME path and version needed to run it</li>
+<li>Check logs, stop container</li>
+<li>Create a new postgress container with same named volume using 9.6.2</li>
+<li>Check logs to validate</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">docker run -d --name mypsql_old -v psql:/var/lib/postgressql/data postgres:9.6.1
+docker logs -f mypsql_old
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">try creating db inside mypsql_old and access same db in newly created container</span>
+docker ps
+docker container stop mypsql_old
+docker run -d --name mypsql_new -v psql:/var/lib/postgressql/data postgres:9.6.2
+docker container logs -f mypsql_old
+LOG: database sys was shutdown
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">LOG: MultiXact member wraparound</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">LOG: database system is ready to accept connect</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">LOG: autovaccum launcher started  </span>
+</pre>
+</div>
+
+<p>
+Create a database and tables and update tables
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">root@f77bfead1b87:/# psql -U postgres
+<span style="color: #ebcb8b;">postgres</span>=# CREATE DATABASE testdb;
+<span style="color: #ebcb8b;">postgres</span>=# \l <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">show databses</span>
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | <span style="color: #ebcb8b;">postgres</span>=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | <span style="color: #ebcb8b;">postgres</span>=CTc/postgres
+ testdb    | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+(4 rows)
+
+<span style="color: #ebcb8b;">postgres</span>=# \c testdb; <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">You are now connected to database "testdb" as user "postgres".</span>
+<span style="color: #ebcb8b;">testdb</span>=# CREATE TABLE COMPANY(
+<span style="color: #DCA432;">testdb</span>(#    ID INT PRIMARY KEY     NOT NULL,
+<span style="color: #DCA432;">testdb</span>(#    NAME           TEXT    NOT NULL,
+<span style="color: #DCA432;">testdb</span>(#    AGE            INT     NOT NULL,
+<span style="color: #DCA432;">testdb</span>(#    ADDRESS        CHAR(50),
+<span style="color: #DCA432;">testdb</span>(#    SALARY         REAL
+<span style="color: #DCA432;">testdb</span>(# );
+
+<span style="color: #ebcb8b;">testdb</span>=# CREATE TABLE DEPARTMENT(
+<span style="color: #DCA432;">testdb</span>(#    ID INT PRIMARY KEY      NOT NULL,
+<span style="color: #DCA432;">testdb</span>(#    DEPT           CHAR(50) NOT NULL,
+<span style="color: #DCA432;">testdb</span>(#    EMP_ID         INT      NOT NULL
+<span style="color: #DCA432;">testdb</span>(# );
+CREATE TABLE
+
+<span style="color: #ebcb8b;">testdb</span>=# \d <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">show the tables created</span>
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | company    | table | postgres
+ public | department | table | postgres
+(2 rows)
+                                                        ^
+<span style="color: #ebcb8b;">testdb</span>=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (4, <span style="color: #deb887;">'Mark'</span>, 25, <span style="color: #deb887;">'Rich-Mond '</span>, 65000.00 ), (5, <span style="color: #deb887;">'David'</span>, 27, <span style="color: #deb887;">'Texas'</span>, 85000.00);
+<span style="color: #ebcb8b;">testdb</span>=# SELECT * FROM COMPANY;
+ id | name  | age |                      address                       | salary 
+----+-------+-----+----------------------------------------------------+--------
+  4 | Mark  |  25 | Rich-Mond                                          |  65000
+  5 | David |  27 | Texas                                              |  85000
+(2 rows)
+
+<span style="color: #ebcb8b;">testdb</span>=#\q
+<span style="color: #89AAEB;">exit</span>  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">exit container </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga80aa78" class="outline-3">
+<h3 id="orga80aa78">Assignment: Database Upgrade using Docker Bind mount</h3>
+<div class="outline-text-3" id="text-orga80aa78">
+<p>
+Use a Jekyll "Static Site Generator " to start a local web server
+Don't have to be web developer: this  is example of bridging  the gap between local file access and apps running in containers
+Source code is in the course repo under bindmount -sample-1
+</p>
+
+<p>
+We edit files with editor on our host using  navite tool
+Container detects changes with host files and update web servers
+start container with docker run -p 80:4000 -v $(pwd):/site/bretfisher/jekyll-serve
+Refresh our borwser to see changes
+Change the file in _posts\ and refresh browser to see change
+</p>
+
+
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">cd /home/jayradhe/Workspace/Devops/udemy-docker-mastery-master/bindmount-sample-1</span>
+docker run -p 80:4000 -v $(<span style="color: #ffd700;">pwd</span>):/site bretfisher/jekyll-serve
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbdae299" class="outline-3">
+<h3 id="orgbdae299">Bind mount  Volume type</h3>
+<div class="outline-text-3" id="text-orgbdae299">
+<p>
+local(host) linux and container dir are synchronized
+local and container are have shared space
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Bind mount </span>
+<span style="color: #f08080;">cd</span> /opt
+mkdir devops
+<span style="color: #f08080;">cd</span> devops
+touch sbi.war icic.jar
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker run -itd -v &lt;local-path(host OS)&gt; : &lt;container-path&gt; &lt;image-name&gt; # Bind mounts</span>
+
+ <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Bind mounts</span>
+docker run -itd -v /opt/devops: /opt/sathish centos   <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">linux</span>
+docker run -itd -v //C/User/bret/stuff/devops: /opt/sathish centos <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Windows </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Volume type </span>
+docker run -d --name mypsql_old -v my_psql:/var/lib/postgressql/data postgres:9.6.1 
+
+docker inspect mypsql_old | grep -A 1 <span style="color: #deb887;">\"</span>Volumes<span style="color: #deb887;">\"</span> 
+            <span style="color: #deb887;">"Volumes"</span>: {
+                <span style="color: #deb887;">"/var/lib/postgresql/data"</span>: {}
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Example </span>
+mkdir  test-bindmount
+<span style="color: #f08080;">cd</span> test-bindmount
+docker run -p 80:4000 -v $(<span style="color: #ffd700;">pwd</span>):/site bretfisher/jekyll-serve
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org85275e3" class="outline-3">
+<h3 id="org85275e3">Update the database to new version</h3>
+<div class="outline-text-3" id="text-org85275e3">
+<p>
+Consider you are using postgress of old version now you want to upgrade 
+</p>
+<pre class="example">
+docker container run -itd  --name my_psql_old -v psql1:/var/lib/postgresql/data postgres:9.6.1
+docker logs -f my_psql_old
+
+docker stop my_psql_old
+docker run -itd --name my_psql_new -v psql2:/var/lib/postgresql/data postgres:9.6.2
+</pre>
+</div>
+</div>
+<div id="outline-container-orgbbaaaa8" class="outline-3">
+<h3 id="orgbbaaaa8">Docker Volume cmd's</h3>
+<div class="outline-text-3" id="text-orgbbaaaa8">
+<pre class="example">
+docker volume ls
+docker volume rm 
+docker volume prune 
+#volume in 
+docker run -itd --name mynginx -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgca77fac" class="outline-2">
+<h2 id="orgca77fac">Docker Link</h2>
+<div class="outline-text-2" id="text-orgca77fac">
+<p>
+Link  : two or more contianers link or communicate each other
+<a href="https://www.youtube.com/watch?v=_uXB9m1i-PU">https://www.youtube.com/watch?v=_uXB9m1i-PU</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To delete used image </span>
+docker system prune -a <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove  unused images,container</span>
+docker run -itd --name mydb -e <span style="color: #ebcb8b;">MYSQL_ROOT_PASSWORD</span>=DEVOPS@12345 mysql:5.7
+dokcer exec -it 015ffdcb /bin/bash
+mysql -u root -p
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">show databases;</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">create employ (){.......etc</span>
+docker run -itd -itd wordpress  --link mydb:mysql -p 83:80 wordpress
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2238da3" class="outline-2">
+<h2 id="org2238da3">Docker Compose :</h2>
+<div class="outline-text-2" id="text-org2238da3">
+<p>
+<a href="https://docs.docker.com/compose/compose-file/compose-file-v2/">https://docs.docker.com/compose/compose-file/compose-file-v2/</a>
+<a href="https://docs.docker.com/compose/compose-file/compose-file-v3/">https://docs.docker.com/compose/compose-file/compose-file-v3/</a>
+Docker Compose is used for running multiple containers of same-image/ Same-organaisation.
+</p>
+</div>
+<div id="outline-container-orgb1ebe6a" class="outline-3">
+<h3 id="orgb1ebe6a">Docker Compose and Docker Compose.yml file</h3>
+<div class="outline-text-3" id="text-orgb1ebe6a">
+<p>
+Docker Compose:
+ Why cofigure relationships between containers
+ Why save our docker container run setting in easy to read file
+ Comprised of 2 separate but related things
+</p>
+<blockquote>
+<p>
+Yaml-Formatted file
+</p>
+<ul class="org-ul">
+<li>version
+<ul class="org-ul">
+<li>defautl : 1 but recommentd min 2</li>
+</ul></li>
+<li>services:  Services consist of individual service(service in swarm)
+<ul class="org-ul">
+<li>&lt;serive-name&gt; services consist of service, each service has  unique name 
+<ul class="org-ul">
+<li>build
+<ul class="org-ul">
+<li>context:</li>
+<li>dockerfile:</li>
+<li>args:</li>
+<li>label:</li>
+</ul></li>
+<li>image # Optional if you use build:</li>
+<li>environment</li>
+<li>command : #Optional, replace the default CMD specified by image</li>
+<li>depend<sub>on</sub>:</li>
+<li>config:</li>
+<li>secrets</li>
+<li>volume</li>
+<li>network</li>
+<li>restart: {always}</li>
+</ul></li>
+</ul></li>
+<li>networks</li>
+<li>volumes</li>
+<li>secretes</li>
+<li>configs:</li>
+</ul>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org2ebbdbc" class="outline-3">
+<h3 id="org2ebbdbc">Syntax</h3>
+<div class="outline-text-3" id="text-org2ebbdbc">
+<div class="org-src-container">
+<pre class="src src-sh">version: <span style="color: #deb887;">'3.1'</span>  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">if no version is specified then v1 is assumed. Recommend v2 minimum</span>
+
+services:  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">containers. same as docker run</span>
+  &lt;servicename&gt;: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">a friendly name. this is also DNS name inside network</span>
+    image: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional if you use build:</span>
+    build:
+        context : . <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">current directory</span>
+        dockerfile: <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Name of Dockerfile</span>
+    <span style="color: #f08080;">command</span>: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional, replace the default CMD specified by the image</span>
+    environment: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional, same as -e in docker run</span>
+    secrets:
+    volumes: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional, same as -v in docker run</span>
+    depends_on: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">need to run other servers before running this servier</span>
+
+  servicename2:
+
+volumes: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional, same as docker volume create</span>
+networks: <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Optional, same as docker network create</span>
+secrets:
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org277e8e2" class="outline-3">
+<h3 id="org277e8e2">Example</h3>
+<div class="outline-text-3" id="text-org277e8e2">
+</div>
+<div id="outline-container-org84194fb" class="outline-4">
+<h4 id="org84194fb">wordpress and mysql</h4>
+<div class="outline-text-4" id="text-org84194fb">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cat /media/jayradhey/myVolume/Tutorial_Docker/Docker-Compose-Example/compose-sample-1/compose-2.yml</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker-compose -f compose-2.yml up -d</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cat docker-compose.yml</span>
+version: <span style="color: #deb887;">'3.3'</span>
+
+services:
+    db:
+        image: mysql:5.7
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD: dev@123
+
+    wordpress:
+        depends_on:
+            - db
+        image: wordpress:latest
+        ports:
+            - <span style="color: #deb887;">"8000:80"</span>
+        restart: always
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4b6e892" class="outline-4">
+<h4 id="org4b6e892">nginx and httpd(apache) docker-compose file</h4>
+<div class="outline-text-4" id="text-org4b6e892">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">cd /home/jayradhe/Workspace/Devops/udemy-docker-mastery-master/compose-sample-2</span>
+cat docker-compose.yml
+
+version: <span style="color: #deb887;">'3'</span>
+
+services:
+  proxy:
+    image: nginx:1.13 <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">this will use the latest version of 1.13.x</span>
+    ports:
+      - <span style="color: #deb887;">'80:80'</span> <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">expose 80 on host and sent to 80 in container</span>
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+  web:
+    image: httpd  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">this will use httpd:latest</span>
+
+docker-compose up
+
+docker-compose ps
+docker-compose top
+docker-compose down
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org911c137" class="outline-4">
+<h4 id="org911c137">jekyll with bindmount current dir docker-compose file</h4>
+<div class="outline-text-4" id="text-org911c137">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker run -p 80:4000 -v $(</span><span style="color: #ffd700;">pwd</span><span style="color: #4f5b67;">):/site bretfisher/jekyll-serve</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">yaml file for sh</span>
+version: <span style="color: #deb887;">'2'</span>
+
+services:
+  jekyll:
+   image: bretfisher/jekyll-serve
+   volumes:
+      - ./:/site <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">'.' Current Working Directory</span>
+   ports:
+      - <span style="color: #deb887;">'80:4000'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9b742f9" class="outline-4">
+<h4 id="org9b742f9">Assignment Create compose-file for drupal and postgress</h4>
+<div class="outline-text-4" id="text-org9b742f9">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Assignment: Writing a Compose File</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">&gt; Goal: Create a compose config for a local Drupal CMS website</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- This empty directory is where you should create a docker-compose.yml </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Set the yml version to 2</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Use the `drupal:8.8.2` image along with the `postgres:12.1` image</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Use `ports` to expose Drupal on 8080 search default port by </span>
+   <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker pull drupal:8.8.2</span>
+   <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker image inspect drupal | grep -A 2 \"Exposedports\" </span>
+        <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">gives 80  </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Be sure to setup POSTGRES_PASSWORD on postgres image</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Walk through Drupal config in browser at http://localhost:8080</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Tip: Drupal assumes DB is localhost, but it will actually be on the #compose service name you give it</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Use Docker Hub documentation to figure out the right environment and volume settings</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">- Extra Credit: Use volumes to store Drupal unique data</span>
+
+version: <span style="color: #deb887;">'2'</span>
+
+services:
+  drupal:
+    image: drupal:8.8.2
+    ports:
+      - <span style="color: #deb887;">"8080:80"</span>
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres:12.1
+    environment:
+      - <span style="color: #ebcb8b;">POSTGRES_PASSWORD</span>=mypasswd
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-----------------------------------</span>
+docker-compose up
+docker-compose down --help
+docker-compose down -v <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove volume (docker by default keep volume ) to remove volume -v</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge4fb6d2" class="outline-4">
+<h4 id="orge4fb6d2">Assignment Create custome drupal Dockerfile and use it in  Compose-file</h4>
+<div class="outline-text-4" id="text-orge4fb6d2">
+<div class="org-src-container">
+<pre class="src src-sh">FROM drupal:8.8.2
+RUN apt-get update &amp;&amp; apt-get install -y git <span style="color: #deb887;">\</span>
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+WORKDIR /var/www/html/themes
+RUN git clone --branch 8.x-3.x --single-branch --depth 1 https://git.drupalcode.org/project/bootstrap.git <span style="color: #deb887;">\</span>
+    &amp;&amp; chown -R www-data:www-data bootstrap
+WORKDIR /var/www/html
+<span style="color: #4f5b67;">####################################################################</span><span style="color: #4f5b67;">3</span>
+version: <span style="color: #deb887;">'2'</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">NOTE: move this answer file up a directory so it'll work</span>
+
+services:
+
+  drupal:
+    image: custom-drupal
+    build: .
+    ports:
+      - <span style="color: #deb887;">"8080:80"</span>
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+
+  postgres:
+    image: postgres:12.1
+    environment:
+      - <span style="color: #ebcb8b;">POSTGRES_PASSWORD</span>=mypasswd
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+
+volumes:
+  drupal-data:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org73d3da8" class="outline-3">
+<h3 id="org73d3da8">docker compose cmd</h3>
+<div class="outline-text-3" id="text-org73d3da8">
+<p>
+Build the project
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker-compose up
+docker-compose up -d  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">run in detach mode </span>
+
+docker-compose -f &lt;compose-file-name&gt; up -d 
+docker-compose down <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">stop all container and don't remove volumes, local images </span>
+
+docker-compose down --help
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Usage: down [options]</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Options:</span>
+<span style="color: #4f5b67;">#    </span><span style="color: #4f5b67;">--rmi type              Remove images. Type must be one of:</span>
+<span style="color: #4f5b67;">#                              </span><span style="color: #4f5b67;">'all': Remove all images used by any service.</span>
+<span style="color: #4f5b67;">#                              </span><span style="color: #4f5b67;">'local': Remove only images that don't have a</span>
+<span style="color: #4f5b67;">#                              </span><span style="color: #4f5b67;">custom tag set by the `image` field.</span>
+<span style="color: #4f5b67;">#    </span><span style="color: #4f5b67;">-v, --volumes           Remove named volumes declared in the `volumes`</span>
+<span style="color: #4f5b67;">#                            </span><span style="color: #4f5b67;">section of the Compose file and anonymous volumes</span>
+<span style="color: #4f5b67;">#                            </span><span style="color: #4f5b67;">attached to containers.</span>
+<span style="color: #4f5b67;">#    </span><span style="color: #4f5b67;">--remove-orphans        Remove containers for services not defined in the</span>
+<span style="color: #4f5b67;">#                            </span><span style="color: #4f5b67;">Compose file</span>
+<span style="color: #4f5b67;">#    </span><span style="color: #4f5b67;">-t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.</span>
+<span style="color: #4f5b67;">#                            </span><span style="color: #4f5b67;">(default: 10)</span>
+docker-compose down -v <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">delete the volume after compose down</span>
+docker-compose down --rmi local -v
+
+docker-compose ps
+docker-compose top 
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker-compose -h</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">build              Build or rebuild services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">bundle             Generate a Docker bundle from the Compose file</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">config             Validate and view the Compose file</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">create             Create services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">down               Stop and remove containers, networks, images, and volumes</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">events             Receive real time events from containers</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">exec               Execute a command in a running container</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">help               Get help on a command</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">images             List images</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">kill               Kill containers</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">logs               View output from containers</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">pause              Pause services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">port               Print the public port for a port binding</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ps                 List containers</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">pull               Pull service images</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">push               Push service images</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">restart            Restart services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rm                 Remove stopped containers</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">run                Run a one-off command</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">scale              Set number of containers for a service</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">start              Start services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">stop               Stop services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">top                Display the running processes</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">unpause            Unpause services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">up                 Create and start containers</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">version            Show the Docker-Compose version information</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org494ec67" class="outline-2">
+<h2 id="org494ec67"><span class="todo TODO">TODO</span> Docker Network</h2>
+<div class="outline-text-2" id="text-org494ec67">
+</div>
+<div id="outline-container-org0ea00ea" class="outline-3">
+<h3 id="org0ea00ea">Intro</h3>
+<div class="outline-text-3" id="text-org0ea00ea">
+<p>
+Docker Netwrok is abstraction of CNM (Contianer Netwrok Model)
+<img src="./Docker-images/Screenshot from 2021-09-25 13-10-02.png" alt="Screenshot from 2021-09-25 13-10-02.png" />
+We have 5 networks model # 
+<img src="./Docker-images/Screenshot from 2021-09-25 13-10-32.png" alt="Screenshot from 2021-09-25 13-10-32.png" />
+</p>
+<ul class="org-ul">
+<li>DRIVER
+<ul class="org-ul">
+<li>bridge
+<img src="./Docker-images/Screenshot from 2021-09-25 13-10-38.png" alt="Screenshot from 2021-09-25 13-10-38.png" /></li>
+<li>host    # <img src="./Docker-images/Screenshot from 2021-09-25 13-10-47.png" alt="Screenshot from 2021-09-25 13-10-47.png" /></li>
+<li>none    # <img src="./Docker-images/Screenshot from 2021-09-25 13-11-13.png" alt="Screenshot from 2021-09-25 13-11-13.png" /></li>
+<li>overlay # <img src="./Docker-images/Screenshot from 2021-09-25 13-11-20.png" alt="Screenshot from 2021-09-25 13-11-20.png" /></li>
+<li>maclane # <img src="./Docker-images/Screenshot from 2021-09-25 13-11-34.png" alt="Screenshot from 2021-09-25 13-11-34.png" /></li>
+</ul></li>
+
+<li>Best Practice:is to create a new virtual network for each app:
+<ul class="org-ul">
+<li>network "my<sub>web</sub><sub>app</sub>" for mysq; and php/apache containers</li>
+<li>network "my<sub>api</sub>" for mongo and nodejs containers (they can talk to each other without configur, they can't talk too other network like my<sub>web</sub><sub>app</sub> network</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc3a79ac" class="outline-3">
+<h3 id="orgc3a79ac">Docker Network cmd's</h3>
+<div class="outline-text-3" id="text-orgc3a79ac">
+<div class="org-src-container">
+<pre class="src src-sh">docker network ls 
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">NETWORK ID          NAME                DRIVER              SCOPE</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">e4412c25e3f8        bridge              bridge              local</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">fc3fb3bc492f        dude                bridge              local</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">bde494d3eca8        my_app_net          bridge              local</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">b5c2bb5208eb        none                null                local</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">85464f22d4d4        host                host                local</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">host network is special network,it gain performance by skipping virtual networks but sacrifices security of container model</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network:</span>
+docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 my-netwrok <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">easter: name of network</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">subnet</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">gateway</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">ip-range </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-d or --driver {bridge,host,none,overlay,maclane}</span>
+
+remove:
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network rm networkname</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove unused networks</span>
+docker network prune 
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">see networkinfo or container info:</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network inspect &lt;network-name&gt; </span>
+docker network inspect mynetwork 
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">container:</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker inspect &lt;containerid&gt;</span>
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network create done</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network ls done </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">dpcker network rm &lt;network-name&gt; </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network prune # delete unused network</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker network inspect continerid</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">---------- Connect Network and Container -----------------</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker netwrok &lt;netwrork-name&gt; connect &lt;container-name/id 's&gt;</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker netwrok disconnect &lt;container-name/id 's&gt;</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker run -itd --name sathish-dev --net &lt;my-network-name&gt;  centos:7 </span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org766186f" class="outline-3">
+<h3 id="org766186f">Example I</h3>
+<div class="outline-text-3" id="text-org766186f">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">example:</span>
+docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  
+
+docker network ls
+docker network inspect devops
+
+docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7 <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">set: network: easter  and ip-address of container: ip:10.1.0.91</span>
+docker ps
+docker exec -it e8a9ef45586c /bin/bash
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">own network                               # docker network create -d bridge --subnet 10.1.0.0/16 --ip-range 10.1.5.0/24 --gateway 10.1.0.1 easter  </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">we can assigen our ip to container        # docker run -itd --name sathish-dev --net easter --ip 10.1.0.91 centos:7</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgefe0812" class="outline-3">
+<h3 id="orgefe0812">Example-II</h3>
+<div class="outline-text-3" id="text-orgefe0812">
+<div class="org-src-container">
+<pre class="src src-sh">docker container ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">498f7bfea262        nginx               "nginx -g 'daemon of&#8230;"   15 seconds ago       Up 12 seconds       80/tcp                 my_engineX</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3928fe27faa0        httpd               "httpd-foreground"       About a minute ago   Up About a minute   0.0.0.0:8080-&gt;80/tcp   webserver</span>
+docker network connect 498f7bf 3928fe27
+docker network inspect 
+docker network disconnect 498f7bf 3928fe27
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org13c0c03" class="outline-3">
+<h3 id="org13c0c03">Example-III</h3>
+<div class="outline-text-3" id="text-org13c0c03">
+<div class="org-src-container">
+<pre class="src src-sh">docker network create --driver overlay mydrupal
+docekr network ls
+docker service create --name psql --network mydrupal -e <span style="color: #ebcb8b;">POSTGRESS_PASSWORD</span>=mypass postgres
+docker service ls
+psql replicated ps psql
+docker container ls
+
+
+docker service create --name drupal --network mydrupal -p 80:80 drupal
+docker service ls
+
+watch docker ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">linux re-run </span>
+docker service ps drupal <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">see -where drupal service is running : let be node2</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">How to make talk to each other </span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46ad87e" class="outline-3">
+<h3 id="org46ad87e">Example with Multiple Node Connecting overlay Network</h3>
+<div class="outline-text-3" id="text-org46ad87e">
+<p>
+python(front-end) &lt;====&gt;redis(front-end) &lt;=====&gt;worker(.net) &lt;====&gt;psql(db,back-end)&lt;======&gt;Node.js
+</p>
+<pre class="example">
+#cd dockersamples/examplevotingapp_vote
+docker node ls
+docker ps -a
+docker services ls
+
+docker network create -d overlay backend
+docker network create -d overlay frontend
+
+docker service create --name vote -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name redis -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name worker -p 80:80 --network frontend --replica 2 dockersamples/examplevottingvotle:before
+
+docker service create --name worker -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name psql -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:before
+docker service create --name Nodejs -p 80:80 --network backend --replica 2 dockersamples/examplevottingvotle:before
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7adf172" class="outline-3">
+<h3 id="org7adf172">Example -IV</h3>
+<div class="outline-text-3" id="text-org7adf172">
+<div class="org-src-container">
+<pre class="src src-sh">docker container run -itd -p 8080:80 --name webserver httpd    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Port Forwarding </span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">ether net is lisening to port 8080 and rouths through webserver and go to httpd port 80</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">8080 : is host OS port and 80 is container prot</span>
+
+ docker container ls -a
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND              #CREATED             STATUS              PORTS                  NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">287e5a78867a        httpd               "httpd-foreground"   8 seconds ago       Up 3 seconds        0.0.0.0:8080-&gt;80/tcp   webserver</span>
+
+docker container port webserver
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">80/tcp -&gt; 0.0.0.0:8080</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Ip Address of Container and host Ip is not same</span>
+docker container inspect --format <span style="color: #deb887;">'{{.NetworkSettings.IPAddress}}'</span> webserver
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">172.17.0.2 Container Ip Address</span>
+
+ifconfig en0 
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span>
+<span style="color: #4f5b67;">#        </span><span style="color: #4f5b67;">inet 192.168.0.105  netmask 255.255.255.0  broadcast 192.168.0.255</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">&gt;&gt; 192.168.0.105 Ip address of host ethernet</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org60645ac" class="outline-3">
+<h3 id="org60645ac">Example - V</h3>
+<div class="outline-text-3" id="text-org60645ac">
+<div class="org-src-container">
+<pre class="src src-sh">docker network create my_app_net
+docker network ls
+docker network inspect my_app_net 
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">create container with given network</span>
+docker container run -itd --name new_nginx --network my_app_net nginx
+docker container run -itd --name my_nginX -p nginx
+docker network inspect my_app_network
+
+
+docker container ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">d2bf3ff05b9b        nginx               "nginx -g 'daemon of&#8230;"   19 seconds ago       Up 17 seconds       80/tcp                 my_nginX</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">b98f30cc34bd        nginx               "nginx -g 'daemon of&#8230;"   About a minute ago   Created                                    new_nginx</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3928fe27faa0        httpd               "httpd-foreground"       19 minutes ago       Up 19 minutes       0.0.0.0:8080-&gt;80/tcp   webserver</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org51e6e3c" class="outline-2">
+<h2 id="org51e6e3c">Docker Swarm</h2>
+<div class="outline-text-2" id="text-org51e6e3c">
+</div>
+<div id="outline-container-orgac9ae80" class="outline-3">
+<h3 id="orgac9ae80">Intro</h3>
+<div class="outline-text-3" id="text-orgac9ae80">
+<p>
+Docker Swarm : To mainitain multiple containers in cluster in more than 1 node 
+</p>
+<ul class="org-ul">
+<li>Advantage is
+<ol class="org-ol">
+<li>Create Clusters :</li>
+<li>High Avaliablity: Even if one server is not working</li>
+<li>load balancing</li>
+<li>Port Forwording</li>
+</ol></li>
+</ul>
+
+<p>
+Cluter maintain in form of services (containers or services)
+</p>
+
+
+<p>
+Steps for Creating Swarm
+</p>
+
+<ul class="org-ul">
+<li>Change Hostname when on aws 
+<ul class="org-ul">
+<li>hostname swarmmaster</li>
+<li>hostname swarmwork1</li>
+<li>hostname swarmworker2</li>
+</ul></li>
+
+<li>Create a swarm
+<ul class="org-ul">
+<li>Join container to swarm
+<ul class="org-ul">
+<li>Go to worker and run join command which is copied in master node
+<ul class="org-ul">
+<li>docker swarm join</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgae759a8" class="outline-3">
+<h3 id="orgae759a8">docker swarm</h3>
+<div class="outline-text-3" id="text-orgae759a8">
+<p>
+Initaizing, join,leave, change form worker node to manager node
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker swarm --help
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ca          Display and rotate the root CA</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">init        Initialize a swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">join        Join a swarm as a node and/or manager</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">join-token  Manage join tokens</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">leave       Leave the swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">unlock      Unlock swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">unlock-key  Manage the unlock key</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">update      Update the swarm</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">go-inside master server</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">How to create a clustser </span>
+docker swarm init --advertise-addr 18.220.116.100 
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">it gives the folloing join --token</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">example:</span>
+docker swarm join --token SWMTKN-1-51n0oal47mvwoyh8l3d2bn8naogqp8xs62wyvh2x6od6f89e8p-efi7qazxaie80f2mepov21d34 18.220.116.100:2377
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step2: go to workers and run join command which is copied in master node</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">join nodes: </span>
+docker swarm join --token SWMTKN-1-51n0oal47mvwoyh8l3d2bn8naogqp8xs62wyvh2x6od6f89e8p-efi7qazxaie80f2mepov21d34 18.220.116.100:2377
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step3: node list added in the cluster :</span>
+docker node ls 
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step4: if you remove node from cluster</span>
+docker swarm leave <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Inside the node docker</span>
+docker swarm leave --force  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Leader</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">-----------------------------------------------------------------------</span>
+docker swarm join-token worker
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">#docker swarm join --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx 172.17.0.2:2377</span>
+
+docker swarm join-token manager
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker swarm join --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2 172.17.0.2:2377</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb6df019" class="outline-3">
+<h3 id="orgb6df019">Docker node</h3>
+<div class="outline-text-3" id="text-orgb6df019">
+<div class="org-src-container">
+<pre class="src src-sh">docker node --help
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">demote      Demote one or more nodes from manager in the swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">inspect     Display detailed information on one or more nodes</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ls          List nodes in the swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">promote     Promote one or more nodes to manager in the swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ps          List tasks running on one or more nodes, defaults to current node</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rm          Remove one or more nodes from the swarm</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">update      Update a node drain or activa the node </span>
+
+docker node ls
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">hc0pu7ntc7s4uvj4pv7z7pz15     swarm-test-03   Ready     Active         Reachable        20.10.2</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">n41b2cijmhifxxvz56vwrs12q     swarm-test-04   Ready     Active                          20.10.2</span>
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">To Drain or Stop a server(container) : </span>
+<span style="color: #4f5b67;">#</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker node update --avalibility drain &lt;hostaname&gt;</span>
+docker node update --avalibility drain worker1
+docker node update --avalibility active worker1
+
+<span style="color: #4f5b67;">#</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To activae a server(container):</span>
+<span style="color: #4f5b67;">#</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker node update --avalibility active hostaname</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To show which node is drain/active </span>
+docker node ls 
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to leave the swarm cluster</span>
+docker leave &lt;hostname&gt;
+docker swarm leave
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">for leader to leave swarm</span>
+docker swarm leave --force 
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org298ed35" class="outline-3">
+<h3 id="org298ed35">Docker service</h3>
+<div class="outline-text-3" id="text-org298ed35">
+<p>
+Create a cluster
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">What is docker service ?</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">is a cluster(replica) of-container(same docker-image)</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">containers or service :docker run -it --name jenkins jenkins used to manage </span>
+docker service --help
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">create      Create a new service</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">inspect     Display detailed information on one or more services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">logs        Fetch the logs of a service or task</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ls          List services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ps          List the tasks of one or more services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rm          Remove one or more services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rollback    Revert changes to a service's configuration</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">scale       Scale one or multiple replicated services</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">update      Update a service</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step5: create service (container running) : if you want to bring up 5 service at a time </span>
+docker service create --replicas 5 -p 80:80 --name web nginx
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">or </span>
+docker service create -p 83:80 --name nginx-dev nginx
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">step6: if you wonna check service is running or not </span>
+docker service ls
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ID            NAME      MODE            REPLICAS             IMAGE</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">c8wgl7q4ndfd  frontend  replicated      5/5                  nginx:alpine</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">dmu1ept4cxcf  redis     replicated      3/3                  redis:3.0.6</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">iwe3278osahj  mongo     global          7/7                  mongo:3.3</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">hh08h9uu8uwr  job       replicated-job  1/1 (3/5 completed)  nginx:latest</span>
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step7: where this is running</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">see in which node the container(service) is running</span>
+docker service ps redis
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">0qihejybwf1x   redis.1   redis:3.0.5  manager1  Running        Running 8 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">bk658fpbex0d   redis.2   redis:3.0.5  worker2   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">5ls5s5fldaqg   redis.3   redis:3.0.5  worker1   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">8ryt076polmc   redis.4   redis:3.0.5  worker1   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">1x0v8yomsncd   redis.5   redis:3.0.5  manager1  Running        Running 8 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">71v7je3el7rr   redis.6   redis:3.0.5  worker2   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">4l3zm9b7tfr7   redis.7   redis:3.0.5  worker2   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">9tfpyixiy2i7   redis.8   redis:3.0.5  worker1   Running        Running 9 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">3w1wu13yupln   redis.9   redis:3.0.5  manager1  Running        Running 8 seconds</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">8eaxrb2fqpbn   redis.10  redis:3.0.5  manager1  Running        Running 8 seconds</span>
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step8: scale up</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">docker service scale &lt;servicename&gt;=20</span>
+docker service scale <span style="color: #ebcb8b;">nginx</span>=20
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To know how may scale in server we using </span>
+docker service ls
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">ID            NAME      MODE            REPLICAS             IMAGE</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">c8wgl7q4ndfd  frontend  replicated      5/5                  nginx:alpine</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">dmu1ept4cxcf  redis     replicated      20/20                  redis:3.0.6</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">iwe3278osahj  mongo     global          7/7                  mongo:3.3</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">hh08h9uu8uwr  job       replicated-job  1/1 (3/5 completed)  nginx:latest</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To which node how many servers are running </span>
+docker service ps nginx
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step9: scale down</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker service scale &lt;servicename&gt;=5</span>
+docker service scale <span style="color: #ebcb8b;">nginx</span>=5
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">step 10: if you wonna remove service</span>
+docker service rm servicename
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb1bdc58" class="outline-3">
+<h3 id="orgb1bdc58"><span class="todo TODO">TODO</span> Docker  Service Update</h3>
+<div class="outline-text-3" id="text-orgb1bdc58">
+<p>
+If you want to update you db(mysql,mongodb,postgres) to new version then we need to create new db and copy db-data to new db by roll-replacing update
+</p>
+
+<p>
+Include rollback and healthcheck options   
+</p>
+<pre class="example">
+# update image version 
+docker servicec update --image myapp:1.2.1 &lt; service-name&gt;
+# update evnironment varialbe and remove port 
+docker service update --env-add NODE_ENV=production --publish-rm 8080
+
+# update replicas
+docker servce web=8 api=6
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa1718c" class="outline-2">
+<h2 id="orgaa1718c">Docker DNS RoundRobin</h2>
+<div class="outline-text-2" id="text-orgaa1718c">
+<p>
+Docker Network DNS
+</p>
+<ul class="org-ul">
+<li>How DNS is key to easy inter-container comms</li>
+<li>How it works by default with custom networks</li>
+<li>How to use &#x2013;link enable</li>
+</ul>
+
+<p>
+The containers ip address is not same because containers are continously creatred and distroyed so we need other naming system so that they can connect regardless of ip address. The solution is using DNS naming 
+</p>
+
+<p>
+Different containers has  same DNS is know as Docker DNS Roundrobin
+Ex: google.com
+</p>
+
+<p>
+Roundrobin mesh con
+</p>
+<ul class="org-ul">
+<li>Stateless load balancer:
+layer at OSI 3(TCP), not layer 4(DNS)</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker network create my_app_net
+docker container run -itd --name new_nginx --network my_app_net nginx
+docker container run -itd --name my_nginX --network my_app_net nginx
+docker network inspect my_app_network
+
+
+docker container ls
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">d2bf3ff05b9b        nginx               "nginx -g 'daemon of&#8230;"   19 seconds ago       Up 17 seconds       80/tcp                 my_nginX</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">b98f30cc34bd        nginx               "nginx -g 'daemon of&#8230;"   About a minute ago   Created                                    new_nginx</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">3928fe27faa0        httpd               "httpd-foreground"       19 minutes ago       Up 19 minutes       0.0.0.0:8080-&gt;80/tcp   webserver</span>
+
+docker container exec -it my_nginx ping new_nginx
+docker container exec -it new_nginx pring ny_nginx
+
+docker network ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Doesn't DNS </span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2df399c" class="outline-3">
+<h3 id="org2df399c">Conclusion</h3>
+<div class="outline-text-3" id="text-org2df399c">
+<ul class="org-ul">
+<li>Containers shouldn't rely on IP's for inter-communication</li>
+<li>DNS for friendly names is built-in if you use custome networks</li>
+<li>If You're using custome networks Then it gets way easier with docker compose in future</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf3c5c71" class="outline-3">
+<h3 id="orgf3c5c71"><span class="todo TODO">TODO</span> Assignment :DNS RoundRobin Test</h3>
+<div class="outline-text-3" id="text-orgf3c5c71">
+<p>
+Requirement: 
+</p>
+<ul class="org-ul">
+<li>Know how to use -it to get shell in container</li>
+<li>Basics of Linux distribution like ubuntu and centos</li>
+<li>How to runcontainer</li>
+<li>Understand DNS Records</li>
+</ul>
+<ul class="org-ul">
+<li>What is DNS RoundRobin ?
+<ul class="org-ul">
+<li>A same DNS or one DNS Server is having one or more  aliase servers 
+<ul class="org-ul">
+<li>Ex: google : Google has 1000 or millons of servers but it has one DNS which is called DNS RoundRobin</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>Assignment</li>
+<li>Since Docker Engin 1.11  we can have multiple container on a created network respond to same DNS address</li>
+</ul>
+
+<p>
+Steps :
+</p>
+<ul class="org-ul">
+<li>Create a new virtaul network (default bridge)</li>
+<li>Create two container from elasticsearch:2  image</li>
+<li>Research and use -network-alias serach when creating them to give them an additional DNS</li>
+<li>Run alpine nslookup search with &#x2013;net to see the two containers list for the same DNS name</li>
+<li>Run centos curl -s search:9200 with &#x2013;net multiple times untill you see both "name" fields show</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker network create dude
+docker container -itd --net dude --net-alias serach elasticsearch:2
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">--net-alias or</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">--network-alias  both are same</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org851a8b1" class="outline-2">
+<h2 id="org851a8b1">Docker Stack</h2>
+<div class="outline-text-2" id="text-org851a8b1">
+</div>
+<div id="outline-container-org14e737b" class="outline-3">
+<h3 id="org14e737b">Intro</h3>
+<div class="outline-text-3" id="text-org14e737b">
+<ul class="org-ul">
+<li>In 1.13 Docker adds a new layer of abstraction to swarm called stack</li>
+<li>Stacks accept Compose files
+<ul class="org-ul">
+<li>which consist of declarative definition for services, networks, and volumes</li>
+<li>its swarm job to create them</li>
+<li>include <code>secrete</code></li>
+</ul></li>
+<li>We use <code>docker stack deploy</code>  rather then docker service create</li>
+<li>Stacks manages all those obj for us,
+-including overlay netwok per stack, volume and inter-connection, services</li>
+<li>New <code>deploy</code> : key in Compose file. Can't do build:
+<ul class="org-ul">
+<li>who many replicas are needed</li>
+<li>what we can't in stack is we <code>can't build</code> as docker-compose.</li>
+</ul></li>
+<li>Compose is created to <code>build multi service</code> while ignoring <code>deploy</code> and</li>
+<li>Swarm is created to <code>deploy</code> while ignoring <code>build</code></li>
+<li>docker-compose cli not need in docker swarm
+NOTE: Compose is not the production tool but for developer and sys-admin tool. Swarm is production,deployment tool.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2f80ca3" class="outline-3">
+<h3 id="org2f80ca3">Difference btw compose and stack file</h3>
+<div class="outline-text-3" id="text-org2f80ca3">
+<p>
+In stack we will not see build option
+In stack as new function called <code>deploy</code> which tells about
+</p>
+<ul class="org-ul">
+<li><p>
+deploy:
+</p>
+<ul class="org-ul">
+<li>replicas</li>
+<li>update<sub>config</sub> {parallelism, delay}</li>
+<li>restart<sub>policy</sub> {condition[on-failure], delay,max<sub>attempts,window</sub>}</li>
+<li>placement: {constraints [node.role]==manager}</li>
+<li>mode</li>
+<li>labels [APP=VOTING]</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">docker stack deploy -c &lt;compose-file-path&gt; &lt;stack-name&gt; <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">c:compose</span>
+
+Usage:  docker stack [OPTIONS] COMMAND
+Options:
+      --orchestrator string   Orchestrator to use (swarm|kubernetes|all)
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">deploy      Deploy a new stack or update an existing stack</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ls          List stacks</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ps          List the tasks in the stack</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rm          Remove one or more stacks</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">services    List the services in the stack</span>
+
+docker stack deploy -c voting_app.yml vote_app
+docker stack ls
+docker stack ps voteapp
+docker stack services voteapp
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Update of stack:</span>
+  <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Q)  if new-update in voting app is done then How to update stack</span>
+     <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">A) git compose-file(.yml) and delpoy again without stop or removing stack</span>
+vim voting_app.yml
+docker  stack deploy -c voting_app.yml voteapp
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1d31298" class="outline-3">
+<h3 id="org1d31298">Docker stack componets overview</h3>
+<div class="outline-text-3" id="text-org1d31298">
+<p>
+<a href="https://docs.docker.com/compose/compose-file/compose-file-v3/">https://docs.docker.com/compose/compose-file/compose-file-v3/</a>
+</p>
+<blockquote>
+<ul class="org-ul">
+<li>docker stack.yml file 
+<ul class="org-ul">
+<li>version
+<ul class="org-ul">
+<li>3  # min 3 or higher</li>
+</ul></li>
+<li>services : Services consist of individual service(service in swarm)
+<ul class="org-ul">
+<li>Each service has unique &lt;service-name&gt; and each service consist of 
+<ul class="org-ul">
+<li>image</li>
+<li>environment</li>
+<li>secrets : min yml version : 3.1</li>
+<li>ports</li>
+<li>deploy
+<ul class="org-ul">
+<li>mode {replicated(specified number of containers),global(exactly one container per swarm node)}</li>
+<li>relicas</li>
+<li>label</li>
+<li>placement
+<ul class="org-ul">
+<li>constraints</li>
+</ul></li>
+<li>resources
+<ul class="org-ul">
+<li>limits
+<ul class="org-ul">
+<li>cups</li>
+<li>memory</li>
+</ul></li>
+<li>reservations:
+<ul class="org-ul">
+<li>cups:</li>
+<li>memory:</li>
+</ul></li>
+</ul></li>
+<li>restart<sub>policy</sub>
+<ul class="org-ul">
+<li>condition{none,on-failure,any }</li>
+<li>delay</li>
+<li>max<sub>attemps</sub></li>
+<li>window</li>
+</ul></li>
+<li>update<sub>config</sub>
+<ul class="org-ul">
+<li>parallelism</li>
+<li>delay</li>
+</ul></li>
+<li>rollback<sub>config</sub>:
+<ul class="org-ul">
+<li>parallelism</li>
+<li>delay</li>
+</ul></li>
+<li>healthcheck:
+<ul class="org-ul">
+<li>test: ["CMD", "curl", "-f", "<a href="http://localhost">http://localhost</a>"]</li>
+<li>interval: 1m30s</li>
+<li>timeout: 10s</li>
+<li>retries: 3</li>
+<li>start<sub>period</sub>: 40s</li>
+</ul></li>
+<li>links:</li>
+</ul></li>
+<li>volume
+<ul class="org-ul">
+<li>type: {volume,bind}</li>
+<li>source: mydata,./curr<sub>dir</sub></li>
+<li>target: /opt/app/static</li>
+</ul></li>
+<li>networks</li>
+<li>depends<sub>on</sub></li>
+<li>link</li>
+<li>stop<sub>grace</sub><sub>period</sub>:</li>
+</ul></li>
+</ul></li>
+<li>volumes</li>
+<li>networks
+<ul class="org-ul">
+<li>&lt;networkname&gt;
+<ul class="org-ul">
+<li>network<sub>mode</sub>: {bridge,host,none,overlay}</li>
+</ul></li>
+</ul></li>
+<li>secrets  # min yml version : 3.1
+<ul class="org-ul">
+<li>&lt;name of secret&gt; 
+<ul class="org-ul">
+<li>external: true # if secret is already created then use this</li>
+<li>file :  *.txt  # if need to create new user/pwd using file</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgca4af75" class="outline-3">
+<h3 id="orgca4af75">Examples</h3>
+<div class="outline-text-3" id="text-orgca4af75">
+</div>
+<div id="outline-container-org827b673" class="outline-4">
+<h4 id="org827b673">wordpress and mysql</h4>
+<div class="outline-text-4" id="text-org827b673">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">stack:</span>
+---
+version: <span style="color: #deb887;">'3'</span>
+services:
+
+ mydb:
+  image: mysql:5
+  environment:
+    MYSQL_ROOT_PASSWORD: DEV@123
+
+ myword:
+   image: wordpress
+   ports:
+    - 83:80
+   deploy:       <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">main diff btw compose and stack : </span>
+     replicas: 3 <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">scale</span>
+     placement:  <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">at which place should it run</span>
+       constraints:
+         - node.hostname == stackslave
+
+     resources:    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">hardware resources </span>
+       limits:
+         cpus: <span style="color: #deb887;">"0.01"</span>
+         memory: 100M
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1dde7d2" class="outline-4">
+<h4 id="org1dde7d2">Jenkins</h4>
+<div class="outline-text-4" id="text-org1dde7d2">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">########################################################################</span>
+
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Example :stack2:</span>
+
+version: <span style="color: #deb887;">'3'</span>
+services:
+  myjenkins:
+     image: jenkins
+     ports:
+      - 8083:8080
+     deploy:
+       replicas: 2
+       placement:
+         constraints:
+          - node.hostname == stackmaster
+       resources:
+         limits:
+           cpus: <span style="color: #deb887;">"0.5"</span>
+           memory: 100M
+
+
+
+</pre>
+</div>
+<p>
+jenkins with nginx
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">stack3:</span>
+---
+version: <span style="color: #deb887;">'3'</span>
+services:
+  myjenkins:
+     image: jenkins
+     ports:
+      - 8083:8080
+     deploy:
+       replicas: 2
+       placement:
+         constraints:
+          - node.hostname == stackmaster
+
+  mynginx:
+    image: nginx
+    ports:
+      - 83:80
+    deploy:
+      replicas: 2
+      placement:
+         constraints:
+            - node.hostname == stackslave
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa7c856" class="outline-4">
+<h4 id="orgaa7c856">jenkins with nginx and stack master and slave</h4>
+<div class="outline-text-4" id="text-orgaa7c856">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">stack4:</span>
+---
+version: <span style="color: #deb887;">'3'</span>
+services:
+  myjenkins:
+     image: jenkins
+     ports:
+      - 8083:8080
+     deploy:
+       replicas: 2
+       placement:
+         constraints:
+          - node.hostname == stackmaster
+
+  mynginx:
+    image: nginx
+    ports:
+      - 83:80
+    deploy:
+      replicas: 2
+      placement:
+         constraints:
+            - node.hostname == stackslave
+
+
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf10bd82" class="outline-4">
+<h4 id="orgf10bd82">update<sub>config</sub></h4>
+<div class="outline-text-4" id="text-orgf10bd82">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">stack5:</span>
+version: <span style="color: #deb887;">'3'</span>
+services:
+ devserver:
+    image: jenkins
+    ports:
+     - 8082:8080
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP-VOTING]
+      placement:
+        constraints: [node.role == manager]
+       update_config:
+        parallelism: 2
+        delay: 10s <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">when container started but in delay so we add delay</span>
+      restart_policy:
+        condtion: on-faliure
+        delay: 10s
+        max_attempts: 3
+        windos: 120 s
+      resources:
+         limits:
+           cpus: <span style="color: #deb887;">"0.5"</span>
+           memory: 100M
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6c106ee" class="outline-3">
+<h3 id="org6c106ee">docker stack cmd</h3>
+<div class="outline-text-3" id="text-org6c106ee">
+<div class="org-src-container">
+<pre class="src src-sh">docker stack deploy -c &lt;stack-file.yml&gt; &lt;stack-name&gt;
+
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;"># RUN STACK FILE</span>
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">docker stack deploy -c name.yml mystack</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">To inspect which node the stack is running</span>
+docker stack ps mystack
+docker stack rm mystack <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">remove the stack</span>
+
+
+docker stack ls <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Name and No.of services running </span>
+docker stack ps &lt;service-name&gt;    <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">task or serive(name,id), image, node, desire state(running,stopped...), port </span>
+docker stack serivces voteapp     <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">service (id, name)  mode(replicated), replicas, images </span>
+
+Usage:  docker stack [OPTIONS] COMMAND
+Options:
+      --orchestrator string   Orchestrator to use (swarm|kubernetes|all)
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">deploy      Deploy a new stack or update an existing stack</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ls          List stacks</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">ps          List the tasks in the stack</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">rm          Remove one or more stacks</span>
+<span style="color: #4f5b67;">#  </span><span style="color: #4f5b67;">services    List the services in the stack</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8a9fad7" class="outline-2">
+<h2 id="org8a9fad7">Docker Secrets</h2>
+<div class="outline-text-2" id="text-org8a9fad7">
+</div>
+<div id="outline-container-orge44100f" class="outline-3">
+<h3 id="orge44100f">Intro</h3>
+<div class="outline-text-3" id="text-orge44100f">
+<ul class="org-ul">
+<li>Added in Docker 1.13 uses Swarm Raft DB in encript on disk</li>
+<li>Only stored on disk on Manager Nodes</li>
+<li>Default is Managers and Workers "control plane" in TLS + Mutal Auth</li>
+<li>Secrets are first stored in Swarm, then  assigned Service('s)</li>
+<li>They look like files in contianer but are actually  in-memory File System</li>
+<li>Locally development docker-compose can be use file-based secrets, but not sure</li>
+</ul>
+<p>
+Note we can see user<sub>id</sub> and password by runing <code>cat /run/secrets/&lt;secret-user_id |password|secret-alias&gt;</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orge45733e" class="outline-3">
+<h3 id="orge45733e">secret cmd</h3>
+<div class="outline-text-3" id="text-orge45733e">
+<div class="org-src-container">
+<pre class="src src-sh">$ docker secret
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Commands:</span>
+<span style="color: #4f5b67;">#   </span><span style="color: #4f5b67;">create      Create a secret from a file or STDIN as content</span>
+<span style="color: #4f5b67;">#   </span><span style="color: #4f5b67;">inspect     Display detailed information on one or more secrets</span>
+<span style="color: #4f5b67;">#   </span><span style="color: #4f5b67;">ls          List secrets</span>
+<span style="color: #4f5b67;">#   </span><span style="color: #4f5b67;">rm          Remove one or more secrets</span>
+
+
+<span style="color: #f08080;">echo</span> <span style="color: #deb887;">"dan_psql"</span> | dokcer secret create psql_user -
+<span style="color: #f08080;">echo</span> <span style="color: #deb887;">"myDd_passwrd"</span> | dokcer secret create psql_password -
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">or create file psql_user, psql_password which contain id and password </span>
+cat psql_user.txt psql_password.txt
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">dan_psql</span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">myDd_passwrd</span>
+docker secret create psql_user psql_user.txt
+
+docker secrete ls
+docker secrete inspect psql_user <span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Don't show user_id</span>
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">Pass secrets to db</span>
+docker service create --name psql <span style="color: #deb887;">\</span>
+                      --secret psql_user <span style="color: #deb887;">\</span>
+                      --secret psql_pass <span style="color: #deb887;">\</span>
+                      -e <span style="color: #ebcb8b;">POSTGRES_USER_FILE</span>=/run/secret/psql_user <span style="color: #deb887;">\</span>
+                      -e <span style="color: #ebcb8b;">POSTGRES_PASSWORD_FILE</span>=/run/secret/psql_pass postgress
+
+
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">to see password </span>
+docker exec -it psql /bin/bash
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">$cat /run/secret/psql_user(or)password # show user name and password</span>
+docker service ps psql
+<span style="color: #4f5b67;"># </span><span style="color: #4f5b67;">id</span>
+docker logs psql.1.&lt;id&gt; <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">from above </span>
+
+
+docker service update --secret-rm <span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">to remove the secret form container then container or service will fail and re-deploy them </span>
+<span style="color: #4f5b67;">#</span><span style="color: #4f5b67;">TODO : How to update database password using secret </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org21d029d" class="outline-3">
+<h3 id="org21d029d">Example  Stack with Secret</h3>
+<div class="outline-text-3" id="text-org21d029d">
+</div>
+<div id="outline-container-org768ec45" class="outline-4">
+<h4 id="org768ec45">stack compose file for postgress db  with secret  passed though file</h4>
+<div class="outline-text-4" id="text-org768ec45">
+<pre class="example">
+# cd /media/jayradhey/New Volume1/Tutorial_Docker/secrets-sample-2
+#├── docker-compose.yml
+#├── psql_password.txt
+#└── psql_user.txt
+
+
+version: "3.1"
+
+services:
+  psql:
+    image: postgres
+    secrets:
+      - psql_user
+      - psql_password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/psql_password
+      POSTGRES_USER_FILE: /run/secrets/psql_user
+
+secrets:
+  psql_user:
+    file: ./psql_user.txt
+  psql_password:
+    file: ./psql_password.txt
+
+###############################################
+docker stack deploy -c docker-compose.yml mydb
+docker secret ls 
+
+docker secret rm mydb # remove the secret also 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge34c235" class="outline-4">
+<h4 id="orge34c235">stack compose file for drupal and postgress db with secret passed externally</h4>
+<div class="outline-text-4" id="text-orge34c235">
+<pre class="example">
+version: '3.1'
+
+services:
+
+  drupal:
+    image: drupal:8.2
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+
+  postgres:
+    image: postgres:12.1
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/psql-pw
+    secrets:
+      - psql-pw 
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+
+volumes:
+  drupal-data:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+
+secrets:
+  psql-pw:
+    external: true
+
+#############################################
+echo "myDd_passwrd" | dokcer secret create psql_pw -
+docker stack deploy -c docker-compose.yml drupal
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbae59fb" class="outline-2">
+<h2 id="orgbae59fb">Full App Lifecycle with compose file</h2>
+<div class="outline-text-2" id="text-orgbae59fb">
+<p>
+A single compose can solve mulitple serveice deploy easy 
+But we need different compose file for different envirnoment like
+</p>
+<ul class="org-ul">
+<li>prodution</li>
+<li>uit testing</li>
+<li>overwrite : for local development</li>
+</ul>
+
+<pre class="example">
+#cd /media/jayradhey/New Volume1/Tutorial_Docker/swarm-stack-3
+#├── docker-compose.override.yml
+#├── docker-compose.prod.yml
+#├── docker-compose.test.yml
+#├── docker-compose.yml
+#├── Dockerfile
+#├── psql-fake-password.txt
+#└── themes/
+
+docker-compose up -d 
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up config 
+# combine the two compose file into one compose file 
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up config &gt; output.yml
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org400283b" class="outline-2">
+<h2 id="org400283b">Docker Trouble Shoot</h2>
+<div class="outline-text-2" id="text-org400283b">
+<p>
+Got Permission denined connecting  Docker deamon socket at unix:///var/run/docker.socket [aws]: This error in aws happen when we restart the ec2-instance where docker is present 
+</p>
+<ul class="org-ul">
+<li><code>sudo chmod 777 /var/run/docker.sock</code></li>
+</ul>
+
+<p>
+Pulled Wrong Docker Image in Production-EC2 instance after Jenkins Build Docker image  :
+</p>
+<ul class="org-ul">
+<li>After Jenkins Build the Docker-image when it push image to ECR(or)Repo
+<ul class="org-ul">
+<li>Jenkins Pipeline Prodcution Ec2 server to pull the image we need to check if we selected the jenkins build</li>
+</ul></li>
+</ul>
+
+<pre class="example">
+# ###################################
+# Below cmd run in jenkins ec2 instance
+# #############################
+docker push 918175365727.dkr.ecr.eu-west-1.amazonaws.com/test_repo:latest
+#The push refers to repository #[918175365727.dkr.ecr.eu-west-1.amazonaws.com/test_repo]
+#ea4bc0cd4a93: Pushed 
+#fac199a5a1a5: Pushed 
+#5c77d760e1f4: Pushed 
+#33cf1b723f65: Pushed 
+#ea207a4854e7: Pushed 
+#608f3a074261: Pushed 
+#latest: digest: sha256:83d487b625d8c7818044c04f1b48aabccd3f51c3341fc300926846bca0c439e6 size: 1570
+
+# ################################
+# Below cmd is run in Production server 
+# ##############################
+
+docker pull 918175365727.dkr.ecr.eu-west-1.amazonaws.com/test_repo:latest
+latest: Pulling from 918175365727.dkr.ecr.eu-west-1.amazonaws.com
+#ea4bc0cd4a93: Pull completed 
+#fac199a5a1a5: Pull completed 
+#5c77d760e1f4: Pull copleted  
+#33cf1b723f65: Pull copleted  
+#ea207a4854e7: Pull copleted  
+#608f3a074261: Pull copleted  
+#Digest: sha256:83d487b625d8c7818044c04f1b48aabccd3f51c3341fc300926846bca0c439e6
+#Status : Downloaded newer image from 918175365727.dkr.ecr.eu-west-1.amazonaws.com/test_repo:latest
+#918175365727.dkr.ecr.eu-west-1.amazonaws.com
+
+# ##################33
+# Note : Both Digiest code is same in push and pull 
+# ############################
+</pre>
+
+
+<p>
+In AutoScaling if you shutdonw the instance manually then you need to make sure to restart the docker manually as above and
+make-sure TargetGroup ec2-instance are healthy
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: D Karthik</p>
+<p class="date">Created: 2023-03-12 Sun 14:57</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

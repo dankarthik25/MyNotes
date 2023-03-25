@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-17 Sun 10:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Markdown to html</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="DeepAlgorithms" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/simple_whiteblue.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Markdown to html</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org303ad8f">Pandoc used cmd</a>
+<ul>
+<li><a href="#orgd847785">org2html using pandoc and org2docx or org2odt</a></li>
+<li><a href="#orgb82e1dd">VSCode Python Data Science Setup, Part 11: Markdown to (html, pdf ) extensions</a></li>
+</ul>
+</li>
+<li><a href="#orgbdf94db">Pandoc cmd</a></li>
+<li><a href="#org71d2cd9">host web-site using [static html file] in google-drive  link</a></li>
+<li><a href="#orgb506bbd">google search for github style markdown template</a></li>
+<li><a href="#org76fa8e0">Django Markdown Tutorial - A Simple Blog Example | Django/Python</a></li>
+<li><a href="#orgf6b5059">Using pandoc to convert Markdown to HTML</a></li>
+<li><a href="#org8301a29">Test codeblock for org2html</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org303ad8f" class="outline-2">
+<h2 id="org303ad8f">Pandoc used cmd</h2>
+<div class="outline-text-2" id="text-org303ad8f">
+</div>
+<div id="outline-container-orgd847785" class="outline-3">
+<h3 id="orgd847785">org2html using pandoc and org2docx or org2odt</h3>
+<div class="outline-text-3" id="text-orgd847785">
+<pre class="example">
+#
+# # # INPUT : md
+#
+# -c : convert input html with css
+# -f : input format , -t : output format ,
+
+
+pandoc -f markdown -t latex hello.txt 
+pandoc -c pandoc.css -s in.md -o out.html 
+
+#
+# # # INPUT : org
+#
+pandoc -c pandoc.css -f org -s markdown-2-other.org -o out.html   
+pandoc -c pandoc.css -f org -s markdown-2-other.org -t docx -o out.docx  
+pandoc -c pandoc.css -f org -s ReadMe-3-CrossAccount-AmazonEventBridge.org -o out.html  
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb82e1dd" class="outline-3">
+<h3 id="orgb82e1dd">VSCode Python Data Science Setup, Part 11: Markdown to (html, pdf ) extensions</h3>
+<div class="outline-text-3" id="text-orgb82e1dd">
+<p>
+<a href="https://www.youtube.com/watch?v=galkO3t_1Og">https://www.youtube.com/watch?v=galkO3t_1Og</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbdf94db" class="outline-2">
+<h2 id="orgbdf94db">Pandoc cmd</h2>
+<div class="outline-text-2" id="text-orgbdf94db">
+<p>
+Pandoc support below format as input(-f or &#x2013;from) and ouput(-o or &#x2013;output) 
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Specify input format. FORMAT can be</span>:
+    epub (EPUB)
+    gfm (GitHub-Flavored Markdown), or the deprecated and less accurate markdown_github; use markdown_github only if you need extensions not supported in gfm.
+    html (HTML)
+    ipynb (Jupyter notebook)
+    jats (JATS XML)
+    jira (Jira/Confluence wiki markup)
+    docx (Word docx)
+    json (JSON version of native AST)
+    latex (LaTeX)
+    markdown (Pandoc&#8217;s Markdown)
+    markdown_mmd (MultiMarkdown)
+    markdown_phpextra (PHP Markdown Extra)
+    markdown_strict (original unextended Markdown)
+    odt (ODT)
+    org (Emacs Org mode)
+    rtf (Rich Text Format)
+    rst (reStructuredText)
+</pre>
+</div>
+
+
+<p>
+cmd
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-f/--from      input format </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-t/--to        output format </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-o/--output    output to a file, use the -o option:</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-s/--standalone</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-c/--css       Link to a CSS style sheet</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">--template=FILE|URL</span>
+pandoc -f html -t markdown https://www.fsf.org <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org71d2cd9" class="outline-2">
+<h2 id="org71d2cd9">host web-site using [static html file] in google-drive  <a href="https://www.youtube.com/watch?v=m3TXRxqiGvw">link</a></h2>
+<div class="outline-text-2" id="text-org71d2cd9">
+<p>
+<a href="https://www.youtube.com/watch?v=m3TXRxqiGvw">https://www.youtube.com/watch?v=m3TXRxqiGvw</a>
+<a href="https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs">https://stackoverflow.com/questions/30576469/reading-markdown-from-a-file-hosted-in-google-docs</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb506bbd" class="outline-2">
+<h2 id="orgb506bbd">google search for github style markdown template</h2>
+<div class="outline-text-2" id="text-orgb506bbd">
+<p>
+<a href="https://stackoverflow.com/questions/50513696/pandoc-convert-github-flavoured-markdown-containing-mixed-html-and-markdown-to">https://stackoverflow.com/questions/50513696/pandoc-convert-github-flavoured-markdown-containing-mixed-html-and-markdown-to</a>
+</p>
+
+<p>
+<a href="https://gist.github.com/killercup/5917178">https://gist.github.com/killercup/5917178</a>
+</p>
+
+
+<p>
+<a href="https://gist.github.com/atelierbram/09c8fb742f1518f09ff9e4338ab8f7fb">https://gist.github.com/atelierbram/09c8fb742f1518f09ff9e4338ab8f7fb</a>
+</p>
+
+
+<p>
+<a href="https://gist.github.com/dashed/6714393">https://gist.github.com/dashed/6714393</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org76fa8e0" class="outline-2">
+<h2 id="org76fa8e0">Django Markdown Tutorial - A Simple Blog Example | Django/Python</h2>
+<div class="outline-text-2" id="text-org76fa8e0">
+<p>
+<a href="https://www.youtube.com/watch?v=t61nTi0lIlk">https://www.youtube.com/watch?v=t61nTi0lIlk</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf6b5059" class="outline-2">
+<h2 id="orgf6b5059">Using pandoc to convert Markdown to HTML</h2>
+<div class="outline-text-2" id="text-orgf6b5059">
+<p>
+<a href="https://www.youtube.com/watch?v=sZBmoiFTJVY">https://www.youtube.com/watch?v=sZBmoiFTJVY</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org8301a29" class="outline-2">
+<h2 id="org8301a29">Test codeblock for org2html</h2>
+<div class="outline-text-2" id="text-org8301a29">
+<p>
+python code 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #715ab1;">tuple_1</span> = (<span style="color: #2d9574;">'History'</span>, <span style="color: #2d9574;">'Math'</span>, <span style="color: #2d9574;">'Physics'</span>, <span style="color: #2d9574;">'CompSci'</span>)
+<span style="color: #715ab1;">tuple_2</span> = tuple_1
+
+<span style="color: #3a81c3;">print</span>(tuble_1)
+<span style="color: #3a81c3;">print</span>(tuble_2)
+
+<span style="color: #715ab1;">tuple_1</span>[0] = <span style="color: #2d9574;">'Art'</span>                    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error because tubles are immutable</span>
+</pre>
+</div>
+
+<p>
+shell scripts
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #3a81c3;">cd</span> test/file
+aws cloudformation deploy --template-file pipelinecf.yaml --stack-name pipeline-build --parameter-overrides <span style="color: #715ab1;">Key1</span>=Value1 <span style="color: #715ab1;">Key2</span>=Value2 --tags <span style="color: #715ab1;">Key1</span>=Value1 <span style="color: #715ab1;">Key2</span>=Value2
+</pre>
+</div>
+
+<p>
+json file 
+</p>
+<div class="org-src-container">
+<pre class="src src-json">{
+    <span style="color: #3a81c3; font-weight: bold;">"Version"</span>: <span style="color: #2d9574;">"2012-10-17"</span>,
+    <span style="color: #3a81c3; font-weight: bold;">"Statement"</span>: [
+        {
+            <span style="color: #3a81c3; font-weight: bold;">"Effect"</span>: <span style="color: #2d9574;">"Allow"</span>,
+            <span style="color: #3a81c3; font-weight: bold;">"Principal"</span>: {
+                <span style="color: #3a81c3; font-weight: bold;">"Service"</span>: <span style="color: #2d9574;">"codepipeline.amazonaws.com"</span>
+            },
+            <span style="color: #3a81c3; font-weight: bold;">"Action"</span>: <span style="color: #2d9574;">"sts:AssumeRole"</span>
+        }
+    ]
+}
+</pre>
+</div>
+
+<p>
+yml
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">version</span>: <span style="color: #2d9574;">'3.1'</span>  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">if no version is specified then v1 is assumed. Recommend v2 minimum</span>
+
+<span style="color: #715ab1;">services</span>:  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">containers. same as docker run</span>
+  <span style="color: #715ab1;">&lt;servicename&gt;</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">a friendly name. this is also DNS name inside network</span>
+    <span style="color: #715ab1;">image</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional if you use build:</span>
+    <span style="color: #715ab1;">build</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">context</span> : . <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">current directory</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">dockerfile</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Name of Dockerfile</span>
+    <span style="color: #715ab1;">command</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional, replace the default CMD specified by the image</span>
+    <span style="color: #715ab1;">environment</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional, same as -e in docker run</span>
+    <span style="color: #715ab1;">secrets</span>:
+    <span style="color: #715ab1;">volumes</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional, same as -v in docker run</span>
+    <span style="color: #715ab1;">depends_on</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">need to run other servers before running this servier</span>
+
+  <span style="color: #715ab1;">servicename2</span>:
+
+<span style="color: #715ab1;">volumes</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional, same as docker volume create</span>
+<span style="color: #715ab1;">networks</span>: <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Optional, same as docker network create</span>
+<span style="color: #715ab1;">secrets</span>:
+</pre>
+</div>
+
+
+
+<p>
+cpp
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span style="color: #6c3163;">#include</span><span style="color: #2d9574;">&lt;iostream&gt;</span>
+<span style="color: #3a81c3; font-weight: bold;">using</span> <span style="color: #3a81c3; font-weight: bold;">namespace</span> <span style="color: #4e3163;">std</span>;
+<span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #6c3163; font-weight: bold;">main</span>(){
+    <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #715ab1;">i</span> =5;
+    cout&lt;&lt;i&lt;&lt; <span style="color: #2d9574;">"Data type"</span> &lt;&lt;i&lt;&lt;<span style="color: #2d9574;">"Hello World !"</span>&lt;&lt;endl;
+    <span style="color: #3a81c3; font-weight: bold;">return</span> 0;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-cpp"><span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #6c3163; font-weight: bold;">main</span>()
+{
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Normal Const </span>
+
+  <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #715ab1;">MAX_AGE</span> =90;
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #715ab1;">MAX_AGE</span> =90;
+
+
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Normal Pointer pointing a cont var </span>
+
+  <span style="color: #ba2f59; font-weight: bold;">int</span>* <span style="color: #715ab1;">a</span> = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;     <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create a normal pointer </span>
+  *a  = 2;              <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">ASSINING VALUE </span>
+  a = (<span style="color: #ba2f59; font-weight: bold;">int</span>*) &amp;MAX_AGE;  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">poin A cosnt value </span>
+  cout &lt;&lt; a&lt;&lt;endl;
+
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Pointer pointing to a constant value</span>
+  <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #ba2f59; font-weight: bold;">int</span> * <span style="color: #715ab1;">a</span>  = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #3a81c3; font-weight: bold;">const</span> * <span style="color: #715ab1;">a</span>  = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;      <span style="color: #2aa1ae; background-color: #ecf3ec;">//</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Both give same result as const is left side of  * </span>
+  *a =2;                        <span style="color: #2aa1ae; background-color: #ecf3ec;">//</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error we can't  modify contant(value) of pointer</span>
+  a = (<span style="color: #ba2f59; font-weight: bold;">int</span>*) &amp;MAX_AGE;
+  cout &lt;&lt; a&lt;&lt;endl;
+
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Pointer pointing to a constant address</span>
+
+  <span style="color: #ba2f59; font-weight: bold;">int</span> * <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #715ab1;">a</span> = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;
+  *a = 2;
+  a = (<span style="color: #ba2f59; font-weight: bold;">int</span>*) &amp;MAX_AGE;   <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error : we created pointer to point constant address </span>
+  cout &lt;&lt; a &lt;&lt; endl;
+
+
+  <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Pointer pointing to a constant address and constant value</span>
+  <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #ba2f59; font-weight: bold;">int</span>* <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #715ab1;">a</span>  = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #3a81c3; font-weight: bold;">const</span> * <span style="color: #3a81c3; font-weight: bold;">const</span> <span style="color: #715ab1;">a</span> = <span style="color: #3a81c3; font-weight: bold;">new</span> <span style="color: #ba2f59; font-weight: bold;">int</span>;
+  *a = 2;                <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error : we created pointer pointing to value</span>
+  a = (<span style="color: #ba2f59; font-weight: bold;">int</span>*) &amp;MAX_AGE;   <span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error : we created pointer to point constant address </span>
+  cout &lt;&lt; a &lt;&lt; endl;
+
+  <span style="color: #4e3163;">std</span>::cin.get();
+}
+</pre>
+</div>
+
+
+<p>
+html
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #3a81c3; font-weight: bold;">!DOCTYPE</span> html&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">title</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Welcome to nginx!</span>&lt;/<span style="color: #6c3163; font-weight: bold;">title</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">style</span>&gt;
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+&lt;/<span style="color: #6c3163; font-weight: bold;">style</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">head</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;">Welcome to DeepAlgorithms!</span>&lt;/<span style="color: #6c3163; font-weight: bold;">h1</span>&gt;
+&lt;<span style="color: #6c3163; font-weight: bold;">p</span>&gt;If you see this page, the test ECS web server is successfully installed and
+working. Further configuration is required.&lt;/<span style="color: #6c3163; font-weight: bold;">p</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">p</span>&gt;For online documentation and support please refer to
+&lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"http://nginx.org/"</span>&gt;nginx.org&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;.&lt;<span style="color: #6c3163; font-weight: bold;">br</span>/&gt;
+Commercial support is available at
+&lt;<span style="color: #6c3163; font-weight: bold;">a</span> <span style="color: #715ab1;">href</span>=<span style="color: #2d9574;">"http://nginx.com/"</span>&gt;nginx.com&lt;/<span style="color: #6c3163; font-weight: bold;">a</span>&gt;.&lt;/<span style="color: #6c3163; font-weight: bold;">p</span>&gt;
+
+&lt;<span style="color: #6c3163; font-weight: bold;">p</span>&gt;&lt;<span style="color: #6c3163; font-weight: bold;">em</span>&gt;<span style="font-style: italic;">Thank you for using nginx.</span>&lt;/<span style="color: #6c3163; font-weight: bold;">em</span>&gt;&lt;/<span style="color: #6c3163; font-weight: bold;">p</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">body</span>&gt;
+&lt;/<span style="color: #6c3163; font-weight: bold;">html</span>&gt;
+</pre>
+</div>
+
+
+<p>
+css
+</p>
+<div class="org-src-container">
+<pre class="src src-css"><span style="color: #2aa1ae; background-color: #ecf3ec;">/*</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"> * I add this to html files generated with pandoc.</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"> * source link : https://gist.github.com/killercup/5917178</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"> * From the command line you now need to use --css=pandoc.css or -c pandoc.css not --css pandoc.css</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"> * pandoc -c pandoc.css -s in.md -o out.html  </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"> */</span>
+
+<span style="color: #6c3163; font-weight: bold;">html </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 100%;
+  <span style="color: #3a81c3; font-weight: bold;">overflow-y</span>: scroll;
+  <span style="color: #3a81c3; font-weight: bold;">-webkit-text-size-adjust</span>: 100%;
+  <span style="color: #3a81c3; font-weight: bold;">-ms-text-size-adjust</span>: 100%;
+}
+
+<span style="color: #6c3163; font-weight: bold;">body </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #444;">#444</span>;
+  <span style="color: #3a81c3; font-weight: bold;">font-family</span>: Georgia, Palatino, <span style="color: #2d9574;">'Palatino Linotype'</span>, Times, <span style="color: #2d9574;">'Times New Roman'</span>, serif;
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 12px;
+  <span style="color: #3a81c3; font-weight: bold;">line-height</span>: 1.7;
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: 1em;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: auto;
+  <span style="color: #3a81c3; font-weight: bold;">max-width</span>: 42em;
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #fefefe;">#fefefe</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #0645ad;">#0645ad</span>;
+  <span style="color: #3a81c3; font-weight: bold;">text-decoration</span>: none;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a:visited </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #0b0080;">#0b0080</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a:hover </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #06e;">#06e</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a:active </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #000000; background-color: #faa700;">#faa700</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a:focus </span>{
+  <span style="color: #3a81c3; font-weight: bold;">outline</span>: thin dotted;
+}
+
+*::-moz-selection {
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ffff00;">rgba(255, 255, 0, 0.3)</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000;">#000</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">*::selection </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ffff00;">rgba(255, 255, 0, 0.3)</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000;">#000</span>;
+}
+
+<span style="color: #3a81c3; font-weight: bold;">a</span>::-moz-selection {
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ffff00;">rgba(255, 255, 0, 0.3)</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #0645ad;">#0645ad</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">a::selection </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ffff00;">rgba(255, 255, 0, 0.3)</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #0645ad;">#0645ad</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">p </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 1em 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">img </span>{
+  <span style="color: #3a81c3; font-weight: bold;">max-width</span>: 100%;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h1, h2, h3, h4, h5, h6 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #111;">#111</span>;
+  <span style="color: #3a81c3; font-weight: bold;">line-height</span>: 125%;
+  <span style="color: #3a81c3; font-weight: bold;">margin-top</span>: 2em;
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: normal;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h4, h5, h6 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: bold;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h1 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 2.5em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h2 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 2em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h3 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 1.5em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h4 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 1.2em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h5 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 1em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">h6 </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 0.9em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">blockquote </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #666666;">#666666</span>;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 0;
+  <span style="color: #3a81c3; font-weight: bold;">padding-left</span>: 3em;
+  <span style="color: #3a81c3; font-weight: bold;">border-left</span>: 0.5em <span style="color: #000000; background-color: #EEE;">#EEE</span> solid;
+}
+
+<span style="color: #6c3163; font-weight: bold;">hr </span>{
+  <span style="color: #3a81c3; font-weight: bold;">display</span>: block;
+  <span style="color: #3a81c3; font-weight: bold;">height</span>: 2px;
+  <span style="color: #3a81c3; font-weight: bold;">border</span>: 0;
+  <span style="color: #3a81c3; font-weight: bold;">border-top</span>: 1px solid <span style="color: #000000; background-color: #aaa;">#aaa</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-bottom</span>: 1px solid <span style="color: #000000; background-color: #eee;">#eee</span>;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 1em 0;
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">pre, code, kbd, samp </span>{
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000;">#000</span>;
+  <span style="color: #3a81c3; font-weight: bold;">font-family</span>: monospace, monospace;
+  _font-family: <span style="color: #2d9574;">'courier new'</span>, monospace;
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 0.98em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">pre </span>{
+  <span style="color: #3a81c3; font-weight: bold;">white-space</span>: pre;
+  <span style="color: #3a81c3; font-weight: bold;">white-space</span>: pre-wrap;
+  <span style="color: #3a81c3; font-weight: bold;">word-wrap</span>: break-word;
+}
+
+<span style="color: #6c3163; font-weight: bold;">b, strong </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: bold;
+}
+
+<span style="color: #6c3163; font-weight: bold;">dfn </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-style</span>: italic;
+}
+
+<span style="color: #6c3163; font-weight: bold;">ins </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ff9;">#ff9</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000;">#000</span>;
+  <span style="color: #3a81c3; font-weight: bold;">text-decoration</span>: none;
+}
+
+<span style="color: #6c3163; font-weight: bold;">mark </span>{
+  <span style="color: #3a81c3; font-weight: bold;">background</span>: <span style="color: #000000; background-color: #ff0;">#ff0</span>;
+  <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000;">#000</span>;
+  <span style="color: #3a81c3; font-weight: bold;">font-style</span>: italic;
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: bold;
+}
+
+<span style="color: #6c3163; font-weight: bold;">sub, sup </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 75%;
+  <span style="color: #3a81c3; font-weight: bold;">line-height</span>: 0;
+  <span style="color: #3a81c3; font-weight: bold;">position</span>: relative;
+  <span style="color: #3a81c3; font-weight: bold;">vertical-align</span>: baseline;
+}
+
+<span style="color: #6c3163; font-weight: bold;">sup </span>{
+  <span style="color: #3a81c3; font-weight: bold;">top</span>: -0.5em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">sub </span>{
+  <span style="color: #3a81c3; font-weight: bold;">bottom</span>: -0.25em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">ul, ol </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 1em 0;
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: 0 0 0 2em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">li p:last-child </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">ul ul, ol ol </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: .3em 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">dl </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 1em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">dt </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-weight</span>: bold;
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: .8em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">dd </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 0 0 .8em 2em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">dd:last-child </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">img </span>{
+  <span style="color: #3a81c3; font-weight: bold;">border</span>: 0;
+  <span style="color: #3a81c3; font-weight: bold;">-ms-interpolation-mode</span>: bicubic;
+  <span style="color: #3a81c3; font-weight: bold;">vertical-align</span>: middle;
+}
+
+<span style="color: #6c3163; font-weight: bold;">figure </span>{
+  <span style="color: #3a81c3; font-weight: bold;">display</span>: block;
+  <span style="color: #3a81c3; font-weight: bold;">text-align</span>: center;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 1em 0;
+}
+
+<span style="color: #6c3163; font-weight: bold;">figure img </span>{
+  <span style="color: #3a81c3; font-weight: bold;">border</span>: none;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 0 auto;
+}
+
+<span style="color: #6c3163; font-weight: bold;">figcaption </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 0.8em;
+  <span style="color: #3a81c3; font-weight: bold;">font-style</span>: italic;
+  <span style="color: #3a81c3; font-weight: bold;">margin</span>: 0 0 .8em;
+}
+
+<span style="color: #6c3163; font-weight: bold;">table </span>{
+  <span style="color: #3a81c3; font-weight: bold;">margin-bottom</span>: 2em;
+  <span style="color: #3a81c3; font-weight: bold;">border-bottom</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-right</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-spacing</span>: 0;
+  <span style="color: #3a81c3; font-weight: bold;">border-collapse</span>: collapse;
+}
+
+<span style="color: #6c3163; font-weight: bold;">table th </span>{
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: .2em 1em;
+  <span style="color: #3a81c3; font-weight: bold;">background-color</span>: <span style="color: #000000; background-color: #eee;">#eee</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-top</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-left</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+}
+
+<span style="color: #6c3163; font-weight: bold;">table td </span>{
+  <span style="color: #3a81c3; font-weight: bold;">padding</span>: .2em 1em;
+  <span style="color: #3a81c3; font-weight: bold;">border-top</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">border-left</span>: 1px solid <span style="color: #000000; background-color: #ddd;">#ddd</span>;
+  <span style="color: #3a81c3; font-weight: bold;">vertical-align</span>: top;
+}
+
+<span style="color: #6c3163; font-weight: bold;">.author </span>{
+  <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 1.2em;
+  <span style="color: #3a81c3; font-weight: bold;">text-align</span>: center;
+}
+
+<span style="color: #3a81c3;">@media</span> only screen and (min-width: 480px) {
+  <span style="color: #6c3163; font-weight: bold;">body </span>{
+    <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 14px;
+  }
+}
+<span style="color: #3a81c3;">@media</span> only screen and (min-width: 768px) {
+  <span style="color: #6c3163; font-weight: bold;">body </span>{
+    <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 16px;
+  }
+}
+<span style="color: #3a81c3;">@media</span> print {
+  <span style="color: #6c3163; font-weight: bold;">* </span>{
+    <span style="color: #3a81c3; font-weight: bold;">background</span>: transparent <span style="color: #3a81c3;">!important</span>;
+    <span style="color: #3a81c3; font-weight: bold;">color</span>: <span style="color: #ffffff; background-color: #000000;">black</span> <span style="color: #3a81c3;">!important</span>;
+    <span style="color: #3a81c3; font-weight: bold;">filter</span>: none <span style="color: #3a81c3;">!important</span>;
+    <span style="color: #3a81c3; font-weight: bold;">-ms-filter</span>: none <span style="color: #3a81c3;">!important</span>;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">body </span>{
+    <span style="color: #3a81c3; font-weight: bold;">font-size</span>: 12pt;
+    <span style="color: #3a81c3; font-weight: bold;">max-width</span>: 100%;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">a, a:visited </span>{
+    <span style="color: #3a81c3; font-weight: bold;">text-decoration</span>: underline;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">hr </span>{
+    <span style="color: #3a81c3; font-weight: bold;">height</span>: 1px;
+    <span style="color: #3a81c3; font-weight: bold;">border</span>: 0;
+    <span style="color: #3a81c3; font-weight: bold;">border-bottom</span>: 1px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">a[href]:after </span>{
+    <span style="color: #3a81c3; font-weight: bold;">content</span>: <span style="color: #2d9574;">" ("</span> attr(href) <span style="color: #2d9574;">")"</span>;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">abbr[title]:after </span>{
+    <span style="color: #3a81c3; font-weight: bold;">content</span>: <span style="color: #2d9574;">" ("</span> attr(title) <span style="color: #2d9574;">")"</span>;
+  }
+
+  .ir a:after, a[href^=<span style="color: #2d9574;">"javascript:"</span>]:after, a[href^=<span style="color: #2d9574;">"#"</span>]:after {
+    <span style="color: #3a81c3; font-weight: bold;">content</span>: <span style="color: #2d9574;">""</span>;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">pre, blockquote </span>{
+    <span style="color: #3a81c3; font-weight: bold;">border</span>: 1px solid <span style="color: #000000; background-color: #999;">#999</span>;
+    <span style="color: #3a81c3; font-weight: bold;">padding-right</span>: 1em;
+    <span style="color: #3a81c3; font-weight: bold;">page-break-inside</span>: avoid;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">tr, img </span>{
+    <span style="color: #3a81c3; font-weight: bold;">page-break-inside</span>: avoid;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">img </span>{
+    <span style="color: #3a81c3; font-weight: bold;">max-width</span>: 100% <span style="color: #3a81c3;">!important</span>;
+  }
+
+  <span style="color: #3a81c3;">@page</span> :left {
+    <span style="color: #3a81c3; font-weight: bold;">margin</span>: 15mm 20mm 15mm 10mm;
+}
+
+  <span style="color: #3a81c3;">@page</span> :right {
+    <span style="color: #3a81c3; font-weight: bold;">margin</span>: 15mm 10mm 15mm 20mm;
+}
+
+  <span style="color: #6c3163; font-weight: bold;">p, h2, h3 </span>{
+    <span style="color: #3a81c3; font-weight: bold;">orphans</span>: 3;
+    <span style="color: #3a81c3; font-weight: bold;">widows</span>: 3;
+  }
+
+  <span style="color: #6c3163; font-weight: bold;">h2, h3 </span>{
+    <span style="color: #3a81c3; font-weight: bold;">page-break-after</span>: avoid;
+  }
+}
+</pre>
+</div>
+
+
+
+<blockquote>
+<p>
+test quote
+quote2
+quote3
+</p>
+</blockquote>
+
+<pre class="example" id="orgabf566a">
+test example
+test2
+test3
+</pre>
+
+<p>
+Test <b>sfafd</b> <i>asfda</i> <span class="underline">asdf</span> <code>safdfaff</code> <del>asdfs</del>  
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2022-07-17 Sun 10:36</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

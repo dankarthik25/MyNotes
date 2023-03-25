@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Devops_Interview_Questions</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Devops<sub>Interview</sub><sub>Questions</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org155f707">day to day life of devops engineers</a></li>
+<li><a href="#orge10966c">Ansible web doc</a></li>
+<li><a href="#org528f756">Edureka git 5 hours over view</a></li>
+<li><a href="#orgff6ee18">Edureka Docker file  Tutorial with examples</a></li>
+<li><a href="#orgb30b6c9">Edureka Jenkins :</a></li>
+<li><a href="#org8aa375c">Jenkins Interview Questions | Top 50 Jenkins Interview Questions and Answers | Edureka</a></li>
+<li><a href="#org69cbb95">DevOps Interview Questions and Answers | DevOps Jobs | DevOps Engineer | DevOps Training | Edureka</a></li>
+<li><a href="#orgc106c6a">AWS Tutorial For Beginners | AWS Full Course - Learn AWS In 10 Hours | AWS Training | Edureka</a></li>
+<li><a href="#orga88254d">Docker Full Course - Learn Docker in 5 Hours | Docker Tutorial For Beginners | Edureka</a></li>
+<li><a href="#org4980057">Jira Interview Question and Answers</a></li>
+<li><a href="#org19b5f4b"><span class="todo TODO">TODO</span> Install Jenkins inside Docker</a></li>
+<li><a href="#orgae0f4f3"><span class="todo TODO">TODO</span> Install Tomcat inside Docker</a></li>
+<li><a href="#org0df1618">Sonarqube</a></li>
+<li><a href="#orgcd5bd9c">Jfrog</a></li>
+<li><a href="#org28b543d">AWS</a></li>
+<li><a href="#org2407100">Terra frorm</a></li>
+<li><a href="#org08a97f0">Create Cluster using Micro servers in docker</a></li>
+<li><a href="#org3e61076">ELC</a></li>
+<li><a href="#orgea50f1c">Nagios</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org155f707" class="outline-2">
+<h2 id="org155f707">day to day life of devops engineers</h2>
+<div class="outline-text-2" id="text-org155f707">
+<p>
+<a href="https://www.youtube.com/watch?v=BxnhYVRphVo">https://www.youtube.com/watch?v=BxnhYVRphVo</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orge10966c" class="outline-2">
+<h2 id="orge10966c">Ansible web doc</h2>
+<div class="outline-text-2" id="text-orge10966c">
+<p>
+<a href="https://learning-ocean.com/tutorials/ansible/ansible-modules">https://learning-ocean.com/tutorials/ansible/ansible-modules</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org528f756" class="outline-2">
+<h2 id="org528f756">Edureka git 5 hours over view</h2>
+<div class="outline-text-2" id="text-org528f756">
+<p>
+git/gitlab 5 hours overview
+<a href="https://www.youtube.com/watch?v=KMOmw19ZCGs">https://www.youtube.com/watch?v=KMOmw19ZCGs</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgff6ee18" class="outline-2">
+<h2 id="orgff6ee18">Edureka Docker file  Tutorial with examples</h2>
+<div class="outline-text-2" id="text-orgff6ee18">
+</div>
+</div>
+
+<div id="outline-container-orgb30b6c9" class="outline-2">
+<h2 id="orgb30b6c9">Edureka Jenkins :</h2>
+<div class="outline-text-2" id="text-orgb30b6c9">
+<p>
+<a href="https://www.youtube.com/watch?v=3a8KsB5wJDE">https://www.youtube.com/watch?v=3a8KsB5wJDE</a>
+Beginners:
+00:00:00 Introduction
+00:03:01 Why Continuous Integration? 
+00:06:15 What is Continuous Integration? 
+00:09:45 What is Jenkins? 
+00:15:00 Jenkins Installation, Setup and Demo
+00:23:55 Jenkins Master-Slave architecture
+01:11:10 Jenkins Pipeline
+01:15:00 What is a Jenkinsfile?
+01:17:30 Pipeline Concepts
+01:21:15 Create your first Pipeline
+01:34:20 What is Docker?
+01:36:50 What are Microservices?
+01:41:50 Hands-On
+01:51:35 What is Git? 
+01:53:25 Why Jenkins and Git are used together? 
+01:55:40 Hands-On
+02:04:45 What Is Automation Testing With Selenium?
+02:06:30 Role Of Selenium In DevOps Life Cycle
+02:07:45 Selenium + Jenkins - Achieving Continuous Testing
+02:11:00 Demo
+02:42:15 What is Jenkins X?
+02:49:00 Jenkins vs Jenkins X
+02:51:00 Jenkins Best Practices
+03:35:35 Jenkins Interview Questions
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8aa375c" class="outline-2">
+<h2 id="org8aa375c">Jenkins Interview Questions | Top 50 Jenkins Interview Questions and Answers | Edureka</h2>
+<div class="outline-text-2" id="text-org8aa375c">
+<p>
+<a href="https://www.youtube.com/watch?v=2AVp9kie6s8">https://www.youtube.com/watch?v=2AVp9kie6s8</a>
+1:08  Jenkins Beginner Questions
+10:09 Jenkins Intermediate  Questions
+26:48 Jenkins Advanced Questions
+</p>
+</div>
+</div>
+
+<div id="outline-container-org69cbb95" class="outline-2">
+<h2 id="org69cbb95">DevOps Interview Questions and Answers | DevOps Jobs | DevOps Engineer | DevOps Training | Edureka</h2>
+<div class="outline-text-2" id="text-org69cbb95">
+<p>
+<a href="https://www.youtube.com/watch?v=clZgb8GA6xI">https://www.youtube.com/watch?v=clZgb8GA6xI</a>
+</p>
+
+<ol class="org-ol">
+<li>Basic DevOps Interview Questions</li>
+<li>Source Code Management Interview Questions</li>
+<li>Continuous Integration Interview Questions</li>
+<li>Continuous Deployment Interview Questions</li>
+<li>Continuous Monitoring Interview Questions</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc106c6a" class="outline-2">
+<h2 id="orgc106c6a">AWS Tutorial For Beginners | AWS Full Course - Learn AWS In 10 Hours | AWS Training | Edureka</h2>
+<div class="outline-text-2" id="text-orgc106c6a">
+<p>
+<a href="https://www.youtube.com/watch?v=k1RI5locZE4">https://www.youtube.com/watch?v=k1RI5locZE4</a>
+</p>
+
+
+<p>
+00:00 Agenda
+02:06 Introduction to Cloud Computing
+02:11 Why Cloud?
+02:21 Before Cloud Computing
+07:11 What is Cloud Computing?
+07:51 Cloud Service Models
+12:01 Cloud Deployment Model
+13:36 Cloud Providers
+16:56 Introduction to AWS
+18:11 Use-Cases
+19:31 Advantages of AWS
+22:31 AWS Architecture
+25:01 Domains of AWS
+34:36 AWS Compute Services
+35:13 What is an Instance?
+38:46 What is EC2?
+46:26 Types of Instances
+45:31 Instance Pricing Models
+54:16 Use Case
+01:10:16 AWS Lambda
+01:13:31 AWS Compute Domains
+01:15:06 Why AWS Lambda?
+01:16:46 AWS SDKs
+01:17:41 Using AWS Lambda  with Eclipse
+01:18:51 Demo
+01:41:20 AWS Elastic Beanstalk
+1:42:00 What is AWS Elastic Beanstalk?
+1:44:25 PaaS
+1:47:35 Web Hosting Platforms
+1:48:30 Features of Elastic Beanstalk
+1:49:50 Fundamentals of Elastic Beanstalk
+1:53:50 Architecture of Elastic Beanstalk
+2:00:25 Demo: How to Deploy An Application Using Beanstalk
+2:12:30 Storage Service
+2:13:05 What is Cloud Storage?
+2:29:50 Cloud Storage Practices
+2:35:25 Cloud Storage Service Providers
+3:09:50 S3 Tutorial For Beginners
+3:13:40 Buckets &amp; Objects
+3:22:40 Versioning &amp; Cross Region Replication
+3:32:55 S3 Transfer Acceleration
+3:40:26 Use Case: IMDB Media
+3:43:41 Demo: AWS S3 Complete Walkthrough
+3:44:51 Networking Services
+3:48:16 AWS CloudFront
+3:53:26 How AWS CloudFront Delivers Content?
+3:56:11 Applications
+3:58:21 Demo: AWS CloudFront Distribution
+4:07:06 Monitoring &amp; Management
+4:07:11 AWS CloudWatch
+4:07:46 Need For Cloud-Based Monitoring
+4:11:21 What is Amazon CloudWatch?
+4:13:31 Amazon CloudWatch
+4:16:41 Amazon CloudWatch Demo
+4:21:01 Amazon CloudWatch Event
+4:24:46 Amazon CloudWatch Event Demo
+4:32:56 Amazon CloudWatch Logs
+4:36:46 AWS CloudFormation
+4:40:11 Get started in AWS CloudFormation
+4:56:21 Autoscaling &amp; Load Balancer
+4:57:36 Snapshots &amp; AMIs
+5:00:06 Why Auto Scaling?
+5:03:46 Why Auto Scaling?
+5:17:51 What is the Load Balancer?
+5:19:01 Types of Load Balancers
+5:22:06 Hands-On
+5:34:51 Cloud Security
+5:35:41 Why Cloud Security?
+5:37:31 Public, Private or Hybrid?
+5:40:56 How Secure Should you make your application?
+5:42:56 How to Troubleshoot a Threat in the Cloud?
+5:43:56 How did they come to know?
+5:45:26 Cloud Security in AWS
+5:59:29 AWS IAM
+6:01:34 What is IAM?
+6:26:59 Multi-Factor Authentication
+6:33:29 Hands-On
+6:46:04 Amazon Redshift
+6:58:29 Demo - Setting Up A Warehouse
+7:14:04 DevOps on AWS
+7:14:14 AWS DevOps Services
+7:19:54 What is Continuous Integration &amp; Delivery?
+7:23:44 What Is CodePipeline?
+7:25:39 CodePipeline Architecture
+7:28:49 Code Deploy, Code Build &amp; Code Commit
+7:30:59 Demo - Deploying An Application Using AWS CodePipeline
+7:42:49 AWS Interview Question
+7:46:44 EC2 Questions
+8:17:29 Amazon Storage
+8:27:34 AWS VPC 
+8:36:44 Amazon Database 
+9:00:29 Cloud Engineer Jobs, Salary, Skills, Responsibilities &amp; Resume
+9:01:04 Cloud Engineer Job &amp; Salary Trends
+9:11:14 Cloud Engineer Job Skills &amp; Description
+9:22:34 Cloud Engineer Resume
+9:26:24 Cloud Master Course At Edureka
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=RSIstPUiEjY">https://www.youtube.com/watch?v=RSIstPUiEjY</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga88254d" class="outline-2">
+<h2 id="orga88254d">Docker Full Course - Learn Docker in 5 Hours | Docker Tutorial For Beginners | Edureka</h2>
+<div class="outline-text-2" id="text-orga88254d">
+<p>
+00:00 Agenda
+1:33 Introduction to Docker
+1:38 Problems before Docker
+4:28 How Docker solves the problem?
+5:48 What is Docker?
+6:38 Docker in a Nutshell
+8:03 Docker Examples
+9:40 Docker Case Study Indiana University
+13:00 Docker Registry
+14:30 Docker Images &amp; Containers
+18:45 Docker Compose
+19:05 Install &amp; Setup Docker 
+19:10 Install Docker 
+22:15 Docker for Windows
+22:25 Why use Docker for Windows?
+25:30 Docker For Windows Demo
+39:52 DokerFile &amp; Commands
+39:57 DockerFile Syntax
+41:22 DockerFile Commands
+48:52 Creating an Image to Install Apache Web Server
+56:57 DockerFile for Installing Nginx
+1:03:37 Docker Commands
+1:03:42 Most Used Docker Commands
+1:04:42 Basic Docker Commands
+1:45:47 Advanced Docler Commands
+1:58:02 Docker Compose &amp; Swarm
+1:58:07 Docker Compose
+1:58:12 What is Docker Compose?
+2:03:27 What is MEAN Stack Application?
+2:04:12 Demo
+2:21:02 Docker Swarm
+2:21:07 What is Docker Swarm?
+2:28:37 Demo
+2:32:42 Docker Swarm Commands
+3:03:47 Docker Networking
+3:05:02 Goals of Docker Networking
+3:06:42 Container Network Model
+3:08:27 Container Network Model Objects
+3:11:27 Network Drivers
+3:11:42 Network Driver: Bridge
+3:12:22 Network Driver: Host
+3:13:02 Network Driver: None
+3:13:17 Network Driver: Overlay
+3:14:22 Network Driver: Macvlan
+3:14:57 Docker Swarm
+3:15:22 Docker Swarm Clusters
+3:15:47 Docker Swarm: Managers &amp; Clusters
+3:16:32 Hands-On -1
+3:19:02 Hands-On - 2
+3:28:42 Dockerizing Applications
+3:29:42 What is Angular?
+3:32:42 What is DevOps?
+3:33:12 DevOps Tools &amp; Techniques
+3:34:12 Deploying an Angular Applications
+3:37:17 Demo
+4:01:12 Docker Jenkins
+4:02:17 What is Jenkins?
+4:03:40 How Jenkins Works?
+4:04:40 Containerisation vs Virtualization
+4:07:50 Docker Use-case
+4:08::50 what are Microservices?
+4:10:35 What are Microservices?
+4:11:05 Advantages of Microservice Architecture
+4:12:15 VMs vs Docker Containers for Microservices
+4:13:35 Use Case
+4:23:50 Node.js Docker
+4:24:00 Why Use Node.js with Docker?
+4:24:40 Demo: Node.js with Docker
+4:38:00 Docker vs VM
+4:38:30 Virtual Machines
+4:38:35 What is a Virtual Machine?
+4:39:25 Benefits of Virtual Machines
+4:39:45 Popular Virtual Machine Providers
+4:40:00 Docker Containers
+4:40:05 What is Docker Container?
+4:41:30 Types of Containers
+4:42:10 Benefits of Containers
+4:42:55 Major Differences
+4:46:30 Use-case
+4:46:45 How PayPal uses Docker &amp; VM?
+4:50:45 Docker Swarm vs Kubernetes
+    4:53:25 Installation &amp; Cluster Configuration
+    4:55:00 GUI
+    4:56:30 Scalability
+    4:57:00 Auto-scaling
+    4:58:20 Load Balancing
+    4:59:25 Rolling Updates &amp; Rollbacks
+    5:01:35 Data Volumes
+    5:02:10 Logging &amp; Monitoring
+5:03:35 Demo
+5:14:55 Kubernetes vs Docker Swarm Mindshare
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org4980057" class="outline-2">
+<h2 id="org4980057">Jira Interview Question and Answers</h2>
+<div class="outline-text-2" id="text-org4980057">
+<p>
+<a href="https://www.youtube.com/watch?v=5PwTkb8fY5g">https://www.youtube.com/watch?v=5PwTkb8fY5g</a>
+</p>
+
+<p>
+<a href="https://www.devopsschool.com/slides/jira/index.html">https://www.devopsschool.com/slides/jira/index.html</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org19b5f4b" class="outline-2">
+<h2 id="org19b5f4b"><span class="todo TODO">TODO</span> Install Jenkins inside Docker</h2>
+<div class="outline-text-2" id="text-org19b5f4b">
+<p>
+Write Docker file and run Docker build and run Jenkins 
+<a href="https://patharetanmay1018.medium.com/automation-with-custom-jenkins-image-by-using-dockerfile-2f2e9aa3c1cd">https://patharetanmay1018.medium.com/automation-with-custom-jenkins-image-by-using-dockerfile-2f2e9aa3c1cd</a>
+Try using tomcaat
+</p>
+</div>
+</div>
+<div id="outline-container-orgae0f4f3" class="outline-2">
+<h2 id="orgae0f4f3"><span class="todo TODO">TODO</span> Install Tomcat inside Docker</h2>
+<div class="outline-text-2" id="text-orgae0f4f3">
+<p>
+install tomcat and use jenkins to deploy artifacts to tomcat server
+</p>
+</div>
+</div>
+<div id="outline-container-org0df1618" class="outline-2">
+<h2 id="org0df1618">Sonarqube</h2>
+</div>
+<div id="outline-container-orgcd5bd9c" class="outline-2">
+<h2 id="orgcd5bd9c">Jfrog</h2>
+</div>
+<div id="outline-container-org28b543d" class="outline-2">
+<h2 id="org28b543d">AWS</h2>
+<div class="outline-text-2" id="text-org28b543d">
+<p>
+EC2
+ALB
+S3
+ECR
+ECS
+VPC
+</p>
+</div>
+</div>
+<div id="outline-container-org2407100" class="outline-2">
+<h2 id="org2407100">Terra frorm</h2>
+</div>
+<div id="outline-container-org08a97f0" class="outline-2">
+<h2 id="org08a97f0">Create Cluster using Micro servers in docker</h2>
+</div>
+<div id="outline-container-org3e61076" class="outline-2">
+<h2 id="org3e61076">ELC</h2>
+</div>
+<div id="outline-container-orgea50f1c" class="outline-2">
+<h2 id="orgea50f1c">Nagios</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

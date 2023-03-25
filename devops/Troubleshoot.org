@@ -1,0 +1,36 @@
+#+TITLE: Troubleshoot
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* SSH connection keeps hanging up in terminal
+
+Here are two problems: https://stackoverflow.com/questions/57264903/ssh-connection-keeps-hanging-up-in-terminal
+
+    SSH session hangs up and not easy to close it.
+
+Cause: Normal keys are forwarded over the ssh sessions so they have no effect now.
+
+Solution: We can use the escape key sequence(Enter ~ .) to close it. In the hang-up terminal hit Enter ~ ? subsequently, it will show you a list of supported escape sequences like this:
+
+Supported escape sequences:
+ ~.   - terminate connection (and any multiplexed sessions)
+ ~B   - send a BREAK to the remote system
+ ~C   - open a command line
+ ~R   - request rekey
+ ~V/v - decrease/increase verbosity (LogLevel)
+ ~^Z  - suspend ssh
+ ~#   - list forwarded connections
+ ~&   - background ssh (when waiting for connections to terminate)
+ ~?   - this message
+ ~~   - send the escape character by typing it twice
+(Note that escapes are only recognized immediately after newline.)
+
+    SSH session hangs up in a short period.
+
+
+
+* Install httpd in Amazon Linux Os 
+#!/bin/bash
+yum install httpd -y
+systemctl enable httpd
+echo "<h1> This is server A</h1>" > /var/www/html/index.html
+systemctl start httpd

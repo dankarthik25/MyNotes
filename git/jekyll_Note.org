@@ -1,0 +1,360 @@
+#+TITLE: jekyll_Note
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB
+# Prerequisites 
+# - Ruby version 2.5.0 or higher   # ruby -v 
+# - RubyGems                       # gem -v
+# - GCC and Make
+* Intro
+- Jeklly is a markdown based blog or website creation without using html or css or js
+- Jeklly theme is github theme and it is dynamic (auto-size adjusted) means it can be used in mobile, tablet , pc ... contant will auto adjusted
+- Big Community 
+#+begin_src 
+# https://phoenixnap.com/kb/install-ruby-ubuntu
+sudo apt update
+sudo apt install ruby-full
+ruby --version
+sudo apt install gem
+
+# install g++ 
+sudo apt install g++
+sudo apt-get install build-essential 
+#+end_src
+* Install jekyll and bundler germs 
+#+begin_src
+# Prerequisites 
+# - Ruby version 2.5.0 or higher   # ruby -v 
+# - RubyGems                       # gem -v
+# - GCC and Make
+
+gem install jekyll bundler
+#+end_src
+
+* Create a new Jekyll site at ./myblog
+#+begin_src
+jekyll new myblog
+cd myblog
+blundle exec jekyll serve # Browse to http://localhost:4000
+# you can use only jekyll serve after build 
+#jekyll serve
+
+#+end_src
+
+
+* Front matter
+#+begin_src 
+cat myblog/_post/2022-07-30-welcome-to-jekyll.markdown
+#+end_src
+
+The metadata present before body in markdown is know as Front-Matter
+#+begin_src markdown
+---
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2022-07-30 21:19:45 +0530
+categories: jekyll update
+author: Mike
+---
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+
+Jekyll requires blog post files to be named according to the following format:
+
+`YEAR-MONTH-DAY-title.MARKUP`
+
+Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+Jekyll also offers powerful support for code snippets:
+
+#+end_src
+
+You can create own front-matter and use them in your =jeklly layout= or =custome html= ..etc
+
+* Create your 1st post in _posts
+Name of post must contain =Date= before filename
+
+create a markdown file in myblog/_posts name it =2017-09-24-my-frist-post=
+
+The =Front Matter= for post is
+#+begin_src markdown
+  ---
+  layout: "post"
+  title: "This is the new title"
+  date: 2017-09-24 15:58:59 +0530
+  ---
+  Some Conten
+#+end_src
+
+#+begin_quote
+you can organize post in a dir by creating a directory inside =_posts= jekyll will able to identity the file 
+#+end_quote
+
+* Draft
+Dir =cd myblog/_draft= is used to store unfinished post
+- generally =_draft= are not displaced in localhost =localserver=
+- to dispaly the drafts
+  #+begin_src sh
+jekyll serve --draft
+  #+end_src
+  
+
+* Pages
+web page like : about, contat, donation,
+
+Create donation page
+
+#+begin_src 
+cd myblog
+touch donate.md
+cat donate.md
+#+end_src
+
+#+begin_src 
+---
+layout: "page"
+---
+Donate to our site 
+#+end_src
+
+To view page : =localhost:4000/donate=
+
+You can organize page by grouing them in directory =myblog/page-dir=
+
+* Permalinks: Permanetent links  
+the url of post changes if the date changes so we can use permalinks which doesn't changes with date
+
+=permalink: "my-new-url-test/test2"=
+#+begin_src 
+  ---
+  layout: "post"
+  title: "This is the new title"
+  date: 2017-09-24 15:58:59 +0530
+  permalink: "my-new-url-test/test2"
+  ---
+  Some Conten
+#+end_src
+
+
+or we can use categories
+
+#+begin_src 
+  ---
+  layout: "post"
+  title: "This is the new title"
+  date: 2017-09-24 15:58:59 +0530
+  categories: jekyll new-cat
+  permalink: /:categories/:day/:year/:month/:title.html 
+  ---
+  Some Conten
+#+end_src
+* Front Matter Default
+If you want  author in every blog post then we can configure in post or we can configure in yaml file =config.yml= 
+
+#+begin_src 
+  ---
+  layout: "post"
+  title: "This is the new title"
+  date: 2017-09-24 15:58:59 +0530
+  author: "Deepalgorithms"
+  ---
+  Some Conten
+#+end_src
+
+config.yml 
+#+begin_src yaml
+# cat config.yml 
+defaults:
+  -
+    scope: 
+      path: ""
+    values:
+      layout: "post"
+#+end_src
+
+* Install theme in jeklly
+Jeklly come with =minima= theme
+
+There are many theme in jeklly you can select from https://rubygems.org/search?query=jekyll-theme
+
+You can see the preview by going to  Links: homepage > github > preview
+
+You can install theme in Gemfile
+
+#+begin_src gem
+gem "minima", "~> 2.5"
+gem "jekyll-theme-hacker"
+#+end_src
+
+
+#+begin_src
+# close the serve  and install theme
+bundle install  # this will install theme
+bundle exec jekyll serve # restart server 
+#+end_src
+
+Config theme in =config.yml=
+
+* Layout
+Layout is basic selection of html and css used to create a site 
+There are two layouts
+- post
+- page
+
+  You can create your own layout by
+  #+begin_src
+cd myblog
+mkdir _layout  # html
+touch _layout/post.html
+  #+end_src
+
+  You can create your own post like
+
+  #+begin_src 
+<h1> This is post </h1>
+
+<hr>
+
+{{ content }}
+
+  #+end_src
+
+You can create custome page layout by myblog/_layout/page.html
+#+begin_src 
+<h1> This is page  </h1>
+
+<hr>
+
+{{ content }}
+
+#+end_src
+
+
+You can define custome layout  myblog/_layout/giraffe.html
+
+#+begin_src 
+<h1> This is page  </h1>
+
+<hr>
+
+{{ content }}
+#+end_src
+* Variable in jekyll
+
+#+begin_src 
+---
+layout: "post"
+title: "This is the new title"
+date: 2017-09-24 15:58:59 +0530
+author: "Deepalgorithms"
+---
+
+Some Content
+
+afadfadf
+
+<h1> This is post </h1>
+<h2> {{ post.title }} </h2>
+<h3> {{ layout.author }} </h3>
+
+
+#+end_src
+
+For more variables visit https://jekyllrb.com/docs/variables/
+* Include
+header and footer
+
+#+begin_src
+cd myblog
+mkdir _include
+cd myblog/_include
+touch header.html
+#+end_src
+
+#+begin_src
+# cat header.html
+
+<h1> {{site.title }} </h1>
+<hr>
+
+#+end_src
+
+To include in page
+#+begin_src 
+<html>
+<head>
+  <meata charset="UTF-8"
+  <title> {{ site.title}} </title>
+</head>
+
+<body>
+  {% include header.html%}
+  {{ content }} 
+</body>
+</html>
+#+end_src
+* Looping
+show all post in home page
+
+=cat home.html=
+
+#+begin_src 
+{% for post in site.posts %}
+  <li> <a href="{{ post.url }}" > {{post.title}} </a> </li>f
+  {{ post.title}} <br>
+
+{% endfor %}
+
+#+end_src
+* Conditions
+
+#+begin_src
+
+{% if page.title == "My Frist Post" and "Last Post" %}
+  This is the first post
+{% elsfi page.title == "My Second Post" or "Last Send Post" %}
+  This is the second post
+{% else %}
+   This is another post 
+{% endif %}
+
+#+end_src
+* Data Files
+access json yaml csv and dispaly on website
+
+#+begin_src 
+# create data file yaml
+touch people.yml
+#+end_src
+
+#+begin_src 
+# peopel.yaml
+
+- name : "Mike"
+  occupation: "Giraffe Academy"
+
+- name : "Steve"
+  occupation: "Firefighter"
+
+- name : "Rob"
+  occupation: "Programmer"
+
+#+end_src
+
+
+inside home.html
+
+#+begin_src
+
+{% for person in site.data.people %}
+  {{person.name}}, {{ person.occupation }} <br> 
+
+{% endfor %}
+#+end_src
+
+
+* Create a complex website
+https://www.youtube.com/watch?v=FiJuoFg_Ipc
+
+
+* Create a theme for jekyll
+https://www.youtube.com/watch?v=UuHrgv6p2Mg

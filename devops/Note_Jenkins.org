@@ -1,0 +1,1310 @@
+#+TITLE: Note_Jenkins
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Udemy Course
+- Course Content
+ - Introduction and Setup
+ - Build Application for Jenkins
+
+ - Continous Integration with Jenkins
+ - Continous Delivery with Jenkins
+
+ - Infrastructure as Code and Automation
+
+ - DSL Jobs
+
+ - Pipeline
+ - Pipeline as code 
+
+ - Jenkins Integration
+
+ - Advance Jenkins Uses
+ - Jenkins Distributed Builds
+
+ - Jenkins & Docker Integration
+ - Jenkins & AWS Integration
+ - Jenkins & Ansible Integration
+ - Jenkins Security Checks management
+ - Jenkins External Job Trigger
+
+ - Email Integration with Jenkins
+ - maven Build Tool Integration
+
+ - Jenkins Pipline + Docker + maven
+
+- Objective
+ - manage CI/CD Flow in Engineering and Production
+ - Build and DEploy Application with Jenkins
+ - Integrate Jenkins with DevOps Tools like Docker, Ansible, Kubernetes & Aws
+ - Build Jenkins Pipline
+ - Build Jenkins Pipline as Code
+ - Build Jenkins DSL
+
+Course Source Code is Uploaded in Github Public
+https://github.com/anshulc55/Jenkins_Upgradev3
+[[file:~/karthik/VideoTutorials/udemy/continous-integration-jenkins-pipelines/01\ Course\ Introduction/001 Jenkins-Course-RoadMap.pdf]]
+* Introduction of Continous Integration[05] 
+** What is Continous Integration
+Continous Integration (CI) : 
+  - Is a development  practice that require  develpoers to (check-in/push repository) continuously(Continous Development),Each /check-in/ is then verified by an automated build,(build continously) and If Can't build then sys notify developers immediattely,by this developers can quickly detect/debug the error as early as possible. This know as Continous Integration.
+      - If code is very big file then we build for every 4 hours.If there is error in build, Developers are responsible for fix error within 4-hours.
+
+Defination:
+  - Practie of merging stable Develop work branch with main branch constantly
+
+-  Why we need CI ?
+ - Significant less back-tracking to discovery where thihngs went wrong.
+ - CI is cheap.
+  - means : If we n't follow continuous approch, you'll have longer periods between integrations. This makes it exponentially more difficult to find and fix problem.
+ - Catch issues early and nip them  in  bud
+ - Spend less time debugging and more time adding features.
+ - Stop waiting to find out if you code's going to work.
+ - Reduce integration problem allow you to deliver software more rapidly
+
+*** Stage of Adopting CI :
+- Principle and Practice 
+  - maintain a single source repository.
+  - automate build process (make your build self-testing)
+  - make it easy for anyone to get the latest executable version(executalbe build)
+  - Everyone can see what happening  (what is error in build)
+  - Automate deployment
+
+- How to Do it
+  - Developer check out code into their own workspace
+  - When done, commit the chages to the central-repository
+  - In CI server
+    - CI server monitors the repository and check  out changes when they occur then automatically build
+      - If build sucessful : CI server  deploy artifact for testing(sit,uat,pre-production)
+      - If build No-sucessfull: Notify the develper Error 
+    - CI server assing a build label to the version of code in just built.
+
+- Team Responsibility
+  - Check in frequently
+  - Don't check in broken code [block the original code]
+  - Don't check in untested code
+  - Don't check in when the build is broken
+** Continuous Delivery
+*Continual Delivery of code* to a *environment* once the code is *ready to ship*
+- Environment could be 
+  - staging (sat,uat, QA, pre-production)
+  - production. 
+
+- First product is delivery to QAs and Review before shipping to Customer/Production.
+** Continous Deployment
+- Deploy your product in production 
+- It is the practice of *releasing/deploy* *every good build* to *users/production*.
+- The *deployment of Product* in *Production* as soon as it's *ready*.
+
+- By adopting CI/CD you will reduce risks and catch bugs quickly, but also  move rapidly to working sofware
+* Introduction to Jenkins
+** What is Jenkis | Jenkins Introduction[06]
+- Jenkins is an Open-Source CI/CD written in Java
+- Jenkins is automation Tool, used  to build and deliver software Product
+- Free written in java
+- Jenkins was forked from Another Project called Hudson after dispute with Oracle
+- It is server-based application and require a web server like Apache Tomcat.
+- 
+- Reson Jenkins become so popular is that of its *monitoring of repeated task* which  *arise*  during the *development* of a  project.
+
+** Why use CI with Jenkins 
+Why Jeninks for CI
+- Code is build and test as soon as Developer commits code
+- Jenkins will build and test code  many times during the day.
+- On Successful build, Jenkins will deploy the source into the test server and notify  deployment team.
+- On Build Failure , Jenkins will notify the error to the developer team
+** Advangates of  using Jenkins
+- Jenkins is being managed by the community which is very open. Every month,they hold public meeting and take inputs from public for development of Jenkins
+- Jenkins as 320 plugins published
+- Support cloud-based Architecher so that you can deploy Jenkins in cloud-based platform.
+- Jenkins Support Docker Container, you can containerize Jenkins Service
+
+** Alterantive
+- Drone CI
+- TeamCity(JetBrains)
+- Wercher
+- CircleCI
+- CodeShip
+- SemaPhoreCI
+
+** Install Jenkins [07]
+- Jenkins can be install in 3 ways
+  - 1. using executal file (unzip and install)
+  - 2. using java    (java -jar jenkins.war)
+  - 3. inside tomcat (jenkins.war files) 
+    - install tomcat then copy jenkins.war to tomcat/webapps
+    - run tomcat start and open https://localhost:8080/jenkins
+*** Using zip file
+#+BEGIN_SRC sh
+# Install java(jenkins is java 8 app) so install openjdk
+sudo apt update
+sudo apt install openjdk-8-jdk
+ 
+# add Jenkins debian repository 
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - 
+# above cmd  should output OK which means that the key has been successfully imported and packages from this repository will be considered trusted.
+
+# add Jenkins repository to sys 
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+
+# install jenkins
+sudo apt update
+sudo apt install jenkins # automatically run jenkins
+
+# check running status of jenkins server 
+systemctl stauts jenkins
+
+# start jenkins
+sudo systemctl start jenkins
+
+sudo service jenkins restart
+sudo service jenkins stop
+sudo service jenkins start
+
+# OR : alternate
+sudo systemctl start jenkins.service
+sudo systemctl stop jenkins.service
+sudo systemctl restart jenkins.service
+
+# Open Firewall
+sudo ufw allow 8080
+
+# set Wrokspace
+
+
+
+# give administator password from : ..../Jenkins/secrets/initialAdminPassword file
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+# select <install suggested plugins>
+
+# sign in to jenkins 
+user     : admin
+password : /Jenkins/secrets/initialAdminPassword
+
+create user : dankarthik
+passwrod : dankarthik
+ 
+#+END_SRC
+*** Install jenkins in tomcat
+#+BEGIN_SRC sh
+cd /opt/softwares/apache-tomcat-9.0.31/webapps
+ 
+wget https://updates.jenkins-ci.org/download/war/2.204/jenkins.war
+
+tomcatdown
+tomcatup
+
+#+END_SRC
+*** Install using java
+#+BEGIN_SRC sh
+java -jar jenkins.war
+java -jar jenkins.war --httpPort=9090
+#+END_SRC
+*** Configure  Port 
+In case you want to change the default jenkins port on Linux,
+You can go to /etc/default/jenkins  
+add --httpPort=9999 or whatever port to JENKINS_ARGS
+#+BEGIN_SRC sh
+vi /etc/default/jenkins
+# # port for HTTP connector (default 8080; disable with -1)
+# HTTP_PORT=8080
+
+#+END_SRC
+
+* Jenkins Getting Started | Get Jenkins Ready
+** TODO Architechural Overview of Jenkins[14]
+** 1st Job[15]
+Jenkins menu
+
+|-------------------+-------------------------------------|
+| New Item          |# Create a job or project            |
+|-------------------+-------------------------------------|
+| People            | #User which are connected to Jenkins |
+|-------------------+-------------------------------------|
+| Build History     | #Build                              |
+|-------------------+-------------------------------------|
+| manage Jenkins    | # manage                            |
+|-------------------+-------------------------------------|
+| my views          |                                     |
+|-------------------+-------------------------------------|
+| lockable resource |                                     |
+|-------------------+-------------------------------------|
+| credentials       | #Create Credentials                 |
+|-------------------+-------------------------------------|
+| new view          |                                     |
+|-------------------+-------------------------------------|
+
+
+
+#+BEGIN_SRC
+(menu)Jenkins 
+            New Items : _Enter item/Job name_
+            FreeStyles(ok)
+
+- General 
+  - Description
+  - Discard odl builds : Remove  the old build(#Saveing space in backup servier)
+      - Days to keep builds    :__________
+      - max # of build to keep :__________
+  - GitHub Project 
+      - give url for source code:________
+  - The :Build requires lockable resource
+
+  - The Project is parametrized :
+         : Project require agruments to be passed 
+  - Throttle builds   # No.of Concurrent(parallel) build
+  - Execute concurrent build if necessary
+      
+- Source Code management
+   Git : _url____________ 
+   Subversion:
+
+
+- Build Triggers
+   - Trigger Build remotely: using url or (Authentication Token)
+
+   - Build after other project are build :
+
+   - Build Periodically 
+               -  # * * * * * 
+
+    - Github hook for GIT_SCm Polling
+    - Poll SCm
+        - # * * * * * # Chanage in code very 1 minint
+- Build Environment
+  - Delete Workspace before build starts (discard old build result and start fresh build)
+  - Use secret text or file
+         - password protection
+    - Abort build if it's stuck
+    - Inspect build log for published Gradle build scans
+- Build
+   - Execute shell
+   - Execute Powershell
+   - 
+
+- Post-build Actions
+  - E-mail Notification
+  - Editable Notification
+  - Git Publisher
+  - Set Github commit status
+  - Delete workspace when build is done
+
+#+END_SRC
+
+ 
+
+Build a job
+Double Click Project > Build Now
+
+* Continuous Integration with Jenkins
+** Integration with Git Guthub[16]
+
+git sample project : https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/maven-samples/single-module
+
+We take maven project as example for git integration
+
+
+#+BEGIN_SRC
+- Steps : 
+   - Install git in localhost:apt-get install git
+   - mange jenkins : 
+           - manage plugins:
+              - Install Github Integration: in jenkins
+
+#+END_SRC
+** Configre Jenkins to  Work with maven
+#+BEGIN_SRC
+ mangae jenkins > 
+    - Global Tool Configuration > 
+         - Add jkd installation
+         - Add Git
+         - Add maven
+
+#+END_SRC
+** Create maven project with Jenkins
+*** Install maven on Host machine [17]
+#+BEGIN_SRC sh
+sudo apt-get install maven
+maven --version
+#+END_SRC
+*** Configure Jenkins with Git, maven in Jenkins[19]
+#+BEGIN_SRC
+- Steps:
+  - Search for maven path
+    - Form teminal install : 'echo $MAVEN_HOME'
+    - Form apt install : /usr/share/maven-repo/org/apache/maven/
+  - Search for Java path :
+    - Form terminal : echo $JAVA_HOME
+- Configure git and maven
+  - manage jenkins
+    - Global Tool Configuration
+       - JDK installation:
+                  - Name      : _Local-JAVA_
+                  - JAVA_HOME : _search-path_
+       - Git installation:
+                  - Name                    : Git
+                  - Path to Git executalbe  :git
+       -  MAVEN installation:
+                  - Name       : local-maven
+                  - MAVEN_HOME : _search-path_
+#+END_SRC
+
+*** Create First Maven Job[20]
+#+BEGIN_SRC
+- New item:
+   -item Name : _First_maven_prj_ 
+     - Freestyle Project
+
+Configurtion:  
+- Source Code management:
+          - URL : _____github:repo maven project clone(https://link)____ 
+                  - https://github.com/anshulc55/Jenkins_Upgradev3               
+- Build 
+   - Add Build Step    : _Invok top-level maven targets_
+      - maven version  : _Jenkins-maven host configration_
+      - Goals          : _test install_ # compile,test,validate,package,install,deploy
+                         # maven-goals or life-cycle :8(clean,test,validate,compile,package,install,deploy...)                                     
+      - Advance :
+          - POM        : _path of pom.xml inside git repo_ # Eg: maven-samples/single-module
+
+     Save and build 
+
+#+END_SRC
+** Source Code Polling in Jenkins[22]
+- Contionous Integration flow in not  for manual work
+- Auto build 
+   - Configure the Jenkins to Poll the source Code Repo
+   - Trigger Build if New Change in source code.
+
+*** Trigger Build Remotely[24]  
+- The Token is genenrated : 
+    - Url is given with token which is used to trigger is 
+- Remote Build Trigger is helpful to execute the build externally.
+  
+- User can Build Trigger by some Script, API,or UI Button Click Event.
+
+
+*** Build After Other Project are build[24] 
+- Job which are executed in Pipline or Job which are in DownStream/Upstream
+*** Build Periodically : 
+*** Poll SCM  :
+- Jenkins will check git-hub repository for periodically as specified in *crontab*, If any new commit is done then Jenkins will auto-matically build trigger
+**** Crontab
+: min(0-59), hours(0-23), day(1-31),month(1-12), day(0-6, Sunday =0)
+ *   : all valid values
+A-Z  : Range of Value
+A,B,C: Enumerates multiple Values.
+A/m B/H 
+Eg:
+#+BEGIN_SRC sh
+0 0 * * * Everyday at midNight
+0 2-4 * * * 2am, 3am, 4am Everyday
+
+#+END_SRC
+* Continuous Delivery with Jenkins
+** Archive Jenkins Job[25]
+- Archive in Jenkins: *how to save* *files* *outside workspace*
+  - While running build in jenkins, 
+      - jenkins will create tmp workspace which stores the artifact's,  
+      - User can clean your previous workspace before next  build 
+      - This artifacts are archieved is safely so that they can be deployed staging enviroment(QA,SIT..) or Production Environment.
+ 
+      - If you want get the older file, you need  archive it
+
+*** artifact's path: 
+#+BEGIN_SRC
+Click Project:
+    Console Output: 
+
+# Here we can see the there is jar file which is created in 
+# [ [1;34mINFO [m] Building jar :/var/lib/jenkins/workspace/.Job-name.../... .jar
+#+END_SRC
+
+*** For Archive Job
+#+BEGIN_SRC
+- Config Job
+  - Post-build Actions 
+          -  *Archive the articats*  ( select in dropdown menu)
+              - File path to be archive : _____________________ **/*.jar 
+                   #  **       all avilable path in workspace
+                   #  *.jar    all file having jar extenction
+                   #  **/*      all artifacts that in workspace
+# We see the output in Next Build 
+# - Click Project
+#   - Console Output:
+## [ [1# [ [1;34mINFO [m] Archiving artifats
+#+END_SRC
+ 
+** Install & Configure Tomcat (Staging Env) [26] 
+- Tomcat is an _application web-server_ form Apache Software Foundation that executes _Java servlet_ and renders Web pages that include _Java Server Pages code_
+- Url for Tomcat Project :
+ https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/java-tomcat-sample
+
+- Why are we building Stageing Env :
+   
+In every Project there are three stagas in 
+- Application Source Code   : Jenkin's Job to Compile,Execute Unit Test & Package Application 
+- Compile Code              : Jenkin's Job will Deploy the Application in Dev/Production 
+- Deploy Application        : Tomcat Env to Exec Application Code
+
+*Application Source Code* 
+      is Complied , Execute Unit Test & Package Applicatoion with help of Jenkins Job
+*Deploy Application* 
+      will Deploy the Application in Dev/Production Enviroment
+
+*** Install Tomcat 
+https://www.youtube.com/watch?v=Feui5F42bII
+#+BEGIN_SRC sh
+# cd Workspace/Devops/tomcat # directory where tomcat is install 
+# get link for tomcat 9 tar file
+wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.31/bin/apache-tomcat-9.0.31.tar.gz
+
+
+# extract tar file
+tar -xvzf apache-tomcat-9.0.31.tar.gz
+
+# install java file # /software/jdk1.8.0_131
+vi ~/.bashrc
+
+# insert below text
+# JAVA ENVIRONmENT VARIABLES
+export CATALINA_HOME=/Workspace/Devops/tomcat
+# export JAVA_HOME=/Workspace/Devops/tomcat/bin
+
+# run bash
+source ~/.bash_profile
+
+cd Workspace/Devops/tomcat
+sh startup.sh
+
+# Run tomcat server
+sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/startup.sh
+
+# Stop tomcat server
+sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/shutdown.sh
+
+
+## Create symbolic link 
+#ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/startup.sh /usr/local/bin/tomcatup
+#ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/shutdown.sh /usr/local/bin/tomcatdown
+
+## To start tomcat as root anywhere in shell
+#tomcatup
+## To stop tomcat
+#tomcatdown
+
+
+firefox localhost:8080 # By default tomcat server is 8080 
+# We can change server in conf/server.xml - conncetor port
+# After starting if there is some error then check log file
+#+END_SRC
+*** Change Port Number
+**** Tomcat File system
+#+BEGIN_SRC sh
+Tomcat
+├── bin  # executable file : start up and shutdown
+├── conf # server.xml : change config 
+|     └──server.xml # like port by default port is  :8080
+├── log    
+└── webapps 
+      └── sbi.war 
+#+END_SRC
+**** Edit server.xml 
+#+BEGIN_SRC sh
+cat server.xml
+######################################################
+# Change port :8080
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+ 
+#+END_SRC
+*** Config Tomcat to Deploy Artifact from Jenkins
+Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
+
+#+BEGIN_SRC sh
+#Tomcat
+#├── bin  # executable file : start up and shutdown
+#├── conf # server.xml         : change config 
+#|     ├── server.xml          # like port by default port is  :8080
+#|     └── tomcat-users.xml    # add/delet users/roles 
+#├── log    
+#└── webapps 
+
+cd tomcat/conf
+# upate tomcat-users.xml file
+# cat tomcat-users.xml
+# add roles: manager-script & admin-gui
+# Set password: tomcat
+
+ <role rolename="manager-script"/>
+ <role rolename="admin-gui"/>
+ <user username="tomcat" password="tomcat" roles="manager-script,admin-gui"/>
+
+
+
+# resart to tomcat server
+sh tomcat/bin/shutdown.sh
+sh tomcat/bin/startup.sh
+#+END_SRC
+** Deploy Application in Staging Env(Tomcat) from Jenkins [029 Udemy Lecture]
+ 
+How to Deploy (automate) git code to tomcat server  
+- Steps required
+  - Configure Tomcat or Create User for remote acess
+  - Install "Copy Artifact" & "Deploy to Containers" Plugins
+    - Copy Artifact        : Use to Copy Artifact from Job A to Job B:
+    - Deploy to Containers : To deploy artifact to tomcat  
+  - Create Job to Produce Tomcat Deployable Artifacts
+  - Create Job to Deploy Artifacts to Staging Env (Tomcat server).
+
+*** Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
+#+BEGIN_SRC sh
+cd /opt/tomcat/conf
+# update tomcat-users.xml file
+# roles : manger-script & manger-gui
+# Set password:tomcat
+
+#  <role rolename="manager-script"/>
+#  <role rolename="manager-gui"/>
+#  <user username="tomcat" password="tomcat" roles="manager-script,manager-gui" />
+#</tomcat-users>
+
+vi /tomcat/conf/server.xml
+# <Connector port="9090" protocol="HTTP/1.1"
+
+# Restart the tomcat server
+
+/opt/tomcat/bin/shutdown.sh
+/opt/tomcat/bin/startup.sh
+
+#+END_SRC
+*** Create Job to Produce Tomcat Deployable Artifacts
+#+BEGIN_SRC
+Create a view : 
+    View Name : _TomcatDeploy_View_
+    List View : ok
+
+# Inside "TomcatDeploy_View" Create a New JOB   :
+New item
+       Name _Package_Application_
+       FreeStyle Project
+Genral :        
+    Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
+    Discard Old Build: 5 days and 5 builds
+Source Code management:
+    git :https://github.com/anshulc55/Jenkins_Upgradev3.git 
+
+Build Trigger :
+    Poll SCM: * * * * *
+Build:
+   _Invoke top-level maven target_
+       Maven Version   : _LocalMaven_
+       Goals           : clean package
+
+       Advance :
+          POM  : _java-tomcat-sample/pom.xml_ # location of pox.xml
+
+ Post-build Action :
+    _Archive the artifacts_
+         Files to archive : _**/*.war_
+
+ Post-build Action : 
+     _Build Other Project_
+          Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
+          Trigger only if build is stable : Ok
+
+Save Job
+#+END_SRC
+
+
+*** Create Job to Deploy Artifacts to Tomcat server or(Staging Env)
+#+BEGIN_SRC
+#Step 1:  Install "Copy Artifact" & "Deploy to Containers" Plugins
+#Step 2:
+New item 
+         Name : _Depoly Application Staging Env_
+         FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+        Project Name :  _Package_Application_   (Project Name for above Project)
+        Which build  : Latest successfull build
+            Stable build only : Ok
+        Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:http://67.205.146.248:9090(9090 : tomcat manual config)
+
+#+END_SRC
+       
+
+
+** Build Pipeline Plugin[30] :
+- Step 1: Install *Build Pipline* :
+- Step 2: Create a New View
+- Step 3: Build Pipeline View
+#+BEGIN_SRC
+Step 1: Install *Build Pipline* :
+Step 2: Create a New View
+Step 3: Build Pipeline View
+            Build Pipeline View Title : Deploy Application Stagging Env
+        Pipeline Flow: 
+           Layout : Upstream /Downstream
+               Upstream /Downstream Config
+               Select  Initial Job :   _Package_Application_ (From How to Delpoy git code to tomcat server ) 
+         Save       
+#+END_SRC
+** Deploy Application in Production [Udemy 031]
+Till Now we have 
+ - Package Build Code : create artifacts
+ - Deploy to QA Env (Tomcat 9090)     [less Approvial for Authority]
+ - Deploy in Production [Now : Tomcat 9091] [Need Approvial from Authority]
+
+*** Step1: Run another tomcat-server at port: 9091 
+https://www.youtube.com/watch?v=n9l8WHHp_30 [Run multiple tomcat instance]
+#+BEGIN_SRC sh
+ls
+# apache-tomcat-9.0.31 # for QA environment
+cp -r apache-tomcat-9.0.31/ apache-tomcat-9.0.31-prod/
+vi apache-tomcat-9.0.31-prod/conf/server.xml  # change the port 
+
+#<Connector port="9091" protocol="HTTP/1.1"
+#               connectionTimeout="20000"
+#               redirectPort="8443" />
+
+# change the server port, connector port(hhtp, ajp), 
+#export CATALINA_BASE=/home/jayradhe/Workspace/Devops/tomcat1
+#export CATALINA_HOME = $CATALINA_BASE
+#sh {$CATALINA_HOME}/bin/startup.sh  
+
+sh apache-tomcat-9.0.31-prod/bin/startup.sh
+
+
+#+END_SRC
+*** Step2: Create a Job <Deploy_Application_Prod_Env> to Deploy From Stage Evn to Production Env 
+#+BEGIN_SRC 
+New item 
+         Name : _Deploy_Application_Prod_Env_
+         FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+        Project Name :  _Package_Application_   (Project Name for above Project)
+        Which build  : Latest successfull build
+            Stable build only : Ok
+        Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9091(9091 : tomcat manual config)
+#+END_SRC
+
+The above job Depoly Application Staging Env is not auto-trigger because it need the approvial of authority (manual triggger from Stagging Env Job)
+
+#+BEGIN_SRC
+#         Name : _Depoly Application Staging Env_
+
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+        Project Name :  _Package_Application_   (Project Name for above Project)
+        Which build  : Latest successfull build
+            Stable build only : Ok
+        Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:http://67.205.146.248:9090(9090 : tomcat manual config)
+
+
+################################################################
+
+    Build other projects(manual step):
+        Downstream Project Names : _Deploy_Application_Prod_Env_
+
+#+END_SRC
+* Infrastructure as Code(DSL)[33] 
+Jenkins Allow User to manage the Jenkins Job  via UI Parameter
+
+This may introduce few Problem
+- No Proper Audit Trails. : If conf maually jenkins with multi-user can edit config  may do not trace back the user or(we don't know who changed what)    
+- No History of Changes.  : If some user change job then we many not have history of chaganes occur.
+- Developers Dependency on  DevOps or System Admin : If Devops are not avaiable then their may be delay 
+- Difficult to Back & Restore    :    
+
+To *solution* is *write Jenkins Job in code*  and save it in SCM
+
+Infrastructure as code (IaC)  is ability to programmatically  manage and provison an entire technology stack through code, rather than using manual and complex process
+
+Version Control provide the History and Audit Trail
+
+Easy Roll Back to prior version of Jobs and Builds
+* Jenkins DSL Domain Specific Langaugae
+** Job DSL Overview[34] 
+- Jenkins DSL : Programatic way of Implement the Jenkins Jobs
+- Jenkins Job DSL plugin is used to define Jobs in Programatic Form
+- DSL stands from Domain Specific Langaugae
+- User can describe their Job using *Groovy Base Script*
+- Jenkins Job DSL Plugin is easy way to manage Jenkins Job.
+- User can create multiple Jobs with Jenkins DSL Plugin and it come with lot of benefits like Version Control, Audit History, Peer Review, RollBack and Backup.
+
+Step To install DSL Plugins
+- manage Jenkins > manage Plugins > Install *Job DSL*
+** Demo DSL Job[35]
+Seed Job : To use the Job DSL plugin, you first need to create a seed job.
+
+The seed Job is a Jenkins Job which runs a DSL scripts, and then generates a new job
+
+The seed job is a normal free- style Jenkins job that you  add the "Process Job DSL" build step. This  step takes the DSL and generates the configured jobs.
+
+*** Create groovy script
+#+BEGIN_SRC java
+// grove base script
+// #FILENAME: MavenProjectDSL.groovy
+
+job('First-maven-Project-Via-DSL'){
+    description("Frist maven Projet generated by DSL ")
+    scm{
+         git("git@github.com:anshulc55/Jenkins_Upgradev3.git",master)
+    }
+    triggers{
+          scm('* * * * *')
+    }
+    steps{
+          maven('clean package', 'maven-samples/single-module/pox.xml')
+    }
+    publishers{
+          archiveArtifacts '**/*.jar'
+    } 
+}
+// 
+#+END_SRC 
+NameConvextion or Syntax For groovy can be found is: google search job-dsl-plugin
+or https://jenkinsci.github.io/job-dsl-plugin/
+*** Push DSL file to github
+Push groovy file in git hub 
+*** Create Job using github groovy file
+#+BEGIN_SRC
+new item 
+        Name : _maven_Seed_Job_ 
+       Free Style
+          
+Source Code management
+    url : https://github.com/anshulc55/Jenkins_Upgradev3.git
+
+Build : 
+      _Process Job DSLs_    # Job-dsl-plugin   
+         Look on FileSytem 
+           DSL Scripts :: _MavenProjectDSL.groovy_ # file name of DSL FILE
+                                              # groovy path in github          
+
+#+END_SRC
+*** Approve DSL script
+Approve DSL script
+#+BEGIN_SRC
+manage Jenkins 
+       In-process Script Approval
+          Click : Approve
+#+END_SRC
+* Jenkins as Code Pipeline 
+** Code Pipeline Overview[037 Udemy]
+Jenkins Code Pipeline used DSL.
+DSL is scriptable via Groovy and so it is extremely flexible.
+DSL used to automate the Jenkins Job
+Having the build and deployment  Pipeline as Code (PaC)
+- Pipeline as Code :
+  - JenkinsFile: Jenkinsfile is a text file that stores the entire workflow as code and it can be  checked into a SCm on your local system
+
+  - The Jenkinsfile is written using the Groovy DSL
+
+  - Pipeline: This is a user defined block which contains all the processes such as build,test,deploy...etc. It is a collector of all the stages in a Jenkinsfile.
+
+  - Node : Inside a pipeline we have a node , which is a machine that executes an entire workflow.
+
+  - Agent:It is a directive that can run multiple builds with only one instance of Jenkins. It instricts Jenkins to allocate an executor for the builds.
+
+  - Any: Runs the pipeline/stage on any available agent.
+
+  - Stages: This block contains all  the work that needs to be carried out. There can be more  than one stage within this directive. Each stage performs a specific task.
+
+  - Steps: A series of steps can be  defined within a stage block.These steps are carried out in  sequence to execute a stage.
+    - There mush be at least one step  within a steps directive.
+
+*** Install <Build Pipeline Plugin>
+#+BEGIN_SRC
+manage Jenkins
+       manage plugin
+             Install : Build Pipeline Plugin
+#+END_SRC
+
+*** Create Jenkinsfile and push in github
+#+BEGIN_SRC java
+
+// # Filename: Jenkinsfile
+pipeline {
+      agent any
+      stages {
+            stage('Init') {
+                  steps {
+                        echo 'Hi, this is Anshul from LevelUp360'
+                        echo 'We are Starting the Testing'
+                  }
+            }
+            stage('Build') {
+                  steps {
+                        echo 'Building Sample Maven Project'
+                  }
+            }
+            stage('Deploy') {
+                  steps {
+                        echo "Deploying in Staging Area"
+                  }
+            }
+            stage('Deploy Production') {
+                  steps {
+                        echo "Deploying in Production Area"
+                  }
+            }
+      }
+}
+
+#+END_SRC
+*** Create Job using Jenkinsfile
+#+BEGIN_SRC
+New item:
+         Name: _SampleCodePipline_
+         Pipeline 
+
+General : 
+       Description: This is First & Sample Code Pipeline Job
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+         Definition       :  _Pipeline script from SCm_
+             SCm          : Git
+                  Repository : _url_
+
+             Script Path  : _Jenkinsfile_
+
+#+END_SRC
+** Ex: Automate maven project [39]
+
+#+BEGIN_SRC
+# Inside "TomcatDeploy_View" Create a New JOB   :
+New item
+       Name _Package_Application_
+       FreeStyle Project
+Genral :        
+    Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
+    Discard Old Build: 5 days and 5 builds
+Source Code management:
+    git :https://github.com/anshulc55/Jenkins_Upgradev3.git 
+
+Build Trigger :
+    Poll SCM: * * * * *
+Build:
+   _Invoke top-level maven target_
+       Maven Version   : _LocalMaven_
+       Goals           : clean package
+
+       Advance :
+          POM  : _java-tomcat-sample/pom.xml_ # location of pox.xml
+
+ Post-build Action :
+    _Archive the artifacts_
+         Files to archive : _**/*.war_
+
+ Post-build Action : 
+     _Build Other Project_
+          Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
+          Trigger only if build is stable : Ok
+
+Save Job
+#+END_SRC
+
+The Package Application Job : Is use to create artifact (**/*.war) and trigger Staging Project 
+
+Need to creating artifact with-out using <Packing Application> and Use Pipeline as code 
+
+If Develpoers who are developing prj then can create there pipeline-code file which use to package-Application.
+
+Then Devops will not have to write the code for package-Application and only need to create/maintain for deploying to Stating and Production Environment.
+
+ 
+
+*** Create Jenkinsfile and push in github
+#+BEGIN_SRC java
+
+// # Filename: Jenkinsfile
+pipeline {
+    agent any
+    stages {
+        stage('Build Application') {
+            steps {
+                sh 'mvn -f java-tomcat-sample/pom.xml clean package'
+            }
+            post {
+                success {
+                    echo "Now Archiving the Artifacts...."
+                    archiveArtifacts artifacts: '**/ *.war'
+                }
+            }
+        }
+        stage('Deploy in Staging Environment'){
+            steps{
+                build job: 'Deploy_Application_Staging_Env'
+
+            }
+            
+        }
+        stage('Deploy to Production'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve PRODUCTION Deployment?'
+                }
+                build job: 'Deploy_Application_Prod_Env'
+            }
+        }
+    }
+}
+#+END_SRC
+
+*** Create Job using Jenkinsfile
+#+BEGIN_SRC
+New item:
+         Name: _PackageApplication Code Pipline_
+         Pipeline 
+
+General : 
+       Description: This is First & Sample Code Pipeline Job
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+         Definition       :  _Pipeline script from SCm_
+             SCm          : Git
+                  Repository : _url_
+
+             Script Path  : _java-tomcat-sample/Jenkinsfile_
+
+#+END_SRC
+
+*** Trigger Delopy to Staging and Production Env
+**** Deploy Stagging Env
+
+#+BEGIN_SRC
+#Step 1:  Install "Copy Artifact" & "Deploy to Containers" Plugins
+#Step 2:
+New item 
+         Name : _Depoly Application Staging Env_
+         FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+# #  #     Project Name :  _Package_Application_   
+        Project Name :  _PackageApplication Code Pipline_   
+        Which build  : Latest successfull build
+            Stable build only : Ok
+        Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9090(9090 : tomcat manual config)
+#+END_SRC
+**** Deploy Production
+#+BEGIN_SRC
+New item 
+         Name : _Deploy_Application_Prod_Env_
+         FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+# #  #     Project Name :  _Package_Application_   (Project Name for above Project)
+        Project Name :  _PackageApplication Code Pipline_   (Project Name for above Project)
+        Which build  : Latest successfull build
+            Stable build only : Ok
+        Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+             Username : tomcat
+             Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9091(9091 : tomcat manual config)
+#+END_SRC
+* Distributated Build in Jenkins
+** Distributed Builds Concept [41] 
+We are using Jenkins master Node to Execute the Build and package the Application.
+
+Jenkins Follow the *master-slave architecture* i.e many slaves work for a master. It is also know as Jenkins Distributied Builds.
+
+It also allows User to run jobs on different Environment like Linux, Windows, macOS...etc.
+
+User can also run the same test  case on different enviroments in parallel using Jenkins Distributed Builds, which in turn helps you to achive the desired results quickly using  this  distributed approach.
+
+All of the job results are collected and combined on the master node for monitoring.  
+
+Jenkins master
+Your main Jenkins server is the master machine.The tasts performed by master are :
+
+- Scheduling build jobs: schedules the jobs in slave machine
+- Dispatching build to the slaves for the execution :
+- monitor the slaves.
+- recording and presenting the build results.
+- Can also execute build job directly.
+
+Jenkins Slave:
+A slave is a Java executable that  runs on a remote machine.
+The characteristics of slave are :
+- hears request from  the Jenkins master  instance
+- Slave can run on a variety  of operating system
+- job of slave is to do as they are told to, which involves executing build jobs dispatched by the master.
+- We can configure a project  to always run on a particular  slave machine or a particular type of slave machine, or simple let jenkins pick the next  availale slave 
+ 
+** Create and Configure Jenkins[42]
+*** Create and Connect Node(Slave-servet) in AWS(SSH- AWS Private key) 
+#+BEGIN_SRC
+manage Jenkins 
+     mange Node(Slave) 
+        New Node  
+             Node name : _<Slave-Server Name>_
+             Permanaent Agent : enable
+
+
+executors : _1_
+remote root directory : _/opt/deploy/_  # dir in slave server
+label            : _orange_
+Launch method    : _Launch agents via SSH_
+   - Host Name   : _18.188.173.210_       
+   - Credentials : _Jenkins_
+       - Kind    : _SSH Username with private key_
+       - Usernaem: _ec2-user_
+       - Private key : enable
+       - key : _<copy the key>_
+Host Key Verification Strategy : _Non verification Strategy_
+
+
+Node Progeries :
+
+Toot Locations :
+  - Name : _Java_
+  - Home : _/opt/software/jdk1.8.0_131_
+  - Name : _maven_
+  - Home : _/opt/software/apache-maven-3.6.3/_
+
+BUG : if java, maven are not present then 
+Jenkins > mangae Jenkins > Global Tool Configuratoin > JDK (Add JDK) , maver(Add maven)
+manage jenkins > mange nodes
+#+END_SRC
+
+*** TODO Create and Connect Node(Slave-servet) in Droplet(By account cmd) (Ubuntu)
+*** Jenkins Executor
+- Jenkins Executor basic block which allow Jenkins Job to Execute on Node
+- Executor is like a single Process which execute by master on slave machine to run build on  slave.
+- This number executor specify the maximum number of concurrent builds that jenkins may perform on Slave Node (20-30,50,100 parallel jobs) 
+
+- This parallel jobs are depends on No.of Executor (2 build per core cpu) 
+** TODO Concurrent Build , Label Nodes[44]
+** TODO Assign particular job to particualar Slave-Node 
+* Jenkins Integration with Docker
+** Create Docker File of Jenkins File[50]
+*** Create Jenkinsfile
+#+BEGIN_SRC java
+// #Jenkinsfile
+pipeline {
+    agent any
+    stages {
+        stage('Build Application') {
+            steps {
+                sh 'mvn -f java-tomcat-sample/pom.xml clean package'
+            }
+            post {
+                success {
+                    echo "Now Archiving the Artifacts...."
+                    archiveArtifacts artifacts: '**/ *.war'
+                }
+            }
+        }
+
+        stage('Create Tomcat Docker Image'){
+            steps {
+                sh "pwd"
+                sh "ls -a"
+                sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
+            }
+        }
+
+    }
+}
+#+END_SRC
+*** Create Docker File 
+#+BEGIN_SRC sh
+# Dockerfile
+FROM tomcat:8.0
+ADD **/*.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+#+END_SRC
+*** Docker config
+https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+#+BEGIN_SRC sh
+sudo groupadd docker
+#+END_SRC
+*** Create Jenkins Job 
+#+BEGIN_SRC
+New item:
+         Name: _Build_Tomcat_Docker_Image_
+         Pipeline 
+
+General : 
+       Description: This Job will create the Docker Image of Java-sample-tomcat Project
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+         Definition          :  _Pipeline script from SCm_
+             SCm             :  _Git_
+                  Repository : _url_
+
+             Script Path     : _Jenkinsfile_
+
+#+END_SRC
+
+Note: Due to security resons like permission
+then 
+#+BEGIN_SRC sh
+sudo usermod -a -G docker jenkins
+#+END_SRC
+** Execute Project in Docker [54]
+#+BEGIN_SRC sh
+docker images
+#REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+#tomcatsamplewebapp:3   latest              8f53e8be8eaf        2 days ago          64.5MB
+
+docker run -p 9090:8080 tomcatsamplewebapp:3
+#+END_SRC
+* Parameterized Jenkins Jobs
+Ceate a script in path : /opt/softaware/scripts/test.sh
+#+BEGIN_SRC sh
+#!/bin/sh
+echo "$1 is a good boy and $2 is a innocent guy"
+#+END_SRC
+*** String Parameter[56]
+#+BEGIN_SRC
+Genral
+This project is parameterised :
+               String  Parameter : 
+                                 Name          : param1
+                                 Default Value : mahesh 
+                                           
+               String  Parameter : 
+                                 Name          : param2
+                                 Default Value : pawan 
+  
+Build 
+        Execute shell
+             command : sh /opt/softaware/scripts/test.sh $param1 @param2
+
+#+END_SRC
+*** Choices Parameter[57]
+#+BEGIN_SRC
+new item > free style  name: parameterijenkns
+
+Genral
+This project is parameterised :
+          Add Parameters:
+               _Choice  Parameter_ : 
+                                 Name: param
+                                 Choices : mahesh 
+                                           pawan
+  
+Build 
+        Execute shell
+             command : sh /opt/softaware/scripts/test.sh $param
+#+END_SRC
+* Jenkins Security Aspect
+** Enable Disable Login [59]
+#+BEGIN_SRC
+manage jenkins
+      Configure Global Security
+              Enable security : Disable
+
+#+END_SRC
+*** Enable Security
+#+BEGIN_SRC
+manage jenkins
+      Configure Global Security
+              Enable security : Enable
+              
+              Access Control :
+                      Authorization:
+                         Logged-in users can do anything : Eanble
+                            Allow anaoymous read access : Enable
+   
+
+#+END_SRC
+** Allow User to Sign-Up [60]
+#+BEGIN_SRC
+manage jenkins
+      Configure Global Security
+              Access Control :
+                    Security Realm:
+                             Allow users to sign up
+
+#+END_SRC
+Note: This dummy user can change job which is not desireable
+
+** TODO Install Powerful Security Plugin 
+#+BEGIN_SRC
+mangae jenkins
+      manage plugin 
+                Role based authorization Strategy  
+#+END_SRC
+* ----------------------------------
+* AWS Delivery Code Pipeline:
+* Introduction to AWS Code Deploy & Code Pipeline
+* Get Start with Project
+* AWS CI/CD Pipline

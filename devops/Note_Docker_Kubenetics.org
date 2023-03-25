@@ -1,0 +1,161 @@
+#+TITLE: Note_Docker_Kubenetics
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Swarm 
+** Intro and Creating a 3-Node Swarm Cluster
+*** Docker Swarm < Start >
+*** Swarm mode Build-In Orchestration[62]
+Why Orchestration
+- How do we automate container lifecycle ?
+- How can we easily scale out/in/up/down ?
+- How can we ensure our container and  re-created if they fail ?
+- How can we replace container without downtime (blue/green deploy) ?
+- How can we control /track where container get started ?
+- How can we ensure only trusted servers run out containers ?
+- How can we store secrets, key, passwords and get them to the right container(and only that container) ?
+
+- Swarm mode : Buil-In Orches
+ - Swarm mode is a clustering solution build inside Docker
+ - Not related to Swarm "classic" for  pre-1.12
+ - Added in 1.12 (Summer 2016) via SwarmKit tool kit
+ - Enhanced in 1.13 (January 2017)  via  Stacks and Secrets
+ - Not enable by default, new commonds once enable
+   - docker swarm
+   - docker node
+   - docker service
+   - docker stack
+   - docker secret
+    
+*** Create Your First Service and Scale it locally
+#+BEGIN_SRC sh
+docker info | grep "Swarm"  # Check if swarm is active or not
+# Swarm: inactive
+
+docker swarm init  # Initialized swarn
+#+END_SRC
+
+- Swarm init background work
+  - Lot of PKI and security automation
+    - Root Signing Certificate created for  our Swarm
+    - Certificate is issused for first management node
+    - Join token are created
+  - Raft database created to store root CA, configs and secrets
+    - Encypted by default on disk (1.13+)
+    - No need for another key/value system to hold orchestration/secretes
+    - Repilcates logs amongs managers via  mutual TLS in  "control plane"
+
+*** Create 3-Node Swarn Cluster [66]
+Option
+-  *Play-with-docker.com*
+    - Only need a brower, but resets after 4 hours
+-  *Docker-machine + Virtual Box*
+    - Free and runs locally, but requires a machines with 8 GB memory
+-  *Digital Ocean + Docker install* [ *default* ]
+    - most like a production setup, but costs $5-10/node/month while learning
+    - Use my referral code in section resource to get $10 free
+-  *Roll you own*
+    - Docker-machine can provision machine for Amaon, Azure, DO,Google,etc.
+    - Install docker anywhere with get.docker.com
+
+ 
+#+BEGIN_SRC sh
+docker-machine node1  # create a node1 
+ 
+docker-machine ssh node1 # to move inside the machine
+docker-machine env node1 # 
+
+#+END_SRC
+
+* Swarm Basic Feature and How to Use them in Workflow
+** Scaling Out with Overlay Networking [67]
+Overlay choose --driver overlay when creating network
+For container-to-container traffic inside a single Swarm
+Optinal IPSec(AES) encryption on network creation
+Each service can be connected to multiple networks
+ - Eg: Front-end , back-end
+#+BEGIN_SRC sh
+docker network create --driver overlay mydrupal
+docekr network ls
+docker service create --name psql --network mydrupal -e POSTGRESS_PASSWORD=mypass postgres
+docker service ls
+psql replicated ps psql
+docker container ls
+
+
+docker service create --name drupal --network mydrupal -p 80:80 drupal
+docker service ls
+
+watch docker ls # linux re-run 
+docker service ps drupal # see -where drupal service is running : let be node2
+
+# How to make talk to each other 
+#+END_SRC
+
+** Scaling Out with Routing mesh[68]
+*** Swarm Routing mesh(Global Traffic Routing)
+Routes ingress (incoming) packets for service to proper task
+Spans all nodes in swarm
+Uses IPVS from Linux Kernel
+Load balances Swarm Services across their Tasks
+Two ways this works:
+Container-to-Container in a Overlay network (Use VIP)
+External traffic incoming to published ports (all nodes listen)
+#+BEGIN_SRC sh
+docker service create --name serach --replicas -p 9200:9200 elasticsearch:2 # elasticserach is a serach database for web api
+
+docker service ps serach
+
+curl localhost:9200
+
+#+END_SRC
+
+** Assignment Ans : Create a multi-server multi-node web app[69-70]
+#+BEGIN_SRC sh
+docker node ls
+docker ps -a
+docker services ls
+
+docker network craete -d overlay backend # only one network we can crate
+docker network craete -d overlay frontend
+#+END_SRC
+
+yml file
+#+BEGIN_SRC sh
+#- vote
+#   - dockersamples/examplevotingapp_vote:before
+#   - web front end for users to vote dog/cat
+#   - ideally published on TCP 80. Container listen on 80
+#   - on frontend network
+#   - 2+ replicas of this contianer
+docker service create --name vote -p 80:80 --network frontend
+--replica 2 dockersamples/examplevotingapp_vote:bofore
+#-redis
+#  - redis:3.2
+#  - key/value storge for incoming votes
+#  - no public ports
+#  - on frontend network
+#  - 2 replicas
+docker services create --name redis --network frontend --replica 2 redis:3.2
+#- worker
+#  - dockersamples/examplevotingapp_worker
+#  - backend processor of redis oand storing results in postgres 
+#  - no public ports
+#  - on frontend and backend networks
+#  - 1 replica
+docker service create --name worker --network frontend --network backend dockersamples/examples/examplevotingapp_worke
+#- db
+#   - postgres: 9.4
+#   - one name volue needed, pointing to /var/lib/postgresql/date
+#   - on bakcend network
+#   - 1 replica
+docker service create --name db --network backend --mount type=volume, source=db-data, target=/var/lib/postgresql/data |
+#- result
+#   - dockersamples/examplevotingapp_result:before
+#   - web app that shows results
+#   - runs on high port since just for admins (lets image)
+#   - so run on a high port of your choosing (I choose 5001), container liseten on 80
+#  - on backend network
+#   - 1 replica
+docker servie create --name result --network backend -p 5001:80
+
+ #+END_SRC

@@ -1,0 +1,429 @@
+#+TITLE: Note_linux_os
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+
+
+* Ubuntu Installation
+** Setting Fastest Repository Mirro
+Software & Updates > Ubuntu Software > Download from > other > Best
+                   > Canonical Partner : select
+** Install Drives :
+Software & Updates > Addtional Drives (Properity :NVIDIA binary)
+
+** Ubuntu restricted pack
+sudo apt install ubuntu-restricted-extras 
+sudo apt install libavcodec-extra
+sudo apt install libdvd-pkg
+** Chrome, Ubuntu-restricted 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install chrome-gnome-shell
+sudo apt install ubuntu-restricted-extras
+
+** atp-get does not remove  config file
+https://askubuntu.com/questions/147277/sudo-apt-get-remove-does-not-remove-config-files
+
+#+BEGIN_SRC sh
+sudo apt-get remove <prg>     # does not remove config files
+sudo apt-get purge <program>  # to remove config files
+#sudo apt-get remove --autoremove avidemux2.6-qt
+sudo apt-get autoremove # to remove unwanted lib
+#+END_SRC
+* Look
+** Install GNOME tweaks tool
+sudo apt install gnome-tweek-tool
+** gnome shell
+#+BEGIN_SRC 
+sudo apt install chrome-gnome-shell
+#+END_SRC
+** Cleaner Bleach Bit
+** Gnome-tools,tweak
+sudo apt-get install gnome-tool
+sudo apt-get install gnome-tweak-tool
+# https://www.ubuntupit.com/19-best-gnome-shell-extensions-ubuntu-gnome-desktop/
+** Template
+touch ~/Templates/Empty\ Document
+** Using Flatpak 
+(universal packaging system for Fedora)
+sudo apt install flatpak
+sudo apt install xdg-desktop-portal
+# defalut install in ubuntu
+* Applications
+** Enable Firewall and Install Antivirus
+sudo ufw enable
+sudo apt dist-upgrade
+sudo apt install gufw
+** Linux PDF Editor 
+should be reviewed
+** Best Terminam Emulator :  
+URXVT(can config: peral OR Tilda uses Tilda)...etc
+TILDA, My St(suckless terminal ) ranger model : 
+
+** archive applications 
+sudo apt-get install unrar zip unzip p7zip-full p7zip-rar rar
+** Wine 
+sudo apt-get install wine winetricks
+** System Restore Point
+sudo add-apt-repository -y ppa:teejee2008/ppa
+sudo apt-get update
+sudo apt-get install timeshift
+** Install Java (most of prg require java )
+sudo apt-get install openjdk-8-jdk
+** battery percentage
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+touch weightloss
+sudo apt get upgrade
+sudo apt-get upgrade
+** youtube-dl
+*** Download audio from YouTube
+`-i`			- ignore errors
+`-c` 			- continue
+`-t`			- use video title as file name
+`--extract-audio` 	- extract audio track
+`--audio-format mp3` 	- convert to mp3
+--no-overwrites
+`--audio-quality 0` 	- the best audio quality
+`--yes-playlist` 		- affirm that url points to a playlist
+`YT_URL` 			- video url from youtube
+# Download single entry
+youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 YT_URL
+
+# Download playlist
+youtube-dl -ict --yes-playlist --extract-audio --audio-format mp3 --audio-quality 0 YT_URL
+
+# Download playlist, --download-archive downloaded.txt add successfully downloaded files into downloaded.txt
+youtube-dl --download-archive downloaded.txt --no-overwrites -ict --yes-playlist --extract-audio --audio-format mp3 --audio-quality 0 --socket-timeout 5 YT_URL
+
+# Retry until success, no -i option
+while ! youtube-dl --download-archive downloaded.txt --no-overwrites -ct --yes-playlist --extract-audio --audio-format mp3 --audio-quality 0 --socket-timeout 5 <YT_PlayList_URL>; do echo DISCONNECTED; sleep 5; done
+```
+*** Download video from YouTube
+https://askubuntu.com/questions/486297/how-to-select-video-quality-from-youtube-dl
+
+*** Download Playlist and change name
+#+BEGIN_SRC sh
+   cd Documents/ 
+youtube-dl -i -f mp4 --autonumber-start 1 --yes-playlist 'https://www.youtube.com/playlist?list=PLTgNKd4RxFTY_rhPBYyFJ-qVwMHNgebJe'
+   youtube-dl -i -f mp4 --autonumber-start 1 --yes-playlist 'https://www.youtube.com/playlist?list=PLRAV69dS1uWTSu9cVg8jjXW8jndOYYJPP'
+   'https://www.youtube.com/playlist?list='
+
+   ls -ltcr >> list # c : ctime: last modification of file status
+                    # t : sort by modification time
+                    # r : revierse the sort  
+   # run Py rename function
+
+#+END_SRC
+*** Download Subtitle or CC for an video
+For http://www.lilsubs.com/#
+**** TODO New to create own macro's  for removing time part
+if strating char is num/empty : del line
+else down
+
+* How to increase speed
+** Preload
+# https://www.ubuntupit.com/how-to-speed-up-ubuntu-linux-must-follow-tips/
+
+sudo apt-get install preload
+** reduce overheating
+sudo add-apt-repository ppa:linrunner/tlp
+sudo apt-get update
+sudo apt-get install tlp tlp-rdw
+sudo tlp start
+** COMMENT For laptop mode 
+To reduce power consumption  by slowing down hard disk speed and kernel control
+*** DONOT INSTALL laptop mode tools, tlp does the same
+sudo add-apt-repository ppa:ubuntuhandbook1/apps
+sudo apt-get update
+sudo apt-get install laptop-mode-tools
+gksu lmt-config-gui
+laptop-mode-tools --help
+
+** Use apt-fast isnted of apt-get
+sudo apt-add-repository ppa: apt-fast/stable
+sudo apt-add-repository ppa:apt-fast/stable
+sudo apt-get update
+sudo apt-get install apt-fast
+sudo apt-get remove apt-fast
+
+**  Choise a light weighted desktop Environment 
+***  Awesome : Awesome is less power hog desktop environment, which gives you a lot of control over the system. To install this environment, just run the following command in Terminal.
+
+ Destro Tube  https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg
+
+*** Qtile Windows: 
+
+
+** Enable Addtional Drives
+** Clean up Ubuntu
+sudo apt-get clean
+sudo apt-get autoremove
+* Programmer
+** git
+sudo apt install git-all
+nano ~/.gitconfig
+** Emacs
+cd emacs
+./autogen.sh
+./configure
+make -j4
+sudo make install
+emacs
+
+** Neovim
+sudo apt-get -f install neovim
+* Atom
+script
+file icon
+pigments
+pigments-map
+
+
+disable : 
+autocomplete-symi
+a....
+
+
+install:
+       fautocomplete-python: 
+shortcut : C+ S + p: cmd promt
+
+# Traversy media
+https://www.youtube.com/watch?v=aiXNKHKWlmY
+
+emmet : faster html,class, id, 
+atomlive server : 
+Todo : reergymerej
+
+eg:
+//TODO: Run my Function
+
+
+atom-beautify : python,php .....
+
+
+ask stack :
+
+# DevTips
+
+https://www.youtube.com/watch?v=UYPgPyxwF28
+Gitware :
+command palellet
+
+multi line cursor
+fuzzy file finder : command search
+
+
+App style sheet :  Atom menu > open my stylesheet
+
+terminal 
+
+# How
+* Jupyter: 
+
+run code interctively > 
+ipython is use to update to Jupter
+
+** creaat new notebook
+cd ../Jupter-Demo
+jupter notebook
+
+
+! at start of cell/file as bash and we can run bash file
+eg: 
+!pip list
+ls 
+
+building cmd : magic
+% cmd agr will come for save line
+
+eg : %lsmagic
+
+%%  then entire cell is consitor for arguments
+
+matpllotlib inline cmd
+
+%% HTML >> entire cell consider as html
+
+insert html, image 
+#+BEGIN_SRC html
+%% HTML
+<iframe width = "560" height ="315" src = "https://www.youtube.com/...."
+#+END_SRC
+ 
+Expote: ipyn,html,py,
+Share :
+
+To view other's jupeter notebook you can view in github ipython,  
+* Anacoda:
+py distribution,
+free and open 
+for data science, meachine larning
+** install
+download from anaconda site  new version
+
+**  install anaconda in local dir
+#+BEGIN_SRC sh
+bash ~/Download/Anaconda3.xx-Linux-x86_64.sh
+ /home/dan/anaconda
+#+END_SRC
+
+   
+* Shortcut Terminal :
+http://i.gzn.jp/img/2007/08/03/linux_command_cheat_sheet/linux.png
+
+
+ | command           | exp                                      |
+ |-------------------+------------------------------------------|
+ | pwd               | print working directory                  |
+ | ls                | list of file in folder                   |
+ | cd                | change directory                         |
+ | cd ..             | parent directory                         |
+ | touch             | create file                              |
+ | gedit sample.txt  | create or open(sample.txt)/edit in gedit |
+ | mv "file-path" ./ | Move file at path(file-path)             |
+ |                   | ./    : To current dir                   |
+ | mkdir 'dir1'      | create a dir of name 'dir1'              |
+ | cd                |                                          |
+* Split Terminal
+#+BEGIN_SRC sh
+  sudo apt-get install screen
+  screen
+  # Split Horizontally : Ctr + a S
+  # Split Horizontally : Ctr + a :split
+  # Split Vertically : Ctr + a |
+  # Split Vertically : Ctr + a :split -v
+  # move cursor around tiles: Ctr + a <Tab>
+  # move cursor around tiles: Ctr + a :focus
+
+  # Open bash terminal in tiles : Ctr +a C
+  # Open bash terminal in tiles : Ctr +a :screen
+
+  # maxime tile : Ctr + a Q 
+  #  
+
+  # remove tile : Ctr + a X
+  # remove tile : Ctr + a :remove
+
+#+END_SRC
+* installation
+
+* pip
+#+BEGIN_SRC sh
+  sudo sh Anaconda3-5.3.1-Linux-x86_64.sh 
+  jupyter notebook
+  python3 -m pip install --upgrade pip
+  python3 -m pip install jupyter
+  python3 -m pip sudo install jupyter
+  sudo python3 -m pip install jupyter
+  jupyter notebook
+  sudo apt-get clean
+  sudo apt-get pip
+  sudo apt-get update
+  sudo apt-get upgrade
+  sudo apt autoremove
+  sudo apt-get upgrade
+  sudo apt-ger install python-pip
+  sudo apt-get install python-pip
+  sudo apt-get install python3-pip
+  pip --version
+# 
+
+#+END_SRC
+
+
+* Udemy-dl Setting
+#+BEGIN_SRC sh
+cd /home/jayradhe/Workspace/udemy-dl
+conda crearte --name udemy-dl
+source activate udemy-dl
+conda env create -f requirement.yaml
+###################################################################################################################33
+# Python Django tkinter     - Complete bundle advance
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/python-django-tkinter-complete-bundle-advance/learn/lecture/16463998?components=buy_button%2Cdiscount_expiration%2Cgift_this_course%2Cintroduction_asset%2Cpurchase%2Cdeal_badge%2Credeem_coupon#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+###################################################################################################################33
+# Ansible -Begineering
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/learn-ansible/learn/lecture/7040832?start=0#overview  -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+###################################################################################################################33
+# Ansible -Advan
+#############################333
+ python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/learn-ansible-advanced/learn/lecture/7687716?start=0#overview  -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+###################################################################################################################33
+# Docker
+#############################333
+python udemy-dl.py -u damodarsharandas@gmail.com -p dan25kar https://www.udemy.com/course/docker-mastery/learn/lecture/16810938#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+
+
+
+############################################33
+#  THE Web Developer Bootcamp
+##############################################
+python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/3861448#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+##########################################################333
+#    Complete React Zero to mastery
+###############################################################
+python udemy-dl.py -u steja999@gmail.com -p Spring@20 https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/14754858#overview -q 720 -o "/home/jayradhe/karthik/VideoTutorials/udemy/" --skip-sub
+
+#+END_SRC
+
+* Read Write NTFS partition drive (Not  C drive) from linux
+I have a external hard disk which is inside laptop so i have
+Two Harddsik
+- Kingston 250 Gb
+  - System reserve : 500Mb "NTFS"  
+  - Windows        : 100Gb "NTFS"
+  - Linux          : 120Gb "ext4"   
+WD - 1Tb 
+#+BEGIN_SRC sh
+ # Do fdisk
+ sudo fdisk -l
+Disk /dev/sda: 223.58 GiB, 240057409536 bytes, 468862128 sectors
+Disk model: KINGSTON SA400S3
+
+Device     Boot     Start       End   Sectors   Size Id Type    # Here sda1: System Reserved, sda2: C drive, sda4: Linux
+/dev/sda1  *         2048   1026047   1024000   500M  7 HPFS/NTFS/exFAT
+/dev/sda2         1026048 202751999 201725952  96.2G  7 HPFS/NTFS/exFAT
+/dev/sda4       202752000 468860927 266108928 126.9G 83 Linux
+
+
+Disk /dev/sdb: 931.53 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: WDC WD10JPVX-75J
+
+Device     Boot Start        End    Sectors   Size Id Type    # sdb1 : External Harddisk (New Volume) 
+/dev/sdb1        2048 1953521663 1953519616 931.5G  7 HPFS/NTFS/exFAT
+
+  # Do blkid
+ sudo blkid
+/dev/sda1: LABEL="System Reserved" UUID="8492E34292E336F8" TYPE="ntfs" PARTUUID="d67b4fcf-01"
+/dev/sda2: UUID="0ABCEC6ABCEC51AD" TYPE="ntfs" PARTUUID="d67b4fcf-02"
+/dev/sda4: UUID="b75e5abd-3f5b-4448-9a96-c20c9d0f6aaf" TYPE="ext4" PTTYPE="dos" PARTUUID="d67b4fcf-04"
+/dev/sdb1: LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" PARTUUID="37330972-01"
+
+  # echo : "LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" rw,auto,nobrowse " in /etc/fstab
+ cat /etc/fstab
+
+# <file system>                          <mount point>   <type>  <options>         <dump>  <pass>
+UUID=b75e5abd-3f5b-4448-9a96-c20c9d0f6aaf /               ext4    errors=remount-ro  0       1
+/swapfile                                 none            swap    sw                 0       0
+
+LABEL="New Volume" UUID="9CB6EE16B6EDF126" TYPE="ntfs" rw,auto,nobrowse 
+
+#+END_SRC
+
+
+* Unable to connect exteranl mike to linux-mint
+In obs i can't add external mike after doing setting i got my answer
+#+begin_src sh
+sudo nano /etc/modprobe.d/alsa-base.conf
+
+# snd-hda-intel is for boya mike obs setting
+options snd-hda-intel model=,dell-headset-multi
+#+end_src
+External mike is showing in system> setting > sound(serach sound) but in obs it is not showing but showing as defalut
+but when using ubs setting it is showing usb mike connection

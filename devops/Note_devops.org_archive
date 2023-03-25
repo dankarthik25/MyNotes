@@ -1,0 +1,29 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/jayradhe/mynotes/Note_devops.org
+
+
+** String Parameter
+:PROPERTIES:
+:ARCHIVE_TIME: 2020-04-25 Sat 07:00
+:ARCHIVE_FILE: ~/mynotes/Note_devops.org
+:ARCHIVE_OLPATH: Jenkins/[19- march] Pass parameters in Jenkins
+:ARCHIVE_CATEGORY: Note_devops
+:END:
+#+BEGIN_QUOTE
+Genral
+This project is parameterised :
+               String  Parameter : 
+                                 Name          : param1
+                                 Default Value : mahesh 
+                                           
+               String  Parameter : 
+                                 Name          : param2
+                                 Default Value : pawan 
+  
+Build 
+        Execute shell
+             command : sh /opt/softaware/scripts/test.sh $param1 @param2
+
+#+END_QUOTE

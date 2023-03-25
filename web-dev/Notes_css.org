@@ -1,0 +1,765 @@
+#+TITLE: CSS notes
+#+AUTHOR:    Karthik
+#+OPTIONS: num:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+# \\ for line break in org to html 
+[[https://www.youtube.com/watch?v=Edsxf_NBFrw]] \\
+CSS Tutorial In Hindi (With Notes) \\
+CodeWithHarry
+
+* Introduction - 00:00:00
+HTML is just an skeletal layout of a website \\
+We need CSS to design a webiste, add styles to it and make it look beautiful.
+
+*  [What is CSS?] - 00:08:21
+CSS stands for cacscading Style Sheets \\
+CSS is optional but it convert an off looking HTML page into a beautiful & responsive website
+** Install VS Code
+We will use Microsoft Visual Studio Code as a tool to edit our code. \\
+It is very powerful, free and customizable
+** Why Learn CSS ?
+CSS is a very demanded skill in the world of web development.\\
+If you are successfully able to master CSS, you can customize your website as per your liking.
+
+** Your first line of CSS
+Create a =.css= file inside  your directory and add it to your HTML. Add the following line to your CSS
+#+begin_src css
+body{
+    background-color: rgb(60, 24, 225);
+}
+#+end_src
+
+** HTML Refresher :
+HTML is a bunch of tags used to lay the structure of a page. \\
+Download HTML Notes as part of these notes for a details deedrive . If you know basic HTML continue !
+*  [Create Our First CSS Website] - 00:23:48
+We will create our first CSS website in this section.
+
+** What is DOM ?
+DOM stands for =Document Object Model=. When a page is loaded, the brower create a DOM of the page which is constructed as a tree of Objects.
+
+** HTML id and class attribues
+When an HTML element is given and id, it servers as a unique identifier for that element.\\
+On the other hand, when an HTML element is given a class, it now belongs to that class. More than one elements can belong to a signle class but every element must have a unique id (if assigned).\\
+We can add multiple class to an element like this
+#+begin_src html 
+<div id ="first" class= "C1 C2 C3">
+    ...
+</div>
+#+end_src
+*** Three ways to add CSS to HTML
+- <style> tag :
+  - Adding =<style>=  =</style>= to HTML
+    #+begin_src css
+<style>
+    body{   /* body : selector */ 
+        color: red;                    /* Declaration (property: value)*/  
+        background-color: pink;        /* Declaration */
+    }
+    #first{
+        background-color: aqua;
+    }
+    .red{
+        background-color: red;
+    }
+</style>
+    #+end_src
+- Inline CSS
+  - Adding CSS using style attribute in html tag
+    #+begin_src html
+<div id= "first" style="background-color: aqua;">
+   ...
+</div>
+    #+end_src
+- External CSS
+  - Adding a stylesheet (.css) to HTML using =<link>= tag
+    #+begin_src html 
+<link rel="stylesheet" type="text/css" href="styles.css" />
+    #+end_src
+    
+*** CSS Selectors
+A CSS Selector is used to select an HTML element for styling
+#+begin_src css
+body{   /* body : selector */ 
+    color: red;                    /* Declaration (property: value)*/  
+    background-color: pink;        /* Declaration */
+}
+#+end_src
+
+** Element Selector
+It is used to select an element based off the tagname \\
+For example
+#+begin_src css
+h2{
+    color: blue;
+}
+#+end_src
+
+** Id Selector
+It is used to select an element with a given id \\
+For example:
+#+begin_src css
+#first{
+    background-color: aqua;
+}
+#+end_src
+
+** Class Selector
+It is used to select an element with a given class \\
+For example \\
+#+begin_src css
+.red{
+    background-color: red;
+}
+#+end_src
+** Important Notes:
+We can group secltors like this:
+#+begin_src css
+h1, h2, h3, div{
+    color: blue; /* h1, h2, h3 and div will be of color blue*/
+}
+#+end_src
+
+We can use element class as slector like this:
+#+begin_src css
+p.red{
+color: red; /*all paragraphs of class `red` will get color red */
+}
+#+end_src
+simillarly we can use
+- =p#first=
+- =span#red=
+  
+can be used =*= as a universal selector to select all the elements
+#+begin_src css
+*{
+    margin: 0;
+    padding:0;
+}
+#+end_src
+
+** An inline style will override external and internal styles
+** Comment is CSS =/*= this is comment =*/=
+The comment in css given inside this tag [ =/*= =*/= ]
+*  Practice Set - 00:57:12
+- Create a website with a  =class red= div which has a =backgrond cloro of red= and =color white=.
+  #+begin_src css
+.red{
+    background-color: red;
+    color:white; 
+}
+.blue{
+    color: blue;
+}
+  #+end_src
+
+- Create an element with id head and verify that background color works on it as inline external as well as using style tag CSS
+
+- Create a css class one and verify that it works on mulitiple elements
+
+- Create multiple CSS classes and verify that all of these work on the same element
+
+- Have a look at the MDN CSS reference and try to play around with few key value CSS rules.
+*  [Colors & Backgrounds] - 01:06:32
+CSS rules are simple key-value pair with a selector \\
+We can write css rules to chagne color and set backgrounds
+
+** Color Property
+CSS color property can be used to set the text color inside an element
+#+begin_src css
+p {
+    color: red; 
+}
+#+end_src
+Simillarly we can set color for different elements
+** Types of color values
+Following are the most commonly used color values in CSS
+- RGB :Specify color using Red, green, blue value eg: =rgb(200,98,70)=
+- HEX : Sepcify color using hex code eg: =#ff7180=
+- HSL : Specify the color using hsl values eg: =hsl(8,90%, 63%)=
+
+The value of the color or background color is provided as any one of these values.
+
+Note: We also have a n RGBA and  HSLA values for color but they are rarely used by beginners, \\
+A stands for alpha
+** Background-clor property
+CSS background-color property specifies the background color of a contianer \\
+For eg:
+#+begin_src css
+.brown{
+    background-color: brown;   /* Can be other types of color as well */
+    color:white; 
+}
+#+end_src
+
+google hex color picker
+get the color of image from google 
+** Background-image property
+Used to set an image as the background.
+#+begin_src css
+body {
+    background-image:  url("harry.jpg");    /*this image repeate in x & y direction */
+}
+#+end_src
+
+** Background-image repeat property
+Can be any of :
+- repeat-x  : repeat in horizontal direction
+- repeat-y  : repeat in vertical direction
+- no-repeat : image not repeat
+
+See more possible value at MDN docs
+#+begin_src css 
+body {
+    background-image:  url("harry.jpg");
+    background-repeat: repeat-x /*select in {repeat, repeat-x, repeat-y, no-repeat}*/
+}
+#+end_src
+View MDN reference from vs code short cut or \\
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+** Background- size property
+#+begin_src css
+.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+    background-size: contain; /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+/*    background-size: 200px 200px; */
+    color: white;
+}
+
+#+end_src
+Can be following
+- cover : fits & no empty space remains
+- contain : fits & image is fully visible
+- auto : display in origina size
+- {{width}} : set width & height will be set automatically
+- {{width}}{{height}} : set width & height
+
+Note : Always check MDN docs to dissect a given CSS property.\\
+Remember, practice will make you perfect\\
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+
+** Background-position property
+Set the starting position of a background image.
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
+#+begin_src css
+.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+/*    background-size: contain; */ /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+    background-size: 200px 200px; 
+    color: white;
+/* Background postion {top, left, center, 25% 75%, bottom 50 px right 100px , right 35% bottom 45% }*/
+    background-position: top center; 
+}
+#+end_src
+
+#+begin_src css
+div1 {
+    background-position: left top ;   
+}
+#+end_src
+
+** Background- attachment property
+Define a scrollable/ non- scrollable character of a background image.\\
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
+
+#+begin_src css
+.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+    /* background-size: contain; */ /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+    background-size: 200px 200px; 
+    color: white;
+     /* background-position: top center;  */
+/* background-attachemt {scroll, fixed, local, local, scroll, }*/
+    background-attachment : fixed; /**/  
+}
+#+end_src
+
+
+#+begin_src css
+div1 {
+    background-attachment : fixed; /**/  
+}
+#+end_src
+** Background shrothand
+Single property to set multiple background properties.
+#+begin_src css
+div3 {
+    background: red url("img.png") no-repeat fixed right top;   
+}
+#+end_src
+One of the peorperties can be missing given the other are in order.
+
+*  Practice Set - 01:47:20
+- Create a dark blue navigation bar with light color items
+  css code
+  #+begin_src html
+<nav>
+    <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+    </ul>
+</nav>
+  #+end_src
+  
+  #+begin_src css
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    background-color: black;
+    color: white;
+/*    width: 344px;
+    height: 333px; */
+/* Side Navigation Bar */
+    width: 344px;
+    vheight: 100vh; /*for responsive site*/
+/* Horizontal Navigation Bar */
+   /*Need css flexbox*/
+}
+
+  #+end_src
+  html code 
+  
+- Change the color of the main container on your page to dark red.
+  #+begin_src html
+<div class="main">
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+</div>
+  #+end_src
+  #+begin_src css
+.main{
+    color: red;
+}
+  #+end_src
+- Create a div and add a background image with a given width and height
+  #+begin_src html
+<div class="bg">
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+</div>
+  #+end_src
+  #+begin_src css
+.bg{
+    width: 344px;
+    height: 334px;
+    background-image: url('index.jpg');
+    background-repeat: no-repeat;
+    background-color: aqua;
+    background-size: 341px 341px;
+
+}
+  #+end_src
+- Verify that the background shorthand property works with some of the values skipped.
+  #+begin_src html
+<div class="bg">
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+</div>
+  #+end_src
+  #+begin_src css
+.bg{
+    width: 344px;
+    height: 3344px;
+    background-image: url('index.jpg');
+    background-repeat: no-repeat;
+    background-color: aqua;
+    background-size: 341px 341px;
+    background-attachment: fixed;
+}
+  #+end_src      
+*  [CSS Box Model] - 02:00:39
+The CSS box model looks at all the html elements as boxes 
+#+STARTUP: inlineimages
+[[file:./images/th-625111471.jpeg]]
+** Set width and height
+#+begin_src css
+#box {
+    height : 70px;
+    widht: 70px;
+}
+#+end_src
+Note that the total width/height is calcultaed as follows:
+
+Total height = height + top/bottom padding + top/bottom border + top/bottom margin \\
+Total width = width + right/left padding + right/left border + right/left margin
+
+
+** Setting Margin & Padding
+#+begin_src css
+.box {
+    margin: 3px; /*set top, bottom, left & right values */
+    padding: 4px; 
+    height : 70px;
+    widht: 70px;
+}
+#+end_src
+
+#+begin_src css
+.boxMain{
+    margin: 7px 0px 2px 11px; /*top=7px ,right=0px, bottom=2px, left=7px */
+}
+.boxLast{
+    margin: 7px 3px; /*top & bottom =7px , left & right =3px */
+} 
+#+end_src
+
+We can also set individual margin/padding like this:
+#+begin_src css
+.box1 {
+    margin-top: 70px;
+    margin-bottom: 7px;
+    margin-left:8px;
+    margin-right:9px;
+}
+#+end_src
+
+** Setting Border
+We can set border as follows
+#+begin_src css
+.bx {
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+}
+#+end_src
+** Border Radius
+We can set border radius  to create rounded borders 
+#+begin_src css
+.div2{
+    border-radius: 7px;
+}
+#+end_src
+
+** Margin Collapse :
+When two margins from difference elements overlap, the equivalent margin is the greate of the two.
+This is called margin collapse.
+#+STARTUP: inlineimages
+[[file:./images/sibling_collapsing.png]]
+
+#+begin_src css
+*{
+    margin: 0;
+    padding: 0;
+}
+.box1{
+    background-color: red;
+    margin: 30px;
+}
+.box2{
+    background-color: aqua;
+    margin: 20px; 
+
+/*    box-sizing: border-box; */
+}
+#+end_src
+#+begin_src css 
+<div class="box1">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+</div>
+<div class="box2"> 
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+</div>
+#+end_src
+
+** Box Sizing
+Determine what out of padding and border is included in elements width and height. \\
+Can be content-box border-box
+#+begin_src css
+*{
+    margin: 0;
+    padding: 0;
+}
+.box1{
+    background-color: red;
+    margin: 30px;
+    height: 2320px;
+    width: 233px;
+    border: 2px solid black;
+}
+.box2{
+    background-color: aqua;
+    /* margin: 20px; */
+    height: 20px;
+    width: 100%;
+    padding:6px;
+    border: 5px solid grey;
+/* fit the child container in parent container */
+    box-sizing: border-box;
+}
+#+end_src
+
+#+begin_src html
+<div class="box1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+    <div class="box2"> 
+    </div>
+
+</div>
+
+#+end_src
+
+#+begin_src css
+.div1 {
+    box-sizing: border-box;
+}
+#+end_src
+*  Practice Set - 02:36:09
+- Create a website layout add a header box, 1 content box and one footer
+
+- Add border & margin to above practice
+
+- Did the margin collapse between content box and footer ?
+
+- Add the boxing -sizing property to context box. What changes did you notice ?  
+
+#+begin_src css
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    border: 2px solid white;
+    height: 66px;
+    background: black;
+    color: white;
+}
+.content{
+    background-color: red;
+    height: 90vh;
+    padding:33px;
+    margin:34px;
+}
+footer{
+    background-color: rebeccapurple;
+    margin: 23px;
+}
+.center{
+    text-align: center;
+}
+#+end_src
+
+#+begin_src html
+<header>
+    <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li> 
+    </ul>
+</header>
+<div class="content">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem, placeat distinctio, dolore eveniet at ut optio minima quia maxime et tenetur nihil, vero facere nulla quaerat cupiditate magni? Ipsam rem possimus totam tempore voluptatum?
+</div>
+<footer>
+    <p class="center"> Copyright &copy; sportsmania007</p>
+</footer>
+#+end_src
+  
+*  [Fonts & Display] - 02:49:20
+** Display 
+*** Display property
+The CSS dispaly property is used to determine whether an element is treated as a block line element & the layout used for its children. (flexbox/grid/etc).
+*** Display : inline
+Takes only the space requried by the element. No linebreaks before and after. Setting width/height not allowed, No margin/padding is allowed
+*** Display: inline-block
+Similar to inline but setting height, widthm margin and padding is allowed.
+Element can sit next to each other.
+*** Display : none vs visibility: hidden
+With =display:none= , the element is removed from the document flow. Its space is not blocked.\\
+With =visibility:hidden=, the element is hidden but its space is reserved.
+*** text-align property
+Used to set the horizontal alignment of a text
+#+begin_src 
+.div1{
+      text-align:center
+}
+#+end_src
+*** text-decoration property
+Used to decorate thet text \\
+Can be {overline, line-through, underline, none}
+
+*** text-transform property
+Used to specify uppercase and lowercase letters in a text.
+
+#+begin_src 
+p.uppercase {
+    text-transform:uppercase;
+}
+#+end_src
+*** line-height property
+Used to specify the space betweeen lines
+#+begin_src 
+.small {
+   line-height:0.7;
+}
+#+end_src
+** Font
+Font play a very important role in the look and feel of a website.
+*** font-family
+font family specifies the font of a text can hold multiple value as a "fallback" system.
+#+begin_src css
+p{
+   font-family: "Times new Roman", monospace; 
+}
+/*Alway have more than one font to ensure the correct font of your choice is rendered.*/
+#+end_src
+*** Web Safe Fonts
+These fonts are universally installed across browsers.
+
+*** How to add Google fonts
+In order to use custom google fonts, go to google fonts then select a style and finally paste it to the style.css of your page.
+
+*** Other Font property
+Some of the other font property are listed below:
+
+- font-size : Set the size of font
+- font-style: Sets the font style
+- font-variant: Sets whether text is displayed in small-capsule
+- font-weight: sets the weight of the font
+*** Generic familes
+Broad class of simillar fonts eg: serif, sans-serif \\
+Just like when we say fruit, it can be any fruit.
+
+font family : specific
+Generic family : Generic
+
+*  Practice Set - 03:29:10
+- Create the following website layout
+- Add a footer with Google Font: "Ballu Bahi" to 1st task
+- Remove the underline from links in 1st task
+- Demostrate the difference between =dispaly:none= and =visibility:hidden= using a div
+- Change the footer to all upperscase in 1st task
+    
+*  [Size, Position & Lists] - 03:45:26
+There are more units for describing size other than =px= \\
+There are =rem=, =em=, =vw=, =vh=, =percentage=,...etc
+** Size
+*** What wront with pixels ?
+Pixels(px) are relative to the viewing device for a device with size 1920x1080, 1px is 1unitof 1080/1920
+*** Relative lenghts
+These units are relative to the other lenght property following are some of the most commonly used relative lenghts
+- =em=: Unit relative to the parent front size
+  - =em=: means "my parent element's font size"
+- =rem= : Unit relative to the root font size (<html> tag)
+- =vm= : Unit relative to 1% viewport widht
+- =vh= : Unit relative to 1% viewprot height
+*** min/max height/width property
+CSS has a min-height, max-height , min-width and max-width property.
+If the content is smaller than than the minumum height, minimum height will be applied.
+
+Simillar is the case with other related properties.
+
+** position
+Used to manipulate the location of an element \\
+Following are the possible values:
+- static : The default position top/bottom/lefft/right/z-index has no effect.
+- relative:The top/bottom/left/right/z-index will now work
+  - Otherwise the element is in the flow of docuemnt like static
+- absolute: The element is removed from the flow & is relatively positioned to tis first non-static ancestory top/bottom etc works
+- fixed: Just like absolute except the element is positioned relative to the browser window
+- sticky : The element is position based on user's scroll position
+** list-style property
+The list style property is a shorthand for type, position & image.
+#+begin_src css
+ul{
+   list-style: square inside url("image.png");
+}
+#+end_src
+
+** Z-index property
+The z-index property specifies the stack order of an element.\\
+It defines which larye will be abive which in case of overlapping elements
+
+*  Practice Set - 04:27:15
+- Create a responisce nav bar using relative lenghts
+- Create a sticky navebar using position property
+- Demostrate the use of list-style property using a vl as example
+- Demonstrate the use of z-index using an example
+        
+*  [CSS Flexbox] - 04:35:59
+Before we look into CSS-Flexbox , we will look into float and clear properties.
+** float property
+Float property is simple. It just flows the elements towards left/right
+#+STARTUP: inlineimages
+[[file:./images/css-float.png]]
+** Clear property
+Used to clear the float. It specifies what elements can float besides a given element.
+
+** CSS flexbox
+Aims at providing a better way to layout align and distribute space among items in a container
+#+begin_src
+container{
+   display: flex;
+}
+#+end_src
+#+STARTUP: inlineimages
+[[file:./images/bw4hK0MYxFXbw7ylW2fR5Q.png]]
+
+** Flex-direction property
+Defines the direction towards which items are laid can be {row, row-reverse, column, column-reverse}
+** Flex properties for parent(flex container)
+Following are the properties for the flex parent:
+- flex-warp: Can be {wrap, nowrap, wrap-reverse}
+  - Wrap items as needed with this property.
+- justify-content: Defines alignment along main axis
+- align-items : Defines alignment along cross axis
+- align-content: Align a flex container's lines when there is extra space in the cross axis.
+          
+** Flex properties for the children (flex items)
+Following are the properties for the flex children.
+- order : controls the order in which the items apper in the flex container
+- align-self : allows default alignment to be overridden for the indivudual flex items.
+- flex-grow: Define the ability for a flex item to grow
+- flex-shrink: Specifies how much a flex item will shrink relative to the rest of the items       
+*  Practice Set - 04:59:37
+- Create a layout of your choice using float
+- Create the same layout in 1st task using flexbox
+- Create the following navigation bar using flexbox
+* TODO insert image
+- Create the following layout using flexbox:
+* TODO insert image   
+*  [CSS Grid & Media Queries] - 05:06:56
+A CSS grid can be initialized using
+
+#+begin_src 
+.container1{
+   display: grid;
+}
+#+end_src
+All direct children automatically become grid items
+
+** grid-column-gap property
+Use to adjust the space between the comumns fo a css grid.
+** grid-row-gap property
+Use to adjust the space between the rows of a CSS grid.
+** grid-gap property
+shorthand property for grid-row-gap & grid-column-gap
+#+begin_src 
+.container {
+   display:grid;
+   grid-gap:40 px 100px
+}
+#+end_src
+Note : For a single value of grid-gap, bot row and column gaps can be set in one value.
+
+*  Practice Set - 05:30:07
+- Create a header with content using CSS grid
+- Create the layout create in using css grid
+- Create a web-page which is green on large devices, red on medium and yellow on small devices
+      
+*   [Transforms, Transitions & Animations] - 05:41:23
+*  Practice Set - 06:47:37 
+* Flipkart Clone Project - 07:09:12
+
+

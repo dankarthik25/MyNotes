@@ -1,0 +1,1241 @@
+#+TITLE: Note_Kubernetics
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* ############ Udemy ############
+* k8 installation
+** Intro
+- Kubernetes is a series of container,CLI and configrations
+- many ways to install, let focus on  easier for learning
+- Dokcer Destop : Enable in settings
+                  - Sets up everything inside Docker's existing Linxu Vm
+- Docker Toolbox on Windows: miniKube
+                  - Use VirtualBox to make Linux Vm
+- Your Own Linux Host or Vm : microk8's
+                  - Install Kubernetes right on the  OS
+- Kubernetes in a browser
+  https:katakoda.com
+  https:play-with-k8.com
+** Kubernetics Ubuntu installation
+Open source contaner managment and orchestration
+
+Step1 : install docker for kubernetics in both master and slave
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
+Step 2 : install kubelet kubeadm kubectl in both master and slave
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+Installing kubeadm, kubelet and kubectl
+
+- kubeadm: the command to *bootstrap the cluster*.
+- kubelet: the component that runs on all of the machines in your cluster and does things like *starting pods and containers*.
+- kubectl: the command line util to *talk to your cluster*.
+  
+#+BEGIN_SRC sh
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+#+END_SRC
+
+
+
+
+#+BEGIN_SRC sh
+#Create a cluster in master
+kubeadmin init #<args>
+
+# https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
+# To start using cluster , you need to run the following  as regular user
+
+# # mkdir -p $HOmE/.kube
+# # sudo cp -i /etc/kubenetes/admin.conf $HOmE/.kube/config
+# # sudo chown $(id -u): $(id -g) $HOmE/.kube/config
+
+# You should now deploy a pod network to the cluster.
+# Run "kubectl apply -f [podnetwork].yaml"  with one of  optional  listed at:
+   #  ..
+# Then you can join any number of worker nodese by running the following on each is root:
+#kubeadm join 172.31.85.184:6443 --token jba6u7.rjkwcd9diiw33x7u / --discovery-token-ca-cert-hash sha256:077d9b3794d7e3d1f25222f6a21d505d9c13d1aa36d9cfab9751040eb6ab4ed
+
+
+kubectl get nodes # To show nodes
+
+
+
+# In slave linux
+kubeadm join 172.31.85.184:6443 --token jba6u7.rjkwcd9diiw33x7u / --discovery-token-ca-cert-hash sha256:077d9b3794d7e3d1f25222f6a21d505d9c13d1aa36d9cfab9751040eb6ab4ed
+
+# This node has join the cluster
+
+kubectl get nodes
+
+#+END_SRC
+
+** Vagrant for Kubernetis step 3 VM using vagrant
+https://www.youtube.com/watch?v=m5q7JEihdU4&t=26s
+* Kuberneteics(K8) Why/What [89]
+- Intro 
+  - Kuberneteics : popular container orchestrator
+  - Container Orchestration = make many servers act like one
+  - Released by Google in 2015 , maintained by large community
+  - Runs on top of Docker (usually) as  set of API's in containers
+  - Provides API/CLI to manage containers across servers
+  - many clouds provide it for you
+  - many vendor make a "distribution" of it
+  - 
+** Kubernetics or Swarm
+- Kubernetics and Swarm are both container orchestrators
+- Both are solid platform with vendor backing
+- Swarm: Easier to deploy/manage
+- Kubernetes: more feature and flexibility
+- What's right for you ? Understand both know  your requirements
+
+Advangatages of Swarm
+- Comes with Docker, Single vendor container platform
+- Easiest Orchestration to deploy/mangae youself
+- Follows 80/20 rule, 20% of features for 80% of use case
+- Runs anywhere Docker does::
+   - local, cloud, datacenter,
+   - ARm, Winodws, 32-bit
+- Secure by default
+- Easier to troubleshoot
+
+Advangates of Kubernetics
+- Has vendor support
+- Infrastructure vendor are making  the own distribution
+- Widest adoption and community
+- Flexible: Covers widest set of use cases
+- "Kubernetes first" vendor support
+- "No one ever got fired for buying IBm"
+- Picking solution isn't 100% rational
+- Trendy, will benefit you career
+** Architecture Terminology 
+*Kubernetes*: The whole orchestation system
+*Kubectl*: CLI to configure Kubernetes and manage apps also know as "CUBE CONTROL" offically
+*Node* : Single server in Kubernetes cluster
+       - In each Node we run a Kubernetes agent and other like : 
+         - *Kubelet* : Kubernetes agent running on nodes
+         - *Kube-proxy* : to control Node Netwrok
+           - for communication between different container and contianers in different nodes
+           
+*Kubelet*: Kubernetes agent running on nodes
+    
+*Control Plane*: Set of Containers in Each Node that manages the cluster simillar to swarm leader or manager  and also called "master"
+   - Includes cmd to get all pods in control plane =kubectl get pods -n kube-system=
+     - *etcd* : distributed storage system for key-value simillar to raft protocol
+     - *API server*: to talk to cluster/serveices 
+     - *scheduler container*: How and where the containers are placed  on the node 
+     - *Controller manger*: Over-view or Manage all Node/Container/Cluster using API, to inspect that the order-User give what actually is going on.  
+     - *Core DNS* :   
+     - More like *storage*, *network* ....etc
+        
+   - Some time called   "Kubelet" : Kubernetes agent running  on nodes
+
+** TODO insert the image
+
+** k8s Container Abstraction:
+- *Pod* : one or more contianers running to-gether  on one Node
+  - Basic unit of deployment. Container are awalays  in pods
+- *Controller*: For creating/updating pods  and other objects
+  - Many Type of Controller
+    - {deployment, ReplicaSet, 3rd party (StatefulSet, DamemonSet, Job, CronJob), ..etc}
+- *Service*: Network endpoint to connect to pod  
+- *Namespace*: Filtered group of object in cluster
+- *Secrets*:
+- *ConfigMapgs*:
+- *More....*:
+      
+#+begin_src 
+kubectl version
+
+#+end_src  
+Run,Create, Apply Kubernetes
+#+begin_src sh
+kubectl run #changing to be only pod creation # simillar to docker run 
+kubectl create #creat some resources via CLI or yaml # docker swarm create
+kubectl apply #create/update anything via yaml # simillar to stack deploy in docker
+
+#+end_src
+
+* Creat 1st Pods
+Two ways to deploy pods
+- container
+- yaml file   
+#+begin_src
+kuberctl version
+# create pod using command-line 
+kubectl run my-nginx --image nginx
+#
+kubectl get pods   # simillar to docker service in swarm(stack)
+# get pods only give contaienrs that we created but not the kubernetics own contaienrs to see those contaienr we need to get all(get all pods) 
+kubectl get all   
+#+end_src
+
+Who pods is created
+- Inside Node/Master: there is kube running on top of docker 
+- Kubectl creates/cmd to Deployment which manage rolling-updagte, replica-set..etc
+  - Deployment creates/cmd to Replica set
+    - Replicaset creates Pod
+* TODO insert image of
+
+#+begin_src
+kubectl delete deployment my-nginx
+#+end_src
+* Scaling ReplicaSets
+#+begin_src
+kubectl run my-apache --image httpd
+kubectl scale deploy/my-apache --replicas 2 # below line are same cmd 
+kubectl scale deployment my-apache --replicas 2 #above cmd is same as cmd
+#+end_src
+
+How scaling is happening :
+- When up scaling or down scaling is cmd is given then it pass the scaling update to *Deployment*
+- *Deployment* update to scale=2 to  *relicas*
+- *ReplicaSet Controller* sets pod count to 2
+- *Control Plane* assigns *node* to pod
+- *Kubelet* sees pod in needed starts container
+* TODO insert image  tiff with crop 
+* Inspecting Deploy
+#+begin_src
+kubectl get pods # all contianer running 
+
+kubectl logs deploy/my-apache # pull only one container logs 
+kubectl logs deploy/my-apache --follow --tail 1
+
+# Combine logs of all pods with my-apache
+
+kubectl logs -l run=my-apache  # it can pull only up to 5 pods
+
+# Info regarding individual pod
+kubectl get pods  # get name-id for it used in next cmd's
+kubectl describe pod/my-apache-54dc6c7  # simillar to docker inspect
+
+# Deleting a pod # simillar to deleting container in swarm/stack
+  # It will re-create the pod
+kubectl get pods -w #in one-window
+kubectl delete pod/my-apache-54dc6c7
+
+# rechech current pods
+kubectl get pods
+
+#+end_src
+* Services (Network )
+Exposing Containers
+- kubectl expose crates a service
+- service is a stable address for pods
+- If we want to connect to pods we need services
+- CoreDNS allows us to reslove service by name
+
+Basic Service Types:
+- *ClusterIP* (default)(has it own DNS )
+  - Single, interval virtual IP allocated
+  - Only reachable from within clusteter (node, pods)
+  - Pods can reach service on apps port number
+    
+- *NodePort* (Desinged to outside the cluster )
+  - High port allocated(assigned) on each node
+  - Port is open on every node's Ip
+  - Anyone can connect (if they can reach node)
+  - Other pods need to be updated to this port
+  - These services are always avaiable in kubernetes
+    
+- *LoadBlancer*: (you are controlling a exteranl loadblancer(aws,gcp,azure) through kuber-cmd)
+  - Controls a LoadBlancer end point external to the cluster
+  - Only avaiable when infra provider given you a Loadblancer
+  - Creates *NodePort* + *CluserIp* Services, tell LB to send to NodePort
+    
+- *ExternalName*:
+  - Add CNAME DNS record to CoreDNS only
+  - Not used for Pods,but for giving pods a DNS name to use for something outside Kubenetes
+- *Kubenetes Ingress* (mostly used for http,https):
+    - http/s traffic  
+
+* Create a ClusterIP
+#+begin_src
+kubectl get pods -w # in one-buffer(bin, winodw
+
+# in other winodw run following cmd 
+kubectl create deploy/http-env  --image=bretfisher/httpenv
+# scale 5
+kbuectl scale deploy/http-env --replicas=5
+
+# Create ClusterIP Service
+kubectl expose deploy/http-env --port 8888
+
+# get ClusterIP
+kubectl get service
+
+# inspect ClusterIP:
+#+end_src
+
+#+begin_src sh
+kubectl run --generator run-pod/v1 tmp-shell --rm -it --image bretfisher/netshoot --bash
+#inside contianer
+curl httpenv:8888
+
+kubectl get service  # ip-address
+#NAME             TYPE           CLUSTER-IP     EXTERNAL-IP       PORT(S)            AGE
+#httpenv          ClusterIP      10.110.159.59  <none>            8888/TCP           7m10s
+#nginx-service    ClusterIP      10.96.0.1      <none>            80/TCP             7m10s
+#kubernetes       ClusterIP      10.110.159.59  <none>            443/TCP            23d
+curl [ip of service]:8888  # work only on linux host 
+
+#+end_src 
+* Create NodePort and Loadbalancer service
+#+begin_src sh
+kubectl run --generator run-pod/v1 tmp-shell --rm -it --image bretfisher/netshoot --bash
+kubectl get all 
+
+
+kubectl expose deployment/nginx --port 80 --name service-lb --type LoadBalancer
+
+kubectl get service  # you can see it create cluserip, NodePort and also loadbalancer
+
+#delete pods
+kubectl delete service/httpenv service/httpenv-np
+kubectl delete service/httpenv-lb deployment/httpenv-np
+
+#+end_src
+* Core DNS:
+Like Swarm, this is DNS-Based Service Discovery
+So far we've been using hostname to access service
+=curl <hostname>=
+But that only work for Services in  the same Namespace
+=kubectl get namespaces=
+Services also have a FQDN
+=curl <hostname>.<naemspace>.svc.cluster.local=
+#+begin_src 
+curl <hostname>
+kubectl get namespace
+#+end_src
+
+* Kubernetes Managment Techniques
+
+Kubectl Generators
+The Future of Kubectl Run
+Imperatice vs. Declartive
+Three Management Approaches
+
+* Run Expose create Generateor <kube cmd's>
+These commands use helper tempaltes called "generator"
+Every resources in Kubernetes has a specification or "spec"
+=kubectl create deployment sample  --image nginx --dry-run -o yaml=
+You can output those templates with =--dry-run -o yaml=
+You can use those yaml defaults as a starting point
+Generator are "opinionated defaults"
+
+** Generator Example
+#+begin_src
+kubectl create deployment sample  --image nginx --dry-run
+kubectl create deployment sample  --image nginx --dry-run -o yaml
+#create or generat a yaml file 
+kubectl create job test --image nginx --dry-run -o yaml  # create a pods which run only once's it will not restart it again
+#Simillary cron job
+
+kubectl expose deployment/test --port 80 --dry-run -o yaml
+# create yaml file
+
+
+kubectl create deployment test --image nginx
+#+end_src
+
+* Future of kubectl run
+* Imperative vs Declarive
+
+Imperatice: Focus of how a program operates
+Declarative: Focus on what a program should accomplish
+
+Kuberentes Imperative:
+=kubectl run, kubbectl create deployment, kubectl update=
+  - We start with a state we know (no delpyment exists)
+  - We ask kubectl run to create a deployment
+- Different commands are requried to change that deployment
+- Different commands are requried per object
+Imperative is easier when you know that state
+Imperative is easier for humans at a CLI
+Imperative is NOT easy to automate
+
+Declarative:
+=kubectl apply -f my-resources.yml=
+- We don't know that current state
+- We only know what we want the end resutl to be (yaml contents)
+- Same command each time (tiny exception for delete)
+- Resources can be all in a file , or many files(apply a whole dir)
+- Requires understanding the yaml keys and value
+- More work than kubectl run  for just starting a pod
+- The easiset way to automate ( *gitops* every time to want to change edit yml and and git-commit and deploy)
+
+** Three Management Approaches
+- Imperative cmd :
+  =run, expose, scale, edit, create deployment=
+  - Best for dev/ learing/personal project
+  - Easy to learn, hardest to mange over-time
+- Imperative objects:
+  =create -f file.yml, replica -f file.yml, delete=    
+  - Good for prod of small environments, single file per command
+  - Store your changes in git-based yaml files
+  - Hard to automate
+- Declarative objects:
+  =apply -f file.yml= or =dir\, diff=
+ - Best for prod, easier to autoamate
+ - Harder to understand and predict changes
+      
+   
+         
+
+#+begin_src 
+
+#+end_src
+* Section
+- Kubectl apply
+- yaml
+- build your yaml files
+- build you yaml spec
+- dry runs and diffs
+- labels and annoatations
+            
+* Kubectl apply
+=kubectl appy -f filename.yml= simillar to docker stack deploy
+
+using kubectl apply
+- create/update resources in a file
+  =kubectl apply -f myfile.yaml=
+- create/update a whole directlry of yaml
+  =kubectl apply -f dir-yaml/=
+- create/update form a url
+  =kubectl apply -f https://bret.run/pod.yml=
+* Configure yaml
+- Kubernetes configuration file (yaml or json )
+- Each file contians one or more manifests
+- Each manifiest describes an API object (deployment, job, secret)
+- Each manifiest needs four parts (root key: value in the file )
+  - =apiVersion=:v1, apps/v1
+  - =kind=:Pod, Job, Deployment, Service
+  - =metadata=:
+    - =name= : name of pod 
+  - =spec=:
+    - =selector=
+    - =replicas=
+    - =template=
+    - =spec=
+      - =container=
+        - =name=:
+        - =image=:
+        - =ports=:
+          - =contianerPort=:
+* Build your yaml file
+- kind
+* TODO video 106 from udemy
+* <2021-10-06 Wed 09:11> Meeting: Abhutahir and Venkat <Install and configure kubernetecis>
+ Timeline : Next week deathline dev env should be  in kubernetics
+ 
+source : https://blog.knoldus.com/how-to-install-kubernetes-on-ubuntu-20-04-kubeadm-and-minikube/
+aunch two ec2-intance (master and slave)
+os           : ubutnu 20.04 (18.06)
+instance-type:t2.medium
+security group:  <created new security group>  kuberentes
+need to open some ports in *inbound* : as given below
+https://kubernetes.io/docs/reference/ports-and-protocols/
+Install Docker
+#+begin_src sh
+sudo apt update
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+#+end_src
+
+#+begin_src
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+apt-cache policy docker-ce
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+#+end_src
+Install Kubernetes
+#+begin_src
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+#+end_src
+
+
+Disable Swap Memory
+#+begin_src sh
+sudo swapoff -a
+sudo nano /etc/fstab
+# Inside this file, comment out the /swapfile line.
+#+end_src
+swap off
+#+begin_src sh
+sed -i '/ swap / s/^/#/' /etc/fstab
+#+end_src
+
+
+
+configure docker
+# c-group was not set properly
+# docekr c-gropu and name-space #20.04 default
+# set system to systemd
+# overlay2
+cd etc/docker
+#+begin_src sh
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+"exec-opts": ["native.cgroupdriver=systemd"],
+"log-driver": "json-file",
+"log-opts": {
+"max-size": "100m"
+},
+"storage-driver": "overlay2"
+}
+EOF
+
+systemctl daemon-reload
+systemctl restart docker
+#+end_src
+
+#+begin_src sh
+sudo grubby --update-kernel=ALL  --args=”systemd.unified_cgroup_hierarchy=1"
+#https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+# Setup required sysctl params, these persist across reboots.
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+EOF
+
+# Apply sysctl params without reboot
+sudo sysctl --system
+
+
+sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+
+
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+#+end_src
+Set hostnames
+#+begin_src sh
+#kubernetes-master:~$
+sudo hostnamectl set-hostname kubernetes-master
+sudo hostnamectl set-hostname kubernetes-worker-1
+#+end_src
+On Master:
+Initialize the cluster (Execute the following command only on the Master node):
+#+begin_src sh
+# https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node
+
+#kubernetes-master:~$
+kubeadm init --pod-network-cidr=172.31.33.101/16
+
+#+end_src
+#+begin_src sh
+#kubernetes-master:~$
+# https://devopscube.com/setup-kubernetes-cluster-kubeadm/
+#IPADDR="10.0.0.10"
+#NODENAME=$(hostname -s)
+
+#sudo kubeadm init --apiserver-advertise-address=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=192.168.0.0/16 --node-name $NODENAME --ignore-preflight-errors Swap
+
+# ############################################################################
+# kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.0.0.200
+# kubeadm init --pod-network-cidr=10.244.0.0/16
+# kubeadm join 172.31.33.101:6443 --token afk1x9.i9p3yed9o4iytj1j \
+#	--discovery-token-ca-cert-hash sha256:58d80548674968fa47f1df47507df983b9af815a3c7405da5654df3ba39825a6
+# kubectl get po --all-namespaces
+
+#+end_src
+Set up local kubeconfig(Execute the following command only on the Master node):
+#+begin_src sh
+#kubernetes-master:~$
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+#Alternatively, if you are the root user, you can run:
+#export KUBECONFIG=/etc/kubernetes/admin.conf
+# #############################3
+# kubeadm reset --force
+# ###########################
+# this cmd is used to reset all the configuration
+#+end_src
+Apply Flannel CNI network overlay(Execute the following command only on the Master node):
+Deploy a pod network
+#+begin_src sh
+#kubernetes-master:~$
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+#kubectl delete -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#kubectl delete -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+#+end_src
+*deployment of core-dns is not working properly need to troubleshoot*
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+Then you can join any number of worker nodes by running the following on each as root:
+kubectl get po --all-namespaces
+#+begin_src sh
+#kubernetes-master:~$
+kubectl get nodes
+kubectl get pods --all-namespaces
+#need save etcd as backup in s3 file(*imp)
+#professional : run etcd in seperatea meachien
+#+end_src
+
+* Pull Docker images from GitLab Container Registry in Kubernetes Cluster
+
+#+begin_src sh
+docker login  registry.gitlab.com/digival/digiassess/digiassessapi -u da-api-deploy-token -p uPciF8yZneXoNTL685c-
+# ##### Create a yaml file for gitlab docker repo credencials #################################################
+kubectl create secret docker-registry dev-digiassessapi \
+ --docker-server=https://registry.gitlab.com/digival/digiassess/digiassessapi \
+ --docker-username=da-api-deploy-token \
+ --docker-password=uPciF8yZneXoNTL685c- \
+ --dry-run=client  --output=yaml > docker-repo-secrets.yaml
+
+
+# ##### Yaml stores the credencials in encripted form ##################################################################
+#cat docker-repo-secrets.yaml
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL3JlZ2lzdHJ5LmdpdGxhYi5jb20vZGlnaXZhbC9kaWdpYXNzZXNzL2RpZ2lhc3Nlc3NhcGkiOnsidXNlcm5hbWUiOiJkYS1hcGktZGVwbG95LXRva2VuIiwicGFzc3dvcmQiOiJ1UGNpRjh5Wm5lWG9OVEw2ODVjIiwiYXV0aCI6IlpHRXRZWEJwTFdSbGNHeHZlUzEwYjJ0bGJqcDFVR05wUmpoNVdtNWxXRzlPVkV3Mk9EVmoifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: dev-digiassessapi
+type: kubernetes.io/dockerconfigjson
+
+# ######## Pass gitlab credencials to kuberentecis in encripted form  ###########################################################
+#root@kubernetes-master:/home/ubuntu# kubectl apply -f docker-repo-secrets.yaml 
+secret/dev-digiassessapi created
+
+# ########## The docker-repo-secrets.yaml is encripted base64 we can decript and see the if credencials are correct.
+kubectl get secret dev-digiassessapi --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+{"auths":{"https://registry.gitlab.com/digival/digiassess/digiassessapi":{"username":"da-api-deploy-token","password":"uPciF8yZneXoNTL685c-","auth":"ZGEtYXBpLWRlcGxveS10b2tlbjp1UGNpRjh5Wm5lWG9OVEw2ODVjLQ=="}}}
+
+# Tell the deployment or pod to use the gitlab credencials for pulling the image in yaml file 
+    spec:
+      containers:
+      - image: registry.gitlab.com/digival/digiassess/digiassessapi:latest
+        imagePullPolicy: Always
+        name: api
+        resources: {}
+      imagePullSecrets:
+        - name: dev-digiassessapi
+#+end_src
+* <2021-10-09 Sat 11:14> Meeting: abhutahir and venkatesh <Task: 2-week know kubernetics>
+--------------------------------
+include digival member :  shiraj,nasrullah,kabeer, abuthahir
+venkatesh recommends all developer should learn kuberentes
+
+---------------------------------------------------
+TASK : In 2-weeks : devops team will be able to do kubernetics and kubernetics cluster
+ENTIRE SETUP : AWS and devops everthing will be perfectly ready by Jan 2022
+
+--------------------------------------
+if you are in troubleshoot in kubernetis you can contact  
+-  google meet(what-app) with venkatesh
+   available:
+   - week day: 5-7pm
+   - saturday and sunday : availabe all day   
+------------------------------------
+Whatever cloud provider(either azure, gcc, aws ) we should able to set our project
+oracle :
+- NEED TO disscussion
+- orcale has it datacenter in saudi region 
+---------------------------------------
+- elk
+  kibana: need to go with opensource try to reduce licensing 
+  automate: move logs to s3 buckets as per existing things ()
+   
+  
+---------------------------
+
+
+
+
+kubectl run my-nginx --image nginx
+kubectl get pods   # simillar to docker service in swarm(stack)
+kubectl scale deploy/my-apache --replicas 2 # below line are same cmd 
+kubectl scale deployment my-apache --replicas 2 #above cmd is same as cmd
+kubectl expose deploy/my-nginx --replicas 2 --port 80
+kubectl run nginx --image=nginx --replicas=1 --port 8080
+
+kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+kubectl get deploy
+kubectl delete pods my-nginx
+kubectl delete pods --all
+
+kubectl describe pod coredns -n kube-system
+* <2021-10-11 Mon 15:03> Meeting : abhutahir and google Kushal Kashyap <for gcp and azure tranning>
+
+28 servers
+
+For techinal expert
+
+sme 
+* <2021-10-11 Mon 15:48> Meeting: Venkat <installation of kubenetes>
+kubeadm join 172.31.42.108:6443 --token 5ib8cu.jphlqans40ct3qlj \
+	--discovery-token-ca-cert-hash sha256:33be393e7b2ec89ba0a66ea7e88c189ec97101383daa3630a96b63e18022fd88 
+
+To start using your cluster, you need to run the following as a regular user:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.37.4:6443 --token fgr7e4.kug90e8bjl8muoyy \
+	--discovery-token-ca-cert-hash sha256:e9874acbad1d23a64824a11b7984e75d7c8b3cb230ec07f885310579d4add748
+* cmd
+#+begin_src
+# get port of particular pod 
+kubectl get pod mongo-75f59d57f4-4nd6q --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+
+kubectl describe pod coredns -n kube-system
+kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+
+kubeadm reset --force  # reset the setting 
+
+
+kubectl delete deployment nginx-deployment
+kubectl delete pods my-nginx
+kubectl delete pods --all
+
+watch kubectl get pods -n calico-system
+kubectl get pods -w # watc
+kubectl get deployment -o wide
+kubectl logs deployment/nginx 
+kubectl logs deployment/nginx --follow --tail 2
+kubectl logs -l run=nginx # -l : label
+
+
+kubectl get all
+kubectl get replicaset
+kubectl get deploy
+kubectl get service
+kubectl get pod
+kubectl get pods --all-namespaces
+kubectl get pods 
+
+#+end_src
+
+* curl: (7) Failed to connect to localhost port 80: Connection refused
+https://serverfault.com/questions/670575/failed-to-connect-to-127-0-0-1-port-80
+
+Nothing is blocking port 80. You just have firewall NAT rules which are redirecting connections to that port to other ports, which aren't open.
+
+#+begin_src 
+sudo netstat -tulpn | grep 80
+Chain PREROUTING (policy ACCEPT 1 packets, 40 bytes)
+pkts bytes target     prot opt in     out     source               destination         
+0     0 REDIRECT   tcp  --  eth0   *       0.0.0.0/0            0.0.0.0/0            tcp dpt:80 redir ports 20559
+0     0 REDIRECT   tcp  --  eth0   *       0.0.0.0/0            0.0.0.0/0            tcp dpt:443 redir ports 20558
+
+Chain OUTPUT (policy ACCEPT 1043 packets, 65731 bytes)
+pkts bytes target     prot opt in     out     source               destination         
+0     0 REDIRECT   tcp  --  *      *       0.0.0.0/0            127.0.0.1            tcp dpt:80 redir ports 20559
+0     0 REDIRECT   tcp  --  *      *       0.0.0.0/0            127.0.0.1            tcp dpt:443 redir ports 20558
+
+#+end_src
+* <2021-10-12 Tue 17:00> Meeting: Venkat  <Kubernetics Serivce-Type>  
+https://itnext.io/kubernetes-clusterip-vs-nodeport-vs-loadbalancer-services-and-ingress-an-overview-with-722a07f3cfe1
+** Intro to Service-Type 
+Kubernetes offers several options when exposing your service based on a feature called Kubernetes Service-types and they are:
+- *NodePort* (30000-32767):
+  - This is the most basic option of exposing your service to be accessible outside of your cluster, on a specific port (called the NodePort) on every node in the cluster. We will illustrate this option shortly.
+- *ClusterIP* : 
+  - This Service-type generally exposes the service on an internal IP, reachable only within the cluster, and possibly only within the cluster-nodes.
+- *LoadBalancer* 
+  - This option leverages on external Load-Balancing services offered by various providers to allow access to your service. This is a more reliable option when thinking about high availability for your service, and has more feature beyond default access.
+- *ExternalName* 
+  - This service does traffic redirect to services outside of the cluster. As such the service is thus mapped to a DNS name that could be hosted out of your cluster. It is important to note that this does not use proxying.
+- *Ingress*
+   - Actually, the Ingress isn't a dedicated Service - it just describes a set of rules for the Kubernetes Ingress Controller to create a Load Balancer, its Listeners and routing rules for them.
+   - Generally used for http,https
+
+** cmd for services, clusterip, nodeport, loadbalancer
+#+begin_src sh
+kubectl create deployment nginx --image=nginx
+kubectl scale deployment nginx --replicas=5
+
+
+kubectl expose deployment/nginx --port 80 --name service-cip   # Create ClusterIP Service
+kubectl expose deployment/nginx --port 80 --name service-np --type NodePort        # Create NodePort Servic
+kubectl expose deployment/nginx --port 80 --name service-lb --type LoadBalancer
+
+NAME         TYPE        CLUSTER-IP          EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1           <none>        443/TCP        27h
+service-ip   ClusterIP   10.105.107.120      <none>        80/TCP         6m9s
+service-np   NodePort    10.100.116.118      <none>        80:32463/TCP   2m35s
+service-lb   LoadBalancer   10.106.169.117   <pending>     80:30556/TCP   7s
+
+# For ClusterIP
+curl 10.105.107.120:80 
+#<!DOCTYPE html>
+#<html>
+#<head>
+#<title>Welcome to nginx!</title>
+#<style>
+#html { color-scheme: light dark; }
+#body { width: 35em; margin: 0 auto;
+#font-family: Tahoma, Verdana, Arial, sans-serif; }
+#</style>
+#</head>
+#<body>
+#<h1>Welcome to nginx!</h1>
+#<p>If you see this page, the nginx web server is successfully installed and
+#working. Further configuration is required.</p>
+#<p>For online documentation and support please refer to
+#<a href="http://nginx.org/">nginx.org</a>.<br/>
+#Commercial support is available at
+#<a href="http://nginx.com/">nginx.com</a>.</p>
+#<p><em>Thank you for using nginx.</em></p>
+#</body>
+#</html>
+
+# For NodePort
+firefox public_ip:NodePort 
+#firefox http://13.232.106.187:32453
+curl 10.100.116.118:32453
+
+firefox public_ip:Loadbalancer_port 
+#firefox http://13.232.106.187:30556 
+
+kubectl delete services service-ip service-np service-lb
+kubectl delete deploy/nginx
+#+end_src
+** yaml file for nginx-with-no-service, service-yaml for clusterip, nodeport, loadbalancer
+*** Nginx-No-service yaml file 
+#+begin_src yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80   # target port
+#+end_src
+*** ClusterIp yaml file 
+#+begin_src yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nginx-service"
+  namespace: "default"
+spec:
+  ports:
+    - port: 80
+  type: ClusterIP
+  selector:
+    app: "nginx"
+#+end_src
+*** NodePort  yaml file 
+#+begin_src 
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nginx-service"
+  namespace: "default"
+spec:
+  ports:
+    - port: 80
+      nodePort: 30001
+  type: NodePort
+  selector:
+    app: "nginx"
+#+end_src
+
+*** LoadBalancer  yaml file
+#+begin_src 
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nginx-service"
+  namespace: "default"
+spec:
+  ports:
+    - port: 80
+  type: LoadBalancer
+  selector:
+    app: "nginx"
+#+end_src
+
+*** Kubernetic cmd 
+#+begin_src sh
+kubectl appy -f nginx-no-service.yaml
+kubectl apply -f nginx-LoadBalancer.yaml
+kubectl apply -f nginx-ClusterIP.yaml 
+kubectl apply -f nginx-NodePort.yml 
+
+kubectl get services
+#NAME         TYPE        CLUSTER-IP          EXTERNAL-IP   PORT(S)        AGE
+#kubernetes   ClusterIP   10.96.0.1           <none>        443/TCP        27h
+#service-ip   ClusterIP   10.105.107.120      <none>        80/TCP         6m9s
+#service-np   NodePort    10.100.116.118      <none>        80:32463/TCP   2m35s
+#service-lb   LoadBalancer   10.106.169.117   <pending>     80:30556/TCP   7s
+
+kubectl delete -f nginx-NodePort.yml 
+
+
+#+end_src
+* <2021-10-13 Wed 17:16> Meeting: Venkat  <Task given:Kubernetics Demonset>  
+
+task nginx should run on 32,000
+add slave kubernetics
+#join 
+run nginx as *demonset*: nginx should run on both(complusory ) slave 
+
+abubaker@existing project 
+helm chart
+promotes and grafana 
+secretes
+auto-scale pods
+* <2021-10-15 Fri 16:48> Meeting with  Venkat <Deploy Dev Env digiassessapi in kubernetics>
+** Report 
+Yestarday i was holiday so during free time i have learned few thing about kubernetecis like
+- Kubernetic  Architecture:
+- Master Node 
+  - etcd 
+  - Controll-Manger 
+    - Node-Contorller
+    - Replication-Contorller 
+    - Replicaset
+  - Scheduler 
+  - Kube-apiserver 
+  - Container-run-time Engine
+    - docker
+    - containerd
+    - rocket
+- Worker Node 
+  - kubelet
+  - Kube-proxy
+- How to write basic kubernetics Yaml file 
+
+- Kubernetecis pod deployment Architecture : 
+  - pod 
+  - replication Contorller vs Replicaset
+  - deployment 
+  - services
+  - namespaces  
+
+I have completed the task of deploying nginx in using daemonset with nodeport enable 
+i have observed that daemonset deploy the nginx to  worker-node but not in master node 
+
+** Intro 
+Minutes of Meeting 
+
+Try to run kubeclt  only by moving .kube folder and install kubectl 
+NOTE: Need to open port both inbound and outbound 64443 
+Know how kube-api-server work : 
+   eg: kubeclt get pod 
+api-server can be a single point of failure because if we are using single master-node and if kube-api-server fails then entire the system work because we lost the communication  or 
+kubernetecis is not working or not responding then it is 1st thing as devops engineer is to see
+- check if kube-api-server is running or not
+- try to check the logs 
+- kubectl logs <kubeapi-server pod-name> -n kube-system 
+- we need to check logs of coreDNS, scheduler, networking 
+
+Deployment file sent by guhan 
+- ecr registory configure 
+- run the deployment file and add service at node port 32080
+
+ 
+kuthen you need to check the log and see where the failure is 
+
+
+
+
+Highly Available : 3 master nodes :
+* <2021-10-16 Sat 18:34> Troubleshoot in deploying dev-digiassess 
+
+https://medium.com/@damitj07/how-to-configure-and-use-aws-ecr-with-kubernetes-rancher2-0-6144c626d42c
+
+https://medium.com/@stasko.lukasz/how-to-pull-docker-images-from-gitlab-container-registry-in-kubernetes-cluster-aae52787074a
+
+https://jamesdefabia.github.io/docs/user-guide/kubectl/kubectl_create_secret_docker-registry/
+
+https://stackoverflow.com/questions/49629241/create-kubernetes-docker-registry-secret-from-yaml-file
+
+#+begin_src 
+docker login  registry.gitlab.com/digival/digiassess/digiassessapi -u da-api-deploy-token -p uPciF8yZneXoNTL685c-
+
+kubectl get secret dev-digiassessapi --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+
+#cat /root/.docker/config.json 
+{
+	"auths": {
+		"registry.gitlab.com": {
+			"auth": "ZGEtYXBpLWRlcGxveS10b2tlbjp1UGNpRjh5Wm5lWG9OVEw2ODVjLQ=="
+		}
+	}
+
+kubectl create secret docker-registry dev-digiassessapi \
+ --docker-server=https://registry.gitlab.com/digival/digiassess/digiassessapi \
+ --docker-username=da-api-deploy-token \
+ --docker-password=uPciF8yZneXoNTL685c- \
+ --dry-run=client  --output=yaml > docker-repo-secrets.yaml
+
+
+# #######################################################################
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL3JlZ2lzdHJ5LmdpdGxhYi5jb20vZGlnaXZhbC9kaWdpYXNzZXNzL2RpZ2lhc3Nlc3NhcGkiOnsidXNlcm5hbWUiOiJkYS1hcGktZGVwbG95LXRva2VuIiwicGFzc3dvcmQiOiJ1UGNpRjh5Wm5lWG9OVEw2ODVjIiwiYXV0aCI6IlpHRXRZWEJwTFdSbGNHeHZlUzEwYjJ0bGJqcDFVR05wUmpoNVdtNWxXRzlPVkV3Mk9EVmoifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: dev-digiassessapi
+type: kubernetes.io/dockerconfigjson
+
+# ###################################################################
+#root@kubernetes-master:/home/ubuntu# kubectl apply -f docker-repo-secrets.yaml 
+secret/dev-digiassessapi created
+
+# The docker-repo-secrets.yaml is encripted base64 we can decript and see the if credencials are correct.
+kubectl get secret dev-digiassessapi --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+{"auths":{"https://registry.gitlab.com/digival/digiassess/digiassessapi":{"username":"da-api-deploy-token","password":"uPciF8yZneXoNTL685c-","auth":"ZGEtYXBpLWRlcGxveS10b2tlbjp1UGNpRjh5Wm5lWG9OVEw2ODVjLQ=="}}}
+
+
+# ##################################################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ...
+spec:
+  ...
+  template:
+    ...
+    spec:
+      containers:
+        - name: image-name
+          image: registry.gitlab.com/namespace/project/image:tag
+      imagePullSecrets:
+        - name: dev-digiassessapi # <gitlab-auth> or <gitlab-token-auth>
+
+# ##################################################################
+
+# cat docker-repo-secrets.yaml 
+
+apiVersion: v1
+data:
+  config.json: ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5naXRsYWIuY29tIjogewoJCQkiYXV0aCI6ICJaR0V0WVhCcExXUmxjR3h2ZVMxMGIydGxianAxVUdOcFJqaDVXbTVsV0c5T1ZFdzJPRFZqTFE9PSIKCQl9C>
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: regcred
+type: kubernetes.io/dockerconfigjson
+
+
+
+
+kubectl create secret docker-registry $SECRET_NAME \
+ --docker-server=https://${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com \
+ --docker-username=AWS \
+ --docker-password="${TOKEN}" \
+ --dry-run=client  --output=yaml > docker-repo-secrets.yaml
+# --docker-email="${EMAIL}"
+# #######################################################
+
+# ############################################################
+kubectl create secret generic regcred \
+    --from-file=/root/.docker/config.json \
+    --type=kubernetes.io/dockerconfigjson  \
+    --dry-run=client  --output=yaml > docker-repo-secrets.yaml
+
+#+end_src
+
+
+https://stackoverflow.com/questions/37302776/what-is-the-meaning-of-imagepullbackoff-status-on-a-kubernetes-pod
+
+If your repo is private then need to config kuber 
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+* <2021-10-19 Tue 13:20> Douths need to ask venkat 
+BEST PRACTICE: Not to deploy application on MASTER NODE 
+High Availability:  how may minmum ec-2 need to run in kuberentes in HA 
+Autoscaling: autoscale the instance ?
+Is it possible to move elk and jenkins into kubernetecis ?
+- elk multi-index 
+
+integrate docker-repo with kubernetics 
+
+
+
+* convert compose to kube yaml using online
+https://8gwifi.org/kube1.jsp You can convert your docker compose file to kube.yaml file online
+
+#+begin_src sh
+docker login registry.gitlab.com/digival/digiauth/digiauthservice -u das-api-deploy-token -p zKH8micASc2D9joWDS_U
+
+kubectl create secret docker-registry docker-login-digiauth \
+ --docker-server=https://registry.gitlab.com/digival/digiauth/digiauthservice \
+ --docker-username=das-api-deploy-token \
+ --docker-password=zKH8micASc2D9joWDS_U \
+ --dry-run=client  --output=yaml > docker-digiauth-login.yaml
+
+kubectl apply -f docker-login-digiauth.yaml 
+
+kubectl get secret docker-login-digiauth --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+
+# {"auths":{"https://registry.gitlab.com/digival/digiassess/digiassessapi":{"username":"da-api-deploy-token","password":"uPciF8yZneXoNTL685c-","auth":"ZGEtYXBpLWRlcGxveS10b2tlbjp1UGNpRjh5Wm5lWG9OVEw2ODVjLQ=="}}}
+
+#secret/dev-digiassessapi created
+
+# add below line in deploy or pod definition
+      imagePullSecrets:
+        - name: digiauth-deploy-gitlab
+#+end_src
+* <2021-10-21 Thu 18:21> Meeting
+api-6c9bcf899d-tmc8w 
+
+docker run --
+
+docker run -itd --name dev-digiassess -p 5000:5000 registry.gitlab.com/digival/digiassess/digiassessapi:latest
+
+
+
+
+
+
+* <2021-10-25 Mon 16:18> 
+
+
+I am facing error node status : "Not Ready"
+https://bobcares.com/blog/kubernetes-cluster-status-of-node-is-notready/
+https://github.com/kubernetes/kubernetes/issues/68542
+https://stackoverflow.com/questions/47107117/how-to-debug-when-kubernetes-nodes-are-in-not-ready-state
+https://joecreager.com/troubleshooting-kubernetes-worker-node-notready/
+NAME                  STATUS         ROLES                    AGE     VERSION
+ip-172-31-13-113      NotReady       <none>                   12d     v1.22.2
+ip-172-31-2-133       NotReady       control-plane,master     12d     v1.22.2
+kubernetes-worker-2   Ready          <none>                   2d20h   v1.22.2
+kubernetes-worker-3   Ready          <none>                   2d      v1.22.2
+
+NAME                                                     READY   STATUS        RESTARTS       AGE     IP               NODE                
+calico-kube-controllers-75f8f6cc59-lcrgn   1/1     Terminating   0        12d     10.244.82.195    ip-172-31-2-133       
+coredns-78fcd69978-8l2cr                         1/1     Terminating   0        12d     10.244.82.194    ip-172-31-2-133       
+coredns-78fcd69978-frg2r                         1/1      Terminating   0        12d     10.244.82.193    ip-172-31-2-133      
+
+I have inspected the pod and it is showing 
+Conditions:
+  ContainersReady   True 
+  PodScheduled      True
+
+
+aIso i have tried to find solution from google failed but failed
+
+
+-----------------------------------------------------------------------------------------------
+
+-------------------------
+
+Events:
+  Type     Reason       Age                 From               Message
+  ----     ------       ----                ----               -------
+  Normal   Scheduled    2m                  default-scheduler  Successfully assigned default/deployment-name27-94d77d477-5hbvm to kubernetes-worker-2
+  Warning  FailedMount  58s (x8 over 2m1s)  kubelet            MountVolume.SetUp failed for volume "pvo-0" : hostPath type check failed: assets-built is not a directory
+
+
+https://stackoverflow.com/questions/65656107/converting-from-docker-compose-to-kubernetes
+
+
+dev.kubedigiassessapi.digivalsolutions.com
+
+eks: 
+
+---------------------
+kubeadm reset 
+rm -rf .kube/
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+-----------------------------
+
+kubeadm init 
+kubeadm join 172.31.2.133:6443 --token ury2q3.81mvz1vanjtlnm5u \
+	--discovery-token-ca-cert-hash sha256:c95a1d6caa10e653d3d123ddbb29eb4ca98c9dde48d74bce8942401578768d69 
+
+
+
+-------------------
+kubeadm reset
+kubeadm join 172.31.2.133:6443 --token ury2q3.81mvz1vanjtlnm5u \
+	--discovery-token-ca-cert-hash sha256:c95a1d6caa10e653d3d123ddbb29eb4ca98c9dde48d74bce8942401578768d69 

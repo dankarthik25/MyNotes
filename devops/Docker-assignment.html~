@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-28 Tue 14:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Docker-assignment</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="D Karthik" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Docker-assignment</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7764c09">DockerFile Assignment</a>
+<ul>
+<li><a href="#org201ffcc">Create Node.js DockerFile</a>
+<ul>
+<li><a href="#orgfe93da1">Solution</a></li>
+</ul>
+</li>
+<li><a href="#org86b41a9">Create Custome Nginx</a></li>
+<li><a href="#org97be338">Create Nginx using Debian image</a></li>
+<li><a href="#orgfed4c23">Create apline image which sleep for 10,000 ms</a></li>
+<li><a href="#orgd2f80bb">Image with entry point and cmd</a></li>
+<li><a href="#orgf299754">Execute the shell script inside dockerfile</a></li>
+<li><a href="#org66a455e">Run custom jekyll server with bindmount</a></li>
+</ul>
+</li>
+<li><a href="#org23c7502">Docker compose</a>
+<ul>
+<li><a href="#org50867f2">Use Compose to Build with Drupal content with postgres</a></li>
+<li><a href="#orga8bdb2b">Build</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7764c09" class="outline-2">
+<h2 id="org7764c09">DockerFile Assignment</h2>
+<div class="outline-text-2" id="text-org7764c09">
+</div>
+<div id="outline-container-org201ffcc" class="outline-3">
+<h3 id="org201ffcc">Create Node.js DockerFile</h3>
+<div class="outline-text-3" id="text-org201ffcc">
+<p>
+The dir contains a Node.js app, you need to get it running in a container
+</p>
+
+<p>
+Overview of this assignment
+</p>
+
+<ul class="org-ul">
+<li>Instructions from the app developer
+<ul class="org-ul">
+<li>you should use the 'node' official image, with the alpine 6.x branch
+<ul class="org-ul">
+<li><code>FROM node:6-alpine</code></li>
+</ul></li>
+</ul></li>
+<li>this app listens on port 3000, but the container should launch on port 80, so that it will respond to <a href="http://localhost">http://localhost</a> on your computer
+<ul class="org-ul">
+<li><code>EXPOSE 3000</code></li>
+</ul></li>
+
+<li>then it should use alpine package manager to install tini: 'apk add &#x2013;update tini'
+<ul class="org-ul">
+<li><code>RUN apk add --update tini</code></li>
+</ul></li>
+<li>then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app'
+<ul class="org-ul">
+<li><code>RUN mkdir -p /usr/scr/app</code></li>
+</ul></li>
+<li>Node uses a "package manager", so it needs to copy in package.json file
+<ul class="org-ul">
+<li><code>WORKDIR /usr/src/app</code></li>
+<li><code>COPY package.json package.json</code></li>
+</ul></li>
+<li>then it needs to run 'npm install' to install dependencies from that file
+<ul class="org-ul">
+<li><code>RUN npm install &amp;&amp; npm cache clean</code></li>
+</ul></li>
+<li>to keep it clean and small, run 'npm cache clean &#x2013;force' after above</li>
+<li>then it needs to copy in all files from current directory
+<ul class="org-ul">
+<li><code>COPY . .</code></li>
+</ul></li>
+<li>then it needs to start container with command '/sbin/tini &#x2013; node ./bin/www'
+<ul class="org-ul">
+<li><code>CMD ["tini","--","node","./bin/www"]</code></li>
+</ul></li>
+
+<li>in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands</li>
+</ul>
+</div>
+
+<div id="outline-container-orgfe93da1" class="outline-4">
+<h4 id="orgfe93da1">Solution</h4>
+<div class="outline-text-4" id="text-orgfe93da1">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">file name : Dockerfile</span>
+FROM node:6-alpine
+EXPOSE 3000
+RUN apk add --update tini
+WORKDIR /usr/src/app
+COPY package.json package.json
+RUN npm install &amp;&amp; npm cache clean --force
+COPY . .
+CMD [ <span style="color: #2d9574;">"/sbin/tini"</span>, <span style="color: #2d9574;">"--"</span>, <span style="color: #2d9574;">"node"</span>, <span style="color: #2d9574;">"./bin/www"</span> ]
+</pre>
+</div>
+
+<p>
+Build the Dockerfile
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker build -t testnode .   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">build the testnode</span>
+docker run -rm testnode -p 80:3000 
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org86b41a9" class="outline-3">
+<h3 id="org86b41a9">Create Custome Nginx</h3>
+<div class="outline-text-3" id="text-org86b41a9">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">this shows how we can extend/change an existing official image from Docker Hub</span>
+
+FROM nginx:latest
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">highly recommend you always pin versions for anything beyond dev/learn</span>
+
+WORKDIR /usr/share/nginx/html
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">change working directory to root of nginx webhost</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">using WORKDIR is preferred to using 'RUN cd /some/path'</span>
+
+COPY index.html index.html
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">I don't have to specify EXPOSE or CMD because they're in my FROM</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org97be338" class="outline-3">
+<h3 id="org97be338">Create Nginx using Debian image</h3>
+<div class="outline-text-3" id="text-org97be338">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">NOTE: this example is taken from the default Dockerfile for the official nginx Docker Hub Repo</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://hub.docker.com/_/nginx/</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">NOTE: This file is slightly different than the video, because nginx versions have been updated </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#       </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to match the latest standards from docker hub... but it's doing the same thing as the video</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#       </span><span style="color: #2aa1ae; background-color: #ecf3ec;">describes</span>
+FROM debian:stretch-slim
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">all images must have a FROM</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">usually from a minimal Linux distribution like debian or (even better) alpine</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">if you truly want to start with an empty container, use FROM scratch</span>
+
+ENV NGINX_VERSION 1.13.6-1~stretch
+ENV NJS_VERSION   1.13.6.0.1.14-1~stretch
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">optional environment variable that's used in later lines and set as envvar when container is running</span>
+
+RUN apt-get update <span style="color: #2d9574;">\</span>
+        &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y gnupg1 <span style="color: #2d9574;">\</span>
+        &amp;&amp; <span style="color: #2d9574;">\</span>
+        <span style="color: #715ab1;">NGINX_GPGKEY</span>=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; <span style="color: #2d9574;">\</span>
+        <span style="color: #715ab1;">found</span>=<span style="color: #2d9574;">''</span>; <span style="color: #2d9574;">\</span>
+        <span style="color: #3a81c3; font-weight: bold;">for</span> server<span style="color: #3a81c3; font-weight: bold;"> in</span> <span style="color: #2d9574;">\</span>
+                ha.pool.sks-keyservers.net <span style="color: #2d9574;">\</span>
+                hkp://keyserver.ubuntu.com:80 <span style="color: #2d9574;">\</span>
+                hkp://p80.pool.sks-keyservers.net:80 <span style="color: #2d9574;">\</span>
+                pgp.mit.edu <span style="color: #2d9574;">\</span>
+        ; <span style="color: #3a81c3; font-weight: bold;">do</span> <span style="color: #2d9574;">\</span>
+                <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Fetching GPG key $NGINX_GPGKEY from $server"</span>; <span style="color: #2d9574;">\</span>
+                apt-key adv --keyserver <span style="color: #2d9574;">"$server"</span> --keyserver-options <span style="color: #715ab1;">timeout</span>=10 --recv-keys <span style="color: #2d9574;">"$NGINX_GPGKEY"</span> &amp;&amp; <span style="color: #715ab1;">found</span>=yes &amp;&amp; <span style="color: #3a81c3; font-weight: bold;">break</span>; <span style="color: #2d9574;">\</span>
+        <span style="color: #3a81c3; font-weight: bold;">done</span>; <span style="color: #2d9574;">\</span>
+        <span style="color: #3a81c3;">test</span> -z <span style="color: #2d9574;">"$found"</span> &amp;&amp; <span style="color: #3a81c3;">echo</span> &gt;&amp;2 <span style="color: #2d9574;">"error: failed to fetch GPG key $NGINX_GPGKEY"</span> &amp;&amp; <span style="color: #3a81c3; font-weight: bold;">exit</span> 1; <span style="color: #2d9574;">\</span>
+        apt-get remove --purge -y gnupg1 &amp;&amp; apt-get -y --purge autoremove &amp;&amp; rm -rf /var/lib/apt/lists/* <span style="color: #2d9574;">\</span>
+        &amp;&amp; <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"deb http://nginx.org/packages/mainline/debian/ stretch nginx"</span> &gt;&gt; /etc/apt/sources.list <span style="color: #2d9574;">\</span>
+        &amp;&amp; apt-get update <span style="color: #2d9574;">\</span>
+        &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y <span style="color: #2d9574;">\</span>
+                                                <span style="color: #715ab1;">nginx</span>=${<span style="color: #715ab1;">NGINX_VERSION</span>} <span style="color: #2d9574;">\</span>
+                                                nginx-module-xslt=${<span style="color: #715ab1;">NGINX_VERSION</span>} <span style="color: #2d9574;">\</span>
+                                                nginx-module-geoip=${<span style="color: #715ab1;">NGINX_VERSION</span>} <span style="color: #2d9574;">\</span>
+                                                nginx-module-image-filter=${<span style="color: #715ab1;">NGINX_VERSION</span>} <span style="color: #2d9574;">\</span>
+                                                nginx-module-njs=${<span style="color: #715ab1;">NJS_VERSION</span>} <span style="color: #2d9574;">\</span>
+                                                gettext-base <span style="color: #2d9574;">\</span>
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">optional commands to run at shell inside container at build time</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">this one adds package repo for nginx from nginx.org and installs it</span>
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log <span style="color: #2d9574;">\</span>
+        &amp;&amp; ln -sf /dev/stderr /var/log/nginx/error.log
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">forward request and error logs to docker log collector</span>
+
+EXPOSE 80 443
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">expose these ports on the docker virtual network</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">you still need to use -p or -P to open/forward these ports on host</span>
+
+CMD [<span style="color: #2d9574;">"nginx"</span>, <span style="color: #2d9574;">"-g"</span>, <span style="color: #2d9574;">"daemon off;"</span>]
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">required: run this command when container is launched</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">only one CMD allowed, so if there are multiple, last one wins</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfed4c23" class="outline-3">
+<h3 id="orgfed4c23">Create apline image which sleep for 10,000 ms</h3>
+<div class="outline-text-3" id="text-orgfed4c23">
+<pre class="example">
+FROM alpine
+
+# method one, shell form
+CMD sleep 10000
+
+# method two, exec form
+#CMD ["sleep", "10000"]
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd2f80bb" class="outline-3">
+<h3 id="orgd2f80bb">Image with entry point and cmd</h3>
+<div class="outline-text-3" id="text-orgd2f80bb">
+<pre class="example">
+FROM alpine
+
+# the executable
+ENTRYPOINT ["sleep"]
+
+# the default arguments
+CMD ["10000"]
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgf299754" class="outline-3">
+<h3 id="orgf299754">Execute the shell script inside dockerfile</h3>
+<div class="outline-text-3" id="text-orgf299754">
+<div class="org-src-container">
+<pre class="src src-sh">FROM alpine
+
+COPY ./docker-entrypoint.sh /
+
+ENTRYPOINT [<span style="color: #2d9574;">"/docker-entrypoint.sh"</span>]
+
+CMD [<span style="color: #2d9574;">"ping"</span>, <span style="color: #2d9574;">"8.8.8.8"</span>]
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">file : docker-entrypoint.sh</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/sh</span>
+<span style="color: #3a81c3;">set</span> -e
+
+cat /etc/hosts
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"ok i'm done, now let's ping'"</span>
+
+<span style="color: #3a81c3; font-weight: bold;">exec</span> <span style="color: #2d9574;">"$@"</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org66a455e" class="outline-3">
+<h3 id="org66a455e">Run custom jekyll server with bindmount</h3>
+<div class="outline-text-3" id="text-org66a455e">
+<p>
+The dir fo jelly is <code>/media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/bindmount-sample-1</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">pwd # /media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/bindmount-sample-1</span>
+
+docker run -p 80:4000 -v $(<span style="color: #ff00ff;">pwd</span>):/site bretfisher/jekyll-serve
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org23c7502" class="outline-2">
+<h2 id="org23c7502">Docker compose</h2>
+<div class="outline-text-2" id="text-org23c7502">
+</div>
+<div id="outline-container-org50867f2" class="outline-3">
+<h3 id="org50867f2">Use Compose to Build with Drupal content with postgres</h3>
+<div class="outline-text-3" id="text-org50867f2">
+<p>
+&gt; Goal: Create a compose config for a local Drupal CMS website
+</p>
+
+<ul class="org-ul">
+<li>This empty directory is where you should create a docker-compose.yml</li>
+<li>Use the `drupal:8.8.2` image along with the `postgres:12.1` image</li>
+<li>Set the version to 2</li>
+<li>Use `ports` to expose Drupal on 8080</li>
+<li>Be sure to setup POSTGRES<sub>PASSWORD</sub> on postgres image</li>
+<li>Walk though Drupal config in browser at <a href="http://localhost:8080">http://localhost:8080</a></li>
+<li>Tip: Drupal assumes DB is localhost, but it will actually be on the compose service name you give it</li>
+<li>Use Docker Hub documentation to figure out the right environment and volume settings</li>
+<li>Extra Credit: Use volumes to store Drupal unique data</li>
+</ul>
+
+<p>
+<a href="https://hub.docker.com/_/drupal/">https://hub.docker.com/_/drupal/</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">version: <span style="color: #2d9574;">'2'</span>
+
+services:
+  drupal:
+    image: drupal:8.8.2
+    ports:
+      - <span style="color: #2d9574;">"8080:80"</span>
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres:12.1
+    environment:
+      - <span style="color: #715ab1;">POSTGRES_PASSWORD</span>=mypasswd
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga8bdb2b" class="outline-3">
+<h3 id="orga8bdb2b">Build</h3>
+<div class="outline-text-3" id="text-orga8bdb2b">
+<p>
+File structure
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">pwd</span>
+ <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&gt;&gt; # /media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/compose-sample-3</span>
+&#9500;&#9472;&#9472; docker-compose.yml
+&#9500;&#9472;&#9472; html
+&#9500;&#9472;&#9472; nginx.conf
+&#9492;&#9472;&#9472; nginx.Dockerfile
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">file : docker-compose.yml </span>
+<span style="color: #715ab1;">version</span>: <span style="color: #2d9574;">'2'</span>
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">based off compose-sample-2, only we build nginx.conf into image</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">uses sample site from https://startbootstrap.com/template-overviews/agency/</span>
+
+<span style="color: #715ab1;">services</span>:
+  <span style="color: #715ab1;">proxy</span>:
+    <span style="color: #715ab1;">build</span>:
+      <span style="color: #715ab1;">context</span>: .
+      <span style="color: #715ab1;">dockerfile</span>: nginx.Dockerfile
+    <span style="color: #715ab1;">ports</span>:
+      - <span style="color: #2d9574;">'80:80'</span>
+  <span style="color: #715ab1;">web</span>:
+    <span style="color: #715ab1;">image</span>: httpd
+    <span style="color: #715ab1;">volumes</span>:
+      - ./html:/usr/local/apache2/htdocs/
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">file : nginx.Dockerfile </span>
+FROM nginx:1.13
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">file : nginx.conf</span>
+server {
+
+        listen 80;
+
+        location / {
+
+                proxy_pass         http://web;
+                proxy_redirect     off;
+                proxy_set_header   Host $<span style="color: #715ab1;">host</span>;
+                proxy_set_header   X-Real-IP $<span style="color: #715ab1;">remote_addr</span>;
+                proxy_set_header   X-Forwarded-For $<span style="color: #715ab1;">proxy_add_x_forwarded_for</span>;
+                proxy_set_header   X-Forwarded-Host $<span style="color: #715ab1;">server_name</span>;
+
+        }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: D Karthik</p>
+<p class="date">Created: 2023-02-28 Tue 14:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

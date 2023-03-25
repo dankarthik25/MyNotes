@@ -1,0 +1,571 @@
+#+TITLE: Note_WebDeveloperBootcamp
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Introduction to this Course
+** Course Content
+ 2: Introduction to Front End Development
+ 3: Introduction to HTML
+ 4: Intermediate HTML
+ 5: Introduction to CSS
+ 6: Intermediate CSS
+ 7: Bootstrap (3)
+ 8: Bootstrap 4!
+ 9: Bootstrap 4: Flexbox and Layout
+ 10: Introduction to JavaScript
+ 11: Javascript Basics: Control Flow
+ 12: Javascript Basics: Functions
+ 13: Javascript Basics: Arrays
+ 14: Javascript Basics: Objects
+ 15: DOM Manipulation
+ 16: Advanced DOM Manipulation
+ 17: Color Game Project
+ 18: Intro to jQuery
+ 19: Advanced jQuery
+ 20: Todo List Projects
+ 21: OPTIONAL Project: Patatap Clone
+ 22: Backend Basics
+ 23: The Command Line
+ 24: Node JS
+ 25: Server Side Frameworks
+ 26: Intermediate Express
+ 27: Working With API's
+ 28: YelpCamp: Basics
+ 29: Databases
+ 30: YelpCamp: Data Persistence
+ 31: RESTful Routing
+ 32: Data Associations
+ 33: YelpCamp: Comments
+ 34: Authentication
+ 35: YelpCamp: Adding Authentication
+ 36: YelpCamp: Cleaning Up
+ 37: YelpCamp: Update and Destroy
+ 38: YelpCamp: UI Improvements
+ 39: Git and Github
+ 40: Deploying
+ 41: JavaScript: The Tricky Stuff
+** How Internet Work
+https://www.youtube.com/watch?v=ewrBalT_eBM
+A Packet's Tale. How Does the Internet Work?
+
+Or 
+Every computer or servers has unique (ip address)
+
+
+
+- What are website ?
+ - Like youtube they don't exist on internet but on servers which has unique ip address
+- How to access the video ?
+ - acess video by using ip address
+- How Ip address assigned  ?
+  - ISP (Internet Service Provider)
+  - Tire 1 (like International Road)
+  - Tire 2 (State
+  - Tire 3 ( Local internet provider) which provied ip address to house 
+- Is IP address fixed  ? 
+ -  No ip address can change system to system but each device has unique mac address
+- What is mac address ?
+  - mac address( mixed address of device don't change like address )
+- What is DNS(Domain Name System) ?
+ - Like youtube stores it video in servers which has ip address but ip address can change, we need to remember ip address of youtube or google....etc
+ - DNS has table of name and it's ip address 
+ - DNS resolves name to ip address
+- Nedd to by DNS name ?
+ -  
+
+** Front End Vs Back End 
+Front End : html,css,js
+Back End  : many obtions like db(mysql,oracel,postsql,mongodb..etc),php,word press, NodeJs, Django, go .....etc
+** ASDFF
+HTmL : HyperText markup Language 
+1st used by miltary to send the data
+
+html : structure of web page or (bone) or nouns
+css  : style of webpage or (skin) adjective
+js   : logic(interactive) or verb
+
+
+
+
+e* Introduction to Front End Development
+* HTmL
+Use codepen of practice 
+** Depricated
+bold <b> is depretated now we use <strong> 
+italic<em> depretatd now we use <em> : meaning is empasis
+ 
+
+** mozilla Developer Network (mDN) :
+Excellent Learning Resource of learning 
+
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title></title>
+    </head>
+    <body>
+
+    <body>
+  <html>
+
+#+END_SRC
+ 3:Introduction to HTML
+#+BEGIN_SRC html
+<!-- Comments-->
+
+#+END_SRC
+
+mDN Element Reference :  cheate sheet for element referecen :
+
+h1, h2,h3,h4,h5,h6 : heading 
+ 4: Intermediate HTML
+** List  order and un-oreder list
+#+BEGIN_SRC html
+<ol>
+  <li>Red</li>
+  <li>Orange</li>
+  <li>Yellow</li>
+</ol>
+<ul>
+  <li>Red</li>
+  <li>Orange</li>
+  <li>Yellow</li>      
+</ul>
+
+#+END_SRC
+** Div and Span :
+Div: Division Element : generic container or group contant together
+Span : generic container but
+Div : is block level container
+Span : is inline level container
+** Table and Form
+Table   as tag od <table> </table>
+For table row : <tr> </tr>
+For table division or column : <td> </td> 
+** Form
+Objectives
+- 
+* Css
+ 5: Introduction to CSS
+http://www.csszengarden.com/
+https://colours.neilorangepeel.com/
+Introduction
+Selectors and Properties
+Coloring and  Formatting
+Font and Text  manipulating 
+Layout
+Flexbox(Responsive Box)
+Grid 
+Animation and Transitions
+Challenge
+
+** Introduction
+#+BEGIN_SRC html
+<link rel="stylesheet" type="text/css" href="../css/style.css"> 
+<-- # or Inbuild css (outdateted) -->
+#+END_SRC
+** Selector( Class and Id) 
+
+The 30 CSS Selector you must memorize 
+https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048
+
+#+BEGIN_SRC html
+<div>
+  <p class="highlight">You say yes</p>
+  <p id = "special">I say no</p> <!-- Id is only one time used in html -->
+</div>
+
+<div >
+  <p>You say goodbye</p>
+  <p class="highlight">I say hello</p>
+</div>
+
+#+END_SRC
+
+#+BEGIN_SRC css
+#special{
+  background:yellow;
+}
+.highlight{
+  background :red;
+  text-decoration: line-through;
+}
+#+END_SRC
+*** Conflit
+#+BEGIN_SRC html
+<h2>adfadfsafd</h2>
+<h2 class="about-me" > About me </h2>
+<h2 class="about-me" id="services" > Service</h2>
+<h2 class="about-me" id="services" style="color:steelblue;"> Stellblue </h2>
+
+<a href="http://www.google.com" id="google-link" > Click here to go Google </a>
+#+END_SRC
+
+#+BEGIN_SRC css
+*{margin:0;padding:0;} /*every element*/
+h2 { color: red;}
+.about-me {color : blue;} /*class */
+#services{color: green;} /*id*/
+
+li a {text-decoration:none;} /*descendant*/
+/* The next most comment selector is the descendant selector. When you need to be more specific with your selectors, you use these. For example, what if, rather than targeting all anchor tags, you only need to target the anchors which are within an unordered list? This is specifically when you'd use a descendant selector. */
+
+/*peudo selectors */
+h2:hover{color red;}
+
+li:first-child{color: steelblue}
+li:last-child{color:pink}
+li:nth-child(2){color:yellow;}
+li:only-child{color:green;}
+
+/* Links which are visited or unvisited */
+#google-link:link{color:blue;}
+#google-link:visited{color:red;}
+
+
+ul + p {
+   color: red;
+}
+/*
+This is referred to as an adjacent selector. It will select only the element that is immediately preceded by the former element. In this case, only the first paragraph after each ul will have red text. */
+#+END_SRC
+select has heraiacal
+first priority is for inline styling
+second priority is for id
+3rd priority is for class
+4th priority is for general
+*** Advance Seletctor
+#+BEGIN_SRC css
+
+/*adjcent selector*/
+ 
+/* attributes*/
+img[src ^="../imgs/"]{broder: 10px solid black ;}
+
+#+END_SRC
+** css block
+#+BEGIN_SRC css
+selector {
+   property: value;
+   property: values2;
+}
+
+#+END_SRC
+
+*** Colour
+There are three type of color
+ - Hexadecimal
+ - RGB
+ - RGBA
+ - Build in Color [red pink blue corn ]
+
+ Built In Colors
+#+BEGIN_SRC css
+h1 {color: red;}
+h2 {color: cornflowerBlue;}
+h3 {color: darkOrchid;
+#+END_SRC
+
+ 6: Intermediate CSS
+ Hexadecimal
+#+BEGIN_SRC css
+h1 {color: #000000;}
+h2 {color: #4B0082;}
+h3 {color: #FF1493;}
+#+END_SRC
+RGB 
+#+BEGIN_SRC css
+h1 {color: rgb(0,255,0);}
+h2 {color: rgb(100, 0, 100);}
+h3 {color: rgb(11, 99, 150);}
+#+END_SRC
+RGBA
+a : alpha value : which is trasparency with backgroud-colur
+#+BEGIN_SRC css
+h1 {color: rgba(11, 99, 150, 1);}
+h2 {color: rgba(11, 99, 150, .6);}
+h3 {color: rgba(11, 99, 150, .2);}
+
+#+END_SRC
+*** Background
+**** Background Color
+#+BEGIN_SRC css
+body {
+  background: #95a5a6;
+}
+
+div{
+  background: #3498db;
+}
+
+p {
+  color: #ecf0f1;
+}
+
+#+END_SRC
+**** Background Image
+#+BEGIN_SRC css
+body {
+  background: url(http://3dprint.com/wp
+   -content/uploads/2014/11/-
+   Rainbow_Ocean__by_Thelma1.jpg);
+  background-repate:no-repeat;
+  background-size:cover;
+}
+
+div{
+  background: rgba(0,0,0,.7);
+}
+
+p {
+  color: #ecf0f1;
+}
+
+#+END_SRC
+**** Background Gradient 
+#+BEGIN_SRC css
+#service-image{
+    height: 400px;
+    width: 70%;
+    background: linear-gradient(to right); /*direction top right bottom left*/
+    background: linear-gradient(to right, red,,green,steelblue, blue,);
+    background: linear-gradient(to right rgba(94,255,126,1),rgba(94,255,126,0) );
+/*diagonal gradient*/
+    background: linear-gradient(to bottom right);
+/*diagonal gradient*/
+    background: linear-gradient(146deg,rgba(94,255,126,1),rgba(94,255,126,0) );
+
+/*radial-gradient*/
+   background: radial-gradient(red 20%,blue 40%,green 55%);
+/*shape*/
+
+   background: radial-gradient(circle,red 20%,blue 40%,green 55%);
+    background-size: cover;
+}
+#+END_SRC
+*** Boader
+#+BEGIN_SRC css
+h1 {
+  color:rgba(0,200,100,0.8);
+  border-width: 5px;
+  border-style:solid;
+  border-color : purple; 
+ or 
+
+ border: 5px solid purple;
+
+}
+#+END_SRC
+*** Units
+400px
+70%
+mm
+relative : 2em
+#+BEGIN_SRC css
+
+
+#+END_SRC
+***  Text manipulation
+
+Different type of text 
+#+BEGIN_SRC css
+p{
+   text-decorator: overline ; /*none, underline, line-through, overline */
+   text-trasform: capitalize; /*lowercase, uppercase*/
+   text-align:justify  /*left right center justify*/
+}
+
+#+END_SRC
+
+*** Font Size, Bolding & Style
+
+For font https://fonts.google.com/
+Google font are free other may be price
+#+BEGIN_SRC css
+/*font-family*/
+h1 {
+	font-family: Georgia; /*serif(print,Georgia,times rome) sans-Serif(arial,Calibri) monospace(corner-view)*/
+	font-size: 5.0em;/*40px */
+	font-weight: normal; /*0-800: Value of Bold*/ 
+	font-weight: 700; /*0-800: Value of Bold*/ 
+
+}
+
+.italics {
+  font-family: "Times New Roman", serif /*1st search for Time Roman if not vailable we use serif */
+  font-style: italic; /*oblique*/
+	line-height: 1.5;
+}
+body {
+	font-size: 10px;
+}
+span {
+	font-size: 2.0em;
+}
+
+
+#+END_SRC
+*** Exteranl Fonts
+google fonts 
+
+get the link add in header 
+** Inheritance
+#+BEGIN_SRC css
+h1 h2 h3{color :red;}
+h3{color:orange;}
+
+#+END_SRC
+Specificity of Selector visit : mdn specificity
+** Box model
+In a doc, each element is represented as a rectangular box.
+In CSS, each of these rectangular box model.
+Each box has four edges: margin edge, border edge, padding edge, and content edge
+
+Each box model consist 
+- box
+ - content
+ - padding : space btw content and broder
+ - broder  : divier btw padding and margin
+ - margin  : spacing  btw broder and other content.
+#+BEGIN_SRC css
+/*for box we use relative units on width, auto for height*/
+
+#about-us-image{
+  height: 300px;
+  width: 60%; /*60vw=60%*/
+}
+
+p{
+boder:2px solid red; /*size style=(solid,dotted,dashed,double) color*/
+/*direction top right  bottom left  */
+padding:20px /*all space  but dones not reduce content*/
+/*
+padding-top: 100px;
+padding-right: 40px;
+padding-bottom: 5px;
+padding-left: 0px;
+*/
+padding: 100px 40px 5px 0px;
+
+margin:       /*add space by decrease  the content*/
+
+display: none;/*inline, inline-block*/
+
+/*float : left right none*/
+}
+
+#+END_SRC
+
+** Variable
+#+BEGIN_SRC css
+:root {
+  --main-bg-color: coral;
+  --main-txt-color: blue;
+  --main-padding: 15px;
+}
+
+#div1 {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+  padding: var(--main-padding);
+}
+
+#div2 {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+  padding: var(--main-padding);
+}
+
+#+END_SRC
+** Flexbox
+- Flexbox consist of
+  - container
+  - flex-item
+
+** CSS Grid
+#+BEGIN_SRC css
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+#+END_SRC
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<head>
+<link>
+</head>
+<body>
+
+<div class="grid-container">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>  
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+  <div class="grid-item">6</div>  
+  <div class="grid-item">7</div>
+  <div class="grid-item">8</div>
+  <div class="grid-item">9</div>  
+</div>
+
+</body>
+</html>
+
+
+#+END_SRC
+
+* Bootstrap
+ 7: Bootstrap (3)
+ 8: Bootstrap 4!
+ 9: Bootstrap 4: Flexbox and Layout
+* Javascript
+ 10: Introduction to JavaScript
+ 11: Javascript Basics: Control Flow
+ 12: Javascript Basics: Functions
+ 13: Javascript Basics: Arrays
+ 14: Javascript Basics: Objects
+ 15: DOM Manipulation
+ 16: Advanced DOM Manipulation
+ 17: Color Game Project
+** JQuery
+18: Intro to jQuery
+ 19: Advanced jQuery
+ 20: Todo List Projects
+ 21: OPTIONAL Project: Patatap Clone
+* Backend 
+ 22: Backend Basics
+ 23: The Command Line
+** Node Js
+ 24: Node JS
+ 25: Server Side Frameworks
+ 26: Intermediate Express
+ 27: Working With API's
+ 28: YelpCamp: Basics
+** 29: Databases(mongoDB)
+  30: YelpCamp: Data Persistence
+SEmantic UI
+ 31: RESTful Routing
+ 32: Data Associations
+ 33: YelpCamp: Comments
+ 34: Authentication
+ 35: YelpCamp: Adding Authentication
+ 36: YelpCamp: Cleaning Up
+ 37: YelpCamp: Update and Destroy
+ 38: YelpCamp: UI Improvements
+** 39: Git and Github
+ 40: Deploying
+ 41: JavaScript: The Tricky Stuff
+
+ 

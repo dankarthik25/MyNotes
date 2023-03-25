@@ -1,0 +1,300 @@
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+TITLE: Docker-assignment
+#+AUTHOR:    D Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+
+#+Setupfile: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+
+* DockerFile Assignment
+
+** Create Node.js DockerFile 
+The dir contains a Node.js app, you need to get it running in a container
+
+Overview of this assignment
+
+- Instructions from the app developer
+  - you should use the 'node' official image, with the alpine 6.x branch
+    - =FROM node:6-alpine= 
+- this app listens on port 3000, but the container should launch on port 80, so that it will respond to http://localhost:80 on your computer
+  - =EXPOSE 3000=
+    
+- then it should use alpine package manager to install tini: 'apk add --update tini'
+  - =RUN apk add --update tini=
+- then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app'
+  - =RUN mkdir -p /usr/scr/app=
+- Node uses a "package manager", so it needs to copy in package.json file
+  - =WORKDIR /usr/src/app=
+  - =COPY package.json package.json=
+- then it needs to run 'npm install' to install dependencies from that file
+  - =RUN npm install && npm cache clean=
+- to keep it clean and small, run 'npm cache clean --force' after above
+- then it needs to copy in all files from current directory
+  - =COPY . .=
+- then it needs to start container with command '/sbin/tini -- node ./bin/www'
+  - =CMD ["tini","--","node","./bin/www"]=
+    
+- in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands
+
+*** Solution
+#+begin_src sh
+#file name : Dockerfile
+FROM node:6-alpine
+EXPOSE 3000
+RUN apk add --update tini
+WORKDIR /usr/src/app
+COPY package.json package.json
+RUN npm install && npm cache clean --force
+COPY . .
+CMD [ "/sbin/tini", "--", "node", "./bin/www" ]
+#+end_src
+
+Build the Dockerfile
+
+#+begin_src sh
+docker build -t testnode .   # build the testnode
+docker run -rm testnode -p 80:3000 
+#+end_src
+
+
+
+
+** Create Custome Nginx
+
+#+begin_src sh
+# this shows how we can extend/change an existing official image from Docker Hub
+
+FROM nginx:latest
+# highly recommend you always pin versions for anything beyond dev/learn
+
+WORKDIR /usr/share/nginx/html
+# change working directory to root of nginx webhost
+# using WORKDIR is preferred to using 'RUN cd /some/path'
+
+COPY index.html index.html
+
+# I don't have to specify EXPOSE or CMD because they're in my FROM
+#+end_src
+
+** Create Nginx using Debian image 
+#+begin_src sh
+# NOTE: this example is taken from the default Dockerfile for the official nginx Docker Hub Repo
+# https://hub.docker.com/_/nginx/
+# NOTE: This file is slightly different than the video, because nginx versions have been updated 
+#       to match the latest standards from docker hub... but it's doing the same thing as the video
+#       describes
+FROM debian:stretch-slim
+# all images must have a FROM
+# usually from a minimal Linux distribution like debian or (even better) alpine
+# if you truly want to start with an empty container, use FROM scratch
+
+ENV NGINX_VERSION 1.13.6-1~stretch
+ENV NJS_VERSION   1.13.6.0.1.14-1~stretch
+# optional environment variable that's used in later lines and set as envvar when container is running
+
+RUN apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y gnupg1 \
+	&& \
+	NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
+	found=''; \
+	for server in \
+		ha.pool.sks-keyservers.net \
+		hkp://keyserver.ubuntu.com:80 \
+		hkp://p80.pool.sks-keyservers.net:80 \
+		pgp.mit.edu \
+	; do \
+		echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
+		apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
+	done; \
+	test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
+	apt-get remove --purge -y gnupg1 && apt-get -y --purge autoremove && rm -rf /var/lib/apt/lists/* \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+						nginx=${NGINX_VERSION} \
+						nginx-module-xslt=${NGINX_VERSION} \
+						nginx-module-geoip=${NGINX_VERSION} \
+						nginx-module-image-filter=${NGINX_VERSION} \
+						nginx-module-njs=${NJS_VERSION} \
+						gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
+# optional commands to run at shell inside container at build time
+# this one adds package repo for nginx from nginx.org and installs it
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
+# forward request and error logs to docker log collector
+
+EXPOSE 80 443
+# expose these ports on the docker virtual network
+# you still need to use -p or -P to open/forward these ports on host
+
+CMD ["nginx", "-g", "daemon off;"]
+# required: run this command when container is launched
+# only one CMD allowed, so if there are multiple, last one wins
+#+end_src
+
+** Create apline image which sleep for 10,000 ms
+
+#+begin_src 
+FROM alpine
+
+# method one, shell form
+CMD sleep 10000
+
+# method two, exec form
+#CMD ["sleep", "10000"]
+#+end_src
+** Image with entry point and cmd
+#+begin_src 
+FROM alpine
+
+# the executable
+ENTRYPOINT ["sleep"]
+
+# the default arguments
+CMD ["10000"]
+#+end_src
+
+
+** Execute the shell script inside dockerfile
+#+begin_src sh 
+FROM alpine
+
+COPY ./docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["ping", "8.8.8.8"]
+#+end_src
+
+
+#+begin_src sh
+#file : docker-entrypoint.sh
+#!/bin/sh
+set -e
+
+cat /etc/hosts
+echo "ok i'm done, now let's ping'"
+
+exec "$@"
+
+#+end_src
+
+** Run custom jekyll server with bindmount
+The dir fo jelly is =/media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/bindmount-sample-1=
+
+#+begin_src sh
+# pwd # /media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/bindmount-sample-1
+
+docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+
+#+end_src
+* Docker compose
+** Use Compose to Build with Drupal content with postgres
+# Assignment: Writing a Compose File
+
+> Goal: Create a compose config for a local Drupal CMS website
+
+- This empty directory is where you should create a docker-compose.yml 
+- Use the `drupal:8.8.2` image along with the `postgres:12.1` image
+- Set the version to 2
+- Use `ports` to expose Drupal on 8080
+- Be sure to setup POSTGRES_PASSWORD on postgres image
+- Walk though Drupal config in browser at http://localhost:8080
+- Tip: Drupal assumes DB is localhost, but it will actually be on the compose service name you give it
+- Use Docker Hub documentation to figure out the right environment and volume settings
+- Extra Credit: Use volumes to store Drupal unique data
+
+https://hub.docker.com/_/drupal/
+#+begin_src sh
+version: '2'
+
+services:
+  drupal:
+    image: drupal:8.8.2
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles       
+      - drupal-sites:/var/www/html/sites      
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres:12.1
+    environment:
+      - POSTGRES_PASSWORD=mypasswd
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+#+end_src
+
+
+** compose build for nginx 
+
+
+
+File structure
+#+begin_src sh 
+#pwd
+ # >> # /media/jayradhey/myVolume/workspace/workspace_devops/udemy-docker-mastery-master/compose-sample-3
+├── docker-compose.yml
+├── html
+├── nginx.conf
+└── nginx.Dockerfile
+#+end_src
+
+
+#+begin_src yaml
+# file : docker-compose.yml 
+version: '2'
+
+# based off compose-sample-2, only we build nginx.conf into image
+# uses sample site from https://startbootstrap.com/template-overviews/agency/
+
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - '80:80'
+  web:
+    image: httpd
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/
+#+end_src
+
+
+#+begin_src sh
+#file : nginx.Dockerfile 
+FROM nginx:1.13
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+#+end_src
+
+
+#+begin_src sh
+#file : nginx.conf
+server {
+
+	listen 80;
+
+	location / {
+
+		proxy_pass         http://web;
+		proxy_redirect     off;
+		proxy_set_header   Host $host;
+		proxy_set_header   X-Real-IP $remote_addr;
+		proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header   X-Forwarded-Host $server_name;
+
+	}
+}
+#+end_src

@@ -1,0 +1,36 @@
+#+TITLE: org2other
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+** org2html using pandoc and org2docx or org2odt 
+#+begin_src
+#
+# # # INPUT : md
+#
+# -c : convert input html with css
+# -f : input format , -t : output format ,
+
+
+pandoc -f markdown -t latex hello.txt 
+pandoc -c pandoc.css -s in.md -o out.html 
+
+#
+# # # INPUT : org
+#
+pandoc -c pandoc.css -f org -s markdown-2-other.org -o out.html   
+pandoc -c pandoc.css -f org -s markdown-2-other.org -t docx -o out.docx  
+pandoc -c pandoc.css -f org -s ReadMe-3-CrossAccount-AmazonEventBridge.org -o out.html  
+pandoc -f org -s Note_py.org -t ipynb -o Note_py.ipynb # Can't fullly convert all the code block and notes in org-mode is converted into single Markdown file which is stored in juypter file 
+
+#+end_src
+
+** TODO Export Org to Jupyter Notebook 
+
+
+* Issuse 
+** Can't convert org to html 
+
+Can't guess python-indent-offset, using defaults: 4 
+[38 times] org-export-data: Unable to resolve link: "SET Objects"
+
+https://stackoverflow.com/questions/18778894/emacs-24-3-python-cant-guess-python-indent-offset-using-defaults-4

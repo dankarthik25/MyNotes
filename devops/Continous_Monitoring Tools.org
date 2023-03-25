@@ -1,0 +1,484 @@
+#+TITLE: Continous_Monitoring Tools
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Elastic Stack (ELK : Elasticsearch Logstack Kibana
+* Installation
+#+begin_src 
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install default-jre
+# java -version
+
+sudo apt-get install nginx -y
+sudo systemctl start nginx
+sudo systemctl status nginx
+
+
+
+sudo apt-get install elasticsearch
+
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+network.host: 0.0.0.0
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+sudo nano /etc/elasticsearch/jvm.options
+
+-Xms128m
+-Xmx128m
+
+sudo systemctl start elasticsearch
+
+sudo systemctl enable elasticsearch
+
+sudo systemctl status elasticsearch
+
+sudo curl -XGET http://localhost:9200
+
+sudo apt-get install kibana
+
+sudo systemctl start kibana
+
+sudo systemctl enable kibana
+
+sudo systemctl status kibana
+
+echo "kibanaadmin:`openssl passwd -apr1`" | sudo tee -a /etc/nginx/htpasswd.users
+
+sudo nano /etc/nginx/sites-available/<public ip>
+
+server {
+    listen 80;
+
+    server_name <public ip>;
+
+    auth_basic "Restricted Access";
+    auth_basic_user_file /etc/nginx/htpasswd.users;
+
+    location / {
+        proxy_pass http://localhost:5601;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/<public ip> /etc/nginx/sites-enabled/<public ip>
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+sudo ufw allow 'Nginx Full'
+
+scp -i <path to .pem file> <path to sample-movies.bulk file> ubuntu@<dns name>:sample-movies.bulk
+
+sudo curl -XPOST http://localhost:9200/_bulk?pretty --data-binary @sample-movies.bulk -H "Content-Type: application/json"
+#+end_src
+* Integrate AWS S3 with elk
+Elasticsearch Plugins and Integrations [7.14] » Snapshot/Restore Repository Plugins » S3 Repository Plugin 
+#+begin_src 
+cd /usr/share/elasticsearch/bin/elasticsearch
+bin/elasticsearch-plugin install repository-s3
+#-> Installing repository-s3
+#-> Downloading repository-s3 from elastic
+#3[=================================================] 100%   
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#@     WARNING: plugin requires additional permissions     @
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# java.lang.RuntimePermission accessDeclaredMembers
+# java.lang.RuntimePermission getClassLoader
+# java.lang.reflect.ReflectPermission suppressAccessChecks
+# java.net.SocketPermission * connect,resolve
+# java.util.PropertyPermission es.allow_insecure_settings read,write
+#See http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html
+#for descriptions of what these permissions allow and the associated risks.
+
+#Continue with installation? [y/N]y
+#-> Installed repository-s3
+#-> Please restart Elasticsearch to activate any plugins installed
+systemctl restart elasticsearch.service 
+#+end_src
+** Elk settings
+give role to ec2-instance
+
+client : default
+bucket name
+
+* Prerequsite
+#+begin_src
+cpu 2
+ram: 4gb
+t2,micro   1,1
+t2.small   1,2
+t2.medium  2,4
+#+end_src
+** Installation
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.4-amd64.deb
+sudo dpkg -i elasticsearch-7.13.4-amd64.deb
+sudo systemctl start elasticsearch.service
+sudo systemctl stop elasticsearch.service
+
+isntall kibana
+wget https://artifacts.elastic.co/downloads/kibana/kibana-7.13.4-amd64.deb
+sudo dpkg -i kibana-7.13.4-amd64.deb
+sudo systemctl start kibana.service
+sudo systemctl stop kibana.service
+# localhost:5601/
+
+sudo apt install logstash
+nano /etc/logstash/conf.d/logstash.conf
+sudo nano /etc/logstash/conf.d/logstash.conf
+sudo systemctl start logstash.service 
+systemctl enable logstash.service 
+
+https://www.youtube.com/watch?v=hVgrXi_9L6Y
+
+
+
+
+https://www.rosehosting.com/blog/how-to-install-elk-stack-on-ubuntu-20-04/
+** Integrate with kubernetics, jenkins
+
+* Installation and Configuration
+#+begin_src 
+# Installation and Configuration of ElasticSearch
+# https://gitlab.com/LabIT/elasticsearch.git
+# Pre-requisites 
+
+## Install Java
+
+sudo apt-get update -y
+sudo apt-get install openjdk-8-jdk -y
+
+# Manual ElK Stack Installation steps
+
+## 1. Download and install public signing key 
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+## 2. Install apt-transport-https package
+
+sudo apt-get install apt-transport-https -y
+
+## 3. Save directory definitions
+
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+
+## 4. Update and Install elasticsearch
+
+sudo apt-get update && sudo apt-get install elasticsearch && sudo apt-get install logstash && sudo apt-get install kibana
+
+#+end_src
+configuration file elastic search 
+#+begin_src 
+
+## 5. configure elasticsearch
+
+#sudo su
+#nano /etc/elasticsearch/elasticsearch.yml
+
+
+cluster.name: demo-elk        #change cluster name
+node.name: demo-node-elk      #give the cluster a descriptive name
+network.host: 0.0.0.0         #change network binding
+discovery.type: single-node   #setup discovery.type as single node
+#########################################
+## 8. configure kibana    
+#nano /etc/kibana/kibana.yml
+
+
+server.port: 5601                               # uncomment server.port
+server.host: "0.0.0.0"                          # change server.host
+server.name: "demo-kibana"                      # change server.name
+elasticsearch.hosts: ["http://localhost:9200"]  #uncomment elasticsearch.host
+##################################################    
+#+end_src
+
+#+begin_src 
+sudo systemctl start elasticsearch ## 6. Start Elasticsearch service
+curl -XGET http://localhost:9200/_cluster/health?pretty # ## 7. validate Elasticsearch cluster health
+systemctl start kibana ## 9. start Kibana service
+
+## 10. enable elasticsearch and kibana
+systemctl enable elasticsearch
+systemctl enable kibana
+
+#+end_src
+* Enable login in elk
+#+begin_src
+#SOURCE: https://www.youtube.com/watch?v=aTOuD4Aj6BU
+#Title:How to enable kibana login page
+
+#SOURCE:https://www.youtube.com/watch?v=nMh1HWWe6B4,
+#Title: Getting Started with Free Elasticsearch Security Features
+
+#Source: https://www.youtube.com/watch?v=11PWoDIc10I
+# Title:  Enable Elasticsearch Security Features for free using X-Pack basic license(Elastic Stack)
+
+
+#vi /etc/elasticsearch/elasticsearch.yml
+xpack.security.enabled: true
+
+#vi /etc/kibana/kibana.yml
+server.host:"173.138.21.159"
+
+systemctl restart elasticsearch
+
+# To auto-generate password
+/usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto #interactive
+
+#Changed password for user apm_system
+#PASSWORD apm_system = UivynEJdfSDgbfyopDsd
+
+#Changed password for user kibana_system
+#PASSWORD kibana_system = DK0loXNOhq1TN2i6iqIx
+
+#Changed password for user kibana
+#PASSWORD kibana = DK0loXNOhq1TN2i6iqIx
+
+#Changed password for user logstash_system
+#PASSWORD logstash_system = Z7TmNdlpu7QtOnSO8C7N
+
+#Changed password for user beats_system
+#PASSWORD beats_system = ke8JWZUmslkCRBHqjQDl
+
+#Changed password for user remote_monitoring_user
+#PASSWORD remote_monitoring_user = nzIIga0F9lBiaiNOtcos
+
+#Changed password for user elastic
+#PASSWORD elastic = WVRMsGpBvHPY3g9RUczS
+
+# Check if elasticsearch user-password is correct
+#curl -u elastic:WVRMsGpBvHPY3g9RUczS -XGET http://localhost:9200/_cluster/health?pretty
+
+
+
+# #################
+# Allow or pass login credencials to kibana
+# ##################
+
+# Method 1: # give user credencials in yml file 
+#vi /etc/kibana/kibana.yml
+elasticsearch.username:"elastic"
+elasticsearch.password:"WVRMsGpBvHPY3g9RUczS" # OR FOLLOW 2nd Method below 
+
+# Method 2: give user credencials in keystore
+#/usr/share/kibana/bin/kibana-keystore create --allow-root
+/usr/share/kibana/bin/kibana-keystore add elasticsearch.username --allow-root
+#Enter value for elasticsearch.username: elastic
+/usr/share/kibana/bin/kibana-keystore add elasticsearch.password --allow-root
+#Enter value for elasticsearch.password:WVRMsGpBvHPY3g9RUczS
+
+# Config Logstack
+#vi /etc/logstash/logstash.yml
+xpack.monitoring.enable:true
+xpack.monitoring.elasticsearch.username:logstack_system
+xpacl.monitoring.elasticsearch.password:Z7TmNdlpu7QtOnSO8C7N
+
+# Create keystore of logstack
+sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+
+# add user to logstack
+sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ES_USER
+# Enter user-name : elastic 
+ 
+# add user to logstack
+sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ES_PWD
+# Enter password : 
+
+# Configure logstack
+vi /etc/logstash/conf.d/estack-test-pipeline.conf
+ 
+systemctl restart elasticsearch
+systemctl restart logstack
+
+# Check if pipeline is running
+tail -f  /var/log/logstash/logstash-plain.log
+# show Pipeline running
+
+systemctl restart kibana
+
+
+#+end_src
+* Nagios
+** Intro 
+What is Nagios ?
+Infra Monitoring tools
+It enables to identify and resolve IT infrastructure problems before they affect critical business processes
+Why ?
+Monitoring everyting
+
+Release of Nagios
+       Nagios Core
+        - Command Line Based tools
+        - Free
+        - Open Source
+       Nagiox XI (trail-versio is available)
+        - GU
+        - Paid
+        - Enterprise
+               
+- Nagios Architechture ?
+  - SERVER
+    - alert
+    - dashboard
+  - AGENT (Windows : NSClient, NRPE)
+    - RUNS ON SERVERS
+What kind of monitoring ?
+
+Two Kind of Monitoring :
+Active Monitoring  :  Xi server <====> Agent 
+Passive Monitoring :  Xi server <----- Agent
+
+ Agentless Monitoring : is possible through protocal
+    - LINUX SNMD
+    - Windows WMI
+
+How can you use Nagios for monitoring ?
+
+
+Core Config Manager
+==========================
+** Nagios Core Installation
+neatly explained https://www.youtube.com/watch?v=doRuDNY6920 
+
+#+begin_src sh
+###
+# Install required package
+###
+yum install httpd php php-cli gcc glibc glibc-common gd gd-devel net-snmp
+###
+# Start Services:
+###
+service httpd start
+###
+# Step 2 – Setup User Accounts
+###
+###  Now create a new nagios user account and setup a password to this account
+useradd nagios
+passwd nagios
+# Now create a groud for nagios setup “nagcmd” and add nagios user to this group and to apache group.
+groupadd nagcmd
+usermod -a -G nagcmd nagios
+usermod -a -G nagcmd apache
+###
+# Step 3 – Install Nagios Core Service
+###
+# Link:  https://support.nagios.com/kb/article/nagios-core-installing-nagios-core-from-source-96.html#RHEL
+cd /opt/
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.3.4.tar.gz
+tar xzf nagios-4.3.4.tar.gz
+cd nagios-4.3.4
+./configure --with-command-group=nagcmd
+make all
+make install
+make install-init
+make install-config
+make install-commandmode
+make install-webconf # command to setup apache configuration for Nagios
+###
+#Step 4 – SET USER NAME AND Passwd for Web-nagios
+###
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin #
+# Enter Password
+service httpd restart # restart Apache to make new settings take effect
+###
+#Step 5 – Install Nagios Plugins
+###
+cd /opt
+wget http://nagios-plugins.org/download/nagios-plugins-2.2.1.tar.gz
+tar xzf nagios-plugins-2.2.1.tar.gz
+cd nagios-plugins-2.2.1
+./configure --with-nagios-user=nagios --with-nagios-group=nagios
+make
+make install
+###
+#Step 6 – Verify and Start Nagios
+###
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg # Should given no error for correct isntallation
+service nagios start
+chkconfig --add nagios
+chkconfig nagios on
+
+###
+#Step 7 – Access Nagios in Web Browser
+###
+curl http://test.tecadmin.net/nagios/ # open in browser it will ask for user/passwd
+# Prompting for Apache Authentication Password –
+
+
+#+end_src
+** NRPE Client
+#+begin_src sh
+# In Client or Slave Server 
+sudo yum install –y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm   #(RHEL)
+yum install epel-release  -y
+yum install nrpe nagios-plugins-all openssl  -y
+vi /etc/nagios/nrpe.cfg
+# Edit: allowed_hosts=127.0.0.1, <nagios_master_ip> # inside the file
+systemctl start nrpe
+chkconfig nrpe on
+#+end_src
+
+
+#+begin_src 
+# In side master
+vim /usr/local/nagios/etc/nagios.cfg
+# uncomment the ( cfg_dir=/usr/local/nagios/etc/servers )
+mkdir  /usr/local/nagios/etc/servers
+cd /user/-----/servers
+vim client.cfg
+###
+# Paste below lines
+###
+
+# define host{
+# use               linux-server
+# host_name         hostname
+# alias             Node1
+# address           ip
+# max_check_attempts 5
+# check_period       24x7
+# notification_interval 30
+# notification_period 24x7
+# }
+systemctl restart nagios
+#+end_src
+
+** Nagios XI installation
+https://www.youtube.com/watch?v=knCO6wzCW3w
+
+#+begin_src 
+sudo -s
+cd /opt
+# get nagios XI link from  nagios site
+yum wget -y
+wget https://xxxxxxxx.nagios.com/downloads/nagios-xi/linux/.....tar.gz
+tar -zvxf xxxxxx.tar.gz
+cd nagiosxi
+./fullinstall
+# yum update -y # check if RHNS certified Note : OS should be centos or red hat
+
+# give url : 139.0.0.0.1/nagios
+
+
+#+end_src
+
+
+
+
+# Is nagios able to monitor aws server : auto scales?
+Yes with Nagios Auto Discovery add-on
+
+ 
+
+** Email Notification ,printer,switches ....etc

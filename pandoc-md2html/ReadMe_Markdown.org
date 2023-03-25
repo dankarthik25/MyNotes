@@ -1,0 +1,146 @@
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+TITLE:   Markdown to html
+#+AUTHOR:  DeepAlgorithms
+#+OPTIONS: num:nil
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+
+# +SETUPFILE: ~/mynotes/pandoc/org-theme-collection/theme-readtheorg.setup
+# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+# +EXPORT_FILE_NAME:  ~/mynotes/pandoc/test-org2html/org2html-theme-name.html
+
+# org2html-readtheorg.html
+# In =afa= is showing text inside a box without any colour change whih make old style
+# The right-side margin is taking lot of space 
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/simple_whiteblue.css"/>
+# Css file doesn't have any side-bars, and main-page doesn't have any margin  which save space
+# TODO: quote_block is not showing as an block in html need to do some work
+# TODO: example block is just block no styling is done 
+# in text-highlighting =dsfas= is changing colour to blue need to change to backgroud
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/comfy_inline.css"/>
+# For begin_src src block if language is not defined then it will not create a seperate block in html
+# TODO : remove centrailized main block with removing margins
+# GETCODE: for displaying the code type either sh,html,css,python,c++
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/gray.css"/>
+# No space wasted in right-side
+# But left-sidebar is not resposive
+# TODO : either remove left-sidebar or make it interactive
+
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/simple_inline.css"/>
+# Little Dull theme
+
+# +HTML_HEAD: <link rel="stylesheet" type="text/css" href="~/mynotes/pandoc/org-theme-collection/latexcss.css"/>
+# No-sidebar and center with margin in left and right 
+# Centrailized most space is wasted
+
+
+* Markdown introduction 
+- Used as README.md in github, gitlab ...etc https://github.com/enhuiz/eisvogel
+- Used to generate complex web-site using jeklly
+- Easy to convert into other format using python =pandoc= application
+** Edit and view in VS-Code
+Install plugin
+- Markdown All in One
+- Markdown Preview Enhance =Ctrl + k -v= to preview     
+** markdown to pdf
+https://github.com/enhuiz/eisvogel
+
+#+begin_src
+# move eisvogel.tex to ~/.local/share/pandoc/templates/ with name eisvogel.latex
+
+cp eisvogel.tex ~/.local/share/pandoc/templates/eisvogel.latex
+pandoc example.md -o example.pdf --from markdown --template eisvogel --listings
+
+#+end_src
+
+** markdonw to docx
+#+begin_src
+pandoc -f markdown document.md -t docx -o test-temp2.docx
+pandoc -f markdown document.md --data-dir=docs/rendering/ -t docx -o test-temp2.docx
+#+end_src
+
+*** issuse : set background color for sourcecode
+
+*** issuse : set refer doc
+https://groups.google.com/g/pandoc-discuss/c/4YkX-B-3Umk/m/WmzA3OUKARkJ
+
+** Convert Markdown to docx with latex equation 
+https://stackoverflow.com/questions/14249811/markdown-to-docx-including-complex-template
+
+#+begin_src sh
+pandoc -t latex mydoc.md | pandoc -f latex --data-dir=docs/rendering/ -o mydoc.docx
+#+end_src 
+
+
+** org2html using pandoc and org2docx or org2odt 
+#+begin_src
+#
+# # # INPUT : md
+#
+# -c : convert input html with css
+# -f : input format , -t : output format ,
+
+
+pandoc -f markdown -t latex hello.txt 
+pandoc -c pandoc.css -s in.md -o out.html 
+
+#
+# # # INPUT : org
+#
+pandoc -c pandoc.css -f org -s markdown-2-other.org -o out.html   
+pandoc -c pandoc.css -f org -s markdown-2-other.org -t docx -o out.docx  
+pandoc -c pandoc.css -f org -s ReadMe-3-CrossAccount-AmazonEventBridge.org -o out.html  
+#+end_src
+
+
+* Pandoc cmd
+Pandoc support below format as input(-f or --from) and ouput(-o or --output) 
+#+begin_src yaml
+Specify input format. FORMAT can be:
+    epub (EPUB)
+    gfm (GitHub-Flavored Markdown), or the deprecated and less accurate markdown_github; use markdown_github only if you need extensions not supported in gfm.
+    html (HTML)
+    ipynb (Jupyter notebook)
+    jats (JATS XML)
+    jira (Jira/Confluence wiki markup)
+    docx (Word docx)
+    json (JSON version of native AST)
+    latex (LaTeX)
+    markdown (Pandoc’s Markdown)
+    markdown_mmd (MultiMarkdown)
+    markdown_phpextra (PHP Markdown Extra)
+    markdown_strict (original unextended Markdown)
+    odt (ODT)
+    org (Emacs Org mode)
+    rtf (Rich Text Format)
+    rst (reStructuredText)
+#+end_src
+
+
+cmd
+#+begin_src sh
+# -f/--from      input format 
+# -t/--to        output format 
+# -o/--output    output to a file, use the -o option:
+# -s/--standalone
+# -c/--css       Link to a CSS style sheet
+# --template=FILE|URL
+pandoc -f html -t markdown https://www.fsf.org # 
+#+end_src
+
+
+* TODO Jeklly create website and try to host using gitlab pages 
+* google search for github style markdown template
+- https://stackoverflow.com/questions/50513696/pandoc-convert-github-flavoured-markdown-containing-mixed-html-and-markdown-to
+- https://gist.github.com/killercup/5917178
+- https://gist.github.com/atelierbram/09c8fb742f1518f09ff9e4338ab8f7fb
+- https://gist.github.com/dashed/6714393
+
+

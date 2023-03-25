@@ -1,0 +1,2704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-25 Sat 14:34 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CloudFormation-Udemy</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="DeepAlgorithms" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CloudFormation-Udemy</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge7e3cdc">Cloud Formation Template</a></li>
+<li><a href="#orgdff240c">Stack Concept with EC2 instnce Example</a>
+<ul>
+<li><a href="#orgc437712">Create EC2 instance</a></li>
+<li><a href="#org65a5f09">Update Key</a></li>
+<li><a href="#org0a4ab8a">Change Key</a></li>
+<li><a href="#orgae1160a">Update Rollback</a></li>
+<li><a href="#org2f3500f">Invalid Template</a></li>
+</ul>
+</li>
+<li><a href="#org498ba6f">Run Stack from Console</a></li>
+<li><a href="#orgd638a6b">Run Stack from awscli</a></li>
+<li><a href="#org6b63747">Resources with EC2-instance Example</a>
+<ul>
+<li><a href="#org227b2d9">Crearte EC2 instance</a></li>
+<li><a href="#org63a3925">add new security group</a></li>
+<li><a href="#org939d9ad">add new rule</a></li>
+<li><a href="#orgf0205ef">Add Elastic IP</a></li>
+<li><a href="#orgcacc375">Test or Check CaseSensitive</a></li>
+</ul>
+</li>
+<li><a href="#org85303de">Parameter Types</a>
+<ul>
+<li><a href="#org74d1c26">Paramter Type : KeyName</a></li>
+<li><a href="#org25b724e">Parameter Type: String</a></li>
+<li><a href="#orgac92f25">Parameter Type: InstanceType</a></li>
+<li><a href="#org7d1214c">Parameter Type: SSM</a></li>
+</ul>
+</li>
+<li><a href="#org0e8b4bf">Mapping with Example</a>
+<ul>
+<li><a href="#org24347e5">Base Stack</a></li>
+<li><a href="#orge89efec">Mapping AMI</a></li>
+<li><a href="#orgd792e18">Mapping AMI with Environment</a></li>
+</ul>
+</li>
+<li><a href="#org7bd754d">Condition</a>
+<ul>
+<li><a href="#org3ae2be5">Syntax</a></li>
+<li><a href="#org3980680">Base</a></li>
+<li><a href="#org2363efa">InstrinsicFunction-Fn-Equals</a></li>
+<li><a href="#orgb07771d">if PseudoParameter-NoValue</a></li>
+<li><a href="#orgdab3239">Fn-if</a></li>
+<li><a href="#org36fc06e">Fn-Not</a></li>
+<li><a href="#org135d38e">Fn-Or</a></li>
+<li><a href="#orgd341b3a">Fn-And</a></li>
+</ul>
+</li>
+<li><a href="#org8ca732e">Output</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org95f1ea6">Base</a></li>
+<li><a href="#orgc791c6c">InstanceID</a></li>
+<li><a href="#orge821a53">Instrinsic Fn::GetAtt</a></li>
+<li><a href="#org846b412">Export Intrinsic Fn::Sub Pseudo StakName</a></li>
+<li><a href="#org9091619">Cross Refeence Intrinsic Fn::ImportValue</a></li>
+<li><a href="#org6f50a98">Output Conditions</a></li>
+<li><a href="#orgddcfb20">Output Export Intrinsic Fn:Join</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org59244e0">MetaData</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org99b7f61">Base</a></li>
+<li><a href="#orgb9711db">Metadata Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org076a8be">EC2 UserData</a>
+<ul>
+<li>
+<ul>
+<li><a href="#orge9a68cb">Base</a></li>
+<li><a href="#org3cee1fa">shell script</a></li>
+<li><a href="#org1814ee1">UserData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org112a8b8">CFN-init</a></li>
+<li><a href="#orge254e6b">Configsets</a></li>
+<li><a href="#org29dd805">NestedStacks</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org43cce59">NestedStack VPC</a></li>
+<li><a href="#org253d907">Root Stack EC2-VPC</a></li>
+<li><a href="#org25edbb8">NestedStack-SG</a></li>
+<li><a href="#org5cfdae7">RootStack -ECE-SG</a></li>
+</ul>
+</li>
+<li><a href="#org6fda1fb">Manual Steps to Create VPC</a></li>
+</ul>
+</li>
+<li><a href="#org97cf90b">Continous Delivery</a></li>
+<li><a href="#org1f79b75">Infrasturcture As Code</a></li>
+<li><a href="#org7910c2a">StackPolicy</a></li>
+<li><a href="#org3c490a2">Additional Templates</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orge7e3cdc" class="outline-2">
+<h2 id="orge7e3cdc">Cloud Formation Template</h2>
+<div class="outline-text-2" id="text-orge7e3cdc">
+<p>
+Templates componets 
+</p>
+<ul class="org-ul">
+<li><b>Resources :</b> Your AWS resources declared in the template (MANDATORY)</li>
+<li><b>Paramters :</b> Dynamic inputs for your tempalate</li>
+<li><b>Mappings :</b> Static varaibles for your template</li>
+<li><b>Outputs :</b> Reference to what has been created</li>
+<li><b>Conditionals :</b> List of conditions to perform resource creation</li>
+<li><b>Metadata :</b></li>
+<li><b>Helpers</b>:
+<ul class="org-ul">
+<li><b>References</b> :</li>
+<li><b>Functions</b> :</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdff240c" class="outline-2">
+<h2 id="orgdff240c">Stack Concept with EC2 instnce Example</h2>
+<div class="outline-text-2" id="text-orgdff240c">
+</div>
+<div id="outline-container-orgc437712" class="outline-3">
+<h3 id="orgc437712">Create EC2 instance</h3>
+<div class="outline-text-3" id="text-orgc437712">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org65a5f09" class="outline-3">
+<h3 id="org65a5f09">Update Key</h3>
+<div class="outline-text-3" id="text-org65a5f09">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0a4ab8a" class="outline-3">
+<h3 id="org0a4ab8a">Change Key</h3>
+<div class="outline-text-3" id="text-org0a4ab8a">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-2
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-2
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae1160a" class="outline-3">
+<h3 id="orgae1160a">Update Rollback</h3>
+<div class="outline-text-3" id="text-orgae1160a">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-3
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2f3500f" class="outline-3">
+<h3 id="org2f3500f">Invalid Template</h3>
+<div class="outline-text-3" id="text-org2f3500f">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-3
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org498ba6f" class="outline-2">
+<h2 id="org498ba6f">Run Stack from Console</h2>
+</div>
+<div id="outline-container-orgd638a6b" class="outline-2">
+<h2 id="orgd638a6b">Run Stack from awscli</h2>
+</div>
+<div id="outline-container-org6b63747" class="outline-2">
+<h2 id="org6b63747">Resources with EC2-instance Example</h2>
+<div class="outline-text-2" id="text-org6b63747">
+</div>
+<div id="outline-container-org227b2d9" class="outline-3">
+<h3 id="org227b2d9">Crearte EC2 instance</h3>
+<div class="outline-text-3" id="text-org227b2d9">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Basic EC2 Instance.
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevEC2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org63a3925" class="outline-3">
+<h3 id="org63a3925">add new security group</h3>
+<div class="outline-text-3" id="text-org63a3925">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Basic EC2 Instance.
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevEC2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH SG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org939d9ad" class="outline-3">
+<h3 id="org939d9ad">add new rule</h3>
+<div class="outline-text-3" id="text-org939d9ad">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Basic EC2 Instance.
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevEC2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH SG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf0205ef" class="outline-3">
+<h3 id="orgf0205ef">Add Elastic IP</h3>
+<div class="outline-text-3" id="text-orgf0205ef">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Basic EC2 Instance.
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevEC2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH SG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">MyElasticIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEC2Instance           
+</pre>
+</div>
+
+<p>
+#+end<sub>src</sub>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcacc375" class="outline-3">
+<h3 id="orgcacc375">Test or Check CaseSensitive</h3>
+<div class="outline-text-3" id="text-orgcacc375">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Basic EC2 Instance.
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevEC2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH SG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8081'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8081'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIP</span>: 0.0.0.0/0          
+
+  <span style="color: #715ab1;">MyElasticIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEC2Instance
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org85303de" class="outline-2">
+<h2 id="org85303de">Parameter Types</h2>
+<div class="outline-text-2" id="text-org85303de">
+</div>
+<div id="outline-container-org74d1c26" class="outline-3">
+<h3 id="org74d1c26">Paramter Type : KeyName</h3>
+<div class="outline-text-3" id="text-org74d1c26">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: KeyName Parameter demo
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the key name from the list
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default        
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup 
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::SecurityGroup'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH security group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org25b724e" class="outline-3">
+<h3 id="org25b724e">Parameter Type: String</h3>
+<div class="outline-text-3" id="text-org25b724e">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: AZ Parameter demo
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the key name from the list
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Select the AZ
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b    
+      - us-east-2c
+
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default        
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup 
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyAvailabilityZone      
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::SecurityGroup'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH security group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgac92f25" class="outline-3">
+<h3 id="orgac92f25">Parameter Type: InstanceType</h3>
+<div class="outline-text-3" id="text-orgac92f25">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: AZ Parameter demo
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the key name from the list
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Select the AZ
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b    
+      - us-east-2c
+  <span style="color: #715ab1;">MyInstanceType</span>:
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type from list
+    <span style="color: #715ab1;">Type</span>: String      
+    <span style="color: #715ab1;">Default</span>: t2.micro
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - t2.micro
+      - t2.small
+
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyInstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default        
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup 
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyAvailabilityZone      
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::SecurityGroup'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH security group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d1214c" class="outline-3">
+<h3 id="org7d1214c">Parameter Type: SSM</h3>
+<div class="outline-text-3" id="text-org7d1214c">
+<p>
+AWS Systems Manager Parameter Store (SSM) provides you with a secure way to store config variables for your applications. You can access SSM via AWS API directly from within the app or just use from AWS CLI. SSM can store plaintext parameters or KMS encrypted secure strings. Since parameters are identified by ARNs, you can set a fine grain access control to your configuration bits with IAM. A truely versatile service !
+</p>
+
+<p>
+Common use cases of SSM are storing configuration for Docker containers initialisation during the runtime, storing secrets for Lambda functions and app, and even using SSM Parameters in CloudFormation.
+</p>
+
+
+<p>
+<b>\(1^{st}\) Step:</b> Create SSM Parameter   <b>AWS Systems Manager Parameter Store</b> <a href="https://www.youtube.com/watch?v=zxi3M_rIE2k">Youtube Tutorial Link </a>  <br />
+<b>\(2^{nd}\) Step:</b> Create a stack using below ssm.yml <br />
+<b>\(3^{rd}\) Step:</b> Choose your paramter name in ssm <br />
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: AZ Parameter demo
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the key name from the list
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Select the AZ
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b    
+      - us-east-2c
+  <span style="color: #715ab1;">MyInstanceType</span>:
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type from SSM
+    <span style="color: #715ab1;">Type</span>: AWS::SSM::Parameter::Value&lt;String&gt;
+
+<span style="color: #715ab1;">Resources</span>: 
+  <span style="color: #715ab1;">DevEC2Instance</span>: 
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::Instance'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyInstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- default        
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup 
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyAvailabilityZone      
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">'AWS::EC2::SecurityGroup'</span>
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">GroupDescription</span>: my new SSH security group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e8b4bf" class="outline-2">
+<h2 id="org0e8b4bf">Mapping with Example</h2>
+<div class="outline-text-2" id="text-org0e8b4bf">
+</div>
+<div id="outline-container-org24347e5" class="outline-3">
+<h3 id="org24347e5">Base Stack</h3>
+<div class="outline-text-3" id="text-org24347e5">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: cfn-key-1
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge89efec" class="outline-3">
+<h3 id="orge89efec">Mapping AMI</h3>
+<div class="outline-text-3" id="text-orge89efec">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+    <span style="color: #715ab1;">Description</span>: Select the keypair
+
+<span style="color: #715ab1;">Mappings</span>:
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044     
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd792e18" class="outline-3">
+<h3 id="orgd792e18">Mapping AMI with Environment</h3>
+<div class="outline-text-3" id="text-orgd792e18">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+    <span style="color: #715ab1;">Description</span>: Select the keypair
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+
+
+<span style="color: #715ab1;">Mappings</span>:
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044     
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small      
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7bd754d" class="outline-2">
+<h2 id="org7bd754d">Condition</h2>
+<div class="outline-text-2" id="text-org7bd754d">
+</div>
+<div id="outline-container-org3ae2be5" class="outline-3">
+<h3 id="org3ae2be5">Syntax</h3>
+<div class="outline-text-3" id="text-org3ae2be5">
+
+<div id="orga495d85" class="figure">
+<p><img src="./Images/Screenshots_2023-02-25T14-32-53.png" alt="Screenshots_2023-02-25T14-32-53.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3980680" class="outline-3">
+<h3 id="org3980680">Base</h3>
+<div class="outline-text-3" id="text-org3980680">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select Key name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small            
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2363efa" class="outline-3">
+<h3 id="org2363efa">InstrinsicFunction-Fn-Equals</h3>
+<div class="outline-text-3" id="text-org2363efa">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select Key name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small            
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb07771d" class="outline-3">
+<h3 id="orgb07771d">if PseudoParameter-NoValue</h3>
+<div class="outline-text-3" id="text-orgb07771d">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select Key name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small            
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, dev]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEnvSecurityGroup], <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::NoValue'</span>]  
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+  <span style="color: #715ab1;">DevEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: DevSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdab3239" class="outline-3">
+<h3 id="orgdab3239">Fn-if</h3>
+<div class="outline-text-3" id="text-orgdab3239">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select Key name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small            
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, dev]
+  <span style="color: #715ab1;">CreateProdSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEnvSecurityGroup], [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> ProdEnvSecurityGroup]]  
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+  <span style="color: #715ab1;">DevEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: DevSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">ProdEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: ProdSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org36fc06e" class="outline-3">
+<h3 id="org36fc06e">Fn-Not</h3>
+<div class="outline-text-3" id="text-org36fc06e">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select Key name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+      - qa
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production or qa     
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small  
+    <span style="color: #715ab1;">qa</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.medium                
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateProdSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Not</span> [{<span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup}]
+
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEnvSecurityGroup], [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> ProdEnvSecurityGroup]]  
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+  <span style="color: #715ab1;">DevEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: DevSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">ProdEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: ProdSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org135d38e" class="outline-3">
+<h3 id="org135d38e">Fn-Or</h3>
+<div class="outline-text-3" id="text-org135d38e">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+      - qa
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production or qa     
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small  
+    <span style="color: #715ab1;">qa</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.medium                
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateProdSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Not</span> [{<span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup}]
+  <span style="color: #715ab1;">IfRegionUseKeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Or</span> [<span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>, us-east-2], <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>, us-west-1]]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [IfRegionUseKeyName, cfn-key-1, cfn-key-2]
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEnvSecurityGroup], [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> ProdEnvSecurityGroup]]  
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+  <span style="color: #715ab1;">DevEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: DevSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">ProdEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: ProdSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd341b3a" class="outline-3">
+<h3 id="orgd341b3a">Fn-And</h3>
+<div class="outline-text-3" id="text-orgd341b3a">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Conditions Practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+      - qa
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production or qa     
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small  
+    <span style="color: #715ab1;">qa</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.medium                
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateProdSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Not</span> [{<span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup}]
+  <span style="color: #715ab1;">IfRegionUseKeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!And</span> [<span style="color: #ba2f59; font-weight: bold;">!Or</span> [<span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>, us-east-2], <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>, us-west-1]], <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, dev]]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [IfRegionUseKeyName, cfn-key-1, cfn-key-2]
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevEnvSecurityGroup], [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> ProdEnvSecurityGroup]]  
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+  <span style="color: #715ab1;">DevEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: DevSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">ProdEnvSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateProdSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: ProdSG
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ca732e" class="outline-2">
+<h2 id="org8ca732e">Output</h2>
+<div class="outline-text-2" id="text-org8ca732e">
+</div>
+<div id="outline-container-org95f1ea6" class="outline-4">
+<h4 id="org95f1ea6">Base</h4>
+<div class="outline-text-4" id="text-org95f1ea6">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc791c6c" class="outline-4">
+<h4 id="orgc791c6c">InstanceID</h4>
+<div class="outline-text-4" id="text-orgc791c6c">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">MyInstanceId</span>:
+    <span style="color: #715ab1;">Description</span>: My instance id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge821a53" class="outline-4">
+<h4 id="orge821a53">Instrinsic Fn::GetAtt</h4>
+<div class="outline-text-4" id="text-orge821a53">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">MyInstanceId</span>:
+    <span style="color: #715ab1;">Description</span>: My instance id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+  <span style="color: #715ab1;">MyDNSName</span>:
+    <span style="color: #715ab1;">Description</span>: My Public DNS Name
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.PublicDnsName
+  <span style="color: #715ab1;">MyInstanceAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Instance Availability Zone
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.AvailabilityZone
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org846b412" class="outline-4">
+<h4 id="org846b412">Export Intrinsic Fn::Sub Pseudo StakName</h4>
+<div class="outline-text-4" id="text-org846b412">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">MyInstanceId</span>:
+    <span style="color: #715ab1;">Description</span>: My instance id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+  <span style="color: #715ab1;">MyDNSName</span>:
+    <span style="color: #715ab1;">Description</span>: My Public DNS Name
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.PublicDnsName
+  <span style="color: #715ab1;">MyInstanceAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Instance Availability Zone
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.AvailabilityZone    
+    <span style="color: #715ab1;">Export</span>: 
+      <span style="color: #715ab1;">Name</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">"${AWS::StackName}-InstanceAz"</span>
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Description</span>: My Dev SG
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+    <span style="color: #715ab1;">Export</span>:
+      <span style="color: #715ab1;">Name</span>: MyDevSSHGlobalSG
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9091619" class="outline-4">
+<h4 id="org9091619">Cross Refeence Intrinsic Fn::ImportValue</h4>
+<div class="outline-text-4" id="text-org9091619">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!ImportValue</span> MyDevSSHGlobalSG
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!ImportValue</span> stack1-InstanceAz
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f50a98" class="outline-4">
+<h4 id="org6f50a98">Output Conditions</h4>
+<div class="outline-text-4" id="text-org6f50a98">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName, dev]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup], <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::NoValue'</span>]
+
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">MyInstanceId</span>:
+    <span style="color: #715ab1;">Description</span>: My instance id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+  <span style="color: #715ab1;">MyDNSName</span>:
+    <span style="color: #715ab1;">Description</span>: My Public DNS Name
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.PublicDnsName
+  <span style="color: #715ab1;">MyInstanceAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Instance Availability Zone
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.AvailabilityZone    
+    <span style="color: #715ab1;">Export</span>: 
+      <span style="color: #715ab1;">Name</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">"${AWS::StackName}-InstanceAz"</span>
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Description</span>: My Dev SG
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Export</span>:
+      <span style="color: #715ab1;">Name</span>: MyDevSSHGlobalSG
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgddcfb20" class="outline-4">
+<h4 id="orgddcfb20">Output Export Intrinsic Fn:Join</h4>
+<div class="outline-text-4" id="text-orgddcfb20">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+<span style="color: #715ab1;">Description</span>: Outputs practice
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the Key Name
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">MyEnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+
+<span style="color: #715ab1;">Mappings</span>:     
+  <span style="color: #715ab1;">MyRegionMap</span>:
+    <span style="color: #715ab1;">us-east-2</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0cd3dfa4e37921605
+    <span style="color: #715ab1;">us-west-1</span>:
+      <span style="color: #715ab1;">HVM64</span>: ami-0ec6517f6edbf8044
+  <span style="color: #715ab1;">MyEnvironmentMap</span>:
+    <span style="color: #715ab1;">dev</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.micro
+    <span style="color: #715ab1;">prod</span>:
+      <span style="color: #715ab1;">instanceType</span>: t2.small   
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateDevSecurityGroup</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName, dev]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyRegionMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::Region'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- HVM64
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- MyEnvironmentMap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyEnvironmentName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- instanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">SecurityGroups</span>: <span style="color: #ba2f59; font-weight: bold;">!If</span> [CreateDevSecurityGroup, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup], <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::NoValue'</span>]
+
+
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My Dev environment Global Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">MyInstanceId</span>:
+    <span style="color: #715ab1;">Description</span>: My instance id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+  <span style="color: #715ab1;">MyDNSName</span>:
+    <span style="color: #715ab1;">Description</span>: My Public DNS Name
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.PublicDnsName
+  <span style="color: #715ab1;">MyInstanceAvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: Instance Availability Zone
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyVMInstance.AvailabilityZone    
+    <span style="color: #715ab1;">Export</span>: 
+      <span style="color: #715ab1;">Name</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">"${AWS::StackName}-InstanceAz"</span>
+  <span style="color: #715ab1;">MyDevGlobalSecurityGroup</span>:
+    <span style="color: #715ab1;">Description</span>: My Dev SG
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyDevGlobalSecurityGroup
+    <span style="color: #715ab1;">Condition</span>: CreateDevSecurityGroup
+    <span style="color: #715ab1;">Export</span>:
+      <span style="color: #715ab1;">Name</span>: <span style="color: #ba2f59; font-weight: bold;">!Join</span> [<span style="color: #2d9574;">"-"</span>, [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">'AWS::StackName'</span>, MyDevSSHGlobalSG]]
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org59244e0" class="outline-2">
+<h2 id="org59244e0">MetaData</h2>
+<div class="outline-text-2" id="text-org59244e0">
+</div>
+<div id="outline-container-org99b7f61" class="outline-4">
+<h4 id="org99b7f61">Base</h4>
+<div class="outline-text-4" id="text-org99b7f61">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+  <span style="color: #715ab1;">InstanceType</span>: 
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: t2.micro
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - t2.micro
+      - t2.small
+      - t2.medium
+  <span style="color: #715ab1;">KeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Key name to SSH to VM's. 
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">AvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: select the availability zone
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b
+      - us-east-2c
+
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> KeyName
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> AvailabilityZone
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb9711db" class="outline-4">
+<h4 id="orgb9711db">Metadata Interface</h4>
+<div class="outline-text-4" id="text-orgb9711db">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+  <span style="color: #715ab1;">InstanceType</span>: 
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: t2.micro
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - t2.micro
+      - t2.small
+      - t2.medium
+  <span style="color: #715ab1;">KeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Key name to SSH to VM's. 
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">AvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: select the availability zone
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b
+      - us-east-2c
+
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+<span style="color: #715ab1;">Metadata</span>:
+  <span style="color: #715ab1;">AWS::CloudFormation::Interface</span>:
+    <span style="color: #715ab1;">ParameterGroups</span>:
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"EC2 Instance Configuration"</span>    
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - InstanceType
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - KeyName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - AvailabilityZone  
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"Environment Configuration"</span>          
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - EnvironmentName  
+    <span style="color: #715ab1;">ParameterLabels</span>:
+      <span style="color: #715ab1;">EnvironmentName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Which environment we are planning to create this instance?"</span>
+      <span style="color: #715ab1;">KeyName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Be aware that once keyname is selected we cannot change it unless instance replaced"</span>
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> KeyName
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> AvailabilityZone
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org076a8be" class="outline-2">
+<h2 id="org076a8be">EC2 UserData</h2>
+<div class="outline-text-2" id="text-org076a8be">
+</div>
+<div id="outline-container-orge9a68cb" class="outline-4">
+<h4 id="orge9a68cb">Base</h4>
+<div class="outline-text-4" id="text-orge9a68cb">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+  <span style="color: #715ab1;">InstanceType</span>: 
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: t2.micro
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - t2.micro
+      - t2.small
+      - t2.medium
+  <span style="color: #715ab1;">KeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Key name to SSH to VM's. 
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">AvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: select the availability zone
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b
+      - us-east-2c
+
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+<span style="color: #715ab1;">Metadata</span>:
+  <span style="color: #715ab1;">AWS::CloudFormation::Interface</span>:
+    <span style="color: #715ab1;">ParameterGroups</span>:
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"EC2 Instance Configuration"</span>    
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - InstanceType
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - KeyName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - AvailabilityZone  
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"Environment Configuration"</span>          
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - EnvironmentName  
+    <span style="color: #715ab1;">ParameterLabels</span>:
+      <span style="color: #715ab1;">EnvironmentName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Which environment we are planning to create this instance?"</span>
+      <span style="color: #715ab1;">KeyName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Be aware that once keyname is selected we cannot change it unless instance replaced"</span>
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> KeyName
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> AvailabilityZone
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3cee1fa" class="outline-4">
+<h4 id="org3cee1fa">shell script</h4>
+<div class="outline-text-4" id="text-org3cee1fa">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">file name: 10-00-Userdata</span>
+          <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash</span>
+          sudo yum update
+          sudo yum -y erase java-1.7.0-openjdk.x86_64
+          sudo yum -y install java-1.8.0-openjdk.x86_64
+          sudo yum -y install java-1.8.0-openjdk-devel
+          sudo yum -y install tomcat8
+          service tomcat8 start
+          mkdir /usr/share/tomcat8/webapps/ROOT
+          touch /usr/share/tomcat8/webapps/ROOT/index.html
+          <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Cloud Formation Tomcat8"</span> &gt; /usr/share/tomcat8/webapps/ROOT/index.html
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1814ee1" class="outline-4">
+<h4 id="org1814ee1">UserData</h4>
+<div class="outline-text-4" id="text-org1814ee1">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: 2010-09-09
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">EnvironmentName</span>:
+    <span style="color: #715ab1;">Description</span>: Select the environment 
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: dev
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - dev
+      - prod
+    <span style="color: #715ab1;">ConstraintDescription</span>: must be development or production      
+  <span style="color: #715ab1;">InstanceType</span>: 
+    <span style="color: #715ab1;">Description</span>: Select the ec2 instance type
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: t2.micro
+    <span style="color: #715ab1;">AllowedValues</span>: 
+      - t2.micro
+      - t2.small
+      - t2.medium
+  <span style="color: #715ab1;">KeyName</span>:
+    <span style="color: #715ab1;">Description</span>: Key name to SSH to VM's. 
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+  <span style="color: #715ab1;">AvailabilityZone</span>:
+    <span style="color: #715ab1;">Description</span>: select the availability zone
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: us-east-2a
+    <span style="color: #715ab1;">AllowedValues</span>:
+      - us-east-2a
+      - us-east-2b
+      - us-east-2c
+
+
+<span style="color: #715ab1;">Conditions</span>:
+  <span style="color: #715ab1;">CreateEIPForProd</span>: <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [<span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvironmentName, prod]
+
+<span style="color: #715ab1;">Metadata</span>:
+  <span style="color: #715ab1;">AWS::CloudFormation::Interface</span>:
+    <span style="color: #715ab1;">ParameterGroups</span>:
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"EC2 Instance Configuration"</span>    
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - InstanceType
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - KeyName
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - AvailabilityZone  
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: <span style="color: #2d9574;">"Environment Configuration"</span>          
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - EnvironmentName  
+    <span style="color: #715ab1;">ParameterLabels</span>:
+      <span style="color: #715ab1;">EnvironmentName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Which environment we are planning to create this instance?"</span>
+      <span style="color: #715ab1;">KeyName</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: <span style="color: #2d9574;">"Be aware that once keyname is selected we cannot change it unless instance replaced"</span>
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MySecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: My SG with port 22, 8080 and 80 inbound
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8080'</span>          
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-0cd3dfa4e37921605
+      <span style="color: #715ab1;">InstanceType</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InstanceType
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> KeyName
+      <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> AvailabilityZone
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MySecurityGroup
+      <span style="color: #715ab1;">UserData</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: |  
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum update</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y erase java-1.7.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk-devel</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install tomcat8</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  service tomcat8 start</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  mkdir /usr/share/tomcat8/webapps/ROOT</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  touch /usr/share/tomcat8/webapps/ROOT/index.html</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  echo <span style="color: #2d9574;">"Cloud Formation Tomcat8"</span> &gt; /usr/share/tomcat8/webapps/ROOT/index.html
+
+
+  <span style="color: #715ab1;">MyProdEIP</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::EIP
+    <span style="color: #715ab1;">Condition</span>: CreateEIPForProd
+    <span style="color: #715ab1;">Properties</span>: 
+      <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVMInstance
+
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">AppURL</span>:
+    <span style="color: #715ab1;">Description</span>: Tomcat App Access URL
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">'http://${MyVMInstance.PublicDnsName}:8080/index.html'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org112a8b8" class="outline-2">
+<h2 id="org112a8b8">CFN-init</h2>
+</div>
+<div id="outline-container-orge254e6b" class="outline-2">
+<h2 id="orge254e6b">Configsets</h2>
+</div>
+<div id="outline-container-org29dd805" class="outline-2">
+<h2 id="org29dd805">NestedStacks</h2>
+<div class="outline-text-2" id="text-org29dd805">
+</div>
+<div id="outline-container-org43cce59" class="outline-4">
+<h4 id="org43cce59">NestedStack VPC</h4>
+<div class="outline-text-4" id="text-org43cce59">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html</span>
+<span style="color: #715ab1;">AWSTemplateFormatVersion</span>: <span style="color: #2d9574;">'2010-09-09'</span>
+<span style="color: #715ab1;">Description</span>: VPC Nested Stack Template
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">VpcBlock</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.0.0/16
+    <span style="color: #715ab1;">Description</span>: VPC CIDR Tange
+
+  <span style="color: #715ab1;">Subnet01Block</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.1.0/24
+    <span style="color: #715ab1;">Description</span>: CidrBlock for Subnet 01 within the VPC.        
+
+<span style="color: #715ab1;">Metadata</span>:
+  <span style="color: #715ab1;">AWS::CloudFormation::Interface</span>:
+    <span style="color: #715ab1;">ParameterGroups</span>:
+      - <span style="color: #715ab1;">Label</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  default</span>: Dev VPC Network Configuration
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    - VpcBlock
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    - Subnet01Block        
+    <span style="color: #715ab1;">ParameterLabels</span>:
+      <span style="color: #715ab1;">VpcBlock</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">default</span>: VPC CIDR Range selection                        
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">myVPC</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::VPC
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">CidrBlock</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> VpcBlock
+      <span style="color: #715ab1;">EnableDnsHostnames</span>: <span style="color: #4e3163;">true</span>
+      <span style="color: #715ab1;">EnableDnsSupport</span>: <span style="color: #4e3163;">true</span>
+      <span style="color: #715ab1;">Tags</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- Key</span>: Name
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">"${AWS::StackName}-myVPC"</span>
+
+  <span style="color: #715ab1;">Subnet01</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Subnet
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">VpcId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> myVPC
+      <span style="color: #715ab1;">CidrBlock</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> Subnet01Block 
+      <span style="color: #715ab1;">Tags</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- Key</span>: Name
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">"${AWS::StackName}-Subnet01"</span>    
+      <span style="color: #715ab1;">AvailabilityZone</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Select</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  - <span style="color: #2d9574;">'0'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  - Fn::GetAZs</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      Ref</span>: AWS::Region
+
+  <span style="color: #715ab1;">RouteTable</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::RouteTable
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">VpcId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> myVPC               
+      <span style="color: #715ab1;">Tags</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- Key</span>: Name
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Value</span>: Public Subnets
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- Key</span>: Network
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Value</span>: Public          
+
+  <span style="color: #715ab1;">Subnet01RouteTableAssociation</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SubnetRouteTableAssociation
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">SubnetId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> Subnet01
+      <span style="color: #715ab1;">RouteTableId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> RouteTable
+
+  <span style="color: #715ab1;">InternetGateway</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::InternetGateway
+
+  <span style="color: #715ab1;">VPCGatewayAttachment</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::VPCGatewayAttachment
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">InternetGatewayId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InternetGateway
+      <span style="color: #715ab1;">VpcId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> myVPC    
+
+  <span style="color: #715ab1;">Route</span>: 
+    <span style="color: #715ab1;">DependsOn</span>: VPCGatewayAttachment
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Route
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">RouteTableId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> RouteTable  
+      <span style="color: #715ab1;">DestinationCidrBlock</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">GatewayId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> InternetGateway    
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">Subnet01Id</span>:
+    <span style="color: #715ab1;">Description</span>: Subnet 01 Id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> Subnet01
+
+  <span style="color: #715ab1;">VpcId</span>:
+    <span style="color: #715ab1;">Description</span>: Vpc Id
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> myVPC
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org253d907" class="outline-4">
+<h4 id="org253d907">Root Stack EC2-VPC</h4>
+<div class="outline-text-4" id="text-org253d907">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: <span style="color: #2d9574;">'2010-09-09'</span>
+<span style="color: #715ab1;">Description</span>: Root Stack Template
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+
+  <span style="color: #715ab1;">VpcBlock</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.0.0/16
+    <span style="color: #715ab1;">Description</span>: VPC CIDR Tange
+
+  <span style="color: #715ab1;">Subnet01Block</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.1.0/24
+    <span style="color: #715ab1;">Description</span>: CidrBlock for Subnet 01 within the VPC.    
+
+<span style="color: #715ab1;">Resources</span>:
+
+  <span style="color: #715ab1;">VPCStack</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::CloudFormation::Stack
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">TemplateURL</span>: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-01-NestedStack-VPC.yml 
+      <span style="color: #715ab1;">Parameters</span>:  
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">VpcBlock</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> VpcBlock
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Subnet01Block</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> Subnet01Block 
+      <span style="color: #715ab1;">TimeoutInMinutes</span>: 5            
+
+
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-04768381bf606e2b3
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">NetworkInterfaces</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- AssociatePublicIpAddress</span>: <span style="color: #2d9574;">"true"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  DeviceIndex</span>: <span style="color: #2d9574;">"0"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  SubnetId</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> VPCStack.Outputs.Subnet01Id
+      <span style="color: #715ab1;">UserData</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum update</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y erase java-1.7.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk-devel</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install tomcat8</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  service tomcat8 start</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  mkdir /usr/share/tomcat8/webapps/ROOT</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  touch /usr/share/tomcat8/webapps/ROOT/index.html</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  echo <span style="color: #2d9574;">"Cloud Formation Tomcat8"</span> &gt; /usr/share/tomcat8/webapps/ROOT/index.html
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">AppURL</span>:
+    <span style="color: #715ab1;">Description</span>: Application URL to access
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">'http://${MyVMInstance.PublicDnsName}:8080/index.html'</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org25edbb8" class="outline-4">
+<h4 id="org25edbb8">NestedStack-SG</h4>
+<div class="outline-text-4" id="text-org25edbb8">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: <span style="color: #2d9574;">'2010-09-09'</span>
+<span style="color: #715ab1;">Description</span>: Root Stack Template
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">VPCId</span>: 
+    <span style="color: #715ab1;">Description</span>: Create security group in this respective VPC
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::VPC::Id
+
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">DevSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: Dev Apps Security Group
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'22'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  FromPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  ToPort</span>: <span style="color: #2d9574;">'8080'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">VpcId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> VPCId
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">DevSGGroupId</span>:
+    <span style="color: #715ab1;">Description</span>: Dev Security Group
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> DevSecurityGroup                   
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5cfdae7" class="outline-4">
+<h4 id="org5cfdae7">RootStack -ECE-SG</h4>
+<div class="outline-text-4" id="text-org5cfdae7">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: <span style="color: #2d9574;">'2010-09-09'</span>
+<span style="color: #715ab1;">Description</span>: Root Stack Template
+
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">MyKeyName</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+
+  <span style="color: #715ab1;">VpcBlock</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.0.0/16
+    <span style="color: #715ab1;">Description</span>: VPC CIDR Tange
+
+  <span style="color: #715ab1;">Subnet01Block</span>:
+    <span style="color: #715ab1;">Type</span>: String
+    <span style="color: #715ab1;">Default</span>: 10.0.1.0/24
+    <span style="color: #715ab1;">Description</span>: CidrBlock for Subnet 01 within the VPC.    
+
+<span style="color: #715ab1;">Resources</span>:
+
+  <span style="color: #715ab1;">VPCStack</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::CloudFormation::Stack
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">TemplateURL</span>: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-01-NestedStack-VPC.yml 
+      <span style="color: #715ab1;">Parameters</span>:  
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">VpcBlock</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> VpcBlock
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Subnet01Block</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> Subnet01Block 
+      <span style="color: #715ab1;">TimeoutInMinutes</span>: 5            
+
+  <span style="color: #715ab1;">SecurityGroupStack</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::CloudFormation::Stack
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">TemplateURL</span>: https://s3.us-east-2.amazonaws.com/nestedbucket0189/nestedstacks/13-03-NestedStack-SG.yml
+      <span style="color: #715ab1;">Parameters</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">VPCId</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> VPCStack.Outputs.VpcId
+      <span style="color: #715ab1;">TimeoutInMinutes</span>: 5        
+
+  <span style="color: #715ab1;">MyVMInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">ImageId</span>: ami-04768381bf606e2b3
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyKeyName
+      <span style="color: #715ab1;">NetworkInterfaces</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">- AssociatePublicIpAddress</span>: <span style="color: #2d9574;">"true"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  DeviceIndex</span>: <span style="color: #2d9574;">"0"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  SubnetId</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> VPCStack.Outputs.Subnet01Id
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  GroupSet</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    - <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> SecurityGroupStack.Outputs.DevSGGroupId
+      <span style="color: #715ab1;">UserData</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum update</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y erase java-1.7.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk.x86_64</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install java-1.8.0-openjdk-devel</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  sudo yum -y install tomcat8</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  service tomcat8 start</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  mkdir /usr/share/tomcat8/webapps/ROOT</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  touch /usr/share/tomcat8/webapps/ROOT/index.html</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  echo <span style="color: #2d9574;">"Cloud Formation Tomcat8"</span> &gt; /usr/share/tomcat8/webapps/ROOT/index.html
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">AppURL</span>:
+    <span style="color: #715ab1;">Description</span>: Application URL to access
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> <span style="color: #2d9574;">'http://${MyVMInstance.PublicDnsName}:8080/index.html'</span>            
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6fda1fb" class="outline-3">
+<h3 id="org6fda1fb">Manual Steps to Create VPC</h3>
+<div class="outline-text-3" id="text-org6fda1fb">
+<ul class="org-ul">
+<li>Step #1: Create VPC</li>
+<li>Step #2: Create Subnet</li>
+<li>Step #3: Create Route Table (Ignore default Main Route Table)</li>
+<li>Step #4: Associate Subnet in Route Table</li>
+<li>Step #5: Create Internet Gateway</li>
+<li>Step #6: Associate Internet Gateway to VPC</li>
+<li>Step #7: Create Route to allow internet traffic via IGW</li>
+</ul>
+
+<p>
+VPC &#x2013; YES
+Subnet  &#x2013; YES
+Route Table   &#x2013; YES
+Internet Gateway  &#x2013; YES
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
+sudo yum update
+sudo yum -y erase java-1.7.0-openjdk.x86_64
+sudo yum -y install java-1.8.0-openjdk.x86_64
+sudo yum -y install java-1.8.0-openjdk-devel
+sudo yum -y install tomcat8
+service tomcat8 start
+mkdir /usr/share/tomcat8/webapps/ROOT
+touch /usr/share/tomcat8/webapps/ROOT/index.html
+<span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Cloud Formation Tomcat8"</span> &gt; /usr/share/tomcat8/webapps/ROOT/index.html
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org97cf90b" class="outline-2">
+<h2 id="org97cf90b">Continous Delivery</h2>
+</div>
+<div id="outline-container-org1f79b75" class="outline-2">
+<h2 id="org1f79b75">Infrasturcture As Code</h2>
+</div>
+<div id="outline-container-org7910c2a" class="outline-2">
+<h2 id="org7910c2a">StackPolicy</h2>
+</div>
+<div id="outline-container-org3c490a2" class="outline-2">
+<h2 id="org3c490a2">Additional Templates</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2023-02-25 Sat 14:34</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

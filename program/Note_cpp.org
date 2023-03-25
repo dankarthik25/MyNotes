@@ -1,0 +1,2176 @@
+#+TITLE: Notes Cpp
+#+AUTHOR: Cherno 
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+# +OPTIONS: broken-links:t
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+
+CppNuts : tutorial is like how to apply c++ and techincal details
+https://www.youtube.com/watch?v=6Q0Cff29YwU&index=36&list=PLk6CEY9XxSIAQ2vE_Jb4Dbmum7UfQrXgt
+Cherno Project
+https://www.youtube.chttps://www.quora.com/If-Linux-is-open-source-Android-is-open-source-then-why-dont-Android-apps-are-open-sourceom/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&disable_polymer=true
+
+* C++ basics without class
+** Why C++ ?
+If we want to write fast and easy prg then c++ is the most widly used prg lang (untill go came ) 
+Because it give direct control of hardware 
+Widely used platform windows, mac, linux, andriod, emebeded system
+*** How C++ complier and linker works
+when (.cpp) is compiled it will create a (.obj) 
+this  obj file is assembly level instructions that
+obj file are give to  linker to create a binary file or executable file.
+*** C++ Vs other prg language
+C++ is one of the oldest prg lang 80's having a large background and community (gameing, linux, open-source)
+Other Prg language like c#, Jave the code is converted to intermediate language by  virtual meachine 
+then a translator(basically c or c++) is used to convert intermediate lang to binary code
+This make c++ faster but it does't mean code is c++ is faster if you code eis bad code
+
+**** Con's
+C#, Java , Python make optimize virtual meachine which make code faster and matches with C++
+
+** C complier why use cmake
+** Data types 
+*** Introduction
+- Primative Types (Build-in Type) :
+  - void
+  - Integral type 
+    - int
+    - char   
+  - Float type :
+    - float
+    - double
+- Derived Data Type :
+  - Array
+  - pointer
+  - reference
+  - functions
+- User Defined Data Type :
+  - Enumerator
+  - Structure
+  - Union
+  - Class
+*** String
+char uft-8 : 128 char
+uft-16,uft-32 used for other languages 
+
+string end with null '\0'or 0 (no. notation of ascii null)
+#+BEGIN_SRC cpp
+char name[6] = {'C','h','e', 'n', 'o','\0'}; // or 0 
+char* name = "Cherno" 
+#+END_SRC
+
+#+BEGIN_SRC cpp
+  void PrintString(const string& str1)
+  {
+    str1 = str1 + "h" // Error : we defined this function such a way that we should n't  manupulate the data while printing
+      cout<< str1<< endl;
+  }
+#+END_SRC
+*** Array
+#+BEGIN_SRC cpp
+  int main()
+  {
+    int a[5];
+    int* p = a;
+    for (int i = 0; i< 5;i++)
+      example[i] =i*i;
+    a[2] = 5;
+    //OR WE CAN USE POINTER
+    ,*(ptr +2)= 5;
+    //OR using different data type pointer
+    ,*(int*) ( (char*) ptr +2*(4/1) ) = 6; // ptr is char type so size is 1byte but data is 4byte so we use 2*4
+
+    
+  }
+
+#+END_SRC
+*** Enumerator
+Var or identifier has fixed set of o/p 
+#+BEGIN_SRC cpp
+    enum enumType_Name {list_of_output } var_name;
+    //eg:
+    enum color {red,green=6, blue, black} c;
+    c = blue;
+
+    color mycolor = red;
+
+  enum Example : uns igned char
+    { A = 5, B,C}
+#+END_SRC
+*** Union
+has same memory
+use for typeplanning (vector3, or, rgb   same memory but different name )
+
+*** Structor
+*** mutable : it can chanage
+- Two uses
+  - const in class 
+    #+BEGIN_SRC cpp
+       class Entity
+      {
+      private:
+        string m_name;
+        int int_debugcount;
+        mutalbe int mut_debugcount;
+      public:
+        cosnt string& Getx() const           //  this method can't modify any of class mem variables 
+        {
+          int_debugcount++;   //ERROR : can't change
+          mut_debugcount++;    // No error : can change var in const function
+          return m_x;
+        }
+      };
+    #+END_SRC
+  - lamdas 
+   #+BEGIN_SRC cpp
+     int main(){
+       int x = 8;
+       auto f = [=]() mutalbe //  pass x by value 
+         {
+           x++;
+           cout<< x<< std:: endl;
+         }
+       f();
+
+       
+       // x = 8
+
+       // without mutable
+       auto f = [=]()  
+         {
+           int y = x;
+           y++;
+           cout<< y<< std:: endl;
+         }
+       f();
+
+     }
+   #+END_SRC
+** TODO Typedef
+User defined name for existing type is done by typedef
+#+BEGIN_SRC cpp
+  int main(){
+    typedef          short int  int16;       //  [-2^15  2^15]
+    typedef unsigned short int uint16;       //  [0 2^16]
+
+    typedef          int  int32;             //  [-2^31 2^31]
+    typedef unsigned int uint32;             //  [0  2^32]
+
+    typedef          long int  int64;        //  [-2^63 2^63]
+    typedef unsigned long int uint64;        //  [ 0 2^64]
+
+    uint16 counter1;        // unsigned short int counter1;
+    int32  x1,x2,x3,x4;     // int 
+    int64  x_total;         // long int
+    
+  }
+
+#+END_SRC
+** Operator 
+*** arithematic operator 
+    Uniary : -, +, ++, --
+    binary : +, -, *, /, %(remainder)
+*** relation operator
+    >, <,<=,>=,==,!=
+*** Logical 
+  !, &&, ||
+#+BEGIN_SRC cpp
+  bool a =0; b =1;
+
+  cout<< !a <<endl;           // !a = 1; true
+  cout << a&&b << endl;       // a&&b = 0
+  cout << a||b << endl;       // a||b = 1
+
+#+END_SRC
+
+*** Conditoin Opearator (Ternary operator)
+#+BEGIN_SRC cpp
+  (x>y)? x:y;
+
+
+  int s_Level = 1;s_Speed = 5;
+  s_Speed  = (s_Level>5)? 10:5;
+
+  string rank = s_Level> 10 ? "master" : "Begineer";
+
+  // or
+
+  if (s_Level > 10)
+    rank = "master";
+  else
+    rank = "begineer";
+
+
+#+END_SRC
+
+*** assignment operator
+=, ==,+=,-=,/=,%=
+
+*** Bitwise Opearator 
+uniary  : ~, <<(left shift) , >> (right shift)
+binary  : ~, &, | , ^(xor) 
+#+BEGIN_SRC cpp
+  A= 60;   // A= 0011 1100
+  B = 13;  // B = 000 1101
+
+  // A&B = 0000 1101
+  // A|B = 0011 1101
+  // A^B = 0011 0001
+
+#+END_SRC 
+
+*** other 
+sizeof()
+comma
+.(dot)
+->(arrow)
+** TODO Escape sequence
+\n      new line
+\t      tab
+\"      "
+\'      ' 
+\\      \      .......etc
+
+** Constant
+*** #define 
+eg: 
+#+BEGIN_SRC cpp
+# define newline '\n'
+#+END_SRC
+
+'#' any line starting with is called complier directive
+means:
+     provide direc to complier so preprocessor will can be done
+
+'#define':
+          before exe code during compilation preprocess will replace newline with '\n'
+
+*** const:
+It a promise that we are n't going to change who ever you can break your promise
+
+The reason we use const is it will help to keep code clean alot and....
+
+pointer :
+
+similar to varilabe but can't change the contant memory is allocated, used in
+
+fake keyword 
+#+BEGIN_SRC cpp
+const int max_age = 55; 
+
+#+END_SRC
+
+**** Use of Constant and pointer
+#+BEGIN_SRC cpp
+  int main()
+  {
+    // Normal Const 
+    
+    const int MAX_AGE =90;
+    int const MAX_AGE =90;
+
+
+    // Normal Pointer pointing a cont var 
+    
+    int* a = new int;     // create a normal pointer 
+    *a  = 2;              // ASSINING VALUE 
+    a = (int*) &MAX_AGE;  // poin A cosnt value 
+    cout << a<<endl;
+
+    // Pointer pointing to a constant value
+    const int * a  = new int;
+    int const * a  = new int;      //Both give same result as const is left side of  * 
+    *a =2;                        //Error we can't  modify contant(value) of pointer
+    a = (int*) &MAX_AGE;
+    cout << a<<endl;
+
+    // Pointer pointing to a constant address
+
+    int * const a = new int;
+    *a = 2;
+    a = (int*) &MAX_AGE;   // Error : we created pointer to point constant address 
+    cout << a << endl;
+
+
+    // Pointer pointing to a constant address and constant value
+    const int* const a  = new int;
+    int const * const a = new int;
+    *a = 2;                // Error : we created pointer pointing to value
+    a = (int*) &MAX_AGE;   // Error : we created pointer to point constant address 
+    cout << a << endl;
+
+    std::cin.get();
+  }
+#+END_SRC  
+
+**** Constant  and Class
+***** Creating a class method which does't change class variables
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    int m_x, m_y;
+  public:
+    int Getx() const           //  this method can't modify any of class mem variables 
+    {
+      m_x =2; // Error : Class mem can't  be modified in this function
+      return m_x;
+    }
+  };
+#+END_SRC
+***** Example :   
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    int* m_x, m_y;
+  public:
+    const int* const GetX() const       // const int*    : we return  a  int that can't be modified
+                                        // const GetX()  : The contant functin cant't be modified
+                                        // Get const     : the class mem can't  be modified
+    {
+      return m_x;
+    }
+  }
+#+END_SRC
+***** Why we  use const methods ?
+ 
+If other programer  is extending this function we telling this can't  we used to modify the class variables
+
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    int m_x, m_y;
+  public:
+    int Getx() const           //  this method can't modify any of class mem variables 
+    {
+      m_x =2; // Error : Class mem can't  be modified in this function
+      return m_x;
+    }
+  };
+
+  void PrintEntity(const Entity &e)       // we no't want to copy  obj ('.' large pointer and we can't  modify the obj)
+  {
+    cout<< e.Get()<< endl; // for (const Entity &e) attributes for function we use only const method such as int GetX() const 
+  }
+#+END_SRC
+
+***** Need to change class var in const function 
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    int m_x, m_y;
+    mutalbe int var;
+  public:
+    int Getx() const           //  this method can't modify any of class mem variables 
+    {
+      
+      var =2; //  We can change class var in const methods
+      return m_x;
+    }
+  };
+#+END_SRC
+** Structure 
+** Pointer Vs Reference 
+*** Pro and Cons for Pointer and Ref
+
+| comparision               | Pointer              | Referance             |                                                |
+|---------------------------+----------------------+-----------------------+------------------------------------------------|
+| Null                      | can point to Null    | Can't point to Null   |                                                |
+| Change memory address     | Yes                  | No                    |                                                |
+| inicailized after created | Yes                  | No                    | (mush inicalize when created)                  |
+| Re-assignment memory      | Yes                  | No                    |                                                |
+|---------------------------+----------------------+-----------------------+------------------------------------------------|
+| Ex:                       | int i = 17;          | int i = 17;           | // i is int type                               |
+|                           |                      |                       |                                                |
+|                           | int *p = &i;         | int& r = i            | // p is pointer type and *p,r is pointer type  |
+|                           |                      |                       | // re-assigned value *p = ...                  |
+|                           | *p= 20; // i  =20    | r=20;  //i =20        |                                                |
+|---------------------------+----------------------+-----------------------+------------------------------------------------|
+|                           | int *p;              |                       | // re-assigned value  r = ....                 |
+|                           | p = &i;              |                       | // re-assign address p = .....                 |
+|                           |                      |                       | //Can't re-assign addresss &r !=               |
+|                           | int *p =0;           |                       | //point to mem = 0 or null or null pointer     |
+|                           | int *p =NULL         |                       | // Point to Null                               |
+|                           | int *p = nullptr;    |                       | //int in C++11                                 |
+|---------------------------+----------------------+-----------------------+------------------------------------------------|
+| Ex:                       |                      |                       |                                                |
+| struct Book{              | struct Book b1;      | struct Book b1;       |                                                |
+| char name[50],title[50];  | struct Book *p_b1;   | struct Book& r_b1=b1; |                                                |
+| int page,id;              | p_b1 = &Book1;       |                       |                                                |
+| }b1;                      |                      |                       |                                                |
+|                           |                      |                       |                                                |
+| accessing members         | p_b1->title          | r_b1.title            |                                                |
+|                           | (*p_b1).title        |                       |                                                |
+|---------------------------+----------------------+-----------------------+------------------------------------------------|
+|                           |                      |                       |                                                |
+| function foramal arg      | swap(int *x, int *y) | swap(int& x ,int& y)  | in function defination formal arg we specify   |
+|                           |                      |                       | which datatype is used to define a function    |
+|                           |                      |                       |                                                |
+| function actual arg       | swap(int& a, int& b) | swap(int a, int b)    | In function call or actual arg we specify      |
+|                           |                      |                       | which datatype is required to pass             |
+|                           |                      |                       |                                                |
+|                           |                      |                       | Both required address and in general           |
+|                           |                      |                       | In pointer we use (&) addrress to assign       |
+|                           |                      |                       |                                                |
+|                           |                      |                       | In ref we only use (&) one time to declare ref |
+|                           |                      |                       | later we use ref-varaiable are normal var      |
+|                           |                      |                       | only diff is it has same address               |
+|                           |                      |                       |                                                |
+
+*** Example
+#+BEGIN_SRC cpp
+int* m_x, m_y;         // m_x is a pointer , m_y is not a pointer
+int* m_x, *m_y;        // m_x, m_y are pointer
+#+END_SRC
+** Function
+*** Syntax 
+#+BEGIN_SRC cpp
+  void print(x,y);         // fuction declaration
+
+  int main(){
+    int a = 10, b = 3;
+    print(a,b);            // function call
+    return 0;
+  }                       // a,b is actual arguments
+
+
+  void print(x, y)         // function defination
+  {cout<< x << y ;}       // x,y is formal arguments
+    
+#+END_SRC
+
+*** Declaration 
+Tell complier that this  identifer(this identifier exisit ) name (function, varialbe or calss ..etc) and its this argument type and this   return type
+
+Then compiler  search for path for  defination either in file or folder or Project
+
+If no result is present for var then,  declaration create(instanziate) an var by  describes its type, be it a type, object, or function. 
+
+A declaration is what the compiler needs to accept references to that identifier. 
+
+
+
+#+BEGIN_SRC cpp
+extern int bar;
+extern int g(int, int);
+double f(int, double); // extern can be omitted for function declarations
+class foo; // no extern allowed for type declarations
+#+END_SRC
+*** Defination 
+A statement that tells the compiler to allocate memory for variable,function, or class and to store in memory.
+
+A definition actually instantiates/implements this identifier. 
+
+It's what the linker needs in order to link references to those entities.
+
+#+BEGIN_SRC cpp
+int bar;
+int g(int lhs, int rhs) {return lhs*rhs;}
+double f(int i, double d) {return i+d;}
+class foo {};
+#+END_SRC
+*** Call by value :
+#+BEGIN_SRC cpp
+
+#+END_SRC
+
+when function call occure : then variable-value (actuall argument) will be used to create in another memory for formal argument
+
+*** Call by ref Vs Call by pointer 
+|---------------------------+---------------------------|
+| Call by referance         | Call by Pointer           |
+|---------------------------+---------------------------|
+| int main {                | int main{                 |
+| int a = 5, b =10;         | int a = 5, b =10          |
+| swap(a, b)                | swap(&a, &b)              |
+| }                         | }                         |
+|                           |                           |
+| void swap(int& x, int& y) | void swap(int *x, int *y) |
+| {                         | {                         |
+| int temp = x;             | int temp = *x;            |
+| x=y;                      | *x = *y;                  |
+| y = temp;                 | *y = temp;                |
+| }                         | }                         |
+|---------------------------+---------------------------|
+
+| comparision                  | Call by referance            | Call by pointer        |
+|------------------------------+------------------------------+------------------------|
+| re-assign                    | Can't re-assign              | can re-assign          |
+| assign null point            | Can't assign to null pointer | assign to Null pointer |
+| access mem in (class/struct) | obj.member                   | obj -> member          |
+|                              | .(dot operator)              | (->) (arrow operator ) |
+|                              |                              |                        | 
+
+*** Function return pointer
+**** syntax 
+#+BEGIN_SRC cpp
+  int *function_name (agr){
+    statements;
+    return xxx..;
+  }
+#+END_SRC  
+
+**** Example 
+#+BEGIN_SRC cpp
+  int *getRandom();
+
+  int main (){
+
+    int *p;
+    p = getRandom();
+    for (int i = 0;i<10;++i){
+      cout<< *(p+i) <<endl;
+    }
+    
+  }
+
+  int *getRandom(){
+    static int r[10];
+
+    for(i =0; i<10;++i){
+      r[i] = i; 
+    }
+    return r;       // return pointer
+  }
+#+END_SRC
+
+*** Inline Functions
+in cpp not in c
+**** synatx 
+#+BEGIN_SRC cpp
+  inline sum (int x, inty ) { return x+y;}
+#+END_SRC
+**** Advantages 
+Function calling overhead reduced
+variable push/pop on stack is reduced
+retun call from a function overhead is reduced
+increase locality of refrence by utilizing instruction cache.
+once inline is done compiler can also apply intra-procedural optimazation if specified
+
+**** Disadvantages
+If use too many inline function (if size of inline is large) the code size increase
+Compilation overhead increase if some changes code  inside function then
+
+Some function can't be inline like recurssion, virtual function
+*** Function Overload
+*** TODO Recurssion
+** TODO Static data members and static functions
+#+BEGIN_SRC cpp
+
+#+END_SRC
+** Storage Class
+*** Intro
+Every variable in C,C++ programming has two properties: type and storage class.
+
+Type refers to the data type of a variable. And, storage class determines the scope and lifetime of a variable.
+
+There are 4 types of storage class:
+
+automatic:  stores in primary memory (RAm) 
+external :
+static   :
+register : declare register variables
+
+**** Scope & Lifetime
+The scope of a declaration is the part of the program for which the declaration is in acessable or effective.
+
+The lifetime of a variable or object is the time period in which the variable/object has valid memory.
+Lifetime is also called "allocation method" or "storage duration."
+
+***** Lifetime
+*Static*: A static variable is stored in the data segment of the "object file" of a program. Its lifetime is the entire duration of the program's execution.
+*Automatic*: An automatic variable has a lifetime that begins when program execution enters the function or statement block or compound and ends when execution leaves the block. Automatic variables are stored in a "function call stack".
+*Dynamic*: The lifetime of a dynamic object begins when memory is allocated for the object (e.g., by a call to malloc() or using new) and ends when memory is deallocated (e.g., by a call to free() or using delete). Dynamic objects are stored in "the heap".
+***** Scope:
+The scope of any variable is actually a subset of life time. A variable may be in the memory but may not be accessible though. So, the area of our program where we can actually access our entity (variable in this case) is the scope of that variable.
+
+The scope of any variable can be broadly categorized into three categories :
+
+Global scope : When variable is defined outside all functions. It is then available to all the functions of the program and all the blocks program contains.
+
+*Local scope*    :  defined inside a function or block and locally accessible within the block 
+*Function scope* :  formal arguments, it is said to have function scope.
+*Class scope*    : "seen" by class members.
+*Namespace scope*: visible within namespace block.
+*File scope*     : visible within current text file.
+*Global scope*   : visible everywhere unless "hidden".
+
+*****  Scope :: operator
+For understand scope operator  1st we see this example 
+#+BEGIN_SRC cpp
+#include<stdio.h>
+int i = 100;          // global variable declared
+void main()
+{
+   int i = 10;         // local variable declared
+   cout<<"Global variable : "::i<<endl;
+   cout<<"Local variable  : "<<i<<endl;
+
+}
+#+END_SRC
+Here our variable named global has global scope and lifetime, hence it outlives in memory till the program execution is completed and can be accessed by any function / block locally too. But in case of our local variable, it may outlives in memory till program execution is completed but it can be accessed from only within  the function or block it is defined in.
+
+The basic problem here can be, we can have variable with same name defined as a global as well as local variable, and hence, it would be ambiguos as to which variable we want to actually refer to. We can resolve this issue in C++ (Advancement of C language) by the use of a special operator known as *scope resolution operator*
+.
+
+
+**** Local Variable
+
+The variables declared inside the function are automatic or local variables.
+
+The local variables exist only inside the function in which it is declared. When the function exits, the local variables are destroyed. 
+
+#+BEGIN_SRC cpp
+int main() {
+    int n; // n is a local variable to main() function
+    ... .. ...
+}
+
+void func() {
+   int n1; // n1 is local to func() function
+}
+#+END_SRC
+
+**** Global Variable
+Variables that are declared outside of all functions are known as external variables. External or global variables are accessible to any function.
+
+#+BEGIN_SRC cpp
+#include <stdio.h>
+void display();
+
+int n = 5;  // global variable
+
+int main()
+{
+    ++n;     // variable n is not declared in the main() function
+    display();
+    return 0;
+}
+
+void display()
+{
+    ++n;     // variable n is not declared in the display() function
+    printf("n = %d", n);
+}
+#+END_SRC
+*** auto     :(default) stores in primary memory (RAm) 
+*** registor : register eg: counter 
+The register keyword is used to declare register variables. Register variables were supposed to be faster than local variables.
+
+However, modern compilers are very good at code optimization and there is a rare chance that using register variables will make your program faster. 
+
+Unless you are working on embedded system where you know how to optimize code for the given application, there is no use of register variables.
+*** static   : complier will keep var existance throughout the prg(.cpp file) eg: total
+
+**** static inside file    
+1. If you define a var in static it can only be access only in that .cpp file and can't access outside .cpp file
+   means the variable can private in file can't  access in other file 
+   inicialize(instanciated) once even if you iniciallize twice complier will ignore the statement because already iniciallized
+#+BEGIN_SRC cpp
+  static int i =10;
+  int main()
+  {
+    static int i = 0; //static var are n't inciallize twice this stat is n't ece
+    for (j=0;j<5;j++)
+      {
+        cout<< i++<<endl;
+      }
+  }
+#+END_SRC
+2. All functions in file can acess static varialbe
+**** Static inside class  
+1. All obj has (shared memory) for (static var or functions) 
+2. Can't access outside the class
+3. Inicialized one
+#+BEGIN_SRC cpp
+  struct Entity
+  {
+    static int x,y;                          // static variable in str\class
+    void Print(){ cout <<x<<y<<endl;}
+    static void Sprint(){ count<<x<<y<<endl;} // static fun inside struct\class
+  };
+
+  int Entity::x;  //define static variable
+  int Entity::y;
+
+  int main()
+  {
+    Entity e;
+    e.x = 2;
+    e.y = 3;
+
+    Entity e1;
+    e1.x = 5;
+    e1.y = 8;
+
+    e.Print();
+    e1.Print();
+
+    Entity::x = 10;
+    Entity::y = 15;
+    Entity::Sprint();
+    e.print();
+    e1.print();
+  }
+#+END_SRC
+
+**** Static inside function:
+Static inside function means the var/obj has entire  the function 
+#+BEGIN_SRC cpp
+  extern j = 0;
+  void fun()
+  {
+    static int i = 0;
+    int k = 0;
+    cout<<"extern j++ :"<< j++<<"Static i++ :"<< i++<<"local k++:"<<k++<<endl;
+  }
+
+  int main()
+  {
+    fun();          // extern j++ : 0   Static i++ : 0   Local k++ : 0
+    fun();          // extern j++ : 1   Static i++ : 1   Local k++ : 1
+    j = 10;
+    fun();          // extern j++ : 10  Static i++ : 2   Local k++ : 2
+    fun();          // extern j++ : 11  Static i++ : 3   Local k++ : 3
+    fun();          // extern j++ : 12  Static i++ : 4   Local k++ : 4
+  } 
+#+END_SRC
+**** Advantages
+1. In creating a prj with mulipile files then it is best to use static variable or else it will make var global and mess entire whole prj
+   In general compiling prj static var make linker n't to look outside the scope of file
+*** external : refer to all global var visible in all prg file
+*** mutable  :
+** TODO include and namespace 
+cout is definded in std
+cout is declared in iostream or ostream
+
+** TODO Namespace
+
+* Basic II
+** Vector 
+dynamic array or size of the array is dynamic (resize)
+
+generally dynamic array of std lib is not optimal so cooperating compay will have there own std lib 
+
+
+
+#+BEGIN_SRC cpp
+  #include<iostream>
+  #include<string>
+  #include<vector>
+
+  struct Ver3
+  {
+    float x,y,z;
+  };
+
+  ostream& operator<< (ostream& stm1, const ver3& v3)
+  {
+    stream<< v3.x<< ", "<< v3.y<<", "<<v3.z;
+    return steam;
+  }
+  int main()
+  {
+    vector<Ver3> vertices;
+    vertices.push_back({1, 2, 3});
+    vertices.push_back({4, 5, 6});
+
+    for (int i = 0; i< vertices.size(); i++)
+      cout<< vertices[i]<<endl;
+
+    for (Ver3& v : vertices)
+      cout<< v<< endl;
+    vertices.clear();
+  }
+
+#+END_SRC 
+** Libraries
+there are two part as
+- file consist of includes (consist of headear flies)
+- binary (lib dir has binary(.dll or .lib) )
+
+there are two libeary 
+- static ( inside exe)
+- dynamic (linked run-time) //
+
+add libraries
+
+linking binarys
+*** Create own lib
+#+BEGIN_SRC sh
+  ## Create a Project
+
+  # game            consist of Application(.exe,.o)
+  # Engine          consist of libraries (Dynamic Library(.dll), Static library (.lib)) for all configuration and platform(32bit,64bit)
+
+  mkdir gameProjectName Engine
+
+  cd gameProjectName
+  mkdir scr && cd scr
+  touch Application.cpp
+
+  cd ../Engine
+  mkdir scr && cd scr
+  touch Engine.cpp Engine.h
+#+END_SRC
+
+#+BEGIN_SRC cpp
+  // file name : Engine.h
+
+  #pragma once
+  namespace engine
+  { void PrintMessage();}
+
+
+  // file name : Engine.cpp
+
+  #include "Engine.h"
+  #include <iostream>
+
+  namespace engine{
+    void PrintMessage()
+    {
+      std::out<<"Hello World"<< std::endl;
+    }
+  }
+
+
+  // application.cpp
+
+  // Below used a relavtive path
+  // cons : if different prj is using same lib then relative path is messing
+  #include "../Engine/src/Engine.h"
+
+  // // below we  complier path then
+  // #include "Engine.h"
+
+  #include<iostream>
+  int main()
+  {
+    engine::PrintMessage();
+  }
+
+#+END_SRC  
+
+** Templet
+*** Function Templet
+#+BEGIN_SRC cpp
+  #include<iostream>
+  #include<string>
+
+  template<typename T>
+  void Print(T value)
+    {cout<< value<< endl;}
+
+  int main()
+  {
+    Print(5);
+    Print("Cherno");
+    Print(5.0f);
+
+    std::cin.get();
+  }
+#+END_SRC
+*** Class Templet
+#+BEGIN_SRC cpp
+  #include <iostream>
+  #include<strings>
+
+  template<typename T, int N>
+  class Array
+  {
+  private:
+    T m_Arrany[N];
+  public:
+    int GetSize() const { return N}
+  };
+
+  int main()
+  {
+    Array<int, 5> array;
+    cout<< array.Getsize()<< std::endl;
+    cin.get();
+  }
+#+END_SRC
+
+*** TODO Std Temple library
+** TODO Preprocess
+Function like macros
+condition Compilation
+'#' and ## operator
+predefine macro
+*** include
+*** pragma
+*** ifndefin
+*** macro
+#+BEGIN_SRC cpp
+  #include < iostream>
+
+  #define WAIT std::cin.get()    // macro
+
+  // Note : some time we need to see the output during debugging the code but should be removed when release the we use below version 
+
+  #if PR_DEBUG == 1                      
+  #define LOG(x) std::cout<< x<< endl
+  #elif define(PR_RELEASE)
+  #define LOG(x)
+  #endif
+
+  int main()
+  {
+    LOG("Hello");
+    WAIT;  // THIS IS Wrong way because if 
+  }
+#+END_SRC
+** TODO Exception Handling 
+** TODO multi-threading 
+*** Creating Threads
+*** Terminating Threads
+*** Passing Arguments to Threads
+*** Joining & Detaching Threads
+** TODO Files and Streams:
+To read and write a file C++ provides lib in standard C++ library called fstream, which provides 3 new data types.
+
+| Data type | Description                                                 |
+| ofstream  | data type : output file stream (create file or write info ) |
+| ifstream  | data type : input file stream (read info from files )       |
+| ifsteam   | data type :  both input and output file stream             |
+ 
+*** syanatx
+ #+BEGIN_SRC cpp
+ void open(const char "filename", ios::openmode mode);
+ #+END_SRC
+
+| mode flag  | Description                                                                |
+|------------+----------------------------------------------------------------------------|
+| ios::app   | append mode. All output of file to be appended in end                      |
+| ios::ate   | open file for output and move read/write control to end of file            |
+| ios::in    | open a file for reading                                                    |
+| ios::out  | file for writing                                                           |
+| ios::trunc | if file already existed, it contents will be truncated before opening file |
+|            |                                                                            |
+
+*** Example
+#+BEGIN_SRC cpp
+  //write and truncate 
+  ofstream outfile;
+  outfile.open("file.dat", ios::out | ios::trunc);
+
+  // read and write
+  fstream afile;
+  afile.open("file.dat", ios::out | ios::in);
+#+END_SRC
+
+*** Closing a file
+In c++ when prg is terminates it automatically closes flushes all streams. But it is always good practice that a programmer should close all the opended files before programm termination
+
+#+BEGIN_SRC cpp
+  void close();
+#+END_SRC
+** Auto keyword
+#+BEGIN_SRC cpp
+  #include <iostream>
+  #include <string>
+  #include <vector>
+  char* GetName()
+  {
+    return "Cherno";
+  }
+  class Device{};
+
+
+  class DeviceManager
+  {
+  private:
+    unordered_map<string, vector<Device*> > m_Devices;
+  public:
+    const unorderd_map<string, vector<Device*> >& GetDevices() const;
+    { return m_Devices}
+  }
+  int main()
+  {
+    std:: vector <std::string> str
+    str.push_back("Apple");
+    str.push_back("Orange");
+
+    for (auto it = str.begin();it != str.end();it++)
+      {
+       cout<< *it << endl;
+      }
+
+    DeviceManager dm;
+    const std::unorderd_map< std::string, std::vector<Device*> > device = dm.GetDevices()
+  }
+#+END_SRC
+** std::array
+simillar to secodory array but has advangaes
+debug setting for auto size set, bounce checks, sort,...etc
+#+BEGIN_SRC cpp
+  #include <iostream>
+  #include <array>
+
+  void PrintArray(int* array)
+  int main()
+  {
+    array<int,5> data;
+    data[0]=2;
+    data[4]=1;
+    data[5]=2;    // bounce checks
+
+    int data[5];
+    data[0]= 0;
+    data[5]= 0;
+
+    std::cin.get();
+    
+  }
+#+END_SRC
+
+** Dynamic memory allocation
+*** new and delete
+new will call malloc and  stores  size , 
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    string s1;
+  };
+
+  int main()
+  {
+    int a =2;
+    int *b = new int[50];
+    Entity *e = new Entity;
+
+
+    delete e;
+    delete [] b;
+    cin.get();
+  }
+#+END_SRC
+
+*** Example: [heap using (new but not del) or (auto delete ) heap having scope ]
+#+BEGIN_SRC cpp
+  class Entilty
+  {
+    
+  };
+
+  class ScopedPtr
+  {
+  private:
+    Entity* m_Ptr;
+  public:
+    ScopedPrt(Entity* ptr)
+      :m_Ptr(ptr){}
+    ~ScopedPrt()
+    { delete m_Ptr; }
+  };
+
+  int main ()
+  {
+    {
+      ScopePtr e = new Entity();
+    }
+    
+  }
+#+END_SRC 
+*** Stack vs heap
+stack is 2 megabite
+heap is large 
+both stack and heap are stored in ram
+**** How it allocate memory in stack vs heap ?
+#+BEGIN_SRC cpp
+  int main()
+  {
+    int value = 5;
+    int array[5];
+    for (int i=0 ; i<5;i++)
+      {array[i] = i;}
+
+    Vector3 vector;
+    
+    int* hvalue = new int;
+    ,*hvalue= 5;
+
+    int* harray = newint[5];
+    for (int i=0 ; i<5;i++)
+      {harray[i] = i;}
+
+    Vector3* hvector = new Vector3();
+
+    delete hvalue;
+    delete[] harray;
+    delete hvector;
+    cin.get();
+      
+  }
+#+END_SRC
+*** heap
+*** TODO Smart Pointer
+#+BEGIN_SRC cpp
+  #include <memory>
+
+  class Entity
+  {
+    
+  };
+
+  int main()
+  {
+    shared_ptr<Entity> sh_Enty = make_shared<Entity>();
+    shared_ptr<Entity> sh_Enty1 = make_shared<Entity>();
+
+    unique_ptr<Entity> sh_Enty = make_shared<Entity>();
+    weak_ptr<Entity> sh_Enty = make_shared<Entity>();
+    }
+  }
+#+END_SRC
+* Class and objects
+** Syntax
+calss is blueprint of a obj,  has some properties(attributes) and behavior(functions) 
+#+BEGIN_SRC cpp
+  class ClassName {
+  private:                  // by default 
+    int x,y;
+  protected:
+    char name;
+  public:
+    void getX(int a){x = a;}
+    void getY(int b){y =b;}
+  };
+
+  int main(){
+    ClassName ObjectName ;
+    ObjectName.getX(10); 
+  }
+#+END_SRC
+
+default acess specifier : private 
+private is used for store attribues or variables
+** Defining member function outside class by scope resolution(::)
+#+BEGIN_SRC cpp
+class ClassName {
+private:                  // by default 
+  int x,y;
+protected:
+  char name;
+};
+void ClassName::getX(int a) {x = a;}
+void ClassName::getY(int b) {y =b;}
+
+int main(){
+  ClassName ObjectName ;
+  ObjectName.getX(10); 
+}
+#+END_SRC
+** this
+only in member function
+*** Example
+#+BEGIN_SRC cpp
+  void PrintEntity( const Entity& e);
+  class Entity
+  {
+  public:
+    int x,y;
+    Entity(int x, int y)
+    {
+      Entity*  e = this;    // 
+      this->x= x;
+      this->y = y;
+      PrintEntity(this);
+    }
+
+    int GetX() const
+    {
+      const Entity& e = *this;
+    }
+    
+  };
+
+  void PrintEntity( const Entity& e)
+  {
+    const Entity& e = *this;
+  }
+
+
+#+END_SRC
+** Constructor
+To iniciallize the when obj is created
+
+Three type of Constructor
+  1. Default
+  2. Patameterize
+  3. Copy Constructor 
+  4. Dynamic by using heap   
+
+*** Intro
+#+BEGIN_SRC cpp
+  class ClassName {
+    int a;
+  public:
+    ClassName(){a = 0}                               // Constructor name is Class Name
+                                                     // Auto matically call when we create a obj of class
+                                                     // No return type
+                                                     // if Not defined compiler will create it self
+  }
+#+END_SRC
+*** (Default,Parameter, Copy) Constructor
+#+BEGIN_SRC cpp
+  class Point {
+    double x, y ;
+  public:
+    Point () { x= 0, y = 0;}                     // default constructors
+    Point (double X, double Y) {x= X; y = Y;}    // parameter constructor  
+    Point (const Point& rhs) {x = rhs.x; y = rhs.y;}  // copy constructor
+    // we are using constant so that we should n't accidenly change what we have to copy
+    // we are copy one poperty to another property,
+    // when you create a obj and want to assing it property
+    
+    double getx(X) {return x;}
+    double gety(Y) {return y;}
+  };
+
+  int main() {
+     // when obj created then constructor is called
+    Point p1;             // default cons is call
+    Point p2(1.2, 3.4);   // para cons
+    Point p3= p1;         // copy one obj to other type
+
+    
+  }
+#+END_SRC
+*** Construction DEPTH
+Construction doesn't run if don't create a obj 
+eg : static method
+**** Class which doesn't allow creating obj
+#+BEGIN_SRC cpp
+  class Log
+  {
+  private :
+    Log(){}; // hidding constructor to stop creating obj
+  public:
+    // OR insted of making cons private we can delete
+    Log()= delete;
+    static void Write()
+    {
+      //sfadffa
+    }
+  };
+
+  int main()
+  {
+    Log::Write();
+    Log wr ;//ERROR
+  }
+#+END_SRC
+*** Initializer List 
+ 
+#+BEGIN_SRC cpp
+  class Base {
+    int  x;
+    int  y;
+  public:
+
+     //NOTE : this is not iniciallizeing but assignment
+    Base (int a, int b) {x = a; y=b; }
+    
+    Base (int a, int b):x{a},y{b}               // This is inicallization
+    Base( int a, int b)
+      :x{a},y{b}                              // Different formate                        
+                        
+  }
+#+END_SRC
+ 
+ There are two ways to do 
+ Using {} : uniform initialization and should be prefered 
+ Using () : round of it convert formal argument data type to data type of actual argument and then assing
+
+#+BEGIN_SRC cpp
+  class Base{
+    char x;
+  public :
+    Base(int a):x(a) {}
+    void print() { cout << (int)x << endl;}
+  };
+
+  int main(){
+    Base b(300);
+    b.print();            // prints: 44
+  }
+
+#+END_SRC
+
+*** member initializer
+Should be in order :
+      the members should be inicialized in order it are defined in classe or some complier give error
+#+BEGIN_SRC cpp
+  class Entity
+  {
+  private:
+    string m_Name;
+    int score;
+  public:
+    Entity() :m_Name("Unknown"),score(0)            // member inicializer
+    {    
+    }
+    Entity(const stirng& name)
+      :m_Name(name)
+    {}
+    const string& GetName() const {return m_Name;}
+  };
+  int main()
+  {
+    Enity e0;
+    cout<<e0.GetName()<<endl;
+    
+    Entity e1("Cherno");
+    cout<<e0.GetName()<<endl;
+    cin.get();
+  }
+#+END_SRC
+**** Why?
+- code style is easy to write and read
+- Function Defernece
+
+Without using member inicializer 
+ #+BEGIN_SRC cpp
+      class Example
+      {
+      public:
+        Example()
+        { cout<< "Create Entity! "<< endl;}
+        Example(int x)
+        {cout<< "Create Entity  with "<<x<<"!"<<endl;}
+      }
+      class Entity
+      {
+      private:
+        string m_Name;
+        Example m_Example;     // it create a object
+      public:
+        Entity()          // NO-member inicializer
+        {
+          m_Name =  string("Unknow");
+          m_Example = Example(8); // over writen the 
+        }
+        Entity(const stirng& name)
+          :m_Name(name)
+        {}
+
+      };
+      int main()
+      {
+        Enity e0;
+        cin.get();
+      }
+
+   // // Result is 
+   // Create Entity !
+   // Create Entitywith 8 !
+ #+END_SRC
+We can see if there is no member inicilizer the we are createing two object of enitiy
+
+By using member iniclizer 
+#+BEGIN_SRC cpp
+     class Example
+     {
+     public:
+       Example()
+       { cout<< "Create Entity! "<< endl;}
+       Example(int x)
+       {cout<< "Create Entity  with "<<x<<"!"<<endl;}
+     }
+     class Entity
+     {
+     private:
+       string m_Name;
+       Example m_Example;     // it create a object c++ will not do it for primitive data types
+     public:
+       Entity()          // NO-member inicializer
+         : m_Example(8)
+       {
+         m_Name =  string("Unknow");
+
+       }
+       Entity(const stirng& name)
+         :m_Name(name)
+       {}
+
+     };
+     int main()
+     {
+       Enity e0;
+       cin.get();
+     }
+
+  // // Result is 
+  // Create Entity !
+
+#+END_SRC
+*** Copying and Copy Constructor
+** Destructor
+*** Syntax
+#+BEGIN_SRC cpp
+  class Base{
+    int x;
+    Base () {cout << "Default constructor " << endl;}
+    Base(int a):x{a}{cout << "Parameter Construtor "<< endl;}
+    ~Base(){ cout << "Destructor"<< endl;}                         // start with ~
+                                                                   // used to destroy memory of obj 
+                                                                    // get call automatically by complier simillar to constructor
+                                                                   // we use manually or explicity for dyanmic memory allocation(new, pointer)
+  };
+
+  int main(){
+    Base b (19);
+    b.~Base();
+    
+    return 0;
+  }
+#+END_SRC
+*** Exampel mem as a pointer
+#+BEGIN_SRC cpp
+  class Base{
+    int *x;
+    int *y;
+    Base ():x{nullptr} {cout << "Default constructor " << endl;}
+    Base(int a):x{a}{cout << "Parameter Construtor "<< endl;}
+    ~Base(){   // generally used to dele dynamic memory otherwise complier will delete it
+      delete x;
+      delete y;
+      cout << "Destructor"<< endl;}
+  };
+
+  int main(){
+    Base b(new int(10));    // new is used for allocating dynamic memory
+    
+    return 0;
+  }
+#+END_SRC
+** Class as Pointer 
+#+BEGIN_SRC cpp
+  class Base{
+    char x;
+  public :
+    int y;
+    Base(char a):x{a}{}
+    void print(){cout << x << endl;}
+  };
+
+  int main(){
+    Base b1("A");
+    b1.y = 100;
+    b1.print();
+    cout<<b.y<<endl;
+    Base* e = &b1;
+    e ->print();
+    cout<<e->y<<endl;
+  }
+#+END_SRC
+** Visibility 
+In c++ has visibility of class are of three types: private, protected, public, friend (function and class)
+
+C++ restricts acess of class mem (var and funct) based on acess sepecifer
+
+| acess\Class                | base Class Public    | base Class Protected    | base Class Private      |
+|----------------------------+----------------------+-------------------------+-------------------------|
+| ouside side                | can acess public mem | can't acess procted mem | can't  acess privat mem |
+|----------------------------+----------------------+-------------------------+-------------------------|
+| baseclass pubic function   | can acess public mem | can acess proteced mem  | can acess private mem   |
+| baseclass procted function | can acess public mem | can acess proteced mem  | can acess private mem   |
+| baseclass private function | can acess public mem | can acess proteced mem  | can acess private mem   |
+|----------------------------+----------------------+-------------------------+-------------------------|
+| friends function/class     | can acess public mem |                         | can acess private mem   |
+|----------------------------+----------------------+-------------------------+-------------------------|
+| derived class              | can acess public mem | can acess protected mem | can't acess private mem |
+|                            |                      |                         |                         |
+
+Public    :    can acess  by everybody        :  either u are ouside, inside class or  derived class
+Protected :    can't acess outide class 
+Private   :    can acess only inside class and friend    
+
+** DONE Function overload 
+*** Introduction
+Function overloading You can have multiple definitions for the same function name in the same scope. The definition of the function must differ from each other by the types and/or the number of arguments in the argument list. You can not overload function declarations that differ only by return type.
+
+Following is the example where same function print() is being used to print different data types:
+
+*** TODO Example
+#+BEGIN_SRC cpp
+  class printData {
+  public:
+    void print(int i)     { cout << "Printing int: " << i << endl; }                 // Function overload
+    void print(double  f) { cout << "Printing float: " << f << endl; }               // Function overload
+    void print(char* c)   { cout << "Printing character: " << c << endl; }           // Function overload
+  };
+
+  int main(void) {
+    printData pd;
+    pd.print(5);              // Call print to print integer
+    pd.print(500.263);        // Call print to print float
+    pd.print("Hello C++");    // Call print to print character
+    return 0;
+  }
+#+END_SRC
+*** How it work 
+when you comiple a prg and in function is called the function address is used to call a function know as (name mangling)  
+
+compiler wil change name and stores it address of change name thus it wil overload function are not depend
+
+so if prg call function(defined more than 1 function ) comiler know which function to call 
+
+*** Rules where function overload doesn't work
+1. differ only in return type
+void add(int x, int y)
+int  add (int x, int y)
+2. In Class: 
+  simillar function name and parameters  but one is static function another is non-static
+
+static void add(int x, int y)
+add (int x, int y)
+
+3. same data type (int, double..) or (array, str) but one is var other is pointer or ref
+int add (int a)
+int add (int *a)
+
+4. constant and volatile
+int add(int arr)
+void add ( volatile int x)
+
+5. default parameter
+void add (int x)
+void add (int x =0)
+*** Function Hiding using scope
+#+BEGIN_SRC cpp
+  class Base {
+  public :
+    int fun(int i) { count << " Base "<<endl; }
+  };
+
+  class Derived : public Base{
+  public :
+    // using Base :: fun;       // all 'fun' name in base should share same scope in Derived class
+    int fun(char c) { count << "Derived"<< endl; }
+    
+  };
+
+  int main() {
+
+    Derived d;
+    d.fun(1);                          // Result : Derived
+    d.fun('a');                        // Result : Derived
+
+    // insted of fun(int i) it call fun(char c) but it call derived function
+    // This is hidding but we can use base class fuction by using scope
+    
+    d.Base:: fun(2)
+    
+  }
+#+END_SRC
+** Operator Overloading
+Overloading operator : User-define or re-define built-in operator of c++
+
+*** Syntax for class members
+#+BEGIN_SRC cpp
+  ClassName operator+ (const ClassName& obj){
+    obj.var = this->lenght + obj.lenght;
+    ...........
+  }
+#+END_SRC
+*** Syntax for non-members functions
+#+BEGIN_SRC cpp
+  ClassName operator+ (const ClassName&, const ClassName&){
+
+    ............
+  }
+#+END_SRC
+*** Example 
+#+BEGIN_SRC cpp
+  class Box{
+  private:
+    double lenght, breadth, height;
+  public:
+    double getVolume(void) {return (lenght*breath* height);}
+    void getlenght(double len) {lenght= len;}
+    void getbreath(double bre) {breadth= bre;}
+    void setheight(double hei) {height= hei;}
+
+    Box operator+(const Box& obj2)                 // operator overloading
+    {
+     Box obj1;
+     obj1.lenght = this->lenght + obj2.lenght;
+     obj1.breadth = this->breadth + obj2.breadth;
+     obj1.height = this->height + obj2.height;
+     return obj1;
+     }
+  };
+
+  int main(){
+    Box box1, box2, box3;            // declare box1, box2, box3
+    box1.setLength(6.0);
+    box1.setBreadth(7.0);
+    box1.setHeight(5.0);
+
+    box2.setLength(12.0);
+    box2.setBreadth(13.0);
+    box2.setHeight(10.0);
+
+    box3 = box1 + box2;
+    volume = box3.getVolume();
+    cout<< "Volume of box3 :"<< volume << endl;
+    return 0;
+  }  
+#+END_SRC
+
+*** Example without operator overloading
+#+BEGIN_SRC cpp
+  struct Vec2
+  {
+    float x,y;
+    
+    Vec2(float x, float y):x(x),y(y){};
+
+    Vec2 Add(const Vec2 &other) const
+    { return  Vec2(x+ other.x , y + other.y); }
+
+    Vec2 mul(const Vec2 &other) const
+    { return Vec2 (x * other.x, y+ other.y);}
+  };
+
+  int main()
+  {
+    Vec2 p1(4.0f, 4.0f);
+    Vec2 speed(0.5f, 1.5f);
+    Vec2 powerup(1.1f, 1.2f);
+
+    Vec2 result = p1.add(speed.mul(powerup)); // which means p1 + speed * powerup
+  }
+
+#+END_SRC
+*** Example with operator overloading
+#+BEGIN_SRC cpp
+  struct Vec2
+  {
+    float x,y;
+    
+    Vec2(float x, float y):x(x),y(y){}
+    
+    Vec2 operator+ (const Vect &other) const
+    { return Vec2(x + other.x , y + other.y); }
+    
+    Vec2 operator*(const Vec2 &other) const
+    { return Vec2 (x * other.x, y* other.y);}
+    
+  };
+
+  ostream& operator<<(osteam& stream1, const Vec2& other)
+  {
+    stream1 <<other.x<<","<<other.y;
+    return steam1;
+  }
+
+  int main()
+  {
+    Vec2 p1(4.0f, 4.0f);
+    Vec2 speed(0.5f, 1.5f);
+    Vec2 powerup(1.1f, 1.2f);
+    Vec2 result =  p1 + speed * powerup   // operator overloading
+    cout << result2<< endl;  
+  }
+
+#+END_SRC
+** Object (Create / Instantiate Object)
+Oject are create in two ways
+stacks is small 1 or 2megabytes, faster
+heap is slower 
+
+- Stacks (normal way to create a obj)
+- Heaps (using new and delete )
+* oops
+** Inheritance
+*** Introduction
+Allow to define a class in terms of another class
+A new class is created based on exisiting(previous class)
+
+NOTE: new class is called derived class
+      existing class is called base class
+
+Pros :
+easier to create
+reuse code
+*** Syntax
+#+BEGIN_SRC cpp
+  class DerivedClass_Name : acess_specifier BaseClass_Name{ 
+    // default acess specifier : privte
+    ........
+  };
+#+END_SRC
+*** Example
+#+BEGIN_SRC cpp
+  // base class
+  class Shape{
+  public :
+    void setWidth(int w){
+      width = w;
+    }
+    void setHeight(inth){
+      height = h;
+    }
+  protected:
+    int width;
+    int height;
+  };
+
+  // Derived Class
+  class Rectangle: public Shape{
+  public:
+    int getArea(){
+      return (width * height);
+    }
+  };
+
+  int main(){
+    Rectangle Rect;
+    Rect.setWidth(5);
+    Rect.setHeight(7);
+
+    cout << "Total area :" <<Rect.getArea() << endl;
+    return 0;
+  }
+#+END_SRC
+*** Types of inheritance by Acess Specifier
+In c++ there are 3 acess specifiers : public,private, protected
+
+Inheritanec can be classifed into three types
+**** Public Inheritance : 
+  base class public    members become derived   class public    members
+  base class protected members become protected class protected members
+  base class private   member  are indirectly become private   class private   members
+
+***** NOTE: Base class members are never accessible directly form a derived class, but an be access through public and private mem of base class
+
+**** Protected Inheritance:
+  Base class public,protected members become protected members of derived class
+
+**** Private Inheritane:
+  Base class public,protected members become private members of derived class
+ 
+| acess\class | inside base class | Insidederived class | outside class |
+|-------------+-------------------+---------------------+---------------|
+| public      | Yes               | Yes                 | Yes           |
+| protected   | Yes               | Yes                 | No            |
+| privte      | Yes               | No                  | No            |
+|             |                   |                     |               |
+*** multipule Inheritance: 
+**** Syntax 
+#+BEGIN_SRC cpp
+  class derive_ClassName : acess baseA, acess base B....{
+    statemetns;
+  }
+#+END_SRC
+**** Example 
+#+BEGIN_SRC cpp
+  // Base class 
+  class Shape {
+  public:
+    void setWidth(int w){ width = w; }
+    void setHeight(int h){ height = h;}
+  protected:
+    int width;
+    int height;
+  };
+
+  // base class
+  class PaintCost{
+  public :
+    int getCost(int area){ return area*70;}
+  };
+
+  // Derived class
+  class Rectangle: public Shape, public PaintConst{
+    int getArea() {return (width * height);}
+  };
+
+  int main(){
+    Rectangle Rect;
+    int area;
+    Rect.setWidth(5);
+    Rect.setWidth(7);
+    area = Rect.getArea();
+
+    cout<< "Total area :" << Rect.getArea()<< endl;
+    cound<< "Total paint cost :$" << Rect.getCost(area)<<endl;
+    return 0;
+  }    
+#+END_SRC
+** Virtual and Pure Virtual Function:
+*** Example
+
+Base Class :
+
+ |---------------|
+ | class: shape  |
+ |---------------|
+ | method Draw() |
+ |---------------|
+
+Derived classes :
+
+ |---------------|         
+ | class: line   |
+ |---------------|
+ | method Draw() |
+ |---------------|
+
+ |------------------|
+ | class: rectangle |
+ |------------------|
+ | method Draw()    |
+ |------------------|
+
+ |----------------|
+ | class: triange |
+ |----------------|
+ | method Draw()  |
+ |----------------|
+
+
+#+BEGIN_SRC cpp
+  class Shape{
+  protected:
+    int width, height;
+  public:
+    Shape(int a = 0, int b = 0){ width = a; height = b;}
+    virtual int area()= 0;             // pure virtual function
+
+    // =0 tell compiler that this function has no body and it is pure virtual function
+  }
+#+END_SRC
+*** Syntax
+#+BEGIN_SRC cpp
+  virtual <data-type> functionName(args);    // virtual function
+  virtual <data-type> functionName(args)=0;    // pure virtual function
+#+END_SRC
+ 
+ virtual function is a defined in a base class with another version (same function name ) in derived class, tells compiler that we don't want static linkage for this function
+*** Example for virtual function 
+#+BEGIN_SRC cpp
+  Class Entity{
+   public:
+    virtual string GetName(){ return "Entity";}
+  };
+
+  Class Player : public Entity{
+   private:
+    string m_Name;
+   public:
+    Player(const string& name):m_Name{name}{}
+    string GetName() {return m_Name;}
+    // in C++ new keywork override is used to specify this is used to override other function
+    // string GenName() override { retun m_Name;} 
+  }
+  void PrintName( Entity * entity){
+    cout<< entity-> GetName()<<endl;
+  }
+
+  int main(){
+    Entity* e = new Entity();
+    PrintName(e);
+    Player* p = new Player("Tony");
+
+    cin.get();
+  }
+#+END_SRC
+
+*** Pure virtual function :
+- has no body (implementation part)
+- Pure Virtual function  is same as abstract method or interface in other prg language like java or c#.
+- Basically it allow us to define a function in base class which doesn't have implementatin and force (sub class or derived class) to actally implement
+*** Example for Pure Virtual Function
+In above virtual function example 
+- we have a virtual function (GetName) in base class(Entity) which has a body
+- Then we have overide it by a (subclass)derived class fucntion
+- By having a body in base class means overiding function of base class is entirely optional
+- means by default compiler will exe base class function but n't derived class and 
+- Some case it does't  make sense implemention in base class wt we want to force derived class to provied own defination
+
+In OOP it is quite common to have base class consist of unimplemented method and force subclass to implement them is know as *Interface Class* or *Absstract Class*
+
+Interface Class  doesn't have any implementation part so it n't instanciate a object. and forces derived class to implement 
+
+
+#+BEGIN_SRC cpp
+  Class Entity{
+   public:
+    virtual string GetName()= 0;
+  };
+
+  Class Player : public Entity{
+   private:
+    string m_Name;
+   public:
+    Player(const string& name):m_Name{name}{}
+    string GetName() {return m_Name;}
+  }
+
+  int main(){
+    Entity* e = new Entity(); // ERROR : Entity is virtual or abstract can't  instanciate
+    PrintName(e);
+    Player* p = new Player("Tony");
+
+    cin.get();
+#+END_SRC 
+
+*** Example 2: Create fucntion which print class name
+#+BEGIN_SRC cpp
+  Class Printable
+  {
+   public :
+    virtual string GetClassName()=0;
+  };
+
+  Class Entity : public Printable
+  {
+   public:
+    virtual string GetName(){return "Entity";}
+    string GetClassName(){return "Entity";} 
+  };
+
+  Class Player : public Entity{
+   private:
+    string m_Name;
+   public:
+    Player(const string& name):m_Name{name}{}
+    string GetName() {return m_Name;}
+  }
+
+  void Print(Printable* obj)
+  {
+    cout<< obj->GetClassName()<<endl;
+  }
+  int main(){
+    Entity* e = new Entity();
+    //  PrintName(e);
+    Player* p = new Player("Tony");
+    Print(e);
+    Print(p);
+
+    cin.get();
+#+END_SRC 
+*** How it work 
+**** V table :
+How does compiler know which Draw function should be used ?
+Virtual function has some thing called dynamic dispach which compile implement by V table 
+V table : TABLE consisting of all virtual function inside base class and map them
+**** Virtual Function is costly 
+There are two run time cost 
+1. memory to store V-table  (to dispach correct function include member pointer in base class)
+
+2. every time we use function we need to go through this table to determine to which function
+*** Dynamic Linkage :  
+(when a function is called which version of function to be selected based on what kind of obj is called. This is also know as late binding ) 
+** Interfaces by Abstract Class
+Interface : class without  committing to a particular implementation of class
+
+ Implemented by abstract class
+*** Defination
+A class is called Abstract if declares at least one pure virtual function 
+
+Abstract class does't have any implementation part hence it give error if we create(instantiate ) a object.
+
+So abstract class are use to provide interface  to derived class where implementation part is present
+
+If a derived class if there is atleast one pure virtual function then it is also called a abstract class and it can't instatiate obj
+
+If in derived class (all pure function in base class) are implemented then it can used to create obj and called =concrete classes=
+
+*** Example :
+#+BEGIN_SRC cpp
+  class Shape{
+  protected:
+    int width, height;
+  public:
+    virtual int getArea()= 0;                // pure virtual function def
+    void setWidth(int w) {width = w}
+    void setHeight(int h){height = h;}
+  };
+  class Rectangle: public Shape{             
+  public:
+    int getArea() {return (width * height);} // implementation of pure virtual function
+  };
+  class Triangle: public Shape{              
+  public:
+    int getArea(){return (width*height/2);}  // implementation of pure virtual function
+  };
+
+  int main(){
+    Rectangle Rect;
+    Triangle Tri;
+    Rect.setWidth(5);
+    Rect.setHeight(7);
+    cout<< "Total Rectangel area : "<<Rect.getArea()<<endl;
+    return 0;
+  }
+#+END_SRC 
+** Abstraction
+Only show features to prg(outside world)  but hiddens the implementation details 
+
+Advantage : 
+  Reduce code complexity
+  Hidding details and expose essentials part
+  
+
+eg: In Database System : hides details of how data is stored and create and mainted  
+
+User does not know how data is stored, create, mainted (hiddes details)
+
+#+BEGIN_SRC cpp
+  // Let there is expensive class Rocket
+
+  class Rocket{
+    void fly()          // this contain very complex code and does not want to show other
+    {.............}
+
+    //   In order to not show it others
+    //    >  Compile class and convert to lib (showing funtion fly)
+    //    >   Prg can't  see implementation part but can use the fly  function 
+  }
+#+END_SRC
+
+Abstraction is a method of expressing the important properties without involving the background details. On the other hand, Data hiding insulates the data from the straight access by the program
+*** Explination
+abstraction is a mechanism of extracting the essential elements for the creation of a system, without its implementation details. In abstraction, we have to focus only on what is to be done instead of how it should be done. Abstraction is a thought process; it solves the problem at the design level.
+
+*** TODO Data Abstracting
+*** Abstract Data Type:
+If you implement class with public & private memberss is called Data Abstraction
+
+Explaination :
+members (attributes and function ) in public are accessable to outside world            # show features or important details 
+members (attributes and function ) in private are n't accessiable to outside world      # hide implementation or background details
+
+** Encapsulation
+ Encapsulation means wrapping the implementation of data member and methods inside a class. When implementation of all the data member and methods inside a class are encapsulated
+
+the method name can only describe what action it can perform on an object of that class
+
+ It also hides data but for protection and binds data and functions
+
+** Data hiding
+
+Data Hiding means confirms the security of  members of a class from an illegal or unauthorized access. 
+
+The main difference between data hiding and encapsulation is that 
+
+data hiding focus more on data security and 
+encapsulation focuses more on hiding the complexity of the system.
+
+Ex: Audio player volume increase
+
+Consider we have a vlc player where it volume [0 100] so we have desing this volume parameter
+#+BEGIN_SRC cpp
+  class vlcplayer{
+  private:
+    int volume_private;        // Here volume_private is hidden we can't access outside or accidenally change volume it should by public function
+  public:
+    int volume_public;         // Here volume_pulic is not hidden we can access outside 
+    vlcplayer():volume_private{0} {}
+    void setVolume_private(int x){ 
+      if (x>=0&& x<= 100){
+        volume_private = x;
+        cout<< "set voulume"<< endl;
+      }
+      else{
+        cout << "Can't Set"<< endl;
+      }
+    }
+  };
+
+  int main(){
+    vlcplayer vlc;
+    vlc.setVolume_private(50);
+    vlc.setVolume_private(-30);
+    vlc.volume_public = 10000;  
+  }
+#+END_SRC
+
+NOTE: In general data is stored in private and implementation part is done in public
+** Data Hiding vs Encapsulation
+| comparison       | Data Hiding                                                   | Encapsulation                                           |
+|------------------+---------------------------------------------------------------+---------------------------------------------------------|
+| Basic            | About data security along with hiding complexity.             | About wrapping data to hide the complexity of a system. |
+| Focus            | Restricting or permitting the use of data inside the capsule. | Enveloping or wrapping the complex data.                |
+| Access Specifier | data under data hiding is always private and inaccessible.    | Data under encapsulation may be private or public.      |
+| Process          | Data hiding is a process as well as technique                 | Encapsulation is a sub-process in data hiding.          |
+** Polymorhism
+*** Introduction
+Polymorphism means having many forms. Typically, polymorphism occurs when there is a hierarchy of classes and they are related by inheritance.
+
+C++ polymorphism means that a =call to a member function= will cause a =different function to be executed depending on the type of object= that invokes the function.
+
+Consider the following example where a base class has been derived by other two classes:
+*** Example 
+#+BEGIN_SRC cpp
+  class Shape {
+  protected:
+    int width, height;
+  public:
+    Shape( int a = 0, int b = 0) {width = a;height = b;}
+    int area() { cout << "Parent class area :" <<endl;  return 0;}                       // Polymorhism obj is shape:  has same name in class
+  };
+
+  class Rectangle: public Shape {
+  public:
+    Rectangle( int a = 0, int b = 0):Shape(a, b) { }
+    int area () { cout << "Rectangle class area :" <<endl; return (width * height); }    // Polymorphism obj is rectangle
+  };
+
+  class Triangle: public Shape{
+  public:
+    Triangle( int a = 0, int b = 0):Shape(a, b) { }                                                
+    int area () { cout << "Triangle class area :" <<endl; return (width * height / 2);}   // Polymorphism obj is triangle  
+  };
+
+  int main( ) {
+    Shape *shape;
+    Rectangle rec(10,7);
+    Triangle  tri(10,5);
+    shape = &rec;                // store the address of Rectangle
+    shape->area();               // call rectangle area.  >> Rectangular class area : 70
+    shape = &tri;                
+    shape->area();               // call triangel area     >> Triangle class area : 50
+    return 0;
+  }
+#+END_SRC
+*** How it work 
+when callingt  polymorphic mem function is set by compoler as version control in base class this is called =static resolution if function call= 
+or static linkage
+
+The function call is fixed before execution know as early bunding because compiler know which polymorphic  function should be called during compiling prg
+
+* Interview Questions
+
+** Difference between void and void pointer:
+ 
+ void
+ used to denote nothing                       
+ if function dont return anything we use void 
+** Difference in Reference variable and pointer variable
+
+References are generally implemented using pointers. A reference is same object, just with a different name and reference must refer to an object. Since references can’t be NULL, they are safer to use.
+
+
+> Pointer can be assigned NULL directly, whereas reference cannot.
+> Pointers can iterate over an array, we can use ++ to go to the next item that a pointer is pointing to.
+> pointer is a variable that holds a memory address. A reference has the same memory address as the item it references.
+> pointer to a class/struct uses ‘->'(arrow operator) to access it’s members whereas a reference uses a ‘.'(dot operator)
+> pointer needs to be dereferenced with * to access the memory location it points to, whereas a reference can be used directly.
+
+** multiple return value
+ by using a struct and putting all the return value and 

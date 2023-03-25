@@ -1,0 +1,3 @@
+#+TITLE: Note_cpp_chernoproject
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup

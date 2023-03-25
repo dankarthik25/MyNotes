@@ -1,0 +1,392 @@
+#+TITLE: Note_linuxTutorial_Vagrant
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* Vagrant Udemy Shell 
+** Introduction
+Vagrant Virtualization (Creating virtual meachine Environment)
+*** Introduction Why Virtualization 
+**** Why use the Virtualization (Linux installallation) in class ?
+- No suprises which lets you to stay  focused on scripting
+- Allow you to get the best help possible(in class all students has same os)
+- Quickly crete multiple Linux system
+**** What is Virtualization Software 
+- Allow to RUN Linux inside virtual machine(eg: VirtualBox(oracle) )
+- Free to download and easy to install
+- Run on winodws,mac,linux 
+- Provides full virtualization are know as Virtual Box(). 
+- Pyhsical computer = host.
+- Virtual Computer = guest
+- Guest OS think it's runing on real hardware but it is actually running on host Os
+**** Why Vagrant
+- In VirtualBox we can manually create a virtual os, but it is difficult to replicate the os(type, config,share sys setting) to other computers. So Vagrant provieds it
+- Virtual Box is time consuming , not automate it
+- Easy to configure , reproduce environments
+***** Pros and Cons of Vagrant
+- Pros
+  - Free
+  - Automation of virtual machine management tasks
+  - Easy to use commands
+  - Easy to Configure of OS, Share Configuration of Os  
+  - Local testing
+  - Well Documented
+  - Vagrant is decentralized so anyone can make a container package to get a project started. you aren't limited to wordpress, or even one style of wordpress install (you can make a sage.io wordpress environment).
+  - Vagrant easily lets you set ports and URLs for local development.
+- Cons
+  - Can be difficult to set up(setup in cmd ) Lacks a GUI
+  - Uses lots of resources on old machines
+  - Compatibility issues with some operating systems (Windows 8.1 home, Windows 10 home)
+  - Can take up a lot of disk space if running several VMs with various configurations
+**** Vagrant Boxes 
+Box = Operating System Image
+#+BEGIN_SRC sh
+# vargrant box add <USER>/<BOX> # USER : user name of os, BOX : Iso image of OS
+# Eg:
+vargrant box add jasonc/centos7
+#+END_SRC
+**** Create Vagrant Projects
+To Create a Vagrant Project :
+- Create and Open a Folder
+- Inicialize Vagrant Project
+#+BEGIN_SRC sh
+mkdir VagrantProject1
+cd VagrantProject1
+vagrant init jasonc/centos7 
+vagrant up
+#+END_SRC
+
+**** Start Virtual machine in Vagrant Project 
+#+BEGIN_SRC sh
+vagrant up # Vagrant will import box into Virtual Box and start it.
+
+#+END_SRC
+**** Vagrant Up/ multi-machine
+#+BEGIN_SRC sh
+#Synatx:
+#       vagrant up <Vm_Name>
+vagrant up master
+vagrant up server1
+vagrant up          # start all virtual machines 
+#+END_SRC
+*** SSH-Secure Shell
+**** Introduction
+SSH : Secure Shell
+Cryptographic Network Protocol
+Uses for acessing remote servers
+SSH uses Asysmmetric Cipers
+In cryptograph,cipher is an algorithm for performing encryption and decryption
+- Why we need ssh
+  - Username and password can be stolen in middle but ssh ensure no 3rd party know username and password
+
+- SSH create public key and a private pair
+  - private key is not share to any one
+  - public key is shared to any one
+
+- There are many encryption methods like (rsa, dsa, ed25519...etc)
+
+Cons in SSH:
+ - Since it's a service, so its not available until system starts
+ - If by mistake (forgot or deleted private key)  then you can't log back in
+https://www.youtube.com/watch?v=y2SWzw9D4RA 
+ https://www.youtube.com/watch?v=AtuAdk4MwWw : Dynamic ssh, reverser ssh, ssh tunneling
+
+Network protacol used to connect to Linux
+No built-in SSH client
+Git include as SSH client
+**** SSH in Vagrant
+Vagrant provide simple shortcut to ssh into the meachine
+#+BEGIN_SRC sh
+vagrant ssh <Vm-name> # Vm-name :to ssh into Project name
+exit # to end ssh connection
+# log out of the Linux system by running the "exit" command.
+#+END_SRC
+
+**** Vagrant Halt,Suspent,Resume,Destroy
+Vagrant it can use to control the Vm   like halt
+#+BEGIN_SRC sh
+vagrant halt <vm-name> # halt <vm-name>
+vagrant halt           # halt all virtual machines 
+# you will not lose any work you’ve performed on the virtual machine.  The virtual machine will still exist in VirtualBox, it will simply be stopped.
+vagrant up <vm-name> # start and
+vagrant suspend <vm-name>  # to suspend
+vagrant resume <vm-name>   # to resume 
+vagrant destroy <vm-name>  # to remove virtual-meachine from virtual box
+# you want to start over with a fresh copy of the virtual machine, run "vagrant destroy" all work inside virtual-meachine will be lost.
+vagrant # help
+#+END_SRC 
+**** Vagrantfile[in Project file]
+
+#+BEGIN_SRC sh
+Vagrant.configure(2) do |config|
+   config.vm.box = "jasonc/centos7"  #Operating System like Ubuntu-64, Centos,...etc
+   config.vm.network "private_network", ip "10.2.3.4" # How your host see your box : configure ip address...etc
+   config.vm.provision "shell",path ="setup.sh" # what we want setup # lamp stack, mean stack,Nodejs
+   config.vm.synced_folder # How you access file in your computer : edit files using atom, vs code.....etc
+   config.vm.provider # Virtualbox like hyperV, VmWare
+end
+#+END_SRC
+
+**** Example fo vagrant file
+#+BEGIN_SRC sh
+    Vagrant.configure("2") do |config|
+      config.vm.box = "jasonc/centos7"
+      config.vm.define "test1" do |test1|
+        test1.vm.hostname = "test1"
+        test1.vm.network "private_network", ip: "10.9.8.5"
+      end
+      config.vm.define "test2" do |test2|
+        test2.vm.hostname = "test2"
+        test2.vm.network "private_network", ip: "10.9.8.6"
+      end
+    end
+
+#+END_SRC
+#+BEGIN_SRC sh 
+config.vm.box = "ubuntu/trusty64"
+# config.vm.box = "jasonc/centos7"
+config.vm.provider "virtualbox" do |vb|
+#+END_SRC
+**** Vagrantfile
+#+BEGIN_SRC sh
+# vi Vagrantfile
+Vagrant.configure(2) do | config | 
+     config.vm.box= "jasonc/centos7"
+     config.vm.hostname = "linuxsvrl"
+     config.vm.network "private_network", ip :"10.2.3.4"
+     config.vm.provider "virtualbox" do |vb|
+       vb.gui = true
+       vb.memory = "1024"
+     end    
+     config.vm.provision "shell", path : "setup.sh"
+end
+#+END_SRC
+*** Config vagrant file for multi-virtual machine project
+#+BEGIN_SRC sh
+vagrant box add jasonc/centos7   # img is load in os
+cd /Workspace/Shell/shellclass
+mkdir multitest
+cd multitest
+vagrant init jasonc/centos7
+# edit vagrantfile 
+vi vagrantfile                 # inside vagrantfiel
+Vagrant.configure("2") do |config|
+   config.vm.box = "jasonc/centos7"  
+
+   config.vm.define "test1" do |test1|
+       test1.vm.hostname = "test1"
+       test1.vm.network "private_network", ip "10.9.8.5" # How your host see your
+   end 
+
+   config.vm.define "test2" do |test2|
+       test1.vm.hostname = "test2"
+       test1.vm.network "private_network", ip "10.9.8.6" # How your host see your
+   end 
+end
+
+
+# in terminal in /Workspaec/Shell/shellcalss/multitest
+vagrant up   # up every meachines test1,test2
+vagrant status # show 2 running virtualbox
+vagrant ssh test1
+exit 
+vagrant ssh test2
+ping -c 3 10.9.8.6 # ip address of test2 system
+#+END_SRC
+
+*** Excersise 
+#+BEGIN_SRC sh
+cd /Workspace/Linux_script/udemy_shellclass/
+cd localuser
+# pwd Workspace/Linux_script/udemy_shellclass/
+vagrant init jasonc/centos7
+vagrant up
+vagrant status
+vagrant ssh
+# root
+# |- Vagrant  (home directory)
+#    |- Vagrantfile(config)
+#+END_SRC
+** Creating User Account in Vagrant 
+*** Introduction 
+- Your First Script
+ - Create new account 
+ - Checks for proper privileges 
+ - Reports if account creation failed
+- But 1st need to Learn all *Concepts and Techinques*
+ - project based learing helps you learn and retain new material
+ - You'll use what you learn in the appropiate context
+- Net 4 Lesson consist of demonstration and teaching
+  - You can watch or follow along
+  - All scripts are in course download
+- Practice Your Skills in Exercise
+ - Follow instruction for exercise
+ - You'll write the script and test it.
+ - Watch the instruction implement  script
+
+*CONTINUE LECTURE*
+
+*** Creating
+#+BEGIN_SRC sh
+# man useradd  
+# useradd [options] LOGIN : Login are username , there should be 8 char or less it's general  practice, but it can more tha 8-char eg: ps -ef
+# usernaem is case sensetive, No special chara
+
+sudo useradd dougstamper   # create user : dougstamper
+passwd # set passwd for  dougstamper
+
+
+#+END_SRC
+
+* ------------------------------------
+* Vagrant Install Vagrant
+#+begin_src sh
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  SUDO APT-GET UPDATE && SUDO APT-GET INSTALL VAGRANT
+#+END_SRC
+short cuts
+https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4
+** Vagrant-hub
+Online where vagrent os are stored and shared https://app.vagrantup.com/boxes/search
+** VAGRANT FILE
+*** Configurations of Vagrant Files
+#+begin_src
+#config.vm.box           #- VM OS Operating System
+#config.vm.hostname      #- VM Host Name
+
+#config.vm.network       #- How your host Local-OS see you  box
+#config.vm.synced_folder #- How you access files for your  computers
+#config.vm.provider      #- virtualbox #alternative also present
+#config.vm.provision     #- what we run script  like "shell" STACK.....ETC
+# config.vm.memory=2024 
+# config.vm.cpus=2
+# config.vm.gui = true   # 
+#+end_src
+*** Configuration with Example
+#+begin_src sh
+#config.vm.box - Operating System
+config.vm.box = "ubuntu/trusty64" # it will pull img form  https://app.vagrantup.com/boxes/search or Vagrant-hub
+config.vm.box = "jasonc/centos7"
+
+#config.vm.provider - virtualbox #alternative also present
+config.vm.provider "virtualbox" do |vb|
+
+# Network Settings
+#config.vm.network - How your host OS see you  box
+config.vm.network "private_network", ip "10.9.8.5"
+# config.vm.network "forwarded_port", guest: 80, host: 8080
+# config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+
+# Folder Settings
+config.vm.synced_folder ".", "/var/www/html",
+# "." current folder
+# "../data" in parentdir data folder
+########### For more secure use below file
+config.vm.synced_folder ".", "/var/www/html",:mount_options => ["dmode=777", "fmode=666"] 
+########### For using nfs in mac
+config.vm.synced_folder ".", "/var/www/html",:nfs =>{:mount_options => ["dmode=777", "fmode=666"] }
+
+
+#config.vm.synced_folder - How you access files for your  computers
+
+
+#config.vm.provision - what we  want setup like LAMP STACK.....ETC
+config.vm.provision "shell", path : "setup.sh"
+config.vm.provision "shell", inline : <<-SHELL
+  apt-get update   
+  apt-get install -y apache2
+SHELL
+config.vm.provision "shell", path : "boothstrap.sh" # instead of inline shell cmd we can run shell by giving path
+#+end_src
+
+
+*** Configure Vagrant File
+#+begin_src sh
+Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: <<-SHELL
+        apt-get update -y
+        echo "10.0.0.10  master-node" >> /etc/hosts
+        echo "10.0.0.11  worker-node01" >> /etc/hosts
+        echo "10.0.0.12  worker-node02" >> /etc/hosts
+    SHELL
+    
+    config.vm.define "master" do |master|
+      master.vm.box = "bento/ubuntu-18.04"
+      master.vm.hostname = "master-node"
+      master.vm.network "private_network", ip: "10.0.0.10"
+      master.vm.provider "virtualbox" do |vb|
+          vb.memory = 4048
+          vb.cpus = 2
+      end
+      master.vm.provision "shell", path: "scripts/common.sh"
+      master.vm.provision "shell", path: "scripts/master.sh"
+    end
+
+    (1..2).each do |i|
+  
+    config.vm.define "node0#{i}" do |node|
+      node.vm.box = "bento/ubuntu-18.04"
+      node.vm.hostname = "worker-node0#{i}"
+      node.vm.network "private_network", ip: "10.0.0.1#{i}"
+      node.vm.provider "virtualbox" do |vb|
+          vb.memory = 2048
+          vb.cpus = 1
+      end
+      node.vm.provision "shell", path: "scripts/common.sh"
+      node.vm.provision "shell", path: "scripts/node.sh"
+    end
+    
+    end
+  end
+#+end_src
+** Run Vagrant FILE
+#+begin_src
+# Go to folder where you want to run Vagrant
+mkdir VagrantProject/
+cd VagrantProject/
+
+# Inicialize Vagrant
+vagrant init # If vagrant file exit then run this cmd
+
+# If vagrant file doesn't exit the use this cmd
+
+vagrant init jasonc/centos7  # create vagrant file and .vagrant dir
+vagrant init debian/jessie64
+vagrant init ubuntu/trusty64
+
+# You can edit vagrantfile run vagrant file directly
+# vi vagrantfile
+
+# To run vagrant
+vagrant up   # up every VM's test1,test2
+
+
+###########################################################
+vagrant status # show 2 running virtualbox
+vagrant halt           # halt all virtual machines 
+
+# you will not lose any work you’ve performed on the virtual machine.  The virtual machine will still exist in VirtualBox, it will simply be stopped.
+
+vagrant up <vm-name> # start and
+
+vagrant suspend <vm-name>  # to suspend          # suspend simillar to hibernate 
+# to un-suspend or continou we use resume  
+vagrant resume <vm-name>   # to resume           #
+
+vagrant halt <vm-name> # halt <vm-name>          # shutdow:  not concerned with saving the current state of the current running VM
+vagrant relaod <vm-name>                         #
+vagrant destroy <vm-name>  # to remove virtual-meachine from virtual box
+# you want to start over with a fresh copy of the virtual machine, run "vagrant destroy" all work inside virtual-meachine will be lost.
+
+vagrant ssh test1
+#+end_src
+
+** Different Vagrant VMs
+*** When to use halt and suspend
+Use vagrant halt when you want to power off your machine, use vagrant suspend when you want to hibernate your machine.
+https://vegibit.com/getting-started-with-vagrant/
+
+[[https://www.chrisjmendez.com/2017/01/08/installing-jenkins-using-virtualbox-and-vagrant/][Install Jenkins in VM using Vagrant]]
+
+** Vagrant for Kubernetis step 3 VM using vagrant
+https://www.youtube.com/watch?v=m5q7JEihdU4&t=26s

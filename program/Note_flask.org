@@ -1,0 +1,660 @@
+#+TITLE:     flask Notes
+#+AUTHOR:    DeepAlgorithms
+#+OPTIONS: num:nil
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+
+source Corey Schafer flask playslit : https://www.youtube.com/watch?v=MwZwr5Tvyxo&list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
+
+
+
+
+* Flask Introduction
+Intro 
+* Create Virtual Env 
+#+BEGIN_SRC sh
+cd myflask-app
+
+conda create --name flask-webapp
+conda activate flask-webapp
+conda install flask
+
+touch flaskblog.py
+# The contant of flaskblog.py is below  
+#+END_SRC
+
+
+#+begin_src python
+# https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py
+
+# myflask-app/flaskblog.py
+
+
+from flask import Flask
+app = Flask(__name__)
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return "<h1>Home Page</h1>"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+#+end_src
+* Run Flask app
+We can run flask in two ways
+
+#+begin_src sh
+export FLASK_APP=main.py
+export FLASK_DEBUG=1
+
+# To run the app using flask
+flask run
+
+# Run using python
+python flaskblog.py # or
+flask run 
+#+end_src
+* Create about page
+see if =about= page is created by routing to about page  =localhost:5000/about=
+If about page is created
+- Then it will redirect to about page
+- if not it will send =ERROR 404= =Page Not Found=
+
+Create about page 
+#+begin_src python
+# https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/01-Getting-Started/flaskblog.py
+
+# myflask-app/flaskblog.py
+
+
+from flask import Flask
+app = Flask(__name__)
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return "<h1>Home Page</h1>"
+
+
+@app.route("/about")
+def about():
+    return "<h1>About Page</h1>"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#+end_src
+
+* Create a templates
+Instead of returning html tag in =return "<h1> Home Page </h1>"= we can use template dir which stores tempalate file like =layout, home, footer, about, posts...etc=
+#+begin_src sh
+cd myflask-app
+mkdir templates static
+touch static/main.css
+cd templates
+touch about.tml home.html layout.html
+#+end_src
+
+The flask app with template
+- To render from tempate we use =import render_tempalate=
+- To convert relative path and add to absolute path we use =url_for= eg : add css and js from the *static dir*
+#+begin_src python
+# myflask-app/flaskblog.py
+from flask import Flask, render_template, url_for
+app = Flask(__name__)
+
+posts = [
+    {
+        'author': 'Corey Schafer',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'April 20, 2018'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'April 21, 2018'
+    }
+]
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+
+@app.route("/about")
+def about():
+    return render_template('about.html', title='About')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#+end_src
+
+The css file is give below
+#+begin_src css
+/* myflask-app/static/main.css */
+/* https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/02-Templates/static/main.css */
+
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+#+end_src
+
+We will create a =layout= for our blog  with css file in =myflask-app/static/main.css= 
+#+begin_src html
+<!-- layout.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- add css and js files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+</head>
+<body>
+   <div  class="container">
+          {% block content %}
+          {% endblock %}
+   </div>
+<!-- jQuery, JavaScript, Bootstrap JS files -->   
+</body>
+</html>
+#+end_src
+
+home page template
+python flask uses template using =jinja2 template=
+- for =inserting or including file= or =loop=, =condition=  we use ={}= tags
+- for python variable we use ={{dict.key}}=
+  
+#+begin_src html
+<!-- home.html -->
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+#+end_src
+
+#+begin_src html
+<!-- about.html -->
+{% extends "layout.html" %}
+{% block content %}
+    <h1>About Page</h1>
+{% endblock content %}
+#+end_src
+
+* Create Forms and  Validate User Input
+Create a registeration page to create account and  login and logout
+- Make sure name, email are valid
+- password should be valid either 6 char
+    
+For users details account creation and validation we are using lib =flask-wtf=
+install =pip install flask-wtf=
+
+
+Create a seperate code-file =form.py=
+
+we use validators to validate the field-value
+- *Name:*     =StringField= : Lenght min :2 and max :20
+- *email:*    =StringField= : Email()[make sure it is valid email]
+- *password:* =PasswordField= :
+- *confirm-password:* =EqualTo()= : [Make sure it is same password enter]
+        
+#+begin_src python
+# file: myflask-app/forms.py
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo
+
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email',validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+#+end_src
+
+
+Now we need to set a =secret key= for our Application
+- Secret Key is used to protect form 
+  - Modifying Cookies
+  - Cross-site request   
+  - Forgery Attacts
+
+- Generate a secret key
+  #+begin_src sh
+python
+>>> import secrets
+>>> secrets.token_hex(16)
+'5791628bb0b13ce0c676dfde280ba245'
+  #+end_src
+
+
+Import =class (form , login)= from =form.py= >> =from forms import RegistrationForm, LoginForm=
+- And add route =register, login= and create template =register.html, login.html=
+- If registration is not valid user need to notify in register.html page
+  - add =flask-message= in =register.html=  if users didn't give valid message 
+- After registeration is *successful* need to notify the user using =flash-message= =flash(f'Account created for {form.username.data}!', 'success')= in =flaskblog.py= after registeration and re-route to =home page= 
+- Add =flask-message= to html layout =layout.html=
+  - =flash-message(flash("Register is created","Successful"))= has to input =message and category= which is stored as  =messages=
+    - this flash data is used in jinja2 template in layout.html or register.html or login.html which will be discussed below 
+#+begin_src python
+# myflask-app/flaskblog.py
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import RegistrationForm, LoginForm
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+
+posts = [
+    {
+        'author': 'Corey Schafer',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'April 20, 2018'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'April 21, 2018'
+    }
+]
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+
+@app.route("/about")
+def about():
+    return render_template('about.html', title='About')
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+# This is for testing or development
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#+end_src
+
+- Add flash-message(=flash() in flaskblog.py=) if there is a message then print =get_flashed_message()= to html template in =layout.html=
+
+  #+begin_src html
+<!-- layout.html -->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+</head>
+<body>
+    <main role="main" class="container">
+        <div class="col-md-8">
+<!-- Flask message block Strat-->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+<!-- Flask message block End-->
+
+<!-- Content Block Strat -->
+          {% block content %}
+          {% endblock %}
+<!-- Content Block End -->
+      </div>
+  </main>
+ 
+
+</body>
+</html>
+
+  #+end_src
+
+
+- If registration is not valid user need to notify in register.html page
+  - add =flask-message= in =register.html=  if users didn't give valid input in user-name, email, password print the error using =flash message=
+
+Below code is without flash Error message (if No Valid Input is given) in Registration template =register.html=
+#+begin_src html
+<!-- register.html -->
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.username(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {{ form.email(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        </small>
+    </div>
+{% endblock content %}
+
+#+end_src
+
+Below code is if error message then print the flash message     
+#+begin_src html
+<!-- register.html -->
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        </small>
+    </div>
+{% endblock content %}
+
+#+end_src
+
+Simillary like register.html we need to create login.html
+
+#+begin_src html
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            <small class="text-muted ml-2">
+                <a href="#">Forgot Password?</a>
+            </small>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+        </small>
+    </div>
+{% endblock content %}
+
+#+end_src
+
+* Create a Database db using sqlAlchemy
+sqlalchemy is intermeditae which is used to connect different types of database
+- With sqlalchemy we can access db as class
+  
+Suppose you want to
+- sqllite for dev enviroment
+- mysql for testing
+- psql for production
+
+  Then by using sqlalchemy we just need to change the database without changing the code.
+
+  Install sqlalchemy using =pip install flask-sqlalchemy=
+   - to link =from flask_sqlalchemy import SQLAlchemy=
+   - There is sqlalchemy but flask-sqlalchemy has some flask sql link
+
+Let use sqllite database
+** Create sqllite database
+#+begin_src 
+
+#+end_src
+** Link sqllite in flask-app
+Add below line in flaskblog.py to add db in flaskblog.py
+- =app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'=
+- =db = SQLAlchemy(app)= for db creation if NOT created.
+
+  

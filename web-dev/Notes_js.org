@@ -1,0 +1,6 @@
+#+TITLE: Notes_js
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+https://www.youtube.com/watch?v=hKB-YGF14SY
+
+JavaScript Tutorial In Hindi

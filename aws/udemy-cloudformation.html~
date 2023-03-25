@@ -1,0 +1,1511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-25 Sat 10:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CloudFormation-Udemy</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="DeepAlgorithms" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">CloudFormation-Udemy</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org29ac788">Overview</a>
+<ul>
+<li><a href="#org443ef03">Infrastructure as Code</a></li>
+<li><a href="#org8101b34">What is CloudFormation</a></li>
+<li><a href="#org21353c1">Benefits of AWS CloudFormation</a></li>
+<li><a href="#org9959e5e">How CloudFormation Works</a></li>
+<li><a href="#orgb78593b">Deploying CloudFormation Templates</a></li>
+<li><a href="#orgfedf207">CloudFormation Building Blocks</a></li>
+</ul>
+</li>
+<li><a href="#org64b32b0">Create Stack Hands On</a>
+<ul>
+<li><a href="#org740f997">Introduction Example</a></li>
+</ul>
+</li>
+<li><a href="#orgbdbc359">Update and Delete Stack</a></li>
+<li><a href="#org2c2f358">Yaml  Crash Course</a></li>
+<li><a href="#org834e966">Parameters in CloudFormation</a>
+<ul>
+<li><a href="#orgeb5884a">What are Paramters</a></li>
+<li><a href="#orge5ea1b3">When should you use a parameter ?</a></li>
+<li><a href="#org29f6e42">Parameters Types (Settings)</a></li>
+<li><a href="#orgca68597">How to Reference a Parameter</a></li>
+<li><a href="#org41850ca">Concept: Pseudo Parameters</a></li>
+</ul>
+</li>
+<li><a href="#orgf309e12">Resources in CloudForamtion</a>
+<ul>
+<li><a href="#org14f53fe">What are resources ?</a></li>
+<li><a href="#orgf49833f">How do I find all resources in aws</a></li>
+<li><a href="#orgc80bf1f">FAQ for resources</a></li>
+</ul>
+</li>
+<li><a href="#org977c691">Mapping in CloudFormation</a>
+<ul>
+<li><a href="#orgc2dd699">What are mapping ?</a></li>
+<li><a href="#orgce4637e">When would you use mapping vs parameters ?</a></li>
+<li><a href="#org2ff7329">Accessing Mapping Value <code>Fn:FindInMap</code></a></li>
+</ul>
+</li>
+<li><a href="#org1bbce6d">Output in CloudFormation</a>
+<ul>
+<li><a href="#orgac2eab5">What are outputs ?</a></li>
+<li><a href="#orga895622">Outputs Example</a></li>
+<li><a href="#org8898310">Cross Stack Reference <code>Fn::ImportValue</code></a></li>
+</ul>
+</li>
+<li><a href="#org5047f14">Conditions in CloudFormation</a>
+<ul>
+<li><a href="#orge699d37">What are conditions used for ?</a></li>
+<li><a href="#org6c93795">Define a Condition</a></li>
+<li><a href="#orgbe606e3">Use Condtions</a></li>
+</ul>
+</li>
+<li><a href="#org8ef7ab8">Intrinsic Function</a>
+<ul>
+<li><a href="#org586f753">Imp Intrisic Functions</a>
+<ul>
+<li><a href="#org8ac8a79">Fn::Ref</a></li>
+<li><a href="#org4e5600f">Fn::GetAtt</a></li>
+<li><a href="#org4a6eec0">FN::FindInMap</a></li>
+<li><a href="#orgb5b04ef">Fn::ImportValue</a></li>
+<li><a href="#orgd016681">Fn::Join</a></li>
+<li><a href="#org522bc74">Fn::Sub</a></li>
+<li><a href="#org430232d">Condtion Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org27ff638">User Data</a>
+<ul>
+<li><a href="#orgc7783bd">User Data in EC2 for Cloudformation</a></li>
+</ul>
+</li>
+<li><a href="#orgb51e1d7">cnf-init : <code>CloudFormation::Init</code></a>
+<ul>
+<li><a href="#org5f01452">cnf-init</a></li>
+</ul>
+</li>
+<li><a href="#org972d752">cnf-signal and wait condtion</a>
+<ul>
+<li><a href="#orgae40fad">cfn-signal &amp; wait condtion</a></li>
+</ul>
+</li>
+<li><a href="#org6782e70">cnf-signal <code>falures troubleshoot</code></a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org29ac788" class="outline-2">
+<h2 id="org29ac788">Overview</h2>
+<div class="outline-text-2" id="text-org29ac788">
+</div>
+<div id="outline-container-org443ef03" class="outline-3">
+<h3 id="org443ef03">Infrastructure as Code</h3>
+<div class="outline-text-3" id="text-org443ef03">
+<ul class="org-ul">
+<li>Currently, we have been doing a lot of manual work in aws</li>
+<li>All this manual work will be very tough to reproduce
+<ul class="org-ul">
+<li>In another region</li>
+<li>In another AWS account</li>
+<li>Within the same region if everything was deleted</li>
+</ul></li>
+<li>Wouldn't it be great if all our infrastructure was code ? (Yes for his terraform, cloud formation, Infrastructure as code)</li>
+<li>That code would be deployed and create/ Update / delete our infrastructure</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8101b34" class="outline-3">
+<h3 id="org8101b34">What is CloudFormation</h3>
+<div class="outline-text-3" id="text-org8101b34">
+<ul class="org-ul">
+<li>Cloud Formation is a declarative way of outlining your AWS Infrastructure, for any resources (most of them are supported)</li>
+
+<li>For example, within a CloudForamtion template, you say:
+<ul class="org-ul">
+<li>I want a security group</li>
+<li>I want two EC2 machines using this security group</li>
+<li>I want tow Elastic IPs for these EC2 machines</li>
+<li>I want an S3 Bucket</li>
+<li>I want a load blancer (ELB) infront of these  machines</li>
+</ul></li>
+
+<li>The CloudFormation creates those for you, in the right orde, with the <b>exact configuration</b> that you specify</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org21353c1" class="outline-3">
+<h3 id="org21353c1">Benefits of AWS CloudFormation</h3>
+<div class="outline-text-3" id="text-org21353c1">
+<ul class="org-ul">
+<li>Infrastructure as code
+<ul class="org-ul">
+<li>No resource are manually created, which is execellent for control</li>
+<li>The code can be version controlled for  example using git</li>
+<li>Changes to the infrastructure are reviwed through code</li>
+</ul></li>
+<li>Cost
+<ul class="org-ul">
+<li>Each resources within the stack is staggged with an identifier so you can easily see how much a stack costs you</li>
+<li>You can estimate the costs of your resources using CloudFormation template</li>
+<li><b>Saving Strategy</b>: In Dev, you could automation deletion of templates at 5 PM and  recreatd at 8 AM, saftely</li>
+</ul></li>
+<li>Productivity :
+<ul class="org-ul">
+<li>Ability to destroy and re-create an infrastructure on cloud on the fly</li>
+<li>Automated generation of Diagram for your template</li>
+<li>Declarative programming(no need to figure out ordering and orchestration)</li>
+</ul></li>
+<li><p>
+Separation of concern:
+Create many stacks for many apps, many layers.
+Ex:
+</p>
+<ul class="org-ul">
+<li>VPC stack</li>
+<li>Network stack</li>
+<li>App stack</li>
+</ul>
+<ul class="org-ul">
+<li>Don't re-invent the wheel
+<ul class="org-ul">
+<li>Leverage existing templates on the web !</li>
+<li>Leverage the documentation</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9959e5e" class="outline-3">
+<h3 id="org9959e5e">How CloudFormation Works</h3>
+<div class="outline-text-3" id="text-org9959e5e">
+<ul class="org-ul">
+<li>Templates have to be
+<ul class="org-ul">
+<li>uploaded in S3 and then referenced in CloudFormation</li>
+<li>uplaoded as file</li>
+</ul></li>
+<li>To update a template, we can't edit previous ones. We have to re-uplaod a new version of the template to AWS</li>
+<li>Stackts are identified by a name</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb78593b" class="outline-3">
+<h3 id="orgb78593b">Deploying CloudFormation Templates</h3>
+<div class="outline-text-3" id="text-orgb78593b">
+<ul class="org-ul">
+<li>Manual way:
+<ul class="org-ul">
+<li>Editing templates in the CloudForamtion Designer</li>
+<li>Using the console to input parameters, etc</li>
+</ul></li>
+<li>Automated way :
+<ul class="org-ul">
+<li>Editiong templates in a Yaml file</li>
+<li>Using the AWS CLI to deploy  the templates</li>
+<li>Recommended way when you fully want to automate your flow</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfedf207" class="outline-3">
+<h3 id="orgfedf207">CloudFormation Building Blocks</h3>
+<div class="outline-text-3" id="text-orgfedf207">
+<p>
+Templates componets (one course section for each):
+</p>
+<ul class="org-ul">
+<li><b>Resources :</b> Your AWS resources declared in the template (MANDATORY)</li>
+<li><b>Paramters :</b> Dynamic inputs for your tempalate</li>
+<li><b>Mappings :</b> Static varaibles for your template</li>
+<li><b>Outputs :</b> Reference to what has been created</li>
+<li><b>Conditionals :</b> List of conditions to perform resource creation</li>
+<li><b>Metadata :</b></li>
+<li><b>Helpers</b>:
+<ul class="org-ul">
+<li><b>References</b> :</li>
+<li><b>Functions</b> :</li>
+</ul></li>
+</ul>
+
+<p>
+Note:
+</p>
+<ul class="org-ul">
+<li>This is an introduction to CloudFormation (OVER-VIEW NOT DEEP ONLY FOR EXAMS)
+<ul class="org-ul">
+<li>It can take over 3 hours to properly learn and master Cloudformation</li>
+<li>This section is meants so you get a goog idea of how it works</li>
+<li>We'll be slightly less hands-on than in other section</li>
+
+<li>We'll learn everything we need to answer question for the exam</li>
+<li>The exam does not require you to actually write CloudFormation</li>
+<li>The exam expects you to understand how to read CloudFormation</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org64b32b0" class="outline-2">
+<h2 id="org64b32b0">Create Stack Hands On</h2>
+<div class="outline-text-2" id="text-org64b32b0">
+</div>
+
+<div id="outline-container-org740f997" class="outline-3">
+<h3 id="org740f997">Introduction Example</h3>
+<div class="outline-text-3" id="text-org740f997">
+<ul class="org-ul">
+<li>We're going to create a simple EC2 instance</li>
+<li>Create and add an Elastic IP to it</li>
+<li><p>
+Create and add Two Security Group to it
+</p>
+
+<p>
+Create a EC2 instance 
+</p></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;">---</span>
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: t2.micro 
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdbc359" class="outline-2">
+<h2 id="orgbdbc359">Update and Delete Stack</h2>
+<div class="outline-text-2" id="text-orgbdbc359">
+<p>
+Update your stack
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;">---</span>
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">SecurityGroupDescription</span>:
+    <span style="color: #715ab1;">Description</span>: Security Group Description 
+    <span style="color: #715ab1;">Type</span>: String 
+
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: ami-a4c7edb2
+      <span style="color: #715ab1;">SecurityGroup</span>:
+      - <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+      - <span style="color: #ba2f59; font-weight: bold;">!Ref</span> ServerSercurityGroup
+
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Elatic Ip for our instance</span>
+
+<span style="color: #715ab1;">MyEIP</span>:
+  <span style="color: #715ab1;">Type</span>: AWS:EC2::IP
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">InstanceId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyInstance
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">EC2 security Group</span>
+<span style="color: #715ab1;">SSHSecurityGroup</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: Enable SSH access via port 22 
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">ToPort</span>: 22
+
+<span style="color: #715ab1;">ServerSercurityGroup</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SecurityGroupDescription
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">FromPort</span>: 80
+      <span style="color: #715ab1;">ToPort</span>: 80
+      <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+    - <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">ToPort</span>: 22
+      <span style="color: #715ab1;">CidrIp</span>: 192.168.1.1./32
+</pre>
+</div>
+
+<p>
+This will update the existing stack (Resources in aws) and delete, create and update respectively
+</p>
+
+<div id="org72761bd" class="figure">
+<p><img src="./image-cf/ezgif.com-gif-maker-image-cf.gif" alt="ezgif.com-gif-maker-image-cf.gif" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c2f358" class="outline-2">
+<h2 id="org2c2f358">Yaml  Crash Course</h2>
+<div class="outline-text-2" id="text-org2c2f358">
+<ul class="org-ul">
+<li>Yaml and Json are language use for CloudFormation</li>
+<li>JSON is horrible for CF</li>
+<li>YAML is great in so many ways</li>
+<li>Let's learn bit about it!</li>
+
+<li>Yaml support
+<ul class="org-ul">
+<li><p>
+Key Value Pair (Dict in python )
+</p>
+<ul class="org-ul">
+<li>Nested objects</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">invoice</span>: 3483   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">we can add comments</span>
+<span style="color: #715ab1;">date</span>: 2001-01-23
+<span style="color: #715ab1;">bill-to</span>:
+   <span style="color: #715ab1;">given</span> : Chris
+   <span style="color: #715ab1;">family</span>: Dumars
+   <span style="color: #715ab1;">address</span>:
+      <span style="color: #715ab1;">line</span>: | 458 Walkman Dr. Sute
+      <span style="color: #715ab1;">city</span>: Royal Oak
+      <span style="color: #715ab1;">state</span>: MI
+      <span style="color: #715ab1;">postal</span>: 48046
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+Supports Array
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">products</span>:
+   - <span style="color: #715ab1;">sku</span> : BL394D
+     <span style="color: #715ab1;">quantity</span>: 4
+     <span style="color: #715ab1;">description</span>: Basketball
+     <span style="color: #715ab1;">price</span>: 450.00
+   - <span style="color: #715ab1;">sku</span> : BL443H
+     <span style="color: #715ab1;">quantity</span>: 1
+     <span style="color: #715ab1;">description</span>: Super Hoop
+     <span style="color: #715ab1;">price</span>: 2392.00
+</pre>
+</div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-org834e966" class="outline-2">
+<h2 id="org834e966">Parameters in CloudFormation</h2>
+<div class="outline-text-2" id="text-org834e966">
+</div>
+<div id="outline-container-orgeb5884a" class="outline-3">
+<h3 id="orgeb5884a">What are Paramters</h3>
+<div class="outline-text-3" id="text-orgeb5884a">
+<ul class="org-ul">
+<li>Parameters are a way to provide inputs to yours AWS CloudFormation template</li>
+<li>They're important to know about if:
+<ul class="org-ul">
+<li>You want to resuse your tempaltes across the company</li>
+<li>Some inputs can not be determined ahead of time</li>
+</ul></li>
+<li>Parameters are extremely powerful, controlled and can prevent errors from happening in your templates thanks to types.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge5ea1b3" class="outline-3">
+<h3 id="orge5ea1b3">When should you use a parameter ?</h3>
+<div class="outline-text-3" id="text-orge5ea1b3">
+<ul class="org-ul">
+<li>Ask yourself this
+<ul class="org-ul">
+<li>Is this CloudFormation resource configuration likely to change in the future ?</li>
+<li>If so, make it a paramter.</li>
+</ul></li>
+<li>You won't have to re-upload a template to change its content</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">SecurityGroupDescription</span>:
+    <span style="color: #715ab1;">Description</span>: Security Group Description 
+    <span style="color: #715ab1;">Type</span>: String 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org29f6e42" class="outline-3">
+<h3 id="org29f6e42">Parameters Types (Settings)</h3>
+<div class="outline-text-3" id="text-org29f6e42">
+<ul class="org-ul">
+<li>Paramters can abe controlled by all these settings :</li>
+
+<li><b>Types :</b>
+<ul class="org-ul">
+<li>String</li>
+<li>Number</li>
+<li>ConmmaDelimitedList</li>
+<li>List&lt;Type&gt;</li>
+<li>AWS Parameter (to help catch invalid values - match againts existing values in AWS Account )</li>
+<li>Description</li>
+<li>Constraints</li>
+<li>ConstraintDescription(String)</li>
+<li>Min/Max Length</li>
+<li>Min/Max Value</li>
+<li>Defaults</li>
+<li>AllowedValues (array)</li>
+<li>AllowedPattern (regexg)</li>
+<li>NoEcho  (Boolean)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgca68597" class="outline-3">
+<h3 id="orgca68597">How to Reference a Parameter</h3>
+<div class="outline-text-3" id="text-orgca68597">
+<ul class="org-ul">
+<li>The <code>Fn::Ref</code> function can be leveraged to reference parameters</li>
+<li>Parameters can be used anywhere in a template</li>
+<li><p>
+The shorthand for this in YAML is <code>!Ref</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">DbSubnet1</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:Subnet
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">VpcId</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyVPC
+</pre>
+</div></li>
+
+<li>The function can also reference other elements within the template</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">SecurityGroupDescription</span>:    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Paramter Name </span>
+    <span style="color: #715ab1;">Description</span>: Security Group Description 
+    <span style="color: #715ab1;">Type</span>: String
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: ami-a4c7edb2
+      <span style="color: #715ab1;">SecurityGroup</span>:
+      - <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+<span style="color: #715ab1;">SSHSecurityGroup</span>:     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;"># EC2 security Group</span>
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SecurityGroupDescription
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">ToPort</span>: 22
+</pre>
+</div>
+
+<p>
+In above code we can see <code>!Ref</code> is used to
+</p>
+<ul class="org-ul">
+<li>refer Parameter <code>!Ref SecurityGroupDescription</code> and also</li>
+<li>refer Function <code>!Ref SSHSecurityGroup</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org41850ca" class="outline-3">
+<h3 id="org41850ca">Concept: Pseudo Parameters</h3>
+<div class="outline-text-3" id="text-org41850ca">
+<ul class="org-ul">
+<li>AWS offers pseudo parameters in any CloudFormation template.</li>
+<li><p>
+These can be used at any time and enabled by default
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Reference Value</th>
+<th scope="col" class="org-left">Example Return Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">AWS:AccountId</td>
+<td class="org-left">1234567890</td>
+</tr>
+
+<tr>
+<td class="org-left">AWS:NotificationARNs</td>
+<td class="org-left">[arn:aws:sns:us-east1:1234567890:MyTopic]</td>
+</tr>
+
+<tr>
+<td class="org-left">AWS:NoValue</td>
+<td class="org-left">Does not return a value</td>
+</tr>
+
+<tr>
+<td class="org-left">AWS:Region</td>
+<td class="org-left">us-east-2</td>
+</tr>
+
+<tr>
+<td class="org-left">AWS:StackId</td>
+<td class="org-left">arn:aws:cloudforamtion:us-east-1:1234567890:stack/Mystack/1c2fa620-982a-11e3-aff7-50e241694e0</td>
+</tr>
+
+<tr>
+<td class="org-left">AWS:StackName</td>
+<td class="org-left">MyStack</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgf309e12" class="outline-2">
+<h2 id="orgf309e12">Resources in CloudForamtion</h2>
+<div class="outline-text-2" id="text-orgf309e12">
+</div>
+
+<div id="outline-container-org14f53fe" class="outline-3">
+<h3 id="org14f53fe">What are resources ?</h3>
+<div class="outline-text-3" id="text-org14f53fe">
+<ul class="org-ul">
+<li>Resources are the core of your CloudFormation template (Mandatory)</li>
+<li>They represent the different AWS Components that will be create and configured</li>
+<li>Resource are declared and can reference each other</li>
+<li>AWS figures out creation, updates and deletes for us</li>
+<li>There are over <code>224 types of resource</code>
+<ul class="org-ul">
+<li>We are not describe each and every resources</li>
+</ul></li>
+<li>Resource types indentifiers are of the form:
+<code>AWS::aws-product-name::data-type-name</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf49833f" class="outline-3">
+<h3 id="orgf49833f">How do I find all resources in aws</h3>
+<div class="outline-text-3" id="text-orgf49833f">
+<ul class="org-ul">
+<li>I can't teach you all of the 224 resources, but i can teach learn how to use them.</li>
+<li>All the resources can be found here . <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html</a>
+<ul class="org-ul">
+<li>This section contains reference information for <code>all AWS resource</code> and property types that are <code>supported by AWS CloudFormation</code>.</li>
+</ul></li>
+<li>Example let  see EC2 instance <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html">https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html</a>
+<ul class="org-ul">
+<li>We can see the
+<ul class="org-ul">
+<li>Syntax</li>
+<li>Properties</li>
+<li>Return Value</li>
+<li>Example</li>
+<li>See also</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc80bf1f" class="outline-3">
+<h3 id="orgc80bf1f">FAQ for resources</h3>
+<div class="outline-text-3" id="text-orgc80bf1f">
+<ul class="org-ul">
+<li><p>
+Can I create a dynamic amount of resouces ?
+</p>
+<ul class="org-ul">
+<li>No you can't</li>
+<li>Everything in the CloudFormation template has to be  declared. You can't perform code generation there</li>
+</ul>
+<ul class="org-ul">
+<li>Is every AWS Service supported ?
+<ul class="org-ul">
+<li>Almost . Only a selected few niches are not there yet.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org977c691" class="outline-2">
+<h2 id="org977c691">Mapping in CloudFormation</h2>
+<div class="outline-text-2" id="text-org977c691">
+</div>
+
+<div id="outline-container-orgc2dd699" class="outline-3">
+<h3 id="orgc2dd699">What are mapping ?</h3>
+<div class="outline-text-3" id="text-orgc2dd699">
+<ul class="org-ul">
+<li>Mapping are fixed variables within your CloudForamtion Template</li>
+<li>They're very handy to differentiate between differnet environments (dev vs prod), regions (AWS regions), AMI types, etc.</li>
+<li>All the values are hardcoded within template</li>
+<li><p>
+Example :
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Mappings</span>:
+  <span style="color: #715ab1;">Mapping01</span>:
+     <span style="color: #715ab1;">Key01</span>:
+       <span style="color: #715ab1;">Name</span>: Value01
+     <span style="color: #715ab1;">Key02</span>:
+       <span style="color: #715ab1;">Name</span>: Value02
+     <span style="color: #715ab1;">Key03</span>:
+       <span style="color: #715ab1;">Name</span>: Value03
+</pre>
+</div></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">RegionMap</span>:
+  <span style="color: #715ab1;">us-east-1</span>:
+   <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-6411e20d"</span>
+   <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-7alle213"</span>
+  <span style="color: #715ab1;">us-west-1</span>:
+   <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-c9c7978c"</span>
+   <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-c9c7978a"</span>
+  <span style="color: #715ab1;">eu-west-1</span>:
+   <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-37c2f643"</span>
+   <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-31c2f645"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce4637e" class="outline-3">
+<h3 id="orgce4637e">When would you use mapping vs parameters ?</h3>
+<div class="outline-text-3" id="text-orgce4637e">
+<ul class="org-ul">
+<li>Mapping are great when you know in advance all the values that can be taken and that they can be deduced from variables such as
+<ul class="org-ul">
+<li>Region</li>
+<li>Availabilityzone</li>
+<li>AWS Account</li>
+<li>Environment (dev vs prod)</li>
+<li>Etc ..</li>
+</ul></li>
+<li>They allow safer contorl over the template.</li>
+<li>Use parametrs when the value are really user specific</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2ff7329" class="outline-3">
+<h3 id="org2ff7329">Accessing Mapping Value <code>Fn:FindInMap</code></h3>
+<div class="outline-text-3" id="text-org2ff7329">
+<ul class="org-ul">
+<li>We use <b>Fn::FindInMap</b> to return a named value from a specific key</li>
+<li><p>
+<code>!FindInMap [MapName, TopLevelKey, SecondLevel1Key]</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">AWSTemplateFormatVersion</span>: <span style="color: #2d9574;">'2010-09-09'</span>
+<span style="color: #715ab1;">Mappings</span>:
+  <span style="color: #715ab1;">RegionMap</span>:
+    <span style="color: #715ab1;">us-east-1</span>:
+    <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-6411e20d"</span>
+    <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-7alle213"</span>
+    <span style="color: #715ab1;">us-west-1</span>:
+    <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-c9c7978c"</span>
+    <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-c9c7978a"</span>
+    <span style="color: #715ab1;">eu-west-1</span>:
+    <span style="color: #2d9574;">"32"</span>: <span style="color: #2d9574;">"ami-37c2f643"</span>
+    <span style="color: #2d9574;">"64"</span>: <span style="color: #2d9574;">"ami-31c2f645"</span>
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">myEC2Instance</span>:
+  <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">"AWS::EC2:Instance"</span>
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">ImageId</span>: <span style="color: #ba2f59; font-weight: bold;">!FindInMap</span> [Region, <span style="color: #ba2f59; font-weight: bold;">!Ref</span> <span style="color: #2d9574;">"AWS::Region"</span>, 32]
+    <span style="color: #715ab1;">InstanceType</span>: m1.small
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1bbce6d" class="outline-2">
+<h2 id="org1bbce6d">Output in CloudFormation</h2>
+<div class="outline-text-2" id="text-org1bbce6d">
+</div>
+<div id="outline-container-orgac2eab5" class="outline-3">
+<h3 id="orgac2eab5">What are outputs ?</h3>
+<div class="outline-text-3" id="text-orgac2eab5">
+<ul class="org-ul">
+<li>The outputs section declares optional output values that we can import into other stacks (if you export them first)!</li>
+
+<li>You can also view the output in the AWS Console or in using AWS CLI</li>
+<li>They're very useful for example if you define a network CloudFormation, and <code>output the variables</code> such as <code>VPC ID</code> and your <code>Subnet IDs</code></li>
+<li>It's the best way to perform some collabration cross stack, as you let expert handle their own part of the stack</li>
+<li>You can't delete a CloudForamtion Stack  if its <code>output</code> are being <code>referenced</code> by another CloudForamtion stack.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga895622" class="outline-3">
+<h3 id="orga895622">Outputs Example</h3>
+<div class="outline-text-3" id="text-orga895622">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">SSHSecurityGroup</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: Enable SSH access via port 22 
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">ToPort</span>: 22
+
+<span style="color: #715ab1;">Outputs</span>:
+  <span style="color: #715ab1;">StackSSecurityGroup</span>:
+    <span style="color: #715ab1;">Description</span>: The SSH Security Group for our Company
+    <span style="color: #715ab1;">Value</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> MyCompanyWideSSHSecurityGroup
+    <span style="color: #715ab1;">Export</span>: 
+      <span style="color: #715ab1;">Name</span>: SSHSecurityGroup  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This value is export which can be used(Cross Stack Reference) other stack yaml </span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8898310" class="outline-3">
+<h3 id="org8898310">Cross Stack Reference <code>Fn::ImportValue</code></h3>
+<div class="outline-text-3" id="text-org8898310">
+<ul class="org-ul">
+<li>We then create a second template that leverages that security group</li>
+<li>For this, we use the Fn::ImportValue function</li>
+<li>You can't delete the underlying stack untill all the references are deleted too.</li>
+<li><p>
+Example :
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: ami-a4c7edb2
+      <span style="color: #715ab1;">SecurityGroup</span>:
+      - <span style="color: #ba2f59; font-weight: bold;">!ImportValue</span> SSHSecurityGroup
+</pre>
+</div></li>
+</ul>
+
+<p>
+You can see we are refering other stack function defination using <code>ImportValue</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5047f14" class="outline-2">
+<h2 id="org5047f14">Conditions in CloudFormation</h2>
+<div class="outline-text-2" id="text-org5047f14">
+</div>
+<div id="outline-container-orge699d37" class="outline-3">
+<h3 id="orge699d37">What are conditions used for ?</h3>
+<div class="outline-text-3" id="text-orge699d37">
+<ul class="org-ul">
+<li>Conditons are used to control the creation of resouces or outputs based on a condition.</li>
+
+<li>Condition can be whatever you want them to be, but common ones are :
+<ul class="org-ul">
+<li>Environment (dev/ test/ prod)</li>
+<li>AWS Region</li>
+<li>Any Parameter value</li>
+</ul></li>
+<li>Each conditons can reference another  condition, parameter value or mapping</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6c93795" class="outline-3">
+<h3 id="org6c93795">Define a Condition</h3>
+<div class="outline-text-3" id="text-org6c93795">
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Conditions</span>:
+  CreateProdResources <span style="color: #ba2f59; font-weight: bold;">!Equals</span> [ <span style="color: #ba2f59; font-weight: bold;">!Ref</span> EnvType, prod] 
+</pre>
+</div>
+
+<p>
+The logical Id is for you to choose.
+The intrinsic function (logical) can be any of the following:
+</p>
+<ul class="org-ul">
+<li>Fn::And</li>
+<li>Fn::Equals</li>
+<li>Fn::Not</li>
+<li>Fn::Or</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbe606e3" class="outline-3">
+<h3 id="orgbe606e3">Use Condtions</h3>
+<div class="outline-text-3" id="text-orgbe606e3">
+<ul class="org-ul">
+<li>Condtions can be applied to resources/ outputs/ etc&#x2026;</li>
+<li><p>
+Example : Create a Voluem Attachment only if above defined condition <code>If Env is Production</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MountPoint</span>:
+    <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">"AWS::EC2::VolumeAttachment"</span>
+    <span style="color: #715ab1;">Condition</span>: CreateProdResources 
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ef7ab8" class="outline-2">
+<h2 id="org8ef7ab8">Intrinsic Function</h2>
+<div class="outline-text-2" id="text-org8ef7ab8">
+</div>
+<div id="outline-container-org586f753" class="outline-3">
+<h3 id="org586f753">Imp Intrisic Functions</h3>
+<div class="outline-text-3" id="text-org586f753">
+<ul class="org-ul">
+<li>Fn::Ref</li>
+<li>Fn::GetAtt</li>
+<li>Fn::FindInMap</li>
+<li>Fn::ImportValue</li>
+<li>Fn::Join</li>
+<li>Fn::Sub</li>
+<li>Condition Function (Fn::If, Fn::Not, Fn::Equals, etc&#x2026;)</li>
+</ul>
+</div>
+
+<div id="outline-container-org8ac8a79" class="outline-4">
+<h4 id="org8ac8a79">Fn::Ref</h4>
+<div class="outline-text-4" id="text-org8ac8a79">
+<ul class="org-ul">
+<li>The Fn::Ref function can be leverage to reference
+<ul class="org-ul">
+<li>Parameters =&gt; return the value of the parameter</li>
+<li>Resources =&gt; return the physical Id of the underlying resource (ex:EC2 ID)</li>
+</ul></li>
+<li>THE Short hand for this in yaml is <code>!Ref</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4e5600f" class="outline-4">
+<h4 id="org4e5600f">Fn::GetAtt</h4>
+<div class="outline-text-4" id="text-org4e5600f">
+<ul class="org-ul">
+<li>Attributes are attached to any resouces you create</li>
+<li>To know the attributes of your resouces, the best place to look at is the documentation.</li>
+<li>Example EC2 instance Doc in return value setion
+<a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance-return-values">https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance-return-values</a></li>
+
+<li><p>
+Example create a EC2 instance with a volume attached to it
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyEc2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: t2.micro 
+
+<span style="color: #715ab1;">NewVolume</span>:
+  <span style="color: #715ab1;">Type</span>: <span style="color: #2d9574;">"AWS::EC2::Volume"</span>
+  <span style="color: #715ab1;">Condition</span>: CreateProdResources
+  <span style="color: #715ab1;">Properties</span>: 
+    <span style="color: #715ab1;">Size</span>: 100
+    <span style="color: #715ab1;">AvailabilityZone</span>: <span style="color: #ba2f59; font-weight: bold;">!GetAtt</span> MyEc2Instance.AvailabilityZone
+</pre>
+</div>
+
+<p>
+Here Volume is create in Volume in EC2 Availabilityzone
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4a6eec0" class="outline-4">
+<h4 id="org4a6eec0">FN::FindInMap</h4>
+<div class="outline-text-4" id="text-org4a6eec0">
+<p>
+Refer Accessing Mapping Value <code>Fn:FindInMap</code> Section in <b>Mapping in CloudFormation</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb5b04ef" class="outline-4">
+<h4 id="orgb5b04ef">Fn::ImportValue</h4>
+<div class="outline-text-4" id="text-orgb5b04ef">
+<p>
+Refer Cross Stack Reference <code>Fn::ImportValue</code> SubSection in <b>Output in CloudFormation</b>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd016681" class="outline-4">
+<h4 id="orgd016681">Fn::Join</h4>
+<div class="outline-text-4" id="text-orgd016681">
+<ul class="org-ul">
+<li><p>
+Join values with a delimiter
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ba2f59; font-weight: bold;">!Join</span> [delimiter, [ comma-delimited list of values]]
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Example create "a:b:c"</span>
+
+<span style="color: #ba2f59; font-weight: bold;">!Join</span> [ <span style="color: #2d9574;">":"</span>, [ a, b, c ] ]
+
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org522bc74" class="outline-4">
+<h4 id="org522bc74">Fn::Sub</h4>
+<div class="outline-text-4" id="text-org522bc74">
+<ul class="org-ul">
+<li><code>Fn::Sub</code> or <code>!Sub</code> used to substitute variables from a text. It's a very handy function that will allow you to fully customize your templates.</li>
+
+<li>For example, you can combine <code>Fn::Sub</code> with References or AWS Pseudo variables!</li>
+<li>String must contian <code>${VariableName}</code> and will substitute them</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ba2f59; font-weight: bold;">!Sub</span>
+  - String
+  - {<span style="color: #715ab1;">Var1Name</span>: Var1Value, <span style="color: #715ab1;">Var2Name</span>: Var2Value}
+</pre>
+</div>
+
+
+<p>
+How to use the sub function 
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #ba2f59; font-weight: bold;">!Sub</span> String
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org430232d" class="outline-4">
+<h4 id="org430232d">Condtion Function</h4>
+<div class="outline-text-4" id="text-org430232d">
+<p>
+Already discussed in <code>Define a Condition</code> in <code>Conditions in CloudFormation</code> Section
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org27ff638" class="outline-2">
+<h2 id="org27ff638">User Data</h2>
+<div class="outline-text-2" id="text-org27ff638">
+</div>
+<div id="outline-container-orgc7783bd" class="outline-3">
+<h3 id="orgc7783bd">User Data in EC2 for Cloudformation</h3>
+<div class="outline-text-3" id="text-orgc7783bd">
+<ul class="org-ul">
+<li>We can have user data at EC2 instance launch through the console</li>
+<li>We can also include it in CloudFormation</li>
+<li>The important things to pass is the entire script through the <code>Fn::Base64</code></li>
+<li>Good to know: user data script log is in /var/log/cloud-init-output.log</li>
+<li>Let's see how can we do this using cloudformation</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyEc2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: ami-009d6802948d06e52
+      <span style="color: #715ab1;">SecurityGroup</span>:
+      - <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+      <span style="color: #715ab1;">UserData</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">! /bin/bash -xe</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  yum update -y</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  yum install -y httpd </span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  systemctl start httpd </span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #2d9574;">  systemctl enable httpd</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  echo <span style="color: #2d9574;">"Hello World from user data"</span> &gt; /var/www/html/index.html
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">EC2 security Group</span>
+<span style="color: #715ab1;">SSHSecurityGroup</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: Enable SSH access via port 22 
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">ToPort</span>: 22 
+</pre>
+</div>
+
+<p>
+Here <code>Fn::Base64</code> is used to tell the string user data which need to run during installation
+</p>
+
+<p>
+NOTE: "|" is used to specify the below block is a single line
+</p>
+
+<p>
+NOTE: You see the log of the user-data by <code>cat /var/log/cloud-init-output.log</code> inside the <code>ec2 instance</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb51e1d7" class="outline-2">
+<h2 id="orgb51e1d7">cnf-init : <code>CloudFormation::Init</code></h2>
+<div class="outline-text-2" id="text-orgb51e1d7">
+</div>
+<div id="outline-container-org5f01452" class="outline-3">
+<h3 id="org5f01452">cnf-init</h3>
+<div class="outline-text-3" id="text-org5f01452">
+<ul class="org-ul">
+<li>AWS::CloudFormation::Init must be in the Metadata of a resource</li>
+<li>With the cfn-init script, it helps make complex EC2 configration readable</li>
+<li>EC2 instance will query the CloudFormation service to get init data.</li>
+<li><p>
+Logs go to /var/log/cfn-init.log
+</p>
+
+<div id="org29bb9c4" class="figure">
+<p><img src="./image-cf/ezgif.com-gif-maker-cfn-int.gif" alt="ezgif.com-gif-maker-cfn-int.gif" />    
+</p>
+</div></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">cfn-init.yaml</span>
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyEc2Instance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-1a
+      <span style="color: #715ab1;">InstanceType</span>: t2.small
+      <span style="color: #715ab1;">ImageId</span>: ami-009d6802948d06e52
+      <span style="color: #715ab1;">SecurityGroup</span>:
+      - <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+      <span style="color: #715ab1;">UserData</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #ba2f59; font-weight: bold;">!Sub</span> |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash -xe</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Get the latest CloudFormation package</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    yum update -y aws-cfn-bootstrap 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEc2Instance --region ${AWS::Region} ||
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    error_exit <span style="color: #2d9574;">'Failed to run cfn-init'</span>
+    <span style="color: #715ab1;">Metadata</span>:
+      <span style="color: #715ab1;">Comment</span>: ApacheInstall
+      <span style="color: #715ab1;">AWS::CloudFormation::Init</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">configSets</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  Install</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    - <span style="color: #2d9574;">"ApacheInstall"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">ApacheInstall</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  packages</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    yum</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      httpd</span>: []
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  files</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    /var/www/html/index.html</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      content</span>: <span style="color: #ba2f59; font-weight: bold;">!Sub</span> |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #2d9574;">  &lt;p&gt;Hello!&lt;/p&gt;</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      mode</span>: <span style="color: #2d9574;">'000644'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      owner</span>: root
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      group</span>: root
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  services</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    sysvinit</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      httpd</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #715ab1;">enabled</span>: <span style="color: #4e3163;">true</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #715ab1;">ensureRunning</span>: <span style="color: #4e3163;">true</span>
+
+<span style="color: #715ab1;">SSHSecurityGroup</span>:
+  <span style="color: #715ab1;">Type</span>: AWS::EC2:SecurityGroup
+  <span style="color: #715ab1;">Properties</span>:
+    <span style="color: #715ab1;">GroupDescription</span>: Enable SSH access via port 22 
+    <span style="color: #715ab1;">SecurityGroupIngress</span>:
+    - <span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      <span style="color: #715ab1;">FromPort</span>: 22
+      <span style="color: #715ab1;">IpProtocol</span>: tcp
+      <span style="color: #715ab1;">ToPort</span>: 22
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org972d752" class="outline-2">
+<h2 id="org972d752">cnf-signal and wait condtion</h2>
+<div class="outline-text-2" id="text-org972d752">
+</div>
+<div id="outline-container-orgae40fad" class="outline-3">
+<h3 id="orgae40fad">cfn-signal &amp; wait condtion</h3>
+<div class="outline-text-3" id="text-orgae40fad">
+<ul class="org-ul">
+<li>After running cfn-init we still don't know how to tell CloudFormation that the EC2 instance got properly configured after a <code>cfn-init</code></li>
+<li>For this, we can use the <code>cfn-signal</code> script
+<ul class="org-ul">
+<li>We run cfn-signal right after cfn-init</li>
+<li>Tell CloudFormation service to keep on gooing or fail</li>
+</ul></li>
+<li>We need to define <code>WaitCondition:</code>
+<ul class="org-ul">
+<li>Block the template untill it receives a signal from cfn-signal</li>
+<li><p>
+We attach a <code>Create Policy</code> (also works on EC2, ASG)
+</p>
+
+<div id="org7a68861" class="figure">
+<p><img src="./image-cf/ezgif.com-gif-maker-cnf-signal.gif" alt="ezgif.com-gif-maker-cnf-signal.gif" />
+</p>
+</div></li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://github.com/Abhishek010397/CloudFormation/blob/master/cfn-signal.yaml</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">cfn-signal.yml</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://github.com/DevOps-CodingDojo/testing</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">---</span>
+<span style="color: #715ab1;">Parameters</span>:
+  <span style="color: #715ab1;">SSHKey</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::KeyPair::KeyName
+    <span style="color: #715ab1;">Description</span>: SSH Key Name for EC2 machine
+<span style="color: #715ab1;">Resources</span>:
+  <span style="color: #715ab1;">MyInstance</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::Instance
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">AvailabilityZone</span>: us-east-2c
+      <span style="color: #715ab1;">ImageId</span>: ami-0b59bfac6be064b78
+      <span style="color: #715ab1;">InstanceType</span>: t2.micro
+      <span style="color: #715ab1;">KeyName</span>: <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHKey
+      <span style="color: #715ab1;">SecurityGroups</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>- <span style="color: #ba2f59; font-weight: bold;">!Ref</span> SSHSecurityGroup
+      <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">user data for our EC2 Instance</span>
+      <span style="color: #715ab1;">UserData</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Fn::Base64</span>: 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #ba2f59; font-weight: bold;">!Sub</span> |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/bash -xe</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">get the latest CF package</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  yum update -y aws-cfn-bootstrap
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">start cfn-init</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  /opt/aws/bin/cfn-init -s ${AWS::StackId} -r MyInstance --region ${AWS::Region} 
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Start cfn-signal to the wait condition</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>  /opt/aws/bin/cfn-signal -e $?  --stack ${AWS::StackId} --resource SampleWaitCondition --region ${AWS::Region}
+
+    <span style="color: #715ab1;">Metadata</span>:
+      <span style="color: #715ab1;">Comment</span>: Install a single apache http page
+      <span style="color: #715ab1;">AWS::CloudFormation::Init</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">config</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  packages</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    yum</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      httpd</span>: []
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  files</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span>    <span style="color: #2d9574;">"/var/www/html/index.html"</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      content</span>: |
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #2d9574;">&lt;h1&gt;Hello World&lt;/h1&gt;</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #2d9574;">&lt;p&gt;This was created using cfn-init&lt;/p&gt;</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      mode</span>: <span style="color: #2d9574;">'000644'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  commands</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    hello</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      command</span>: <span style="color: #2d9574;">"echo 'Hello World'&amp;&amp; exit 0"</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">  services</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">    sysvinit</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">      httpd</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #715ab1;">enabled</span>: <span style="color: #2d9574;">'true'</span>
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">                </span><span style="color: #715ab1;">ensureRunning</span>: <span style="color: #2d9574;">'true'</span>
+
+  <span style="color: #715ab1;">SampleWaitCondition</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::CloudFormation::WaitCondition
+    <span style="color: #715ab1;">CreationPolicy</span>:
+      <span style="color: #715ab1;">ResourceSignal</span>:
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Timeout</span>: PT2M
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">Count</span>: <span style="color: #2d9574;">'1'</span>
+
+  <span style="color: #715ab1;">SSHSecurityGroup</span>:
+    <span style="color: #715ab1;">Type</span>: AWS::EC2::SecurityGroup
+    <span style="color: #715ab1;">Properties</span>:
+      <span style="color: #715ab1;">GroupDescription</span>: SSH and HTTP
+      <span style="color: #715ab1;">SecurityGroupIngress</span>:
+      - <span style="color: #715ab1;">IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">FromPort</span>: 22
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">ToPort</span>: 22
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+      - <span style="color: #715ab1;">IpProtocol</span>: tcp
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">FromPort</span>: 80
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">ToPort</span>: 80
+<span style="color: #ff0000; background-color: #ff0000; font-weight: bold;">        </span><span style="color: #715ab1;">CidrIp</span>: 0.0.0.0/0
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6782e70" class="outline-2">
+<h2 id="org6782e70">cnf-signal <code>falures troubleshoot</code></h2>
+<div class="outline-text-2" id="text-org6782e70">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: DeepAlgorithms</p>
+<p class="date">Created: 2023-02-25 Sat 10:20</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

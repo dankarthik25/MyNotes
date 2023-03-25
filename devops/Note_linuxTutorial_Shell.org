@@ -1,0 +1,1351 @@
+#+TITLE: Linux
+#+AUTHOR:    D Karthik
+#+OPTIONS: num:nil
+# +OPTIONS: ^:nil p:t
+# +OPTIONS: toc:nil  Timestamp: nil toc:nil date:nil author:nil
+#+OPTIONS: broken-links:t
+
+#+HTML_HEAD: <link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+* Shabang
+#+BEGIN_SRC sh
+  #! /bin/bash
+  #! /bin/sh     # #! :shabang
+  echo "print in termnal"
+#+END_SRC
+* Type of Shell
+https://www.educba.com/types-of-shells-in-linux/
+- bash (build based on bourne shell ) default shell of many linux distribution
+- csh (C Shell )
+- tcsh (Tab C Shell)  
+- zsh *Z Shell* (Combined feature of bash + csh + ksh)
+- *Fish Shell*  (User Friendly Shell) 
+- Ksh  *Korn Shell*
+  
+[[./linux-img/th-4143612218.jpeg]]
+* Shell Keyword
+|-----------+-------+----------+-------|
+| Echo      | if    | until    | trap  |
+| read      | else  | case     | wait  |
+| set       | fi    | esac     | eval  |
+| unset     | while | break    | exec  |
+| read-only | do    | continue | ulmit |
+| shift     | Done  | exit     | umask |
+| export    | For   | return   |       |
+
+* Run shell script
+#+begin_src sh
+# need to give full permission to the shell-file
+chmod 777 name.sh
+./name.sh
+sh name.sh
+sh -x name.sh
+source name.sh
+#+end_src
+
+* Variable
+#+BEGIN_SRC sh
+  #
+  # varaiable 
+  #
+
+  # systax   <variable-name>=<value>
+  # variable should consist of (a-z,A-Z,0-9, _ ) NO special symbol, variable should not start with number
+
+  #EG:
+  a=10               # declare a varibale int(or) float types
+  b=15               # 
+  salary=10000
+  surname='script'   # declare a string type varibale
+  name=sathish       # assign
+  lastname="script"         
+
+  echo "$a"            # 10 print the variable
+  echo "$b"            # 15
+  echo "$salary"       # 10000
+  echo "name"          # name 
+  echo "$name"         # sathish
+  echo "${name}"       # sathis
+  echo '$name'         # $name
+  echo "Hi my name is $name"      # Hi my name is sathish
+  echo "Hi my name is ${name}"    # Hi my name is sathish
+  echo "${surname}ing is fun"     #script is fun
+  ending
+  echo "This is ${word}${ending}. "
+  src=$HOME
+  des=${HOME}/../../media/${USER}/easystore/mySyn_Home_rsync/
+  cd $src
+  echo "pwd inside src: $(pwd)"   # >>> pwd inside src: /home/karthik
+  cd $des
+  echo "pwd inside des: $(pwd)"   # >>> pwd inside des: /media/karthik/easystore/mySyn_Home_rsync
+
+  #Ex : 
+  #Eg :
+
+  src=/opt/sathish/scripts
+  dest=/temp
+  # will move sbi.war file from scr to dest
+  cp $src/sbi.war $dest/
+
+  # Ex : write a script which will clone from git_url to dest
+  #Filename : clone.sh
+  git_url= https://github.com/devipsstephen/ibm.git
+  dest= /opt/git_repo
+  mkdir -p $dest
+  cd $dest
+  pwd
+  git clone $git_url
+  chrontab -e
+  # # insert
+  # */1 * * * * sh /opt/clone.sh  
+#+END_SRC
+
+* Diff btw " and ' 
+single quotes (') preserves the literal value of each character within the quotes. 
+Enclosing characters in double quotes (") preserves the literal value of all characters within the quotes, with the exception of $, `, \,
+
+#+BEGIN_SRC sh
+echo "${name}"       # >> sathis     # variable are passed ${}
+echo '$name'         # $name
+echo "echo PATH: ${PATH}"            # here PATH is local linux OS global variable so we pass insdie ${}
+echo "echo UID : $(id -un)"          # linux cmd  are executed inside string using $()
+cd $src
+echo "pwd inside src: $(pwd)"   # >>> pwd inside src: /home/karthik
+cd $des
+echo "pwd inside des: $(pwd)"   # >>> pwd inside des: /media/karthik/easystore/mySyn_Home_rsync
+#+END_SRC
+
+* Special Variable
+#+BEGIN_SRC sh
+#!/bin/bash
+
+#
+#    UID
+# 
+
+# Display the UID and username of the user executing this script.
+# Display if the user is the root user or not.
+
+# Display the UID
+echo "Your UID is ${UID}"    # UID special preset variable 
+## >>> Your UID is 1000
+
+# TO more about uid 
+# man bash
+# # vi key binding
+#/UID<ENTER>
+
+# Display the username
+#USER_NAME=$(id -un)
+id 
+#uid=1000(jayradhey) gid=1000(jayradhey) groups=1000(jayradhey),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),114(lpadmin),134(sambashare),999(docker)
+id -u     # -u  or --user >>> 1000 
+id -un    # -u  or --name #>>> jayradhey
+man id    # more details
+
+ 
+USER_NAME=`id -un`    # older style 
+echo "Your username is ${USER_NAME}"
+
+# Display if the user is the root user or not.
+if [[ "${UID}" -eq 0 ]]
+then
+  echo 'You are root.'
+else
+  echo 'You are not root.'
+fi
+
+
+#
+#          ID
+#
+# Print user and group information for  the specified USER or (for current user
+
+man id
+type -a id
+id -u
+id -u -n
+id -un
+
+# whoami
+man whoami
+whoami   #>>>>  jayradhey
+
+# [[ is bash condtion not work in csh shell may not work
+# or 
+# [  is older UNIX way
+
+
+#+END_SRC
+
+* PATH variable,  basename N dirname variable
+
+The search path for commands.  
+It is  a  colon-separated  list of directories  in  which  the  shell looks for commands
+#+BEGIN_SRC sh
+PATH=${PATH}:/opt/softwares/apache-maven-3.6.3/bin
+
+path_maven= /opt/softwares/apache-maven-3.6.3 
+basename /opt/softwares/apache-maven-3.6.3
+# > apache-maven-3.6.3
+
+dirname /opt/softwares/apache-maven-3.6.3
+# > /opt/softwares/
+
+dirname /opt/software/apache-maven-3.6.3/bin/not/here
+# > /opt/softwar/apache-maven-3.6.3/bin/not
+#+END_SRC
+
+#+BEGIN_SRC sh
+dirname "~/WorkSpace_Python"
+# ~
+basename "home/jayaradhe/WorkSpace_Python"
+#WorkSpace_Python
+# $pwd | xargs dirname  #>>> ~
+
+
+echo "You executeed in this command :${0}"
+echo "You used $(dirname ${0}) as the path to $(basename ${0}) script"
+
+NoOfParameter= "${#}"
+echo "You supplied ${NoOfParameters} arguments(s) on the command line."
+
+if [[ "${NoOfParameters}" -lt 1]]
+then 
+    echo "Usage : ${0} USER_NAmE [USER_NAmE]]"
+    exit 1
+fi
+#+END_SRC
+
+* IF statment
+#+BEGIN_SRC 
+#
+# Decision making
+#
+
+#syntax:
+#if [condition]
+#then
+#
+#
+#else
+#
+#fi
+
+# relation operators
+# == eq 
+# >= ge 
+# <= le 
+# =! ne
+# < gt 
+# > lt 
+
+#Ex
+
+age=20
+if [$age>=18] # or [ $age -ge 18]
+then
+  echo "aligible for diving license"
+else
+  echo "not aligible"
+fi
+
+
+
+#Ex : if file(calender.war) exist then backback
+
+src= /opt/calender.war
+dest=/opt/backup
+mkdir -p $dest
+
+if [-f $src]
+then
+     mv $src $dest
+     echo "file is existing"  
+else
+     cp /tmp/Calender.war $dest
+     if [$? ==0]
+        then 
+          echo "deployment is done successfull"
+     fi
+fi
+
+
+
+
+# Ex: Tell weather deployment is sucessfull or failure 
+sh deploy.sh
+
+if[ $? ==0]
+then
+  echo "deployment is done sucessfull"
+else 
+  echo "not success"
+if
+
+# Ex : check if disk space of /dev/xvda1 is more the 3GB then clean the space
+
+thershold=3
+disc= `df-h |grep /dev/xvda1 | awk '{print 4}'| cut -c 1`
+echo "$disc"
+
+if [$disk -gt $threshold]
+then 
+   echo"clean the space"
+else
+   echo"disc space is ok"
+fi
+
+
+#+END_SRC
+
+* If Condition Statment
+#+BEGIN_SRC sh
+#!/bin/bash
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+if [[ "${1}" = 'start' ]]
+then
+  echo 'Starting.'
+elif [[ "${1}" = 'stop' ]]
+then
+  echo 'Stopping.'
+elif [[ "${1}" = 'status' ]]
+then
+  echo 'Status:'
+else
+  echo 'Supply a valid option.' >&2
+  exit 1
+fi
+#+END_SRC
+
+#+BEGIN_SRC sh
+#! /bin/bash
+file=$1
+if [ -e $file ]
+then
+	echo -e "File $file exists"
+else
+	echo -e "File $file doesnt exists"
+fi
+# To check condition "man test"
+#+END_SRC
+
+#+BEGIN_SRC sh
+#!/bin/bash
+echo "Please enter first number"
+read first
+echo "Please enter second number"
+read second
+
+if [ $first -eq 0 ] && [ $second -eq 0 ]
+then
+	echo "Num1 and Num2 are zero"
+elif [ $first -eq $second ]
+then
+	echo "Both Values are equal"
+elif [ $first -gt $second ]
+then
+	echo "$first is greater than $second"
+else
+	echo "$first is lesser than $second"
+fi
+#+END_SRC
+
+#+BEGIN_SRC sh
+if [ “$1” == “moo” ] 
+then
+    echo "$1 is moo" 
+fi
+# Note: you can also use a single “=” instead of a double one.
+#+END_SRC
+
+#+BEGIN_SRC sh
+
+if [ `whoami` != 'root' ]; then
+	echo "Executing the installer script"
+else
+	echo "Root is not allowed to execute the installer script"
+fi
+#+END_SRC
+* If vs Switch 
+#+BEGIN_SRC sh
+!/bin/bash
+
+This script demonstrates the case statement.
+
+Instead of an if statement like this, consider using a case statement instead.
+if [[ "${1}" = 'start' ]]
+then
+  echo 'Starting.'
+elif [[ "${1}" = 'stop' ]]
+then
+  echo 'Stopping.'
+elif [[ "${1}" = 'status' ]]
+then
+  echo 'Status:'
+else
+  echo 'Supply a valid option.' >&2
+  exit 1
+fi
+
+This ideal format of a case statement follows.
+case "${1}" in
+  start)
+    echo 'Starting.'
+    ;;
+  stop)
+    echo 'Stopping.'
+    ;;
+  status|state|--status|--state)
+    echo 'Status:'
+    ;;
+  *)
+    echo 'Supply a valid option.' >&2
+    exit 1
+    ;;
+esac
+
+
+Here is a compact version of the case statement.
+
+case "${1}" in
+  start) echo 'Starting.' ;;
+  stop) echo 'Stopping.' ;;
+  status) echo 'Status:' ;;
+  *)
+    echo 'Supply a valid option.' >&2
+    exit 1
+    ;;
+esac
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+
+# This ideal format of a case statement follows.
+case "${1}" in
+  start)
+    echo 'Starting.'
+    ;;
+  stop)
+    echo 'Stopping.'
+    ;;
+  status|state|--status|--state)
+    echo 'Status:'
+    ;;
+  *)
+    echo 'Supply a valid option.' >&2
+    exit 1
+    ;;
+esac
+
+
+
+#+END_SRC
+* Switch Statment II
+#+BEGIN_SRC sh
+# Here is a compact version of the case statement.
+case "${1}" in
+  start) echo 'Starting.' ;;
+  stop) echo 'Stopping.' ;;
+  status) echo 'Status:' ;;
+  *)
+    echo 'Supply a valid option.' >&2
+    exit 1
+    ;;
+esac
+#+END_SRC
+* Switch 
+#+BEGIN_SRC sh  syntax
+env=moday
+case "$env" in 
+
+"monday") echo "monday";;
+"tuesday") echo "tuesday";;
+"*") echo "invalid opearation"
+esac
+#+END_SRC
+
+#+BEGIN_SRC sh 
+#! /bin/sh
+day= $1
+case $day in 
+"monday") 
+echo "this is monday"
+;;
+case $day in 
+"tue") 
+echo "this is tuesday"
+;;
+"*")
+echo "invalid"
+;;
+esac
+
+#+END_SRC
+
+* for Loop
+The `for' loop executes a sequence of commands for each member in list of items.  
+If `in WORDS ...;' is not present, then `in "$@"' is assumed.  
+For each element in WORDS, NAME is set to that element, and the COMMANDS are executed.
+
+more information man bash #vi /Specia Parameters  or @
+
+#+BEGIN_SRC sh
+# for $vari in 1 2 3 4 5 
+# do
+# #statement
+#done
+
+#! i in 1 2 3 4 5 
+for i in 1 2 3 4 5
+do 
+  echo "$i"
+  echo "$i"
+done
+
+cat name
+#sathish
+#sanjay
+#prabhakar
+#karthik
+#vijay
+#santhosh
+#prasad
+#ravi
+#raa
+#ggg
+#hh
+#kk
+
+# for i in $(cat people_data.csv); do  echo "$i"; done
+for i in `cat name`
+do
+echo "$i"
+done
+
+touch test 
+vi test 
+# welcom 
+cp test test2
+cp test test3
+
+#FileName: file.sh
+#! /bin/sh
+
+for file in /d/chola/*
+do 
+   if ["${file}" == "/d/chola/test"]
+      then
+       sed -i 's/welcome/devops/g'
+      fi
+done
+
+
+for i in `cat /d/chola/test`
+do
+  echo "$i" |sed -i 's/welcome/devops/g'
+done
+#+END_SRC
+
+#+begin_src sh 
+for file in ~/.{path,bash_promt,exports,aliases,functions,extra};do
+  # do some thing
+  # do some thing
+done;
+#+end_src
+* while and Shift loop
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# Demonstrate the use of shift and while loops.
+
+# Display the first three parameters.
+echo "Parameter 1: ${1}"
+echo "Parameter 2: ${2}"
+echo "Parameter 3: ${3}"
+echo
+
+# Loop through all the positional parameters.
+while [[ "${#}" -gt 0 ]]
+do
+  echo "Number of parameters: ${#}"
+  echo "Parameter 1: ${1}"
+  echo "Parameter 2: ${2}"
+  echo "Parameter 3: ${3}"
+  echo
+  shift
+done
+
+
+#+END_SRC
+
+* Argument in shell
+#+BEGIN_SRC sh
+  # passing prameter in shell 
+  # sh  tesh.sh 45 yes 25k shathish
+  #then $0 is test.sh
+  # ${0} is file name
+  # ${1} is 45
+  # ${2} is yes
+  # ${3} is 25k
+  # ${4} is shatish
+  # $#   is No.Of parameter in command line or ${#}
+  # $? : Exist Status of  previous cmd executed sucessfull : true / false(not exectued sucessfull)
+  # "${@} : all parameter starting from 1 or ${1}${2}${3}${4}"
+#+END_SRC
+** Argument Examples
+#+BEGIN_SRC sh
+
+echo "You executeed in this command :${0}"
+
+echo "You used $(dirname ${0}) as the path to $(basename ${0}) script"
+# dirname /home/jayradhe
+## >>/home
+
+# basename /home/jayrade
+## >> jayradae
+
+
+NoOfParameter= "${#}"
+echo "You supplied ${NoOfParameters} arguments(s) on the command line."
+
+if [[ "${NoOfParameters}" -lt 1]]
+then 
+    echo "Usage : ${0} USER_NAmE [USER_NAmE]]"
+    exit 1
+fi
+
+# Generate and display a password for each parameter
+do
+ PASSWORD=$(date +%s%N | sha256sum | head -c48)
+  echo "${USER_NAME}: ${PASSWORD}"
+done
+#+END_SRC
+
+* Function
+
+#+BEGIN_SRC sh
+env = $1
+
+# delete all files in tmp fodler
+delete()
+{
+rm -rf /tmp/*
+}
+
+# copy sbi.war file to username at ip:x.x.x.x  at /tmp
+
+deploy()
+{username= $1
+passwd=$2
+scp sbi.war $username@$passwd: /tmp
+}
+
+if evn == dev
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == sit     # System Integration and Testing
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == preprod
+then 
+deploy dev 192.145.67.8
+fi 
+
+if evn == prod
+then 
+deploy dev 192.145.67.8
+fi 
+
+#+END_SRC
+
+#+BEGIN_SRC sh
+log(){
+# local: The  scope variable inside func exist
+# "${@} : all parameter starting from 1 or ${1}${2}${3}${4}"
+
+local message= "${@}"
+echo "${message}" 
+}
+log 'Hello!'
+log 'This is fun'
+
+# Or
+function log{
+  echo 'You called the log function'
+}
+#+END_SRC
+** Example
+#+BEGIN_SRC sh
+  log(){
+   local VERBOSE="${1}"
+   shift
+   local message= "${@}"         
+   if [["${VERBOSE}"= 'true' ]]
+   then 
+       echo "${message}"
+   fi 
+  }
+  log 'true' 'Hello!'
+
+  VERBOSE='true'
+  log "${VERBOSE}" 'Hello!'
+  log "${VERBOSE}" 'This is fun'
+
+  # 
+  #       READ ONLY VARIABE
+  #
+  log(){
+   local message= "${@}"         
+   if [["${VERBOSE}"= 'true' ]]
+   then 
+       echo "${message}"
+   fi 
+  }
+
+  readonly VERBOSE='true'
+  log  'Hello!'
+  log 'This is fun'
+
+
+  #
+  #    Send msg to sys logger
+  #
+  type -a logger
+  man logger
+  logger 'Hello from udemy course this is linux course'
+  sudo tail /var/log/messages
+
+  logger -t myscript 'Tagging on'
+
+#+END_SRC
+** Functoin for backup files
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# This script demonstrates the use of functions.
+
+log() {
+  # This function sends a message to syslog and to standard output if VERBOSE is true.
+
+  local MESSAGE="${@}"
+  if [[ "${VERBOSE}" = 'true' ]]
+  then
+    echo "${MESSAGE}"
+  fi
+  logger -t luser-demo10.sh "${MESSAGE}"
+}
+
+backup_file() {
+  # This function creates a backup of a file.  Returns non-zero status on error.
+
+  local FILE="${1}"
+
+  # Make sure the file exists.
+  if [[ -f "${FILE}" ]]
+  then
+    local BACKUP_FILE="/var/tmp/$(basename ${FILE}).$(date +%F-%N)"
+    log "Backing up ${FILE} to ${BACKUP_FILE}."
+
+    # The exit status of the function will be the exit sta tus of the cp command.
+    cp -p ${FILE} ${BACKUP_FILE}
+  else
+    # The file does not exist, so return a non-zero exit status.
+    return 1
+  fi
+}
+
+readonly VERBOSE='true'
+log 'Hello!'
+log 'This is fun!'
+
+backup_file /etc/passwd
+
+# Make a decision based on the exit status of the function.
+# Note this is for demonstration purposes.  You could have
+# put this functionality inside of the backup_file function.
+if [[ "${?}" -eq '0' ]]
+then
+  log 'File backup succeeded!'
+else
+  log 'File backup failed!'
+  exit 1
+fi
+#+END_SRC
+
+* Regular expression 
+visit : linuxTutorial.org doc 
+* cut and Awk
+visit : linuxTutorial.org doc 
+* Sort and uniq 
+visit : linuxTutorial.org doc 
+* Sed and Streams (find and replace)
+ Sed = Stream editor
+A stream is data that travels from :
+- One process to another through a pip
+- One file to another as a redirect
+- One device to another.
+
+Standard Input = Standard Input Stream, etc
+Strems are typically textual data
+
+Sed perform text transformations on streams
+Example :
+ - Substitute some text for other text
+ - Remvoe lines
+ - Append textg after given lines
+ - Insert text before certain lines
+
+Sed is used programmatically,not interactively
+sed is 
+#+BEGIN_SRC sh
+## syantax : sed's/search-pattern/replacement-string/flags'
+echo 'Dwight is the assistant regional manager.' > manager.txt
+cat manager.txt
+sed 's/assistant/assistant to the/' manager.txt# s :substitute cmd
+# sed also allow regex for search and repalce
+
+# the original file is not alter or change
+ cat manager.txt
+
+# to change original file
+sed 's/assistant/assistant to the/' manager.txt
+
+
+# Case insensitive :
+echo 'I love my prabhupad' love.txt
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/i' love.txt
+echo 'This is line2' >> love.txt 
+
+# By default sed replace first pattern on line  but not on whole line or multi accurance in same line .
+# replace  muti-occurance we use g-flage
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/g' love.txt
+sed 's/PRABHUPAD/HH A.C.PRABHUPAD/2' love.txt # only 2nd occarance is changed
+
+# create a backup
+sed -i.bak  's/assistant/assistant to the/' manager.txt
+
+
+#+END_SRC
+* SSH (with password N with ssh-key)
+visit : linuxTutorial.org doc 
+
+* I/O redirection 
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# This script demonstrates I/O redirection.
+
+# Redirect STDOUT to a file.
+FILE="/tmp/data"
+head -n1 /etc/passwd > ${FILE}
+
+# Redirect STDIN to a program.
+read LINE < ${FILE}
+echo "LINE contains: ${LINE}"
+
+# Redirect STDOUT to a file, overwriting the file.
+head -n3 /etc/passwd > ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDOUT to a file, appending to the file.
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDIN to a program, using FD 0.
+read LINE 0< ${FILE}
+echo
+echo "LINE contains: ${LINE}"
+
+# Redirect STDOUT to a file using FD 1, overwriting the file.
+head -n3 /etc/passwd 1> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDERR to a file using FD 2.
+ERR_FILE="/tmp/data.err"
+head -n3 /etc/passwd /fakefile 2> ${ERR_FILE}
+echo
+echo "Contents of ${ERR_FILE}:"
+cat ${ERR_FILE}
+
+# Redirect STDOUT and STDERR to a file.
+head -n3 /etc/passwd /fakefile &> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# Redirect STDOUT and STDERR through a pipe.
+echo
+head -n3 /etc/passwd /fakefile |& cat -n
+
+# Send output to STDERR
+echo "This is STDERR!" >&2
+
+# Discard STDOUT
+echo
+echo "Discarding STDOUT:"
+head -n3 /etc/passwd /fakefile > /dev/null
+
+# Discard STDERR
+echo
+echo "Discarding STDERR:"
+head -n3 /etc/passwd /fakefile 2> /dev/null
+
+# Discard STDOUT and STDERR
+echo
+echo "Discarding STDOUT and STDERR:"
+head -n3 /etc/passwd /fakefile &> /dev/null
+
+# Clean up
+rm ${FILE} ${ERR_FILE} &> /dev/null
+
+
+#+END_SRC
+
+* Redirect a file 
+Every process three File Descriptors :
+- FD 0 STDIN  # Input
+- FD 1 STDOUT # output
+- FD 2 STDERR # error 
+
+#+BEGIN_SRC sh
+id -un > id
+"${UID}" > uid
+
+# set password from file/variable
+echo "secret" > password
+sudo pass --stdin einstein < password
+
+# create a password 
+data | sha256sum | head -c10 >> password
+
+######################################################33
+# Redirect STDOUT to a file.
+######################################################33
+
+FILE="/tmp/data"
+head -n1 /etc/passwd > ${FILE}
+
+######################################################33
+# Redirect STDIN to a program.
+######################################################33
+
+read LINE < ${FILE}
+echo "LINE contains: ${LINE}"
+
+######################################################33
+# Redirect STDOUT to a file, overwriting the file.
+######################################################33
+
+head -n3 /etc/passwd > ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+echo "secret" > password_file
+cat password_file
+
+
+######################################################33
+# Redirect STDOUT to a file, appending to the file
+######################################################33
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+
+READ X < /etc/centos-release   # implicit and 
+READ X 0< /etc/centos-release  # explicit
+READ X 0 < /etc/centos-release # SYANTAX ERROR
+echo "${UDI}" > uid
+echo "${UDI}" 1> uid
+
+man head # print 1st 10 lines of each File to standard output, with more tha t 1file
+head  -n1 /etc/passwd /etc/hosts
+
+# If file not exis then 
+
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile  
+# output in terminal is : Has both std output and std error message
+# STDOUTPUT : Are stored in head.out
+# STDERROR : Are stored in head.err
+
+########################################################33
+# RE DIRECT : STDOUT, and print STDERROR
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile > head.out # Error message is re-directed to head.out but printed in terminal
+
+########################################################33
+# RE DIRECT : STDERROR
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2> head.err # Error message is re-directed to head.out but printed in terminal
+
+#######################################################33#
+# RE DIRECT : STDOUT and STDERROR :to seperate files
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile > head.out 2>head.err
+
+########################################################33
+# RE DIRECT : STDOUT and STDERROR :to seperate files
+#######################################################33 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile > head.both 2>&1 #re-direct FD2 at address of Fd1
+# OR  (New way )
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &> head.both
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile &>> head.both # append
+
+#######################################################33
+#  Append STD ERROR to STD OUT  : Doesn't flow(pass) through pipe
+######################################################33# 
+man cat 
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile | cat -n # Error: can't pass err msg
+
+# inorder to pass error throw pip we need to append pass stderr to stdout
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile 2>&1 | cat -n  # Or
+head  -n1 /etc/passwd /etc/hosts /etc/fakefile |& cat -n 
+
+#######################################################33
+#  Append STD OUT to STD ERROR  : Doesn't flow(pass) through pipe
+######################################################33# 
+echo "error" |cat -n
+echo "error" >&2 |cat -n   #or
+echo "error" 1>&2 |cat -n   # same as >&2
+# Why we need to send data from std out to std error ?
+# To echo a msg which stdout  to std error 
+#Ex:
+echo "This is a std error" >&2
+
+######################################################33
+# Redirect STDIN to a program, using FD 0.
+######################################################33
+read LINE 0< ${FILE}
+echo
+echo "LINE contains: ${LINE}"
+
+######################################################33
+# Redirect STDOUT to a file using FD 1, overwriting the file.
+######################################################33
+head -n3 /etc/passwd 1> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+######################################################33
+# Redirect STDERR to a file using FD 2.
+######################################################33
+ERR_FILE="/tmp/data.err"
+head -n3 /etc/passwd /fakefile 2> ${ERR_FILE}
+echo
+echo "Contents of ${ERR_FILE}:"
+cat ${ERR_FILE}
+######################################################33
+# Redirect STDOUT and STDERR to a file.
+######################################################33
+head -n3 /etc/passwd /fakefile &> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+######################################################33
+# Redirect STDOUT and STDERR through a pipe.
+######################################################33
+echo
+head -n3 /etc/passwd /fakefile |& cat -n
+
+######################################################33
+# Send output to STDERR
+######################################################33
+echo "This is STDERR!" >&2
+
+######################################################33
+# Discard STDOUT
+######################################################33
+echo
+echo "Discarding STDOUT:"
+head -n3 /etc/passwd /fakefile > /dev/null
+
+######################################################33
+# Discard STDERR
+######################################################33
+echo
+echo "Discarding STDERR:"
+head -n3 /etc/passwd /fakefile 2> /dev/null
+
+######################################################33
+# Discard STDOUT and STDERR
+######################################################33
+echo
+echo "Discarding STDOUT and STDERR:"
+head -n3 /etc/passwd /fakefile &> /dev/null
+
+######################################################33
+# Clean up
+######################################################33
+rm ${FILE} ${ERR_FILE} &> /dev/null
+
+
+#+END_SRC
+* bel
+#+BEGIN_SRC sh
+( speaker-test -t sine -f 1000 )& pid=$! ; sleep 1s ; kill -9 $pid
+#+END_SRC
+* READ 
+read -p “ prompt_text”
+
+Here we read the data along with some hint text . The hint text helps the user in what he/she has to enter . -p here stands for the prompt . The hint text also called the prompt text.
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# This script creates an account on the local system.
+# You will be prompted for the account name and password.
+
+# Ask for the user name.
+read -p 'Enter the username to create: ' USER_NAME 
+
+# Ask for the real name.
+read -p 'Enter the name of the person who this account is for: ' USER_DETAILS
+
+# Ask for the password.
+# read -p 'Enter the password to use for the account: ' PASSWORD
+
+read -s -p "Enter Password: " password
+echo $password
+
+# Create the user.
+useradd -c "${USER_DETAILS}" -m ${USER_NAME}
+
+# Set the password for the user.
+# NOTE: You can also use the following command:
+#    echo "${USER_NAME}:${PASSWORD}" | chpasswd
+echo ${PASSWORD} | passwd --stdin ${USER_NAME}
+
+# Force password change on first login.
+passwd -e ${USER_NAME}
+#+END_SRC
+* RANDOm 
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# This script generates a list of random passwords.
+
+# A random number as a password.
+PASSWORD="${RANDOM}"
+echo "${PASSWORD}"
+
+# Three random numbers together.
+PASSWORD="${RANDOM}${RANDOM}${RANDOM}"
+echo "${PASSWORD}"
+
+# Use the current date/time as the basis for the password.
+PASSWORD=$(date +%s)
+echo "${PASSWORD}"
+
+# Use nanoseconds to act as randomization.
+PASSWORD=$(date +%s%N)
+echo "${PASSWORD}"
+
+# A better password.
+PASSWORD=$(date +%s%N | sha256sum | head -c32)
+echo "${PASSWORD}"
+
+# An even better password.
+PASSWORD=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c48)
+echo "${PASSWORD}"
+
+# Append a special character to the password.
+SPECIAL_CHARACTER=$(echo '!@#$%^&*()_-+=' | fold -w1 | shuf | head -c1)
+echo "${PASSWORD}${SPECIAL_CHARACTER}"
+
+# shuf 
+echo "karthik" | fold -w1                # print each character in order
+echo "karthik" | fold -w1| shuf          # print each character in random order
+echo "karthik" | fold -w1| shuf |head -c1 # print one character in random
+ 
+#+END_SRC
+* RANDOm II
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# This script generates a random password for each user specified on the comand line.
+
+# Display what the user typed on the command line.
+echo "You executed this command: ${0}"
+
+# Display the path and filename of the script.
+echo "You used $(dirname ${0}) as the path to the $(basename ${0}) script."
+
+# Tell them how many arguments they passed in.
+# (Inside the script they are parameters, outside they are arguments.)
+NUMBER_OF_PARAMETERS="${#}"
+echo "You supplied ${NUMBER_OF_PARAMETERS} argument(s) on the command line."
+
+# Make sure they at least supply one argument.
+if [[ "${NUMBER_OF_PARAMETERS}" -lt 1 ]]
+then
+  echo "Usage: ${0} USER_NAME [USER_NAME]..."
+  exit 1
+fi
+
+# Generate and display a password for each parameter.
+for USER_NAME in "${@}"
+do
+  PASSWORD=$(date "+%s %N" | sha256sum | head -c48)
+  echo "${USER_NAME}: ${PASSWORD}"
+done
+#+END_SRC
+
+* Example 
+deployment process:
+- step 1:
+   - check file is existing or not is /opt
+   - if yes :take back up to buackup folder
+   - if no 
+      - cp new war file to deployment folder /opt
+or
+#+BEGIN_SRC sh
+if [ -f /opt/Calender.war]
+then
+# if exist
+mv
+# create file copy
+else
+   #cp
+fi
+#+END_SRC
+* Example 
+deployment :
+To developers
+To System Integration and Testing
+To Preproduction
+To production 
+
+#+BEGIN_SRC sh
+#! /bin/sh
+#FILEName : deployment.sh
+env = $1
+if ['dev' = $env ] &&[/opt/Calender.war]
+then 
+cp /tem/*.war /opt/dev
+fi
+
+if ['sit' = $env ]
+then 
+cp /tem/*.war /opt/sit
+fi
+if ['preprod' = $env ]
+then 
+cp /tem/*.war /opt/preprod
+fi
+if ['prod' = $env ]
+then 
+cp /tem/*.war /opt/prod
+fi
+
+## sh deployment.sh sit
+#+END_SRC
+* Deletig and Disabling Linux
+type -a userdel    # not found
+which userdel      # no userdel in 
+3) options : userdel cmd is outside the path of shell 
+#+BEGIN_SRC sh
+
+
+#+END_SRC
+* Parsing Command Line Option (getopts)
+#+BEGIN_SRC sh
+# getopts is builtin #type -a getopts
+# help getopts | less
+# Getopts is used by shell procedures to parse position parameters
+#!/bin/bash
+
+# This script generates a random password.
+# The user can set the password length with -l and add a special character with -s.
+
+# Verbose mode can be enabled with -v.
+
+usage() {
+  echo "Usage: ${0} [-vs] [-l LENGTH]" >&2
+  echo 'Generate a random password.' >&2
+  echo '  -l LENGTH  Specify the password length.' >&2
+  echo '  -s         Append a special character to the password.' >&2
+  echo '  -v         Increase verbosity.' >&2
+  exit 1
+}
+
+log() {
+  local MESSAGE="${@}"
+  if [[ "${VERBOSE}" = 'true' ]]
+  then
+    echo "${MESSAGE}"
+  fi
+}
+
+# Set a default password length.
+LENGTH=48
+
+while getopts vl:s OPTION
+do
+  case ${OPTION} in
+    v)
+      VERBOSE='true'
+      log 'Verbose mode on.'
+      ;;
+    l)
+      LENGTH="${OPTARG}"
+      ;;
+    s)
+      USE_SPECIAL_CHARACTER='true'
+      ;;
+    ?)
+      usage
+      ;;
+  esac
+done
+
+# Remove the options while leaving the remaining arguments.
+shift "$(( OPTIND - 1 ))"
+
+if [[ "${#}" -gt 0 ]]
+then
+  usage
+fi
+
+log 'Generating a password.'
+
+PASSWORD=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c${LENGTH})
+
+# Append a special character if requested to do so.
+if [[ "${USE_SPECIAL_CHARACTER}" = 'true' ]]
+then
+  log 'Selecting a random special character.'
+  SPECIAL_CHARACTER=$(echo '!@#$%^&*()_-+=' | fold -w1 | shuf | head -c1)
+  PASSWORD="${PASSWORD}${SPECIAL_CHARACTER}"
+fi
+
+log 'Done.'
+log 'Here is the password:'
+
+# Display the password.
+echo "${PASSWORD}"
+
+exit 0
+
+#+END_SRC

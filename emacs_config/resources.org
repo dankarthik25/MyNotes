@@ -1,0 +1,57 @@
+#+AUTHOR: Karthik
+#+TITLE: resources
+#+PROPERTY: header-args:emacs-lisp :tangle .emacs.d/init.el
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+* TODO Init file 
+How to create a initialization file 
+https://wikemacs.org/wiki/User%27s_Initialization_File
+
+init file sample \\
+https://github.com/daviwil/emacs-from-scratch/blob/9388cf6ecd9b44c430867a5c3dad5f050fdc0ee1/init.el 
+
+* DONE Resouce on init file 
+Emacs Config file in org mode https://github.com/daviwil/dotfiles \\
+Other Emacs Config file in org mode https://github.com/larstvei/dot-emacs/blob/master/init.org
+like 
+#+begin_src 
+(fset 'yes-or-no-p 'y-or-n-p) ;;Answering yes and no to each question from Emacs can be tedious, a single y or n will suffice.
+;; To avoid file system clutter we put all auto saved files in a single directory.
+(defvar emacs-autosave-directory
+  (concat user-emacs-directory "autosaves/")
+  "This variable dictates where to put auto saves. It is set to a
+  directory called autosaves located wherever your .emacs.d/ is
+  located.")
+
+;; Sets all files to be backed up and auto saved in a single directory.
+(setq backup-directory-alist
+      `((".*" . ,emacs-autosave-directory))
+      auto-save-file-name-transforms
+      `((".*" ,emacs-autosave-directory t)))
+
+
+#+end_src
+
+Other Emacs Config file https://hugocisneros.com/org-config/ \\
+Site : https://systemcrafters.cc/emacs-essentials/absolute-beginners-guide-to-emacs/
+* Lear Emacs Lips 
+Learning Emacs Lips Fundamentals
+System Crafter
+https://www.youtube.com/playlist?list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7
+
+* Youtube Playlist 
+See more palylist on SystemCrafters
+https://www.youtube.com/@SystemCrafters/playlist
+
+Youtube Playlist : Emacs From Scratch \\
+Code : https://github.com/daviwil/emacs-from-scratch
+
+Publishing Website with Org 
+Hack Session
+Chatting with emacs
+Build a Second Brain in Emacs
+magit
+Emacs tips
+Effective Window Mangagement in Emcas
+Emacs as IDE
+Emacs Mail
+Evil Mode 

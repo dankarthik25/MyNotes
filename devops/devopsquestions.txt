@@ -1,0 +1,516 @@
+interview questions:
+
+Linux:
+
+1.How to check disc space in linux?
+a) df -h
+
+2. How to check memory or RAM?
+a) free -m
+3) How to delete cache with Ram in linux?
+a) sync; echo 2 > /proc/sys/vm/drop_caches
+
+3) How to check whether process running or not?
+a) ps -ef | grep processname
+
+4) How to check whether port is running or not?
+a) netstat -anp | grep portnumber
+
+5)what are the ports of ssh, http, https, tomcat, sonar, j forg artifactory
+
+a) ssh---22
+http---80
+https---443
+tomcat---8080
+sonar---9000
+jforg artifactory----8081, 8082
+telnet---23
+
+6)how tocheck server connection
+
+a) ping servername/ip address
+
+5) how to kill process?
+a) kill -9 processid
+
+6) How to check logs?
+a) tail -100f cataline.out
+
+7) How to delete older than 30 day files
+a) find path -mtime +30 -exec rm -rf {} \;
+
+8) How to create a tar file?
+a) tar -cvf filename filename.tar
+
+9)how to find a file/direcory
+find path -name filename/directory.
+
+9) how to extract the TAR FILE
+a) tar -xvf tarfile
+
+10) how toview the tar filecontent with extracting
+
+tar -tvf tarfilename.
+
+10) how find STRING or WORD in a file 
+a) grep "string" file name
+
+11) how to replace a string?
+a)  sed -i 's/oldname/newname/g' filename
+
+12) how to give full permissions?
+a) chmod 777 filename
+
+13) how to change file ownership? 
+
+a)   chown -R user:user directory(for directory)
+
+14) how to creat user 
+ a) useradd username
+    passwd anypassed
+
+15) (|) PIPE  by using pipe symbol we can use multiple cmds
+      eg:- ls -latr | grep devops
+
+16) how to connect one linux machine to another linux 
+     ssh username@ip address
+      
+
+17) how to copy a file directory to another machine from one machine 
+      scp -r filename username@ip:/path
+
+18)  download software for internet comd
+    wget url 
+ 
+18) find comd
+a)  find /path -name name 
+      eg:-find /opt -name java
+
+19) how creat a war file  
+a)   mvn archetype:generate
+     given project number
+     version 
+     group id
+     artifat id
+     version
+     package
+     mvn install 
+
+20) mvn lifecycle 
+a)   validate
+     compile
+     test
+     package
+     install 
+     deploy
+
+21) what is the different between install and deploy?
+a)   install :  
+        means deployed in .m2 repo
+     deploy:
+        means deployed on remote repo
+22) how many repositories in maven
+ We have 3  repositories [.m2(local) , central , remote]
+
+22) how to execute mvn profile?
+a)  mvn package -p profilename
+
+23) what is sonar?
+a) sonar is a quality tool
+
+24) what is quality gate?
+a)  to set up conditions   >80 quality gate pass
+
+25) what is quality profile?
+a)  set of rules 
+
+26) what jfrog artifactory?
+
+a) Jfrog artifactory is a remote repo
+use: to store artifacts(war/jar files) in jfrog artifactory
+
+27) what is tomcat
+a) tomcat is a web server to deploy war file in webapps folder
+
+28) what is the defaul port number for tomcat?
+a) 8080
+
+29) how to change tomcat port number?
+
+tomcat->conf->server.xml->connector port=8081
+
+30) how to check logs in tomcat?
+tomcat->logs->catilina.out
+
+31)  How to start server in tomcat?
+tomcat->bin/startup.sh
+nohup startup.sh &
+32) How to stop serverin tomcat?
+tomcat->bin>shutdowm.sh
+
+33) what are plugins you know in jenkins?
+a) maven integration plugin
+   plubish over ssh plugin
+   jforg artifactory plugin
+   sonar integration plugin
+   msbuild plugin
+   role based plugin
+   active directory plugin
+   jenkins backup plugin
+   build pipeline plugin
+   terraform plugin
+   ansible plugin
+
+34) how many ways to intall jenkins
+1) install as a service
+      systemctl start jenkins
+      systemctl stop jenkins
+      systemctl status jenkins
+2) install as a war file 
+tomcat->webapps->jenkins.war file
+
+3) run as a command line?
+java -jar jenkins.war -httpPort=8081
+
+
+35) how to install plugins?
+
+  Manage jenkins-> manage plugins->available
+36) how to install custom plugins?
+manage jenkins-> manage plugins->advanced-> upload
+
+37) how to give permissions in jenkins?
+we are using project based authantication 
+
+38) how to configure master->slave in jenkins
+manage jenkins->manage nodes-> create new  node->
+give name : linuxslave
+no of executors: 2
+remote directory: /opt/jenkins
+lable: apple
+lunch method: ssh
+save
+lunch
+now connected
+
+39) How to configure master->slave using jnlnp plugin?
+
+manage jenkins->manage nodes-> create new  node->
+give name : linuxslave
+no of executors: 2
+remote directory: /opt/jenkins
+lable: apple
+lunch method: commandline master 
+save
+
+now we have jnlnp command
+it will run on windows machine 
+now master jenkins and windows will be connected
+
+r40) How to run database jobs using jenkins?
+a) lique base plugin we are using
+   sql runner plugin    
+41)  how we are creating jenkins jobs?
+using Declarative scripting languege
+pipeline{
+    agent {
+      lable 'apple'
+      }
+     tools{
+       jdk 'java-1.8'
+       maven 'maven3.6.3'
+    stages{
+       stage('checkout'){
+          steps{
+              git 'https://github.com/icici.git'
+}
+}
+ }  
+}
+
+41) How to upload artifacts in Jfrog artifactory?
+first install jfrog artifactory plugin
+second will connect it
+manage jenkins->configure system->artifactory
+url
+username
+passwd
+
+now check connectivity using testconnection
+finaly
+in jenkins job
+
+use send artifacts to artifactory
+url
+local repos libs-release-local
+            libs->snaphot->local
+
+42) how to run sonar test
+in maven we have setting.xml file in .m2 folder
+here we need add 
+sonarid
+username
+passwd
+
+now run 'mvn clean package sonar:sonar'
+
+43) what is svn?
+svn is a version control system which is used to store data
+
+44) what is command to checkout code in svn?
+svn checkout url
+45) how to get latest code in svn?
+svn update
+
+46) what are commands we are using in svn?
+svn add
+svn commit -m"commit file"
+
+47) what is the structure of svn?
+trunk: we are maintaining stable code
+branches: developing happing
+tags: future perpose we are creating tags like v1.0, v1.1 ...etc
+
+48) what is the difference between svn and git?
+svn: in svn we have only oe repogistory 
+svn: svn is a central version control system
+git: in git we have two repogistories
+git: git is a distributed version control system
+
+49) what are the operations we are using in git?
+git add
+git commit -m"created"
+git push
+
+50) what is docker?
+docker is a containerised tool.
+51) how to take images?
+docker pull imagename
+52) how to run container?
+docker run -itd -p 80:80 --name dev imagename
+53) in dockerfile what we are defining?
+FROM java-aplaineimage
+MAINTAINER "jagan"
+WORKDIR /opt
+COPY icici.jar /opt
+ADD https://maven.com/maven.tar /opt
+EXPOSE 8080
+CMD ["java", "-jar","icici.jar"]
+53) How to run docker file?
+a) docker build -t myown:1.2 .
+ 
+54) what is the difference betbeen COPY AND ADD in dockerfile?
+COPY: COPY FILES SOURCE TO inside container
+ADD: 1.COPY FILES SOURCE TO inside container
+     2. download artifacts from internet
+
+55) how to stop container?
+docker stop containerid
+
+56) how to start container?
+docker start containerid
+57) How to go inside container?
+docker exec -it containerid /bin/bash
+
+57) how to remove docker images?
+a) docker rmi imagename
+
+58) How  tocheck images?
+docker images
+
+59) How to remove containers?
+a) Docker rm containerid
+
+60) how to check running containers?
+a) docker ps
+61)How to check all containers?
+a) docker ps -a
+
+58) what is volumes in docker?
+to create backup in host machine and container machine.
+docker run -itd -v /opt:/opt imageid
+
+59) How to reduce image size?
+we can use java-aplaine image as it has less size
+
+60) what is ansible?
+ansible is a configuration management tool. 
+
+61) what is playbook.
+in playbook we can define
+---
+ - hosts: webgroup
+   become: yes
+   vars:
+     package_name: git
+   tasks:
+   - name: install git 
+     yum:
+       name: git
+       state: latest
+
+62) how to run playbook?
+ansible-playbook -i inventory playbookname.yml
+63) what is inventory file?
+we can keep all destination ips
+
+64) how to establish contion between master and slave
+
+step1: create keys
+ssh-keygen
+step2: copy keys
+ssh-copy-id username@passwd
+
+65) what is ELK?
+Elk is montoring tool 
+we have 
+elastic search
+Logstash
+Kibana
+
+66) what is ECR repository in aws?
+ECR : elastic container registory
+to store dockerimages
+67) How to push images to ECR?
+a) ecr login
+   docker push imagename
+
+67) what is ECS?
+ECS: elastic container service
+to create  forgate cluster
+to create forgate service
+to create task defination
+
+68) what is s3?
+s3 is store services in aws
+in s3 to data 
+
+what si s3 life cycle/storage classes?
+standard 
+intelligent 
+one zone
+glacier
+deep glacier
+
+69) what is security group and nacl
+security group: is a state full that means no need to explictly open outbound rules
+it is top of ec2 instance
+nacl: is a state less that means we can explictly open inbound and out bound
+it is top of network
+
+70) what is vpc peering 
+ if you want to connect one vpc to anothere vpc we can use vpc peering 
+
+71) what is NAT gateway
+  private subnet connecting to public subnet using NAT gateway 
+
+72) what is network load balancesing 
+     NLB is a 4th layer of OSI model and it supports TCP,udp,tls ports 
+   it can support to run millons of request persec
+
+73) what application load balancer 
+     ALB is a 7th layer of OSI model and it supports HTTP and HTTPS 
+      it can support path basing routing that means 
+      debt means forword to debt target group 
+      creadit means farword to creadit traget group
+
+74)  what is cloud watch 
+      useing cloud watch we can monitor AWS services 
+
+75) what SNS
+     simple notification services which is used send mail notification 
+
+76) what is autoscaling 
+     based on cpu load we are incressing/decressing  servers 
+
+77) how many types of autoscaling 
+     2types of scaling 
+           1)horzintal scaling 
+           2)vertical scaling 
+
+78) what is horizantal scaling 
+     based on cpu we are incressing EC2 machines 
+
+79) vertical scaling 
+      based on cpu  we are incressing  cpu memory 
+
+80) what is EBS
+        elastic block storage to ctreat voloums and attached to server 
+
+81) how many types of servers 
+     general purpose SSD (gp2 and gp3)
+     provisined IOPS SSD (io2 and io1)
+     throughput optimized HHD and COLD HHD
+
+82) what is DevOps
+     devops is a culture which is used to realse softwares with quality and less time
+
+83) what is jira
+     jira is ticketing tool where we can defind tickets
+ 
+84) what is DevOps role 
+     checkout code from github repo 
+      creat a package by using mvn build tool 
+       and deploy environments like dev,sit,uat,prepord and production 
+ 
+85) in shellscript what is "$?" 
+    it is cheking previos commond status 
+
+86) what is the differences b/w "nohup" and "&"
+     nohup it will creat nohup.outfile running inside 
+      & means it will run backend 
+
+87) how to see nohup.outfile
+     tail -100f filename 
+
+ 88) What s lambda function-------serverless programming 
+
+89) What is terraform-----It is used toprovisioning AWS services
+
+main.tf
+provider "aws"{
+  access_key=wer
+  secreatekey=efew
+}
+
+
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+
+ 
+  } 
+
+resource "aws_vpc" "my_vpc" {
+  cidr_block = "172.16.0.0/16"
+
+  tags = {
+    Name = "tf-example"
+  }
+}
+
+
+
+terraform init   
+terraform plan
+terraorm apply 
+terraform destroy
+
+
+
+
+
+
+
+ 
+
+
+
+
+    
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+# sno    course   name  fee
+# 1      devops   phani 15
+# 2      devops   kar   15
+# 3      devops   san   15

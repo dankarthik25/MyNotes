@@ -1,0 +1,1695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSS notes</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">CSS notes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9e87916">Introduction - 00:00:00</a></li>
+<li><a href="#orga45fb5c">[What is CSS?] - 00:08:21</a>
+<ul>
+<li><a href="#orgb182815">Install VS Code</a></li>
+<li><a href="#org8663304">Why Learn CSS ?</a></li>
+<li><a href="#org2ffa81d">Your first line of CSS</a></li>
+<li><a href="#orgf91e7f7">HTML Refresher :</a></li>
+</ul>
+</li>
+<li><a href="#org270e65b">[Create Our First CSS Website] - 00:23:48</a>
+<ul>
+<li><a href="#orga5ef443">What is DOM ?</a></li>
+<li><a href="#org2fa8532">HTML id and class attribues</a>
+<ul>
+<li><a href="#org7a61e4a">Three ways to add CSS to HTML</a></li>
+<li><a href="#orga4d58c9">CSS Selectors</a></li>
+</ul>
+</li>
+<li><a href="#org75a06a3">Element Selector</a></li>
+<li><a href="#org22c6de2">Id Selector</a></li>
+<li><a href="#orgf2d3732">Class Selector</a></li>
+<li><a href="#org0504f26">Important Notes:</a></li>
+<li><a href="#orgd3078ba">An inline style will override external and internal styles</a></li>
+<li><a href="#orgeb2a0fa">Comment is CSS <code>/*</code> this is comment <code>*/</code></a></li>
+</ul>
+</li>
+<li><a href="#org056719b">Practice Set - 00:57:12</a></li>
+<li><a href="#org146dbf0">[Colors &amp; Backgrounds] - 01:06:32</a>
+<ul>
+<li><a href="#orgf842ed9">Color Property</a></li>
+<li><a href="#org06255ea">Types of color values</a></li>
+<li><a href="#orge3bfa0e">Background-clor property</a></li>
+<li><a href="#org70fc5cb">Background-image property</a></li>
+<li><a href="#org59ed8ff">Background-image repeat property</a></li>
+<li><a href="#orgf225401">Background- size property</a></li>
+<li><a href="#org89bb292">Background-position property</a></li>
+<li><a href="#org3162751">Background- attachment property</a></li>
+<li><a href="#org216bde5">Background shrothand</a></li>
+</ul>
+</li>
+<li><a href="#org9d50645">Practice Set - 01:47:20</a></li>
+<li><a href="#orgb1b2a59">[CSS Box Model] - 02:00:39</a>
+<ul>
+<li><a href="#org377ba94">Set width and height</a></li>
+<li><a href="#orgaf99cf6">Setting Margin &amp; Padding</a></li>
+<li><a href="#orgd6391d2">Setting Border</a></li>
+<li><a href="#org93b0ad7">Border Radius</a></li>
+<li><a href="#org12707df">Margin Collapse :</a></li>
+<li><a href="#orgb988aa7">Box Sizing</a></li>
+</ul>
+</li>
+<li><a href="#org0000224">Practice Set - 02:36:09</a></li>
+<li><a href="#orgc23c428">[Fonts &amp; Display] - 02:49:20</a>
+<ul>
+<li><a href="#org3497638">Display</a>
+<ul>
+<li><a href="#orgbc809f3">Display property</a></li>
+<li><a href="#org7f60d8a">Display : inline</a></li>
+<li><a href="#org438a278">Display: inline-block</a></li>
+<li><a href="#org2a0e77a">Display : none vs visibility: hidden</a></li>
+<li><a href="#orgf1a6d89">text-align property</a></li>
+<li><a href="#orgb388770">text-decoration property</a></li>
+<li><a href="#org756a4b3">text-transform property</a></li>
+<li><a href="#org3202c8e">line-height property</a></li>
+</ul>
+</li>
+<li><a href="#org3c25bbf">Font</a>
+<ul>
+<li><a href="#org9574ebb">font-family</a></li>
+<li><a href="#org9007bec">Web Safe Fonts</a></li>
+<li><a href="#org5d61376">How to add Google fonts</a></li>
+<li><a href="#org10aa969">Other Font property</a></li>
+<li><a href="#orgc5f9a59">Generic familes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orge2848af">Practice Set - 03:29:10</a></li>
+<li><a href="#org856def4">[Size, Position &amp; Lists] - 03:45:26</a>
+<ul>
+<li><a href="#org389d488">Size</a>
+<ul>
+<li><a href="#org75356e4">What wront with pixels ?</a></li>
+<li><a href="#orgc09a7cf">Relative lenghts</a></li>
+<li><a href="#org56c1636">min/max height/width property</a></li>
+</ul>
+</li>
+<li><a href="#org5638d91">position</a></li>
+<li><a href="#orgc8ba831">list-style property</a></li>
+<li><a href="#org0122261">Z-index property</a></li>
+</ul>
+</li>
+<li><a href="#orgc338df2">Practice Set - 04:27:15</a></li>
+<li><a href="#orga34158d">[CSS Flexbox] - 04:35:59</a>
+<ul>
+<li><a href="#org5142e39">float property</a></li>
+<li><a href="#orga1bbb47">Clear property</a></li>
+<li><a href="#org1f948f9">CSS flexbox</a></li>
+<li><a href="#org508252a">Flex-direction property</a></li>
+<li><a href="#orgb861579">Flex properties for parent(flex container)</a></li>
+<li><a href="#org547e768">Flex properties for the children (flex items)</a></li>
+</ul>
+</li>
+<li><a href="#orgbd41674">Practice Set - 04:59:37</a></li>
+<li><a href="#orgcf8d81f"><span class="todo TODO">TODO</span> insert image</a></li>
+<li><a href="#org6cbedee"><span class="todo TODO">TODO</span> insert image</a></li>
+<li><a href="#org6454d87">[CSS Grid &amp; Media Queries] - 05:06:56</a>
+<ul>
+<li><a href="#orga618722">grid-column-gap property</a></li>
+<li><a href="#org31ccfbc">grid-row-gap property</a></li>
+<li><a href="#org6aed49d">grid-gap property</a></li>
+</ul>
+</li>
+<li><a href="#orgdc027ea">Practice Set - 05:30:07</a></li>
+<li><a href="#orgc1298ec">[Transforms, Transitions &amp; Animations] - 05:41:23</a></li>
+<li><a href="#orgbbad77b">Practice Set - 06:47:37</a></li>
+<li><a href="#org0926eb2">Flipkart Clone Project - 07:09:12</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="https://www.youtube.com/watch?v=Edsxf_NBFrw">https://www.youtube.com/watch?v=Edsxf_NBFrw</a> <br />
+CSS Tutorial In Hindi (With Notes) <br />
+CodeWithHarry
+</p>
+
+<div id="outline-container-org9e87916" class="outline-2">
+<h2 id="org9e87916">Introduction - 00:00:00</h2>
+<div class="outline-text-2" id="text-org9e87916">
+<p>
+HTML is just an skeletal layout of a website <br />
+We need CSS to design a webiste, add styles to it and make it look beautiful.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga45fb5c" class="outline-2">
+<h2 id="orga45fb5c">[What is CSS?] - 00:08:21</h2>
+<div class="outline-text-2" id="text-orga45fb5c">
+<p>
+CSS stands for cacscading Style Sheets <br />
+CSS is optional but it convert an off looking HTML page into a beautiful &amp; responsive website
+</p>
+</div>
+<div id="outline-container-orgb182815" class="outline-3">
+<h3 id="orgb182815">Install VS Code</h3>
+<div class="outline-text-3" id="text-orgb182815">
+<p>
+We will use Microsoft Visual Studio Code as a tool to edit our code. <br />
+It is very powerful, free and customizable
+</p>
+</div>
+</div>
+<div id="outline-container-org8663304" class="outline-3">
+<h3 id="org8663304">Why Learn CSS ?</h3>
+<div class="outline-text-3" id="text-org8663304">
+<p>
+CSS is a very demanded skill in the world of web development.<br />
+If you are successfully able to master CSS, you can customize your website as per your liking.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ffa81d" class="outline-3">
+<h3 id="org2ffa81d">Your first line of CSS</h3>
+<div class="outline-text-3" id="text-org2ffa81d">
+<p>
+Create a <code>.css</code> file inside  your directory and add it to your HTML. Add the following line to your CSS
+</p>
+<div class="org-src-container">
+<pre class="src src-css">body{
+    background-color: rgb(60, 24, 225);
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf91e7f7" class="outline-3">
+<h3 id="orgf91e7f7">HTML Refresher :</h3>
+<div class="outline-text-3" id="text-orgf91e7f7">
+<p>
+HTML is a bunch of tags used to lay the structure of a page. <br />
+Download HTML Notes as part of these notes for a details deedrive . If you know basic HTML continue !
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org270e65b" class="outline-2">
+<h2 id="org270e65b">[Create Our First CSS Website] - 00:23:48</h2>
+<div class="outline-text-2" id="text-org270e65b">
+<p>
+We will create our first CSS website in this section.
+</p>
+</div>
+
+<div id="outline-container-orga5ef443" class="outline-3">
+<h3 id="orga5ef443">What is DOM ?</h3>
+<div class="outline-text-3" id="text-orga5ef443">
+<p>
+DOM stands for <code>Document Object Model</code>. When a page is loaded, the brower create a DOM of the page which is constructed as a tree of Objects.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2fa8532" class="outline-3">
+<h3 id="org2fa8532">HTML id and class attribues</h3>
+<div class="outline-text-3" id="text-org2fa8532">
+<p>
+When an HTML element is given and id, it servers as a unique identifier for that element.<br />
+On the other hand, when an HTML element is given a class, it now belongs to that class. More than one elements can belong to a signle class but every element must have a unique id (if assigned).<br />
+We can add multiple class to an element like this
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;div id ="first" class= "C1 C2 C3"&gt;
+    ...
+&lt;/div&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-org7a61e4a" class="outline-4">
+<h4 id="org7a61e4a">Three ways to add CSS to HTML</h4>
+<div class="outline-text-4" id="text-org7a61e4a">
+<ul class="org-ul">
+<li>&lt;style&gt; tag :
+<ul class="org-ul">
+<li><p>
+Adding <code>&lt;style&gt;</code>  <code>&lt;/style&gt;</code> to HTML
+</p>
+<div class="org-src-container">
+<pre class="src src-css">&lt;style&gt;
+    body{   /* body : selector */ 
+	color: red;                    /* Declaration (property: value)*/  
+	background-color: pink;        /* Declaration */
+    }
+    #first{
+	background-color: aqua;
+    }
+    .red{
+	background-color: red;
+    }
+&lt;/style&gt;
+</pre>
+</div></li>
+</ul></li>
+<li>Inline CSS
+<ul class="org-ul">
+<li><p>
+Adding CSS using style attribute in html tag
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;div id= "first" style="background-color: aqua;"&gt;
+   ...
+&lt;/div&gt;
+</pre>
+</div></li>
+</ul></li>
+<li>External CSS
+<ul class="org-ul">
+<li><p>
+Adding a stylesheet (.css) to HTML using <code>&lt;link&gt;</code> tag
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;link rel="stylesheet" type="text/css" href="styles.css" /&gt;
+</pre>
+</div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga4d58c9" class="outline-4">
+<h4 id="orga4d58c9">CSS Selectors</h4>
+<div class="outline-text-4" id="text-orga4d58c9">
+<p>
+A CSS Selector is used to select an HTML element for styling
+</p>
+<div class="org-src-container">
+<pre class="src src-css">body{   /* body : selector */ 
+    color: red;                    /* Declaration (property: value)*/  
+    background-color: pink;        /* Declaration */
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org75a06a3" class="outline-3">
+<h3 id="org75a06a3">Element Selector</h3>
+<div class="outline-text-3" id="text-org75a06a3">
+<p>
+It is used to select an element based off the tagname <br />
+For example
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h2{
+    color: blue;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org22c6de2" class="outline-3">
+<h3 id="org22c6de2">Id Selector</h3>
+<div class="outline-text-3" id="text-org22c6de2">
+<p>
+It is used to select an element with a given id <br />
+For example:
+</p>
+<div class="org-src-container">
+<pre class="src src-css">#first{
+    background-color: aqua;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf2d3732" class="outline-3">
+<h3 id="orgf2d3732">Class Selector</h3>
+<div class="outline-text-3" id="text-orgf2d3732">
+<p>
+It is used to select an element with a given class <br />
+For example <br />
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.red{
+    background-color: red;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0504f26" class="outline-3">
+<h3 id="org0504f26">Important Notes:</h3>
+<div class="outline-text-3" id="text-org0504f26">
+<p>
+We can group secltors like this:
+</p>
+<div class="org-src-container">
+<pre class="src src-css">h1, h2, h3, div{
+    color: blue; /* h1, h2, h3 and div will be of color blue*/
+}
+</pre>
+</div>
+
+<p>
+We can use element class as slector like this:
+</p>
+<div class="org-src-container">
+<pre class="src src-css">p.red{
+color: red; /*all paragraphs of class `red` will get color red */
+}
+</pre>
+</div>
+<p>
+simillarly we can use
+</p>
+<ul class="org-ul">
+<li><code>p#first</code></li>
+<li><code>span#red</code></li>
+</ul>
+
+<p>
+can be used <code>*</code> as a universal selector to select all the elements
+</p>
+<div class="org-src-container">
+<pre class="src src-css">*{
+    margin: 0;
+    padding:0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd3078ba" class="outline-3">
+<h3 id="orgd3078ba">An inline style will override external and internal styles</h3>
+</div>
+<div id="outline-container-orgeb2a0fa" class="outline-3">
+<h3 id="orgeb2a0fa">Comment is CSS <code>/*</code> this is comment <code>*/</code></h3>
+<div class="outline-text-3" id="text-orgeb2a0fa">
+<p>
+The comment in css given inside this tag [ <code>/*</code> <code>*/</code> ]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org056719b" class="outline-2">
+<h2 id="org056719b">Practice Set - 00:57:12</h2>
+<div class="outline-text-2" id="text-org056719b">
+<ul class="org-ul">
+<li><p>
+Create a website with a  <code>class red</code> div which has a <code>backgrond cloro of red</code> and <code>color white</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.red{
+    background-color: red;
+    color:white; 
+}
+.blue{
+    color: blue;
+}
+</pre>
+</div></li>
+
+<li>Create an element with id head and verify that background color works on it as inline external as well as using style tag CSS</li>
+
+<li>Create a css class one and verify that it works on mulitiple elements</li>
+
+<li>Create multiple CSS classes and verify that all of these work on the same element</li>
+
+<li>Have a look at the MDN CSS reference and try to play around with few key value CSS rules.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org146dbf0" class="outline-2">
+<h2 id="org146dbf0">[Colors &amp; Backgrounds] - 01:06:32</h2>
+<div class="outline-text-2" id="text-org146dbf0">
+<p>
+CSS rules are simple key-value pair with a selector <br />
+We can write css rules to chagne color and set backgrounds
+</p>
+</div>
+
+<div id="outline-container-orgf842ed9" class="outline-3">
+<h3 id="orgf842ed9">Color Property</h3>
+<div class="outline-text-3" id="text-orgf842ed9">
+<p>
+CSS color property can be used to set the text color inside an element
+</p>
+<div class="org-src-container">
+<pre class="src src-css">p {
+    color: red; 
+}
+</pre>
+</div>
+<p>
+Simillarly we can set color for different elements
+</p>
+</div>
+</div>
+<div id="outline-container-org06255ea" class="outline-3">
+<h3 id="org06255ea">Types of color values</h3>
+<div class="outline-text-3" id="text-org06255ea">
+<p>
+Following are the most commonly used color values in CSS
+</p>
+<ul class="org-ul">
+<li>RGB :Specify color using Red, green, blue value eg: <code>rgb(200,98,70)</code></li>
+<li>HEX : Sepcify color using hex code eg: <code>#ff7180</code></li>
+<li>HSL : Specify the color using hsl values eg: <code>hsl(8,90%, 63%)</code></li>
+</ul>
+
+<p>
+The value of the color or background color is provided as any one of these values.
+</p>
+
+<p>
+Note: We also have a n RGBA and  HSLA values for color but they are rarely used by beginners, <br />
+A stands for alpha
+</p>
+</div>
+</div>
+<div id="outline-container-orge3bfa0e" class="outline-3">
+<h3 id="orge3bfa0e">Background-clor property</h3>
+<div class="outline-text-3" id="text-orge3bfa0e">
+<p>
+CSS background-color property specifies the background color of a contianer <br />
+For eg:
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.brown{
+    background-color: brown;   /* Can be other types of color as well */
+    color:white; 
+}
+</pre>
+</div>
+
+<p>
+google hex color picker
+get the color of image from google 
+</p>
+</div>
+</div>
+<div id="outline-container-org70fc5cb" class="outline-3">
+<h3 id="org70fc5cb">Background-image property</h3>
+<div class="outline-text-3" id="text-org70fc5cb">
+<p>
+Used to set an image as the background.
+</p>
+<div class="org-src-container">
+<pre class="src src-css">body {
+    background-image:  url("harry.jpg");    /*this image repeate in x &amp; y direction */
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org59ed8ff" class="outline-3">
+<h3 id="org59ed8ff">Background-image repeat property</h3>
+<div class="outline-text-3" id="text-org59ed8ff">
+<p>
+Can be any of :
+</p>
+<ul class="org-ul">
+<li>repeat-x  : repeat in horizontal direction</li>
+<li>repeat-y  : repeat in vertical direction</li>
+<li>no-repeat : image not repeat</li>
+</ul>
+
+<p>
+See more possible value at MDN docs
+</p>
+<div class="org-src-container">
+<pre class="src src-css">body {
+    background-image:  url("harry.jpg");
+    background-repeat: repeat-x /*select in {repeat, repeat-x, repeat-y, no-repeat}*/
+}
+</pre>
+</div>
+<p>
+View MDN reference from vs code short cut or <br />
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat">https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf225401" class="outline-3">
+<h3 id="orgf225401">Background- size property</h3>
+<div class="outline-text-3" id="text-orgf225401">
+<div class="org-src-container">
+<pre class="src src-css">.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+    background-size: contain; /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+/*    background-size: 200px 200px; */
+    color: white;
+}
+
+</pre>
+</div>
+<p>
+Can be following
+</p>
+<ul class="org-ul">
+<li>cover : fits &amp; no empty space remains</li>
+<li>contain : fits &amp; image is fully visible</li>
+<li>auto : display in origina size</li>
+<li>{{width}} : set width &amp; height will be set automatically</li>
+<li>{{width}}{{height}} : set width &amp; height</li>
+</ul>
+
+<p>
+Note : Always check MDN docs to dissect a given CSS property.<br />
+Remember, practice will make you perfect<br />
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">https://developer.mozilla.org/en-US/docs/Web/CSS/background-size</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org89bb292" class="outline-3">
+<h3 id="org89bb292">Background-position property</h3>
+<div class="outline-text-3" id="text-org89bb292">
+<p>
+Set the starting position of a background image.
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">https://developer.mozilla.org/en-US/docs/Web/CSS/background-position</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+/*    background-size: contain; */ /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+    background-size: 200px 200px; 
+    color: white;
+/* Background postion {top, left, center, 25% 75%, bottom 50 px right 100px , right 35% bottom 45% }*/
+    background-position: top center; 
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">div1 {
+    background-position: left top ;   
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3162751" class="outline-3">
+<h3 id="org3162751">Background- attachment property</h3>
+<div class="outline-text-3" id="text-org3162751">
+<p>
+Define a scrollable/ non- scrollable character of a background image.<br />
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment">https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css">.container{
+    width: 334px;
+    height: 344px;
+    background-color: rgb(94,26,184);
+    background-image: url("image.png");
+    background-repeat: no-repeat;
+    /* background-size: contain; */ /*select in {cover, contain, auto, {{width}} , {{width}}{{height}} }*/
+    background-size: 200px 200px; 
+    color: white;
+     /* background-position: top center;  */
+/* background-attachemt {scroll, fixed, local, local, scroll, }*/
+    background-attachment : fixed; /**/  
+}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-css">div1 {
+    background-attachment : fixed; /**/  
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org216bde5" class="outline-3">
+<h3 id="org216bde5">Background shrothand</h3>
+<div class="outline-text-3" id="text-org216bde5">
+<p>
+Single property to set multiple background properties.
+</p>
+<div class="org-src-container">
+<pre class="src src-css">div3 {
+    background: red url("img.png") no-repeat fixed right top;   
+}
+</pre>
+</div>
+<p>
+One of the peorperties can be missing given the other are in order.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9d50645" class="outline-2">
+<h2 id="org9d50645">Practice Set - 01:47:20</h2>
+<div class="outline-text-2" id="text-org9d50645">
+<ul class="org-ul">
+<li><p>
+Create a dark blue navigation bar with light color items
+css code
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;nav&gt;
+    &lt;ul&gt;
+	&lt;li&gt;Home&lt;/li&gt;
+	&lt;li&gt;About&lt;/li&gt;
+	&lt;li&gt;Contact&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    background-color: black;
+    color: white;
+/*    width: 344px;
+    height: 333px; */
+/* Side Navigation Bar */
+    width: 344px;
+    vheight: 100vh; /*for responsive site*/
+/* Horizontal Navigation Bar */
+   /*Need css flexbox*/
+}
+
+</pre>
+</div>
+<p>
+html code 
+</p></li>
+
+<li><p>
+Change the color of the main container on your page to dark red.
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;div class="main"&gt;
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+&lt;/div&gt;
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-css">.main{
+    color: red;
+}
+</pre>
+</div></li>
+<li><p>
+Create a div and add a background image with a given width and height
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;div class="bg"&gt;
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+&lt;/div&gt;
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-css">.bg{
+    width: 344px;
+    height: 334px;
+    background-image: url('index.jpg');
+    background-repeat: no-repeat;
+    background-color: aqua;
+    background-size: 341px 341px;
+
+}
+</pre>
+</div></li>
+<li><p>
+Verify that the background shorthand property works with some of the values skipped.
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;div class="bg"&gt;
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatur inventore. Officiis voluptatem nisi fugit, repellat illo nemo odit soluta fuga quos? Sint iste omnis expedita, quam tempore in quibusdam magni consectetur inventore.
+&lt;/div&gt;
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-css">.bg{
+    width: 344px;
+    height: 3344px;
+    background-image: url('index.jpg');
+    background-repeat: no-repeat;
+    background-color: aqua;
+    background-size: 341px 341px;
+    background-attachment: fixed;
+}
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb1b2a59" class="outline-2">
+<h2 id="orgb1b2a59">[CSS Box Model] - 02:00:39</h2>
+<div class="outline-text-2" id="text-orgb1b2a59">
+<p>
+The CSS box model looks at all the html elements as boxes 
+</p>
+
+<div id="orgbb55cb1" class="figure">
+<p><img src="./images/th-625111471.jpeg" alt="th-625111471.jpeg" />
+</p>
+</div>
+</div>
+<div id="outline-container-org377ba94" class="outline-3">
+<h3 id="org377ba94">Set width and height</h3>
+<div class="outline-text-3" id="text-org377ba94">
+<div class="org-src-container">
+<pre class="src src-css">#box {
+    height : 70px;
+    widht: 70px;
+}
+</pre>
+</div>
+<p>
+Note that the total width/height is calcultaed as follows:
+</p>
+
+<p>
+Total height = height + top/bottom padding + top/bottom border + top/bottom margin <br />
+Total width = width + right/left padding + right/left border + right/left margin
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgaf99cf6" class="outline-3">
+<h3 id="orgaf99cf6">Setting Margin &amp; Padding</h3>
+<div class="outline-text-3" id="text-orgaf99cf6">
+<div class="org-src-container">
+<pre class="src src-css">.box {
+    margin: 3px; /*set top, bottom, left &amp; right values */
+    padding: 4px; 
+    height : 70px;
+    widht: 70px;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">.boxMain{
+    margin: 7px 0px 2px 11px; /*top=7px ,right=0px, bottom=2px, left=7px */
+}
+.boxLast{
+    margin: 7px 3px; /*top &amp; bottom =7px , left &amp; right =3px */
+} 
+</pre>
+</div>
+
+<p>
+We can also set individual margin/padding like this:
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.box1 {
+    margin-top: 70px;
+    margin-bottom: 7px;
+    margin-left:8px;
+    margin-right:9px;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd6391d2" class="outline-3">
+<h3 id="orgd6391d2">Setting Border</h3>
+<div class="outline-text-3" id="text-orgd6391d2">
+<p>
+We can set border as follows
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.bx {
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org93b0ad7" class="outline-3">
+<h3 id="org93b0ad7">Border Radius</h3>
+<div class="outline-text-3" id="text-org93b0ad7">
+<p>
+We can set border radius  to create rounded borders 
+</p>
+<div class="org-src-container">
+<pre class="src src-css">.div2{
+    border-radius: 7px;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org12707df" class="outline-3">
+<h3 id="org12707df">Margin Collapse :</h3>
+<div class="outline-text-3" id="text-org12707df">
+<p>
+When two margins from difference elements overlap, the equivalent margin is the greate of the two.
+This is called margin collapse.
+</p>
+
+<div id="orga2baa5e" class="figure">
+<p><img src="./images/sibling_collapsing.png" alt="sibling_collapsing.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">*{
+    margin: 0;
+    padding: 0;
+}
+.box1{
+    background-color: red;
+    margin: 30px;
+}
+.box2{
+    background-color: aqua;
+    margin: 20px; 
+
+/*    box-sizing: border-box; */
+}
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-css">&lt;div class="box1"&gt;
+	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+&lt;/div&gt;
+&lt;div class="box2"&gt; 
+	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+&lt;/div&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb988aa7" class="outline-3">
+<h3 id="orgb988aa7">Box Sizing</h3>
+<div class="outline-text-3" id="text-orgb988aa7">
+<p>
+Determine what out of padding and border is included in elements width and height. <br />
+Can be content-box border-box
+</p>
+<div class="org-src-container">
+<pre class="src src-css">*{
+    margin: 0;
+    padding: 0;
+}
+.box1{
+    background-color: red;
+    margin: 30px;
+    height: 2320px;
+    width: 233px;
+    border: 2px solid black;
+}
+.box2{
+    background-color: aqua;
+    /* margin: 20px; */
+    height: 20px;
+    width: 100%;
+    padding:6px;
+    border: 5px solid grey;
+/* fit the child container in parent container */
+    box-sizing: border-box;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;div class="box1"&gt;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et tenetur cumque culpa blanditiis asperiores nisi assumenda perferendis. Officiis culpa omnis magnam quas itaque enim mollitia, vel doloremque animi nostrum, possimus sequi, minima necessitatibus temporibus?
+    &lt;div class="box2"&gt; 
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css">.div1 {
+    box-sizing: border-box;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0000224" class="outline-2">
+<h2 id="org0000224">Practice Set - 02:36:09</h2>
+<div class="outline-text-2" id="text-org0000224">
+<ul class="org-ul">
+<li>Create a website layout add a header box, 1 content box and one footer</li>
+
+<li>Add border &amp; margin to above practice</li>
+
+<li>Did the margin collapse between content box and footer ?</li>
+
+<li>Add the boxing -sizing property to context box. What changes did you notice ?</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-css">*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    border: 2px solid white;
+    height: 66px;
+    background: black;
+    color: white;
+}
+.content{
+    background-color: red;
+    height: 90vh;
+    padding:33px;
+    margin:34px;
+}
+footer{
+    background-color: rebeccapurple;
+    margin: 23px;
+}
+.center{
+    text-align: center;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;header&gt;
+    &lt;ul&gt;
+	&lt;li&gt;Home&lt;/li&gt;
+	&lt;li&gt;About&lt;/li&gt;
+	&lt;li&gt;Contact&lt;/li&gt; 
+    &lt;/ul&gt;
+&lt;/header&gt;
+&lt;div class="content"&gt;
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem, placeat distinctio, dolore eveniet at ut optio minima quia maxime et tenetur nihil, vero facere nulla quaerat cupiditate magni? Ipsam rem possimus totam tempore voluptatum?
+&lt;/div&gt;
+&lt;footer&gt;
+    &lt;p class="center"&gt; Copyright &amp;copy; sportsmania007&lt;/p&gt;
+&lt;/footer&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc23c428" class="outline-2">
+<h2 id="orgc23c428">[Fonts &amp; Display] - 02:49:20</h2>
+<div class="outline-text-2" id="text-orgc23c428">
+</div>
+<div id="outline-container-org3497638" class="outline-3">
+<h3 id="org3497638">Display</h3>
+<div class="outline-text-3" id="text-org3497638">
+</div>
+<div id="outline-container-orgbc809f3" class="outline-4">
+<h4 id="orgbc809f3">Display property</h4>
+<div class="outline-text-4" id="text-orgbc809f3">
+<p>
+The CSS dispaly property is used to determine whether an element is treated as a block line element &amp; the layout used for its children. (flexbox/grid/etc).
+</p>
+</div>
+</div>
+<div id="outline-container-org7f60d8a" class="outline-4">
+<h4 id="org7f60d8a">Display : inline</h4>
+<div class="outline-text-4" id="text-org7f60d8a">
+<p>
+Takes only the space requried by the element. No linebreaks before and after. Setting width/height not allowed, No margin/padding is allowed
+</p>
+</div>
+</div>
+<div id="outline-container-org438a278" class="outline-4">
+<h4 id="org438a278">Display: inline-block</h4>
+<div class="outline-text-4" id="text-org438a278">
+<p>
+Similar to inline but setting height, widthm margin and padding is allowed.
+Element can sit next to each other.
+</p>
+</div>
+</div>
+<div id="outline-container-org2a0e77a" class="outline-4">
+<h4 id="org2a0e77a">Display : none vs visibility: hidden</h4>
+<div class="outline-text-4" id="text-org2a0e77a">
+<p>
+With <code>display:none</code> , the element is removed from the document flow. Its space is not blocked.<br />
+With <code>visibility:hidden</code>, the element is hidden but its space is reserved.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf1a6d89" class="outline-4">
+<h4 id="orgf1a6d89">text-align property</h4>
+<div class="outline-text-4" id="text-orgf1a6d89">
+<p>
+Used to set the horizontal alignment of a text
+</p>
+<pre class="example">
+.div1{
+      text-align:center
+}
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb388770" class="outline-4">
+<h4 id="orgb388770">text-decoration property</h4>
+<div class="outline-text-4" id="text-orgb388770">
+<p>
+Used to decorate thet text <br />
+Can be {overline, line-through, underline, none}
+</p>
+</div>
+</div>
+
+<div id="outline-container-org756a4b3" class="outline-4">
+<h4 id="org756a4b3">text-transform property</h4>
+<div class="outline-text-4" id="text-org756a4b3">
+<p>
+Used to specify uppercase and lowercase letters in a text.
+</p>
+
+<pre class="example">
+p.uppercase {
+    text-transform:uppercase;
+}
+</pre>
+</div>
+</div>
+<div id="outline-container-org3202c8e" class="outline-4">
+<h4 id="org3202c8e">line-height property</h4>
+<div class="outline-text-4" id="text-org3202c8e">
+<p>
+Used to specify the space betweeen lines
+</p>
+<pre class="example">
+.small {
+   line-height:0.7;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c25bbf" class="outline-3">
+<h3 id="org3c25bbf">Font</h3>
+<div class="outline-text-3" id="text-org3c25bbf">
+<p>
+Font play a very important role in the look and feel of a website.
+</p>
+</div>
+<div id="outline-container-org9574ebb" class="outline-4">
+<h4 id="org9574ebb">font-family</h4>
+<div class="outline-text-4" id="text-org9574ebb">
+<p>
+font family specifies the font of a text can hold multiple value as a "fallback" system.
+</p>
+<div class="org-src-container">
+<pre class="src src-css">p{
+   font-family: "Times new Roman", monospace; 
+}
+/*Alway have more than one font to ensure the correct font of your choice is rendered.*/
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9007bec" class="outline-4">
+<h4 id="org9007bec">Web Safe Fonts</h4>
+<div class="outline-text-4" id="text-org9007bec">
+<p>
+These fonts are universally installed across browsers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5d61376" class="outline-4">
+<h4 id="org5d61376">How to add Google fonts</h4>
+<div class="outline-text-4" id="text-org5d61376">
+<p>
+In order to use custom google fonts, go to google fonts then select a style and finally paste it to the style.css of your page.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org10aa969" class="outline-4">
+<h4 id="org10aa969">Other Font property</h4>
+<div class="outline-text-4" id="text-org10aa969">
+<p>
+Some of the other font property are listed below:
+</p>
+
+<ul class="org-ul">
+<li>font-size : Set the size of font</li>
+<li>font-style: Sets the font style</li>
+<li>font-variant: Sets whether text is displayed in small-capsule</li>
+<li>font-weight: sets the weight of the font</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc5f9a59" class="outline-4">
+<h4 id="orgc5f9a59">Generic familes</h4>
+<div class="outline-text-4" id="text-orgc5f9a59">
+<p>
+Broad class of simillar fonts eg: serif, sans-serif <br />
+Just like when we say fruit, it can be any fruit.
+</p>
+
+<p>
+font family : specific
+Generic family : Generic
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge2848af" class="outline-2">
+<h2 id="orge2848af">Practice Set - 03:29:10</h2>
+<div class="outline-text-2" id="text-orge2848af">
+<ul class="org-ul">
+<li>Create the following website layout</li>
+<li>Add a footer with Google Font: "Ballu Bahi" to 1st task</li>
+<li>Remove the underline from links in 1st task</li>
+<li>Demostrate the difference between <code>dispaly:none</code> and <code>visibility:hidden</code> using a div</li>
+<li>Change the footer to all upperscase in 1st task</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org856def4" class="outline-2">
+<h2 id="org856def4">[Size, Position &amp; Lists] - 03:45:26</h2>
+<div class="outline-text-2" id="text-org856def4">
+<p>
+There are more units for describing size other than <code>px</code> <br />
+There are <code>rem</code>, <code>em</code>, <code>vw</code>, <code>vh</code>, <code>percentage</code>,&#x2026;etc
+</p>
+</div>
+<div id="outline-container-org389d488" class="outline-3">
+<h3 id="org389d488">Size</h3>
+<div class="outline-text-3" id="text-org389d488">
+</div>
+<div id="outline-container-org75356e4" class="outline-4">
+<h4 id="org75356e4">What wront with pixels ?</h4>
+<div class="outline-text-4" id="text-org75356e4">
+<p>
+Pixels(px) are relative to the viewing device for a device with size 1920x1080, 1px is 1unitof 1080/1920
+</p>
+</div>
+</div>
+<div id="outline-container-orgc09a7cf" class="outline-4">
+<h4 id="orgc09a7cf">Relative lenghts</h4>
+<div class="outline-text-4" id="text-orgc09a7cf">
+<p>
+These units are relative to the other lenght property following are some of the most commonly used relative lenghts
+</p>
+<ul class="org-ul">
+<li><code>em</code>: Unit relative to the parent front size
+<ul class="org-ul">
+<li><code>em</code>: means "my parent element's font size"</li>
+</ul></li>
+<li><code>rem</code> : Unit relative to the root font size (&lt;html&gt; tag)</li>
+<li><code>vm</code> : Unit relative to 1% viewport widht</li>
+<li><code>vh</code> : Unit relative to 1% viewprot height</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org56c1636" class="outline-4">
+<h4 id="org56c1636">min/max height/width property</h4>
+<div class="outline-text-4" id="text-org56c1636">
+<p>
+CSS has a min-height, max-height , min-width and max-width property.
+If the content is smaller than than the minumum height, minimum height will be applied.
+</p>
+
+<p>
+Simillar is the case with other related properties.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5638d91" class="outline-3">
+<h3 id="org5638d91">position</h3>
+<div class="outline-text-3" id="text-org5638d91">
+<p>
+Used to manipulate the location of an element <br />
+Following are the possible values:
+</p>
+<ul class="org-ul">
+<li>static : The default position top/bottom/lefft/right/z-index has no effect.</li>
+<li>relative:The top/bottom/left/right/z-index will now work
+<ul class="org-ul">
+<li>Otherwise the element is in the flow of docuemnt like static</li>
+</ul></li>
+<li>absolute: The element is removed from the flow &amp; is relatively positioned to tis first non-static ancestory top/bottom etc works</li>
+<li>fixed: Just like absolute except the element is positioned relative to the browser window</li>
+<li>sticky : The element is position based on user's scroll position</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc8ba831" class="outline-3">
+<h3 id="orgc8ba831">list-style property</h3>
+<div class="outline-text-3" id="text-orgc8ba831">
+<p>
+The list style property is a shorthand for type, position &amp; image.
+</p>
+<div class="org-src-container">
+<pre class="src src-css">ul{
+   list-style: square inside url("image.png");
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0122261" class="outline-3">
+<h3 id="org0122261">Z-index property</h3>
+<div class="outline-text-3" id="text-org0122261">
+<p>
+The z-index property specifies the stack order of an element.<br />
+It defines which larye will be abive which in case of overlapping elements
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc338df2" class="outline-2">
+<h2 id="orgc338df2">Practice Set - 04:27:15</h2>
+<div class="outline-text-2" id="text-orgc338df2">
+<ul class="org-ul">
+<li>Create a responisce nav bar using relative lenghts</li>
+<li>Create a sticky navebar using position property</li>
+<li>Demostrate the use of list-style property using a vl as example</li>
+<li>Demonstrate the use of z-index using an example</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga34158d" class="outline-2">
+<h2 id="orga34158d">[CSS Flexbox] - 04:35:59</h2>
+<div class="outline-text-2" id="text-orga34158d">
+<p>
+Before we look into CSS-Flexbox , we will look into float and clear properties.
+</p>
+</div>
+<div id="outline-container-org5142e39" class="outline-3">
+<h3 id="org5142e39">float property</h3>
+<div class="outline-text-3" id="text-org5142e39">
+<p>
+Float property is simple. It just flows the elements towards left/right
+</p>
+
+<div id="org9e47f44" class="figure">
+<p><img src="./images/css-float.png" alt="css-float.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga1bbb47" class="outline-3">
+<h3 id="orga1bbb47">Clear property</h3>
+<div class="outline-text-3" id="text-orga1bbb47">
+<p>
+Used to clear the float. It specifies what elements can float besides a given element.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1f948f9" class="outline-3">
+<h3 id="org1f948f9">CSS flexbox</h3>
+<div class="outline-text-3" id="text-org1f948f9">
+<p>
+Aims at providing a better way to layout align and distribute space among items in a container
+</p>
+<pre class="example">
+container{
+   display: flex;
+}
+</pre>
+
+<div id="orgebb609b" class="figure">
+<p><img src="./images/bw4hK0MYxFXbw7ylW2fR5Q.png" alt="bw4hK0MYxFXbw7ylW2fR5Q.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org508252a" class="outline-3">
+<h3 id="org508252a">Flex-direction property</h3>
+<div class="outline-text-3" id="text-org508252a">
+<p>
+Defines the direction towards which items are laid can be {row, row-reverse, column, column-reverse}
+</p>
+</div>
+</div>
+<div id="outline-container-orgb861579" class="outline-3">
+<h3 id="orgb861579">Flex properties for parent(flex container)</h3>
+<div class="outline-text-3" id="text-orgb861579">
+<p>
+Following are the properties for the flex parent:
+</p>
+<ul class="org-ul">
+<li>flex-warp: Can be {wrap, nowrap, wrap-reverse}
+<ul class="org-ul">
+<li>Wrap items as needed with this property.</li>
+</ul></li>
+<li>justify-content: Defines alignment along main axis</li>
+<li>align-items : Defines alignment along cross axis</li>
+<li>align-content: Align a flex container's lines when there is extra space in the cross axis.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org547e768" class="outline-3">
+<h3 id="org547e768">Flex properties for the children (flex items)</h3>
+<div class="outline-text-3" id="text-org547e768">
+<p>
+Following are the properties for the flex children.
+</p>
+<ul class="org-ul">
+<li>order : controls the order in which the items apper in the flex container</li>
+<li>align-self : allows default alignment to be overridden for the indivudual flex items.</li>
+<li>flex-grow: Define the ability for a flex item to grow</li>
+<li>flex-shrink: Specifies how much a flex item will shrink relative to the rest of the items</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbd41674" class="outline-2">
+<h2 id="orgbd41674">Practice Set - 04:59:37</h2>
+<div class="outline-text-2" id="text-orgbd41674">
+<ul class="org-ul">
+<li>Create a layout of your choice using float</li>
+<li>Create the same layout in 1st task using flexbox</li>
+<li>Create the following navigation bar using flexbox</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf8d81f" class="outline-2">
+<h2 id="orgcf8d81f"><span class="todo TODO">TODO</span> insert image</h2>
+<div class="outline-text-2" id="text-orgcf8d81f">
+<ul class="org-ul">
+<li>Create the following layout using flexbox:</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6cbedee" class="outline-2">
+<h2 id="org6cbedee"><span class="todo TODO">TODO</span> insert image</h2>
+</div>
+<div id="outline-container-org6454d87" class="outline-2">
+<h2 id="org6454d87">[CSS Grid &amp; Media Queries] - 05:06:56</h2>
+<div class="outline-text-2" id="text-org6454d87">
+<p>
+A CSS grid can be initialized using
+</p>
+
+<pre class="example">
+.container1{
+   display: grid;
+}
+</pre>
+<p>
+All direct children automatically become grid items
+</p>
+</div>
+
+<div id="outline-container-orga618722" class="outline-3">
+<h3 id="orga618722">grid-column-gap property</h3>
+<div class="outline-text-3" id="text-orga618722">
+<p>
+Use to adjust the space between the comumns fo a css grid.
+</p>
+</div>
+</div>
+<div id="outline-container-org31ccfbc" class="outline-3">
+<h3 id="org31ccfbc">grid-row-gap property</h3>
+<div class="outline-text-3" id="text-org31ccfbc">
+<p>
+Use to adjust the space between the rows of a CSS grid.
+</p>
+</div>
+</div>
+<div id="outline-container-org6aed49d" class="outline-3">
+<h3 id="org6aed49d">grid-gap property</h3>
+<div class="outline-text-3" id="text-org6aed49d">
+<p>
+shorthand property for grid-row-gap &amp; grid-column-gap
+</p>
+<pre class="example">
+.container {
+   display:grid;
+   grid-gap:40 px 100px
+}
+</pre>
+<p>
+Note : For a single value of grid-gap, bot row and column gaps can be set in one value.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc027ea" class="outline-2">
+<h2 id="orgdc027ea">Practice Set - 05:30:07</h2>
+<div class="outline-text-2" id="text-orgdc027ea">
+<ul class="org-ul">
+<li>Create a header with content using CSS grid</li>
+<li>Create the layout create in using css grid</li>
+<li>Create a web-page which is green on large devices, red on medium and yellow on small devices</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc1298ec" class="outline-2">
+<h2 id="orgc1298ec">[Transforms, Transitions &amp; Animations] - 05:41:23</h2>
+</div>
+<div id="outline-container-orgbbad77b" class="outline-2">
+<h2 id="orgbbad77b">Practice Set - 06:47:37</h2>
+</div>
+<div id="outline-container-org0926eb2" class="outline-2">
+<h2 id="org0926eb2">Flipkart Clone Project - 07:09:12</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:42</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,2326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-03-16 Thu 11:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Note_Jenkins</title>
+<meta name="author" content="Karthik" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Note<sub>Jenkins</sub></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgaf25b8c">Udemy Course</a></li>
+<li><a href="#org07f8024">Introduction of Continous Integration[05]</a>
+<ul>
+<li><a href="#org0784971">What is Continous Integration</a>
+<ul>
+<li><a href="#org15718c8">Stage of Adopting CI :</a></li>
+</ul>
+</li>
+<li><a href="#org394b1e1">Continuous Delivery</a></li>
+<li><a href="#orgd41664c">Continous Deployment</a></li>
+</ul>
+</li>
+<li><a href="#org3dd90fc">Introduction to Jenkins</a>
+<ul>
+<li><a href="#org71009fd">What is Jenkis | Jenkins Introduction[06]</a></li>
+<li><a href="#org8aa9cbb">Why use CI with Jenkins</a></li>
+<li><a href="#org9421dff">Advangates of  using Jenkins</a></li>
+<li><a href="#org556e00e">Alterantive</a></li>
+<li><a href="#org18b7110">Install Jenkins [07]</a>
+<ul>
+<li><a href="#org99d68e3">Using zip file</a></li>
+<li><a href="#org1c8d554">Install jenkins in tomcat</a></li>
+<li><a href="#orgac770dc">Install using java</a></li>
+<li><a href="#orgd650efa">Configure  Port</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3a7bcdc">Jenkins Getting Started | Get Jenkins Ready</a>
+<ul>
+<li><a href="#org3ac8817"><span class="todo TODO">TODO</span> Architechural Overview of Jenkins[14]</a></li>
+<li><a href="#orgfb4a94e">1st Job[15]</a></li>
+</ul>
+</li>
+<li><a href="#org83f488f">Continuous Integration with Jenkins</a>
+<ul>
+<li><a href="#org38e8b88">Integration with Git Guthub[16]</a></li>
+<li><a href="#org73a35aa">Configre Jenkins to  Work with maven</a></li>
+<li><a href="#org4f5ada9">Create maven project with Jenkins</a>
+<ul>
+<li><a href="#org7aed9be">Install maven on Host machine [17]</a></li>
+<li><a href="#org6d172fd">Configure Jenkins with Git, maven in Jenkins[19]</a></li>
+<li><a href="#orgc884bd3">Create First Maven Job[20]</a></li>
+</ul>
+</li>
+<li><a href="#orgd895373">Source Code Polling in Jenkins[22]</a>
+<ul>
+<li><a href="#org65ccff1">Trigger Build Remotely[24]</a></li>
+<li><a href="#orgda280cf">Build After Other Project are build[24]</a></li>
+<li><a href="#org8a6ee53">Build Periodically :</a></li>
+<li><a href="#org92889dc">Poll SCM  :</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga3d33e8">Continuous Delivery with Jenkins</a>
+<ul>
+<li><a href="#org84d919d">Archive Jenkins Job[25]</a>
+<ul>
+<li><a href="#org259aa24">artifact's path:</a></li>
+<li><a href="#org66aa675">For Archive Job</a></li>
+</ul>
+</li>
+<li><a href="#org3c0d83a">Install &amp; Configure Tomcat (Staging Env) [26]</a>
+<ul>
+<li><a href="#org3b33353">Install Tomcat</a></li>
+<li><a href="#orgf770062">Change Port Number</a></li>
+<li><a href="#org98b6bd5">Config Tomcat to Deploy Artifact from Jenkins</a></li>
+</ul>
+</li>
+<li><a href="#orgf421456">Deploy Application in Staging Env(Tomcat) from Jenkins [029 Udemy Lecture]</a>
+<ul>
+<li><a href="#orgf26ce67">Configure Jenkins with Tomcat for Auto Deployment of Artifacts.</a></li>
+<li><a href="#org79a2160">Create Job to Produce Tomcat Deployable Artifacts</a></li>
+<li><a href="#orgfca4d0c">Create Job to Deploy Artifacts to Tomcat server or(Staging Env)</a></li>
+</ul>
+</li>
+<li><a href="#orgb0e1c3a">Build Pipeline Plugin[30] :</a></li>
+<li><a href="#orge1587c4">Deploy Application in Production [Udemy 031]</a>
+<ul>
+<li><a href="#org9602702">Step1: Run another tomcat-server at port: 9091</a></li>
+<li><a href="#org7b1368e">Step2: Create a Job &lt;Deploy<sub>Application</sub><sub>Prod</sub><sub>Env</sub>&gt; to Deploy From Stage Evn to Production Env</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb505175">Infrastructure as Code(DSL)[33]</a></li>
+<li><a href="#orgb3b582c">Jenkins DSL Domain Specific Langaugae</a>
+<ul>
+<li><a href="#orgcb6e391">Job DSL Overview[34]</a></li>
+<li><a href="#org30aa85e">Demo DSL Job[35]</a>
+<ul>
+<li><a href="#orgaa36d36">Create groovy script</a></li>
+<li><a href="#org4a02fdf">Push DSL file to github</a></li>
+<li><a href="#org65a2136">Create Job using github groovy file</a></li>
+<li><a href="#org5943f61">Approve DSL script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7b57094">Jenkins as Code Pipeline</a>
+<ul>
+<li><a href="#org41179a6">Code Pipeline Overview[037 Udemy]</a>
+<ul>
+<li><a href="#org92e2af8">Install &lt;Build Pipeline Plugin&gt;</a></li>
+<li><a href="#org52496f0">Create Jenkinsfile and push in github</a></li>
+<li><a href="#org0829dde">Create Job using Jenkinsfile</a></li>
+</ul>
+</li>
+<li><a href="#org9c32fec">Ex: Automate maven project [39]</a>
+<ul>
+<li><a href="#org3302b34">Create Jenkinsfile and push in github</a></li>
+<li><a href="#org1f6e731">Create Job using Jenkinsfile</a></li>
+<li><a href="#org0cc11bf">Trigger Delopy to Staging and Production Env</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org30327f9">Distributated Build in Jenkins</a>
+<ul>
+<li><a href="#org73c9e81">Distributed Builds Concept [41]</a></li>
+<li><a href="#orgdc7258f">Create and Configure Jenkins[42]</a>
+<ul>
+<li><a href="#orgad147a2">Create and Connect Node(Slave-servet) in AWS(SSH- AWS Private key)</a></li>
+<li><a href="#org4966f80"><span class="todo TODO">TODO</span> Create and Connect Node(Slave-servet) in Droplet(By account cmd) (Ubuntu)</a></li>
+<li><a href="#org49750b5">Jenkins Executor</a></li>
+</ul>
+</li>
+<li><a href="#org77bddab"><span class="todo TODO">TODO</span> Concurrent Build , Label Nodes[44]</a></li>
+<li><a href="#orgf5a382e"><span class="todo TODO">TODO</span> Assign particular job to particualar Slave-Node</a></li>
+</ul>
+</li>
+<li><a href="#orga0814e6">Jenkins Integration with Docker</a>
+<ul>
+<li><a href="#orgeb6cb62">Create Docker File of Jenkins File[50]</a>
+<ul>
+<li><a href="#org31f4b7d">Create Jenkinsfile</a></li>
+<li><a href="#orgc955474">Create Docker File</a></li>
+<li><a href="#org0107905">Docker config</a></li>
+<li><a href="#org9029fcc">Create Jenkins Job</a></li>
+</ul>
+</li>
+<li><a href="#orge3e8c1e">Execute Project in Docker [54]</a></li>
+</ul>
+</li>
+<li><a href="#orgcacc259">Parameterized Jenkins Jobs</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org10b57aa">String Parameter[56]</a></li>
+<li><a href="#org2194fbe">Choices Parameter[57]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3784c7d">Jenkins Security Aspect</a>
+<ul>
+<li><a href="#orgcf66c55">Enable Disable Login [59]</a>
+<ul>
+<li><a href="#org3476085">Enable Security</a></li>
+</ul>
+</li>
+<li><a href="#orgf3e946d">Allow User to Sign-Up [60]</a></li>
+<li><a href="#orge0795b3"><span class="todo TODO">TODO</span> Install Powerful Security Plugin</a></li>
+</ul>
+</li>
+<li><a href="#orgf1d39f4">----------------------------------</a></li>
+<li><a href="#org1c3b560">AWS Delivery Code Pipeline:</a></li>
+<li><a href="#orgced28ae">Introduction to AWS Code Deploy &amp; Code Pipeline</a></li>
+<li><a href="#org683f7cc">Get Start with Project</a></li>
+<li><a href="#org27f8f7d">AWS CI/CD Pipline</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaf25b8c" class="outline-2">
+<h2 id="orgaf25b8c">Udemy Course</h2>
+<div class="outline-text-2" id="text-orgaf25b8c">
+<ul class="org-ul">
+<li>Course Content
+<ul class="org-ul">
+<li>Introduction and Setup</li>
+<li>Build Application for Jenkins</li>
+
+<li>Continous Integration with Jenkins</li>
+<li>Continous Delivery with Jenkins</li>
+
+<li>Infrastructure as Code and Automation</li>
+
+<li>DSL Jobs</li>
+
+<li>Pipeline</li>
+<li>Pipeline as code</li>
+
+<li>Jenkins Integration</li>
+
+<li>Advance Jenkins Uses</li>
+<li>Jenkins Distributed Builds</li>
+
+<li>Jenkins &amp; Docker Integration</li>
+<li>Jenkins &amp; AWS Integration</li>
+<li>Jenkins &amp; Ansible Integration</li>
+<li>Jenkins Security Checks management</li>
+<li>Jenkins External Job Trigger</li>
+
+<li>Email Integration with Jenkins</li>
+<li>maven Build Tool Integration</li>
+
+<li>Jenkins Pipline + Docker + maven</li>
+</ul></li>
+
+<li>Objective
+<ul class="org-ul">
+<li>manage CI/CD Flow in Engineering and Production</li>
+<li>Build and DEploy Application with Jenkins</li>
+<li>Integrate Jenkins with DevOps Tools like Docker, Ansible, Kubernetes &amp; Aws</li>
+<li>Build Jenkins Pipline</li>
+<li>Build Jenkins Pipline as Code</li>
+<li>Build Jenkins DSL</li>
+</ul></li>
+</ul>
+
+<p>
+Course Source Code is Uploaded in Github Public
+<a href="https://github.com/anshulc55/Jenkins_Upgradev3">https://github.com/anshulc55/Jenkins_Upgradev3</a>
+<a href="file:///home/karthik/karthik/VideoTutorials/udemy/continous-integration-jenkins-pipelines/01\ Course\ Introduction/001 Jenkins-Course-RoadMap.pdf">file:///home/karthik/karthik/VideoTutorials/udemy/continous-integration-jenkins-pipelines/01\ Course\ Introduction/001 Jenkins-Course-RoadMap.pdf</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org07f8024" class="outline-2">
+<h2 id="org07f8024">Introduction of Continous Integration[05]</h2>
+<div class="outline-text-2" id="text-org07f8024">
+</div>
+<div id="outline-container-org0784971" class="outline-3">
+<h3 id="org0784971">What is Continous Integration</h3>
+<div class="outline-text-3" id="text-org0784971">
+<p>
+Continous Integration (CI) : 
+</p>
+<ul class="org-ul">
+<li>Is a development  practice that require  develpoers to (check-in/push repository) continuously(Continous Development),Each <i>check-in</i> is then verified by an automated build,(build continously) and If Can't build then sys notify developers immediattely,by this developers can quickly detect/debug the error as early as possible. This know as Continous Integration.
+<ul class="org-ul">
+<li>If code is very big file then we build for every 4 hours.If there is error in build, Developers are responsible for fix error within 4-hours.</li>
+</ul></li>
+</ul>
+
+<p>
+Defination:
+</p>
+<ul class="org-ul">
+<li>Practie of merging stable Develop work branch with main branch constantly</li>
+</ul>
+<ul class="org-ul">
+<li>Why we need CI ?
+<ul class="org-ul">
+<li>Significant less back-tracking to discovery where thihngs went wrong.</li>
+<li>CI is cheap.
+<ul class="org-ul">
+<li>means : If we n't follow continuous approch, you'll have longer periods between integrations. This makes it exponentially more difficult to find and fix problem.</li>
+</ul></li>
+<li>Catch issues early and nip them  in  bud</li>
+<li>Spend less time debugging and more time adding features.</li>
+<li>Stop waiting to find out if you code's going to work.</li>
+<li>Reduce integration problem allow you to deliver software more rapidly</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org15718c8" class="outline-4">
+<h4 id="org15718c8">Stage of Adopting CI :</h4>
+<div class="outline-text-4" id="text-org15718c8">
+<ul class="org-ul">
+<li>Principle and Practice 
+<ul class="org-ul">
+<li>maintain a single source repository.</li>
+<li>automate build process (make your build self-testing)</li>
+<li>make it easy for anyone to get the latest executable version(executalbe build)</li>
+<li>Everyone can see what happening  (what is error in build)</li>
+<li>Automate deployment</li>
+</ul></li>
+
+<li>How to Do it
+<ul class="org-ul">
+<li>Developer check out code into their own workspace</li>
+<li>When done, commit the chages to the central-repository</li>
+<li>In CI server
+<ul class="org-ul">
+<li>CI server monitors the repository and check  out changes when they occur then automatically build
+<ul class="org-ul">
+<li>If build sucessful : CI server  deploy artifact for testing(sit,uat,pre-production)</li>
+<li>If build No-sucessfull: Notify the develper Error</li>
+</ul></li>
+<li>CI server assing a build label to the version of code in just built.</li>
+</ul></li>
+</ul></li>
+
+<li>Team Responsibility
+<ul class="org-ul">
+<li>Check in frequently</li>
+<li>Don't check in broken code [block the original code]</li>
+<li>Don't check in untested code</li>
+<li>Don't check in when the build is broken</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org394b1e1" class="outline-3">
+<h3 id="org394b1e1">Continuous Delivery</h3>
+<div class="outline-text-3" id="text-org394b1e1">
+<p>
+<b>Continual Delivery of code</b> to a <b>environment</b> once the code is <b>ready to ship</b>
+</p>
+<ul class="org-ul">
+<li>Environment could be 
+<ul class="org-ul">
+<li>staging (sat,uat, QA, pre-production)</li>
+<li>production.</li>
+</ul></li>
+
+<li>First product is delivery to QAs and Review before shipping to Customer/Production.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd41664c" class="outline-3">
+<h3 id="orgd41664c">Continous Deployment</h3>
+<div class="outline-text-3" id="text-orgd41664c">
+<ul class="org-ul">
+<li>Deploy your product in production</li>
+<li>It is the practice of <b>releasing/deploy</b> <b>every good build</b> to <b>users/production</b>.</li>
+<li>The <b>deployment of Product</b> in <b>Production</b> as soon as it's <b>ready</b>.</li>
+
+<li>By adopting CI/CD you will reduce risks and catch bugs quickly, but also  move rapidly to working sofware</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3dd90fc" class="outline-2">
+<h2 id="org3dd90fc">Introduction to Jenkins</h2>
+<div class="outline-text-2" id="text-org3dd90fc">
+</div>
+<div id="outline-container-org71009fd" class="outline-3">
+<h3 id="org71009fd">What is Jenkis | Jenkins Introduction[06]</h3>
+<div class="outline-text-3" id="text-org71009fd">
+<ul class="org-ul">
+<li>Jenkins is an Open-Source CI/CD written in Java</li>
+<li>Jenkins is automation Tool, used  to build and deliver software Product</li>
+<li>Free written in java</li>
+<li>Jenkins was forked from Another Project called Hudson after dispute with Oracle</li>
+<li>It is server-based application and require a web server like Apache Tomcat.</li>
+<li></li>
+
+<li>Reson Jenkins become so popular is that of its <b>monitoring of repeated task</b> which  <b>arise</b>  during the <b>development</b> of a  project.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8aa9cbb" class="outline-3">
+<h3 id="org8aa9cbb">Why use CI with Jenkins</h3>
+<div class="outline-text-3" id="text-org8aa9cbb">
+<p>
+Why Jeninks for CI
+</p>
+<ul class="org-ul">
+<li>Code is build and test as soon as Developer commits code</li>
+<li>Jenkins will build and test code  many times during the day.</li>
+<li>On Successful build, Jenkins will deploy the source into the test server and notify  deployment team.</li>
+<li>On Build Failure , Jenkins will notify the error to the developer team</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9421dff" class="outline-3">
+<h3 id="org9421dff">Advangates of  using Jenkins</h3>
+<div class="outline-text-3" id="text-org9421dff">
+<ul class="org-ul">
+<li>Jenkins is being managed by the community which is very open. Every month,they hold public meeting and take inputs from public for development of Jenkins</li>
+<li>Jenkins as 320 plugins published</li>
+<li>Support cloud-based Architecher so that you can deploy Jenkins in cloud-based platform.</li>
+<li>Jenkins Support Docker Container, you can containerize Jenkins Service</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org556e00e" class="outline-3">
+<h3 id="org556e00e">Alterantive</h3>
+<div class="outline-text-3" id="text-org556e00e">
+<ul class="org-ul">
+<li>Drone CI</li>
+<li>TeamCity(JetBrains)</li>
+<li>Wercher</li>
+<li>CircleCI</li>
+<li>CodeShip</li>
+<li>SemaPhoreCI</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org18b7110" class="outline-3">
+<h3 id="org18b7110">Install Jenkins [07]</h3>
+<div class="outline-text-3" id="text-org18b7110">
+<ul class="org-ul">
+<li>Jenkins can be install in 3 ways
+<ul class="org-ul">
+<li>1. using executal file (unzip and install)</li>
+<li>2. using java    (java -jar jenkins.war)</li>
+<li>3. inside tomcat (jenkins.war files) 
+<ul class="org-ul">
+<li>install tomcat then copy jenkins.war to tomcat/webapps</li>
+<li>run tomcat start and open <a href="https://localhost:8080/jenkins">https://localhost:8080/jenkins</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org99d68e3" class="outline-4">
+<h4 id="org99d68e3">Using zip file</h4>
+<div class="outline-text-4" id="text-org99d68e3">
+<div class="org-src-container">
+<pre class="src src-sh"># Install java(jenkins is java 8 app) so install openjdk
+sudo apt update
+sudo apt install openjdk-8-jdk
+
+# add Jenkins debian repository 
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - 
+# above cmd  should output OK which means that the key has been successfully imported and packages from this repository will be considered trusted.
+
+# add Jenkins repository to sys 
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list'
+
+
+# install jenkins
+sudo apt update
+sudo apt install jenkins # automatically run jenkins
+
+# check running status of jenkins server 
+systemctl stauts jenkins
+
+# start jenkins
+sudo systemctl start jenkins
+
+sudo service jenkins restart
+sudo service jenkins stop
+sudo service jenkins start
+
+# OR : alternate
+sudo systemctl start jenkins.service
+sudo systemctl stop jenkins.service
+sudo systemctl restart jenkins.service
+
+# Open Firewall
+sudo ufw allow 8080
+
+# set Wrokspace
+
+
+
+# give administator password from : ..../Jenkins/secrets/initialAdminPassword file
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+# select &lt;install suggested plugins&gt;
+
+# sign in to jenkins 
+user     : admin
+password : /Jenkins/secrets/initialAdminPassword
+
+create user : dankarthik
+passwrod : dankarthik
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1c8d554" class="outline-4">
+<h4 id="org1c8d554">Install jenkins in tomcat</h4>
+<div class="outline-text-4" id="text-org1c8d554">
+<div class="org-src-container">
+<pre class="src src-sh">cd /opt/softwares/apache-tomcat-9.0.31/webapps
+
+wget https://updates.jenkins-ci.org/download/war/2.204/jenkins.war
+
+tomcatdown
+tomcatup
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgac770dc" class="outline-4">
+<h4 id="orgac770dc">Install using java</h4>
+<div class="outline-text-4" id="text-orgac770dc">
+<div class="org-src-container">
+<pre class="src src-sh">java -jar jenkins.war
+java -jar jenkins.war --httpPort=9090
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd650efa" class="outline-4">
+<h4 id="orgd650efa">Configure  Port</h4>
+<div class="outline-text-4" id="text-orgd650efa">
+<p>
+In case you want to change the default jenkins port on Linux,
+You can go to /etc/default/jenkins  
+add &#x2013;httpPort=9999 or whatever port to JENKINS<sub>ARGS</sub>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">vi /etc/default/jenkins
+# # port for HTTP connector (default 8080; disable with -1)
+# HTTP_PORT=8080
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3a7bcdc" class="outline-2">
+<h2 id="org3a7bcdc">Jenkins Getting Started | Get Jenkins Ready</h2>
+<div class="outline-text-2" id="text-org3a7bcdc">
+</div>
+<div id="outline-container-org3ac8817" class="outline-3">
+<h3 id="org3ac8817"><span class="todo TODO">TODO</span> Architechural Overview of Jenkins[14]</h3>
+</div>
+<div id="outline-container-orgfb4a94e" class="outline-3">
+<h3 id="orgfb4a94e">1st Job[15]</h3>
+<div class="outline-text-3" id="text-orgfb4a94e">
+<p>
+Jenkins menu
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">New Item</th>
+<th scope="col" class="org-left"># Create a job or project</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">People</td>
+<td class="org-left">#User which are connected to Jenkins</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Build History</td>
+<td class="org-left">#Build</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">manage Jenkins</td>
+<td class="org-left"># manage</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">my views</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">lockable resource</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">credentials</td>
+<td class="org-left">#Create Credentials</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">new view</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<pre class="example">
+(menu)Jenkins 
+	    New Items : _Enter item/Job name_
+	    FreeStyles(ok)
+
+- General 
+  - Description
+  - Discard odl builds : Remove  the old build(#Saveing space in backup servier)
+      - Days to keep builds    :__________
+      - max # of build to keep :__________
+  - GitHub Project 
+      - give url for source code:________
+  - The :Build requires lockable resource
+
+  - The Project is parametrized :
+	 : Project require agruments to be passed 
+  - Throttle builds   # No.of Concurrent(parallel) build
+  - Execute concurrent build if necessary
+
+- Source Code management
+   Git : _url____________ 
+   Subversion:
+
+
+- Build Triggers
+   - Trigger Build remotely: using url or (Authentication Token)
+
+   - Build after other project are build :
+
+   - Build Periodically 
+	       -  # * * * * * 
+
+    - Github hook for GIT_SCm Polling
+    - Poll SCm
+	- # * * * * * # Chanage in code very 1 minint
+- Build Environment
+  - Delete Workspace before build starts (discard old build result and start fresh build)
+  - Use secret text or file
+	 - password protection
+    - Abort build if it's stuck
+    - Inspect build log for published Gradle build scans
+- Build
+   - Execute shell
+   - Execute Powershell
+   - 
+
+- Post-build Actions
+  - E-mail Notification
+  - Editable Notification
+  - Git Publisher
+  - Set Github commit status
+  - Delete workspace when build is done
+
+</pre>
+
+
+
+<p>
+Build a job
+Double Click Project &gt; Build Now
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org83f488f" class="outline-2">
+<h2 id="org83f488f">Continuous Integration with Jenkins</h2>
+<div class="outline-text-2" id="text-org83f488f">
+</div>
+<div id="outline-container-org38e8b88" class="outline-3">
+<h3 id="org38e8b88">Integration with Git Guthub[16]</h3>
+<div class="outline-text-3" id="text-org38e8b88">
+<p>
+git sample project : <a href="https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/maven-samples/single-module">https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/maven-samples/single-module</a>
+</p>
+
+<p>
+We take maven project as example for git integration
+</p>
+
+
+<pre class="example">
+- Steps : 
+   - Install git in localhost:apt-get install git
+   - mange jenkins : 
+	   - manage plugins:
+	      - Install Github Integration: in jenkins
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org73a35aa" class="outline-3">
+<h3 id="org73a35aa">Configre Jenkins to  Work with maven</h3>
+<div class="outline-text-3" id="text-org73a35aa">
+<pre class="example">
+mangae jenkins &gt; 
+   - Global Tool Configuration &gt; 
+	- Add jkd installation
+	- Add Git
+	- Add maven
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org4f5ada9" class="outline-3">
+<h3 id="org4f5ada9">Create maven project with Jenkins</h3>
+<div class="outline-text-3" id="text-org4f5ada9">
+</div>
+<div id="outline-container-org7aed9be" class="outline-4">
+<h4 id="org7aed9be">Install maven on Host machine [17]</h4>
+<div class="outline-text-4" id="text-org7aed9be">
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install maven
+maven --version
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6d172fd" class="outline-4">
+<h4 id="org6d172fd">Configure Jenkins with Git, maven in Jenkins[19]</h4>
+<div class="outline-text-4" id="text-org6d172fd">
+<pre class="example">
+- Steps:
+  - Search for maven path
+    - Form teminal install : 'echo $MAVEN_HOME'
+    - Form apt install : /usr/share/maven-repo/org/apache/maven/
+  - Search for Java path :
+    - Form terminal : echo $JAVA_HOME
+- Configure git and maven
+  - manage jenkins
+    - Global Tool Configuration
+       - JDK installation:
+		  - Name      : _Local-JAVA_
+		  - JAVA_HOME : _search-path_
+       - Git installation:
+		  - Name                    : Git
+		  - Path to Git executalbe  :git
+       -  MAVEN installation:
+		  - Name       : local-maven
+		  - MAVEN_HOME : _search-path_
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc884bd3" class="outline-4">
+<h4 id="orgc884bd3">Create First Maven Job[20]</h4>
+<div class="outline-text-4" id="text-orgc884bd3">
+<pre class="example">
+- New item:
+   -item Name : _First_maven_prj_ 
+     - Freestyle Project
+
+Configurtion:  
+- Source Code management:
+	  - URL : _____github:repo maven project clone(https://link)____ 
+		  - https://github.com/anshulc55/Jenkins_Upgradev3               
+- Build 
+   - Add Build Step    : _Invok top-level maven targets_
+      - maven version  : _Jenkins-maven host configration_
+      - Goals          : _test install_ # compile,test,validate,package,install,deploy
+			 # maven-goals or life-cycle :8(clean,test,validate,compile,package,install,deploy...)                                     
+      - Advance :
+	  - POM        : _path of pom.xml inside git repo_ # Eg: maven-samples/single-module
+
+     Save and build 
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd895373" class="outline-3">
+<h3 id="orgd895373">Source Code Polling in Jenkins[22]</h3>
+<div class="outline-text-3" id="text-orgd895373">
+<ul class="org-ul">
+<li>Contionous Integration flow in not  for manual work</li>
+<li>Auto build 
+<ul class="org-ul">
+<li>Configure the Jenkins to Poll the source Code Repo</li>
+<li>Trigger Build if New Change in source code.</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org65ccff1" class="outline-4">
+<h4 id="org65ccff1">Trigger Build Remotely[24]</h4>
+<div class="outline-text-4" id="text-org65ccff1">
+<ul class="org-ul">
+<li>The Token is genenrated : 
+<ul class="org-ul">
+<li>Url is given with token which is used to trigger is</li>
+</ul></li>
+<li>Remote Build Trigger is helpful to execute the build externally.</li>
+
+<li>User can Build Trigger by some Script, API,or UI Button Click Event.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgda280cf" class="outline-4">
+<h4 id="orgda280cf">Build After Other Project are build[24]</h4>
+<div class="outline-text-4" id="text-orgda280cf">
+<ul class="org-ul">
+<li>Job which are executed in Pipline or Job which are in DownStream/Upstream</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8a6ee53" class="outline-4">
+<h4 id="org8a6ee53">Build Periodically :</h4>
+</div>
+<div id="outline-container-org92889dc" class="outline-4">
+<h4 id="org92889dc">Poll SCM  :</h4>
+<div class="outline-text-4" id="text-org92889dc">
+<ul class="org-ul">
+<li>Jenkins will check git-hub repository for periodically as specified in <b>crontab</b>, If any new commit is done then Jenkins will auto-matically build trigger</li>
+</ul>
+</div>
+<ul class="org-ul">
+<li><a id="org8237200"></a>Crontab<br />
+<div class="outline-text-5" id="text-org8237200">
+<pre class="example">
+min(0-59), hours(0-23), day(1-31),month(1-12), day(0-6, Sunday =0)
+</pre>
+
+<ul class="org-ul">
+<li>: all valid values</li>
+</ul>
+<p>
+A-Z  : Range of Value
+A,B,C: Enumerates multiple Values.
+A/m B/H 
+Eg:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">0 0 * * * Everyday at midNight
+0 2-4 * * * 2am, 3am, 4am Everyday
+
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga3d33e8" class="outline-2">
+<h2 id="orga3d33e8">Continuous Delivery with Jenkins</h2>
+<div class="outline-text-2" id="text-orga3d33e8">
+</div>
+<div id="outline-container-org84d919d" class="outline-3">
+<h3 id="org84d919d">Archive Jenkins Job[25]</h3>
+<div class="outline-text-3" id="text-org84d919d">
+<ul class="org-ul">
+<li>Archive in Jenkins: <b>how to save</b> <b>files</b> <b>outside workspace</b>
+<ul class="org-ul">
+<li>While running build in jenkins, 
+<ul class="org-ul">
+<li>jenkins will create tmp workspace which stores the artifact's,</li>
+<li>User can clean your previous workspace before next  build</li>
+<li>This artifacts are archieved is safely so that they can be deployed staging enviroment(QA,SIT..) or Production Environment.</li>
+
+<li>If you want get the older file, you need  archive it</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org259aa24" class="outline-4">
+<h4 id="org259aa24">artifact's path:</h4>
+<div class="outline-text-4" id="text-org259aa24">
+<pre class="example">
+Click Project:
+    Console Output: 
+
+# Here we can see the there is jar file which is created in 
+# [ [1;34mINFO [m] Building jar :/var/lib/jenkins/workspace/.Job-name.../... .jar
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org66aa675" class="outline-4">
+<h4 id="org66aa675">For Archive Job</h4>
+<div class="outline-text-4" id="text-org66aa675">
+<pre class="example">
+- Config Job
+  - Post-build Actions 
+	  -  *Archive the articats*  ( select in dropdown menu)
+	      - File path to be archive : _____________________ **/*.jar 
+		   #  **       all avilable path in workspace
+		   #  *.jar    all file having jar extenction
+		   #  **/*      all artifacts that in workspace
+# We see the output in Next Build 
+# - Click Project
+#   - Console Output:
+## [ [1# [ [1;34mINFO [m] Archiving artifats
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3c0d83a" class="outline-3">
+<h3 id="org3c0d83a">Install &amp; Configure Tomcat (Staging Env) [26]</h3>
+<div class="outline-text-3" id="text-org3c0d83a">
+<ul class="org-ul">
+<li>Tomcat is an <span class="underline">application web-server</span> form Apache Software Foundation that executes <span class="underline">Java servlet</span> and renders Web pages that include <span class="underline">Java Server Pages code</span></li>
+<li>Url for Tomcat Project :
+<a href="https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/java-tomcat-sample">https://github.com/anshulc55/Jenkins_Upgradev3/tree/master/java-tomcat-sample</a></li>
+
+<li>Why are we building Stageing Env :</li>
+</ul>
+
+<p>
+In every Project there are three stagas in 
+</p>
+<ul class="org-ul">
+<li>Application Source Code   : Jenkin's Job to Compile,Execute Unit Test &amp; Package Application</li>
+<li>Compile Code              : Jenkin's Job will Deploy the Application in Dev/Production</li>
+<li>Deploy Application        : Tomcat Env to Exec Application Code</li>
+</ul>
+
+<p>
+<b>Application Source Code</b> 
+      is Complied , Execute Unit Test &amp; Package Applicatoion with help of Jenkins Job
+<b>Deploy Application</b> 
+      will Deploy the Application in Dev/Production Enviroment
+</p>
+</div>
+
+<div id="outline-container-org3b33353" class="outline-4">
+<h4 id="org3b33353">Install Tomcat</h4>
+<div class="outline-text-4" id="text-org3b33353">
+<p>
+<a href="https://www.youtube.com/watch?v=Feui5F42bII">https://www.youtube.com/watch?v=Feui5F42bII</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"># cd Workspace/Devops/tomcat # directory where tomcat is install 
+# get link for tomcat 9 tar file
+wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.31/bin/apache-tomcat-9.0.31.tar.gz
+
+
+# extract tar file
+tar -xvzf apache-tomcat-9.0.31.tar.gz
+
+# install java file # /software/jdk1.8.0_131
+vi ~/.bashrc
+
+# insert below text
+# JAVA ENVIRONmENT VARIABLES
+export CATALINA_HOME=/Workspace/Devops/tomcat
+# export JAVA_HOME=/Workspace/Devops/tomcat/bin
+
+# run bash
+source ~/.bash_profile
+
+cd Workspace/Devops/tomcat
+sh startup.sh
+
+# Run tomcat server
+sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/startup.sh
+
+# Stop tomcat server
+sh /home/jayradhe/Workspace/Devops/apache-tomcat-9.0.31/bin/shutdown.sh
+
+
+## Create symbolic link 
+#ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/startup.sh /usr/local/bin/tomcatup
+#ln -s /opt/tomcat/apache-tomcat-9.0.31/bin/shutdown.sh /usr/local/bin/tomcatdown
+
+## To start tomcat as root anywhere in shell
+#tomcatup
+## To stop tomcat
+#tomcatdown
+
+
+firefox localhost:8080 # By default tomcat server is 8080 
+# We can change server in conf/server.xml - conncetor port
+# After starting if there is some error then check log file
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf770062" class="outline-4">
+<h4 id="orgf770062">Change Port Number</h4>
+<div class="outline-text-4" id="text-orgf770062">
+</div>
+<ul class="org-ul">
+<li><a id="org24f4bdd"></a>Tomcat File system<br />
+<div class="outline-text-5" id="text-org24f4bdd">
+<div class="org-src-container">
+<pre class="src src-sh">Tomcat
+├── bin  # executable file : start up and shutdown
+├── conf # server.xml : change config 
+|     └──server.xml # like port by default port is  :8080
+├── log    
+└── webapps 
+      └── sbi.war 
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org4223e74"></a>Edit server.xml<br />
+<div class="outline-text-5" id="text-org4223e74">
+<div class="org-src-container">
+<pre class="src src-sh">cat server.xml
+######################################################
+# Change port :8080
+&lt;Connector port="8080" protocol="HTTP/1.1"
+	       connectionTimeout="20000"
+	       redirectPort="8443" /&gt;
+
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org98b6bd5" class="outline-4">
+<h4 id="org98b6bd5">Config Tomcat to Deploy Artifact from Jenkins</h4>
+<div class="outline-text-4" id="text-org98b6bd5">
+<p>
+Configure Jenkins with Tomcat for Auto Deployment of Artifacts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">#Tomcat
+#├── bin  # executable file : start up and shutdown
+#├── conf # server.xml         : change config 
+#|     ├── server.xml          # like port by default port is  :8080
+#|     └── tomcat-users.xml    # add/delet users/roles 
+#├── log    
+#└── webapps 
+
+cd tomcat/conf
+# upate tomcat-users.xml file
+# cat tomcat-users.xml
+# add roles: manager-script &amp; admin-gui
+# Set password: tomcat
+
+ &lt;role rolename="manager-script"/&gt;
+ &lt;role rolename="admin-gui"/&gt;
+ &lt;user username="tomcat" password="tomcat" roles="manager-script,admin-gui"/&gt;
+
+
+
+# resart to tomcat server
+sh tomcat/bin/shutdown.sh
+sh tomcat/bin/startup.sh
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf421456" class="outline-3">
+<h3 id="orgf421456">Deploy Application in Staging Env(Tomcat) from Jenkins [029 Udemy Lecture]</h3>
+<div class="outline-text-3" id="text-orgf421456">
+<p>
+How to Deploy (automate) git code to tomcat server  
+</p>
+<ul class="org-ul">
+<li>Steps required
+<ul class="org-ul">
+<li>Configure Tomcat or Create User for remote acess</li>
+<li>Install "Copy Artifact" &amp; "Deploy to Containers" Plugins
+<ul class="org-ul">
+<li>Copy Artifact        : Use to Copy Artifact from Job A to Job B:</li>
+<li>Deploy to Containers : To deploy artifact to tomcat</li>
+</ul></li>
+<li>Create Job to Produce Tomcat Deployable Artifacts</li>
+<li>Create Job to Deploy Artifacts to Staging Env (Tomcat server).</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-orgf26ce67" class="outline-4">
+<h4 id="orgf26ce67">Configure Jenkins with Tomcat for Auto Deployment of Artifacts.</h4>
+<div class="outline-text-4" id="text-orgf26ce67">
+<div class="org-src-container">
+<pre class="src src-sh">cd /opt/tomcat/conf
+# update tomcat-users.xml file
+# roles : manger-script &amp; manger-gui
+# Set password:tomcat
+
+#  &lt;role rolename="manager-script"/&gt;
+#  &lt;role rolename="manager-gui"/&gt;
+#  &lt;user username="tomcat" password="tomcat" roles="manager-script,manager-gui" /&gt;
+#&lt;/tomcat-users&gt;
+
+vi /tomcat/conf/server.xml
+# &lt;Connector port="9090" protocol="HTTP/1.1"
+
+# Restart the tomcat server
+
+/opt/tomcat/bin/shutdown.sh
+/opt/tomcat/bin/startup.sh
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org79a2160" class="outline-4">
+<h4 id="org79a2160">Create Job to Produce Tomcat Deployable Artifacts</h4>
+<div class="outline-text-4" id="text-org79a2160">
+<pre class="example">
+Create a view : 
+    View Name : _TomcatDeploy_View_
+    List View : ok
+
+# Inside "TomcatDeploy_View" Create a New JOB   :
+New item
+       Name _Package_Application_
+       FreeStyle Project
+Genral :        
+    Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
+    Discard Old Build: 5 days and 5 builds
+Source Code management:
+    git :https://github.com/anshulc55/Jenkins_Upgradev3.git 
+
+Build Trigger :
+    Poll SCM: * * * * *
+Build:
+   _Invoke top-level maven target_
+       Maven Version   : _LocalMaven_
+       Goals           : clean package
+
+       Advance :
+	  POM  : _java-tomcat-sample/pom.xml_ # location of pox.xml
+
+ Post-build Action :
+    _Archive the artifacts_
+	 Files to archive : _**/*.war_
+
+ Post-build Action : 
+     _Build Other Project_
+	  Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
+	  Trigger only if build is stable : Ok
+
+Save Job
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgfca4d0c" class="outline-4">
+<h4 id="orgfca4d0c">Create Job to Deploy Artifacts to Tomcat server or(Staging Env)</h4>
+<div class="outline-text-4" id="text-orgfca4d0c">
+<pre class="example">
+#Step 1:  Install "Copy Artifact" &amp; "Deploy to Containers" Plugins
+#Step 2:
+New item 
+	 Name : _Depoly Application Staging Env_
+	 FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+	Project Name :  _Package_Application_   (Project Name for above Project)
+	Which build  : Latest successfull build
+	    Stable build only : Ok
+	Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+	     Username : tomcat
+	     Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:http://67.205.146.248:9090(9090 : tomcat manual config)
+
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb0e1c3a" class="outline-3">
+<h3 id="orgb0e1c3a">Build Pipeline Plugin[30] :</h3>
+<div class="outline-text-3" id="text-orgb0e1c3a">
+<ul class="org-ul">
+<li>Step 1: Install <b>Build Pipline</b> :</li>
+<li>Step 2: Create a New View</li>
+<li>Step 3: Build Pipeline View</li>
+</ul>
+<pre class="example">
+Step 1: Install *Build Pipline* :
+Step 2: Create a New View
+Step 3: Build Pipeline View
+	    Build Pipeline View Title : Deploy Application Stagging Env
+	Pipeline Flow: 
+	   Layout : Upstream /Downstream
+	       Upstream /Downstream Config
+	       Select  Initial Job :   _Package_Application_ (From How to Delpoy git code to tomcat server ) 
+	 Save       
+</pre>
+</div>
+</div>
+<div id="outline-container-orge1587c4" class="outline-3">
+<h3 id="orge1587c4">Deploy Application in Production [Udemy 031]</h3>
+<div class="outline-text-3" id="text-orge1587c4">
+<p>
+Till Now we have 
+</p>
+<ul class="org-ul">
+<li>Package Build Code : create artifacts</li>
+<li>Deploy to QA Env (Tomcat 9090)     [less Approvial for Authority]</li>
+<li>Deploy in Production [Now : Tomcat 9091] [Need Approvial from Authority]</li>
+</ul>
+</div>
+
+<div id="outline-container-org9602702" class="outline-4">
+<h4 id="org9602702">Step1: Run another tomcat-server at port: 9091</h4>
+<div class="outline-text-4" id="text-org9602702">
+<p>
+<a href="https://www.youtube.com/watch?v=n9l8WHHp_30">https://www.youtube.com/watch?v=n9l8WHHp_30</a> [Run multiple tomcat instance]
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ls
+# apache-tomcat-9.0.31 # for QA environment
+cp -r apache-tomcat-9.0.31/ apache-tomcat-9.0.31-prod/
+vi apache-tomcat-9.0.31-prod/conf/server.xml  # change the port 
+
+#&lt;Connector port="9091" protocol="HTTP/1.1"
+#               connectionTimeout="20000"
+#               redirectPort="8443" /&gt;
+
+# change the server port, connector port(hhtp, ajp), 
+#export CATALINA_BASE=/home/jayradhe/Workspace/Devops/tomcat1
+#export CATALINA_HOME = $CATALINA_BASE
+#sh {$CATALINA_HOME}/bin/startup.sh  
+
+sh apache-tomcat-9.0.31-prod/bin/startup.sh
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b1368e" class="outline-4">
+<h4 id="org7b1368e">Step2: Create a Job &lt;Deploy<sub>Application</sub><sub>Prod</sub><sub>Env</sub>&gt; to Deploy From Stage Evn to Production Env</h4>
+<div class="outline-text-4" id="text-org7b1368e">
+<pre class="example">
+New item 
+	 Name : _Deploy_Application_Prod_Env_
+	 FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+	Project Name :  _Package_Application_   (Project Name for above Project)
+	Which build  : Latest successfull build
+	    Stable build only : Ok
+	Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+	     Username : tomcat
+	     Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9091(9091 : tomcat manual config)
+</pre>
+
+<p>
+The above job Depoly Application Staging Env is not auto-trigger because it need the approvial of authority (manual triggger from Stagging Env Job)
+</p>
+
+<pre class="example">
+#         Name : _Depoly Application Staging Env_
+
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+	Project Name :  _Package_Application_   (Project Name for above Project)
+	Which build  : Latest successfull build
+	    Stable build only : Ok
+	Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+	     Username : tomcat
+	     Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:http://67.205.146.248:9090(9090 : tomcat manual config)
+
+
+################################################################
+
+    Build other projects(manual step):
+	Downstream Project Names : _Deploy_Application_Prod_Env_
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb505175" class="outline-2">
+<h2 id="orgb505175">Infrastructure as Code(DSL)[33]</h2>
+<div class="outline-text-2" id="text-orgb505175">
+<p>
+Jenkins Allow User to manage the Jenkins Job  via UI Parameter
+</p>
+
+<p>
+This may introduce few Problem
+</p>
+<ul class="org-ul">
+<li>No Proper Audit Trails. : If conf maually jenkins with multi-user can edit config  may do not trace back the user or(we don't know who changed what)</li>
+<li>No History of Changes.  : If some user change job then we many not have history of chaganes occur.</li>
+<li>Developers Dependency on  DevOps or System Admin : If Devops are not avaiable then their may be delay</li>
+<li>Difficult to Back &amp; Restore    :</li>
+</ul>
+
+<p>
+To <b>solution</b> is <b>write Jenkins Job in code</b>  and save it in SCM
+</p>
+
+<p>
+Infrastructure as code (IaC)  is ability to programmatically  manage and provison an entire technology stack through code, rather than using manual and complex process
+</p>
+
+<p>
+Version Control provide the History and Audit Trail
+</p>
+
+<p>
+Easy Roll Back to prior version of Jobs and Builds
+</p>
+</div>
+</div>
+<div id="outline-container-orgb3b582c" class="outline-2">
+<h2 id="orgb3b582c">Jenkins DSL Domain Specific Langaugae</h2>
+<div class="outline-text-2" id="text-orgb3b582c">
+</div>
+<div id="outline-container-orgcb6e391" class="outline-3">
+<h3 id="orgcb6e391">Job DSL Overview[34]</h3>
+<div class="outline-text-3" id="text-orgcb6e391">
+<ul class="org-ul">
+<li>Jenkins DSL : Programatic way of Implement the Jenkins Jobs</li>
+<li>Jenkins Job DSL plugin is used to define Jobs in Programatic Form</li>
+<li>DSL stands from Domain Specific Langaugae</li>
+<li>User can describe their Job using <b>Groovy Base Script</b></li>
+<li>Jenkins Job DSL Plugin is easy way to manage Jenkins Job.</li>
+<li>User can create multiple Jobs with Jenkins DSL Plugin and it come with lot of benefits like Version Control, Audit History, Peer Review, RollBack and Backup.</li>
+</ul>
+
+<p>
+Step To install DSL Plugins
+</p>
+<ul class="org-ul">
+<li>manage Jenkins &gt; manage Plugins &gt; Install <b>Job DSL</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org30aa85e" class="outline-3">
+<h3 id="org30aa85e">Demo DSL Job[35]</h3>
+<div class="outline-text-3" id="text-org30aa85e">
+<p>
+Seed Job : To use the Job DSL plugin, you first need to create a seed job.
+</p>
+
+<p>
+The seed Job is a Jenkins Job which runs a DSL scripts, and then generates a new job
+</p>
+
+<p>
+The seed job is a normal free- style Jenkins job that you  add the "Process Job DSL" build step. This  step takes the DSL and generates the configured jobs.
+</p>
+</div>
+
+<div id="outline-container-orgaa36d36" class="outline-4">
+<h4 id="orgaa36d36">Create groovy script</h4>
+<div class="outline-text-4" id="text-orgaa36d36">
+<div class="org-src-container">
+<pre class="src src-java">// grove base script
+// #FILENAME: MavenProjectDSL.groovy
+
+job('First-maven-Project-Via-DSL'){
+    description("Frist maven Projet generated by DSL ")
+    scm{
+	 git("git@github.com:anshulc55/Jenkins_Upgradev3.git",master)
+    }
+    triggers{
+	  scm('* * * * *')
+    }
+    steps{
+	  maven('clean package', 'maven-samples/single-module/pox.xml')
+    }
+    publishers{
+	  archiveArtifacts '**/*.jar'
+    } 
+}
+// 
+</pre>
+</div>
+<p>
+NameConvextion or Syntax For groovy can be found is: google search job-dsl-plugin
+or <a href="https://jenkinsci.github.io/job-dsl-plugin/">https://jenkinsci.github.io/job-dsl-plugin/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org4a02fdf" class="outline-4">
+<h4 id="org4a02fdf">Push DSL file to github</h4>
+<div class="outline-text-4" id="text-org4a02fdf">
+<p>
+Push groovy file in git hub 
+</p>
+</div>
+</div>
+<div id="outline-container-org65a2136" class="outline-4">
+<h4 id="org65a2136">Create Job using github groovy file</h4>
+<div class="outline-text-4" id="text-org65a2136">
+<pre class="example">
+new item 
+	Name : _maven_Seed_Job_ 
+       Free Style
+
+Source Code management
+    url : https://github.com/anshulc55/Jenkins_Upgradev3.git
+
+Build : 
+      _Process Job DSLs_    # Job-dsl-plugin   
+	 Look on FileSytem 
+	   DSL Scripts :: _MavenProjectDSL.groovy_ # file name of DSL FILE
+					      # groovy path in github          
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org5943f61" class="outline-4">
+<h4 id="org5943f61">Approve DSL script</h4>
+<div class="outline-text-4" id="text-org5943f61">
+<p>
+Approve DSL script
+</p>
+<pre class="example">
+manage Jenkins 
+       In-process Script Approval
+	  Click : Approve
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b57094" class="outline-2">
+<h2 id="org7b57094">Jenkins as Code Pipeline</h2>
+<div class="outline-text-2" id="text-org7b57094">
+</div>
+<div id="outline-container-org41179a6" class="outline-3">
+<h3 id="org41179a6">Code Pipeline Overview[037 Udemy]</h3>
+<div class="outline-text-3" id="text-org41179a6">
+<p>
+Jenkins Code Pipeline used DSL.
+DSL is scriptable via Groovy and so it is extremely flexible.
+DSL used to automate the Jenkins Job
+Having the build and deployment  Pipeline as Code (PaC)
+</p>
+<ul class="org-ul">
+<li>Pipeline as Code :
+<ul class="org-ul">
+<li>JenkinsFile: Jenkinsfile is a text file that stores the entire workflow as code and it can be  checked into a SCm on your local system</li>
+
+<li>The Jenkinsfile is written using the Groovy DSL</li>
+
+<li>Pipeline: This is a user defined block which contains all the processes such as build,test,deploy&#x2026;etc. It is a collector of all the stages in a Jenkinsfile.</li>
+
+<li>Node : Inside a pipeline we have a node , which is a machine that executes an entire workflow.</li>
+
+<li>Agent:It is a directive that can run multiple builds with only one instance of Jenkins. It instricts Jenkins to allocate an executor for the builds.</li>
+
+<li>Any: Runs the pipeline/stage on any available agent.</li>
+
+<li>Stages: This block contains all  the work that needs to be carried out. There can be more  than one stage within this directive. Each stage performs a specific task.</li>
+
+<li>Steps: A series of steps can be  defined within a stage block.These steps are carried out in  sequence to execute a stage.
+<ul class="org-ul">
+<li>There mush be at least one step  within a steps directive.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org92e2af8" class="outline-4">
+<h4 id="org92e2af8">Install &lt;Build Pipeline Plugin&gt;</h4>
+<div class="outline-text-4" id="text-org92e2af8">
+<pre class="example">
+manage Jenkins
+       manage plugin
+	     Install : Build Pipeline Plugin
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org52496f0" class="outline-4">
+<h4 id="org52496f0">Create Jenkinsfile and push in github</h4>
+<div class="outline-text-4" id="text-org52496f0">
+<div class="org-src-container">
+<pre class="src src-java">
+// # Filename: Jenkinsfile
+pipeline {
+      agent any
+      stages {
+	    stage('Init') {
+		  steps {
+			echo 'Hi, this is Anshul from LevelUp360'
+			echo 'We are Starting the Testing'
+		  }
+	    }
+	    stage('Build') {
+		  steps {
+			echo 'Building Sample Maven Project'
+		  }
+	    }
+	    stage('Deploy') {
+		  steps {
+			echo "Deploying in Staging Area"
+		  }
+	    }
+	    stage('Deploy Production') {
+		  steps {
+			echo "Deploying in Production Area"
+		  }
+	    }
+      }
+}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0829dde" class="outline-4">
+<h4 id="org0829dde">Create Job using Jenkinsfile</h4>
+<div class="outline-text-4" id="text-org0829dde">
+<pre class="example">
+New item:
+	 Name: _SampleCodePipline_
+	 Pipeline 
+
+General : 
+       Description: This is First &amp; Sample Code Pipeline Job
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+	 Definition       :  _Pipeline script from SCm_
+	     SCm          : Git
+		  Repository : _url_
+
+	     Script Path  : _Jenkinsfile_
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9c32fec" class="outline-3">
+<h3 id="org9c32fec">Ex: Automate maven project [39]</h3>
+<div class="outline-text-3" id="text-org9c32fec">
+<pre class="example">
+# Inside "TomcatDeploy_View" Create a New JOB   :
+New item
+       Name _Package_Application_
+       FreeStyle Project
+Genral :        
+    Description: This Job is Packaging Java-Tomcat-Sample Project  and Create war file
+    Discard Old Build: 5 days and 5 builds
+Source Code management:
+    git :https://github.com/anshulc55/Jenkins_Upgradev3.git 
+
+Build Trigger :
+    Poll SCM: * * * * *
+Build:
+   _Invoke top-level maven target_
+       Maven Version   : _LocalMaven_
+       Goals           : clean package
+
+       Advance :
+	  POM  : _java-tomcat-sample/pom.xml_ # location of pox.xml
+
+ Post-build Action :
+    _Archive the artifacts_
+	 Files to archive : _**/*.war_
+
+ Post-build Action : 
+     _Build Other Project_
+	  Project to build : _Depoly Application Staging Env_ (Below Stage Job Name)
+	  Trigger only if build is stable : Ok
+
+Save Job
+</pre>
+
+<p>
+The Package Application Job : Is use to create artifact (<b>*/</b>.war) and trigger Staging Project 
+</p>
+
+<p>
+Need to creating artifact with-out using &lt;Packing Application&gt; and Use Pipeline as code 
+</p>
+
+<p>
+If Develpoers who are developing prj then can create there pipeline-code file which use to package-Application.
+</p>
+
+<p>
+Then Devops will not have to write the code for package-Application and only need to create/maintain for deploying to Stating and Production Environment.
+</p>
+</div>
+
+
+
+<div id="outline-container-org3302b34" class="outline-4">
+<h4 id="org3302b34">Create Jenkinsfile and push in github</h4>
+<div class="outline-text-4" id="text-org3302b34">
+<div class="org-src-container">
+<pre class="src src-java">
+// # Filename: Jenkinsfile
+pipeline {
+    agent any
+    stages {
+	stage('Build Application') {
+	    steps {
+		sh 'mvn -f java-tomcat-sample/pom.xml clean package'
+	    }
+	    post {
+		success {
+		    echo "Now Archiving the Artifacts...."
+		    archiveArtifacts artifacts: '**/ *.war'
+		}
+	    }
+	}
+	stage('Deploy in Staging Environment'){
+	    steps{
+		build job: 'Deploy_Application_Staging_Env'
+
+	    }
+
+	}
+	stage('Deploy to Production'){
+	    steps{
+		timeout(time:5, unit:'DAYS'){
+		    input message:'Approve PRODUCTION Deployment?'
+		}
+		build job: 'Deploy_Application_Prod_Env'
+	    }
+	}
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1f6e731" class="outline-4">
+<h4 id="org1f6e731">Create Job using Jenkinsfile</h4>
+<div class="outline-text-4" id="text-org1f6e731">
+<pre class="example">
+New item:
+	 Name: _PackageApplication Code Pipline_
+	 Pipeline 
+
+General : 
+       Description: This is First &amp; Sample Code Pipeline Job
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+	 Definition       :  _Pipeline script from SCm_
+	     SCm          : Git
+		  Repository : _url_
+
+	     Script Path  : _java-tomcat-sample/Jenkinsfile_
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0cc11bf" class="outline-4">
+<h4 id="org0cc11bf">Trigger Delopy to Staging and Production Env</h4>
+<div class="outline-text-4" id="text-org0cc11bf">
+</div>
+<ul class="org-ul">
+<li><a id="org0c664d5"></a>Deploy Stagging Env<br />
+<div class="outline-text-5" id="text-org0c664d5">
+<pre class="example">
+#Step 1:  Install "Copy Artifact" &amp; "Deploy to Containers" Plugins
+#Step 2:
+New item 
+	 Name : _Depoly Application Staging Env_
+	 FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+# #  #     Project Name :  _Package_Application_   
+	Project Name :  _PackageApplication Code Pipline_   
+	Which build  : Latest successfull build
+	    Stable build only : Ok
+	Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+	     Username : tomcat
+	     Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9090(9090 : tomcat manual config)
+</pre>
+</div>
+</li>
+<li><a id="orgb0ab336"></a>Deploy Production<br />
+<div class="outline-text-5" id="text-orgb0ab336">
+<pre class="example">
+New item 
+	 Name : _Deploy_Application_Prod_Env_
+	 FreeStyle
+Genreal:
+     Description : This Will Deploy the Java_Tomcat_sample in Staging Enviroment
+     Discard Old Build : 5 days , 5 build
+Build:
+     _Copy Artifacts from Another Project_
+# #  #     Project Name :  _Package_Application_   (Project Name for above Project)
+	Project Name :  _PackageApplication Code Pipline_   (Project Name for above Project)
+	Which build  : Latest successfull build
+	    Stable build only : Ok
+	Artifacts to Copy :  _**/*war_
+
+Post-build Action
+   _Deploy war/ear to a container_
+    War/Ear files : _**/*.war_ 
+    Context Path : _/_
+    Containers : _Tomcat 9_
+    Credentials : Add credentials 
+	     Username : tomcat
+	     Password : tomcat (For configuration we set)
+    Tomcat Url : _Same page url_ eg:https://67.205.146.248:9091(9091 : tomcat manual config)
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org30327f9" class="outline-2">
+<h2 id="org30327f9">Distributated Build in Jenkins</h2>
+<div class="outline-text-2" id="text-org30327f9">
+</div>
+<div id="outline-container-org73c9e81" class="outline-3">
+<h3 id="org73c9e81">Distributed Builds Concept [41]</h3>
+<div class="outline-text-3" id="text-org73c9e81">
+<p>
+We are using Jenkins master Node to Execute the Build and package the Application.
+</p>
+
+<p>
+Jenkins Follow the <b>master-slave architecture</b> i.e many slaves work for a master. It is also know as Jenkins Distributied Builds.
+</p>
+
+<p>
+It also allows User to run jobs on different Environment like Linux, Windows, macOS&#x2026;etc.
+</p>
+
+<p>
+User can also run the same test  case on different enviroments in parallel using Jenkins Distributed Builds, which in turn helps you to achive the desired results quickly using  this  distributed approach.
+</p>
+
+<p>
+All of the job results are collected and combined on the master node for monitoring.  
+</p>
+
+<p>
+Jenkins master
+Your main Jenkins server is the master machine.The tasts performed by master are :
+</p>
+
+<ul class="org-ul">
+<li>Scheduling build jobs: schedules the jobs in slave machine</li>
+<li>Dispatching build to the slaves for the execution :</li>
+<li>monitor the slaves.</li>
+<li>recording and presenting the build results.</li>
+<li>Can also execute build job directly.</li>
+</ul>
+
+<p>
+Jenkins Slave:
+A slave is a Java executable that  runs on a remote machine.
+The characteristics of slave are :
+</p>
+<ul class="org-ul">
+<li>hears request from  the Jenkins master  instance</li>
+<li>Slave can run on a variety  of operating system</li>
+<li>job of slave is to do as they are told to, which involves executing build jobs dispatched by the master.</li>
+<li>We can configure a project  to always run on a particular  slave machine or a particular type of slave machine, or simple let jenkins pick the next  availale slave</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdc7258f" class="outline-3">
+<h3 id="orgdc7258f">Create and Configure Jenkins[42]</h3>
+<div class="outline-text-3" id="text-orgdc7258f">
+</div>
+<div id="outline-container-orgad147a2" class="outline-4">
+<h4 id="orgad147a2">Create and Connect Node(Slave-servet) in AWS(SSH- AWS Private key)</h4>
+<div class="outline-text-4" id="text-orgad147a2">
+<pre class="example">
+manage Jenkins 
+     mange Node(Slave) 
+	New Node  
+	     Node name : _&lt;Slave-Server Name&gt;_
+	     Permanaent Agent : enable
+
+
+executors : _1_
+remote root directory : _/opt/deploy/_  # dir in slave server
+label            : _orange_
+Launch method    : _Launch agents via SSH_
+   - Host Name   : _18.188.173.210_       
+   - Credentials : _Jenkins_
+       - Kind    : _SSH Username with private key_
+       - Usernaem: _ec2-user_
+       - Private key : enable
+       - key : _&lt;copy the key&gt;_
+Host Key Verification Strategy : _Non verification Strategy_
+
+
+Node Progeries :
+
+Toot Locations :
+  - Name : _Java_
+  - Home : _/opt/software/jdk1.8.0_131_
+  - Name : _maven_
+  - Home : _/opt/software/apache-maven-3.6.3/_
+
+BUG : if java, maven are not present then 
+Jenkins &gt; mangae Jenkins &gt; Global Tool Configuratoin &gt; JDK (Add JDK) , maver(Add maven)
+manage jenkins &gt; mange nodes
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4966f80" class="outline-4">
+<h4 id="org4966f80"><span class="todo TODO">TODO</span> Create and Connect Node(Slave-servet) in Droplet(By account cmd) (Ubuntu)</h4>
+</div>
+<div id="outline-container-org49750b5" class="outline-4">
+<h4 id="org49750b5">Jenkins Executor</h4>
+<div class="outline-text-4" id="text-org49750b5">
+<ul class="org-ul">
+<li>Jenkins Executor basic block which allow Jenkins Job to Execute on Node</li>
+<li>Executor is like a single Process which execute by master on slave machine to run build on  slave.</li>
+<li>This number executor specify the maximum number of concurrent builds that jenkins may perform on Slave Node (20-30,50,100 parallel jobs)</li>
+
+<li>This parallel jobs are depends on No.of Executor (2 build per core cpu)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org77bddab" class="outline-3">
+<h3 id="org77bddab"><span class="todo TODO">TODO</span> Concurrent Build , Label Nodes[44]</h3>
+</div>
+<div id="outline-container-orgf5a382e" class="outline-3">
+<h3 id="orgf5a382e"><span class="todo TODO">TODO</span> Assign particular job to particualar Slave-Node</h3>
+</div>
+</div>
+<div id="outline-container-orga0814e6" class="outline-2">
+<h2 id="orga0814e6">Jenkins Integration with Docker</h2>
+<div class="outline-text-2" id="text-orga0814e6">
+</div>
+<div id="outline-container-orgeb6cb62" class="outline-3">
+<h3 id="orgeb6cb62">Create Docker File of Jenkins File[50]</h3>
+<div class="outline-text-3" id="text-orgeb6cb62">
+</div>
+<div id="outline-container-org31f4b7d" class="outline-4">
+<h4 id="org31f4b7d">Create Jenkinsfile</h4>
+<div class="outline-text-4" id="text-org31f4b7d">
+<div class="org-src-container">
+<pre class="src src-java">// #Jenkinsfile
+pipeline {
+    agent any
+    stages {
+	stage('Build Application') {
+	    steps {
+		sh 'mvn -f java-tomcat-sample/pom.xml clean package'
+	    }
+	    post {
+		success {
+		    echo "Now Archiving the Artifacts...."
+		    archiveArtifacts artifacts: '**/ *.war'
+		}
+	    }
+	}
+
+	stage('Create Tomcat Docker Image'){
+	    steps {
+		sh "pwd"
+		sh "ls -a"
+		sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
+	    }
+	}
+
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc955474" class="outline-4">
+<h4 id="orgc955474">Create Docker File</h4>
+<div class="outline-text-4" id="text-orgc955474">
+<div class="org-src-container">
+<pre class="src src-sh"># Dockerfile
+FROM tomcat:8.0
+ADD **/*.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0107905" class="outline-4">
+<h4 id="org0107905">Docker config</h4>
+<div class="outline-text-4" id="text-org0107905">
+<p>
+<a href="https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket">https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo groupadd docker
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9029fcc" class="outline-4">
+<h4 id="org9029fcc">Create Jenkins Job</h4>
+<div class="outline-text-4" id="text-org9029fcc">
+<pre class="example">
+New item:
+	 Name: _Build_Tomcat_Docker_Image_
+	 Pipeline 
+
+General : 
+       Description: This Job will create the Docker Image of Java-sample-tomcat Project
+
+Build Trigger:
+Adavnce Project Option
+
+Pipeline:
+	 Definition          :  _Pipeline script from SCm_
+	     SCm             :  _Git_
+		  Repository : _url_
+
+	     Script Path     : _Jenkinsfile_
+
+</pre>
+
+<p>
+Note: Due to security resons like permission
+then 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo usermod -a -G docker jenkins
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge3e8c1e" class="outline-3">
+<h3 id="orge3e8c1e">Execute Project in Docker [54]</h3>
+<div class="outline-text-3" id="text-orge3e8c1e">
+<div class="org-src-container">
+<pre class="src src-sh">docker images
+#REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+#tomcatsamplewebapp:3   latest              8f53e8be8eaf        2 days ago          64.5MB
+
+docker run -p 9090:8080 tomcatsamplewebapp:3
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcacc259" class="outline-2">
+<h2 id="orgcacc259">Parameterized Jenkins Jobs</h2>
+<div class="outline-text-2" id="text-orgcacc259">
+<p>
+Ceate a script in path : /opt/softaware/scripts/test.sh
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/sh
+echo "$1 is a good boy and $2 is a innocent guy"
+</pre>
+</div>
+</div>
+<div id="outline-container-org10b57aa" class="outline-4">
+<h4 id="org10b57aa">String Parameter[56]</h4>
+<div class="outline-text-4" id="text-org10b57aa">
+<pre class="example">
+Genral
+This project is parameterised :
+	       String  Parameter : 
+				 Name          : param1
+				 Default Value : mahesh 
+
+	       String  Parameter : 
+				 Name          : param2
+				 Default Value : pawan 
+
+Build 
+	Execute shell
+	     command : sh /opt/softaware/scripts/test.sh $param1 @param2
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org2194fbe" class="outline-4">
+<h4 id="org2194fbe">Choices Parameter[57]</h4>
+<div class="outline-text-4" id="text-org2194fbe">
+<pre class="example">
+new item &gt; free style  name: parameterijenkns
+
+Genral
+This project is parameterised :
+	  Add Parameters:
+	       _Choice  Parameter_ : 
+				 Name: param
+				 Choices : mahesh 
+					   pawan
+
+Build 
+	Execute shell
+	     command : sh /opt/softaware/scripts/test.sh $param
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3784c7d" class="outline-2">
+<h2 id="org3784c7d">Jenkins Security Aspect</h2>
+<div class="outline-text-2" id="text-org3784c7d">
+</div>
+<div id="outline-container-orgcf66c55" class="outline-3">
+<h3 id="orgcf66c55">Enable Disable Login [59]</h3>
+<div class="outline-text-3" id="text-orgcf66c55">
+<pre class="example">
+manage jenkins
+      Configure Global Security
+	      Enable security : Disable
+
+</pre>
+</div>
+<div id="outline-container-org3476085" class="outline-4">
+<h4 id="org3476085">Enable Security</h4>
+<div class="outline-text-4" id="text-org3476085">
+<pre class="example">
+manage jenkins
+      Configure Global Security
+	      Enable security : Enable
+
+	      Access Control :
+		      Authorization:
+			 Logged-in users can do anything : Eanble
+			    Allow anaoymous read access : Enable
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf3e946d" class="outline-3">
+<h3 id="orgf3e946d">Allow User to Sign-Up [60]</h3>
+<div class="outline-text-3" id="text-orgf3e946d">
+<pre class="example">
+manage jenkins
+      Configure Global Security
+	      Access Control :
+		    Security Realm:
+			     Allow users to sign up
+
+</pre>
+<p>
+Note: This dummy user can change job which is not desireable
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge0795b3" class="outline-3">
+<h3 id="orge0795b3"><span class="todo TODO">TODO</span> Install Powerful Security Plugin</h3>
+<div class="outline-text-3" id="text-orge0795b3">
+<pre class="example">
+mangae jenkins
+      manage plugin 
+		Role based authorization Strategy  
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf1d39f4" class="outline-2">
+<h2 id="orgf1d39f4">----------------------------------</h2>
+</div>
+<div id="outline-container-org1c3b560" class="outline-2">
+<h2 id="org1c3b560">AWS Delivery Code Pipeline:</h2>
+</div>
+<div id="outline-container-orgced28ae" class="outline-2">
+<h2 id="orgced28ae">Introduction to AWS Code Deploy &amp; Code Pipeline</h2>
+</div>
+<div id="outline-container-org683f7cc" class="outline-2">
+<h2 id="org683f7cc">Get Start with Project</h2>
+</div>
+<div id="outline-container-org27f8f7d" class="outline-2">
+<h2 id="org27f8f7d">AWS CI/CD Pipline</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Karthik</p>
+<p class="date">Created: 2023-03-16 Thu 11:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

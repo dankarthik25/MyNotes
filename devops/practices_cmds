@@ -1,0 +1,924 @@
+    1  sudo apt-get update
+    2  htop
+    3  lscpu
+    4  apt install ultracopier
+    5  sudo apt install virtualbox
+    6  virtualbox
+    7  sudo add-apt-repository ppa:yannubuntu/boot-repair
+    8  sudo apt-get update
+    9  sudo apt-get install boot-repair
+   10  boot-repair
+   11  sudo fdisk -l
+   12  cd /boot/grub/
+   13  ls
+   14  sudo gedit grub.cfg
+   15  exit
+   16  sudo apt install obs-studio
+   17  sudo apt install ffmpeg
+   18  sudo gedit /etc/fstab 
+   19  sudo nano /etc/fstab 
+   20  ls
+   21  pwd
+   22  cd /
+   23  ls
+   24  cd media/
+   25  ls
+   26  cd jayradhey/
+   27  ls
+   28  cd New\ Volume/
+   29  df -T /media/jayradhey/New\ Volume
+   30  cd
+   31  cd /etc
+   32  ls
+   33  gedit fstab
+   34  lsblk -f
+   35  cat /etc/fstab 
+   36  cd
+   37  cd /media
+   38  ls
+   39  cd jayradhey/
+   40  ls
+   41  cd New\ Volume/
+   42  lsblk
+   43  sudo fdisk -l
+   44  sudo blkid
+   45  gedit fstab
+   46  gedit /etc/fstab 
+   47  sudo gedit /etc/fstab 
+   48  sudo fdisk -l
+   49  sudo blkid
+   50  sudo gedit /etc/fstab 
+   51  sudo fdisk -l
+   52  sudo blkid
+   53  cat /etc/fstab 
+   54  git -h
+   55  git
+   56  sudo apt install git
+   57  cd my
+   58  cd mynotes/
+   59  pwd
+   60  (use-package doom-themes
+   61  emacs --hel[
+   62  emacs --help
+   63  emacs --debug-init
+   64  apt -help
+   65  apt list
+   66  sudo apt install snapd
+   67  snap
+   68  sudo apt-get update
+   69  sudo apt install snapd
+   70  lsb_release -a
+   71  lsb_release -d
+   72  cat /etc/issue
+   73  cat /etc/os-release 
+   74  hostnamectl
+   75  cat /etc/issue
+   76  sudo apt-get update
+   77  sudo apt-get upgrade
+   78  uname -a
+   79  sudo apt install snapd
+   80  sudo rm /etc/apt/preferences.d/nosnap.pref
+   81  sudo apt install snapd
+   82  sudo snap install emacs --classic
+   83  emacs
+   84  python
+   85  python3
+   86  sudo apt-get install python
+   87  pip
+   88  sudo apt install pip
+   89  sudo apt install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+   90  wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+   91  sha256sum /tmp/Anaconda3-2020.02-Linux-x86_64.sh
+   92  bash /tmp/Anaconda3-2020.02-Linux-x86_64.sh 
+   93  cat .bashrc 
+   94  anaconda-navigator
+   95  conda list
+   96  conda update conda
+   97  conda update anaconda
+   98  anaconda-navigator 
+   99  nano /home/jayradhey/anaconda3/lib/python3.7/site-packages/anaconda_navigator/api/external_apps/vscode.py
+  100  anaconda-navigator 
+  101  conda update anaconda-navigator
+  102  anaconda-navigator 
+  103  sudo apt-get install bluez*
+  104  systemctl is-enabled bluetooth.service 
+  105  systemctl status bluetooth.service 
+  106  rfkill
+  107  rfkill unblock bluetooth 
+  108  bluetoothctl 
+  109  bluetoothctl show
+  110  bluetoothctl
+  111  cd MadeEasy/
+  112  ls
+  113  cd DigitalCircuit/
+  114  LS
+  115  ls
+  116  ls -a
+  117  ls -l
+  118  latex
+  119  sudo apt install latex
+  120  sudo apt-get install dvipng
+  121  sudo apt-get install maple-latex
+  122  cd
+  123  cd /tmp
+  124  ls
+  125  cat orgtexwBaMOk.log 
+  126  sudo atp-get isntall texlive-latex-extra
+  127  sudo apt-get isntall texlive-latex-extra
+  128  sudo apt-get install texlive-latex-extra
+  129  sudo apt-get install -y pandoc
+  130  pandoc -h
+  131  cd myeducation/
+  132  ls
+  133  pandoc -s -r html https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols -o test.org
+  134  pandoc -s -r html https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols  --reference-location=block -o test.org
+  135  ls
+  136  python remove_url.py 
+  137  cd
+  138  cd myeducation/
+  139  python remove_url.py 
+  140  cat test.org |grep http
+  141  cat test.org |grep [http
+  142  cat test.org |grep '[http...'
+  143  cat test.org |grep 'http...'
+  144  cat test.org |grep '['
+  145  cat test.org |grep "["
+  146  cat test.org |grep "a"
+  147  cat test.org |grep "\["
+  148  cat test.org |grep "\[http...]"
+  149  cat test.org |grep "\[ht.."
+  150  cat test.org |grep "\[(\w+)\]"
+  151  cat test.org |grep "\[(\w+)"
+  152  cat test.org |grep "\["
+  153  cat test.org |grep "\[[A-Za-z]\]"
+  154  cat test.org |grep "\[[A-Za-z]"
+  155  cat test.org |grep "\[[A-Za-z]+"
+  156  cat test.org |grep "\[([A-Za-z]+)"
+  157  cat test.org |grep "\[([A-Za-z0-9]*)\]"
+  158  cat test.org |grep "\[.*?\]"
+  159  cat test.org |grep "\[.*?"
+  160  cat test.org |grep "\[http.*?"
+  161  cat test.org |grep "\[http.*?"\]
+  162  cat test.org |grep "\[http.*?\]"
+  163  cat test.org |grep "\[http.*?+\]"
+  164  cat test.org |grep "\[http.*?...\]"
+  165  cat test.org |grep "\[http.*?"
+  166  cat test.org |grep "\[http.*\]"
+  167  cat test.org |grep "\[[http.*\]\]"
+  168  cat test.org |grep "\[\[http.*\]\]"
+  169  cat test.org |grep "\[\[http.* \]\]"
+  170  cat test.org |grep "\[\[http"
+  171  cat test.org |grep "\[\[http."
+  172  cat test.org |grep "\[\[http.*"
+  173  cat test.org |grep "\[\[http.*?"
+  174  cat test.org |grep "\[\[http.*\]\]"
+  175  cat test.org |grep "\[\[http.* \]\]"
+  176  cat test.org |grep "\[\[http.*\]\]$"
+  177  cat test.org |grep "\[http.*\]$"
+  178  cat test.org |grep "\[\]$"
+  179  cat test.org |grep "\[\]"
+  180  cat test.org |grep "\[.\]"
+  181  cat test.org |grep "\[.?\]"
+  182  cat test.org |grep "\[.*\]"
+  183  cat test.org |grep "\[.*?\]"
+  184  cat test.org |grep "\[.*\]"
+  185  cat test.org |grep "\["
+  186  cat test.org |grep "\[.*\]"
+  187  pandoc -s -r html https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols  --reference-location=block -o test.org
+  188  ls
+  189  pandoc -s -r Signal_N_System.org -o test.ipynb
+  190  pandoc -h
+  191  pandoc -f org -t ipynb -r Signal_N_System.org -o test.ipynb
+  192  ls
+  193  history
+  194  pandoc -s -r html test2.html  -o test.org
+  195  pandoc -s -r html https://vedabase.io/en/library/bg/3/1/  --reference-location=block -o vedabase.org
+  196  pandoc -s -r html vedabase.html  --reference-location=block -o vedabase.org
+  197  cat test.org |grep "\[.*\]"
+  198  cat test.org |grep "\[.*.\]"
+  199  cat test.org |grep "\[..\]"
+  200  cat test.org |grep "\[*\]"
+  201  cat test.org |grep "\[.*\]"
+  202  cat test.org |grep "\[.\]"
+  203  cat test.org |grep "\[.*\]"
+  204  cat test.org |grep "\[.*\]\]"
+  205  cat test.org |grep "\[.*\]"
+  206  cat test.org |grep ".\[.*\]"
+  207  cat test.org |grep "\[.*\]"
+  208  cat test.org |grep "\[\[.*\]"
+  209  cat test.org |grep "\[\[file.*\]"
+  210  cat test.org |grep "\[\[file.*svg\]\]"
+  211  sudo snap install losslesscut
+  212  losslesscut -h
+  213  sudo losslesscut 
+  214  sudo snap remove losslesscut
+  215  clear
+  216  ffmpeg
+  217  man ffpeg
+  218  ffpeg -h
+  219  ffpeg 
+  220  ffmpeg 
+  221  -h
+  222  ffmpeg -h
+  223  man ffmpeg
+  224  ffmpeg -formats
+  225  sudo apt-get updade
+  226  sudo apt-get update
+  227  sudo apt-get upgrade
+  228  sudo fdisk -l
+  229  sudo blkid
+  230  cat /etc/fstab 
+  231  sudo nano /etc/fstab 
+  232  udo nano /etc/fstab 
+  233  sudo nano /etc/fstab 
+  234  sudo blkid
+  235  fsck
+  236  sudo blkid
+  237  sudo fdisk -l
+  238  sudo fdisk -l
+  239  sudo umount /dev/sbd1
+  240  sudo mkdir -p /mnt/sdb1
+  241  sudo mount -o rw,users,umask=002 /dev/sdb1 /mnt/sdb1
+  242  sudo fdisk -l
+  243  sudo blkid
+  244  sudo fdisk -l
+  245  cat /etc/fstab 
+  246  sudo nano /etc/fstab 
+  247  sudo apt install emacs --classic
+  248  sudo snap install emacs --classic
+  249  sudo apt install snap
+  250  sudo snap install snap
+  251  snap 
+  252  sudo apt purge snapd
+  253  sudo apt purge snap
+  254  cd /snap/
+  255  ls
+  256  cd
+  257  rm -rf ~/snap/
+  258  cd /var/cache/
+  259  ls
+  260  cd
+  261  sudo apt install snap
+  262  snap
+  263  snapd
+  264  sudo apt-get isntall snapd
+  265  sudo apt-get install snapd
+  266  snap
+  267  sudo snap install emacs --classic
+  268  emacs
+  269  sudo systemctl restart snap.my_snap_name.command.service
+  270  sudo snap restart
+  271  snap reboot
+  272  sudo snap reboot
+  273  snap
+  274  ifconfig
+  275  hostname
+  276  gh repo clone dankarthik25/MyNotes_dev
+  277  git repo clone dankarthik25/MyNotes_dev
+  278  git
+  279  sudo apt update
+  280  sudo apt upgrade
+  281  sudo apt install git
+  282  ls
+  283  cd MyNotes_dev/
+  284  ls
+  285  git status
+  286  cd 
+  287  git status
+  288  ls
+  289  git clone https://github.com/dankarthik25/MyNotes_dev.git
+  290  cd MyNotes_dev/
+  291  ls
+  292  ls -a
+  293  git status
+  294  git init
+  295  git log
+  296  git log --oneline
+  297  git config --global user.email "dankarthik25@gmail.com"
+  298  git config --global user.name "Dankarthik25 "
+  299  ls
+  300  cd MyNotes_dev/
+  301  git log
+  302  cd MyNotes_dev/
+  303  git log
+  304  git log
+  305  git diff co
+  306  git diff COMMIT^!
+  307  git diff-tree -p COMMIT
+  308  git diff-tree -p commit
+  309  git show 4d94da0 aca2617
+  310  git diff 4d94da0 aca2617
+  311  ls
+  312  git log
+  313  ls
+  314  ls -latr
+  315  cd ..
+  316  ls
+  317  ls -latr
+  318  rm -rf .Trash-1000/
+  319  CD
+  320  cd
+  321  cd MyNotes_dev/
+  322  git log
+  323  cd
+  324  cd .emacs.d/
+  325  ls
+  326  git init
+  327  git status
+  328  git add myinit.el myinit.org myinit_manual.org
+  329  git commit -m "version based emacs configuration"
+  330  git status
+  331  git log
+  332  git branch
+  333  git log
+  334  git status
+  335  git add myinit_manual.org
+  336  git push origin master
+  337  git remote add origin url https://github.com/dankarthik25/emacs-config
+  338  git remote add origin url https://github.com/dankarthik25/emacs-config -m
+  339  git remote add origin https://github.com/dankarthik25/emacs-config -m
+  340  git remote add origin https://github.com/dankarthik25/emacs-config
+  341  git push origin master 
+  342  git log
+  343  git pull
+  344  git log
+  345  git status
+  346  git add myinit_manual.org
+  347  git commit -m "Work on Company and Word Stuff"
+  348  git log
+  349  git push origin master 
+  350  git remote add origin https://github.com/dankarthik25/emacs_config.git
+  351  ls -la
+  352  cd .git/
+  353  ls
+  354  vi config 
+  355  ls
+  356  cd ..
+  357  ls
+  358  git log
+  359  git remote add origin https://github.com/dankarthik25/emacs_config.git
+  360  git push origin master 
+  361  git diff
+  362  git log
+  363  git diff 38f571 d2b3734
+  364  git branch
+  365  cd
+  366  ls -la
+  367  pwd
+  368  vi ~/.gitconfig 
+  369  ls -latr
+  370  cd Books/
+  371  ls -latr
+  372  cd
+  373  cat /etc/fstab 
+  374  blkid
+  375  ntfsfix
+  376  ntfsfix -h
+  377  cat ~/.gitconfig 
+  378  cd MyNotes_dev/
+  379  ls
+  380  git status 
+  381  git log
+  382  git log --online
+  383  git log --oneline
+  384  git
+  385  git status
+  386  cd
+  387  mkdir test_merge_rebase
+  388  cd test_merge_rebase/
+  389  git init
+  390  touch master1.txt
+  391  git add .
+  392  git commit -m "m1.txt"
+  393  touch m2.txt
+  394  git add .
+  395  git commit -m "m2.txt"
+  396  git log
+  397  git brand -b feature_branch
+  398  git brand -b featureB
+  399  git branch -b featureB
+  400  git checkout -b featureB
+  401  git branch
+  402  git log
+  403  touch f1.txt
+  404  git add .
+  405  git commit -m "f1.txt"
+  406  git checkout master 
+  407  git log
+  408  touch m3.txt
+  409  git log
+  410  git add .
+  411  git commit -m "m3.txt"
+  412  git checkout featureB 
+  413  git log
+  414  ls
+  415  touch f2.txt
+  416  git add .
+  417  git commit -m "f2.txt"
+  418  git log
+  419  git checkout master 
+  420  ls
+  421  git status
+  422  touch m4.txt
+  423  git add .
+  424  git commit -m "m4.txt"
+  425  git merge featureB 
+  426  git log
+  427  git git reset --hard HEAD~1
+  428  git reset --hard HEAD~1
+  429  git log
+  430  git rebase featureB 
+  431  git log
+  432  git reflog
+  433  git reset f4d4656
+  434  git reset 9f123de
+  435  git checkout featureB 
+  436  git branch
+  437  git status
+  438  git log
+  439  cd
+  440  rm -rf test_merge_rebase/
+  441  ls
+  442  cd MyNotes_dev/
+  443  ls
+  444  git status
+  445  git add Note_devops.org 
+  446  git commit -m "Revised git in devops.org"
+  447  git status
+  448  git add Note_git.org 
+  449  git commit -m "Copied changes in devops.org to git.org"
+  450  git push origin master
+  451  cd /
+  452  cd
+  453  vim tem
+  454  vi tem
+  455  ls
+  456  ls -latr
+  457  sudo su -
+  458  clear
+  459  sudo -i
+  460  whoami
+  461  sudo su -
+  462  free
+  463  free -m
+  464  free -h
+  465  free -mh
+  466  ps
+  467  ps-ef
+  468  ps -ef
+  469  ps -e
+  470  ps -ef
+  471  ps -h
+  472  ps --help
+  473  ps --help simple
+  474  ps --help output
+  475  ps --help list
+  476  ps --help all
+  477  netstat
+  478  sudo su -
+  479  sudo apt-get update ;sudo apt-get upgrade
+  480  sudo apt-get update ; sudo apt-get upgrade
+  481  sudo apt-get upgrade
+  482  id 
+  483  id -un
+  484  sudo -su
+  485  sudo -u
+  486  sudo su -
+  487  cut -c 1 filename
+  488  cut -c 1 'filename'
+  489  cut -c 1 "filename"
+  490  echo "filename" | cut -c 1
+  491  echo "filename" | cut -c 1-5
+  492  echo "filename" | cut -c 1,3,5
+  493  mkdir -h
+  494  mkdir --help
+  495  echo "$PATH"
+  496  echo "${0}"
+  497  echo "adfasf\tfadsfaf"
+  498  echo -e "adfasf\tfadsfaf"
+  499  echo "$PATH" | sed 's/:/\n'|echo
+  500  echo "$PATH" | sed 's/:/\n/g'|echo
+  501  echo -e  "env=dev\nurl=https:10.9.68.7:8080/dev\nusername=dev\npasswd=dev@123"
+  502  cd MyNotes_dev/
+  503  git status
+  504  git add Note_devops.org Note_linuxTutorial.org 
+  505  git status
+  506  git rim Note_linuxTutorial.org
+  507  git restore Note_linuxTutorial.org
+  508  git status
+  509  git restore --stage Note_linuxTutorial.org
+  510  git status
+  511  git commit -m "maven is reviesed & need to practice"
+  512  git push origin master
+  513  git log
+  514  git status
+  515  git log
+  516  commit -m "Tomcat server is revised"
+  517  git commit -m "Tomcat server is revised"
+  518  git add Note_devops.org 
+  519  git commit -m "Tomcat server is revised"
+  520  git log
+  521  git add Note_linuxTutorial.org 
+  522  git commit -m "Need to create Question Answer for Learning and Interview"
+  523  git push origin master 
+  524  git log
+  525  git status 
+  526  cd
+  527  wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz -P /tmp
+  528  jdk 
+  529  java
+  530  java -help
+  531  java -version
+  532  cd /usr/lib/jvm/
+  533  ls
+  534  cd
+  535  wget wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+  536  sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+  537  cd /opt/
+  538  ls
+  539  sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+  540  sudo nano /etc/profile.d/maven.sh
+  541  ls
+  542  ls -latr
+  543  cd /etc/profile.d/
+  544  ls
+  545  ls -latr
+  546  sudo chmod +x /etc/profile.d/maven.sh 
+  547  ls -latr
+  548  source /etc/profile.d/maven.sh 
+  549  mvn
+  550  cd 
+  551  cd WorkSpace_Devops/
+  552  LS
+  553  ls
+  554  cd maven/
+  555  ls
+  556  cd india/
+  557  ls
+  558  cd src/
+  559  ls
+  560  cd main/
+  561  ls
+  562  cd ..
+  563  mvn compile
+  564  mvn package
+  565  mvn install
+  566  java -version
+  567  ufw -h
+  568  ufw app list
+  569  cd 
+  570  vi ~/.bashrc 
+  571  nano ~/.bashrc
+  572  echo "$CATALINA_HOME"
+  573  cd "$CATALINA_HOME"
+  574  ls
+  575  cd bin/
+  576  cd
+  577  cd "$CATALINA_HOME"/bin
+  578  sh startup.sh 
+  579  ls -latr
+  580  cd ..
+  581  chmod -R +x bin
+  582  cd bin/
+  583  ls -l
+  584  sh startup.sh 
+  585  sh shutdown.sh 
+  586  sh startup.sh 
+  587  sh shutdown.sh
+  588  netstat -anp
+  589  sh startup.sh 
+  590  netstat -anp
+  591  sh shutdown.sh
+  592  sh startup.sh 
+  593  sh shutdown.sh
+  594  sh startup.sh 
+  595  nano ~/.bashrc
+  596  cd MyNotes_dev/
+  597  git log
+  598  echo $JAVA_HOME
+  599  echo $MAVEN_HOME
+  600  echo $2_HOME
+  601  echo $M2_HOME
+  602  cd /etc/profile.d/
+  603  ls
+  604  cat maven.sh 
+  605  java -h
+  606  java -version
+  607  -name javac
+  608  find / -name javac
+  609  cd
+  610  find / -name javac
+  611  sudo find / -name javac
+  612  echo $JAVA_HOME
+  613  cd /usr/lib/jvm
+  614  ls
+  615  cd default-java
+  616  ls
+  617  cd bin/
+  618  ls
+  619  cd ..
+  620  cd java-11-openjdk-amd64/
+  621  cd bin/
+  622  ls
+  623  which java
+  624  ls
+  625  ls -latr
+  626  pwd
+  627  java -manual mode
+  628  cd
+  629  sudo apt install -y openjdk-8-jdk
+  630  java
+  631  which java
+  632  cd /usr/lib/
+  633  ls
+  634  cd jvm/
+  635  ls
+  636  cd java-1.8.0-openjdk-amd64
+  637  ls
+  638  cd bin/
+  639  ls
+  640  cd ..
+  641  cd java-8-openjdk-amd64/
+  642  cd bin/
+  643  ls
+  644  cd ../../
+  645  cd java-11-openjdk-amd64/
+  646  cd bin/
+  647  ls
+  648  cat /var/lib/jenkins/secrets/initialAdminPassword.
+  649  sudo cat /var/lib/jenkins/secrets/initialAdminPassword.
+  650  echo '$JENKINS_HOME/secrets/initialAdminPassword.'
+  651  echo '$JENKINS_HOME/secrets/initialAdminPassword'
+  652  echo "${JENKINS_HOME}/secrets/initialAdminPassword"
+  653  echo "${JENKINS_HOME}"
+  654  echo -e "${JENKINS_HOME}"
+  655  cd
+  656  sudo service jenkins stop
+  657  sudo service jenkins restart
+  658  sudo cat /var/lib/jenkins/secrets/initialAdminPassword.
+  659  ls -a
+  660  cd /
+  661  find / -type d jenkins
+  662  find / -type d -name jenkins
+  663  sudo find / -type d -name jenkins
+  664  cd /var/lib/jenkins/
+  665  ls
+  666  cd secrets/
+  667  sudo cd secrets/
+  668  sudo su -
+  669  pwd
+  670  sudo su -
+  671  history
+  672  cd /usr/lib/jvm/java-8-openjdk-amd64
+  673  cd
+  674  ls
+  675  sudo service jenkins stop
+  676  cd MyNotes_dev/
+  677  git status 
+  678  git add Note_devops.org 
+  679  git commit -m "devops.org Jenkins is hard to understand need to practice"
+  680  git log
+  681  git status
+  682  git add Note_linuxTutorial_Vagrant.org 
+  683  git commit -m "Vagrant can be used to teach others: linux,shell,maven,tomcat,jenkins without changing your workflow"
+  684  git log
+  685  git log -help
+  686  git log Note_linuxTutorial.org
+  687  git status
+  688  git add Note_Ansible.org Note_Docker_Kubenetics.org 
+  689  git commit -m "Ansible and Docker Kubenetics need to practices"
+  690  git log
+  691  git status
+  692  git add devops-tools.png git-gitflow-7-638.jpg git-model@2x.png 
+  693  git commit -m "Added img for doc"
+  694  path3=${pwd}
+  695  echo $path3
+  696  echo pwd
+  697  echo $pwd
+  698  echo "${pwd}"
+  699  pwd
+  700  echo "${path3}"
+  701  cd
+  702  sudo service jenkins start 
+  703  ls
+  704  cd MyNotes_dev/
+  705  git status
+  706  git add Note_Ansible.org 
+  707  git commit -m "Revised Ansible"
+  708  git add Note_devops.org 
+  709  git commit -m "Revised upto Docker Compose"
+  710  git log
+  711  git status
+  712  cd
+  713  ls -a
+  714  cd ..
+  715  ls
+  716  ls -a
+  717  cd ..
+  718  ls
+  719  ls -a
+  720  cd etc/
+  721  ls
+  722  cd ssh
+  723  ls
+  724  cat ssh_config
+  725  ls
+  726  ls -a
+  727  cd ssh_config.d/
+  728  ls
+  729  ls -a
+  730  cd
+  731  clera
+  732  clear
+  733  cut -c 1 /etc/passwd
+  734  cat/etc/passwd
+  735  cat /etc/passwd
+  736  cut -c 1-5 /etc/passwd
+  737  cut -c 12358 /etc/passwd
+  738  cut -c 1,2,3,5,8,13 /etc/passwd
+  739  cut -f /etc/passwd
+  740  cut -f 1 /etc/passwd
+  741  cat /etc/passwd
+  742  cut -d ':' -f 1 /etc/passwd
+  743  cat /etc/passwd
+  744  history
+  745  cat /etc/passwd
+  746  history
+  747  cut -d ':' -f 1 /etc/passwd
+  748  cut -d ':' -f 1-3 /etc/passwd
+  749  cut -d ':' -f 1,2,4,3 /etc/passwd
+  750  cut -d ':' -f ,2,4,1,3 /etc/passwd
+  751  cut -d ':' -f ,1,4,3 /etc/passwd
+  752  cut -d ':' -f ,1,3 /etc/passwd
+  753  cut -d ':' -f ,1 /etc/passwd
+  754  cut -d ':' -f 1 /etc/passwd
+  755  cut -d ':' -f 1,3 /etc/passwd
+  756  cut -d ':' -f 1,3,2 /etc/passwd
+  757  cut -d ':' -f 1,3 /etc/passwd
+  758  history
+  759  awk -F ':' '{print $3,$1}' /etc/passwd
+  760  awk -F ':' '{print $NF}' /etc/passwd
+  761  awk -F ':' '{print $(NF-1)}' /etc/passwd
+  762  cat /etc/passwd
+  763  awk -F '{print $(NF-1)}' /etc/passwd
+  764  awk '{print $(NF-1)}' /etc/passwd
+  765  awk '{print $1}' /etc/passwd
+  766  cd /bin/
+  767  ls
+  768  cd cat
+  769  cat cat
+  770  clear
+  771  ls
+  772  pwd
+  773  clear
+  774  cd
+  775  ls 
+  776  cd /
+  777  ls
+  778  cd /bin/
+  779  ls
+  780  cd
+  781  cd boot
+  782  cd /
+  783  cd boot/
+  784  ls
+  785  cd ..
+  786  ls
+  787  cd dev/
+  788  ls
+  789  cd /
+  790  ls
+  791  cd etc/
+  792  ls
+  793  cd profile.d/
+  794  ls
+  795  cat maven.sh 
+  796  mvn 
+  797  cd
+  798  mvn
+  799  sh /etc/profile.d/maven.sh 
+  800  mvn
+  801  java
+  802  java -version
+  803  javac
+  804  javac -version 
+  805  mvn
+  806  cd ..
+  807  cd /
+  808  ls
+  809  cd etc
+  810  ls
+  811  cd profile.d/
+  812  ls
+  813  cd /
+  814  ls
+  815  cd lib
+  816  ls
+  817  cd ufw/
+  818  ls
+  819  cd /
+  820  cd media/
+  821  ls
+  822  ls -la
+  823  cd ..
+  824  cd mnt/
+  825  ls
+  826  cd sdb1/
+  827  ls
+  828  cd 
+  829  ls
+  830  cd /
+  831  ls
+  832  cd proc/
+  833  ls
+  834  cd 1
+  835  ls
+  836  top
+  837  ls
+  838  cd 
+  839  cd /
+  840  ls
+  841  cd root/
+  842  sudo cd root/
+  843  sudo su -
+  844  cd usr/
+  845  ls
+  846  cd ..
+  847  cd var/
+  848  ls
+  849  cd log
+  850  ls
+  851  cat alternatives.log
+  852  last jayradhey 
+  853  ls
+  854  cat auth.log
+  855  cat /var/log/auth.log | grep Accepted | awk '{print $1,$2,$3,$9}'
+  856  cat /var/log/auth.log | awk '{print $1,$2,$3,$9}'
+  857  cd /
+  858  ls
+  859  cd var/
+  860  ls
+  861  cd lib/
+  862  ls
+  863  cd jenkins/
+  864  ls
+  865  cd logs/
+  866  ls
+  867  cd tasks/
+  868  ls
+  869  cat Download\ metadata.log
+  870  cat Periodic\ background\ build\ discarder.log
+  871  cd /
+  872  mkdir -h
+  873  mkdir --help
+  874  ls
+  875  cd
+  876  ls
+  877  mkdir test1
+  878  cd test1/
+  879  ls
+  880  touch text1
+  881  vi text1 
+  882  cat text1 
+  883  cd
+  884  mkdir test1
+  885  mkdir -p test1
+  886  rm -r test1/
+  887  ls
+  888  cd MyNotes_dev/
+  889  ls
+  890  emacs AgileModel.png 
+  891  emacs ismriti_training.tex 
+  892  last
+  893  cd WorkSpace_Devops/apache-tomcat-9.0.45/bin/
+  894  firefox localhost:8080
+  895  sh shutdown.sh 
+  896  netstat 
+  897  sh startup.sh 
+  898  netstat -ano |findstr 8080
+  899  netstat -ano |findstr 9090
+  900  netstat -ano | findstr 8080
+  901  netstat -ano | grep  "8080"
+  902  netstat -ano | grep  8080
+  903  netstat -ano 
+  904  netstat -anp
+  905  netstat -anp | grep 9090
+  906  sh shutdown.sh 
+  907  sh startup.sh 
+  908  sh shutdown.sh 
+  909  netstat -anp | grep 9090
+  910  cd
+  911  ufw status 
+  912  sudo ufw status 
+  913  sudo ufw enable
+  914  sudo ufw status 
+  915  sudo ufw allow OpenSSH
+  916  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+  917  sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+  918  sudo apt update
+  919  sudo apt install jenkins
+  920  systemctl status jenkins
+  921  ls -CF
+  922  ls
+  923  history
+  924  history >> practices_cmds

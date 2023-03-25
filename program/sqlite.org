@@ -1,0 +1,19 @@
+#+TITLE: sqlite
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+
+
+Python SQLite Tutorial: Complete Overview - Creating a Database, Table, and Running Queries
+https://www.youtube.com/watch?v=pd-0G0MigUA
+
+
+
+https://www.youtube.com/watch?v=iXYeb2artTE
+Python SQLite Tutorial: Build a Python project with a SQLite database
+
+
+
+
+ORM : Object Relation Mapper  =flask-SQLAlchemy= or =SQLAlchemy=
+https://www.youtube.com/watch?v=cYWiDiIUxQc 
