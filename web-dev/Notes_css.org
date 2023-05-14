@@ -12,7 +12,7 @@ CodeWithHarry
 HTML is just an skeletal layout of a website \\
 We need CSS to design a webiste, add styles to it and make it look beautiful.
 
-*  [What is CSS?] - 00:08:21
+* [What is CSS?] - 00:08:21
 CSS stands for cacscading Style Sheets \\
 CSS is optional but it convert an off looking HTML page into a beautiful & responsive website
 ** Install VS Code
@@ -33,7 +33,7 @@ body{
 ** HTML Refresher :
 HTML is a bunch of tags used to lay the structure of a page. \\
 Download HTML Notes as part of these notes for a details deedrive . If you know basic HTML continue !
-*  [Create Our First CSS Website] - 00:23:48
+* [Create Our First CSS Website] - 00:23:48
 We will create our first CSS website in this section.
 
 ** What is DOM ?
@@ -142,7 +142,7 @@ can be used =*= as a universal selector to select all the elements
 ** An inline style will override external and internal styles
 ** Comment is CSS =/*= this is comment =*/=
 The comment in css given inside this tag [ =/*= =*/= ]
-*  Practice Set - 00:57:12
+* Practice Set - 00:57:12
 - Create a website with a  =class red= div which has a =backgrond cloro of red= and =color white=.
   #+begin_src css
 .red{
@@ -161,7 +161,7 @@ The comment in css given inside this tag [ =/*= =*/= ]
 - Create multiple CSS classes and verify that all of these work on the same element
 
 - Have a look at the MDN CSS reference and try to play around with few key value CSS rules.
-*  [Colors & Backgrounds] - 01:06:32
+* [Colors & Backgrounds] - 01:06:32
 CSS rules are simple key-value pair with a selector \\
 We can write css rules to chagne color and set backgrounds
 
@@ -302,7 +302,7 @@ div3 {
 #+end_src
 One of the peorperties can be missing given the other are in order.
 
-*  Practice Set - 01:47:20
+* Practice Set - 01:47:20
 - Create a dark blue navigation bar with light color items
   css code
   #+begin_src html
@@ -380,7 +380,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique vero pariatu
     background-attachment: fixed;
 }
   #+end_src      
-*  [CSS Box Model] - 02:00:39
+* [CSS Box Model] - 02:00:39
 The CSS box model looks at all the html elements as boxes 
 #+STARTUP: inlineimages
 [[file:./images/th-625111471.jpeg]]
@@ -515,7 +515,7 @@ Can be content-box border-box
     box-sizing: border-box;
 }
 #+end_src
-*  Practice Set - 02:36:09
+* Practice Set - 02:36:09
 - Create a website layout add a header box, 1 content box and one footer
 
 - Add border & margin to above practice
@@ -566,7 +566,7 @@ footer{
 </footer>
 #+end_src
   
-*  [Fonts & Display] - 02:49:20
+* [Fonts & Display] - 02:49:20
 ** Display 
 *** Display property
 The CSS dispaly property is used to determine whether an element is treated as a block line element & the layout used for its children. (flexbox/grid/etc).
@@ -634,14 +634,14 @@ Just like when we say fruit, it can be any fruit.
 font family : specific
 Generic family : Generic
 
-*  Practice Set - 03:29:10
+* Practice Set - 03:29:10
 - Create the following website layout
 - Add a footer with Google Font: "Ballu Bahi" to 1st task
 - Remove the underline from links in 1st task
 - Demostrate the difference between =dispaly:none= and =visibility:hidden= using a div
 - Change the footer to all upperscase in 1st task
     
-*  [Size, Position & Lists] - 03:45:26
+* [Size, Position & Lists] - 03:45:26
 There are more units for describing size other than =px= \\
 There are =rem=, =em=, =vw=, =vh=, =percentage=,...etc
 ** Size
@@ -681,55 +681,168 @@ ul{
 The z-index property specifies the stack order of an element.\\
 It defines which larye will be abive which in case of overlapping elements
 
-*  Practice Set - 04:27:15
+* Practice Set - 04:27:15
 - Create a responisce nav bar using relative lenghts
 - Create a sticky navebar using position property
 - Demostrate the use of list-style property using a vl as example
 - Demonstrate the use of z-index using an example
-        
-*  [CSS Flexbox] - 04:35:59
-Before we look into CSS-Flexbox , we will look into float and clear properties.
-** float property
+
+* Web Page Layout
+** Float
+*** float property
+The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
+
+The float property can have one of the following values:
+- left - The element floats to the left of its container
+- right - The element floats to the right of its container
+- none - The element does not float (will be displayed just where it occurs in the text). This is default
+- inherit - The element inherits the float value of its parent
+
+
 Float property is simple. It just flows the elements towards left/right
+
+#+begin_src css
+#content .sidebar{
+    float:right;
+    width:40%;
+    display:block;
+    margin:0 0 24px 24px;
+    padding:24px;
+    background:#f3f6f6;
+    border:solid 1px #e1e4e5}
+#+end_src
+
+#+begin_src css
+.tag span {
+    background-color: #EDEDED;
+    border: 1px solid #EDEDED;
+    color: #939393;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 80%;
+    font-weight: normal;
+    margin: 0 3px;
+    padding: 1px 2px;
+    border-radius: 10px;
+} 
+#+end_src
+
 #+STARTUP: inlineimages
 [[file:./images/css-float.png]]
-** Clear property
+
+*** Clear propert
+When we use the float property, and we want the next element below (not on right or left), we will have to use the clear property.
+
+The clear property specifies what should happen with the element that is next to a floating element.
+
+The clear property can have one of the following values:
+- none - The element is not pushed below left or right floated elements. This is default
+- left - The element is pushed below left floated elements
+- right - The element is pushed below right floated elements
+- both - The element is pushed below both left and right floated elements
+- inherit - The element inherits the clear value from its parent
+
+When clearing floats, you should match the clear to the float: If an element is floated to the left, then you should clear to the left. Your floated element will continue to float, but the cleared element will appear below it on the web page.
+
 Used to clear the float. It specifies what elements can float besides a given element.
 
-** CSS flexbox
+** display
+https://www.w3schools.com/css/css_display_visibility.asp
+
+The =display= property is the most important CSS property for controlling layout
+
+The =display= property specifies if/how an element is displayed.
+
+Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is =block= or =inline=.
+
+display can have
+- =block;= or
+- =inline;=
+- =none;=  
+- =flex= :
+- =grid= : https://www.w3schools.com/css/css_grid.asp
+- =inline-grid=
+** Flexbox
+** Grid
+
+* [CSS Flexbox] - 04:35:59
+Before we look into CSS-Flexbox , we will look into float and clear properties, display
+
+** CSS flexbox or flex-container
 Aims at providing a better way to layout align and distribute space among items in a container
 #+begin_src
 container{
    display: flex;
 }
 #+end_src
+
+The flex container properties are:
+- flex-direction
+- flex-wrap
+- flex-flow
+- justify-content
+- align-items
+- align-content
+
 #+STARTUP: inlineimages
 [[file:./images/bw4hK0MYxFXbw7ylW2fR5Q.png]]
 
-** Flex-direction property
+*** Flex-direction property
 Defines the direction towards which items are laid can be {row, row-reverse, column, column-reverse}
-** Flex properties for parent(flex container)
+*** Flex properties for parent(flex container)
 Following are the properties for the flex parent:
 - flex-warp: Can be {wrap, nowrap, wrap-reverse}
   - Wrap items as needed with this property.
 - justify-content: Defines alignment along main axis
 - align-items : Defines alignment along cross axis
 - align-content: Align a flex container's lines when there is extra space in the cross axis.
-          
-** Flex properties for the children (flex items)
+
+** Flex item
+
 Following are the properties for the flex children.
 - order : controls the order in which the items apper in the flex container
 - align-self : allows default alignment to be overridden for the indivudual flex items.
 - flex-grow: Define the ability for a flex item to grow
-- flex-shrink: Specifies how much a flex item will shrink relative to the rest of the items       
-*  Practice Set - 04:59:37
+- flex-shrink: Specifies how much a flex item will shrink relative to the rest of the items
+- flex-basis
+- flex
+- align-self
+
+** Flex Responsive
+To create web pages which support different type of resolution or devices like moble, table, moniter...etc
+we need responsice web pages which can be achive by flex responisve
+
+You learned from the [[https://www.w3schools.com/css/css3_mediaqueries.asp][CSS Media Queries]] chapter that you can use media queries to create different layouts for different screen sizes and devices.
+
+#+begin_src css
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+#+end_src
+* Practice Set - 04:59:37
 - Create a layout of your choice using float
 - Create the same layout in 1st task using flexbox
 - Create the following navigation bar using flexbox
+* CSS Grid
+** Intro
+https://www.w3schools.com/css/css_grid.asp
+** Grid Container
+https://www.w3schools.com/css/css_grid_container.asp
+** Grid Item
+https://www.w3schools.com/css/css_grid_item.asp
+    
 * TODO insert image
-- Create the following layout using flexbox:
-* TODO insert image   
-*  [CSS Grid & Media Queries] - 05:06:56
+- Create the following layout using flexbox:  
+* [CSS Grid & Media Queries] - 05:06:56
 A CSS grid can be initialized using
 
 #+begin_src 
@@ -753,13 +866,13 @@ shorthand property for grid-row-gap & grid-column-gap
 #+end_src
 Note : For a single value of grid-gap, bot row and column gaps can be set in one value.
 
-*  Practice Set - 05:30:07
+* Practice Set - 05:30:07
 - Create a header with content using CSS grid
 - Create the layout create in using css grid
 - Create a web-page which is green on large devices, red on medium and yellow on small devices
       
-*   [Transforms, Transitions & Animations] - 05:41:23
-*  Practice Set - 06:47:37 
+* [Transforms, Transitions & Animations] - 05:41:23
+* Practice Set - 06:47:37 
 * Flipkart Clone Project - 07:09:12
 
 

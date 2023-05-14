@@ -12,6 +12,11 @@
 #+Setupfile: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
 
 # +SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme-readtheorg.setup
+
+asdfasdf
+
+sadfasdfsdf
+
 * Full Course :
 Colt Steele developed this course. : \\
 Youtube : The 50 Most Popular Linux & Terminal Commands - Full Course for Beginner \\
@@ -624,6 +629,46 @@ du -sh *.jpg # size of all jpg formate
 # 378M	Gitabase
 
 #+end_src
+
+https://cloudcone.com/docs/article/check-which-folders-use-the-highest-disk-space-in-linux/
+https://www.tecmint.com/find-top-large-directories-and-files-sizes-in-linux/
+
+Real time  problem  \\
+There is error in code deploy and error is docker pull ecr_url/repo_name:latest  \\
+
+The error is insuffient file size unable to pull img > Check there is most of file size is utilited
+#+begin_src sh
+du -h / 2>/dev/null | grep '[0-9\.]\+G'
+
+
+cd / && du -hs * | sort -rh | head -10
+# 7.2G	var   # here size is more because of docker images are stored here
+# 2.1G	usr   # python is installed here 
+# 1.4G	snap
+# 134M	boot
+# 19M	opt
+# 6.1M	etc
+# 848K	run
+# 60K	tmp
+# 56K	root
+# 40K	home
+
+
+cd /usr &&  du -hs * | sort -rh | head -10
+# 940M	lib
+# 355M	bin
+# 341M	share
+# 288M	src
+# 121M	libexec
+# 29M	sbin
+# 2.6M	include
+# 104K	local
+# 4.0K	libx32
+# 4.0K	lib64
+
+#+end_src
+cd /var/lib && du -hs * | sort -rh | head -10
+
 ** RAM free
 #+begin_src sh 
 ## ##########################################################
@@ -2188,6 +2233,11 @@ awk -F ':' '{print $(NF-1)}' /etc/passwd
 
 netstat -nutl ${1} | grep : | awk '{print $4}' | awk -F':' '{print $NF}'
 #+END_SRC
+** Awk
+#+begin_src sh
+# remove line number 
+history|awk '{$1="";print substr($0,2)}'
+#+end_src
 * Sort and Uniq 
 #+BEGIN_SRC sh
 man sort

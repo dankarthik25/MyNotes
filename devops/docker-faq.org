@@ -1,0 +1,19 @@
+#+TITLE: ec2 vs ecs (Farget and EC2)
+#+AUTHOR: Karthik
+#+SETUPFILE: ~/mynotes/org2html/org-theme-collection/theme2.setup
+
+
+
+https://nodramadevops.com/2019/10/the-importance-of-docker-container-resource-limits/
+
+
+dockers args --user root -v /var/docker.sock:/var/run/docker.sock
+
+
+https://blogs.perficient.com/2021/06/07/docker-bootcamp-resource-limits/
+
+what is vcpu in aws : and cpu in docker ?
+vcpu : stardard unit of core chip used in all process: there are more than 1 core or (1vcpu) you can check no of core by
+
+docker info | grep CPU
+

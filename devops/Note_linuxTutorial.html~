@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-02-16 Thu 12:12 -->
+<!-- 2023-04-28 Fri 12:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux for DevOps</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="D Karthik" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,38 +191,23 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
-<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
-<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="/home/jayradhey/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/images/favicon.png">
+<link rel="icon" type="image/png" href="https://deepalgorithms.in/assets/icons/favicon.png">
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg-htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/home/karthik/mynotes/org2html/org-theme-collection/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -242,237 +228,238 @@
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Linux for DevOps</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9ffcd44">Full Course :</a></li>
-<li><a href="#org82c4696">Introduction to Kernel,Shell</a>
+<li><a href="#org98bc535">Full Course :</a></li>
+<li><a href="#org8a382a4">Introduction to Kernel,Shell</a>
 <ul>
-<li><a href="#orgd2b02e3">What is Kernel</a>
+<li><a href="#org9bbeb96">What is Kernel</a>
 <ul>
-<li><a href="#org2ec7550">What the kernel does</a></li>
+<li><a href="#org0800d1f">What the kernel does</a></li>
 </ul>
 </li>
-<li><a href="#org19ae5cf">What is shell</a></li>
-<li><a href="#org521aa41">Type of shell</a></li>
-<li><a href="#orgc6420d8">Linux Job</a></li>
-<li><a href="#org7068382">Linux File System</a></li>
+<li><a href="#org75cd015">What is shell</a></li>
+<li><a href="#org5f5d05d">Type of shell</a></li>
+<li><a href="#orgdf6eb14">Linux Job</a></li>
+<li><a href="#org8abe881">Linux File System</a></li>
 </ul>
 </li>
-<li><a href="#org5f0015e">File/Dir navigate (ls, pwd,cd)</a>
+<li><a href="#org7a16bff">File/Dir navigate (ls, pwd,cd)</a>
 <ul>
-<li><a href="#org6dd9555">ls List</a></li>
-<li><a href="#orga492ff5">pwd Print Working Directory</a></li>
-<li><a href="#org8ff9206">cd</a></li>
+<li><a href="#orgc2bcc9d">ls List</a></li>
+<li><a href="#org15728dc">pwd Print Working Directory</a></li>
+<li><a href="#org299092f">cd</a></li>
 </ul>
 </li>
-<li><a href="#org370da4a">File/Dir Create (mkdir, touch)</a>
+<li><a href="#org83d355e">File/Dir Create (mkdir, touch)</a>
 <ul>
-<li><a href="#orgca7269d">mkdir Make Dir</a></li>
-<li><a href="#org65d6cf7">create file</a></li>
+<li><a href="#orge0b284a">mkdir Make Dir</a></li>
+<li><a href="#org1aafd78">create file</a></li>
 </ul>
 </li>
-<li><a href="#org64a3ab8">File/Dir Copy (cp Copy ,mv Move(rename) ,rm Remove)</a></li>
-<li><a href="#org34dc4ec">File/Dir Read and Write (cat,head,tail,less vi,nano,gedit)</a></li>
-<li><a href="#org04e1b62">Find</a>
+<li><a href="#orgf47366f">File/Dir Copy (cp Copy ,mv Move(rename) ,rm Remove)</a></li>
+<li><a href="#orgece23a5">File/Dir Read and Write (cat,head,tail,less vi,nano,gedit)</a></li>
+<li><a href="#orgc7c888b">Find</a>
 <ul>
-<li><a href="#org6aa3bad">[Assignment]</a></li>
+<li><a href="#org34cb925">[Assignment]</a></li>
 </ul>
 </li>
-<li><a href="#orgd663234">chmod (File Permissions)</a></li>
-<li><a href="#org54e330b">chown [CHange OWNner of file/dir]</a></li>
-<li><a href="#org9ada022">which</a></li>
-<li><a href="#orgec91018">zip/un-zip [Compress and Uncompress tar, gzip, gunzip, bzip2, bunzip2]</a></li>
-<li><a href="#org6656d3d">User Create User,switch, list</a>
+<li><a href="#orgfe78131">chmod (File Permissions)</a></li>
+<li><a href="#org37c7fe8">chown [CHange OWNner of file/dir]</a></li>
+<li><a href="#orga938346">which</a></li>
+<li><a href="#org6b399db">zip/un-zip [Compress and Uncompress tar, gzip, gunzip, bzip2, bunzip2]</a></li>
+<li><a href="#org532175e">User Create User,switch, list</a>
 <ul>
-<li><a href="#org1884b43">Super User su</a></li>
-<li><a href="#org27682bd">List user in linux</a></li>
-<li><a href="#orgecaa470">Create Users</a></li>
-<li><a href="#orgf8c3e45">SU Switch User in linux</a></li>
-<li><a href="#org6766f1f">delete a user</a></li>
+<li><a href="#org5ecf171">Super User su</a></li>
+<li><a href="#orgf33c9b5">List user in linux</a></li>
+<li><a href="#org6062ad4">Create Users</a></li>
+<li><a href="#org4441393">SU Switch User in linux</a></li>
+<li><a href="#org801f54a">delete a user</a></li>
 </ul>
 </li>
-<li><a href="#org4a5c85e">System monitor cmd [df,du,top,free, ps, kill, uptime]</a>
+<li><a href="#orge049bd3">System monitor cmd [df,du,top,free, ps, kill, uptime]</a>
 <ul>
-<li><a href="#orgebd6496">top</a></li>
-<li><a href="#org08b3e6b">df</a></li>
-<li><a href="#org4ff3c0e">du</a></li>
-<li><a href="#orgc91ccbb">RAM free</a></li>
-<li><a href="#org2df9085">ps - example Intro</a></li>
-<li><a href="#org6fd1b7c">ps</a></li>
-<li><a href="#org679d17a">kill</a></li>
-<li><a href="#orgd81e38d">uptime</a></li>
+<li><a href="#orgb8b5920">top</a></li>
+<li><a href="#orgfc2667e">df</a></li>
+<li><a href="#orga935def">du</a></li>
+<li><a href="#org719713a">RAM free</a></li>
+<li><a href="#org898d26b">ps - example Intro</a></li>
+<li><a href="#org6fd3b6a">ps</a></li>
+<li><a href="#org1891014">kill</a></li>
+<li><a href="#org0c1c7b8">uptime</a></li>
 </ul>
 </li>
-<li><a href="#orgef8f1e0">Networking</a>
+<li><a href="#orga0bf965">Networking</a>
 <ul>
-<li><a href="#orgf724846">Basics of Computer Networking</a></li>
-<li><a href="#org818a899">IP Address</a></li>
-<li><a href="#orgd90f438">IPv4</a></li>
-<li><a href="#org843616c">IPV6</a></li>
-<li><a href="#orgc13c594">IP4 vs IP6</a>
+<li><a href="#org6d1093c">Basics of Computer Networking</a></li>
+<li><a href="#org0ac6013">IP Address</a></li>
+<li><a href="#orgc58f212">IPv4</a></li>
+<li><a href="#org02f8fb2">IPV6</a></li>
+<li><a href="#org2fc967a">IP4 vs IP6</a>
 <ul>
-<li><a href="#orgbe2ea78">IPV6 Tunneling</a></li>
-<li><a href="#org6da7b41">Which one is faster IPv4 or IPv6</a></li>
+<li><a href="#org558c13c">IPV6 Tunneling</a></li>
+<li><a href="#org426ecb1">Which one is faster IPv4 or IPv6</a></li>
 </ul>
 </li>
-<li><a href="#org6874b23">ifconfig</a></li>
-<li><a href="#org841a0e4">Subnet Masking</a>
+<li><a href="#org8a05f2d">ifconfig</a></li>
+<li><a href="#orga200366">Subnet Masking</a>
 <ul>
-<li><a href="#org6d9cb2e">Subnet or Subnetwork</a></li>
-<li><a href="#orge58d4eb">Subnet Mask</a></li>
-<li><a href="#orgbe2957a">Private Netwrok</a></li>
+<li><a href="#orgac3a9dc">Subnet or Subnetwork</a></li>
+<li><a href="#org7eedf4a">Subnet Mask</a></li>
+<li><a href="#org620e3c5">Private Netwrok</a></li>
 </ul>
 </li>
-<li><a href="#org922cc5a">ping</a></li>
-<li><a href="#org63291ce">nslookup</a></li>
-<li><a href="#org7ebfa99">netstrat</a></li>
-<li><a href="#org0e1966b">telnet</a></li>
-<li><a href="#orga50c35a">Networking Command</a></li>
+<li><a href="#orgdd05d15">ping</a></li>
+<li><a href="#org43a3354">nslookup</a></li>
+<li><a href="#org768b6ed">netstrat</a></li>
+<li><a href="#orgc588d82">telnet</a></li>
+<li><a href="#orgb9999a7">Networking Command</a></li>
 </ul>
 </li>
-<li><a href="#org2e3f78e">SSH Remote Access (Master-Slave), SSH, RSA, PEM, PPK,, SSL</a>
+<li><a href="#org65d8178">SSH Remote Access (Master-Slave), SSH, RSA, PEM, PPK,, SSL</a>
 <ul>
-<li><a href="#orgb0b0b30">How ssh work ?</a></li>
-<li><a href="#org24ac6fb">Create SSH- RSA based remote access</a></li>
-<li><a href="#orgd9a9888">SSH Authentication Method</a></li>
-<li><a href="#org0182b03">ssh/scp [with Password or key][master-slave linux]</a></li>
+<li><a href="#orgf54b959"><span class="todo TODO">TODO</span> How ssh work ?</a></li>
+<li><a href="#orgf7c948c"><span class="todo TODO">TODO</span> Create SSH- RSA based remote access</a></li>
+<li><a href="#orga3fba02"><span class="todo TODO">TODO</span> SSH Authentication Method</a></li>
+<li><a href="#orgef247f7">ssh/scp [with Password or key][master-slave linux]</a></li>
 </ul>
 </li>
-<li><a href="#org1aaaafa">SSH (with password and without Password(rsa ,pem key)</a>
+<li><a href="#orgdcb8b98">SSH (with password and without Password(rsa ,pem key)</a>
 <ul>
-<li><a href="#orgad2b202">Connect using SSH-key (without using password)</a>
+<li><a href="#orgb71474f">Connect using SSH-key (without using password)</a>
 <ul>
-<li><a href="#orga152357">Create a Common User</a></li>
-<li><a href="#org9633ce7">Give Root Privilage to the Common User</a></li>
-<li><a href="#org023232b">Allow password based ssh-authentication or RSA based-authentication</a></li>
-<li><a href="#org6cc3cc2">Copy Public Key(id<sub>rsa.pub</sub>) into slave-user ~/.ssh/authorized<sub>keys</sub> file</a></li>
+<li><a href="#org3273581">Create a Common User</a></li>
+<li><a href="#orgfd50f27">Give Root Privilage to the Common User</a></li>
+<li><a href="#org42cfd44">Allow password based ssh-authentication or RSA based-authentication</a></li>
+<li><a href="#orgc1be19d">Copy Public Key(id<sub>rsa.pub</sub>) into slave-user ~/.ssh/authorized<sub>keys</sub> file</a></li>
 </ul>
 </li>
-<li><a href="#org543500a">Connect using pem key instead of ras(pub key)</a>
+<li><a href="#orge2907a2"><span class="todo TODO">TODO</span> Connect using pem key instead of ras(pub key)</a>
 <ul>
-<li><a href="#org0e43c4e">1.Generating Key Pairs</a></li>
-<li><a href="#orgabed77b">Copy/Append pub key to Authorized<sub>key</sub> file</a></li>
-<li><a href="#orgcac5d8f">Downlaod the pem key in system</a></li>
-<li><a href="#org92b30de">Config sshd config</a></li>
-<li><a href="#org231bfbe">Connect through pem file</a></li>
+<li><a href="#org964a3b2">1.Generating Key Pairs</a></li>
+<li><a href="#org8388ce0">Copy/Append pub key to Authorized<sub>key</sub> file</a></li>
+<li><a href="#org6c21718">Downlaod the pem key in system</a></li>
+<li><a href="#org795695e">Config sshd config</a></li>
+<li><a href="#orgcbb4dc3">Connect through pem file</a></li>
 </ul>
 </li>
-<li><a href="#org63e17c1">Convert ppk to pem key and vice versa</a></li>
-<li><a href="#orge08aad8">AWS-EC2</a></li>
-<li><a href="#org4d60fb4">Check any unidentified ssh access</a></li>
-<li><a href="#org30658f4">Check ssh-log files : check failed login attempts:</a></li>
-<li><a href="#org95352e9">small-step : linux app to manage ssh keys ,ssl</a></li>
+<li><a href="#org64f9333"><span class="todo TODO">TODO</span> Convert ppk to pem key and vice versa</a></li>
+<li><a href="#orgc4f7683">AWS-EC2</a></li>
+<li><a href="#orgb27a5a9"><span class="todo TODO">TODO</span> Check any unidentified ssh access</a></li>
+<li><a href="#org760c82f"><span class="todo TODO">TODO</span> Check ssh-log files : check failed login attempts:</a></li>
+<li><a href="#org8eeb88f"><span class="todo TODO">TODO</span> small-step : linux app to manage ssh keys ,ssl</a></li>
 </ul>
 </li>
-<li><a href="#orge358bed">Crontab</a>
+<li><a href="#org7ebfe9f"><span class="todo TODO">TODO</span> Crontab</a>
 <ul>
-<li><a href="#org7b1f1e7">Example</a></li>
-<li><a href="#org23bd785">UTC Time Crontab</a></li>
+<li><a href="#org8acdcc4">Example</a></li>
+<li><a href="#org36662c9">UTC Time Crontab</a></li>
 </ul>
 </li>
-<li><a href="#org8d6514b">RUN SHELL SCRIPTS</a></li>
-<li><a href="#orge6de678">Regular expression</a>
+<li><a href="#org5f0f573">RUN SHELL SCRIPTS</a></li>
+<li><a href="#orgf13feaf">Regular expression</a>
 <ul>
-<li><a href="#orga0fe6a0">Regular Expression Intro</a>
+<li><a href="#org816f938">Regular Expression Intro</a>
 <ul>
-<li><a href="#org6c73547">Quantifiers</a></li>
+<li><a href="#org0be976a">Quantifiers</a></li>
 </ul>
 </li>
-<li><a href="#org3af3695">GREP : Global Regular Expression Print</a>
+<li><a href="#org88db294">GREP : Global Regular Expression Print</a>
 <ul>
-<li><a href="#orgc0ea638">Example for grep</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgabfb7d2">Sed (Find and Replace in File )</a>
-<ul>
-<li><a href="#org383f12a">sed Stread EDitor &lt;Replace character in file &gt;</a>
-<ul>
-<li><a href="#orga69a984">Real-time problem for sed:</a></li>
-</ul>
-</li>
-<li><a href="#org56e7c64">Sed and Streams (find and replace)</a></li>
-</ul>
-</li>
-<li><a href="#org6893708">AWK and cut searches for text pattern in File</a>
-<ul>
-<li><a href="#org9a15917">cut and Awk</a>
-<ul>
-<li><a href="#org06713d1">Exampel : Find all Network pork using Awk</a></li>
+<li><a href="#orgf82e79b">Example for grep</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org92024bb">Sort and Uniq</a>
+<li><a href="#orge176633">Sed (Find and Replace in File )</a>
+<ul>
+<li><a href="#org5d26914"><span class="todo TODO">TODO</span> sed Stread EDitor &lt;Replace character in file &gt;</a>
+<ul>
+<li><a href="#orgea28a08">Real-time problem for sed:</a></li>
+</ul>
+</li>
+<li><a href="#org67ca0f7">Sed and Streams (find and replace)</a></li>
+</ul>
+</li>
+<li><a href="#org4951bbe">AWK and cut searches for text pattern in File</a>
+<ul>
+<li><a href="#org17530c5">cut and Awk</a>
+<ul>
+<li><a href="#org613c875">Exampel : Find all Network pork using Awk</a></li>
+</ul>
+</li>
+<li><a href="#orga381fe9">Awk</a></li>
+</ul>
+</li>
+<li><a href="#org63e4cc3">Sort and Uniq</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org4da262e">Exersice</a></li>
+<li><a href="#orgf1712c3">Exersice</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgd9ee759">Pip" |" combination of two cmds</a>
+<li><a href="#orgcb51687">Pip" |" combination of two cmds</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org90d8ed1">Assignment</a></li>
+<li><a href="#org3ff204c">Assignment</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgcdb1b0e">redirect</a></li>
-<li><a href="#org3527995">runlevel</a></li>
-<li><a href="#org096966f">Advance L2</a>
+<li><a href="#org7c95397">redirect</a></li>
+<li><a href="#org9077292"><span class="todo TODO">TODO</span> runlevel</a></li>
+<li><a href="#org76dcc6a">TO DO link soft , hard</a></li>
+<li><a href="#org5781b60">Advance L2</a>
 <ul>
-<li><a href="#org9cadb38">Rsync</a></li>
-<li><a href="#org564f77e">CURL wget</a></li>
-<li><a href="#org628ace7">GPG</a></li>
-<li><a href="#orgcc5a5f4">DNS, DNS-Server</a></li>
-<li><a href="#org4d55dd2">SSL</a></li>
+<li><a href="#org12a929e"><span class="todo TODO">TODO</span> Rsync</a></li>
+<li><a href="#org867e603">CURL wget</a></li>
+<li><a href="#org251429f"><span class="todo TODO">TODO</span> GPG</a></li>
+<li><a href="#orgd5af260"><span class="todo TODO">TODO</span> DNS, DNS-Server</a></li>
+<li><a href="#org9a0bee6"><span class="todo TODO">TODO</span> SSL</a></li>
 </ul>
 </li>
-<li><a href="#org36289fa">Linux Cmd review</a></li>
-<li><a href="#org1f981b6">Linux Interview Question</a>
+<li><a href="#orgff1d5fc"><span class="todo TODO">TODO</span> Linux Cmd review</a></li>
+<li><a href="#orga4f09ad">Linux Interview Question</a>
 <ul>
-<li><a href="#orga3a211e">36) What are environmental variables?</a></li>
-<li><a href="#org1f3d998">39) What is redirection?</a></li>
-<li><a href="#org981cf00">40) What is grep command?</a></li>
-<li><a href="#org1cbfa09">43) How do you terminate an ongoing process?</a></li>
-<li><a href="#org641bb54">46) How do you execute more than one command or program from a single command line entry?</a></li>
-<li><a href="#orgbb4490f">more questions</a></li>
-<li><a href="#orgca5441b">28. What are the Process states in Linux?</a></li>
-<li><a href="#org0f8b7d4">What is  Run levels</a></li>
+<li><a href="#org9f717a9">36) What are environmental variables?</a></li>
+<li><a href="#org7b5d14c">39) What is redirection?</a></li>
+<li><a href="#org5c36109">40) What is grep command?</a></li>
+<li><a href="#orgbabb37f">43) How do you terminate an ongoing process?</a></li>
+<li><a href="#org5d36a87">46) How do you execute more than one command or program from a single command line entry?</a></li>
+<li><a href="#org0b6193a">more questions</a></li>
+<li><a href="#orge2ea3bd">28. What are the Process states in Linux?</a></li>
+<li><a href="#org11daf96">What is  Run levels</a></li>
 </ul>
 </li>
-<li><a href="#orgc923c06">Extra</a></li>
-<li><a href="#orga9b6265">Configure your linux laptop for devops</a>
+<li><a href="#org32ab602">Extra</a></li>
+<li><a href="#orgf6a3f72">Configure your linux laptop for devops</a>
 <ul>
-<li><a href="#org6283101">Troubleshoot in ssh connection disconnect</a></li>
-<li><a href="#org1f2ee42">Temux</a></li>
-<li><a href="#orgce20048">vim or neo-vim</a></li>
+<li><a href="#org0e55aad">Troubleshoot in ssh connection disconnect</a></li>
+<li><a href="#orgb9e6886">Temux</a></li>
+<li><a href="#org2b2e7b5">vim or neo-vim</a></li>
 </ul>
 </li>
-<li><a href="#org0ffe78f">Example shell script run remote script</a>
+<li><a href="#org7ca468d">Example shell script run remote script</a>
 <ul>
-<li><a href="#org3a0f0e5">Assignment</a></li>
+<li><a href="#orgaeed9fb">Assignment</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9ffcd44" class="outline-2">
-<h2 id="org9ffcd44">Full Course :</h2>
-<div class="outline-text-2" id="text-org9ffcd44">
+<div id="outline-container-org98bc535" class="outline-2">
+<h2 id="org98bc535">Full Course :</h2>
+<div class="outline-text-2" id="text-org98bc535">
 <p>
 Colt Steele developed this course. : <br />
 Youtube : The 50 Most Popular Linux &amp; Terminal Commands - Full Course for Beginner <br />
@@ -481,13 +468,13 @@ Youtube : The 50 Most Popular Linux &amp; Terminal Commands - Full Course for Be
 </div>
 </div>
 
-<div id="outline-container-org82c4696" class="outline-2">
-<h2 id="org82c4696">Introduction to Kernel,Shell</h2>
-<div class="outline-text-2" id="text-org82c4696">
+<div id="outline-container-org8a382a4" class="outline-2">
+<h2 id="org8a382a4">Introduction to Kernel,Shell</h2>
+<div class="outline-text-2" id="text-org8a382a4">
 </div>
-<div id="outline-container-orgd2b02e3" class="outline-3">
-<h3 id="orgd2b02e3">What is Kernel</h3>
-<div class="outline-text-3" id="text-orgd2b02e3">
+<div id="outline-container-org9bbeb96" class="outline-3">
+<h3 id="org9bbeb96">What is Kernel</h3>
+<div class="outline-text-3" id="text-org9bbeb96">
 <ul class="org-ul">
 <li>The Linux® kernel is the <b>core</b> component of <b>Operating System (OS)</b> and is the
 <ul class="org-ul">
@@ -500,9 +487,9 @@ Youtube : The 50 Most Popular Linux &amp; Terminal Commands - Full Course for Be
 <a href="https://upload.wikimedia.org/wikipedia/commons/7/7b/Free_and_open-source-software_display_servers_and_UI_toolkits.svg">source: wikipedia</a>
 </p>
 </div>
-<div id="outline-container-org2ec7550" class="outline-4">
-<h4 id="org2ec7550">What the kernel does</h4>
-<div class="outline-text-4" id="text-org2ec7550">
+<div id="outline-container-org0800d1f" class="outline-4">
+<h4 id="org0800d1f">What the kernel does</h4>
+<div class="outline-text-4" id="text-org0800d1f">
 <p>
 The kernel has 4 jobs:
 </p>
@@ -530,9 +517,9 @@ The kernel has 4 jobs:
 </div>
 </div>
 
-<div id="outline-container-org19ae5cf" class="outline-3">
-<h3 id="org19ae5cf">What is shell</h3>
-<div class="outline-text-3" id="text-org19ae5cf">
+<div id="outline-container-org75cd015" class="outline-3">
+<h3 id="org75cd015">What is shell</h3>
+<div class="outline-text-3" id="text-org75cd015">
 <p>
 Shell:  is the <b>Command Line Interface (cli or terminal interface)</b> between
 </p>
@@ -556,9 +543,9 @@ Shell:  is the <b>Command Line Interface (cli or terminal interface)</b> between
 </ul>
 </div>
 </div>
-<div id="outline-container-org521aa41" class="outline-3">
-<h3 id="org521aa41">Type of shell</h3>
-<div class="outline-text-3" id="text-org521aa41">
+<div id="outline-container-org5f5d05d" class="outline-3">
+<h3 id="org5f5d05d">Type of shell</h3>
+<div class="outline-text-3" id="text-org5f5d05d">
 <p>
 <a href="https://www.educba.com/types-of-shells-in-linux/">https://www.educba.com/types-of-shells-in-linux/</a>
 </p>
@@ -573,15 +560,15 @@ Shell:  is the <b>Command Line Interface (cli or terminal interface)</b> between
 </ul>
 
 
-<div id="org8300301" class="figure">
+<div id="org06b64ed" class="figure">
 <p><img src="./linux-img/th-4143612218.jpeg" alt="th-4143612218.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6420d8" class="outline-3">
-<h3 id="orgc6420d8">Linux Job</h3>
-<div class="outline-text-3" id="text-orgc6420d8">
+<div id="outline-container-orgdf6eb14" class="outline-3">
+<h3 id="orgdf6eb14">Linux Job</h3>
+<div class="outline-text-3" id="text-orgdf6eb14">
 <ul class="org-ul">
 <li>System Administator</li>
 <li>Network</li>
@@ -591,9 +578,9 @@ Shell:  is the <b>Command Line Interface (cli or terminal interface)</b> between
 </ul>
 </div>
 </div>
-<div id="outline-container-org7068382" class="outline-3">
-<h3 id="org7068382">Linux File System</h3>
-<div class="outline-text-3" id="text-org7068382">
+<div id="outline-container-org8abe881" class="outline-3">
+<h3 id="org8abe881">Linux File System</h3>
+<div class="outline-text-3" id="text-org8abe881">
 <pre class="example">
 (/): Directory
 ├── bin           # binary like ls,cat........ 
@@ -649,13 +636,13 @@ important file files
 </div>
 </div>
 
-<div id="outline-container-org5f0015e" class="outline-2">
-<h2 id="org5f0015e">File/Dir navigate (ls, pwd,cd)</h2>
-<div class="outline-text-2" id="text-org5f0015e">
+<div id="outline-container-org7a16bff" class="outline-2">
+<h2 id="org7a16bff">File/Dir navigate (ls, pwd,cd)</h2>
+<div class="outline-text-2" id="text-org7a16bff">
 </div>
-<div id="outline-container-org6dd9555" class="outline-3">
-<h3 id="org6dd9555">ls List</h3>
-<div class="outline-text-3" id="text-org6dd9555">
+<div id="outline-container-orgc2bcc9d" class="outline-3">
+<h3 id="orgc2bcc9d">ls List</h3>
+<div class="outline-text-3" id="text-orgc2bcc9d">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">###########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">list directory</span>
@@ -739,9 +726,9 @@ ls -latr | grep test.sh | rm -rf
 </div>
 </div>
 </div>
-<div id="outline-container-orga492ff5" class="outline-3">
-<h3 id="orga492ff5">pwd Print Working Directory</h3>
-<div class="outline-text-3" id="text-orga492ff5">
+<div id="outline-container-org15728dc" class="outline-3">
+<h3 id="org15728dc">pwd Print Working Directory</h3>
+<div class="outline-text-3" id="text-org15728dc">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print working directory</span>
@@ -754,9 +741,9 @@ ls -latr | grep test.sh | rm -rf
 </div>
 </div>
 </div>
-<div id="outline-container-org8ff9206" class="outline-3">
-<h3 id="org8ff9206">cd</h3>
-<div class="outline-text-3" id="text-org8ff9206">
+<div id="outline-container-org299092f" class="outline-3">
+<h3 id="org299092f">cd</h3>
+<div class="outline-text-3" id="text-org299092f">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Change directory</span>
@@ -775,7 +762,7 @@ ls -latr | grep test.sh | rm -rf
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">relative path</span>
 
-<span style="color: #3a81c3;">cd</span> /home/jayradhey/MyNotes_dev
+<span style="color: #3a81c3;">cd</span> ~/MyNotes_dev
 <span style="color: #3a81c3;">cd</span> ../WorkSpace_AWS <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">THIS is relative path with respect to current path</span>
 </pre>
 </div>
@@ -783,31 +770,31 @@ ls -latr | grep test.sh | rm -rf
 </div>
 </div>
 
-<div id="outline-container-org370da4a" class="outline-2">
-<h2 id="org370da4a">File/Dir Create (mkdir, touch)</h2>
-<div class="outline-text-2" id="text-org370da4a">
+<div id="outline-container-org83d355e" class="outline-2">
+<h2 id="org83d355e">File/Dir Create (mkdir, touch)</h2>
+<div class="outline-text-2" id="text-org83d355e">
 </div>
-<div id="outline-container-orgca7269d" class="outline-3">
-<h3 id="orgca7269d">mkdir Make Dir</h3>
-<div class="outline-text-3" id="text-orgca7269d">
+<div id="outline-container-orge0b284a" class="outline-3">
+<h3 id="orge0b284a">mkdir Make Dir</h3>
+<div class="outline-text-3" id="text-orge0b284a">
 <div class="org-src-container">
 <pre class="src src-sh">mkdir mydir_name
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org65d6cf7" class="outline-3">
-<h3 id="org65d6cf7">create file</h3>
-<div class="outline-text-3" id="text-org65d6cf7">
+<div id="outline-container-org1aafd78" class="outline-3">
+<h3 id="org1aafd78">create file</h3>
+<div class="outline-text-3" id="text-org1aafd78">
 <pre class="example">
 touch file_name
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org64a3ab8" class="outline-2">
-<h2 id="org64a3ab8">File/Dir Copy (cp Copy ,mv Move(rename) ,rm Remove)</h2>
-<div class="outline-text-2" id="text-org64a3ab8">
+<div id="outline-container-orgf47366f" class="outline-2">
+<h2 id="orgf47366f">File/Dir Copy (cp Copy ,mv Move(rename) ,rm Remove)</h2>
+<div class="outline-text-2" id="text-orgf47366f">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">File/Directory Creation, Delete,copy,move,rename manupulation cmd</span>
@@ -844,9 +831,9 @@ rm -rf subdir1
 </div>
 </div>
 </div>
-<div id="outline-container-org34dc4ec" class="outline-2">
-<h2 id="org34dc4ec">File/Dir Read and Write (cat,head,tail,less vi,nano,gedit)</h2>
-<div class="outline-text-2" id="text-org34dc4ec">
+<div id="outline-container-orgece23a5" class="outline-2">
+<h2 id="orgece23a5">File/Dir Read and Write (cat,head,tail,less vi,nano,gedit)</h2>
+<div class="outline-text-2" id="text-orgece23a5">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Read and Write file in terminal</span>
@@ -864,9 +851,9 @@ gedit orig_file.txt
 </div>
 </div>
 </div>
-<div id="outline-container-org04e1b62" class="outline-2">
-<h2 id="org04e1b62">Find</h2>
-<div class="outline-text-2" id="text-org04e1b62">
+<div id="outline-container-orgc7c888b" class="outline-2">
+<h2 id="orgc7c888b">Find</h2>
+<div class="outline-text-2" id="text-orgc7c888b">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Find files/directory </span>
@@ -914,9 +901,9 @@ find . -maxdepth 2
 </pre>
 </div>
 </div>
-<div id="outline-container-org6aa3bad" class="outline-3">
-<h3 id="org6aa3bad">[Assignment]</h3>
-<div class="outline-text-3" id="text-org6aa3bad">
+<div id="outline-container-org34cb925" class="outline-3">
+<h3 id="org34cb925">[Assignment]</h3>
+<div class="outline-text-3" id="text-org34cb925">
 <ul class="org-ul">
 <li>Search for file or dir which has name <code>Website_Demo</code>
 <ul class="org-ul">
@@ -933,14 +920,14 @@ find . -type f -name <span style="color: #2d9574;">"*.org~"</span>  <span style=
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Change user and group and permission to (775 for dir and 664 for files</span>
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Step 1: change user and group</span>
-find Website_Demo -exec chom coreyschafer:www-data {} +
+find Website_Demo -exec chom coreyschafer:www-data <span style="color: #3a81c3;">{}</span> +
 ls  -la Website_Demo
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Step 2 : change directory permission to 755</span>
-find Website_DEMO -type d -exec chomd 775 {} +
+find Website_DEMO -type d -exec chomd 775 <span style="color: #3a81c3;">{}</span> +
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Step 2 : change file permission to 664</span>
-find Website_Demo -type f -exec chomod 664 {} +
+find Website_Demo -type f -exec chomod 664 <span style="color: #3a81c3;">{}</span> +
 
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">delete all files with .jpg form current direcory</span>
@@ -949,7 +936,7 @@ find . -type f -name <span style="color: #2d9574;">"*.jpg"</span>  <span style="
 find . -type f -name <span style="color: #2d9574;">"*.jpg"</span> -maxdepth 1
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">To delete above files</span>
-find. -type f -name  <span style="color: #2d9574;">"*.jpg"</span> -maxdepth 1 -exec rm {} +
+find. -type f -name  <span style="color: #2d9574;">"*.jpg"</span> -maxdepth 1 -exec rm <span style="color: #3a81c3;">{}</span> +
 
 
 
@@ -976,9 +963,9 @@ find . -type -d asia <span style="color: #2aa1ae; background-color: #ecf3ec;"># 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd663234" class="outline-2">
-<h2 id="orgd663234">chmod (File Permissions)</h2>
-<div class="outline-text-2" id="text-orgd663234">
+<div id="outline-container-orgfe78131" class="outline-2">
+<h2 id="orgfe78131">chmod (File Permissions)</h2>
+<div class="outline-text-2" id="text-orgfe78131">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">File permissions:</span>
@@ -989,9 +976,9 @@ find . -type -d asia <span style="color: #2aa1ae; background-color: #ecf3ec;"># 
 drwx-rwx-rwx
 owner-group-user
 d: driectory 
-<span style="color: #6c3163; font-weight: bold;">x</span>(1) : executable user
-<span style="color: #6c3163; font-weight: bold;">w</span>(2) : write
-<span style="color: #6c3163; font-weight: bold;">r</span>(4) : read 
+<span style="color: #6c3163; font-weight: bold;">x</span><span style="color: #3a81c3;">(</span>1<span style="color: #3a81c3;">)</span> : executable user
+<span style="color: #6c3163; font-weight: bold;">w</span><span style="color: #3a81c3;">(</span>2<span style="color: #3a81c3;">)</span> : write
+<span style="color: #6c3163; font-weight: bold;">r</span><span style="color: #3a81c3;">(</span>4<span style="color: #3a81c3;">)</span> : read 
 
 0: --- 
 1: --x
@@ -1020,9 +1007,9 @@ d: driectory
 </div>
 </div>
 </div>
-<div id="outline-container-org54e330b" class="outline-2">
-<h2 id="org54e330b">chown [CHange OWNner of file/dir]</h2>
-<div class="outline-text-2" id="text-org54e330b">
+<div id="outline-container-org37c7fe8" class="outline-2">
+<h2 id="org37c7fe8">chown [CHange OWNner of file/dir]</h2>
+<div class="outline-text-2" id="text-org37c7fe8">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">change owner of file or dir : chown</span>
@@ -1030,7 +1017,7 @@ d: driectory
 chown owner-user file 
 chown &lt;owner-user&gt;:&lt;owner-group&gt;  &lt;file/directory&gt;
 <span style="color: #2aa1ae; background-color: #ecf3ec;">################################################################</span>
-  [root@ansible-master ansible]# chown -R ansible:ansible ansible.txt 
+  <span style="color: #3a81c3;">[</span>root@ansible-master ansible<span style="color: #3a81c3;">]</span># chown -R ansible:ansible ansible.txt 
 
   -rwxrwxrwx  1 root    root     1156 Mar 24 08:36 hosts
   -rw-r--r--  1 ansible ansible     0 Mar 24 14:17 ansible.tx
@@ -1058,9 +1045,9 @@ ls -latr
 </div>
 </div>
 </div>
-<div id="outline-container-org9ada022" class="outline-2">
-<h2 id="org9ada022">which</h2>
-<div class="outline-text-2" id="text-org9ada022">
+<div id="outline-container-orga938346" class="outline-2">
+<h2 id="orga938346">which</h2>
+<div class="outline-text-2" id="text-orga938346">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to get the location where the app is installed </span>
 which git        <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/usr/bin/git</span>
@@ -1069,15 +1056,15 @@ which emacs      <span style="color: #2aa1ae; background-color: #ecf3ec;"># </sp
 which firefox    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/usr/bin/firefox</span>
 which filezilla  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/usr/bin/filezilla</span>
 which docker     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/usr/bin/docker</span>
-which python     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">/home/jayradhey/anaconda3/bin/python</span>
+which python     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">~/anaconda3/bin/python</span>
 
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgec91018" class="outline-2">
-<h2 id="orgec91018">zip/un-zip [Compress and Uncompress tar, gzip, gunzip, bzip2, bunzip2]</h2>
-<div class="outline-text-2" id="text-orgec91018">
+<div id="outline-container-org6b399db" class="outline-2">
+<h2 id="org6b399db">zip/un-zip [Compress and Uncompress tar, gzip, gunzip, bzip2, bunzip2]</h2>
+<div class="outline-text-2" id="text-org6b399db">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">##                   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">zip and un-zip         </span>
@@ -1105,13 +1092,13 @@ unzip sampleZipfile.zip
 </div>
 </div>
 
-<div id="outline-container-org6656d3d" class="outline-2">
-<h2 id="org6656d3d">User Create User,switch, list</h2>
-<div class="outline-text-2" id="text-org6656d3d">
+<div id="outline-container-org532175e" class="outline-2">
+<h2 id="org532175e">User Create User,switch, list</h2>
+<div class="outline-text-2" id="text-org532175e">
 </div>
-<div id="outline-container-org1884b43" class="outline-3">
-<h3 id="org1884b43">Super User su</h3>
-<div class="outline-text-3" id="text-org1884b43">
+<div id="outline-container-org5ecf171" class="outline-3">
+<h3 id="org5ecf171">Super User su</h3>
+<div class="outline-text-3" id="text-org5ecf171">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#############################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Root User </span>
@@ -1122,7 +1109,7 @@ sudo su - <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><spa
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">normal user  [ec2-user@ip-172-31-30-43 ~]$</span>
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">root user start with #(ash symbal) </span>
-<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">normal user start with $(</span><span style="color: #ff00ff;">doller symbol</span><span style="color: #2aa1ae; background-color: #ecf3ec;">)</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">normal user start with $(</span><span style="color: #6c3163;">doller symbol</span><span style="color: #2aa1ae; background-color: #ecf3ec;">)</span>
 
 sudo -i   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">(alternative of root user)</span>
 whoami
@@ -1134,9 +1121,9 @@ jayradhey@jayradhey:~$ whoami
 </div>
 </div>
 </div>
-<div id="outline-container-org27682bd" class="outline-3">
-<h3 id="org27682bd">List user in linux</h3>
-<div class="outline-text-3" id="text-org27682bd">
+<div id="outline-container-orgf33c9b5" class="outline-3">
+<h3 id="orgf33c9b5">List user in linux</h3>
+<div class="outline-text-3" id="text-orgf33c9b5">
 <div class="org-src-container">
 <pre class="src src-sh">cat  /etc/passwd       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to see password</span>
 awk -F <span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{print $1}'</span> /etc/passwd         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">see list of user only </span>
@@ -1146,9 +1133,9 @@ awk -F <span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{
 </div>
 </div>
 </div>
-<div id="outline-container-orgecaa470" class="outline-3">
-<h3 id="orgecaa470">Create Users</h3>
-<div class="outline-text-3" id="text-orgecaa470">
+<div id="outline-container-org6062ad4" class="outline-3">
+<h3 id="org6062ad4">Create Users</h3>
+<div class="outline-text-3" id="text-org6062ad4">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#  </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Create Users</span>
@@ -1186,9 +1173,9 @@ sudo useradd phani -m -d /home/phani
 </div>
 </div>
 </div>
-<div id="outline-container-orgf8c3e45" class="outline-3">
-<h3 id="orgf8c3e45">SU Switch User in linux</h3>
-<div class="outline-text-3" id="text-orgf8c3e45">
+<div id="outline-container-org4441393" class="outline-3">
+<h3 id="org4441393">SU Switch User in linux</h3>
+<div class="outline-text-3" id="text-org4441393">
 <div class="org-src-container">
 <pre class="src src-sh">su jenkins   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jenkins@host-name:/root$    # pwd : /root </span>
 su - jenkins <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jenkins@host-name:~$        # pwd : /var/lib/jenkins</span>
@@ -1197,22 +1184,22 @@ su - jenkins <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><
 </div>
 </div>
 </div>
-<div id="outline-container-org6766f1f" class="outline-3">
-<h3 id="org6766f1f">delete a user</h3>
-<div class="outline-text-3" id="text-org6766f1f">
+<div id="outline-container-org801f54a" class="outline-3">
+<h3 id="org801f54a">delete a user</h3>
+<div class="outline-text-3" id="text-org801f54a">
 <pre class="example">
 userdel &lt;user_name&gt;
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org4a5c85e" class="outline-2">
-<h2 id="org4a5c85e">System monitor cmd [df,du,top,free, ps, kill, uptime]</h2>
-<div class="outline-text-2" id="text-org4a5c85e">
+<div id="outline-container-orge049bd3" class="outline-2">
+<h2 id="orge049bd3">System monitor cmd [df,du,top,free, ps, kill, uptime]</h2>
+<div class="outline-text-2" id="text-orge049bd3">
 </div>
-<div id="outline-container-orgebd6496" class="outline-3">
-<h3 id="orgebd6496">top</h3>
-<div class="outline-text-3" id="text-orgebd6496">
+<div id="outline-container-orgb8b5920" class="outline-3">
+<h3 id="orgb8b5920">top</h3>
+<div class="outline-text-3" id="text-orgb8b5920">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">system moitor </span>
@@ -1224,9 +1211,9 @@ top <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span styl
 </div>
 </div>
 </div>
-<div id="outline-container-org08b3e6b" class="outline-3">
-<h3 id="org08b3e6b">df</h3>
-<div class="outline-text-3" id="text-org08b3e6b">
+<div id="outline-container-orgfc2667e" class="outline-3">
+<h3 id="orgfc2667e">df</h3>
+<div class="outline-text-3" id="text-orgfc2667e">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">## ##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">diskspace or disk free (used available, % used) </span>
@@ -1248,16 +1235,16 @@ df -aPh <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Ex : check if disk space of /dev/xvda1 is more the 3GB then clean the space</span>
 
 <span style="color: #715ab1;">thershold</span>=3
-<span style="color: #715ab1;">disc</span>= <span style="color: #ff00ff;">`df-h |grep /dev/xvda1 | awk '{print 4}'| cut -c 1`</span>
+<span style="color: #715ab1;">disc</span>= <span style="color: #6c3163;">`df-h |grep /dev/xvda1 | awk '{print 4}'| cut -c 1`</span>
 <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"$disc"</span>
 
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org4ff3c0e" class="outline-3">
-<h3 id="org4ff3c0e">du</h3>
-<div class="outline-text-3" id="text-org4ff3c0e">
+<div id="outline-container-orga935def" class="outline-3">
+<h3 id="orga935def">du</h3>
+<div class="outline-text-3" id="text-orga935def">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">directory size:  du -sh &lt;dir_name&gt; </span>
@@ -1273,11 +1260,55 @@ du -sh *.jpg <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><
 
 </pre>
 </div>
+
+<p>
+Real time  problem  <br />
+There is error in code deploy and error is docker pull ecr<sub>url</sub>/repo<sub>name</sub>:latest  <br />
+</p>
+
+<p>
+The error is insuffient file size unable to pull img &gt; Check there is most of file size is utilited
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">du -h / 2&gt;/dev/null | grep <span style="color: #2d9574;">'[0-9\.]\+G'</span>
+
+
+<span style="color: #3a81c3;">cd</span> / &amp;&amp; du -hs * | sort -rh | head -10
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">7.2G  var   # here size is more because of docker images are stored here</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2.1G  usr   # python is installed here </span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1.4G  snap</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">134M  boot</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">19M   opt</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">6.1M  etc</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">848K  run</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">60K   tmp</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">56K   root</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">40K   home</span>
+
+
+<span style="color: #3a81c3;">cd</span> /usr &amp;&amp;  du -hs * | sort -rh | head -10
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">940M  lib</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">355M  bin</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">341M  share</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">288M  src</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">121M  libexec</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">29M   sbin</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2.6M  include</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">104K  local</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">4.0K  libx32</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">4.0K  lib64</span>
+
+</pre>
+</div>
+<p>
+cd /var/lib &amp;&amp; du -hs * | sort -rh | head -10
+</p>
 </div>
 </div>
-<div id="outline-container-orgc91ccbb" class="outline-3">
-<h3 id="orgc91ccbb">RAM free</h3>
-<div class="outline-text-3" id="text-orgc91ccbb">
+
+<div id="outline-container-org719713a" class="outline-3">
+<h3 id="org719713a">RAM free</h3>
+<div class="outline-text-3" id="text-org719713a">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">RAm size</span>
@@ -1289,9 +1320,9 @@ free -mh <span style="color: #2aa1ae; background-color: #ecf3ec;">#  </span><spa
 </div>
 </div>
 </div>
-<div id="outline-container-org2df9085" class="outline-3">
-<h3 id="org2df9085">ps - example Intro</h3>
-<div class="outline-text-3" id="text-org2df9085">
+<div id="outline-container-org898d26b" class="outline-3">
+<h3 id="org898d26b">ps - example Intro</h3>
+<div class="outline-text-3" id="text-org898d26b">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">process running </span>
@@ -1317,7 +1348,7 @@ ps -x    <span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><s
 ps -u 
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79171  0.0  0.0  10864  4952 pts/0    Ss   Dec23   0:00 bash</span>
-         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79195  0.0  1.2 530832 102140 pts/0   Sl+  Dec23   0:15 /home/jayradhey/</span>
+         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79195  0.0  1.2 530832 102140 pts/0   Sl+  Dec23   0:15 ~/</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  129438  0.0  0.0  11008  5100 pts/2    Ss+  11:00   0:00 -bash</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  129520  0.0  0.0  10864  5100 pts/1    Ss   11:04   0:00 bash</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  130050  0.0  0.0  11488  3252 pts/1    R+   11:21   0:00</span>
@@ -1325,7 +1356,7 @@ ps -u
 ps -aux  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span>
 
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79171  0.0  0.0  10864  4952 pts/0    Ss   Dec23   0:00 bash</span>
-         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79195  0.0  1.2 530832 102140 pts/0   Sl+  Dec23   0:15 /home/jayradhey/</span>
+         <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+   79195  0.0  1.2 530832 102140 pts/0   Sl+  Dec23   0:15 ~/</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  129438  0.0  0.0  11008  5100 pts/2    Ss+  11:00   0:00 -bash</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  129520  0.0  0.0  10864  5100 pts/1    Ss   11:04   0:00 bash</span>
          <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">jayradh+  130050  0.0  0.0  11488  3252 pts/1    R+   11:21   0:00</span>
@@ -1425,9 +1456,9 @@ ps -f -p 20906 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span
 </div>
 </div>
 </div>
-<div id="outline-container-org6fd1b7c" class="outline-3">
-<h3 id="org6fd1b7c">ps</h3>
-<div class="outline-text-3" id="text-org6fd1b7c">
+<div id="outline-container-org6fd3b6a" class="outline-3">
+<h3 id="org6fd3b6a">ps</h3>
+<div class="outline-text-3" id="text-org6fd3b6a">
 <p>
 EXAMPLES
 </p>
@@ -1570,9 +1601,9 @@ SIMPLE PROCESS SELECTION
 </pre>
 </div>
 </div>
-<div id="outline-container-org679d17a" class="outline-3">
-<h3 id="org679d17a">kill</h3>
-<div class="outline-text-3" id="text-org679d17a">
+<div id="outline-container-org1891014" class="outline-3">
+<h3 id="org1891014">kill</h3>
+<div class="outline-text-3" id="text-org1891014">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$ kill -kill &lt;PID&gt;  # to kill process</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">$ kill -term &lt;PID&gt;  # to kill process</span>
@@ -1586,9 +1617,9 @@ SIMPLE PROCESS SELECTION
 </div>
 </div>
 </div>
-<div id="outline-container-orgd81e38d" class="outline-3">
-<h3 id="orgd81e38d">uptime</h3>
-<div class="outline-text-3" id="text-orgd81e38d">
+<div id="outline-container-org0c1c7b8" class="outline-3">
+<h3 id="org0c1c7b8">uptime</h3>
+<div class="outline-text-3" id="text-org0c1c7b8">
 <div class="org-src-container">
 <pre class="src src-sh">uptime  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">find out how long system is active.</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Display the time since the last boot</span>
@@ -1600,13 +1631,13 @@ SIMPLE PROCESS SELECTION
 </div>
 </div>
 
-<div id="outline-container-orgef8f1e0" class="outline-2">
-<h2 id="orgef8f1e0">Networking</h2>
-<div class="outline-text-2" id="text-orgef8f1e0">
+<div id="outline-container-orga0bf965" class="outline-2">
+<h2 id="orga0bf965">Networking</h2>
+<div class="outline-text-2" id="text-orga0bf965">
 </div>
-<div id="outline-container-orgf724846" class="outline-3">
-<h3 id="orgf724846">Basics of Computer Networking</h3>
-<div class="outline-text-3" id="text-orgf724846">
+<div id="outline-container-org6d1093c" class="outline-3">
+<h3 id="org6d1093c">Basics of Computer Networking</h3>
+<div class="outline-text-3" id="text-org6d1093c">
 <p>
 What is Ip4 and Ip6 : <a href="https://www.youtube.com/watch?v=ThdO9beHhpA">https://www.youtube.com/watch?v=ThdO9beHhpA</a> <br />
 What is Port :   <a href="https://www.youtube.com/watch?v=g2fT-g9PX9o">https://www.youtube.com/watch?v=g2fT-g9PX9o</a> <br />
@@ -1616,9 +1647,9 @@ What is Subnet Masking : <a href="https://www.youtube.com/watch?v=s_Ntt6eTn94">h
 </p>
 </div>
 </div>
-<div id="outline-container-org818a899" class="outline-3">
-<h3 id="org818a899">IP Address</h3>
-<div class="outline-text-3" id="text-org818a899">
+<div id="outline-container-org0ac6013" class="outline-3">
+<h3 id="org0ac6013">IP Address</h3>
+<div class="outline-text-3" id="text-org0ac6013">
 <p>
 An Internet Protocol address, also known as an IP address,
 </p>
@@ -1634,9 +1665,9 @@ And there are two types of IP addresses: IPv4 and IPv6.
 </div>
 </div>
 
-<div id="outline-container-orgd90f438" class="outline-3">
-<h3 id="orgd90f438">IPv4</h3>
-<div class="outline-text-3" id="text-orgd90f438">
+<div id="outline-container-orgc58f212" class="outline-3">
+<h3 id="orgc58f212">IPv4</h3>
+<div class="outline-text-3" id="text-orgc58f212">
 <p>
 IPv4 uses a <b>32-bit address</b>  and can support a maximum of \(2^{32}=2^{8*4}={2^8}^{4}=(8 \;binary\; digits)^4 =256^4\) (or 4.3 billion) IP addresses. <br />
 An IPv4 address is made up of four numbers, each ranging from 0 to 255.
@@ -1662,9 +1693,9 @@ So new version <code>version 6</code> of IP address is released <br />
 </div>
 </div>
 
-<div id="outline-container-org843616c" class="outline-3">
-<h3 id="org843616c">IPV6</h3>
-<div class="outline-text-3" id="text-org843616c">
+<div id="outline-container-org02f8fb2" class="outline-3">
+<h3 id="org02f8fb2">IPV6</h3>
+<div class="outline-text-3" id="text-org02f8fb2">
 <p>
 Ipv6 USES <b>128 bit address</b> ,support max of  \(2^{128}=2^{16*8}=({2^{16}})^{8}=(16 \;binary \;digits)^8= (16/4=4Hexadecimal \;Digits)^8  = 3.4 * 10^{38}\) 340 undecillion IP addresses,  <br />
 An IPv6 address is made up of <b>eight parts</b>, each ranging from 0000 to FFFF.
@@ -1683,9 +1714,9 @@ hex digits(16) : 0 to 9,A B,C,D,E,F : 0000 to 1111 : 4 binary digits <br />
 </div>
 </div>
 
-<div id="outline-container-orgc13c594" class="outline-3">
-<h3 id="orgc13c594">IP4 vs IP6</h3>
-<div class="outline-text-3" id="text-orgc13c594">
+<div id="outline-container-org2fc967a" class="outline-3">
+<h3 id="org2fc967a">IP4 vs IP6</h3>
+<div class="outline-text-3" id="text-org2fc967a">
 <p>
 <a href="https://cybernews.com/what-is-vpn/ipv4-vs-ipv6/">https://cybernews.com/what-is-vpn/ipv4-vs-ipv6/</a> <br />
 <a href="https://www.geeksforgeeks.org/differences-between-ipv4-and-ipv6/">https://www.geeksforgeeks.org/differences-between-ipv4-and-ipv6/</a> <br />
@@ -1723,9 +1754,9 @@ IP6  advangates :
 </ul>
 </div>
 
-<div id="outline-container-orgbe2ea78" class="outline-4">
-<h4 id="orgbe2ea78">IPV6 Tunneling</h4>
-<div class="outline-text-4" id="text-orgbe2ea78">
+<div id="outline-container-org558c13c" class="outline-4">
+<h4 id="org558c13c">IPV6 Tunneling</h4>
+<div class="outline-text-4" id="text-org558c13c">
 <p>
 Some internet service providers use transition technologies, such as IPv6 tunnels. This technology allows private networks to communicate with each other, even if one of them uses an IPv4 address, and the other one – IPv6.
 </p>
@@ -1739,9 +1770,9 @@ Of course, as this transition to IPv6 is likely to take many more years to compl
 </p>
 </div>
 </div>
-<div id="outline-container-org6da7b41" class="outline-4">
-<h4 id="org6da7b41">Which one is faster IPv4 or IPv6</h4>
-<div class="outline-text-4" id="text-org6da7b41">
+<div id="outline-container-org426ecb1" class="outline-4">
+<h4 id="org426ecb1">Which one is faster IPv4 or IPv6</h4>
+<div class="outline-text-4" id="text-org426ecb1">
 <p>
 In speed tests, IPv4 and IPv6 delivered the same speed in direct connections. As a matter of fact, if anything, IPv4 was occasionally slightly quicker.
 </p>
@@ -1754,9 +1785,9 @@ In theory, IPv6 should be slightly faster as cycles don’t have to be wasted on
 </div>
 
 
-<div id="outline-container-org6874b23" class="outline-3">
-<h3 id="org6874b23">ifconfig</h3>
-<div class="outline-text-3" id="text-org6874b23">
+<div id="outline-container-org8a05f2d" class="outline-3">
+<h3 id="org8a05f2d">ifconfig</h3>
+<div class="outline-text-3" id="text-org8a05f2d">
 <p>
 youtube : <a href="https://www.youtube.com/watch?v=waCYu4QGsYc">https://www.youtube.com/watch?v=waCYu4QGsYc</a>
 </p>
@@ -1829,18 +1860,18 @@ ip -br a <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span
 </div>
 </div>
 </div>
-<div id="outline-container-org841a0e4" class="outline-3">
-<h3 id="org841a0e4">Subnet Masking</h3>
-<div class="outline-text-3" id="text-org841a0e4">
+<div id="outline-container-orga200366" class="outline-3">
+<h3 id="orga200366">Subnet Masking</h3>
+<div class="outline-text-3" id="text-orga200366">
 
-<div id="org25a2358" class="figure">
+<div id="orgc03f3a9" class="figure">
 <p><img src="./linux-img/vpc-2PubSubnets-PrivateSubnet.drawio15.png" alt="vpc-2PubSubnets-PrivateSubnet.drawio15.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org6d9cb2e" class="outline-4">
-<h4 id="org6d9cb2e">Subnet or Subnetwork</h4>
-<div class="outline-text-4" id="text-org6d9cb2e">
+<div id="outline-container-orgac3a9dc" class="outline-4">
+<h4 id="orgac3a9dc">Subnet or Subnetwork</h4>
+<div class="outline-text-4" id="text-orgac3a9dc">
 <ul class="org-ul">
 <li>is a network inside a network.</li>
 <li>Subnets make networks more efficient.</li>
@@ -1848,9 +1879,9 @@ ip -br a <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span
 </ul>
 </div>
 </div>
-<div id="outline-container-orge58d4eb" class="outline-4">
-<h4 id="orge58d4eb">Subnet Mask</h4>
-<div class="outline-text-4" id="text-orge58d4eb">
+<div id="outline-container-org7eedf4a" class="outline-4">
+<h4 id="org7eedf4a">Subnet Mask</h4>
+<div class="outline-text-4" id="text-org7eedf4a">
 <ul class="org-ul">
 <li>A subnet mask is like an IP address,</li>
 <li>But for only internal usage within a network.</li>
@@ -1867,9 +1898,9 @@ Every IP address has two parts. The first part indicates which network the addre
 </div>
 </div>
 
-<div id="outline-container-orgbe2957a" class="outline-4">
-<h4 id="orgbe2957a">Private Netwrok</h4>
-<div class="outline-text-4" id="text-orgbe2957a">
+<div id="outline-container-org620e3c5" class="outline-4">
+<h4 id="org620e3c5">Private Netwrok</h4>
+<div class="outline-text-4" id="text-org620e3c5">
 <ul class="org-ul">
 <li>Networks are categorized into different classes, labeled A through E.</li>
 <li>Class A networks can connect 16 millions of devices.</li>
@@ -1899,9 +1930,9 @@ Calculate Network Masking :  <a href="https://jodies.de/ipcalc?host=192.168.1.1&
 </div>
 </div>
 </div>
-<div id="outline-container-org922cc5a" class="outline-3">
-<h3 id="org922cc5a">ping</h3>
-<div class="outline-text-3" id="text-org922cc5a">
+<div id="outline-container-orgdd05d15" class="outline-3">
+<h3 id="orgdd05d15">ping</h3>
+<div class="outline-text-3" id="text-orgdd05d15">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">GET ip</span>
 ping google.com
@@ -1951,15 +1982,15 @@ The reply message are know as <b>Echo Reply Request</b>
 </ul>
 <div class="org-src-container">
 <pre class="src src-sh">$<span style="color: #715ab1;">ping</span> google.com
-PING google.com (142.250.195.14) 56(84) bytes of data.
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=1 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.3 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=2 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=146 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=3 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.4 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=4 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.2 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=5 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.3 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=6 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=86.9 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=7 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=110 ms
-64 bytes from del12s09-in-f14.1e100.net (142.250.195.14): <span style="color: #715ab1;">icmp_seq</span>=8 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=58.4 ms
+PING google.com <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span> 56<span style="color: #3a81c3;">(</span>84<span style="color: #3a81c3;">)</span> bytes of data.
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=1 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.3 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=2 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=146 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=3 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.4 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=4 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.2 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=5 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=59.3 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=6 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=86.9 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=7 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=110 ms
+64 bytes from del12s09-in-f14.1e100.net <span style="color: #3a81c3;">(</span>142.250.195.14<span style="color: #3a81c3;">)</span>: <span style="color: #715ab1;">icmp_seq</span>=8 <span style="color: #715ab1;">ttl</span>=118 <span style="color: #715ab1;">time</span>=58.4 ms
 
 --- google.com ping statistics ---
 8 packets transmitted, 8 received, 0% packet loss, time 7011ms
@@ -2032,9 +2063,9 @@ ping google.com # instead of ip we will dns where host will determine it ip so i
 </div>
 </div>
 
-<div id="outline-container-org63291ce" class="outline-3">
-<h3 id="org63291ce">nslookup</h3>
-<div class="outline-text-3" id="text-org63291ce">
+<div id="outline-container-org43a3354" class="outline-3">
+<h3 id="org43a3354">nslookup</h3>
+<div class="outline-text-3" id="text-org43a3354">
 <div class="org-src-container">
 <pre class="src src-sh">nslookup google.com      <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">for querying the Domain Name System to obtain domain name or IP address mapping, or other DNS records.</span>
 
@@ -2051,9 +2082,9 @@ ping google.com # instead of ip we will dns where host will determine it ip so i
 </div>
 </div>
 
-<div id="outline-container-org7ebfa99" class="outline-3">
-<h3 id="org7ebfa99">netstrat</h3>
-<div class="outline-text-3" id="text-org7ebfa99">
+<div id="outline-container-org768b6ed" class="outline-3">
+<h3 id="org768b6ed">netstrat</h3>
+<div class="outline-text-3" id="text-org768b6ed">
 <p>
 What is Port : <a href="https://www.youtube.com/watch?v=g2fT-g9PX9o">https://www.youtube.com/watch?v=g2fT-g9PX9o</a>
 Port :
@@ -2170,55 +2201,55 @@ netstat -anp | grep &lt;ports-no&gt; <span style="color: #2aa1ae; background-col
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script shows the open network ports on a system.</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Use -4 as an argument to limit to tcpv4 ports.</span>
 
-netstat -nutl ${<span style="color: #715ab1;">1</span>} | grep : | awk <span style="color: #2d9574;">'{print $4}'</span> | awk -F<span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{print $NF}'</span>
+netstat -nutl $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">1</span><span style="color: #3a81c3;">}</span> | grep : | awk <span style="color: #2d9574;">'{print $4}'</span> | awk -F<span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{print $NF}'</span>
 
 
-(base) jayradhey@jayradhey:~$ netstat
-Active Internet connections (w/o servers)
+<span style="color: #3a81c3;">(</span>base<span style="color: #3a81c3;">)</span> jayradhey@jayradhey:~$ netstat
+Active Internet connections <span style="color: #3a81c3;">(</span>w/o servers<span style="color: #3a81c3;">)</span>
 Proto Recv-Q Send-Q Local Address           Foreign Address         State      
 tcp        0      0 jayradhey:51010         del12s05-in-f10.1:https ESTABLISHED
 tcp        0      0 jayradhey:37264         del12s05-in-f14.1:https ESTABLISHED
 tcp        0      0 jayradhey:59864         server-99-86-47-7:https ESTABLISHED
 
-Active UNIX domain sockets (w/o servers)
+Active UNIX domain sockets <span style="color: #3a81c3;">(</span>w/o servers<span style="color: #3a81c3;">)</span>
 Proto RefCnt Flags       Type       State         I-Node   Path
-unix  18     [ ]         DGRAM                    19267    /run/systemd/journal/dev-log
-unix  9      [ ]         DGRAM                    19271    /run/systemd/journal/socket
-unix  3      [ ]         STREAM     CONNECTED     39642    /run/dbus/system_bus_socket
-unix  3      [ ]         STREAM     CONNECTED     1091059  /run/user/1000/bus
-unix  3      [ ]         SEQPACKET  CONNECTED     1086230  
+unix  18     <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         DGRAM                    19267    /run/systemd/journal/dev-log
+unix  9      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         DGRAM                    19271    /run/systemd/journal/socket
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         STREAM     CONNECTED     39642    /run/dbus/system_bus_socket
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         STREAM     CONNECTED     1091059  /run/user/1000/bus
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         SEQPACKET  CONNECTED     1086230  
 
-(base) jayradhey@jayradhey:~$ netstat -p 
+<span style="color: #3a81c3;">(</span>base<span style="color: #3a81c3;">)</span> jayradhey@jayradhey:~$ netstat -p 
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
 tcp        0      0 jayradhey:51010         del12s05-in-f10.1:https ESTABLISHED 54213/firefox       
 tcp        0      0 jayradhey:53946         del11s18-in-f10.1:https ESTABLISHED 54213/firefox       
 tcp        0      0 jayradhey:37280         del12s05-in-f14.1:https ESTABLISHED 54213/firefox       
 tcp        0      0 jayradhey:36572         del11s13-in-f3.1e:https ESTABLISHED 54213/firefox       
 tcp        0      0 jayradhey:51008         del12s05-in-f10.1:https ESTABLISHED 54213/firefox       
-Active UNIX domain sockets (w/o servers)
+Active UNIX domain sockets <span style="color: #3a81c3;">(</span>w/o servers<span style="color: #3a81c3;">)</span>
 Proto RefCnt Flags       Type       State         I-Node   PID/Program name     Path
-unix  2      [ ]         DGRAM                    41562    1680/systemd         /run/user/1000/systemd/notify
-unix  4      [ ]         DGRAM                    19238    -                    /run/systemd/notify
-unix  3      [ ]         STREAM     CONNECTED     42097    2001/csd-a11y-setti  
-unix  3      [ ]         STREAM     CONNECTED     39642    -                    /run/dbus/system_bus_socket
-unix  3      [ ]         STREAM     CONNECTED     1091059  1831/dbus-daemon     /run/user/1000/bus
-unix  3      [ ]         SEQPACKET  CONNECTED     1086230  54213/firefox
+unix  2      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         DGRAM                    41562    1680/systemd         /run/user/1000/systemd/notify
+unix  4      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         DGRAM                    19238    -                    /run/systemd/notify
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         STREAM     CONNECTED     42097    2001/csd-a11y-setti  
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         STREAM     CONNECTED     39642    -                    /run/dbus/system_bus_socket
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         STREAM     CONNECTED     1091059  1831/dbus-daemon     /run/user/1000/bus
+unix  3      <span style="color: #3a81c3;">[</span> <span style="color: #3a81c3;">]</span>         SEQPACKET  CONNECTED     1086230  54213/firefox
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0e1966b" class="outline-3">
-<h3 id="org0e1966b">telnet</h3>
-<div class="outline-text-3" id="text-org0e1966b">
+<div id="outline-container-orgc588d82" class="outline-3">
+<h3 id="orgc588d82">telnet</h3>
+<div class="outline-text-3" id="text-orgc588d82">
 <p>
 <a href="https://www.youtube.com/watch?v=tZop-zjYkrU">https://www.youtube.com/watch?v=tZop-zjYkrU</a>
 </p>
 </div>
 </div>
-<div id="outline-container-orga50c35a" class="outline-3">
-<h3 id="orga50c35a">Networking Command</h3>
-<div class="outline-text-3" id="text-orga50c35a">
+<div id="outline-container-orgb9999a7" class="outline-3">
+<h3 id="orgb9999a7">Networking Command</h3>
+<div class="outline-text-3" id="text-orgb9999a7">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#         </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Network Cmd</span>
@@ -2236,13 +2267,13 @@ netstat                  <span style="color: #2aa1ae; background-color: #ecf3ec;
 </div>
 </div>
 </div>
-<div id="outline-container-org2e3f78e" class="outline-2">
-<h2 id="org2e3f78e">SSH Remote Access (Master-Slave), SSH, RSA, PEM, PPK,, SSL</h2>
-<div class="outline-text-2" id="text-org2e3f78e">
+<div id="outline-container-org65d8178" class="outline-2">
+<h2 id="org65d8178">SSH Remote Access (Master-Slave), SSH, RSA, PEM, PPK,, SSL</h2>
+<div class="outline-text-2" id="text-org65d8178">
 </div>
-<div id="outline-container-orgb0b0b30" class="outline-3">
-<h3 id="orgb0b0b30">How ssh work ?</h3>
-<div class="outline-text-3" id="text-orgb0b0b30">
+<div id="outline-container-orgf54b959" class="outline-3">
+<h3 id="orgf54b959"><span class="todo TODO">TODO</span> How ssh work ?</h3>
+<div class="outline-text-3" id="text-orgf54b959">
 <p>
 <a href="https://www.youtube.com/watch?v=5JvLV2-ngCI">https://www.youtube.com/watch?v=5JvLV2-ngCI</a> <br />
 What is SSH, How it came to existance, client, server , tcp, packets 
@@ -2255,7 +2286,7 @@ Beginners Guide To SSH
 </p>
 
 
-<div id="org5ef1289" class="figure">
+<div id="org2a472df" class="figure">
 <p><img src="./linux-img/ezgif.com-gif-maker.gif" alt="ezgif.com-gif-maker.gif" />
 </p>
 </div>
@@ -2273,25 +2304,25 @@ ssh, ssl, tsl, https, gpg  &#x2026;etc
 </div>
 </div>
 
-<div id="outline-container-org24ac6fb" class="outline-3">
-<h3 id="org24ac6fb">Create SSH- RSA based remote access</h3>
-<div class="outline-text-3" id="text-org24ac6fb">
+<div id="outline-container-orgf7c948c" class="outline-3">
+<h3 id="orgf7c948c"><span class="todo TODO">TODO</span> Create SSH- RSA based remote access</h3>
+<div class="outline-text-3" id="text-orgf7c948c">
 <ul class="org-ul">
 <li>how ssh work, why is ssh is secure remote acess</li>
 <li>how to create a remote access to jenkins server</li>
 <li>how amazon pem key can be chanaged ?</li>
 </ul>
 
-<div id="orgfec06e8" class="figure">
-<p><img src="file:///home/jayradhey/mynotes/devops/images/rsa_ssh_drawio.png" alt="rsa_ssh_drawio.png" />
+<div id="orge308697" class="figure">
+<p><img src="file://~/mynotes/devops/images/rsa_ssh_drawio.png" alt="rsa_ssh_drawio.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd9a9888" class="outline-3">
-<h3 id="orgd9a9888">SSH Authentication Method</h3>
-<div class="outline-text-3" id="text-orgd9a9888">
+<div id="outline-container-orga3fba02" class="outline-3">
+<h3 id="orga3fba02"><span class="todo TODO">TODO</span> SSH Authentication Method</h3>
+<div class="outline-text-3" id="text-orga3fba02">
 <ul class="org-ul">
 <li>No password required</li>
 <li>Password</li>
@@ -2340,9 +2371,9 @@ Host *
 </div>
 </div>
 
-<div id="outline-container-org0182b03" class="outline-3">
-<h3 id="org0182b03">ssh/scp [with Password or key][master-slave linux]</h3>
-<div class="outline-text-3" id="text-org0182b03">
+<div id="outline-container-orgef247f7" class="outline-3">
+<h3 id="orgef247f7">ssh/scp [with Password or key][master-slave linux]</h3>
+<div class="outline-text-3" id="text-orgef247f7">
 <div class="org-src-container">
 <pre class="src src-sh">
 <span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
@@ -2366,13 +2397,13 @@ scp -i key.pem /path/to/myfile.txt ec2-user@IPAddressOfEC2:/
 </div>
 </div>
 </div>
-<div id="outline-container-org1aaaafa" class="outline-2">
-<h2 id="org1aaaafa">SSH (with password and without Password(rsa ,pem key)</h2>
-<div class="outline-text-2" id="text-org1aaaafa">
+<div id="outline-container-orgdcb8b98" class="outline-2">
+<h2 id="orgdcb8b98">SSH (with password and without Password(rsa ,pem key)</h2>
+<div class="outline-text-2" id="text-orgdcb8b98">
 </div>
-<div id="outline-container-orgad2b202" class="outline-3">
-<h3 id="orgad2b202">Connect using SSH-key (without using password)</h3>
-<div class="outline-text-3" id="text-orgad2b202">
+<div id="outline-container-orgb71474f" class="outline-3">
+<h3 id="orgb71474f">Connect using SSH-key (without using password)</h3>
+<div class="outline-text-3" id="text-orgb71474f">
 <p>
 During connect using SSH-Key there will be one master user(server) and slave server.
 From master server we need to generate(ssh-key) and share to slave server and use ssh-key to connect slave server
@@ -2391,12 +2422,12 @@ From master server we need to generate(ssh-key) and share to slave server and us
 </ol></li>
 </ul>
 </div>
-<div id="outline-container-orga152357" class="outline-4">
-<h4 id="orga152357">Create a Common User</h4>
-<div class="outline-text-4" id="text-orga152357">
+<div id="outline-container-org3273581" class="outline-4">
+<h4 id="org3273581">Create a Common User</h4>
+<div class="outline-text-4" id="text-org3273581">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1.best practice create one common users or genereal users</span>
-
+sudo adduser new_user --disabled-password <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">create user without password # in aws</span>
 sudo useradd &lt;new-user-name&gt; -m -d &lt;new-user-name-home-dir-path&gt;
 sudo useradd devops -m -d /home/devops
 useradd devops
@@ -2408,9 +2439,9 @@ cat /etc/passwd  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</spa
 </div>
 </div>
 </div>
-<div id="outline-container-org9633ce7" class="outline-4">
-<h4 id="org9633ce7">Give Root Privilage to the Common User</h4>
-<div class="outline-text-4" id="text-org9633ce7">
+<div id="outline-container-orgfd50f27" class="outline-4">
+<h4 id="orgfd50f27">Give Root Privilage to the Common User</h4>
+<div class="outline-text-4" id="text-orgfd50f27">
 <div class="org-src-container">
 <pre class="src src-sh">vi visudo
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">add below lines </span>
@@ -2421,9 +2452,9 @@ cat /etc/passwd  <span style="color: #2aa1ae; background-color: #ecf3ec;">#</spa
 </div>
 </div>
 </div>
-<div id="outline-container-org023232b" class="outline-4">
-<h4 id="org023232b">Allow password based ssh-authentication or RSA based-authentication</h4>
-<div class="outline-text-4" id="text-org023232b">
+<div id="outline-container-org42cfd44" class="outline-4">
+<h4 id="org42cfd44">Allow password based ssh-authentication or RSA based-authentication</h4>
+<div class="outline-text-4" id="text-org42cfd44">
 <div class="org-src-container">
 <pre class="src src-sh">vi /etc/ssh/sshd_config
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">PasswordAuthentication  yes</span>
@@ -2438,9 +2469,9 @@ service sshd restart
 </div>
 </div>
 </div>
-<div id="outline-container-org6cc3cc2" class="outline-4">
-<h4 id="org6cc3cc2">Copy Public Key(id<sub>rsa.pub</sub>) into slave-user ~/.ssh/authorized<sub>keys</sub> file</h4>
-<div class="outline-text-4" id="text-org6cc3cc2">
+<div id="outline-container-orgc1be19d" class="outline-4">
+<h4 id="orgc1be19d">Copy Public Key(id<sub>rsa.pub</sub>) into slave-user ~/.ssh/authorized<sub>keys</sub> file</h4>
+<div class="outline-text-4" id="text-orgc1be19d">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">5.Connect master to slave with password</span>
     <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Crearte a common user is both master and slave</span>
@@ -2459,16 +2490,16 @@ ssh devops@slave_ip
 
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">show-key : cat /home/&lt;user-name&gt;/devops/.ssh/authorizzed_keys</span>
-<span style="color: #3a81c3; font-weight: bold;">exit</span>() <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to exist </span>
+<span style="color: #3a81c3; font-weight: bold;">exit</span><span style="color: #3a81c3;">()</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">to exist </span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">NOTE: we can connect from master to slave but not from slave to master</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org543500a" class="outline-3">
-<h3 id="org543500a">Connect using pem key instead of ras(pub key)</h3>
-<div class="outline-text-3" id="text-org543500a">
+<div id="outline-container-orge2907a2" class="outline-3">
+<h3 id="orge2907a2"><span class="todo TODO">TODO</span> Connect using pem key instead of ras(pub key)</h3>
+<div class="outline-text-3" id="text-orge2907a2">
 <p>
 <a href="https://linuxaws.wordpress.com/2017/07/17/How-To-Generate-Pem-File-To-Ssh-The-Server-Without-Password-In-Linux/">https://linuxaws.wordpress.com/2017/07/17/How-To-Generate-Pem-File-To-Ssh-The-Server-Without-Password-In-Linux/</a>
 <a href="https://www.solutionclub.in/how-to-create-pem-file-and-access-linux-server-via-pem-file.html">https://www.solutionclub.in/how-to-create-pem-file-and-access-linux-server-via-pem-file.html</a>
@@ -2478,9 +2509,9 @@ ssh devops@slave_ip
 To ssh using pem file there are few steps you have to follow
 </p>
 </div>
-<div id="outline-container-org0e43c4e" class="outline-4">
-<h4 id="org0e43c4e">1.Generating Key Pairs</h4>
-<div class="outline-text-4" id="text-org0e43c4e">
+<div id="outline-container-org964a3b2" class="outline-4">
+<h4 id="org964a3b2">1.Generating Key Pairs</h4>
+<div class="outline-text-4" id="text-org964a3b2">
 <p>
 To generate an RSA key pair for version 2 of the SSH protocol, follow these steps:
 </p>
@@ -2506,9 +2537,9 @@ $ ls
 </div>
 
 
-<div id="outline-container-orgabed77b" class="outline-4">
-<h4 id="orgabed77b">Copy/Append pub key to Authorized<sub>key</sub> file</h4>
-<div class="outline-text-4" id="text-orgabed77b">
+<div id="outline-container-org8388ce0" class="outline-4">
+<h4 id="org8388ce0">Copy/Append pub key to Authorized<sub>key</sub> file</h4>
+<div class="outline-text-4" id="text-org8388ce0">
 <div class="org-src-container">
 <pre class="src src-sh">chmod    700   ~/.ssh  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Change the permissions of the ~/.ssh/  directory</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">create a file ~/.ssh/authorized_keys  if not exists</span>
@@ -2524,18 +2555,18 @@ chmod   600  ~/.ssh/authorized_keys  <span style="color: #2aa1ae; background-col
 </div>
 
 
-<div id="outline-container-orgcac5d8f" class="outline-4">
-<h4 id="orgcac5d8f">Downlaod the pem key in system</h4>
-<div class="outline-text-4" id="text-orgcac5d8f">
+<div id="outline-container-org6c21718" class="outline-4">
+<h4 id="org6c21718">Downlaod the pem key in system</h4>
+<div class="outline-text-4" id="text-org6c21718">
 <p>
 Now  download the pem file (linux<sub>point.pem</sub>) in your local-os from where you want to Access the Server (remote-os).
 Using Key-Based Authentication
 </p>
 </div>
 </div>
-<div id="outline-container-org92b30de" class="outline-4">
-<h4 id="org92b30de">Config sshd config</h4>
-<div class="outline-text-4" id="text-org92b30de">
+<div id="outline-container-org795695e" class="outline-4">
+<h4 id="org795695e">Config sshd config</h4>
+<div class="outline-text-4" id="text-org795695e">
 <p>
 To improve the system security even further, you can enforce key-based authentication by disabling the standard password authentication. To do so, open the /etc/ssh/sshd<sub>config</sub> configuration file in a text editor such as vim, and change or uncomment if exist the option as follows:
 </p>
@@ -2561,25 +2592,25 @@ UsePAM        ye
 </div>
 </div>
 
-<div id="outline-container-org231bfbe" class="outline-4">
-<h4 id="org231bfbe">Connect through pem file</h4>
-<div class="outline-text-4" id="text-org231bfbe">
+<div id="outline-container-orgcbb4dc3" class="outline-4">
+<h4 id="orgcbb4dc3">Connect through pem file</h4>
+<div class="outline-text-4" id="text-orgcbb4dc3">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">$ ssh &#8211;i &lt;path to pem file(linux_point.pem)&gt; &lt;user&gt;linux_point@&lt;IP&gt; </span>
 Last login: Mon Jul 17 15:35:38 2017 from XXX.XXX.XXX.XX
-[linuxpoint@XXX.XXX.XXX.XX ~]$ _
+<span style="color: #3a81c3;">[</span>linuxpoint@XXX.XXX.XXX.XX ~<span style="color: #3a81c3;">]</span>$ _
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org63e17c1" class="outline-3">
-<h3 id="org63e17c1">Convert ppk to pem key and vice versa</h3>
+<div id="outline-container-org64f9333" class="outline-3">
+<h3 id="org64f9333"><span class="todo TODO">TODO</span> Convert ppk to pem key and vice versa</h3>
 </div>
 
-<div id="outline-container-orge08aad8" class="outline-3">
-<h3 id="orge08aad8">AWS-EC2</h3>
-<div class="outline-text-3" id="text-orge08aad8">
+<div id="outline-container-orgc4f7683" class="outline-3">
+<h3 id="orgc4f7683">AWS-EC2</h3>
+<div class="outline-text-3" id="text-orgc4f7683">
 <div class="org-src-container">
 <pre class="src src-sh">scp -i key.pem /path/to/myfile.txt ec2-user@IPAddressOfEC2:/ 
 </pre>
@@ -2587,12 +2618,12 @@ Last login: Mon Jul 17 15:35:38 2017 from XXX.XXX.XXX.XX
 </div>
 </div>
 
-<div id="outline-container-org4d60fb4" class="outline-3">
-<h3 id="org4d60fb4">Check any unidentified ssh access</h3>
+<div id="outline-container-orgb27a5a9" class="outline-3">
+<h3 id="orgb27a5a9"><span class="todo TODO">TODO</span> Check any unidentified ssh access</h3>
 </div>
-<div id="outline-container-org30658f4" class="outline-3">
-<h3 id="org30658f4">Check ssh-log files : check failed login attempts:</h3>
-<div class="outline-text-3" id="text-org30658f4">
+<div id="outline-container-org760c82f" class="outline-3">
+<h3 id="org760c82f"><span class="todo TODO">TODO</span> Check ssh-log files : check failed login attempts:</h3>
+<div class="outline-text-3" id="text-org760c82f">
 <p>
 /var/log/secure
 </p>
@@ -2615,15 +2646,15 @@ Were There <code>/var/log/auth.log</code>
 </div>
 </div>
 
-<div id="outline-container-org95352e9" class="outline-3">
-<h3 id="org95352e9">small-step : linux app to manage ssh keys ,ssl</h3>
+<div id="outline-container-org8eeb88f" class="outline-3">
+<h3 id="org8eeb88f"><span class="todo TODO">TODO</span> small-step : linux app to manage ssh keys ,ssl</h3>
 </div>
 </div>
 
 
-<div id="outline-container-orge358bed" class="outline-2">
-<h2 id="orge358bed">Crontab</h2>
-<div class="outline-text-2" id="text-orge358bed">
+<div id="outline-container-org7ebfe9f" class="outline-2">
+<h2 id="org7ebfe9f"><span class="todo TODO">TODO</span> Crontab</h2>
+<div class="outline-text-2" id="text-org7ebfe9f">
 <ul class="org-ul">
 <li>Job scheduler which run the program or cmd at given time.</li>
 <li>Users can setup and maintain software environments use cron to schedule jobs to run periodically at fixed times, dates, or intervals.</li>
@@ -2664,9 +2695,9 @@ Create a cron job <a href="https://cron.help/every-minute">https://cron.help/eve
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">|  |  |  |  |</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">*  *  *  *  * user-name command to be executed</span>
 17 *    * * *   root    cd / &amp;&amp; run-parts --report /etc/cron.hourly
-25 6    * * *   root    test -x /usr/sbin/anacron || ( <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.daily )
-47 6    * * 7   root    test -x /usr/sbin/anacron || ( <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.weekly )
-52 6    1 * *   root    test -x /usr/sbin/anacron || ( <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.monthly )
+25 6    * * *   root    test -x /usr/sbin/anacron || <span style="color: #3a81c3;">(</span> <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.daily <span style="color: #3a81c3;">)</span>
+47 6    * * 7   root    test -x /usr/sbin/anacron || <span style="color: #3a81c3;">(</span> <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.weekly <span style="color: #3a81c3;">)</span>
+52 6    1 * *   root    test -x /usr/sbin/anacron || <span style="color: #3a81c3;">(</span> <span style="color: #3a81c3;">cd</span> / &amp;&amp; run-parts --report /etc/cron.monthly <span style="color: #3a81c3;">)</span>
 
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">https://www.geeksforgeeks.org/crontab-in-linux-with-examples/</span>
@@ -2733,9 +2764,9 @@ Say I have a crontab which runs every 20 minutes and I have a hour range which c
 </div>
 </div>
 
-<div id="outline-container-org7b1f1e7" class="outline-3">
-<h3 id="org7b1f1e7">Example</h3>
-<div class="outline-text-3" id="text-org7b1f1e7">
+<div id="outline-container-org8acdcc4" class="outline-3">
+<h3 id="org8acdcc4">Example</h3>
+<div class="outline-text-3" id="text-org8acdcc4">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Empty temp folder every Friday 5:00 am</span>
 0 5 * * 5 rm -rf /temp/*
@@ -2746,14 +2777,14 @@ Say I have a crontab which runs every 20 minutes and I have a hour range which c
 </div>
 </div>
 </div>
-<div id="outline-container-org23bd785" class="outline-3">
-<h3 id="org23bd785">UTC Time Crontab</h3>
+<div id="outline-container-org36662c9" class="outline-3">
+<h3 id="org36662c9">UTC Time Crontab</h3>
 </div>
 </div>
 
-<div id="outline-container-org8d6514b" class="outline-2">
-<h2 id="org8d6514b">RUN SHELL SCRIPTS</h2>
-<div class="outline-text-2" id="text-org8d6514b">
+<div id="outline-container-org5f0f573" class="outline-2">
+<h2 id="org5f0f573">RUN SHELL SCRIPTS</h2>
+<div class="outline-text-2" id="text-org5f0f573">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">run shell scripts</span>
@@ -2762,18 +2793,18 @@ chmod +x name.sh notify-send.sh
 sh -x name.sh <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">debugging mode or Trouble shoot</span>
 sh name.sh
 <span style="color: #3a81c3;">source</span> name.sh
-/home/jayradhey/notify-send.sh <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">absolute path</span>
+~/notify-send.sh <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">absolute path</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge6de678" class="outline-2">
-<h2 id="orge6de678">Regular expression</h2>
-<div class="outline-text-2" id="text-orge6de678">
+<div id="outline-container-orgf13feaf" class="outline-2">
+<h2 id="orgf13feaf">Regular expression</h2>
+<div class="outline-text-2" id="text-orgf13feaf">
 </div>
-<div id="outline-container-orga0fe6a0" class="outline-3">
-<h3 id="orga0fe6a0">Regular Expression Intro</h3>
-<div class="outline-text-3" id="text-orga0fe6a0">
+<div id="outline-container-org816f938" class="outline-3">
+<h3 id="org816f938">Regular Expression Intro</h3>
+<div class="outline-text-3" id="text-org816f938">
 <ul class="org-ul">
 <li>Flexible search pattern</li>
 <li>made up of:
@@ -2954,9 +2985,9 @@ Extended Regular Expression
 </div>
 
 
-<div id="outline-container-org6c73547" class="outline-4">
-<h4 id="org6c73547">Quantifiers</h4>
-<div class="outline-text-4" id="text-org6c73547">
+<div id="outline-container-org0be976a" class="outline-4">
+<h4 id="org0be976a">Quantifiers</h4>
+<div class="outline-text-4" id="text-org0be976a">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3043,7 +3074,7 @@ Extended Regular Expression
 <div class="org-src-container">
 <pre class="src src-sh">cat sample |grep ^a  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">strat with a </span>
 cat sample | grep t$   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">end with t</span>
-<span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"apple\npant\npeople"</span> |grep -E p<span style="color: #2d9574;">\{</span>2}   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">apple </span>
+<span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"apple\npant\npeople"</span> |grep -E p<span style="color: #2d9574;">\{</span>2<span style="color: #e0211d; text-decoration: overline;">}</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">apple </span>
 <span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"bat\nant\neat\npant\ntaste"</span> | grep <span style="color: #2d9574;">"a\+t"</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">bat, eat</span>
 
 <span style="color: #3a81c3;">echo</span> -e <span style="color: #2d9574;">"bat\nhat\nrat\nsat\neat\npeople"</span> |grep <span style="color: #2d9574;">'[b,h]at'</span>
@@ -3076,13 +3107,13 @@ grep -n <span style="color: #2d9574;">'\&lt;work\&gt;'</span> GNULicense.txt <sp
 </div>
 </div>
 
-<div id="outline-container-org3af3695" class="outline-3">
-<h3 id="org3af3695">GREP : Global Regular Expression Print</h3>
-<div class="outline-text-3" id="text-org3af3695">
+<div id="outline-container-org88db294" class="outline-3">
+<h3 id="org88db294">GREP : Global Regular Expression Print</h3>
+<div class="outline-text-3" id="text-org88db294">
 </div>
-<div id="outline-container-orgc0ea638" class="outline-4">
-<h4 id="orgc0ea638">Example for grep</h4>
-<div class="outline-text-4" id="text-orgc0ea638">
+<div id="outline-container-orgf82e79b" class="outline-4">
+<h4 id="orgf82e79b">Example for grep</h4>
+<div class="outline-text-4" id="text-orgf82e79b">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">## </span><span style="color: #2aa1ae; background-color: #ecf3ec;">##########################################################</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">SEARCH and Replace "STRING/TEXT" in file </span>
@@ -3153,13 +3184,13 @@ grep -wirlP <span style="color: #2d9574;">"\d{3}-\d{3}-\d{4}"</span> .
 </div>
 </div>
 
-<div id="outline-container-orgabfb7d2" class="outline-2">
-<h2 id="orgabfb7d2">Sed (Find and Replace in File )</h2>
-<div class="outline-text-2" id="text-orgabfb7d2">
+<div id="outline-container-orge176633" class="outline-2">
+<h2 id="orge176633">Sed (Find and Replace in File )</h2>
+<div class="outline-text-2" id="text-orge176633">
 </div>
-<div id="outline-container-org383f12a" class="outline-3">
-<h3 id="org383f12a">sed Stread EDitor &lt;Replace character in file &gt;</h3>
-<div class="outline-text-3" id="text-org383f12a">
+<div id="outline-container-org5d26914" class="outline-3">
+<h3 id="org5d26914"><span class="todo TODO">TODO</span> sed Stread EDitor &lt;Replace character in file &gt;</h3>
+<div class="outline-text-3" id="text-org5d26914">
 <p>
 for more info visito Durgasoft: pg 229
 </p>
@@ -3172,13 +3203,13 @@ cat temp_data
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2      devops   kar   15</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">3      devops   san   15</span>
 
-(base) jayradhey@jayradhey:~$ sed 2p temp_data 
+<span style="color: #3a81c3;">(</span>base<span style="color: #3a81c3;">)</span> jayradhey@jayradhey:~$ sed 2p temp_data 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sno    course   name  fee</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      devops   phani 15</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      devops   phani 15</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">2      devops   kar   15</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">3      devops   san   15</span>
-(base) jayradhey@jayradhey:~$ sed <span style="color: #2d9574;">'2p'</span> temp_data 
+<span style="color: #3a81c3;">(</span>base<span style="color: #3a81c3;">)</span> jayradhey@jayradhey:~$ sed <span style="color: #2d9574;">'2p'</span> temp_data 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sno    course   name  fee</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      devops   phani 15</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">1      devops   phani 15</span>
@@ -3281,9 +3312,9 @@ less sat <span style="color: #2aa1ae; background-color: #ecf3ec;">#  </span><spa
 </div>
 </div>
 
-<div id="outline-container-orga69a984" class="outline-4">
-<h4 id="orga69a984">Real-time problem for sed:</h4>
-<div class="outline-text-4" id="text-orga69a984">
+<div id="outline-container-orgea28a08" class="outline-4">
+<h4 id="orgea28a08">Real-time problem for sed:</h4>
+<div class="outline-text-4" id="text-orgea28a08">
 <p>
 You have created a playlist '.xspf' in vlc having path your external-Harddisk {Name: "New Volume"}
 </p>
@@ -3322,9 +3353,9 @@ sed -i <span style="color: #2d9574;">'s/New%20Volume1/myVolume/g'</span> *.xspf 
 </div>
 </div>
 </div>
-<div id="outline-container-org56e7c64" class="outline-3">
-<h3 id="org56e7c64">Sed and Streams (find and replace)</h3>
-<div class="outline-text-3" id="text-org56e7c64">
+<div id="outline-container-org67ca0f7" class="outline-3">
+<h3 id="org67ca0f7">Sed and Streams (find and replace)</h3>
+<div class="outline-text-3" id="text-org67ca0f7">
 <p>
  Sed = Stream editor
 A stream is data that travels from :
@@ -3388,13 +3419,13 @@ sed -i.bak  <span style="color: #2d9574;">'s/assistant/assistant to the/'</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org6893708" class="outline-2">
-<h2 id="org6893708">AWK and cut searches for text pattern in File</h2>
-<div class="outline-text-2" id="text-org6893708">
+<div id="outline-container-org4951bbe" class="outline-2">
+<h2 id="org4951bbe">AWK and cut searches for text pattern in File</h2>
+<div class="outline-text-2" id="text-org4951bbe">
 </div>
-<div id="outline-container-org9a15917" class="outline-3">
-<h3 id="org9a15917">cut and Awk</h3>
-<div class="outline-text-3" id="text-org9a15917">
+<div id="outline-container-org17530c5" class="outline-3">
+<h3 id="org17530c5">cut and Awk</h3>
+<div class="outline-text-3" id="text-org17530c5">
 <pre class="example">
 #type -c 1 &lt;file_name&gt; type -a cut # cut is not a shell build in but
 stand alone property man cut
@@ -3524,27 +3555,46 @@ awk -F ':' '{print $(NF-1)}' /etc/passwd
 </pre>
 </div>
 
-<div id="outline-container-org06713d1" class="outline-4">
-<h4 id="org06713d1">Exampel : Find all Network pork using Awk</h4>
-<div class="outline-text-4" id="text-org06713d1">
+<div id="outline-container-org613c875" class="outline-4">
+<h4 id="org613c875">Exampel : Find all Network pork using Awk</h4>
+<div class="outline-text-4" id="text-org613c875">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bin/</span><span style="color: #3a81c3; font-weight: bold;">bash</span>
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This script shows the open network ports on a system.</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Use -4 as an argument to limit to tcpv4 ports.</span>
 
-netstat -nutl ${<span style="color: #715ab1;">1</span>} | grep : | awk <span style="color: #2d9574;">'{print $4}'</span> | awk -F<span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{print $NF}'</span>
+netstat -nutl $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">1</span><span style="color: #3a81c3;">}</span> | grep : | awk <span style="color: #2d9574;">'{print $4}'</span> | awk -F<span style="color: #2d9574;">':'</span> <span style="color: #2d9574;">'{print $NF}'</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div id="outline-container-org92024bb" class="outline-2">
-<h2 id="org92024bb">Sort and Uniq</h2>
-<div class="outline-text-2" id="text-org92024bb">
+<div id="outline-container-orga381fe9" class="outline-3">
+<h3 id="orga381fe9">Awk</h3>
+<div class="outline-text-3" id="text-orga381fe9">
 <div class="org-src-container">
-<pre class="src src-sh">sort /etc/passwd |less
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">remove line number </span>
+<span style="color: #3a81c3;">history</span>|awk <span style="color: #2d9574;">'{$1="";print substr($0,2)}'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org63e4cc3" class="outline-2">
+<h2 id="org63e4cc3">Sort and Uniq</h2>
+<div class="outline-text-2" id="text-org63e4cc3">
+<div class="org-src-container">
+<pre class="src src-sh">man sort
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-r, --reverse ,             reverse the result of comparisons</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-u, --unique, with -c,      check for strict ordering; without -c,  output  only  the first of an equal run</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-h, --human-numeric-sort    compare human readable numbers (e.g., 2K 1G)</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-n, --numeric-sort          compare according to string numerical value</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-k, --key=KEYDEF            sort via a key; KEYDEF gives location and type &lt;Colum Number&gt;</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#   </span><span style="color: #2aa1ae; background-color: #ecf3ec;">-t, --field-separator=SEP   use SEP instead of non-blank to blank transition or delimiter</span>
+
+
+sort /etc/passwd |less
 sort -r /etc/passwd  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">print in reverse order</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">sort with numbers</span>
 cut -d <span style="color: #2d9574;">':'</span> -f 3 /etc/passwd | sort   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">not sorted numerically</span>
@@ -3618,32 +3668,32 @@ cut -d <span style="color: #2d9574;">'"'</span> -f 2 access_log |cut -d <span st
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">check if log file exist</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
-<span style="color: #3a81c3; font-weight: bold;">if</span> [[ <span style="color: #4e3163;">!</span> -e <span style="color: #2d9574;">"${LOG_FILE}"</span> ]] <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Not existing file </span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #4e3163;">!</span> -e <span style="color: #2d9574;">"${LOG_FILE}"</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Not existing file </span>
 <span style="color: #3a81c3; font-weight: bold;">then</span>
   <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Cannot open ${LOG_FILE}"</span> &gt;&amp;2
   <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
 <span style="color: #3a81c3; font-weight: bold;">fi</span>
 
-cut -d <span style="color: #2d9574;">'"'</span> -f 2 ${<span style="color: #715ab1;">LOG_FILE</span>} | cut -d <span style="color: #2d9574;">' '</span> -f 2 | sort | uniq -c | sort -n | tail -3
+cut -d <span style="color: #2d9574;">'"'</span> -f 2 $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">LOG_FILE</span><span style="color: #3a81c3;">}</span> | cut -d <span style="color: #2d9574;">' '</span> -f 2 | sort | uniq -c | sort -n | tail -3
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org4da262e" class="outline-4">
-<h4 id="org4da262e">Exersice</h4>
-<div class="outline-text-4" id="text-org4da262e">
+<div id="outline-container-orgf1712c3" class="outline-4">
+<h4 id="orgf1712c3">Exersice</h4>
+<div class="outline-text-4" id="text-orgf1712c3">
 </div>
 <ul class="org-ul">
-<li><a id="org5533aad"></a>Goal:<br />
-<div class="outline-text-5" id="text-org5533aad">
+<li><a id="orgce3839a"></a>Goal:<br />
+<div class="outline-text-5" id="text-orgce3839a">
 <p>
 The goal of this exercise is to create a shell script that displays the number of failed login attempts
 by IP address and location.
 </p>
 </div>
 </li>
-<li><a id="orgf030e0b"></a>Scenario:<br />
-<div class="outline-text-5" id="text-orgf030e0b">
+<li><a id="orga15bba8"></a>Scenario:<br />
+<div class="outline-text-5" id="text-orga15bba8">
 <p>
 One day you received a call about a user being locked out of their account. Being the awesome
 sysadmin that you are, you decided to look at the log files to see why this person's account was
@@ -3653,8 +3703,8 @@ quickly decide if an IP address needs to blocked.
 </p>
 </div>
 </li>
-<li><a id="org0bc4b02"></a>Shell Script Requirements:<br />
-<div class="outline-text-5" id="text-org0bc4b02">
+<li><a id="org600014a"></a>Shell Script Requirements:<br />
+<div class="outline-text-5" id="text-org600014a">
 <p>
 You think about what the shell script must do and how you would like it operate. You come up with
 the following list.
@@ -3662,8 +3712,8 @@ the following list.
 </div>
 </li>
 
-<li><a id="orgc1dd7b1"></a>The script:<br />
-<div class="outline-text-5" id="text-orgc1dd7b1">
+<li><a id="org37a287d"></a>The script:<br />
+<div class="outline-text-5" id="text-org37a287d">
 <ul class="org-ul">
 <li>Is named "show-attackers.sh ".</li>
 <li>Requires that a file is provided as an argument. If a file is not provided or it cannot be read, then the script will display an error message and exit with a status of 1.</li>
@@ -3675,8 +3725,8 @@ the following list.
 </ul>
 </div>
 </li>
-<li><a id="org8c608a8"></a>Solution<br />
-<div class="outline-text-5" id="text-org8c608a8">
+<li><a id="org98be61e"></a>Solution<br />
+<div class="outline-text-5" id="text-org98be61e">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">look contant of file</span>
 cat /home/jayradhe/Workspace/Linux_script/udemy_exercises/syslog-sample 
@@ -3684,18 +3734,18 @@ cat /home/jayradhe/Workspace/Linux_script/udemy_exercises/syslog-sample
 grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk -F <span style="color: #2d9574;">'from '</span> <span style="color: #2d9574;">'{print $2}'</span>|cut -d <span style="color: #2d9574;">' '</span> -f 1 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">or</span>
 grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk -F <span style="color: #2d9574;">'from '</span> <span style="color: #2d9574;">'{print $2}'</span>|awk <span style="color: #2d9574;">'{print $1}'</span> 
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">or</span>
-grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #ff00ff;">NF -3</span><span style="color: #2d9574;">)}'</span>|sort|uniq -c|sort -nr
+grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #6c3163;">NF -3</span><span style="color: #2d9574;">)}'</span>|sort|uniq -c|sort -nr
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">find ip address </span>
 geoiplookup 182.100.67.59
 
-grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #ff00ff;">NF -3</span><span style="color: #2d9574;">)}'</span>|sort|uniq -c|sort -nr| whle read COUNT IP
+grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #6c3163;">NF -3</span><span style="color: #2d9574;">)}'</span>|sort|uniq -c|sort -nr| whle read COUNT IP
 <span style="color: #3a81c3; font-weight: bold;">do</span> 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">If no.of failed attempts is greater than limit , display count,Ip,Location</span>
-  <span style="color: #3a81c3; font-weight: bold;">if</span> [[ <span style="color: #2d9574;">"${COUNT}"</span> -gt 10 ]]
+  <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${COUNT}"</span> -gt 10 <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
   <span style="color: #3a81c3; font-weight: bold;">then</span>
-<span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Location = $(</span><span style="color: #ff00ff;">geoiplookup ${IP}</span><span style="color: #2aa1ae; background-color: #ecf3ec;">)</span>
-    Location = $(<span style="color: #ff00ff;">geoiplookup ${IP} | awk -F ', ' '{print $2}'</span>) <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">remove umwanted data</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Location = $(</span><span style="color: #6c3163;">geoiplookup ${IP}</span><span style="color: #2aa1ae; background-color: #ecf3ec;">)</span>
+    Location = $<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">geoiplookup $</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">IP</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;"> | awk -F ', ' '{print $2}'</span><span style="color: #3a81c3;">)</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">remove umwanted data</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#    </span><span style="color: #2aa1ae; background-color: #ecf3ec;">echo "${COUNT} ${IP} $ {LOCATION}"</span>
     <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${COUNT}, ${IP}, $ {LOCATION}"</span>
   <span style="color: #3a81c3; font-weight: bold;">fi</span>
@@ -3711,7 +3761,7 @@ grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span sty
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Make sure a file was supplied as an argument.</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span>
-<span style="color: #3a81c3; font-weight: bold;">if</span> [[ <span style="color: #4e3163;">!</span> -e <span style="color: #2d9574;">"${LOG_FILE}"</span> ]]
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #4e3163;">!</span> -e <span style="color: #2d9574;">"${LOG_FILE}"</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
 <span style="color: #3a81c3; font-weight: bold;">then</span> 
   <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"Cannot open log file: ${LOG_FILE}"</span> &gt;&amp;2
   <span style="color: #3a81c3; font-weight: bold;">exit</span> 1
@@ -3721,12 +3771,12 @@ grep <span style="color: #2d9574;">'Failed'</span> syslog-sample | awk <span sty
 <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">'Count,IP,Location'</span>
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Loop through the list of failed attempts and corresponding IP addresses.</span>
-grep Failed ${<span style="color: #715ab1;">LOG_FILE</span>} | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #ff00ff;">NF - 3</span><span style="color: #2d9574;">)}'</span> | sort | uniq -c | sort -nr |  <span style="color: #3a81c3; font-weight: bold;">while </span><span style="color: #3a81c3;">read</span> COUNT IP
+grep Failed $<span style="color: #3a81c3;">{</span><span style="color: #715ab1;">LOG_FILE</span><span style="color: #3a81c3;">}</span> | awk <span style="color: #2d9574;">'{print $(</span><span style="color: #6c3163;">NF - 3</span><span style="color: #2d9574;">)}'</span> | sort | uniq -c | sort -nr |  <span style="color: #3a81c3; font-weight: bold;">while </span><span style="color: #3a81c3;">read</span> COUNT IP
 <span style="color: #3a81c3; font-weight: bold;">do</span>
   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">If the number of failed attempts is greater than the limit, display count, IP, and location.</span>
-  <span style="color: #3a81c3; font-weight: bold;">if</span> [[ <span style="color: #2d9574;">"${COUNT}"</span> -gt <span style="color: #2d9574;">"${LIMIT}"</span> ]]
+  <span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span><span style="color: #6c3163;">[</span> <span style="color: #2d9574;">"${COUNT}"</span> -gt <span style="color: #2d9574;">"${LIMIT}"</span> <span style="color: #6c3163;">]</span><span style="color: #3a81c3;">]</span>
   <span style="color: #3a81c3; font-weight: bold;">then</span>
-    <span style="color: #715ab1;">LOCATION</span>=$(<span style="color: #ff00ff;">geoiplookup ${IP} | awk -F ', ' '{print $2}'</span>)
+    <span style="color: #715ab1;">LOCATION</span>=$<span style="color: #3a81c3;">(</span><span style="color: #6c3163;">geoiplookup $</span><span style="color: #6c3163;">{</span><span style="color: #6c3163;">IP</span><span style="color: #6c3163;">}</span><span style="color: #6c3163;"> | awk -F ', ' '{print $2}'</span><span style="color: #3a81c3;">)</span>
     <span style="color: #3a81c3;">echo</span> <span style="color: #2d9574;">"${COUNT},${IP},${LOCATION}"</span>
   <span style="color: #3a81c3; font-weight: bold;">fi</span>
 <span style="color: #3a81c3; font-weight: bold;">done</span>
@@ -3738,9 +3788,9 @@ grep Failed ${<span style="color: #715ab1;">LOG_FILE</span>} | awk <span style="
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd9ee759" class="outline-2">
-<h2 id="orgd9ee759">Pip" |" combination of two cmds</h2>
-<div class="outline-text-2" id="text-orgd9ee759">
+<div id="outline-container-orgcb51687" class="outline-2">
+<h2 id="orgcb51687">Pip" |" combination of two cmds</h2>
+<div class="outline-text-2" id="text-orgcb51687">
 <p>
 pip
 </p>
@@ -3777,13 +3827,13 @@ pip
 </pre>
 </div>
 </div>
-<div id="outline-container-org90d8ed1" class="outline-4">
-<h4 id="org90d8ed1">Assignment</h4>
-<div class="outline-text-4" id="text-org90d8ed1">
+<div id="outline-container-org3ff204c" class="outline-4">
+<h4 id="org3ff204c">Assignment</h4>
+<div class="outline-text-4" id="text-org3ff204c">
 </div>
 <ul class="org-ul">
-<li><a id="orgf466bf0"></a>47) Write a command that will look for files with an extension "c", and has the occurrence of the string "apple" in it.<br />
-<div class="outline-text-5" id="text-orgf466bf0">
+<li><a id="orga637a77"></a>47) Write a command that will look for files with an extension "c", and has the occurrence of the string "apple" in it.<br />
+<div class="outline-text-5" id="text-orga637a77">
 <p>
 Answer:
 </p>
@@ -3795,8 +3845,8 @@ Find ./ -name "*.c" | xargs grep –i "apple"
 </div>
 </li>
 
-<li><a id="orgd81be9c"></a>48) Write a command that will display all .txt files, including its individual permission.<br />
-<div class="outline-text-5" id="text-orgd81be9c">
+<li><a id="org4dc9c36"></a>48) Write a command that will display all .txt files, including its individual permission.<br />
+<div class="outline-text-5" id="text-org4dc9c36">
 <p>
 Answer:
 </p>
@@ -3809,9 +3859,9 @@ ls -al *.txt
 </div>
 </div>
 
-<div id="outline-container-orgcdb1b0e" class="outline-2">
-<h2 id="orgcdb1b0e">redirect</h2>
-<div class="outline-text-2" id="text-orgcdb1b0e">
+<div id="outline-container-org7c95397" class="outline-2">
+<h2 id="org7c95397">redirect</h2>
+<div class="outline-text-2" id="text-org7c95397">
 <p>
 &gt; created a file
 </p>
@@ -3825,9 +3875,9 @@ df -h &gt; disk.log  # create a file and write data in this file
 </p>
 </div>
 </div>
-<div id="outline-container-org3527995" class="outline-2">
-<h2 id="org3527995">runlevel</h2>
-<div class="outline-text-2" id="text-org3527995">
+<div id="outline-container-org9077292" class="outline-2">
+<h2 id="org9077292"><span class="todo TODO">TODO</span> runlevel</h2>
+<div class="outline-text-2" id="text-org9077292">
 <p>
  #Q) What is runlevels in linu
 <a href="https://www.liquidweb.com/kb/linux-runlevels-explained">https://www.liquidweb.com/kb/linux-runlevels-explained</a>
@@ -3850,25 +3900,27 @@ runlevel
 </div>
 
 <p>
-init 0 - shut down
-init 1 - single user
-init 2 - multi user but no network
-inti 3 - mulit user with network
-inti 4 - no used
-init 5 - nulit user and GUL
-init 6 - reboot
+init 0 - shut down <br />
+init 1 - single user <br />
+init 2 - multi user but no network <br />
+inti 3 - mulit user with network <br />
+inti 4 - no used <br />
+init 5 - nulit user and GUL <br />
+init 6 - reboot <br />
 </p>
 </div>
 </div>
 
-
-<div id="outline-container-org096966f" class="outline-2">
-<h2 id="org096966f">Advance L2</h2>
-<div class="outline-text-2" id="text-org096966f">
+<div id="outline-container-org76dcc6a" class="outline-2">
+<h2 id="org76dcc6a">TO DO link soft , hard</h2>
 </div>
-<div id="outline-container-org9cadb38" class="outline-3">
-<h3 id="org9cadb38">Rsync</h3>
-<div class="outline-text-3" id="text-org9cadb38">
+<div id="outline-container-org5781b60" class="outline-2">
+<h2 id="org5781b60">Advance L2</h2>
+<div class="outline-text-2" id="text-org5781b60">
+</div>
+<div id="outline-container-org12a929e" class="outline-3">
+<h3 id="org12a929e"><span class="todo TODO">TODO</span> Rsync</h3>
+<div class="outline-text-3" id="text-org12a929e">
 <p>
 apt-get install rsync
 yum install rsync
@@ -3956,7 +4008,7 @@ rsync -zaP coreyms@192.168.56.100:~/public/my_site/my_backup ~/Projects/my_site/
 Create a backup of my home dir in linux to external harddisk
 </p>
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #715ab1;">src</span>=/home/jayradhey/    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">syn this folder</span>
+<pre class="src src-sh"><span style="color: #715ab1;">src</span>=~/    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">syn this folder</span>
 <span style="color: #715ab1;">des</span>=/media/jayradhey/easystore/mySyn_Home_rsync/ <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">syn to this folder </span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">rsync -a -r $src $des</span>
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">rsync -av --dry-run $src $des</span>
@@ -3965,15 +4017,15 @@ rsync -aP -r --exclude-from=Xrsync.txt $<span style="color: #715ab1;">src</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org564f77e" class="outline-3">
-<h3 id="org564f77e">CURL wget</h3>
-<div class="outline-text-3" id="text-org564f77e">
+<div id="outline-container-org867e603" class="outline-3">
+<h3 id="org867e603">CURL wget</h3>
+<div class="outline-text-3" id="text-org867e603">
 <p>
-curl  is  a  tool  to transfer data from or to a server, using one of the
-       supported protocols (DICT, FILE, FTP, FTPS, GOPHER,  HTTP,  HTTPS,  IMAP,
-       IMAPS,  LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMB, SMBS, SMTP,
-       SMTPS, TELNET and TFTP). The command is designed to work without user in‐
-       teraction.
+curl  is  a  tool  to transfer data from or to a server, using one of the  <br />
+\(\;\;\;\;\)       supported protocols (DICT, FILE, FTP, FTPS, GOPHER,  HTTP,  HTTPS,  IMAP, <br />
+\(\;\;\;\;\)       IMAPS,  LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMB, SMBS, SMTP, <br />
+\(\;\;\;\;\)       SMTPS, TELNET and TFTP). The command is designed to work without user in‐ <br />
+\(\;\;\;\;\)       teraction.<br />
 </p>
 
 <div class="org-src-container">
@@ -4045,7 +4097,7 @@ curl -F <span style="color: #715ab1;">name</span>=John -F <span style="color: #7
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">as a plain text field, but get the contents for it  from  a  local</span>
 
  -I, --head
-(HTTP  FTP  FILE) Fetch the headers only! HTTP-servers feature the
+<span style="color: #3a81c3;">(</span>HTTP  FTP  FILE<span style="color: #3a81c3;">)</span> Fetch the headers only! HTTP-servers feature the
 <span style="color: #3a81c3;">command</span> HEAD which this uses to get nothing but the  header  of  a
 document. When used on an FTP or FILE file, curl displays the file
 size and last modification time only.
@@ -4130,16 +4182,16 @@ wget # to download the file from internet
 </pre>
 </div>
 </div>
-<div id="outline-container-org628ace7" class="outline-3">
-<h3 id="org628ace7">GPG</h3>
-<div class="outline-text-3" id="text-org628ace7">
+<div id="outline-container-org251429f" class="outline-3">
+<h3 id="org251429f"><span class="todo TODO">TODO</span> GPG</h3>
+<div class="outline-text-3" id="text-org251429f">
 <p>
 <a href="https://www.youtube.com/watch?v=vASTNKXjDxA&amp;list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&amp;index=4">https://www.youtube.com/watch?v=vASTNKXjDxA&amp;list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&amp;index=4</a>
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Add Docker repo to Linux mint</span>
-sudo add-apt-repository <span style="color: #2d9574;">"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(</span><span style="color: #ff00ff;">. /etc/os-release; echo "$UBUNTU_CODENAME"</span><span style="color: #2d9574;">) stable"</span>
+sudo add-apt-repository <span style="color: #2d9574;">"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(</span><span style="color: #6c3163;">. /etc/os-release; echo "$UBUNTU_CODENAME"</span><span style="color: #2d9574;">) stable"</span>
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Install Docker Engine and Docker Compose</span>
 sudo apt-get update
@@ -4149,76 +4201,76 @@ sudo apt-get -y  install docker-ce docker-compose
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc5a5f4" class="outline-3">
-<h3 id="orgcc5a5f4">DNS, DNS-Server</h3>
+<div id="outline-container-orgd5af260" class="outline-3">
+<h3 id="orgd5af260"><span class="todo TODO">TODO</span> DNS, DNS-Server</h3>
 </div>
-<div id="outline-container-org4d55dd2" class="outline-3">
-<h3 id="org4d55dd2">SSL</h3>
+<div id="outline-container-org9a0bee6" class="outline-3">
+<h3 id="org9a0bee6"><span class="todo TODO">TODO</span> SSL</h3>
 </div>
 </div>
-<div id="outline-container-org36289fa" class="outline-2">
-<h2 id="org36289fa">Linux Cmd review</h2>
+<div id="outline-container-orgff1d5fc" class="outline-2">
+<h2 id="orgff1d5fc"><span class="todo TODO">TODO</span> Linux Cmd review</h2>
 </div>
 
-<div id="outline-container-org1f981b6" class="outline-2">
-<h2 id="org1f981b6">Linux Interview Question</h2>
-<div class="outline-text-2" id="text-org1f981b6">
+<div id="outline-container-orga4f09ad" class="outline-2">
+<h2 id="orga4f09ad">Linux Interview Question</h2>
+<div class="outline-text-2" id="text-orga4f09ad">
 </div>
-<div id="outline-container-orga3a211e" class="outline-3">
-<h3 id="orga3a211e">36) What are environmental variables?</h3>
-<div class="outline-text-3" id="text-orga3a211e">
+<div id="outline-container-org9f717a9" class="outline-3">
+<h3 id="org9f717a9">36) What are environmental variables?</h3>
+<div class="outline-text-3" id="text-org9f717a9">
 <p>
 Environmental variables are global settings that control the shell's function as well as that of other Linux programs. Another common term for environmental variables is global shell variables.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1f3d998" class="outline-3">
-<h3 id="org1f3d998">39) What is redirection?</h3>
-<div class="outline-text-3" id="text-org1f3d998">
+<div id="outline-container-org7b5d14c" class="outline-3">
+<h3 id="org7b5d14c">39) What is redirection?</h3>
+<div class="outline-text-3" id="text-org7b5d14c">
 <p>
 Redirection is the process of directing data from one output to another. It can also be used to direct an output as an input to another process.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org981cf00" class="outline-3">
-<h3 id="org981cf00">40) What is grep command?</h3>
-<div class="outline-text-3" id="text-org981cf00">
+<div id="outline-container-org5c36109" class="outline-3">
+<h3 id="org5c36109">40) What is grep command?</h3>
+<div class="outline-text-3" id="text-org5c36109">
 <p>
 grep a search command that makes use of pattern-based searching. It makes use of options and parameters that are specified along with the command line and applies this pattern in searching the required file output. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1cbfa09" class="outline-3">
-<h3 id="org1cbfa09">43) How do you terminate an ongoing process?</h3>
-<div class="outline-text-3" id="text-org1cbfa09">
+<div id="outline-container-orgbabb37f" class="outline-3">
+<h3 id="orgbabb37f">43) How do you terminate an ongoing process?</h3>
+<div class="outline-text-3" id="text-orgbabb37f">
 <p>
 Every process in the system is identified by a unique process id or pid. Use the kill command followed by the pid to terminate that process. To terminate all process at once, use kill 0. 
 </p>
 </div>
 </div>
-<div id="outline-container-org641bb54" class="outline-3">
-<h3 id="org641bb54">46) How do you execute more than one command or program from a single command line entry?</h3>
-<div class="outline-text-3" id="text-org641bb54">
+<div id="outline-container-org5d36a87" class="outline-3">
+<h3 id="org5d36a87">46) How do you execute more than one command or program from a single command line entry?</h3>
+<div class="outline-text-3" id="text-org5d36a87">
 <p>
 You can combine several commands by separating each command or program using a semicolon symbol. For example, you can issue such a series of commands in a single entry: 
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb4490f" class="outline-3">
-<h3 id="orgbb4490f">more questions</h3>
-<div class="outline-text-3" id="text-orgbb4490f">
+<div id="outline-container-org0b6193a" class="outline-3">
+<h3 id="org0b6193a">more questions</h3>
+<div class="outline-text-3" id="text-org0b6193a">
 <p>
 <a href="https://www.edureka.co/blog/interview-questions/linux-interview-questions-for-beginners/">https://www.edureka.co/blog/interview-questions/linux-interview-questions-for-beginners/</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgca5441b" class="outline-3">
-<h3 id="orgca5441b">28. What are the Process states in Linux?</h3>
-<div class="outline-text-3" id="text-orgca5441b">
+<div id="outline-container-orge2ea3bd" class="outline-3">
+<h3 id="orge2ea3bd">28. What are the Process states in Linux?</h3>
+<div class="outline-text-3" id="text-orge2ea3bd">
 <p>
 Ans:  Five process states in Linux. They are
 </p>
@@ -4236,14 +4288,14 @@ Linux Process states
 </p>
 </div>
 </div>
-<div id="outline-container-org0f8b7d4" class="outline-3">
-<h3 id="org0f8b7d4">What is  Run levels</h3>
+<div id="outline-container-org11daf96" class="outline-3">
+<h3 id="org11daf96">What is  Run levels</h3>
 </div>
 </div>
 
-<div id="outline-container-orgc923c06" class="outline-2">
-<h2 id="orgc923c06">Extra</h2>
-<div class="outline-text-2" id="text-orgc923c06">
+<div id="outline-container-org32ab602" class="outline-2">
+<h2 id="org32ab602">Extra</h2>
+<div class="outline-text-2" id="text-org32ab602">
 <p>
 links : soft links, hard links
 absolute path, relative path ~
@@ -4256,9 +4308,9 @@ change hostname: <code>$hostname linux-master</code>
 </p>
 </div>
 </div>
-<div id="outline-container-orga9b6265" class="outline-2">
-<h2 id="orga9b6265">Configure your linux laptop for devops</h2>
-<div class="outline-text-2" id="text-orga9b6265">
+<div id="outline-container-orgf6a3f72" class="outline-2">
+<h2 id="orgf6a3f72">Configure your linux laptop for devops</h2>
+<div class="outline-text-2" id="text-orgf6a3f72">
 <p>
 for more custom confi your linux(Ubuntu) os : view
 
@@ -4272,9 +4324,9 @@ for more custom confi your linux(Ubuntu) os : view
 </ul>
 </div>
 
-<div id="outline-container-org6283101" class="outline-3">
-<h3 id="org6283101">Troubleshoot in ssh connection disconnect</h3>
-<div class="outline-text-3" id="text-org6283101">
+<div id="outline-container-org0e55aad" class="outline-3">
+<h3 id="org0e55aad">Troubleshoot in ssh connection disconnect</h3>
+<div class="outline-text-3" id="text-org0e55aad">
 <p>
 <a href="https://serverfault.com/questions/283129/why-do-consoles-sometimes-hang-forever-when-ssh-connection-breaks">https://serverfault.com/questions/283129/why-do-consoles-sometimes-hang-forever-when-ssh-connection-breaks</a>
 </p>
@@ -4311,9 +4363,9 @@ ServerAliveCount 3
 </div>
 </div>
 
-<div id="outline-container-org1f2ee42" class="outline-3">
-<h3 id="org1f2ee42">Temux</h3>
-<div class="outline-text-3" id="text-org1f2ee42">
+<div id="outline-container-orgb9e6886" class="outline-3">
+<h3 id="orgb9e6886">Temux</h3>
+<div class="outline-text-3" id="text-orgb9e6886">
 <p>
 <a href="https://www.youtube.com/watch?v=Yl7NFenTgIo">https://www.youtube.com/watch?v=Yl7NFenTgIo</a>
 </p>
@@ -4384,13 +4436,13 @@ https://www.youtube.com/watch?v=Yl7NFenTgIo
 
 
 
-<div id="outline-container-orgce20048" class="outline-3">
-<h3 id="orgce20048">vim or neo-vim</h3>
+<div id="outline-container-org2b2e7b5" class="outline-3">
+<h3 id="org2b2e7b5">vim or neo-vim</h3>
 </div>
 </div>
-<div id="outline-container-org0ffe78f" class="outline-2">
-<h2 id="org0ffe78f">Example shell script run remote script</h2>
-<div class="outline-text-2" id="text-org0ffe78f">
+<div id="outline-container-org7ca468d" class="outline-2">
+<h2 id="org7ca468d">Example shell script run remote script</h2>
+<div class="outline-text-2" id="text-org7ca468d">
 <p>
 <a href="https://www.linuxtechi.com/scp-command-examples-in-linux/">https://www.linuxtechi.com/scp-command-examples-in-linux/</a>
 </p>
@@ -4410,9 +4462,9 @@ scp sbi.war devops@3.15.169.84:/opt
 
 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">!/bash/bash</span>
 
-<span style="color: #6c3163; font-weight: bold;">delete</span>(){
+<span style="color: #6c3163; font-weight: bold;">delete</span><span style="color: #3a81c3;">(){</span>
 rm -rf /opt/test*
-}
+<span style="color: #3a81c3;">}</span>
 delete
 <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">run scripts from master on slave</span>
 ssh devops@3.15.169.84 sh /opt/delete.sh
@@ -4420,9 +4472,9 @@ ssh devops@3.15.169.84 sh /opt/delete.sh
 </div>
 </div>
 
-<div id="outline-container-org3a0f0e5" class="outline-3">
-<h3 id="org3a0f0e5">Assignment</h3>
-<div class="outline-text-3" id="text-org3a0f0e5">
+<div id="outline-container-orgaeed9fb" class="outline-3">
+<h3 id="orgaeed9fb">Assignment</h3>
+<div class="outline-text-3" id="text-orgaeed9fb">
 <p>
 Exercies : create 5 servers in aws 
 (build,dev,sit(System Integration and Testing),uat(UAT (User Acceptance Testing)),prod) servers and create common user(user:devops passwd: dev@!23)
@@ -4444,22 +4496,22 @@ From build server build war file and deploy to (dev,sit,uat,prod) script
 
 <span style="color: #715ab1;">src_path</span>= /opt/sbi.war
 <span style="color: #715ab1;">dst_path</span>= /opt
-<span style="color: #3a81c3; font-weight: bold;">if</span> [$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"dev"</span>]
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span>$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"dev"</span><span style="color: #3a81c3;">]</span>
 <span style="color: #3a81c3; font-weight: bold;">then</span>
   scp $<span style="color: #715ab1;">scr_path</span> $<span style="color: #715ab1;">username</span>@$<span style="color: #715ab1;">ip</span>:$<span style="color: #715ab1;">dst_path</span> 
 <span style="color: #3a81c3; font-weight: bold;">fi</span>
 
-<span style="color: #3a81c3; font-weight: bold;">if</span> [$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"sit"</span>]       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">System Integrety and Testing</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span>$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"sit"</span><span style="color: #3a81c3;">]</span>       <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">System Integrety and Testing</span>
 <span style="color: #3a81c3; font-weight: bold;">then</span>
   scp $<span style="color: #715ab1;">src_path</span> $<span style="color: #715ab1;">username</span>@$<span style="color: #715ab1;">ip</span>:$<span style="color: #715ab1;">dst_path</span>
 <span style="color: #3a81c3; font-weight: bold;">fi</span>
 
-<span style="color: #3a81c3; font-weight: bold;">if</span> [$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"uat"</span>]   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">UAT (User Acceptance Testing)</span>
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span>$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"uat"</span><span style="color: #3a81c3;">]</span>   <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">UAT (User Acceptance Testing)</span>
 <span style="color: #3a81c3; font-weight: bold;">then</span>
   scp $<span style="color: #715ab1;">src_path</span> $<span style="color: #715ab1;">username</span>@$<span style="color: #715ab1;">ip</span>:$<span style="color: #715ab1;">dst_path</span>
 <span style="color: #3a81c3; font-weight: bold;">fi</span>
 
-<span style="color: #3a81c3; font-weight: bold;">if</span> [$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"prod"</span>]
+<span style="color: #3a81c3; font-weight: bold;">if</span> <span style="color: #3a81c3;">[</span>$<span style="color: #715ab1;">env</span> ==<span style="color: #2d9574;">"prod"</span><span style="color: #3a81c3;">]</span>
 <span style="color: #3a81c3; font-weight: bold;">then</span>
   scp $<span style="color: #715ab1;">scr_path</span> $<span style="color: #715ab1;">username</span>@$<span style="color: #715ab1;">ip</span>:$<span style="color: #715ab1;">dst_path</span>
 <span style="color: #3a81c3; font-weight: bold;">fi</span>
@@ -4485,7 +4537,7 @@ prod) scp $<span style="color: #715ab1;">scr_path</span> $<span style="color: #7
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: D Karthik</p>
-<p class="date">Created: 2023-02-16 Thu 12:12</p>
+<p class="date">Created: 2023-04-28 Fri 12:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

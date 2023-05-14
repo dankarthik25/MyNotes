@@ -270,12 +270,12 @@ docker conatainer run -d --name psql -v psql:/var/lib/postgresql/data postgres:9
 
 #+end_src
 ** docker import/export cmd 
-#+BEGIN_SRC 
+#+BEGIN_SRC sh
 docker export --output="zip-name.tar" <container-id/name>
 docker import <path>
 #+end_src
 ** Docker Build Cmd
-#+begin_src
+#+begin_src sh
 docker build . # current working dir 
 docker build <build-img-name> .
 docker build -t <repo-name>/<build-img-name>:2.0 .  # name in repo is vieux/apache:2.0
@@ -285,7 +285,7 @@ docker build -t <my-img2> -f <Dockerfile2> . # .: current working dir
 #+end_src
 
 ** Docker Link cmd
-#+begin_src 
+#+begin_src sh
 docker run -itd --name mydb -e MYSQL_ROOT_PASSWORD=DEVOPS@12345 mysql:5.7
 docker run -itd wordpress  --link mydb:mysql -p 83:80 wordpress
 #+end_src
@@ -293,7 +293,7 @@ docker run -itd wordpress  --link mydb:mysql -p 83:80 wordpress
 Use to build and run  mulit containers which are inter-linked to each other
 It is not a product tool
 
-#+begin_src 
+#+begin_src sh
 # cd <path> where docker-compose.yml is present
 docker-compose build
 docker-compose up
